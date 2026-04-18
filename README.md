@@ -101,16 +101,6 @@ http://localhost:8000
 
 Frontend được phục vụ trực tiếp từ backend server (không cần mở file HTML riêng).
 
-## 📖 Hướng Dẫn Sử Dụng
-
-1. **Tìm kiếm địa điểm**: Nhập tên địa điểm vào ô tìm kiếm (chỉ tìm ở Việt Nam)
-2. **Thêm vào danh sách**: Nhấn nút ➕ để thêm địa điểm vào danh sách lịch trình
-3. **Xóa khỏi danh sách**: Nhấn nút ✕ để xóa địa điểm không mong muốn
-4. **Tạo lịch trình**: Nhấn nút **"Tạo Lịch Trình"** để hệ thống tối ưu hóa
-5. **Xem kết quả**: 
-   - Bản đồ hiển thị lộ trình mỗi ngày bằng **một màu khác nhau**
-   - Điểm tối ưu (trung vị) được đánh dấu **nổi bật** trên bản đồ
-   - Bảng thông tin bên trái hiển thị khoảng cách giữa các điểm và tổng quãng đường mỗi ngày
 
 ## 🔧 Công Nghệ Sử Dụng
 
