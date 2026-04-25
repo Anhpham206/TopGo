@@ -14,18 +14,7 @@ from datetime import datetime
 import math
 
 
-LOGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
 
-
-os.makedirs(LOGS_DIR, exist_ok=True)
-
-
-def save_json_log(filename: str, data: dict):
-    """Lưu dữ liệu JSON vào thư mục logs ở hiện tại"""
-    filepath = os.path.join(LOGS_DIR, filename)
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    print(f"[LOG] Đã lưu file: {filepath}")
 
 
 def calculate_median_coordinates(places: list) -> dict:
@@ -81,8 +70,7 @@ async def get_distance_matrix(places: list, optimal_coord: dict) -> dict:
         response = await client.get(url)
         data = response.json()
 
-    # Lưu log OSRM response
-    save_json_log("osrm_distance_matrix_response.txt", data)
+
 
     if data.get("code") != "Ok":
         raise Exception(
@@ -215,8 +203,7 @@ async def get_daily_routes(day_groups: list, optimal_coord: dict) -> list:
             response = await client.get(url)
             data = response.json()
 
-            # Lưu log OSRM route response
-            save_json_log(f"osrm_route_day_{day_idx + 1}.txt", data)
+
 
             if data.get("code") != "Ok":
                 print(
