@@ -1,0 +1,76 @@
+{
+    "output": {
+        "Thong_tin_chung": {
+            "Ten_hanh_trinh": "[Tạo một tên hành trình hấp dẫn]",
+            "So_nguoi": "[Lấy từ so_luong_hanh_khach]",
+            "Tong_ngan_sach": "[Lấy từ ngan_sach_tong_k, format VNĐ]",
+            "Thoi_tiet": "[Dự báo hoặc mô tả ngắn gọn]",
+            "AIScore_Hanh_trinh": "[Điểm đánh giá chung độ phù hợp, VD: 98% Phù hợp]"
+        },
+        "Lich_trinh": [
+            [
+                {
+                    "Thoi_gian": "hh:mm - hh:mm",
+                    "Thoi_luong": "[Thời lượng tham quan]",
+                    "Dia_diem": "[Tên địa điểm 1]",
+                    "Gioi_thieu": "[Giới thiệu ngắn gọn 2-3 câu]",
+                    "Di_chuyen": {
+                        "Phuong_tien": "[Loại phương tiện]",
+                        "Khoang_cach": "[Khoảng cách km/m]",
+                        "Thoi_gian_di_chuyen": "[Thời gian di chuyển]",
+                        "Du_kien_den_luc": "hh:mm"
+                    }
+                },
+                {
+                    "Thoi_gian": "hh:mm - hh:mm",
+                    "Thoi_luong": "[Thời lượng tham quan]",
+                    "Dia_diem": "[Tên địa điểm 2]",
+                    "Gioi_thieu": "[Giới thiệu ngắn gọn]",
+                    "Di_chuyen": {
+                        "Phuong_tien": "[Loại phương tiện]",
+                        "Khoang_cach": "[Khoảng cách km/m]",
+                        "Thoi_gian_di_chuyen": "[Thời gian di chuyển]",
+                        "Du_kien_den_luc": "hh:mm"
+                    }
+                }
+            ],
+            [
+                {
+                    "Thoi_gian": "hh:mm - hh:mm",
+                    "Thoi_luong": "[Thời lượng tham quan]",
+                    "Dia_diem": "[Tên địa điểm ngày 2]",
+                    "Gioi_thieu": "[Giới thiệu ngắn gọn]",
+                    "Di_chuyen": {
+                        "Phuong_tien": "[Loại phương tiện]",
+                        "Khoang_cach": "[Khoảng cách km/m]",
+                        "Thoi_gian_di_chuyen": "[Thời gian di chuyển]",
+                        "Du_kien_den_luc": "hh:mm"
+                    }
+                }
+            ]
+        ],
+        "Khach_san_goi_y": [
+            {
+                "Ten": "[Tên Top 1]",
+                "rate": "[Rating Top 1]",
+                "AIScore": "[AIScore_Moi Top 1 %]",
+                "Gia_tien": "[Giá tiền Top 1]",
+                "url_img": "[Link]"
+            },
+            {
+                "Ten": "[Tên Top 2]",
+                "rate": "[Rating Top 2]",
+                "AIScore": "[AIScore_Moi Top 2 %]",
+                "Gia_tien": "[Giá tiền Top 2]",
+                "url_img": "[Link]"
+            },
+            {
+                "Ten": "[Tên Top 3]",
+                "rate": "[Rating Top 3]",
+                "AIScore": "[AIScore_Moi Top 3 %]",
+                "Gia_tien": "[Giá tiền Top 3]",
+                "url_img":"[Link]"
+            }
+        ]
+    }
+}
