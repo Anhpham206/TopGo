@@ -1,0 +1,47 @@
+{
+    "places": [
+        {
+            "id": "HCM_DTQ_001",
+            "name": "Dinh Độc Lập",
+            "lat": 10.7770348,
+            "lon": 106.695488,
+            "open": 8.0,
+            "close": 17.0,
+            "display_name": "Dinh Độc Lập, 135, Nam Kỳ Khởi Nghĩa, Khu phố 7, Phường Bến Thành, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, 71009, Việt Nam"
+        },
+        {
+            "id": "HCM_DTQ_002",
+            "name": "Phố đi bộ Nguyễn Huệ",
+            "lat": 10.7754135,
+            "lon": 106.7001378,
+            "open": 8.0,
+            "close": 22.0,
+            "display_name": "Phố đi bộ Nguyễn Huệ, Lê Thánh Tôn, Khu phố 3, Phường Sài Gòn, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, 71006, Việt Nam"
+        },
+        {
+            "id": "HCM_DTQ_003",
+            "name": "Vinhomes Central Park - Tòa nhà Landmark 81",
+            "lat": 10.795827,
+            "lon": 106.7225902,
+            "open": 8.0,
+            "close": 21.0,
+            "display_name": "Vinhomes Central Park - Tòa nhà Landmark 81, Trần Trọng Kim, Khu phố 48, Phường Thạnh Mỹ Tây, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, 71108, Việt Nam"
+        },
+        {
+            "id": "HCM_DTQ_004",
+            "name": "Bảo tàng Chứng tích Chiến tranh",
+            "lat": 10.7793648,
+            "lon": 106.6922806,
+            "display_name": "Bảo tàng Chứng tích Chiến tranh, 28, Võ Văn Tần, Khu phố 3, Phường Xuân Hòa, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, 70001, Việt Nam"
+        },
+        {
+            "id": "HCM_DTQ_005",
+            "name": "Nhà hát Thành phố",
+            "lat": 10.7767437,
+            "lon": 106.7032488,
+            "open": 8.0,
+            "close": 17.0,
+            "display_name": "Nhà hát Thành phố, 7, Công trường Lam Sơn, Khu phố 5, Phường Sài Gòn, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, 71006, Việt Nam"
+        }
+    ]
+}
