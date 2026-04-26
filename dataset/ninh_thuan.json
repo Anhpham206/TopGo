@@ -1,0 +1,1198 @@
+{
+    "Ninh Thuận": {
+        "diem_tham_quan": [
+            {
+                "id": "NTH_DTQ_001",
+                "ten": "Vịnh Vĩnh Hy",
+                "toa_do": {
+                    "lat": 11.71762,
+                    "lng": 109.202127
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Biển",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_002",
+                "ten": "Tháp Chàm Po Klong Garai (Panduranga)",
+                "toa_do": {
+                    "lat": 11.601906,
+                    "lng": 108.946504
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa Chăm",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.5
+                },
+                "rating": 0.0,
+                "gia_ve": 20000
+            },
+            {
+                "id": "NTH_DTQ_003",
+                "ten": "Tháp Chàm Po Rome (Bimong)",
+                "toa_do": {
+                    "lat": 11.501211,
+                    "lng": 108.865829
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa Chăm",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_004",
+                "ten": "Tháp Chàm Hòa Lai",
+                "toa_do": {
+                    "lat": 11.676042,
+                    "lng": 109.035627
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Kiến trúc Chăm",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_005",
+                "ten": "Vườn Quốc Gia Núi Chúa",
+                "toa_do": {
+                    "lat": 11.680879,
+                    "lng": 109.175057
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Sinh thái",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 50000
+            },
+            {
+                "id": "NTH_DTQ_006",
+                "ten": "Đồi Cát Nam Cương",
+                "toa_do": {
+                    "lat": 11.50879,
+                    "lng": 108.997104
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Chụp ảnh",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_007",
+                "ten": "Bãi Biển Ninh Chữ",
+                "toa_do": {
+                    "lat": 11.586519,
+                    "lng": 109.033244
+                },
+                "tags": [
+                    "Biển",
+                    "Thư giãn",
+                    "Nghỉ dưỡng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_008",
+                "ten": "Bãi Biển Bình Sơn",
+                "toa_do": {
+                    "lat": 11.564854,
+                    "lng": 109.024474
+                },
+                "tags": [
+                    "Biển",
+                    "Thư giãn",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_009",
+                "ten": "Bãi Thùng (Vinh Hy - ẩn)",
+                "toa_do": {
+                    "lat": 11.745862,
+                    "lng": 109.223417
+                },
+                "tags": [
+                    "Biển hoang sơ",
+                    "Khám phá",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_010",
+                "ten": "Hòn Rùa Vĩnh Hy (Đảo Rùa)",
+                "toa_do": {
+                    "lat": 11.716037,
+                    "lng": 109.221121
+                },
+                "tags": [
+                    "Lặn san hô",
+                    "Biển",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_011",
+                "ten": "Hang Yến Vĩnh Hy",
+                "toa_do": {
+                    "lat": 11.70633,
+                    "lng": 109.202628
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Khám phá",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_012",
+                "ten": "Bãi Cầu - Hòn Cầu Vĩnh Hy",
+                "toa_do": {
+                    "lat": 11.713526,
+                    "lng": 109.200402
+                },
+                "tags": [
+                    "Lặn san hô",
+                    "Biển",
+                    "Yên tĩnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 4.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_013",
+                "ten": "Bãi Tắm Vĩnh Hy",
+                "toa_do": {
+                    "lat": 11.71327,
+                    "lng": 109.200664
+                },
+                "tags": [
+                    "Biển",
+                    "Bơi lội",
+                    "Nghỉ ngơi"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_014",
+                "ten": "Làng Gốm Chăm Bàu Trúc",
+                "toa_do": {
+                    "lat": 11.529783,
+                    "lng": 108.924957
+                },
+                "tags": [
+                    "Văn hóa Chăm",
+                    "Thủ công mỹ nghệ",
+                    "Tham quan"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.5,
+                    "dong_cua": 19.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_015",
+                "ten": "Gốm Chăm Ninh Thuận (Nghệ nhân)",
+                "toa_do": {
+                    "lat": 11.527764,
+                    "lng": 108.925866
+                },
+                "tags": [
+                    "Văn hóa Chăm",
+                    "Nghệ thuật",
+                    "Tham quan"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_016",
+                "ten": "Làng Dệt Thổ Cẩm Mỹ Nghiệp",
+                "toa_do": {
+                    "lat": 11.521536,
+                    "lng": 108.942482
+                },
+                "tags": [
+                    "Văn hóa Chăm",
+                    "Dệt thổ cẩm",
+                    "Tham quan"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_017",
+                "ten": "Brocade Thanh Đan - Mỹ Nghiệp",
+                "toa_do": {
+                    "lat": 11.522624,
+                    "lng": 108.940482
+                },
+                "tags": [
+                    "Văn hóa Chăm",
+                    "Dệt lụa",
+                    "Mua sắm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_018",
+                "ten": "Bảo Tàng Ninh Thuận",
+                "toa_do": {
+                    "lat": 11.564286,
+                    "lng": 108.999495
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_019",
+                "ten": "Mũi Dinh - Hải Đăng Mũi Dinh",
+                "toa_do": {
+                    "lat": 11.360804,
+                    "lng": 109.013972
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Chụp ảnh",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 10000
+            },
+            {
+                "id": "NTH_DTQ_020",
+                "ten": "Bãi Tràng - Mũi Dinh",
+                "toa_do": {
+                    "lat": 11.355811,
+                    "lng": 109.005907
+                },
+                "tags": [
+                    "Biển hoang sơ",
+                    "Cắm trại",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_021",
+                "ten": "Làng Chài Hòn Thiên (Mural Village)",
+                "toa_do": {
+                    "lat": 11.633983,
+                    "lng": 109.020017
+                },
+                "tags": [
+                    "Văn hóa địa phương",
+                    "Bích họa",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_022",
+                "ten": "Vịnh Vĩnh Hy Tour (Thuận Châu)",
+                "toa_do": {
+                    "lat": 11.725591,
+                    "lng": 109.196587
+                },
+                "tags": [
+                    "Tham quan vịnh",
+                    "Lặn biển",
+                    "Ẩm thực hải sản"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 150000
+            },
+            {
+                "id": "NTH_DTQ_023",
+                "ten": "MyHoa Lagoon - Khu Lướt Ván Diều",
+                "toa_do": {
+                    "lat": 11.608149,
+                    "lng": 109.145843
+                },
+                "tags": [
+                    "Lướt ván diều",
+                    "Nghỉ dưỡng",
+                    "Thiên nhiên"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_024",
+                "ten": "Suối Ba Hồ",
+                "toa_do": {
+                    "lat": 11.772456,
+                    "lng": 109.053675
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Tắm suối",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_025",
+                "ten": "Cánh Đồng Muối Cà Ná",
+                "toa_do": {
+                    "lat": 11.341141,
+                    "lng": 108.894768
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Chụp ảnh",
+                    "Trải nghiệm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_026",
+                "ten": "Hồ Tân Giang",
+                "toa_do": {
+                    "lat": 11.493764,
+                    "lng": 108.785342
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngắm cảnh",
+                    "Picnic"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_027",
+                "ten": "Đảo Hòn Cau (Cù Lao Câu)",
+                "toa_do": {
+                    "lat": 11.225074,
+                    "lng": 108.826927
+                },
+                "tags": [
+                    "Biển hoang sơ",
+                    "Lặn san hô",
+                    "Cắm trại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_028",
+                "ten": "Long Thuận Resort Ninh Chữ",
+                "toa_do": {
+                    "lat": 11.561979,
+                    "lng": 109.023218
+                },
+                "tags": [
+                    "Nghỉ dưỡng",
+                    "Biển",
+                    "Lướt ván"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 4.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_029",
+                "ten": "Vườn Nho Thái An",
+                "toa_do": {
+                    "lat": 11.671466,
+                    "lng": 109.175653
+                },
+                "tags": [
+                    "Nông trại",
+                    "Trải nghiệm",
+                    "Ẩm thực"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_030",
+                "ten": "Đầm Nại Wind Farm & Rừng Ngập Mặn",
+                "toa_do": {
+                    "lat": 11.667647,
+                    "lng": 109.039916
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Thiên nhiên",
+                    "Chim thú"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_031",
+                "ten": "Cánh Đồng Điện Gió Ninh Thuận",
+                "toa_do": {
+                    "lat": 11.501211,
+                    "lng": 108.865829
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Chụp ảnh",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_032",
+                "ten": "Bãi Biển Cà Ná",
+                "toa_do": {
+                    "lat": 11.324337,
+                    "lng": 108.839128
+                },
+                "tags": [
+                    "Biển",
+                    "Thư giãn",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_033",
+                "ten": "Đèo Cây Cóc - Ngắm Vịnh Vĩnh Hy",
+                "toa_do": {
+                    "lat": 11.72885,
+                    "lng": 109.198715
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Chụp ảnh",
+                    "Phong cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_034",
+                "ten": "Chợ Đêm Phan Rang",
+                "toa_do": {
+                    "lat": 11.5635,
+                    "lng": 108.988
+                },
+                "tags": [
+                    "Ẩm thực",
+                    "Mua sắm",
+                    "Sôi động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 17.0,
+                    "dong_cua": 23.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_035",
+                "ten": "Hồ Đá Vách - Núi Chúa",
+                "toa_do": {
+                    "lat": 11.680879,
+                    "lng": 109.175057
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Trekking",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 50000
+            },
+            {
+                "id": "NTH_DTQ_036",
+                "ten": "Bãi Biển Mỹ Hòa - Lướt Ván Diều",
+                "toa_do": {
+                    "lat": 11.607758,
+                    "lng": 109.146572
+                },
+                "tags": [
+                    "Biển",
+                    "Thư giãn",
+                    "Địa phương"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_037",
+                "ten": "Đền Thánh Mẫu Thiên Ya Na (Po Ino Nagar)",
+                "toa_do": {
+                    "lat": 11.53,
+                    "lng": 108.992
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Văn hóa Chăm",
+                    "Tâm linh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_038",
+                "ten": "Bãi Tràng - Mũi Dinh",
+                "toa_do": {
+                    "lat": 11.355811,
+                    "lng": 109.005907
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Thiên nhiên",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_039",
+                "ten": "Hồ Sông Sắt - Bác Ái",
+                "toa_do": {
+                    "lat": 11.862931,
+                    "lng": 108.941309
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngắm cảnh",
+                    "Picnic"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_040",
+                "ten": "Suối Lồ Ồ - Vĩnh Hy",
+                "toa_do": {
+                    "lat": 11.727719,
+                    "lng": 109.189084
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Trekking",
+                    "Suối"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 50000
+            },
+            {
+                "id": "NTH_DTQ_041",
+                "ten": "Tháp Chăm Po Dam",
+                "toa_do": {
+                    "lat": 11.266654,
+                    "lng": 108.692141
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Văn hóa Chăm",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_042",
+                "ten": "Làng Chài Vĩnh Hy (Fishing Village)",
+                "toa_do": {
+                    "lat": 11.725591,
+                    "lng": 109.196587
+                },
+                "tags": [
+                    "Văn hóa địa phương",
+                    "Ẩm thực hải sản",
+                    "Tham quan"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_043",
+                "ten": "Sân Chim Đầm Nại",
+                "toa_do": {
+                    "lat": 11.64,
+                    "lng": 109.015
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Quan sát chim",
+                    "Thiên nhiên"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.5,
+                    "dong_cua": 17.5
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_044",
+                "ten": "Chợ Sơn Hải - Bãi Biển Sơn Hải",
+                "toa_do": {
+                    "lat": 11.413364,
+                    "lng": 109.006533
+                },
+                "tags": [
+                    "Biển",
+                    "Hoang sơ",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_045",
+                "ten": "Đồi Sim Ninh Thuận (Po Rome)",
+                "toa_do": {
+                    "lat": 11.501211,
+                    "lng": 108.865829
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Chụp ảnh",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_046",
+                "ten": "Vườn Nho Thái Phong Ninh Thuận",
+                "toa_do": {
+                    "lat": 11.671466,
+                    "lng": 109.175653
+                },
+                "tags": [
+                    "Nông trại nho",
+                    "Ẩm thực",
+                    "Trải nghiệm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 30000
+            },
+            {
+                "id": "NTH_DTQ_047",
+                "ten": "Bãi Biển Khánh Hội (Ninh Hải)",
+                "toa_do": {
+                    "lat": 11.564854,
+                    "lng": 109.024474
+                },
+                "tags": [
+                    "Biển",
+                    "Thiên nhiên",
+                    "Yên tĩnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_048",
+                "ten": "Tháp Chàm Po Klong Garai (Phan Rang)",
+                "toa_do": {
+                    "lat": 11.601906,
+                    "lng": 108.946504
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa Chăm",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 20000
+            },
+            {
+                "id": "NTH_DTQ_049",
+                "ten": "Đèo Cậu - Điểm Ngắm Vịnh Vĩnh Hy",
+                "toa_do": {
+                    "lat": 11.72885,
+                    "lng": 109.198715
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Chụp ảnh",
+                    "Đi bộ"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.9833
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTH_DTQ_050",
+                "ten": "Vườn Quốc Gia Núi Chúa (Cổng chính)",
+                "toa_do": {
+                    "lat": 11.680879,
+                    "lng": 109.175057
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngắm cảnh",
+                    "Trekking"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 40000
+            }
+        ],
+        "quan_an": [
+            {
+                "id": "NT_QA_001",
+                "ten_quan": "Bánh Canh Nhường",
+                "dia_chi": "284 Ngô Gia Tự, Phường Kinh Dinh, TP Phan Rang - Tháp Chàm(Cũ: Phường Tấn Tài → sáp nhập vào Phường Kinh Dinh)",
+                "gia_trung_binh": "25.000 - 45.000 VNĐ",
+                "mon_noi_bat": "Bánh canh chả cá, Chả cuốn",
+                "dac_diem": "Quán bánh canh lâu đời nức tiếng Phan Rang, chả cá dai ngọt tự làm, nước dùng thanh vị cá biển ăn cùng chả cuốn mắm nêm cực cuốn."
+            },
+            {
+                "id": "NT_QA_002",
+                "ten_quan": "Cơm Gà Phước Thành",
+                "dia_chi": "3 Trần Quang Diệu, Phường Kinh Dinh, TP Phan Rang - Tháp Chàm(Cũ: Phường Tấn Tài → sáp nhập vào Phường Kinh Dinh)",
+                "gia_trung_binh": "40.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Cơm gà luộc chặt, Cơm gà rôti",
+                "dac_diem": "Địa chỉ cơm gà chặt nổi tiếng với giống gà ta thả đồi dai giòn, cơm nấu nước luộc gà béo ngậy, ăn kèm dưa chua ngọt."
+            },
+            {
+                "id": "NT_QA_003",
+                "ten_quan": "Bánh Căn - Bánh Xèo Quê Hương",
+                "dia_chi": "133 Trần Quang Diệu, Phường Phủ Hà, TP Phan Rang - Tháp Chàm(Cũ: Phường Thanh Sơn → sáp nhập vào Phường Phủ Hà)",
+                "gia_trung_binh": "30.000 - 60.000 VNĐ",
+                "mon_noi_bat": "Bánh căn mực, Bánh xèo hải sản",
+                "dac_diem": "Lò bánh đổ liên tục nóng hổi, vỏ giòn nhân hải sản tươi rói. Điểm nhấn là sự kết hợp 4 loại nước chấm: mắm chua ngọt, mắm nêm, mắm đậu phộng và mắm cà chua."
+            },
+            {
+                "id": "NT_QA_004",
+                "ten_quan": "Hải Sản Gái Mập",
+                "dia_chi": "Khu vực Biển Bình Sơn, Phường Mỹ Bình, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "100.000 - 400.000 VNĐ",
+                "mon_noi_bat": "Tôm hùm nướng, Mực một nắng",
+                "dac_diem": "Quán hải sản ven biển thoáng mát, giá cả minh bạch. Hải sản tươi sống được chọn trực tiếp tại bể, mực một nắng nướng sa tế là món \"must-try\"."
+            },
+            {
+                "id": "NT_QA_005",
+                "ten_quan": "Cơm Gà Khánh Kỳ",
+                "dia_chi": "61 Trần Quang Diệu, Phường Phủ Hà, TP Phan Rang - Tháp Chàm(Cũ: Phường Thanh Sơn → sáp nhập vào Phường Phủ Hà)",
+                "gia_trung_binh": "35.000 - 70.000 VNĐ",
+                "mon_noi_bat": "Cơm gà ta, Canh lá dông",
+                "dac_diem": "Quán cơm gà truyền thống được người bản địa ưa chuộng. Thịt gà chắc, da vàng ươm, nước chấm tỏi ớt đặc kẹo mang đậm bản sắc Ninh Thuận."
+            },
+            {
+                "id": "NT_QA_006",
+                "ten_quan": "Quán Dông Phong Ký",
+                "dia_chi": "106 Nguyễn Văn Cừ, Phường Văn Hải, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "150.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Dông cát nướng muối ớt, Gỏi dông",
+                "dac_diem": "Đặc sản dông cát (bò sát sa mạc) được chế biến sạch, thịt trắng, dai ngọt như thịt gà. Món nướng muối ớt tẩm ướp đậm đà rất hợp nhâm nhi."
+            },
+            {
+                "id": "NT_QA_007",
+                "ten_quan": "Lẩu Bò Sáu Trọng",
+                "dia_chi": "Đường 21 Tháng 8, Phường Phủ Hà, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "120.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Lẩu bò thập cẩm, Bò nướng",
+                "dac_diem": "Nước lẩu thơm mùi thảo mộc, thịt bò ninh mềm tơi. Quán bình dân nhưng luôn đông khách nhờ khẩu phần ăn lớn và giá cả hợp lý."
+            },
+            {
+                "id": "NT_QA_008",
+                "ten_quan": "Bún Sứa Kiều",
+                "dia_chi": "85 Lê Lợi, Phường Kinh Dinh, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "30.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bún sứa chả cá, Bún cá dầm",
+                "dac_diem": "Sứa biển tươi giòn sần sật, chả cá chiên thơm lừng hòa cùng nước lèo cá dầm ngọt thanh, món ăn sáng giải nhiệt tuyệt vời xứ nắng gió."
+            },
+            {
+                "id": "NT_QA_009",
+                "ten_quan": "Bánh Hỏi Lòng Heo Phủ Hà",
+                "dia_chi": "Chợ Phủ Hà, Phường Phủ Hà, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "25.000 - 40.000 VNĐ",
+                "mon_noi_bat": "Bánh hỏi lòng heo",
+                "dac_diem": "Quán trong lồng chợ truyền thống. Bánh hỏi thoa mỡ hành dẻo thơm, ăn cùng lòng heo luộc mềm, dồi sụn và chén mắm chanh tỏi ớt cực dính."
+            },
+            {
+                "id": "NT_QA_010",
+                "ten_quan": "Hải Sản Sơn Ca",
+                "dia_chi": "Khu K1, Hoàng Diệu, Phường Phủ Hà, TP Phan Rang - Tháp Chàm(Cũ: Phường Thanh Sơn → sáp nhập vào Phường Phủ Hà)",
+                "gia_trung_binh": "150.000 - 350.000 VNĐ",
+                "mon_noi_bat": "Ốc hương rang muối, Nhum biển nướng",
+                "dac_diem": "Nằm trong khu đô thị K1 sầm uất mới nổi, không gian rộng rãi sang trọng. Menu đa dạng hải sản đánh bắt trong ngày từ vịnh Vĩnh Hy."
+            },
+            {
+                "id": "NT_QA_011",
+                "ten_quan": "Cừu Nướng Ô Vương",
+                "dia_chi": "123 Lương Ngọc Quyến, Phường Phủ Hà, TP Phan Rang - Tháp Chàm(Cũ: Phường Thanh Sơn → sáp nhập vào Phường Phủ Hà)",
+                "gia_trung_binh": "120.000 - 280.000 VNĐ",
+                "mon_noi_bat": "Đùi cừu nướng, Lẩu cừu nấu tiêu",
+                "dac_diem": "Thịt cừu Ninh Thuận chính gốc không bị hôi, nướng tảng trên than hồng hoặc nấu lẩu tiêu xanh cay nồng, thích hợp tụ tập nhóm bạn."
+            },
+            {
+                "id": "NT_QA_012",
+                "ten_quan": "Cơm Niêu Lộc Ký",
+                "dia_chi": "81 Đường 16 Tháng 4, Phường Mỹ Hải, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "80.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Cơm niêu, Cá bớp kho tộ",
+                "dac_diem": "Cơm niêu đập vỏ giòn rụm, thực đơn thuần Việt phong phú với các loại cá biển kho tộ đậm đà. Phù hợp cho bữa cơm gia đình và thiết đãi khách."
+            },
+            {
+                "id": "NT_QA_013",
+                "ten_quan": "Bún Mắm Nêm Chị Thảo",
+                "dia_chi": "Đ. Nguyễn Công Trứ, Phường Kinh Dinh, TP Phan Rang - Tháp Chàm(Cũ: Phường Mỹ Hương → sáp nhập vào Phường Kinh Dinh)",
+                "gia_trung_binh": "25.000 - 45.000 VNĐ",
+                "mon_noi_bat": "Bún mắm nêm thịt luộc, Tai heo",
+                "dac_diem": "Tô bún đầy đặn với thịt ba chỉ luộc, tai heo giòn, chả lụa trộn cùng mắm nêm Ninh Thuận mặn mòi, thơm nức mũi."
+            },
+            {
+                "id": "NT_QA_014",
+                "ten_quan": "Bánh Xèo Hồ Cá",
+                "dia_chi": "80 Trần Quang Diệu, Phường Phủ Hà, TP Phan Rang - Tháp Chàm(Cũ: Phường Thanh Sơn → sáp nhập vào Phường Phủ Hà)",
+                "gia_trung_binh": "25.000 - 55.000 VNĐ",
+                "mon_noi_bat": "Bánh xèo tôm mực",
+                "dac_diem": "Nổi tiếng với không gian thoáng gần hồ cá nhỏ. Bánh xèo đổ bằng khuôn đất nung giữ nguyên độ ngọt của tôm đất và mực nang nhỏ."
+            },
+            {
+                "id": "NT_QA_015",
+                "ten_quan": "Nhà Hàng Chốn Quê",
+                "dia_chi": "Đ. Nguyễn Văn Cừ, Phường Đài Sơn, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "100.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Gỏi cá mai, Lẩu hải sản",
+                "dac_diem": "Kiến trúc nhà hàng mang nét mộc mạc đúng chất \"chốn quê\". Chuyên món gỏi cá mai đặc sản Ninh Thuận chua cay hài hòa, cuốn bánh tráng rau rừng."
+            },
+            {
+                "id": "NT_QA_016",
+                "ten_quan": "Bánh Canh Bà Bốn",
+                "dia_chi": "75 Ngô Gia Tự, Phường Kinh Dinh, TP Phan Rang - Tháp Chàm(Cũ: Phường Tấn Tài → sáp nhập vào Phường Kinh Dinh)",
+                "gia_trung_binh": "25.000 - 45.000 VNĐ",
+                "mon_noi_bat": "Bánh canh cá dầm, Chả hấp",
+                "dac_diem": "Đối thủ nặng ký của Bánh canh Nhường, vị nước lèo có phần thanh ngọt hơn, sợi bánh canh bột gạo dẻo mềm không bị nát."
+            },
+            {
+                "id": "NT_QA_017",
+                "ten_quan": "Quán Ốc Đợi",
+                "dia_chi": "Ngô Gia Tự, Phường Kinh Dinh, TP Phan Rang - Tháp Chàm(Cũ: Phường Tấn Tài → sáp nhập vào Phường Kinh Dinh)",
+                "gia_trung_binh": "40.000 - 100.000 VNĐ",
+                "mon_noi_bat": "Ốc hương xào bơ tỏi, Sò huyết xào me",
+                "dac_diem": "Quán ốc vỉa hè bình dân nhưng nước sốt cực kỳ đậm đà. Đặt tên \"Ốc Đợi\" vì khách đông nên đôi khi phải chờ, bù lại chất lượng rất xứng đáng."
+            },
+            {
+                "id": "NT_QA_018",
+                "ten_quan": "Dê Núi Ninh Bình - Xứ Phan",
+                "dia_chi": "Đường 16 Tháng 4, Phường Mỹ Bình, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "150.000 - 350.000 VNĐ",
+                "mon_noi_bat": "Dê hấp tía tô, Dê nướng tảng",
+                "dac_diem": "Kết hợp cách chế biến dê núi phía Bắc với thịt dê chăn thả tự nhiên của Ninh Thuận, cho ra món ăn mềm, ngọt thịt và không hăng."
+            },
+            {
+                "id": "NT_QA_019",
+                "ten_quan": "Nem Nướng Cuốn Bánh Tráng Bà Năm",
+                "dia_chi": "Đường Trần Phú, Phường Phủ Hà, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "35.000 - 60.000 VNĐ",
+                "mon_noi_bat": "Nem nướng, Chả lụi",
+                "dac_diem": "Cuốn nem nướng đầy đặn cùng chả ram giòn, dưa chua, xoài băm, chấm ngập trong nước lèo đậu phộng béo ngậy ăn không biết ngán."
+            },
+            {
+                "id": "NT_QA_020",
+                "ten_quan": "Quán Ăn Gia Đình Bốn Mùa",
+                "dia_chi": "Đường Yên Ninh, Phường Văn Hải, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "100.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Lẩu cá bóp, Mực hấp hành gừng",
+                "dac_diem": "Nằm gần khu du lịch biển Ninh Chử, quán có menu chuyên hải sản và các món ăn gia đình miền Trung, không gian mát mẻ dưới rạp cây."
+            },
+            {
+                "id": "NT_QA_021",
+                "ten_quan": "Bè Hải Sản Dũng Sài Gòn",
+                "dia_chi": "Vịnh Vĩnh Hy, Xã Vĩnh Hải, Huyện Ninh Hải",
+                "gia_trung_binh": "200.000 - 600.000 VNĐ",
+                "mon_noi_bat": "Tôm hùm xanh, Cầu gai nướng mỡ hành",
+                "dac_diem": "Trải nghiệm ăn hải sản ngay trên bè nổi vịnh Vĩnh Hy. Thực khách tự tay vớt hải sản từ lưới thả dưới biển, tươi ngon tuyệt đối."
+            },
+            {
+                "id": "NT_QA_022",
+                "ten_quan": "Quán Nhậu Bờ Kè Đầm Nại",
+                "dia_chi": "Dọc bờ kè, Thị trấn Khánh Hải, Huyện Ninh Hải",
+                "gia_trung_binh": "80.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Hào nướng, Cá bò da nướng giấy bạc",
+                "dac_diem": "Dãy quán nhậu tấp nập view đầm Nại lộng gió lúc hoàng hôn. Giá cực kỳ sinh viên, chuyên phục vụ đồ nướng và bia lạnh nhâm nhi cuối ngày."
+            },
+            {
+                "id": "NT_QA_023",
+                "ten_quan": "Bánh Mì Bò Né 3 Ngon",
+                "dia_chi": "44 Trần Phú, Phường Phủ Hà, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "30.000 - 60.000 VNĐ",
+                "mon_noi_bat": "Bò né ốp la, Bò xíu mại",
+                "dac_diem": "Chảo gang bò né xèo xèo nóng hổi, thịt bò ta mềm ngọt tẩm ướp đậm vị, thêm pate béo ngậy chấm cùng bánh mì giòn tan."
+            },
+            {
+                "id": "NT_QA_024",
+                "ten_quan": "Bún Cá Dầm Lá É",
+                "dia_chi": "Đường Lê Duẩn, Phường Phủ Hà, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "30.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bún cá dầm lá é",
+                "dac_diem": "Món ăn sáng thanh đạm, cá cờ dầm nát nấu trong nước lèo trong vắt, đặc biệt ăn kèm lá é xắt nhỏ mang lại mùi thơm nồng giải cảm rất tốt."
+            },
+            {
+                "id": "NT_QA_025",
+                "ten_quan": "Chè Chuối Nướng Chợ Đêm",
+                "dia_chi": "Chợ đêm du lịch Ninh Thuận, Đ. 16 Tháng 4, Phường Mỹ Hải",
+                "gia_trung_binh": "15.000 - 25.000 VNĐ",
+                "mon_noi_bat": "Chuối nếp nướng cốt dừa",
+                "dac_diem": "Quầy ăn vặt được giới trẻ săn đón, chuối bọc nếp nướng xém cạnh thơm phức, rưới đẫm nước cốt dừa và rắc đậu phộng rang."
+            },
+            {
+                "id": "NT_QA_026",
+                "ten_quan": "Lẩu Dê Trí Tâm",
+                "dia_chi": "Đường Thủy Tàu, Phường Đô Vinh, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "120.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Dê xào lăn, Ngọc dương hầm thuốc bắc",
+                "dac_diem": "Nằm cách hơi xa trung tâm nhưng thu hút dân sành ăn. Dê được thu mua trực tiếp từ dân chăn nuôi tại vùng đồi núi Đô Vinh, chất lượng tuyệt hảo."
+            },
+            {
+                "id": "NT_QA_027",
+                "ten_quan": "Nhà Hàng Xứ Phan",
+                "dia_chi": "Khu K1, Phường Phủ Hà, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "150.000 - 400.000 VNĐ",
+                "mon_noi_bat": "Cua gạch rang me, Sashimi hải sản",
+                "dac_diem": "Nhà hàng VIP tại khu đô thị K1, phòng lạnh riêng tư. Đầu bếp tay nghề cao xử lý các món hải sản cao cấp cực chuẩn vị, trang trí đẹp mắt."
+            },
+            {
+                "id": "NT_QA_028",
+                "ten_quan": "Bánh Tráng Nướng Liên Lỗi",
+                "dia_chi": "Ngã 3 Liên Lỗi, Phường Đạo Long, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "15.000 - 30.000 VNĐ",
+                "mon_noi_bat": "Bánh tráng nướng mắm ruốc",
+                "dac_diem": "Món ăn vặt \"thần thánh\" của học sinh sinh viên. Bánh tráng phết mắm ruốc, mỡ hành, trứng cút nướng giòn rụm bằng than củi."
+            },
+            {
+                "id": "NT_QA_029",
+                "ten_quan": "Bánh Xèo Cô Ba",
+                "dia_chi": "Phố đi bộ, Đường Quang Trung, Phường Kinh Dinh, TP Phan Rang - Tháp Chàm",
+                "gia_trung_binh": "30.000 - 60.000 VNĐ",
+                "mon_noi_bat": "Bánh xèo giá đỗ thịt heo",
+                "dac_diem": "Quán nhộn nhịp vào các buổi tối cuối tuần trên phố đi bộ. Bánh xèo đổ theo phong cách giòn rụm miền Trung, ăn rau sống tươi sạch thả ga."
+            },
+            {
+                "id": "NT_QA_030",
+                "ten_quan": "Cơm Gà Chú Ngộ",
+                "dia_chi": "Lê Hồng Phong, Phường Kinh Dinh, TP Phan Rang - Tháp Chàm(Cũ: Phường Mỹ Hương → sáp nhập vào Phường Kinh Dinh)",
+                "gia_trung_binh": "35.000 - 65.000 VNĐ",
+                "mon_noi_bat": "Cơm gà xé bóp thấu",
+                "dac_diem": "Mang phong cách cơm gà xé Hội An pha trộn với khẩu vị đậm đà mặn ngọt của Ninh Thuận, dưa hành tím muối giòn chua giải ngấy cực đỉnh."
+            }
+        ]
+    }
+}

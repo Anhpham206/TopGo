@@ -1,0 +1,1198 @@
+{
+    "Cà Mau": {
+        "diem_tham_quan": [
+            {
+                "id": "CAM_DTQ_001",
+                "ten": "Cột cờ Mũi Cà Mau",
+                "toa_do": {
+                    "lat": 8.608081,
+                    "lng": 104.719275
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Khám phá",
+                    "Biểu tượng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_002",
+                "ten": "Vườn Quốc gia U Minh Hạ",
+                "toa_do": {
+                    "lat": 9.19831,
+                    "lng": 104.95915
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Thiên nhiên",
+                    "Rừng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.2,
+                "gia_ve": 10000
+            },
+            {
+                "id": "CAM_DTQ_003",
+                "ten": "Hòn Đá Bạc",
+                "toa_do": {
+                    "lat": 9.179023,
+                    "lng": 104.802054
+                },
+                "tags": [
+                    "Biển",
+                    "Tâm linh",
+                    "Phong cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 40000
+            },
+            {
+                "id": "CAM_DTQ_004",
+                "ten": "Đầm Thị Tường",
+                "toa_do": {
+                    "lat": 8.999779,
+                    "lng": 104.935965
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Trải nghiệm",
+                    "Hoàng hôn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_005",
+                "ten": "Chợ nổi Cà Mau",
+                "toa_do": {
+                    "lat": 9.160601,
+                    "lng": 105.155683
+                },
+                "tags": [
+                    "Văn hóa",
+                    "Sôi động",
+                    "Chèo thuyền"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 4.0,
+                    "dong_cua": 8.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_006",
+                "ten": "Vườn chim Cà Mau",
+                "toa_do": {
+                    "lat": 9.1722,
+                    "lng": 105.1528
+                },
+                "tags": [
+                    "Động vật",
+                    "Ngoài trời",
+                    "Thiên nhiên"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_007",
+                "ten": "Rừng đước Năm Căn",
+                "toa_do": {
+                    "lat": 8.7562,
+                    "lng": 105.0001
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Khám phá",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_008",
+                "ten": "Chùa Monivongsa Bopharam",
+                "toa_do": {
+                    "lat": 9.181028,
+                    "lng": 105.141022
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Kiến trúc",
+                    "Văn hóa"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_009",
+                "ten": "Khu du lịch Khai Long",
+                "toa_do": {
+                    "lat": 8.566853,
+                    "lng": 104.828653
+                },
+                "tags": [
+                    "Biển",
+                    "Giải trí",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 0.0,
+                "gia_ve": 30000
+            },
+            {
+                "id": "CAM_DTQ_010",
+                "ten": "Chùa Bà Thiên Hậu",
+                "toa_do": {
+                    "lat": 9.177787,
+                    "lng": 105.146526
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Lịch sử",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_011",
+                "ten": "Khu tưởng niệm Chủ tịch Hồ Chí Minh",
+                "toa_do": {
+                    "lat": 9.18524,
+                    "lng": 105.137171
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_012",
+                "ten": "Đảo Hòn Khoai",
+                "toa_do": {
+                    "lat": 8.431651,
+                    "lng": 104.830869
+                },
+                "tags": [
+                    "Biển",
+                    "Khám phá",
+                    "Hải đăng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_013",
+                "ten": "Vườn dâu Cái Tàu",
+                "toa_do": {
+                    "lat": 9.381423,
+                    "lng": 105.00156
+                },
+                "tags": [
+                    "Nông trại",
+                    "Sinh thái",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 30000
+            },
+            {
+                "id": "CAM_DTQ_014",
+                "ten": "Khu du lịch sinh thái Thư Duy",
+                "toa_do": {
+                    "lat": 9.164436,
+                    "lng": 105.219512
+                },
+                "tags": [
+                    "Giải trí",
+                    "Nghỉ dưỡng",
+                    "Hiện đại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.3,
+                    "dong_cua": 22.0
+                },
+                "rating": 0.0,
+                "gia_ve": 50000
+            },
+            {
+                "id": "CAM_DTQ_015",
+                "ten": "Tượng Đài Cây Đước (Trung Tâm)",
+                "toa_do": {
+                    "lat": 9.176207,
+                    "lng": 105.150853
+                },
+                "tags": [
+                    "Biểu tượng",
+                    "Lịch sử",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_016",
+                "ten": "Lâm viên Cà Mau",
+                "toa_do": {
+                    "lat": 9.171,
+                    "lng": 105.148
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Đi bộ",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 21.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_017",
+                "ten": "Chùa Kim Sơn",
+                "toa_do": {
+                    "lat": 9.168261,
+                    "lng": 105.183754
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Tôn giáo",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_018",
+                "ten": "Đình Tân Hưng",
+                "toa_do": {
+                    "lat": 9.140742,
+                    "lng": 105.12918
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa",
+                    "Tôn giáo"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_019",
+                "ten": "Vườn Quốc gia Mũi Cà Mau",
+                "toa_do": {
+                    "lat": 8.605564,
+                    "lng": 104.722946
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Sinh thái",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 0.0,
+                "gia_ve": 30000
+            },
+            {
+                "id": "CAM_DTQ_020",
+                "ten": "Chợ Cà Mau",
+                "toa_do": {
+                    "lat": 9.176528,
+                    "lng": 105.147182
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Sôi động",
+                    "Ẩm thực"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_021",
+                "ten": "Cầu Gành Hào",
+                "toa_do": {
+                    "lat": 9.172333,
+                    "lng": 105.147884
+                },
+                "tags": [
+                    "Chụp ảnh",
+                    "Giao thông",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_022",
+                "ten": "Bảo tàng tỉnh Cà Mau",
+                "toa_do": {
+                    "lat": 9.182044,
+                    "lng": 105.136122
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Trong nhà",
+                    "Văn hóa"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 10000
+            },
+            {
+                "id": "CAM_DTQ_023",
+                "ten": "Công viên văn hóa Hùng Vương",
+                "toa_do": {
+                    "lat": 9.178857,
+                    "lng": 105.1517
+                },
+                "tags": [
+                    "Giải trí",
+                    "Ngoài trời",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_024",
+                "ten": "Thánh đường Tắc Sậy",
+                "toa_do": {
+                    "lat": 9.221859,
+                    "lng": 105.397617
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Kiến trúc",
+                    "Tôn giáo"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 4.0,
+                    "dong_cua": 21.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_025",
+                "ten": "Khu di tích lịch sử Lung Ngọc Hoàng",
+                "toa_do": {
+                    "lat": 9.35,
+                    "lng": 105.3
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Thiên nhiên",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_026",
+                "ten": "Cồn Ông Trang",
+                "toa_do": {
+                    "lat": 8.688525,
+                    "lng": 104.874336
+                },
+                "tags": [
+                    "Biển",
+                    "Thiên nhiên",
+                    "Hoang sơ"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_027",
+                "ten": "Đầm Dơi",
+                "toa_do": {
+                    "lat": 8.969714,
+                    "lng": 105.20778
+                },
+                "tags": [
+                    "Khám phá",
+                    "Thiên nhiên",
+                    "Trải nghiệm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_028",
+                "ten": "Cửa biển Sông Đốc",
+                "toa_do": {
+                    "lat": 9.040856,
+                    "lng": 104.830037
+                },
+                "tags": [
+                    "Sôi động",
+                    "Cảng cá",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_029",
+                "ten": "Chùa Quan Âm",
+                "toa_do": {
+                    "lat": 9.139967,
+                    "lng": 105.210934
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Tâm linh",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_030",
+                "ten": "Quảng trường Thanh Niên",
+                "toa_do": {
+                    "lat": 9.186623,
+                    "lng": 105.167112
+                },
+                "tags": [
+                    "Sôi động",
+                    "Ngoài trời",
+                    "Sự kiện"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_031",
+                "ten": "Khu du lịch sinh thái Mười Ngọt",
+                "toa_do": {
+                    "lat": 9.245352,
+                    "lng": 104.868524
+                },
+                "tags": [
+                    "Trải nghiệm",
+                    "Ẩm thực",
+                    "Thiên nhiên"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 20000
+            },
+            {
+                "id": "CAM_DTQ_032",
+                "ten": "Đầm Cùng",
+                "toa_do": {
+                    "lat": 8.853272,
+                    "lng": 105.019991
+                },
+                "tags": [
+                    "Cảnh quan",
+                    "Sông nước",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_033",
+                "ten": "Khu du lịch Hương Tràm",
+                "toa_do": {
+                    "lat": 9.293388,
+                    "lng": 104.998469
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Gia đình",
+                    "Nghỉ dưỡng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 0.0,
+                "gia_ve": 30000
+            },
+            {
+                "id": "CAM_DTQ_034",
+                "ten": "Chùa Phổ Tạng",
+                "toa_do": {
+                    "lat": 9.188,
+                    "lng": 105.143
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Thanh tịnh",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_035",
+                "ten": "Cầu quay Cà Mau",
+                "toa_do": {
+                    "lat": 9.180839,
+                    "lng": 105.149411
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Biểu tượng",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_036",
+                "ten": "Rừng ngập mặn Năm Căn",
+                "toa_do": {
+                    "lat": 8.76,
+                    "lng": 105.02
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Sinh thái",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.5
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_037",
+                "ten": "Khu tưởng niệm cụ Phan Ngọc Hiển",
+                "toa_do": {
+                    "lat": 8.756809,
+                    "lng": 104.990437
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa",
+                    "Tham quan"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_038",
+                "ten": "Chợ Năm Căn",
+                "toa_do": {
+                    "lat": 8.759634,
+                    "lng": 104.992305
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Sôi động",
+                    "Đặc sản"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 3.0,
+                    "dong_cua": 19.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_039",
+                "ten": "Khu sinh thái Đất Mũi",
+                "toa_do": {
+                    "lat": 8.605564,
+                    "lng": 104.722946
+                },
+                "tags": [
+                    "Khám phá",
+                    "Thiên nhiên",
+                    "Biển"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 0.0,
+                "gia_ve": 30000
+            },
+            {
+                "id": "CAM_DTQ_040",
+                "ten": "Chùa Vạn Phước",
+                "toa_do": {
+                    "lat": 8.855762,
+                    "lng": 104.912056
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Kiến trúc",
+                    "Tâm linh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_041",
+                "ten": "Công viên 19/5",
+                "toa_do": {
+                    "lat": 9.175,
+                    "lng": 105.153
+                },
+                "tags": [
+                    "Ngoài trời",
+                    "Gia đình",
+                    "Đi bộ"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_042",
+                "ten": "Khu di tích lịch sử Xẻo Đước",
+                "toa_do": {
+                    "lat": 8.8,
+                    "lng": 104.9
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Khám phá",
+                    "Rừng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_043",
+                "ten": "Cửa biển Gành Hào",
+                "toa_do": {
+                    "lat": 9.020357,
+                    "lng": 105.422366
+                },
+                "tags": [
+                    "Biển",
+                    "Chụp ảnh",
+                    "Sôi động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_044",
+                "ten": "Nhà công tử Bạc Liêu (chi nhánh CM)",
+                "toa_do": {
+                    "lat": 9.18,
+                    "lng": 105.15
+                },
+                "tags": [
+                    "Kiến trúc",
+                    "Lịch sử",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.5
+                },
+                "rating": 4.0,
+                "gia_ve": 20000
+            },
+            {
+                "id": "CAM_DTQ_045",
+                "ten": "Cầu Phan Ngọc Hiển",
+                "toa_do": {
+                    "lat": 9.180937,
+                    "lng": 105.149357
+                },
+                "tags": [
+                    "Giao thông",
+                    "Chụp ảnh",
+                    "Biểu tượng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_046",
+                "ten": "Đình thần Tân Lộc",
+                "toa_do": {
+                    "lat": 9.266983,
+                    "lng": 105.178792
+                },
+                "tags": [
+                    "Văn hóa",
+                    "Tôn giáo",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_047",
+                "ten": "Vườn chim Đầm Dơi",
+                "toa_do": {
+                    "lat": 8.94,
+                    "lng": 105.21
+                },
+                "tags": [
+                    "Động vật",
+                    "Thiên nhiên",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_048",
+                "ten": "Khu du lịch Đá Bạc - Lợi An",
+                "toa_do": {
+                    "lat": 9.176095,
+                    "lng": 104.810054
+                },
+                "tags": [
+                    "Biển",
+                    "Giải trí",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.5
+                },
+                "rating": 0.0,
+                "gia_ve": 40000
+            },
+            {
+                "id": "CAM_DTQ_049",
+                "ten": "Chùa Bà Mã Châu",
+                "toa_do": {
+                    "lat": 9.182,
+                    "lng": 105.146
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Văn hóa",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "CAM_DTQ_050",
+                "ten": "Biển Khai Long",
+                "toa_do": {
+                    "lat": 8.566853,
+                    "lng": 104.828653
+                },
+                "tags": [
+                    "Biển",
+                    "Thiên nhiên",
+                    "Cảnh quan"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            }
+        ],
+        "quan_an": [
+            {
+                "id": "CM_QA_001",
+                "ten_quan": "Hải Sản Quạt Mo",
+                "dia_chi": "14-16 Bùi Thị Trường, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 5, TP Cà Mau)",
+                "gia_trung_binh": "80.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Cua Cà Mau rang me, Cua luộc",
+                "dac_diem": "Một trong những nhà hàng hải sản nổi tiếng bậc nhất Cà Mau, vừa phục vụ ăn uống vừa là vựa hải sản sỉ lẻ, hải sản tươi sống chọn lọc mỗi ngày, không gian rộng sạch sẽ thoáng mát."
+            },
+            {
+                "id": "CM_QA_002",
+                "ten_quan": "Nhà Hàng Làng Xưa",
+                "dia_chi": "238 Nguyễn Trãi, Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 4 → sáp nhập vào Phường An Xuyên)",
+                "gia_trung_binh": "120.000 - 400.000 VNĐ",
+                "mon_noi_bat": "Tôm càng xanh, Cua Cà Mau, Cá nâu",
+                "dac_diem": "Khuôn viên rộng đến 6.000m², thiết kế như ngôi làng xưa với 7 khu vực xen kẽ hồ nước, cây xanh, không gian sang trọng phục vụ đặc sản miền Tây chuẩn vị."
+            },
+            {
+                "id": "CM_QA_003",
+                "ten_quan": "Nhà Hàng Phố Xưa",
+                "dia_chi": "239 Phan Ngọc Hiển, Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 9, TP Cà Mau)",
+                "gia_trung_binh": "100.000 - 350.000 VNĐ",
+                "mon_noi_bat": "Cua rang me, Gỏi tôm xoài",
+                "dac_diem": "Quán ăn nổi tiếng nhiều năm tại Cà Mau, thu hút đông du khách ghé thăm, chuyên đặc sản cua Cà Mau chế biến đa dạng, không gian ấm cúng đậm chất miền Tây."
+            },
+            {
+                "id": "CM_QA_004",
+                "ten_quan": "Nhà Hàng Phượng Vĩ",
+                "dia_chi": "255 Trần Hưng Đạo, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 5, TP Cà Mau)",
+                "gia_trung_binh": "150.000 - 500.000 VNĐ",
+                "mon_noi_bat": "Vộp nướng, Chả trứng mực",
+                "dac_diem": "Một trong những nhà hàng lớn nhất Cà Mau sức chứa 1.500 khách, chia 5 sảnh phong cách riêng, điểm ăn uống quen thuộc của đoàn du lịch, chuyên tổ chức tiệc gala."
+            },
+            {
+                "id": "CM_QA_005",
+                "ten_quan": "Lẩu Mắm Đồng Quê",
+                "dia_chi": "91A Tôn Đức Thắng, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 5, TP Cà Mau)",
+                "gia_trung_binh": "200.000 - 350.000 VNĐ",
+                "mon_noi_bat": "Lẩu mắm hải sản, Lẩu mắm cá kèo",
+                "dac_diem": "Nước lẩu trong không đục, vị mắm đậm không quá nồng, topping đầy đủ cua tôm lươn ốc mực, rau sống bông súng bông điên điển chuẩn vị U Minh."
+            },
+            {
+                "id": "CM_QA_006",
+                "ten_quan": "Lẩu Dê Phát Cường",
+                "dia_chi": "120 Ngô Quyền, Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 1, TP Cà Mau)",
+                "gia_trung_binh": "100.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Lẩu dê, Dê tái chanh, Dê xào lăn",
+                "dac_diem": "Nổi tiếng khử mùi thịt dê chuẩn, nước dùng ngọt đậm đà, thịt mổ trong ngày tươi không hôi, không gian rộng thoáng mát lý tưởng cho nhóm đông."
+            },
+            {
+                "id": "CM_QA_007",
+                "ten_quan": "Hủ Tiếu Mực A Vòi",
+                "dia_chi": "Lý Thường Kiệt, Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 2, TP Cà Mau)",
+                "gia_trung_binh": "40.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Hủ tiếu mực tươi, Hủ tiếu đặc biệt",
+                "dac_diem": "Chuyên hủ tiếu mực đậm chất miền Tây, nước dùng ninh xương ống nhiều giờ không lạm dụng bột ngọt, mực tươi thấm gia vị chấm nước mắm chua ngọt rất hấp dẫn."
+            },
+            {
+                "id": "CM_QA_008",
+                "ten_quan": "Nem Nướng Thanh Hương",
+                "dia_chi": "49 Châu Văn Đặng, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 5, TP Cà Mau)",
+                "gia_trung_binh": "50.000 - 100.000 VNĐ",
+                "mon_noi_bat": "Nem nướng, Bánh hỏi nem nướng",
+                "dac_diem": "Quán nem nướng nổi tiếng bậc nhất Cà Mau, nước chấm đậm đà bùi bùi đặc trưng, phục vụ cả bánh hỏi heo quay và bánh hỏi thịt nướng, thu hút khách địa phương và du khách."
+            },
+            {
+                "id": "CM_QA_009",
+                "ten_quan": "Bánh Tầm Cari Cô Lan",
+                "dia_chi": "Đối diện số 2 Bùi Thị Xuân, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 7, TP Cà Mau)",
+                "gia_trung_binh": "20.000 - 40.000 VNĐ",
+                "mon_noi_bat": "Bánh tầm cari cay, Bánh tầm nước cốt dừa",
+                "dac_diem": "Địa chỉ bánh tầm nổi tiếng quen thuộc với người dân địa phương, hương vị cari cay rất đặc trưng khó nhầm với nơi khác, giá bình dân phục vụ từ sáng sớm."
+            },
+            {
+                "id": "CM_QA_010",
+                "ten_quan": "Quán Cây Sứa",
+                "dia_chi": "Đối diện số 2 Bùi Thị Xuân, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 7, TP Cà Mau)",
+                "gia_trung_binh": "25.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bún nước lèo mực tôm cá",
+                "dac_diem": "Quán ăn sáng yêu thích của người dân địa phương, nước lèo nấu từ mắm sặc đúng chất miền Tây ngọt thanh dễ ăn, mỗi tô đầy đủ mực tôm đất cá và rau xanh."
+            },
+            {
+                "id": "CM_QA_011",
+                "ten_quan": "Cháo Tiều 70",
+                "dia_chi": "70 Ngô Gia Tự, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 5, TP Cà Mau)",
+                "gia_trung_binh": "30.000 - 60.000 VNĐ",
+                "mon_noi_bat": "Cháo tiều thập cẩm, Cháo cá lóc",
+                "dac_diem": "Quán cháo lâu đời nổi tiếng TP Cà Mau, cháo tiều thập cẩm tim gan bao tử cật thịt bằm ăn kèm hành tiêu ớt đậm đà, có thêm cháo cá lóc đặc trưng miền Tây."
+            },
+            {
+                "id": "CM_QA_012",
+                "ten_quan": "Quán Phượng 76 - Cơm Tấm",
+                "dia_chi": "76 Nguyễn Hữu Lễ, Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 2, TP Cà Mau)",
+                "gia_trung_binh": "40.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Cơm tấm sườn nướng",
+                "dac_diem": "Cơm tấm sườn nướng ướp đậm đà, thịt mềm màu vàng ươm bắt mắt, dọn kèm đồ chua bào sợi và tóp mỡ đặc trưng, là địa chỉ cơm tấm được du khách đánh giá cao."
+            },
+            {
+                "id": "CM_QA_013",
+                "ten_quan": "Nhà Hàng Hoàng Hổ",
+                "dia_chi": "Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 5, TP Cà Mau)",
+                "gia_trung_binh": "100.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Cá lóc nướng giấy bạc, Gỏi tôm xoài",
+                "dac_diem": "Nhà hàng sức chứa 1.000 khách, không gian thoáng đãng rộng mở phù hợp đãi tiệc lớn, thực đơn đặc sản Cà Mau phong phú từ hải sản đến món đồng."
+            },
+            {
+                "id": "CM_QA_014",
+                "ten_quan": "Nhà Hàng Đất Mũi",
+                "dia_chi": "220 Tôn Đức Thắng, Phường Hoà Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 6, TP Cà Mau)",
+                "gia_trung_binh": "100.000 - 350.000 VNĐ",
+                "mon_noi_bat": "Tôm tích, Ba khía, Cua gạch",
+                "dac_diem": "Nằm gần điểm du lịch nổi tiếng, chuyên hải sản tươi sống ba khía cua gạch tôm tích, không gian thoáng phục vụ nhanh, lý tưởng cho đoàn gia đình đi du lịch."
+            },
+            {
+                "id": "CM_QA_015",
+                "ten_quan": "Nhà Hàng Tân Tân",
+                "dia_chi": "153A Nguyễn Đình Chiểu, Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 2, TP Cà Mau)",
+                "gia_trung_binh": "80.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Gỏi nhộng ong rừng U Minh, Cháo cá bống mú",
+                "dac_diem": "Địa chỉ hiếm có phục vụ đặc sản gỏi nhộng ong rừng U Minh quý hiếm, nhộng ong vò vẻ trộn bắp chuối rau thơm đậu phộng rang, hương vị béo bùi khó quên."
+            },
+            {
+                "id": "CM_QA_016",
+                "ten_quan": "Quán 126 - Cá Lóc Nướng Trui",
+                "dia_chi": "126 Phan Ngọc Hiển, Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 9, TP Cà Mau)",
+                "gia_trung_binh": "60.000 - 120.000 VNĐ",
+                "mon_noi_bat": "Cá lóc nướng trui cuốn bánh tráng",
+                "dac_diem": "Chuyên cá lóc đồng nướng trui nguyên con, thịt cá ngọt mềm không tanh, cuốn bánh tráng rau sống chấm mắm nêm, đặc sản dân dã không thể bỏ qua khi đến Cà Mau."
+            },
+            {
+                "id": "CM_QA_017",
+                "ten_quan": "Quán Quỳnh Lâm",
+                "dia_chi": "40 Lưu Hữu Phước, Phường Lý Văn Lâm, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 8, TP Cà Mau)",
+                "gia_trung_binh": "50.000 - 130.000 VNĐ",
+                "mon_noi_bat": "Cá lóc nướng, Lươn um chuối hột",
+                "dac_diem": "Quán ăn quen thuộc của người dân địa phương, nổi bật với cá lóc nướng và lươn um chuối hột đậm vị miền Tây, không khí gia đình ấm cúng."
+            },
+            {
+                "id": "CM_QA_018",
+                "ten_quan": "Đào Hoa Đảo",
+                "dia_chi": "257 Lý Thái Tôn, Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 4 → sáp nhập vào Phường An Xuyên)",
+                "gia_trung_binh": "80.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Sườn cây nướng, Combo nướng ba rọi tôm bò",
+                "dac_diem": "Gây thích thú với nhiều thực khách lần đầu đến Cà Mau, sườn nướng thơm da giòn ăn kèm rau sống, combo nướng đa dạng đậm hương vị ẩm thực Nam Bộ."
+            },
+            {
+                "id": "CM_QA_019",
+                "ten_quan": "Hải Sản Năm Ngoan 2",
+                "dia_chi": "127 Quản Lộ Phụng Hiệp, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường Tân Thành, TP Cà Mau)",
+                "gia_trung_binh": "80.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Cua hấp, Hàu nướng mỡ hành, Lẩu cá kèo",
+                "dac_diem": "Quán hải sản nổi tiếng ngoại ô, hải sản chọn lọc mỗi ngày giữ độ tươi sống tuyệt đối, không gian rộng rãi sạch sẽ phục vụ nhanh, giá cả hợp lý."
+            },
+            {
+                "id": "CM_QA_020",
+                "ten_quan": "Lẩu Mắm 8 Biểu",
+                "dia_chi": "Quản Lộ Phụng Hiệp, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường Tân Thành, TP Cà Mau)",
+                "gia_trung_binh": "100.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Lẩu mắm hải sản, Lẩu mắm cá linh",
+                "dac_diem": "Địa chỉ lẩu mắm vừa ngon vừa rẻ được nhiều thực khách tin tưởng, nguyên liệu hải sản tươi thịt cá cùng rau đồng nội địa, nước mắm đặc trưng đúng chuẩn Cà Mau."
+            },
+            {
+                "id": "CM_QA_021",
+                "ten_quan": "Nhà Hàng Hạnh Phúc",
+                "dia_chi": "174 Ngô Quyền, Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 1, TP Cà Mau)",
+                "gia_trung_binh": "60.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Hải sản chiên xào hấp, Cua Cà Mau",
+                "dac_diem": "Không gian ấm cúng lý tưởng cho gia đình và bạn bè tụ họp, thực đơn đa dạng đặc sản Cà Mau từ nguyên liệu tươi ngon, giá cả phù hợp nhiều đối tượng."
+            },
+            {
+                "id": "CM_QA_022",
+                "ten_quan": "Ốc Đầm Già Xì 2",
+                "dia_chi": "Đường Tôn Đức Thắng, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 5, TP Cà Mau)",
+                "gia_trung_binh": "30.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Ốc len rang muối, Tôm hùm sốt phô mai",
+                "dac_diem": "Quán ốc nổi tiếng với ốc len rang muối đặc sản Cà Mau và tôm hùm sốt phô mai hấp dẫn, giá từ 30.000đ một đĩa ốc ngon, thu hút đông khách mỗi buổi tối."
+            },
+            {
+                "id": "CM_QA_023",
+                "ten_quan": "Quán 257",
+                "dia_chi": "257 Lý Thái Tôn, Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 4 → sáp nhập vào Phường An Xuyên)",
+                "gia_trung_binh": "50.000 - 150.000 VNĐ",
+                "mon_noi_bat": "Cua kho, Cá lóc, Mực trứng, Cơm cháy",
+                "dac_diem": "Đậm chất văn hóa ẩm thực Nam Bộ, thực đơn phong phú từ cua kho cá lóc chả cá đến phở bún hủ tiếu buổi sáng, phục vụ cả ngày đáp ứng mọi nhu cầu."
+            },
+            {
+                "id": "CM_QA_024",
+                "ten_quan": "Nhà Hàng Gà Chọi Vịt Xiêm",
+                "dia_chi": "Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 2, TP Cà Mau)",
+                "gia_trung_binh": "80.000 - 180.000 VNĐ",
+                "mon_noi_bat": "Gà chọi nướng, Vịt xiêm om sấu",
+                "dac_diem": "Nổi bật với gà chọi và vịt xiêm chế biến đa dạng nướng luộc om sấu, thịt chắc ngọt giữ vị tự nhiên, không gian ngoài trời thoáng mát phù hợp nhóm gia đình."
+            },
+            {
+                "id": "CM_QA_025",
+                "ten_quan": "King Cua Cà Mau",
+                "dia_chi": "Quản Lộ Phụng Hiệp, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường Tân Thành, TP Cà Mau)",
+                "gia_trung_binh": "120.000 - 400.000 VNĐ",
+                "mon_noi_bat": "Cua rang me, Cua sốt Singapore, Cua hấp bia",
+                "dac_diem": "Chuyên các món từ cua đặc sản Cà Mau, nguyên liệu tuyển chọn kỹ cua luôn chắc thịt ngọt đậm, nổi bật với cua sốt Singapore phong cách độc đáo ít nơi có."
+            },
+            {
+                "id": "CM_QA_026",
+                "ten_quan": "Lẩu Cua Cà Mau Bà Tám",
+                "dia_chi": "Phan Ngọc Hiển, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 7, TP Cà Mau)",
+                "gia_trung_binh": "120.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Lẩu cua Năm Căn, Cua hấp",
+                "dac_diem": "Lẩu cua Năm Căn chắc thịt nước dùng ngọt thanh đậm vị gạch cua, nguồn cua tươi trực tiếp từ vuông nuôi vùng Ngọc Hiển, không gian bình dân sức chứa đông khách."
+            },
+            {
+                "id": "CM_QA_027",
+                "ten_quan": "Quán Bồn Bồn Xào Tép",
+                "dia_chi": "18 Nguyễn Trung Trực, Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 1, TP Cà Mau)",
+                "gia_trung_binh": "50.000 - 120.000 VNĐ",
+                "mon_noi_bat": "Bồn bồn xào tép, Lẩu bò 89, Bò ngâm mắm nhĩ",
+                "dac_diem": "Phục vụ đặc sản bồn bồn xào tép hiếm gặp cùng nhiều món Cà Mau độc đáo, nổi tiếng với Lẩu bò 89 và bò ngâm mắm nhĩ, phong cách phục vụ chu đáo tận tình."
+            },
+            {
+                "id": "CM_QA_028",
+                "ten_quan": "Bánh Hỏi Nem Nướng Thanh Hương",
+                "dia_chi": "25-27 Lạc Long Quân, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 7, TP Cà Mau)",
+                "gia_trung_binh": "40.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Bánh hỏi heo quay, Bánh hỏi nem nướng",
+                "dac_diem": "Gia vị nêm đầy đủ mang lại hương vị khó quên cho khách lần đầu đến Cà Mau, bánh hỏi mềm mịn cuộn cùng thịt nướng thơm lừng và nước chấm đặc biệt."
+            },
+            {
+                "id": "CM_QA_029",
+                "ten_quan": "Cháo Cá Bống Mú Làng Quê",
+                "dia_chi": "Phường An Xuyên, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 4 → sáp nhập vào Phường An Xuyên)",
+                "gia_trung_binh": "40.000 - 90.000 VNĐ",
+                "mon_noi_bat": "Cháo cá bống mú, Bồn bồn xào tép",
+                "dac_diem": "Đặc sản cháo cá bống mú thịt trắng ngọt chắc nấu cùng gừng hành tím, kết hợp bồn bồn xào tép đặc sản địa phương, không khí cổ điển gần gũi thiên nhiên."
+            },
+            {
+                "id": "CM_QA_030",
+                "ten_quan": "Hải Sản Hoàng Hổ",
+                "dia_chi": "255 Trần Hưng Đạo, Phường Tân Thành, TP Cà Mau, Tỉnh Cà Mau\n (Cũ: Phường 5, TP Cà Mau)",
+                "gia_trung_binh": "100.000 - 400.000 VNĐ",
+                "mon_noi_bat": "Tôm sú nướng muối ớt, Cá kho tộ, Mực nướng sa tế",
+                "dac_diem": "Nhà hàng lớn ngay trung tâm, chuyên ẩm thực hải sản đặc sản Cà Mau kết hợp món miền Tây dân dã, không gian sang trọng thích hợp tiếp khách doanh nghiệp."
+            }
+        ]
+    }
+}

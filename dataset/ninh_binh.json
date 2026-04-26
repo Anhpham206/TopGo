@@ -1,0 +1,1174 @@
+{
+    "Ninh Bình": {
+        "diem_tham_quan": [
+            {
+                "id": "NB_DTQ_001",
+                "ten": "Quần Thể Danh Thắng Tràng An",
+                "toa_do": {
+                    "lat": 20.253158,
+                    "lng": 105.918315
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Di sản UNESCO",
+                    "Hang động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.7,
+                "gia_ve": 250000
+            },
+            {
+                "id": "NB_DTQ_002",
+                "ten": "Thung Nham Ninh Bình",
+                "toa_do": {
+                    "lat": 20.218308,
+                    "lng": 105.893184
+                },
+                "tags": [
+                    "Vườn chim",
+                    "Sinh thái",
+                    "Cảnh quan"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.3,
+                "gia_ve": 250000
+            },
+            {
+                "id": "NB_DTQ_003",
+                "ten": "Cố Đô Hoa Lư",
+                "toa_do": {
+                    "lat": 20.284627,
+                    "lng": 105.90836
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Di tích",
+                    "Đền thờ"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_004",
+                "ten": "Động Am Tiên (Tuyệt Tịnh Cốc)",
+                "toa_do": {
+                    "lat": 20.280661,
+                    "lng": 105.915866
+                },
+                "tags": [
+                    "Phong cảnh",
+                    "Sống ảo",
+                    "Yên tĩnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.4,
+                "gia_ve": 50000
+            },
+            {
+                "id": "NB_DTQ_005",
+                "ten": "Khu Bảo tồn Thiên nhiên Vân Long",
+                "toa_do": {
+                    "lat": 20.394736,
+                    "lng": 105.868039
+                },
+                "tags": [
+                    "Khu bảo tồn",
+                    "Đất ngập nước",
+                    "Bơi thuyền"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.5,
+                "gia_ve": 100000
+            },
+            {
+                "id": "NB_DTQ_006",
+                "ten": "Vườn Quốc Gia Cúc Phương",
+                "toa_do": {
+                    "lat": 20.316836,
+                    "lng": 105.608248
+                },
+                "tags": [
+                    "Rừng nguyên sinh",
+                    "Khám phá",
+                    "Trekking"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.5,
+                "gia_ve": 60000
+            },
+            {
+                "id": "NB_DTQ_007",
+                "ten": "Núi Non Nước",
+                "toa_do": {
+                    "lat": 20.260184,
+                    "lng": 105.982447
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Thành phố",
+                    "Thơ ca"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.3,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_008",
+                "ten": "Chùa Bái Đính",
+                "toa_do": {
+                    "lat": 20.268062,
+                    "lng": 105.855603
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Kỷ lục Châu Á",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 21.0
+                },
+                "rating": 4.9,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_009",
+                "ten": "Tam Cốc - Bích Động",
+                "toa_do": {
+                    "lat": 20.21679,
+                    "lng": 105.937365
+                },
+                "tags": [
+                    "Ngồi đò",
+                    "Cảnh quan",
+                    "Vịnh Hạ Long cạn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.5,
+                "gia_ve": 250000
+            },
+            {
+                "id": "NB_DTQ_010",
+                "ten": "Nhà Thờ Đá Phát Diệm",
+                "toa_do": {
+                    "lat": 20.093161,
+                    "lng": 106.079454
+                },
+                "tags": [
+                    "Kiến trúc gỗ đá",
+                    "Tôn giáo",
+                    "Cổ kính"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_011",
+                "ten": "Hang Múa",
+                "toa_do": {
+                    "lat": 20.229227,
+                    "lng": 105.931879
+                },
+                "tags": [
+                    "Leo núi",
+                    "Sống ảo",
+                    "Ngắm toàn cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 19.0
+                },
+                "rating": 4.6,
+                "gia_ve": 100000
+            },
+            {
+                "id": "NB_DTQ_012",
+                "ten": "Động Thiên Hà",
+                "toa_do": {
+                    "lat": 20.195459,
+                    "lng": 105.852066
+                },
+                "tags": [
+                    "Hang động",
+                    "Thạch nhũ",
+                    "Huyền ảo"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.0,
+                "gia_ve": 120000
+            },
+            {
+                "id": "NB_DTQ_013",
+                "ten": "Kênh Gà (Suối Khoáng Nóng)",
+                "toa_do": {
+                    "lat": 20.334061,
+                    "lng": 105.813963
+                },
+                "tags": [
+                    "Nghỉ dưỡng",
+                    "Khoáng nóng",
+                    "Chăm sóc sức khỏe"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.8,
+                "gia_ve": 100000
+            },
+            {
+                "id": "NB_DTQ_014",
+                "ten": "Trung tâm bảo tồn gấu Ninh Bình",
+                "toa_do": {
+                    "lat": 20.207942,
+                    "lng": 105.763538
+                },
+                "tags": [
+                    "Bảo vệ động vật",
+                    "Giáo dục",
+                    "Tự nhiên"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.8,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_015",
+                "ten": "Hồ Đồng Chương",
+                "toa_do": {
+                    "lat": 20.224,
+                    "lng": 105.795375
+                },
+                "tags": [
+                    "Hồ nước",
+                    "Rừng thông",
+                    "Dã ngoại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 3.9,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_016",
+                "ten": "Đồi dứa Tam Điệp",
+                "toa_do": {
+                    "lat": 20.168315,
+                    "lng": 105.911378
+                },
+                "tags": [
+                    "Nông trại",
+                    "Sống ảo",
+                    "Miễn phí"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_017",
+                "ten": "Biển Kim Sơn (Cồn Sơn)",
+                "toa_do": {
+                    "lat": 19.870418,
+                    "lng": 106.069469
+                },
+                "tags": [
+                    "Cửa biển",
+                    "Đầm lầy",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_018",
+                "ten": "Đồi thông Hồ Đồng Chương",
+                "toa_do": {
+                    "lat": 20.228242,
+                    "lng": 105.786778
+                },
+                "tags": [
+                    "Dã ngoại",
+                    "Chụp ảnh",
+                    "Thiên nhiên"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_019",
+                "ten": "Thung Nắng",
+                "toa_do": {
+                    "lat": 20.217444,
+                    "lng": 105.916444
+                },
+                "tags": [
+                    "Ngồi đò",
+                    "Cảnh quan",
+                    "Yên bình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.8,
+                "gia_ve": 100000
+            },
+            {
+                "id": "NB_DTQ_020",
+                "ten": "Phố Cổ Hoa Lư",
+                "toa_do": {
+                    "lat": 20.263675,
+                    "lng": 105.968114
+                },
+                "tags": [
+                    "Ánh sáng",
+                    "Văn hóa",
+                    "Ban đêm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 23.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_021",
+                "ten": "Đan Viện Châu Sơn",
+                "toa_do": {
+                    "lat": 20.341186,
+                    "lng": 105.735675
+                },
+                "tags": [
+                    "Kiến trúc Gothic",
+                    "Thanh tịnh",
+                    "Tôn giáo"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_022",
+                "ten": "Đền Đinh Lê",
+                "toa_do": {
+                    "lat": 20.284629,
+                    "lng": 105.905241
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Di tích",
+                    "Tâm linh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.5,
+                "gia_ve": 20000
+            },
+            {
+                "id": "NB_DTQ_023",
+                "ten": "Hang Bụt",
+                "toa_do": {
+                    "lat": 20.216798,
+                    "lng": 105.891387
+                },
+                "tags": [
+                    "Hang động",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.5,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.3,
+                "gia_ve": 100000
+            },
+            {
+                "id": "NB_DTQ_024",
+                "ten": "Đền Thái Vi",
+                "toa_do": {
+                    "lat": 20.224456,
+                    "lng": 105.929947
+                },
+                "tags": [
+                    "Kiến trúc đá",
+                    "Di tích nhà Trần"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.3,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_025",
+                "ten": "Động Tiên Cá",
+                "toa_do": {
+                    "lat": 20.237622,
+                    "lng": 105.889964
+                },
+                "tags": [
+                    "Hang động",
+                    "Thạch nhũ"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 250000
+            },
+            {
+                "id": "NB_DTQ_026",
+                "ten": "Cố Viên Lầu",
+                "toa_do": {
+                    "lat": 20.219126,
+                    "lng": 105.936235
+                },
+                "tags": [
+                    "Làng cổ",
+                    "Kiến trúc truyền thống"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.0,
+                "gia_ve": 50000
+            },
+            {
+                "id": "NB_DTQ_027",
+                "ten": "Núi Kỳ Lân",
+                "toa_do": {
+                    "lat": 20.26463,
+                    "lng": 105.967607
+                },
+                "tags": [
+                    "Phong cảnh",
+                    "Hang động nhỏ"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_028",
+                "ten": "Chùa Bích Động",
+                "toa_do": {
+                    "lat": 20.217709,
+                    "lng": 105.915776
+                },
+                "tags": [
+                    "Nam thiên đệ nhị động",
+                    "Tâm linh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_029",
+                "ten": "Hồ Yên Thắng",
+                "toa_do": {
+                    "lat": 20.135146,
+                    "lng": 105.964537
+                },
+                "tags": [
+                    "Hồ nước",
+                    "Câu cá",
+                    "Dã ngoại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_030",
+                "ten": "Động Vái Giời",
+                "toa_do": {
+                    "lat": 20.216418,
+                    "lng": 105.900587
+                },
+                "tags": [
+                    "Thạch nhũ",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.3,
+                "gia_ve": 150000
+            },
+            {
+                "id": "NB_DTQ_031",
+                "ten": "Đền Trình (Tràng An)",
+                "toa_do": {
+                    "lat": 20.257225,
+                    "lng": 105.906905
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Khởi đầu tuyến đò"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_032",
+                "ten": "Phủ Khống (Tràng An)",
+                "toa_do": {
+                    "lat": 20.26857,
+                    "lng": 105.904161
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Phong cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_033",
+                "ten": "Hành Cung Vũ Lâm",
+                "toa_do": {
+                    "lat": 20.247516,
+                    "lng": 105.914392
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Điểm dừng chân Tràng An"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.8,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_034",
+                "ten": "Đền Thánh Nguyễn",
+                "toa_do": {
+                    "lat": 20.308198,
+                    "lng": 105.875339
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Tâm linh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.9,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_035",
+                "ten": "Hang Sáng, Hang Tối",
+                "toa_do": {
+                    "lat": 20.260897,
+                    "lng": 105.90069
+                },
+                "tags": [
+                    "Hang động nước",
+                    "Cảnh đẹp"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_036",
+                "ten": "Chùa Địch Lộng",
+                "toa_do": {
+                    "lat": 20.373909,
+                    "lng": 105.912865
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Di tích quốc gia"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_037",
+                "ten": "Núi Mèo Cào",
+                "toa_do": {
+                    "lat": 20.374166,
+                    "lng": 105.873324
+                },
+                "tags": [
+                    "Phong cảnh",
+                    "Sông suối"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_038",
+                "ten": "Hầm đi bộ Tràng An",
+                "toa_do": {
+                    "lat": 20.253135,
+                    "lng": 105.918606
+                },
+                "tags": [
+                    "Chụp ảnh",
+                    "Trải nghiệm",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.0,
+                    "dong_cua": 19.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_039",
+                "ten": "Làng nghề đá mỹ nghệ Ninh Vân",
+                "toa_do": {
+                    "lat": 20.208966,
+                    "lng": 105.959861
+                },
+                "tags": [
+                    "Nghề chạm khắc đá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_040",
+                "ten": "Động Am Tiên",
+                "toa_do": {
+                    "lat": 20.283545,
+                    "lng": 105.912083
+                },
+                "tags": [
+                    "Hang động",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_041",
+                "ten": "Cây Đăng Cổ Thụ (Cúc Phương)",
+                "toa_do": {
+                    "lat": 20.351848,
+                    "lng": 105.592378
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Sinh thái rừng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_042",
+                "ten": "Hồ Mạc (Cúc Phương)",
+                "toa_do": {
+                    "lat": 20.25728,
+                    "lng": 105.708144
+                },
+                "tags": [
+                    "Nghỉ dưỡng",
+                    "Hồ nước trong rừng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_043",
+                "ten": "Hang Con Moong (Cúc Phương)",
+                "toa_do": {
+                    "lat": 20.264356,
+                    "lng": 105.62368
+                },
+                "tags": [
+                    "Khảo cổ học",
+                    "Di chỉ người tiền sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_044",
+                "ten": "Vườn Chim Thung Nham",
+                "toa_do": {
+                    "lat": 20.22222,
+                    "lng": 105.88572
+                },
+                "tags": [
+                    "Phong cảnh",
+                    "Động vật",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_045",
+                "ten": "Chùa Tam Chúc",
+                "toa_do": {
+                    "lat": 20.570923,
+                    "lng": 105.814059
+                },
+                "tags": [
+                    "Phật giáo",
+                    "Phong cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_046",
+                "ten": "Chùa Nhất Trụ",
+                "toa_do": {
+                    "lat": 20.288087,
+                    "lng": 105.907627
+                },
+                "tags": [
+                    "Phật giáo",
+                    "Tâm linh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_047",
+                "ten": "Đền Suối Tiên",
+                "toa_do": {
+                    "lat": 20.246192,
+                    "lng": 105.905054
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Di tích"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 16.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_048",
+                "ten": "Đền thờ Vua Lê Đại Hành",
+                "toa_do": {
+                    "lat": 19.851245,
+                    "lng": 106.121245
+                },
+                "tags": [
+                    "Di tích",
+                    "Nghiêm trang",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_049",
+                "ten": "Đền thờ Vua Đinh Tiên Hoàng",
+                "toa_do": {
+                    "lat": 20.284822,
+                    "lng": 105.905214
+                },
+                "tags": [
+                    "Di tích",
+                    "Nghiêm trang",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "NB_DTQ_050",
+                "ten": "Bảo tàng Ninh Bình",
+                "toa_do": {
+                    "lat": 20.259062,
+                    "lng": 105.980438
+                },
+                "tags": [
+                    "Trưng bày",
+                    "Lịch sử văn hóa"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 3.9,
+                "gia_ve": 20000
+            }
+        ],
+        "quan_an": [
+            {
+                "id": "NB_QA_001",
+                "ten_quan": "Dê tái chanh Đức Dê",
+                "dia_chi": "29 Ngõ 458 Nguyễn Huệ, Nam Bình",
+                "gia_trung_binh": "100.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Dê tái chanh, Cơm cháy",
+                "dac_diem": "Nhà hàng lâu đời nổi tiếng nhất nhì Ninh Bình với các món dê núi đá đặc trưng, đông đúc."
+            },
+            {
+                "id": "NB_QA_002",
+                "ten_quan": "Miến lươn Bà Phấn",
+                "dia_chi": "995 Trần Hưng Đạo, Thanh Bình",
+                "gia_trung_binh": "40.000 - 60.000 VNĐ",
+                "mon_noi_bat": "Miến lươn xào, Miến lươn nước",
+                "dac_diem": "Thương hiệu miến lươn lâu năm, lươn chiên giòn rụm hoặc lươn mềm đều rất thơm ngon, nước dùng đậm đà."
+            },
+            {
+                "id": "NB_QA_003",
+                "ten_quan": "Nhà hàng Thăng Long",
+                "dia_chi": "Tràng An, Trường Yên, Hoa Lư",
+                "gia_trung_binh": "150.000 - 350.000 VNĐ",
+                "mon_noi_bat": "Dê nướng tảng, Cơm cháy",
+                "dac_diem": "Nằm gần khu du lịch Tràng An, chuyên dê núi nướng nguyên tảng giữ được độ ngọt thịt tự nhiên."
+            },
+            {
+                "id": "NB_QA_004",
+                "ten_quan": "Lẩu dê Hoàng Giang",
+                "dia_chi": "Trường Yên, Hoa Lư",
+                "gia_trung_binh": "150.000 - 350.000 VNĐ",
+                "mon_noi_bat": "Lẩu dê, Dê áp chảo",
+                "dac_diem": "Nhà hàng có không gian rộng sát bờ sông Hoàng Long, phục vụ lẩu dê với nước dùng đậm vị thuốc bắc."
+            },
+            {
+                "id": "NB_QA_005",
+                "ten_quan": "Nhà hàng Ba Cửa",
+                "dia_chi": "Thôn Tràng An, Trường Yên, Hoa Lư",
+                "gia_trung_binh": "150.000 - 400.000 VNĐ",
+                "mon_noi_bat": "Dê ủ trấu",
+                "dac_diem": "Món dê ủ trấu là cực phẩm, thịt chín bằng hơi nóng trấu giữ lại nước ngọt và mùi thơm lá sen rơm rạ."
+            },
+            {
+                "id": "NB_QA_006",
+                "ten_quan": "Bún mọc Tố Như",
+                "dia_chi": "Thị trấn Phát Diệm, Kim Sơn",
+                "gia_trung_binh": "30.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bún mọc",
+                "dac_diem": "Bún mọc gia truyền, viên mọc dai giòn làm từ thịt lợn tươi, nước dùng thanh ngọt nấu từ xương."
+            },
+            {
+                "id": "NB_QA_007",
+                "ten_quan": "Nhà hàng Vũ Bảo",
+                "dia_chi": "86 Lương Văn Tụy kéo dài",
+                "gia_trung_binh": "150.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Gỏi cá nhệch",
+                "dac_diem": "Nơi thưởng thức gỏi cá nhệch Kim Sơn chuẩn vị, cuốn lá sung chấm chẻo mẻ cay nồng ấn tượng."
+            },
+            {
+                "id": "NB_QA_008",
+                "ten_quan": "Cháo lòng Minh Chiến",
+                "dia_chi": "Ngõ 195 Lê Thái Tổ",
+                "gia_trung_binh": "30.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Cháo lòng, Lòng luộc",
+                "dac_diem": "Quán cháo lòng đông khách mỗi buổi sáng, lòng làm sạch không hôi, dồi tiết bùi béo."
+            },
+            {
+                "id": "NB_QA_009",
+                "ten_quan": "Nhà hàng Bình Dũng chim to dần",
+                "dia_chi": "Ngõ 668 Ngô Gia Tự, phố Đoàn Kết",
+                "gia_trung_binh": "150.000 - 500.000 VNĐ",
+                "mon_noi_bat": "Các món chim trời",
+                "dac_diem": "Độc đáo với menu \"chim to dần\" từ chim sẻ, chim cút đến vịt trời, chế biến quay nướng đa dạng."
+            },
+            {
+                "id": "NB_QA_010",
+                "ten_quan": "Đức Trọc Quán",
+                "dia_chi": "52 Hoàng Hoa Thám",
+                "gia_trung_binh": "50.000 - 150.000 VNĐ",
+                "mon_noi_bat": "Ăn vặt, Ốc, Đồ nướng",
+                "dac_diem": "Quán ăn vặt và nhậu bình dân siêu rẻ, menu phong phú, là điểm tụ tập buổi tối lý tưởng."
+            },
+            {
+                "id": "NB_QA_011",
+                "ten_quan": "Nhà hàng Cơm niêu Việt Xưa",
+                "dia_chi": "80 Tràng An, Hoa Lư",
+                "gia_trung_binh": "50.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Cơm niêu đập, Món Việt",
+                "dac_diem": "Mang phong vị bữa cơm gia đình Bắc Bộ, cơm niêu nấu củi giòn rụm kết hợp cá kho tộ."
+            },
+            {
+                "id": "NB_QA_012",
+                "ten_quan": "Cơm Thố Anh Nguyễn",
+                "dia_chi": "207 Lương Văn Thăng",
+                "gia_trung_binh": "30.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Cơm thố xá xíu",
+                "dac_diem": "Cơm nấu trong thố đá nóng hổi, giữ nhiệt lâu, phần ăn văn phòng tiện lợi và chất lượng."
+            },
+            {
+                "id": "NB_QA_013",
+                "ten_quan": "Cơm thố Tây Thành",
+                "dia_chi": "173 Tây Thành, Hoa Lư",
+                "gia_trung_binh": "30.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Cơm thố ếch, Cơm bò",
+                "dac_diem": "Thêm một lựa chọn cơm thố ngon rẻ, thịt ếch xào đậm vị, không gian quán sạch sẽ."
+            },
+            {
+                "id": "NB_QA_014",
+                "ten_quan": "Nhà hàng Quang Dũng",
+                "dia_chi": "09 Tràng An 2, Tân Thành",
+                "gia_trung_binh": "150.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Dê núi, Hải sản",
+                "dac_diem": "Phục vụ song song hải sản tươi sống và đặc sản dê núi, đáp ứng nhu cầu đa dạng của khách đoàn."
+            },
+            {
+                "id": "NB_QA_015",
+                "ten_quan": "Nhà hàng Tam Gia Trang",
+                "dia_chi": "35 Tràng An 2, Kỳ Lân",
+                "gia_trung_binh": "100.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Lẩu cháo chim, Gà đồi",
+                "dac_diem": "Thiết kế theo phong cách kiếm hiệp cổ trang độc đáo, món lẩu cháo chim bồ câu bổ dưỡng là best-seller."
+            },
+            {
+                "id": "NB_QA_016",
+                "ten_quan": "Nhà hàng Thanh Lợi",
+                "dia_chi": "199 Lê Hồng Phong",
+                "gia_trung_binh": "100.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Ốc núi hấp sả",
+                "dac_diem": "Ốc núi đánh bắt vào mùa mưa thịt dai giòn sần sật, hấp sả thơm lừng mang nét hoang dã."
+            },
+            {
+                "id": "NB_QA_017",
+                "ten_quan": "Bầu Pizza",
+                "dia_chi": "85 Nguyễn Bặc, Hợp Thành",
+                "gia_trung_binh": "100.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Pizza lò củi, Pasta",
+                "dac_diem": "Đổi gió với ẩm thực Tây, pizza đế mỏng nướng lò củi xém viền phô mai ngập tràn."
+            },
+            {
+                "id": "NB_QA_018",
+                "ten_quan": "GoGi House Ninh Bình",
+                "dia_chi": "219 Lương Văn Thăng",
+                "gia_trung_binh": "200.000 - 400.000 VNĐ",
+                "mon_noi_bat": "Thịt nướng Hàn Quốc",
+                "dac_diem": "Chuỗi nướng BBQ chuẩn Hàn, thịt bò mỹ hảo hạng tẩm ướp sốt Galbi đặc trưng."
+            },
+            {
+                "id": "NB_QA_019",
+                "ten_quan": "Lẩu nướng Toong quán",
+                "dia_chi": "70 Nguyễn Công Trứ",
+                "gia_trung_binh": "100.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Nướng chảo gang",
+                "dac_diem": "Quán nướng chảo gang lót giấy bạc sốt me chua cay thần thánh, giá sinh viên cực thu hút giới trẻ."
+            },
+            {
+                "id": "NB_QA_020",
+                "ten_quan": "Bún chả quạt Tình Mai",
+                "dia_chi": "16 Phạm Hồng Thái, Thanh Bình",
+                "gia_trung_binh": "35.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bún chả quạt",
+                "dac_diem": "Chả băm nguyên miếng lớn nướng vỉ than hoa, không nặn viên nhỏ, ăn kèm bún lá cắt miếng."
+            },
+            {
+                "id": "NB_QA_021",
+                "ten_quan": "Năm Dê Ninh Bình (CS15)",
+                "dia_chi": "ĐT491, Ninh Tiến",
+                "gia_trung_binh": "200.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Dê hấp lá tía tô, Dê xào sả",
+                "dac_diem": "Hệ thống nhà hàng dê lớn, thịt dê mềm ngọt không hôi, chấm tương gừng đặc trưng."
+            },
+            {
+                "id": "NB_QA_022",
+                "ten_quan": "Lẩu Dê Quang Chính Hiệu",
+                "dia_chi": "159 Quyết Thắng, Tam Điệp",
+                "gia_trung_binh": "100.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Lẩu dê thuốc bắc",
+                "dac_diem": "Nước lẩu ninh từ xương dê trong nhiều giờ với thuốc bắc, thảo mộc, bồi bổ sức khỏe rất tốt."
+            },
+            {
+                "id": "NB_QA_023",
+                "ten_quan": "Quán Huy - Bún Chả Hà Nội",
+                "dia_chi": "Ngõ 70 Lương Văn Tụy",
+                "gia_trung_binh": "25.000 - 40.000 VNĐ",
+                "mon_noi_bat": "Bún chả thịt nướng",
+                "dac_diem": "Bún chả chuẩn vị thủ đô ngay giữa lòng Ninh Bình, nước mắm pha chua ngọt vừa vặn."
+            },
+            {
+                "id": "NB_QA_024",
+                "ten_quan": "Nhà hàng thịt dê Thành Long",
+                "dia_chi": "Xóm 3, Gia Sinh, Gia Viễn",
+                "gia_trung_binh": "150.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Dê nướng mọi",
+                "dac_diem": "Nằm gần chùa Bái Đính, không gian mộc mạc thoáng mát, thịt dê bản địa nuôi chăn thả núi đá."
+            },
+            {
+                "id": "NB_QA_025",
+                "ten_quan": "Bún Chả Chung An",
+                "dia_chi": "Số 02, ngõ 09, Phạm Hồng Thái",
+                "gia_trung_binh": "30.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bún chả nem cua bể",
+                "dac_diem": "Một tiệm bún chả khác được dân địa phương ưa chuộng, chả nướng lửa than vừa tới không bị khô."
+            },
+            {
+                "id": "NB_QA_026",
+                "ten_quan": "Bánh Tráng Nướng Liên Lỗi",
+                "dia_chi": "Ngã 3 Liên Lỗi, Đạo Long",
+                "gia_trung_binh": "15.000 - 30.000 VNĐ",
+                "mon_noi_bat": "Bánh tráng nướng mắm ruốc",
+                "dac_diem": "Món ăn vặt \"thần thánh\", bánh tráng nướng than củi giòn rụm phết mắm ruốc mỡ hành thơm nức."
+            },
+            {
+                "id": "NB_QA_027",
+                "ten_quan": "Nhà hàng Cờ Lau",
+                "dia_chi": "Số 1 Tràng An, Hoa Lư",
+                "gia_trung_binh": "150.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Xôi trứng kiến, Gà đồi",
+                "dac_diem": "Thực đơn hội tụ sản vật núi rừng Cúc Phương, xôi nếp nương đồ cùng trứng kiến béo bùi lạ miệng."
+            },
+            {
+                "id": "NB_QA_028",
+                "ten_quan": "Bánh Xèo Cô Ba",
+                "dia_chi": "Phố đi bộ Quang Trung",
+                "gia_trung_binh": "30.000 - 60.000 VNĐ",
+                "mon_noi_bat": "Bánh xèo miền Trung",
+                "dac_diem": "Quán nhộn nhịp buổi tối cuối tuần, vỏ bánh xèo chiên giòn tan rổ rau sống tươi xanh."
+            },
+            {
+                "id": "NB_QA_029",
+                "ten_quan": "Cơm Gà Chú Ngộ",
+                "dia_chi": "Lê Hồng Phong, Kinh Dinh",
+                "gia_trung_binh": "35.000 - 65.000 VNĐ",
+                "mon_noi_bat": "Cơm gà xé bóp thấu",
+                "dac_diem": "Gà luộc bóp thấu hành tây rau răm chua ngọt, ăn kèm cơm nấu nước dùng gà óng ả."
+            },
+            {
+                "id": "NB_QA_030",
+                "ten_quan": "Bún cá dầm lá é Lê Duẩn",
+                "dia_chi": "Đường Lê Duẩn, Phường Phủ Hà",
+                "gia_trung_binh": "30.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bún cá dầm lá é",
+                "dac_diem": "Món ăn thanh mát đặc trưng với lá é xắt nhỏ, cá cờ dầm nát ngọt nước giải nhiệt rất tốt."
+            }
+        ]
+    }
+}

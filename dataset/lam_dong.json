@@ -1,0 +1,1198 @@
+{
+    "Lâm Đồng": {
+        "diem_tham_quan": [
+            {
+                "id": "DAL_DTQ_001",
+                "ten": "Hồ Xuân Hương",
+                "toa_do": {
+                    "lat": 11.936089,
+                    "lng": 108.44154
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngoài trời",
+                    "Lãng mạn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.98
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_002",
+                "ten": "Chợ Đà Lạt",
+                "toa_do": {
+                    "lat": 11.929958,
+                    "lng": 108.436878
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Ẩm thực",
+                    "Văn hóa"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_003",
+                "ten": "Nhà thờ Con Gà",
+                "toa_do": {
+                    "lat": 11.903629,
+                    "lng": 108.437711
+                },
+                "tags": [
+                    "Kiến trúc",
+                    "Tôn giáo",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.25,
+                    "dong_cua": 18.25
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_004",
+                "ten": "Dinh Bảo Đại (Dinh III)",
+                "toa_do": {
+                    "lat": 11.903432,
+                    "lng": 108.429638
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Kiến trúc",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.5
+                },
+                "rating": 0.0,
+                "gia_ve": 20000
+            },
+            {
+                "id": "DAL_DTQ_005",
+                "ten": "Thiền Viện Trúc Lâm",
+                "toa_do": {
+                    "lat": 11.97881,
+                    "lng": 108.435711
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Thiên nhiên",
+                    "Tâm linh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_006",
+                "ten": "Thác Datanla",
+                "toa_do": {
+                    "lat": 12.019321,
+                    "lng": 108.4497
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Giải trí",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 16.5
+                },
+                "rating": 0.0,
+                "gia_ve": 60000
+            },
+            {
+                "id": "DAL_DTQ_007",
+                "ten": "Thung Lũng Tình Yêu",
+                "toa_do": {
+                    "lat": 11.939362,
+                    "lng": 108.448308
+                },
+                "tags": [
+                    "Lãng mạn",
+                    "Ngoài trời",
+                    "Giải trí"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 50000
+            },
+            {
+                "id": "DAL_DTQ_008",
+                "ten": "Khu Du Lịch Langbiang",
+                "toa_do": {
+                    "lat": 11.941617,
+                    "lng": 108.424388
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Khám phá",
+                    "Leo núi"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 100000
+            },
+            {
+                "id": "DAL_DTQ_009",
+                "ten": "Quảng Trường Lâm Viên",
+                "toa_do": {
+                    "lat": 11.944633,
+                    "lng": 108.445203
+                },
+                "tags": [
+                    "Sôi động",
+                    "Ngoài trời",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.98
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_010",
+                "ten": "Ga Đà Lạt",
+                "toa_do": {
+                    "lat": 11.950248,
+                    "lng": 108.454465
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Kiến trúc Pháp",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.5
+                },
+                "rating": 0.0,
+                "gia_ve": 10000
+            },
+            {
+                "id": "DAL_DTQ_011",
+                "ten": "Chùa Linh Phước",
+                "toa_do": {
+                    "lat": 11.89983,
+                    "lng": 108.499322
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Kiến trúc",
+                    "Nghệ thuật"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_012",
+                "ten": "Vườn Hoa Thành Phố Đà Lạt",
+                "toa_do": {
+                    "lat": 11.923215,
+                    "lng": 108.449829
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Chụp ảnh",
+                    "Hoa"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.5,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 100000
+            },
+            {
+                "id": "DAL_DTQ_013",
+                "ten": "Hồ Tuyền Lâm",
+                "toa_do": {
+                    "lat": 12.026012,
+                    "lng": 108.42983
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngắm cảnh",
+                    "Lãng mạn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.98
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_014",
+                "ten": "Cáp Treo Đà Lạt (Đồi Robin)",
+                "toa_do": {
+                    "lat": 11.701881,
+                    "lng": 108.443778
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Giải trí",
+                    "Thiên nhiên"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 16.75
+                },
+                "rating": 0.0,
+                "gia_ve": 150000
+            },
+            {
+                "id": "DAL_DTQ_015",
+                "ten": "Làng Cù Lần",
+                "toa_do": {
+                    "lat": 11.940772,
+                    "lng": 108.3637
+                },
+                "tags": [
+                    "Văn hóa dân tộc",
+                    "Khám phá",
+                    "Sinh thái"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.5
+                },
+                "rating": 0.0,
+                "gia_ve": 150000
+            },
+            {
+                "id": "DAL_DTQ_016",
+                "ten": "Samten Hills Đà Lạt",
+                "toa_do": {
+                    "lat": 11.941401,
+                    "lng": 108.41973
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Kiến trúc Tây Tạng",
+                    "Tôn giáo"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 0.0,
+                "gia_ve": 250000
+            },
+            {
+                "id": "DAL_DTQ_017",
+                "ten": "Bảo Tàng Lâm Đồng",
+                "toa_do": {
+                    "lat": 11.963378,
+                    "lng": 108.459852
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 22000
+            },
+            {
+                "id": "DAL_DTQ_018",
+                "ten": "Chợ Đêm Đà Lạt",
+                "toa_do": {
+                    "lat": 11.877211,
+                    "lng": 108.437291
+                },
+                "tags": [
+                    "Ẩm thực",
+                    "Mua sắm",
+                    "Sôi động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 17.5,
+                    "dong_cua": 0.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_019",
+                "ten": "Thiền Viện Vạn Hạnh",
+                "toa_do": {
+                    "lat": 11.950169,
+                    "lng": 108.444231
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Tâm linh",
+                    "Yên tĩnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 19.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_020",
+                "ten": "Thác Prenn",
+                "toa_do": {
+                    "lat": 11.947693,
+                    "lng": 108.470557
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngoài trời",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 30000
+            },
+            {
+                "id": "DAL_DTQ_021",
+                "ten": "Chùa Linh Sơn",
+                "toa_do": {
+                    "lat": 11.824434,
+                    "lng": 108.436954
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Lịch sử",
+                    "Tâm linh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_022",
+                "ten": "Khu Du Lịch Fresh Garden",
+                "toa_do": {
+                    "lat": 11.934733,
+                    "lng": 108.409073
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Chụp ảnh",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.5
+                },
+                "rating": 0.0,
+                "gia_ve": 120000
+            },
+            {
+                "id": "DAL_DTQ_023",
+                "ten": "Chùa Linh Ẩn (Nam Ban)",
+                "toa_do": {
+                    "lat": 11.956837,
+                    "lng": 108.333592
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Kiến trúc",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_024",
+                "ten": "Crazy House (Nhà Hàng Nga)",
+                "toa_do": {
+                    "lat": 11.935623,
+                    "lng": 108.430881
+                },
+                "tags": [
+                    "Kiến trúc độc đáo",
+                    "Nghệ thuật",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.5,
+                    "dong_cua": 18.5
+                },
+                "rating": 0.0,
+                "gia_ve": 60000
+            },
+            {
+                "id": "DAL_DTQ_025",
+                "ten": "Hồ Than Thở",
+                "toa_do": {
+                    "lat": 11.944336,
+                    "lng": 108.47898
+                },
+                "tags": [
+                    "Lãng mạn",
+                    "Thiên nhiên",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.0,
+                "gia_ve": 20000
+            },
+            {
+                "id": "DAL_DTQ_026",
+                "ten": "Dinh Bảo Đại (Dinh II)",
+                "toa_do": {
+                    "lat": 11.915731,
+                    "lng": 108.447997
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Kiến trúc",
+                    "Tham quan"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 20000
+            },
+            {
+                "id": "DAL_DTQ_027",
+                "ten": "Dinh Bảo Đại (Dinh I)",
+                "toa_do": {
+                    "lat": 11.902427,
+                    "lng": 108.46971
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Thiên nhiên",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 0.0,
+                "gia_ve": 50000
+            },
+            {
+                "id": "DAL_DTQ_028",
+                "ten": "Mongo Land Đà Lạt",
+                "toa_do": {
+                    "lat": 12.002715,
+                    "lng": 108.339222
+                },
+                "tags": [
+                    "Giải trí",
+                    "Thiên nhiên",
+                    "Chill"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.5
+                },
+                "rating": 0.0,
+                "gia_ve": 120000
+            },
+            {
+                "id": "DAL_DTQ_029",
+                "ten": "Dapa Hill Đà Lạt",
+                "toa_do": {
+                    "lat": 11.972613,
+                    "lng": 108.344222
+                },
+                "tags": [
+                    "Chụp ảnh",
+                    "Giải trí",
+                    "Trải nghiệm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 100000
+            },
+            {
+                "id": "DAL_DTQ_030",
+                "ten": "PiNi Đà Lạt (Quần thể du lịch)",
+                "toa_do": {
+                    "lat": 11.941805,
+                    "lng": 108.350434
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Thiên nhiên",
+                    "Nghỉ dưỡng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 150000
+            },
+            {
+                "id": "DAL_DTQ_031",
+                "ten": "Làng Hoa Thái Phiên",
+                "toa_do": {
+                    "lat": 11.943796,
+                    "lng": 108.482737
+                },
+                "tags": [
+                    "Hoa",
+                    "Sinh thái",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_032",
+                "ten": "Thác Cam Ly",
+                "toa_do": {
+                    "lat": 11.945467,
+                    "lng": 108.420848
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngoài trời",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 20000
+            },
+            {
+                "id": "DAL_DTQ_033",
+                "ten": "Nhà thờ Cam Ly",
+                "toa_do": {
+                    "lat": 11.952483,
+                    "lng": 108.422043
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Kiến trúc đá",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_034",
+                "ten": "Trường Cao Đẳng Sư Phạm Đà Lạt",
+                "toa_do": {
+                    "lat": 11.984206,
+                    "lng": 108.452773
+                },
+                "tags": [
+                    "Kiến trúc Pháp",
+                    "Chụp ảnh",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_035",
+                "ten": "Sân Golf Đồi Cù (Dalat Palace)",
+                "toa_do": {
+                    "lat": 12.047434,
+                    "lng": 108.444571
+                },
+                "tags": [
+                    "Thể thao",
+                    "Ngoài trời",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 19.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_036",
+                "ten": "Hồ Đa Thiện",
+                "toa_do": {
+                    "lat": 11.923215,
+                    "lng": 108.450973
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngắm cảnh",
+                    "Giải trí"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_037",
+                "ten": "Núi Langbiang (Đỉnh núi trekking)",
+                "toa_do": {
+                    "lat": 11.879081,
+                    "lng": 108.440737
+                },
+                "tags": [
+                    "Trekking",
+                    "Thiên nhiên",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 100000
+            },
+            {
+                "id": "DAL_DTQ_038",
+                "ten": "Đồi Robin - Điểm ngắm cảnh",
+                "toa_do": {
+                    "lat": 11.955,
+                    "lng": 108.443778
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Chụp ảnh",
+                    "Lãng mạn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.98
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_039",
+                "ten": "Đồi Chè Cầu Đất",
+                "toa_do": {
+                    "lat": 11.940736,
+                    "lng": 108.560507
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Nông trại",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 17.5
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_040",
+                "ten": "Vườn Dâu Tây Đà Lạt",
+                "toa_do": {
+                    "lat": 11.938,
+                    "lng": 108.43
+                },
+                "tags": [
+                    "Nông trại",
+                    "Sinh thái",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 30000
+            },
+            {
+                "id": "DAL_DTQ_041",
+                "ten": "Hồ Xuân Hương - Công viên bờ hồ",
+                "toa_do": {
+                    "lat": 11.948,
+                    "lng": 108.44154
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Đi bộ",
+                    "Thư giãn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_042",
+                "ten": "Rừng Thông Đà Lạt (Ái Ân)",
+                "toa_do": {
+                    "lat": 11.895,
+                    "lng": 108.461
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Yên tĩnh",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_043",
+                "ten": "Vườn Hồng Đà Lạt",
+                "toa_do": {
+                    "lat": 11.880797,
+                    "lng": 108.452
+                },
+                "tags": [
+                    "Hoa hồng",
+                    "Chụp ảnh",
+                    "Lãng mạn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 50000
+            },
+            {
+                "id": "DAL_DTQ_044",
+                "ten": "Khu du lịch sinh thái Hòa Phú Thành",
+                "toa_do": {
+                    "lat": 12.044,
+                    "lng": 108.41
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Gia đình",
+                    "Cắm trại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 80000
+            },
+            {
+                "id": "DAL_DTQ_045",
+                "ten": "Vườn Châu Âu Đà Lạt",
+                "toa_do": {
+                    "lat": 11.958292,
+                    "lng": 108.562855
+                },
+                "tags": [
+                    "Hoa",
+                    "Chụp ảnh",
+                    "Lãng mạn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 150000
+            },
+            {
+                "id": "DAL_DTQ_046",
+                "ten": "Tháp Truyền Hình - Đỉnh Radar Langbiang",
+                "toa_do": {
+                    "lat": 11.944,
+                    "lng": 108.432
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Khám phá",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_047",
+                "ten": "Khu du lịch Bonsai Garden",
+                "toa_do": {
+                    "lat": 11.880064,
+                    "lng": 108.397299
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Nghệ thuật bonsai",
+                    "Yên tĩnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 50000
+            },
+            {
+                "id": "DAL_DTQ_048",
+                "ten": "Sân Vận Động Đà Lạt",
+                "toa_do": {
+                    "lat": 11.949656,
+                    "lng": 108.43
+                },
+                "tags": [
+                    "Chụp ảnh",
+                    "Kiến trúc",
+                    "Thể thao"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.98
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "DAL_DTQ_049",
+                "ten": "Khu du lịch Lỡ Đà Lạt (Suối Tía)",
+                "toa_do": {
+                    "lat": 11.8800644,
+                    "lng": 108.41235
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Suối",
+                    "Chill"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 30000
+            },
+            {
+                "id": "DAL_DTQ_050",
+                "ten": "Nhà Thờ Domaine de Marie",
+                "toa_do": {
+                    "lat": 11.9496557,
+                    "lng": 108.430241
+                },
+                "tags": [
+                    "Kiến trúc Pháp",
+                    "Tôn giáo",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 0.0,
+                "gia_ve": 0
+            }
+        ],
+        "quan_an": [
+            {
+                "id": "DL_QA_001",
+                "ten_quan": "Bánh Căn Lệ",
+                "dia_chi": "27/44 Yersin, Phường 10, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "20.000 – 30.000 VNĐ",
+                "mon_noi_bat": "Bánh căn trứng, Bánh căn hải sản",
+                "dac_diem": "Quán bánh căn lâu đời nằm trong hẻm nhỏ, vỏ bánh giòn rụm chín tới, nhân đa dạng từ trứng cút, bò băm đến hải sản, ăn kèm nước chấm ấm nóng đậm đà. Là địa chỉ ruột của dân địa phương."
+            },
+            {
+                "id": "DL_QA_002",
+                "ten_quan": "Phở Uyên",
+                "dia_chi": "167 Xô Viết Nghệ Tĩnh, Phường 8, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "25.000 – 35.000 VNĐ",
+                "mon_noi_bat": "Phở bò, Phở gà",
+                "dac_diem": "Quán phở hơn 20 năm tuổi nổi tiếng với nước dùng trong vắt ninh từ xương ống, sợi phở dai, thịt bò thái lát vừa ăn. Không gian vintage độc đáo, là điểm check-in được giới trẻ yêu thích."
+            },
+            {
+                "id": "DL_QA_003",
+                "ten_quan": "Bánh Mì Xíu Mại Hoàng Diệu",
+                "dia_chi": "37 Hoàng Diệu, Phường 5, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "10.000 – 20.000 VNĐ",
+                "mon_noi_bat": "Bánh mì xíu mại, Sữa đậu nành nóng",
+                "dac_diem": "Quán ăn sáng bình dân nổi tiếng bậc nhất Đà Lạt với giá chỉ 10.000đ/chén. Xíu mại tròn đều ăn kèm bánh mì nóng, thêm sữa đậu nành và yaourt handmade. Luôn đông kín khách từ sáng sớm."
+            },
+            {
+                "id": "DL_QA_004",
+                "ten_quan": "Nem Nướng Bà Hùng",
+                "dia_chi": "328 Phan Đình Phùng, Phường 2, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "50.000 – 100.000 VNĐ",
+                "mon_noi_bat": "Nem nướng, Bánh tráng cuốn",
+                "dac_diem": "Quán nem nướng lâu đời nổi tiếng Đà Lạt với nem vàng ươm thơm lừng, ăn kèm bánh tráng, rau sống tươi ngon và nước chấm đậm đà. Không gian ấm cúng, phục vụ nhanh nhẹn dù lúc nào cũng đông."
+            },
+            {
+                "id": "DL_QA_005",
+                "ten_quan": "Lẩu Gà Lá É Tao Ngộ",
+                "dia_chi": "29 Thông Thiên Học, Phường 9, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "150.000 – 250.000 VNĐ",
+                "mon_noi_bat": "Lẩu gà lá é, Lẩu gà nấm",
+                "dac_diem": "Quán lẩu gà lá é đặc trưng số một Đà Lạt với hương vị đậm đà từ lá é thơm lừng, nấm rơm, măng tươi. Nồi lẩu đủ cho 2-3 người, không gian rộng rãi có chỗ đậu xe ô tô và xe máy lớn."
+            },
+            {
+                "id": "DL_QA_006",
+                "ten_quan": "Bánh Canh Xuân An",
+                "dia_chi": "15A Nhà Chung, Phường 3, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "30.000 – 45.000 VNĐ",
+                "mon_noi_bat": "Bánh canh chả cá, Bánh canh giò heo",
+                "dac_diem": "Thương hiệu bánh canh lâu đời nổi tiếng nhất Đà Lạt với nước dùng ngọt thanh tự nhiên từ xương hầm, sợi bánh dai mềm. Quán 2 tầng rộng rãi, phục vụ nhanh, mức giá rất hợp lý."
+            },
+            {
+                "id": "DL_QA_007",
+                "ten_quan": "Nhà Hàng Kim Gia",
+                "dia_chi": "09 Trần Nhật Duật, Phường 9, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "100.000 – 400.000 VNĐ",
+                "mon_noi_bat": "Cơm lam gà nướng, Bò nướng đá, Cơm niêu",
+                "dac_diem": "Nhà hàng sang trọng nổi tiếng với cơm lam gà nướng tẩm ướp chuẩn vị, bò tươi đặc sắc và cơm niêu dân dã. Không gian thiết kế thoáng đãng hiện đại, phù hợp tiệc gia đình và đón khách quan trọng."
+            },
+            {
+                "id": "DL_QA_008",
+                "ten_quan": "Quán Nướng Chu Đà Lạt",
+                "dia_chi": "38 Phạm Ngũ Lão, Phường 9, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "80.000 – 200.000 VNĐ",
+                "mon_noi_bat": "Thịt nướng than hồng, Hải sản nướng",
+                "dac_diem": "Quán nướng lâu đời được giới trẻ săn lùng tại Đà Lạt, chuyên các món thịt và hải sản nướng trên than hồng thơm lừng. Không khí sôi động, phù hợp tụ tập nhóm bạn trong tiết trời se lạnh."
+            },
+            {
+                "id": "DL_QA_009",
+                "ten_quan": "Nhà Hàng Hoàng Lan",
+                "dia_chi": "199A Phù Đổng Thiên Vương, Phường 8, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "100.000 – 350.000 VNĐ",
+                "mon_noi_bat": "Lẩu Tả Pín Lù, Ẩm thực ba miền",
+                "dac_diem": "Nhà hàng lớn nổi tiếng với lẩu Tả Pín Lù set đa dạng topping, nước dùng ngọt thanh, đồ tươi ngon. Thực đơn phủ khắp ẩm thực ba miền, nhân viên nhiệt tình, không gian rộng rãi sang trọng."
+            },
+            {
+                "id": "DL_QA_010",
+                "ten_quan": "Bánh Ướt Lòng Gà Long",
+                "dia_chi": "202/2/5 Phan Đình Phùng, Phường 2, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "30.000 – 60.000 VNĐ",
+                "mon_noi_bat": "Bánh ướt lòng gà, Gỏi gà",
+                "dac_diem": "Quán bánh ướt lòng gà đặc sản Đà Lạt với bánh ướt mềm dẻo, gà ta xé phay, lòng gà giòn sần sật chan nước mắm chua ngọt, rắc rau răm hành phi thơm lừng. Vị chua thanh mát rất đặc trưng."
+            },
+            {
+                "id": "DL_QA_011",
+                "ten_quan": "Nhà Hàng Dung 65",
+                "dia_chi": "65 Quang Trung, Phường 9, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "100.000 – 400.000 VNĐ",
+                "mon_noi_bat": "Gà nướng, Xôi bồ câu, Lẩu cua đồng",
+                "dac_diem": "Nhà hàng sức chứa 500 khách không gian sang trọng, nổi bật với gà đồi nướng tẩm ướp vừa vị ăn kèm xôi bồ câu bùi bùi đặc sắc. Lẩu cua đồng nước ngọt gạch cua vàng óng là đặc sản không thể bỏ qua."
+            },
+            {
+                "id": "DL_QA_012",
+                "ten_quan": "Nhà Hàng Nam Anh Phát",
+                "dia_chi": "36 Mạc Đĩnh Chi, Phường 4, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "120.000 – 500.000 VNĐ",
+                "mon_noi_bat": "Cơm lam gà ta nướng, Thỏ nướng nguyên con, Tôm hùm tự chọn",
+                "dac_diem": "Nhà hàng cách chợ Đà Lạt 500m, nổi tiếng với các món đặc sản như thỏ nướng nguyên con, lẩu bồ câu và hải sản tươi sống. Điểm hiếm có bán hải sản tươi ngon chất lượng tại Đà Lạt."
+            },
+            {
+                "id": "DL_QA_013",
+                "ten_quan": "Quán Tô Cháo Đêm",
+                "dia_chi": "26 Nguyễn Văn Cừ, Phường 1, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "25.000 – 70.000 VNĐ",
+                "mon_noi_bat": "Cháo đêm, Bánh tráng, Trà sữa",
+                "dac_diem": "Quán ăn đêm nổi tiếng Đà Lạt chuyên cháo nóng hổi, bánh tráng đặc sản và trà sữa giá phải chăng. Luôn đông khách, phục vụ đến khuya, là điểm hẹn không thể thiếu của giới trẻ sau những buổi dạo đêm phố núi."
+            },
+            {
+                "id": "DL_QA_014",
+                "ten_quan": "Cháo Ếch Singapore 151",
+                "dia_chi": "151 Bùi Thị Xuân, Phường 2, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "50.000 – 120.000 VNĐ",
+                "mon_noi_bat": "Cháo ếch Singapore, Ếch xào sa tế",
+                "dac_diem": "Quán trứ danh trên 'thiên đường ăn uống' đường Bùi Thị Xuân. Ếch to thịt chắc nấu riêng với cháo trắng giữ trọn hương vị, thố ếch sệt đậm đà là đặc trưng không nơi nào sánh được."
+            },
+            {
+                "id": "DL_QA_015",
+                "ten_quan": "Khap Bun Kha – Nhà Hàng Thái",
+                "dia_chi": "26 Nguyễn Văn Cừ, Phường 1, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "100.000 – 300.000 VNĐ",
+                "mon_noi_bat": "Lẩu Thái, Mực nang khổng lồ",
+                "dac_diem": "Nhà hàng Thái đặc sắc tại Đà Lạt, hải sản nhập tươi hàng ngày. Lẩu Khap Bun Kha với mực nang khổng lồ là món đặc trưng với vị chua cay mặn ngọt hòa quyện, ấm lòng trong tiết trời lạnh."
+            },
+            {
+                "id": "DL_QA_016",
+                "ten_quan": "Nhà Hàng Tâm Đắc Đà Lạt",
+                "dia_chi": "41 Sương Nguyệt Ánh, Phường 9, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "20.000 – 250.000 VNĐ",
+                "mon_noi_bat": "Đặc sản Đà Lạt, Lẩu, Buffet rau củ",
+                "dac_diem": "Nhà hàng sức chứa lên đến 2.000 khách, không gian rộng rãi thoáng mát. Buffet rau củ 69.000đ là điểm nhấn, thực đơn đa dạng từ ba miền phù hợp khách đoàn lớn và gia đình đông người."
+            },
+            {
+                "id": "DL_QA_017",
+                "ten_quan": "Túy Tửu Lầu – Lẩu Nướng Cổ Trang",
+                "dia_chi": "24/7 Hùng Vương, Phường 10, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "35.000 – 250.000 VNĐ",
+                "mon_noi_bat": "Thịt bò nướng đá, Lẩu nướng kiếm hiệp",
+                "dac_diem": "Quán lẩu nướng phong cách cổ trang kiếm hiệp độc đáo nhất Đà Lạt với tường giấy nâu thư pháp. Thịt bò tơ nướng trên đá thơm mềm không ám khói là đặc sản, vừa ăn ngon vừa chụp ảnh cực xịn."
+            },
+            {
+                "id": "DL_QA_018",
+                "ten_quan": "Ốc 33 Đà Lạt",
+                "dia_chi": "33 Hai Bà Trưng, Phường 6, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "50.000 – 150.000 VNĐ",
+                "mon_noi_bat": "Ốc nhồi thịt, Ốc hấp sả",
+                "dac_diem": "Quán ốc nổi tiếng được nhiều người nổi tiếng review trên diễn đàn ẩm thực, chuyên ốc bươu nhồi thịt hấp sả ăn kèm nước mắm chua ngọt và rau thơm. Không gian tuy hẹp ngoài nhưng rộng bên trong, phục vụ nhiệt tình."
+            },
+            {
+                "id": "DL_QA_019",
+                "ten_quan": "Phở Bò Vàng",
+                "dia_chi": "678 Hùng Vương, Phường 11, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "35.000 – 60.000 VNĐ",
+                "mon_noi_bat": "Phở bò đặc biệt, Phở tái nạm",
+                "dac_diem": "Quán phở bò quen thuộc nổi tiếng trên đường Hùng Vương sầm uất, nước dùng hầm xương bò nhiều giờ vị ngọt thanh tự nhiên, thịt bò tươi mềm tan trong miệng. Không gian rộng thoáng, ấm cúng."
+            },
+            {
+                "id": "DL_QA_020",
+                "ten_quan": "Bánh Tráng Nướng Dì Đinh",
+                "dia_chi": "26 Hoàng Diệu, Phường 5, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "15.000 – 40.000 VNĐ",
+                "mon_noi_bat": "Bánh tráng nướng, Pizza Việt Nam",
+                "dac_diem": "Quán bánh tráng nướng nổi tiếng Đà Lạt với 4 lò nướng liên tục, đảm bảo mỗi thực khách được thưởng thức bánh nóng hổi giòn rụm vừa ra lò. Topping đa dạng phong phú, giá bình dân, luôn tấp nập khách."
+            },
+            {
+                "id": "DL_QA_021",
+                "ten_quan": "Kem Bơ Thanh Thảo",
+                "dia_chi": "76 Nguyễn Văn Trỗi, Phường 2, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "20.000 – 50.000 VNĐ",
+                "mon_noi_bat": "Kem bơ đặc sản, Sinh tố bơ",
+                "dac_diem": "Quán kem bơ đặc sản nổi tiếng Đà Lạt với phần kem mềm mịn không bị dăm đá, bơ sáp vừa chín béo ngậy, rắc dừa sấy bùi giòn. Là địa chỉ ruột của cả khách du lịch và dân địa phương."
+            },
+            {
+                "id": "DL_QA_022",
+                "ten_quan": "Nhà Hàng Cơm Niêu Fresh",
+                "dia_chi": "90 Vạn Thành, Phường 5, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "80.000 – 250.000 VNĐ",
+                "mon_noi_bat": "Cơm niêu, Cơm lam gà nướng, Cá kho tộ",
+                "dac_diem": "Nhà hàng sức chứa 700 người trong hệ sinh thái Fresh Garden, cách trung tâm 3km. Cơm niêu giòn rụm có lớp cháy vàng đặc trưng, ăn kèm cá kho tộ, canh atiso chuẩn vị Tây Nguyên bình dân mộc mạc."
+            },
+            {
+                "id": "DL_QA_023",
+                "ten_quan": "Cút Kít BBQ & Beer",
+                "dia_chi": "145 Phan Bội Châu, Phường 1, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "80.000 – 250.000 VNĐ",
+                "mon_noi_bat": "BBQ nướng than, Bia craft, Đồ nướng đặc sản",
+                "dac_diem": "Quán BBQ & bia hot trend giới trẻ Đà Lạt, không gian thoáng mát vừa nướng vừa nhâm nhi bia lạnh. Thực đơn phong phú từ thịt nướng than đến hải sản, đặc biệt có bia craft địa phương độc đáo."
+            },
+            {
+                "id": "DL_QA_024",
+                "ten_quan": "H'mông Quán – Lẩu Gà Khô Cay",
+                "dia_chi": "17-19 Đường 3 Tháng 4, Phường 3, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "100.000 – 280.000 VNĐ",
+                "mon_noi_bat": "Lẩu gà khô cay H'mông, Gà nướng ống tre",
+                "dac_diem": "Nhà hàng phong cách dân tộc H'mông độc đáo, chuyên lẩu gà khô cay đặc sản vùng cao với gia vị riêng biệt. Không gian trang trí bản làng Tây Nguyên, trải nghiệm ẩm thực dân tộc thiểu số khó quên."
+            },
+            {
+                "id": "DL_QA_025",
+                "ten_quan": "Bà Triệu – Xắp Xắp & Bánh Bèo",
+                "dia_chi": "23/2 Bà Triệu, Phường 4, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "20.000 – 60.000 VNĐ",
+                "mon_noi_bat": "Xắp xắp, Bánh bèo, Ăn vặt đặc sản",
+                "dac_diem": "Quán ăn vặt nổi tiếng với xắp xắp huyền thoại Đà Lạt, chế biến từ đu đủ bào sợi theo công thức riêng của cô chủ. Bánh bèo dẻo mềm nhân đậu xanh thơm bùi, là địa chỉ ăn vặt không thể bỏ qua."
+            },
+            {
+                "id": "DL_QA_026",
+                "ten_quan": "Mãn Vị Lẩu",
+                "dia_chi": "Hẻm 21Bis Trần Phú, Phường 3, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "39.000 – 200.000 VNĐ",
+                "mon_noi_bat": "Lẩu Tứ Xuyên, Lẩu Thái Tom Yum, Lẩu Kim Chi",
+                "dac_diem": "Quán lẩu gần Nhà Thờ Con Gà nổi tiếng với 9 loại nước lẩu đa dạng: Thượng Hải, Tứ Xuyên siêu cay, Thái Tom Yum, Kim Chi, Nấm. Topping chỉ từ 39k/phần, nước lẩu miễn phí, cực hút khách."
+            },
+            {
+                "id": "DL_QA_027",
+                "ten_quan": "Tre Trăm Đốt BBQ",
+                "dia_chi": "303 Hai Bà Trưng, Phường 6, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "100.000 – 300.000 VNĐ",
+                "mon_noi_bat": "BBQ nướng ống tre, Thịt nướng đặc sản",
+                "dac_diem": "Quán BBQ phong cách Tây Nguyên độc đáo với món nướng trong ống tre thơm phức, không gian trang trí tre nứa mộc mạc ấm cúng. Được giới trẻ check-in nhiều vì vừa ngon vừa có góc ảnh rất đẹp."
+            },
+            {
+                "id": "DL_QA_028",
+                "ten_quan": "Nhà Hàng Vừng Ơi",
+                "dia_chi": "19 Ngô Thì Sỹ, Phường 4, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "55.000 – 250.000 VNĐ",
+                "mon_noi_bat": "Cơm trưa 5 món, Cơm gia đình",
+                "dac_diem": "Nhà hàng cơm trưa nổi tiếng cho khách đoàn với không gian 1.500m² sức chứa 500 khách. Set cơm 5 món 55.000đ hương vị quê nhà đậm đà được lòng mọi đối tượng khách từ du lịch đến địa phương."
+            },
+            {
+                "id": "DL_QA_029",
+                "ten_quan": "Tiệm Bánh Cối Xay Gió",
+                "dia_chi": "05 Đường 3/4, Phường 3, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "20.000 – 80.000 VNĐ",
+                "mon_noi_bat": "Bánh ngọt Đà Lạt, Bánh kem hoa quả",
+                "dac_diem": "Tiệm bánh nổi tiếng Đà Lạt với không gian check-in độc đáo phong cách cối xay gió châu Âu. Bánh ngọt sử dụng nguyên liệu tươi từ vùng cao nguyên, hương vị tinh tế, hình thức đẹp mắt thu hút giới trẻ."
+            },
+            {
+                "id": "DL_QA_030",
+                "ten_quan": "Sữa Chua Phô Mai Khe Sanh",
+                "dia_chi": "48 Khe Sanh, Phường 10, TP. Đà Lạt, Tỉnh Lâm Đồng",
+                "gia_trung_binh": "10.000 – 30.000 VNĐ",
+                "mon_noi_bat": "Sữa chua phô mai, Yaourt đặc sản",
+                "dac_diem": "Quán đồ uống đặc sản nổi tiếng với hũ sữa chua phô mai béo ngậy vàng thơm từ sữa bò tươi lên men tự nhiên, đậm chất Đà Lạt. Giá bình dân, thường xuyên hết hàng sớm, là đồ vặt không thể bỏ qua khi du lịch."
+            }
+        ]
+    }
+}

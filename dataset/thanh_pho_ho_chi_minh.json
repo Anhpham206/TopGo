@@ -1,0 +1,1198 @@
+{
+    "Thành phố Hồ Chí Minh": {
+        "diem_tham_quan": [
+            {
+                "id": "HCM_DTQ_001",
+                "ten": "Dinh Độc Lập",
+                "toa_do": {
+                    "lat": 10.7773,
+                    "lng": 106.695346
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Trong nhà",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.5,
+                "gia_ve": 40000
+            },
+            {
+                "id": "HCM_DTQ_002",
+                "ten": "Bưu điện Trung tâm Sài Gòn",
+                "toa_do": {
+                    "lat": 10.780098,
+                    "lng": 106.699831
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Kiến trúc",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_003",
+                "ten": "Chợ Bến Thành",
+                "toa_do": {
+                    "lat": 10.772737,
+                    "lng": 106.697962
+                },
+                "tags": [
+                    "Sôi động",
+                    "Mua sắm",
+                    "Văn hóa"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 19.0
+                },
+                "rating": 4.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_004",
+                "ten": "Bảo tàng Chứng tích Chiến tranh",
+                "toa_do": {
+                    "lat": 10.779584,
+                    "lng": 106.692102
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Trong nhà",
+                    "Trưng bày"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.5
+                },
+                "rating": 4.5,
+                "gia_ve": 40000
+            },
+            {
+                "id": "HCM_DTQ_005",
+                "ten": "Địa đạo Củ Chi",
+                "toa_do": {
+                    "lat": 11.141705,
+                    "lng": 106.461589
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Ngoài trời",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.5,
+                "gia_ve": 110000
+            },
+            {
+                "id": "HCM_DTQ_006",
+                "ten": "Nhà thờ Đức Bà Sài Gòn",
+                "toa_do": {
+                    "lat": 10.779943,
+                    "lng": 106.698911
+                },
+                "tags": [
+                    "Kiến trúc",
+                    "Tôn giáo",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_007",
+                "ten": "Thảo Cầm Viên Sài Gòn",
+                "toa_do": {
+                    "lat": 10.787608,
+                    "lng": 106.705002
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngoài trời",
+                    "Động vật"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.5
+                },
+                "rating": 4.3,
+                "gia_ve": 60000
+            },
+            {
+                "id": "HCM_DTQ_008",
+                "ten": "Landmark 81 SkyView",
+                "toa_do": {
+                    "lat": 10.795185,
+                    "lng": 106.722085
+                },
+                "tags": [
+                    "Hiện đại",
+                    "Trong nhà",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 10.0,
+                    "dong_cua": 21.5
+                },
+                "rating": 4.6,
+                "gia_ve": 450000
+            },
+            {
+                "id": "HCM_DTQ_009",
+                "ten": "Khu du lịch Văn hoá Suối Tiên",
+                "toa_do": {
+                    "lat": 10.866312,
+                    "lng": 106.80321
+                },
+                "tags": [
+                    "Giải trí",
+                    "Ngoài trời",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.3,
+                "gia_ve": 180000
+            },
+            {
+                "id": "HCM_DTQ_010",
+                "ten": "Bitexco Financial Tower",
+                "toa_do": {
+                    "lat": 10.771748,
+                    "lng": 106.704343
+                },
+                "tags": [
+                    "Hiện đại",
+                    "Trong nhà",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.5,
+                    "dong_cua": 21.5
+                },
+                "rating": 4.5,
+                "gia_ve": 240000
+            },
+            {
+                "id": "HCM_DTQ_011",
+                "ten": "Nhà hát Thành phố",
+                "toa_do": {
+                    "lat": 10.776855,
+                    "lng": 106.703214
+                },
+                "tags": [
+                    "Nghệ thuật",
+                    "Kiến trúc",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_012",
+                "ten": "Phố đi bộ Nguyễn Huệ",
+                "toa_do": {
+                    "lat": 10.773986,
+                    "lng": 106.703613
+                },
+                "tags": [
+                    "Sôi động",
+                    "Ngoài trời",
+                    "Giải trí"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_013",
+                "ten": "Phố đi bộ Bùi Viện",
+                "toa_do": {
+                    "lat": 10.767551,
+                    "lng": 106.693883
+                },
+                "tags": [
+                    "Sôi động",
+                    "Giải trí đêm",
+                    "Ẩm thực"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 18.0,
+                    "dong_cua": 4.0
+                },
+                "rating": 4.3,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_014",
+                "ten": "Chợ hoa Hồ Thị Kỷ",
+                "toa_do": {
+                    "lat": 10.765505,
+                    "lng": 106.676972
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Ẩm thực",
+                    "Sôi động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_015",
+                "ten": "Công viên Nước Đầm Sen",
+                "toa_do": {
+                    "lat": 10.769137,
+                    "lng": 106.635999
+                },
+                "tags": [
+                    "Giải trí",
+                    "Thể thao nước",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.3,
+                "gia_ve": 220000
+            },
+            {
+                "id": "HCM_DTQ_016",
+                "ten": "VinWonders Grand Park",
+                "toa_do": {
+                    "lat": 10.840161,
+                    "lng": 106.84564
+                },
+                "tags": [
+                    "Giải trí",
+                    "Hiện đại",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 21.0
+                },
+                "rating": 4.8,
+                "gia_ve": 270000
+            },
+            {
+                "id": "HCM_DTQ_017",
+                "ten": "Chùa Ngọc Hoàng",
+                "toa_do": {
+                    "lat": 10.79227,
+                    "lng": 106.6982
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Lịch sử",
+                    "Tâm linh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_018",
+                "ten": "Bảo tàng Mỹ thuật TP.HCM",
+                "toa_do": {
+                    "lat": 10.770126,
+                    "lng": 106.699216
+                },
+                "tags": [
+                    "Nghệ thuật",
+                    "Lịch sử",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 30000
+            },
+            {
+                "id": "HCM_DTQ_019",
+                "ten": "Bảo tàng Lịch sử TP.HCM",
+                "toa_do": {
+                    "lat": 10.788227,
+                    "lng": 106.704609
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Trưng bày",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.5,
+                "gia_ve": 30000
+            },
+            {
+                "id": "HCM_DTQ_020",
+                "ten": "Công viên Vinhomes Central Park",
+                "toa_do": {
+                    "lat": 10.79362,
+                    "lng": 106.724355
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngoài trời",
+                    "Hiện đại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 21.5
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_021",
+                "ten": "KDL sinh thái Cần Giờ",
+                "toa_do": {
+                    "lat": 10.500854,
+                    "lng": 106.801723
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Sinh thái",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.3,
+                "gia_ve": 60000
+            },
+            {
+                "id": "HCM_DTQ_022",
+                "ten": "Cầu Ánh Sao",
+                "toa_do": {
+                    "lat": 10.724898,
+                    "lng": 106.718621
+                },
+                "tags": [
+                    "Lãng mạn",
+                    "Ngoài trời",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_023",
+                "ten": "Công viên Tao Đàn",
+                "toa_do": {
+                    "lat": 10.775821,
+                    "lng": 106.691993
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngoài trời",
+                    "Giải trí"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_024",
+                "ten": "KDL sinh thái Bình Quới",
+                "toa_do": {
+                    "lat": 10.830168,
+                    "lng": 106.739569
+                },
+                "tags": [
+                    "Văn hóa",
+                    "Ẩm thực",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 21.0
+                },
+                "rating": 4.4,
+                "gia_ve": 130000
+            },
+            {
+                "id": "HCM_DTQ_025",
+                "ten": "Rừng Sác Cần Giờ",
+                "toa_do": {
+                    "lat": 10.326336,
+                    "lng": 106.74386
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Thiên nhiên",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.3,
+                "gia_ve": 35000
+            },
+            {
+                "id": "HCM_DTQ_026",
+                "ten": "KDL sinh thái Dần Xây",
+                "toa_do": {
+                    "lat": 10.501351,
+                    "lng": 106.867634
+                },
+                "tags": [
+                    "Cắm trại",
+                    "Sinh thái",
+                    "Yên tĩnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 50000
+            },
+            {
+                "id": "HCM_DTQ_027",
+                "ten": "Nóc hầm Thủ Thiêm",
+                "toa_do": {
+                    "lat": 10.770505,
+                    "lng": 106.709823
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Chụp ảnh",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_028",
+                "ten": "Chợ Bình Tây",
+                "toa_do": {
+                    "lat": 10.749564,
+                    "lng": 106.651045
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Lịch sử",
+                    "Văn hóa"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_029",
+                "ten": "Chùa Bà Thiên Hậu",
+                "toa_do": {
+                    "lat": 10.759688,
+                    "lng": 106.662993
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Lịch sử",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 17.5
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_030",
+                "ten": "Bến Nhà Rồng",
+                "toa_do": {
+                    "lat": 10.768533,
+                    "lng": 106.706717
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.7,
+                "gia_ve": 40000
+            },
+            {
+                "id": "HCM_DTQ_031",
+                "ten": "Chợ Tân Định",
+                "toa_do": {
+                    "lat": 10.789838,
+                    "lng": 106.689787
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Ẩm thực",
+                    "Giao thương"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_032",
+                "ten": "Nhà thờ Tân Định",
+                "toa_do": {
+                    "lat": 10.788599,
+                    "lng": 106.690743
+                },
+                "tags": [
+                    "Kiến trúc",
+                    "Tôn giáo",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_033",
+                "ten": "Saigon Waterbus",
+                "toa_do": {
+                    "lat": 10.775609,
+                    "lng": 106.706834
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Giao thông",
+                    "Lãng mạn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 22.5
+                },
+                "rating": 4.4,
+                "gia_ve": 15000
+            },
+            {
+                "id": "HCM_DTQ_034",
+                "ten": "Saigon Centre / Takashimaya",
+                "toa_do": {
+                    "lat": 10.773134,
+                    "lng": 106.700931
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Hiện đại",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.5,
+                    "dong_cua": 21.5
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_035",
+                "ten": "Trung tâm thương mại Gigamall",
+                "toa_do": {
+                    "lat": 10.828655,
+                    "lng": 106.721581
+                },
+                "tags": [
+                    "Giải trí",
+                    "Mua sắm",
+                    "Nghệ thuật"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.5,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_036",
+                "ten": "Hồ Con Rùa",
+                "toa_do": {
+                    "lat": 10.782613,
+                    "lng": 106.695885
+                },
+                "tags": [
+                    "Giao lộ",
+                    "Lịch sử",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_037",
+                "ten": "Cầu Ba Son (Cầu Thủ Thiêm 2)",
+                "toa_do": {
+                    "lat": 10.779762,
+                    "lng": 106.710132
+                },
+                "tags": [
+                    "Hiện đại",
+                    "Chụp ảnh",
+                    "Giao thông"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.9,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_038",
+                "ten": "Bảo tàng Y học Cổ truyền",
+                "toa_do": {
+                    "lat": 10.776371,
+                    "lng": 106.671781
+                },
+                "tags": [
+                    "Văn hóa",
+                    "Lịch sử",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.5,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.5,
+                "gia_ve": 120000
+            },
+            {
+                "id": "HCM_DTQ_039",
+                "ten": "Chùa Giác Lâm",
+                "toa_do": {
+                    "lat": 10.778822,
+                    "lng": 106.649148
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Lịch sử",
+                    "Yên tĩnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 21.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_040",
+                "ten": "Khu phố Tàu (Chinatown Quận 5)",
+                "toa_do": {
+                    "lat": 10.751535,
+                    "lng": 106.658262
+                },
+                "tags": [
+                    "Văn hóa",
+                    "Ẩm thực",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 3.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_041",
+                "ten": "AEON MALL Bình Tân",
+                "toa_do": {
+                    "lat": 10.742918,
+                    "lng": 106.611845
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Giải trí",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 10.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_042",
+                "ten": "Khu du lịch Bến Xưa",
+                "toa_do": {
+                    "lat": 10.852866,
+                    "lng": 106.677396
+                },
+                "tags": [
+                    "Ẩm thực",
+                    "Gia đình",
+                    "Nghỉ dưỡng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.3,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_043",
+                "ten": "Công viên bến Bạch Đằng",
+                "toa_do": {
+                    "lat": 10.775088,
+                    "lng": 106.706448
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Ngoài trời",
+                    "Giải trí"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_044",
+                "ten": "Chùa Bửu Long",
+                "toa_do": {
+                    "lat": 10.88342,
+                    "lng": 106.836002
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Kiến trúc Thái",
+                    "Tâm linh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.9,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_045",
+                "ten": "Saigon Sniper",
+                "toa_do": {
+                    "lat": 10.788468,
+                    "lng": 106.703742
+                },
+                "tags": [
+                    "Thể thao",
+                    "Trải nghiệm",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": "22,0"
+                },
+                "rating": 4.6,
+                "gia_ve": 35000
+            },
+            {
+                "id": "HCM_DTQ_046",
+                "ten": "Nhà hát Rồng Vàng",
+                "toa_do": {
+                    "lat": 10.776502,
+                    "lng": 106.692601
+                },
+                "tags": [
+                    "Nghệ thuật",
+                    "Văn hóa",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 17.0,
+                    "dong_cua": 20.75
+                },
+                "rating": 4.4,
+                "gia_ve": 330000
+            },
+            {
+                "id": "HCM_DTQ_047",
+                "ten": "Bảo tàng Địa chất TP.HCM",
+                "toa_do": {
+                    "lat": 10.785007,
+                    "lng": 106.707704
+                },
+                "tags": [
+                    "Khoa học",
+                    "Khám phá",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 16.5
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_048",
+                "ten": "Chợ An Đông",
+                "toa_do": {
+                    "lat": 10.75842,
+                    "lng": 106.672238
+                },
+                "tags": [
+                    "Mua sắm sỉ",
+                    "Văn hóa",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.1,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_049",
+                "ten": "Saigon Garden",
+                "toa_do": {
+                    "lat": 10.776741,
+                    "lng": 106.703957
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Hiện đại",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "HCM_DTQ_050",
+                "ten": "Trung Tâm Thương Mại Vạn Hạnh",
+                "toa_do": {
+                    "lat": 10.770712,
+                    "lng": 106.669922
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Giải trí",
+                    "Nghệ thuật"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.5,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            }
+        ],
+        "quan_an": [
+            {
+                "id": "HCM_QA_001",
+                "ten_quan": "Cơm Tấm Ba Ghiền",
+                "dia_chi": "84 Đ. Đặng Văn Ngữ, Phường 10, Phú Nhuận",
+                "gia_trung_binh": "40.000 - 170.000 VNĐ",
+                "mon_noi_bat": "Cơm tấm sườn bì chả",
+                "dac_diem": "Phục vụ sáng chiều tối, miếng sườn khổng lồ, được tẩm ướp đậm đà theo công thức gia truyền, thu hút dân địa phương."
+            },
+            {
+                "id": "HCM_QA_002",
+                "ten_quan": "Phở Hùng",
+                "dia_chi": "241 - 243 Nguyễn Trãi, Cầu Ông Lãnh, Quận 1",
+                "gia_trung_binh": "45.000 - 100.000 VNĐ",
+                "mon_noi_bat": "Phở bò tái nạm",
+                "dac_diem": "Nước dùng được ninh từ xương bò lâu, vị ngọt thanh, quán lâu đời mang phong vị phở Sài Gòn ăn kèm tương đen và rau thơm."
+            },
+            {
+                "id": "HCM_QA_003",
+                "ten_quan": "Lẩu Gà Ớt Hiểm 109",
+                "dia_chi": "23/2 Lê Văn Duyệt, Phường 3, Bình Thạnh",
+                "gia_trung_binh": "150.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Lẩu gà ớt hiểm cay tê",
+                "dac_diem": "Chuyên món lẩu gà với hương vị cay nồng, sức chứa 150 khách, không gian bình dân thích hợp cho tụ họp gia đình, bạn bè."
+            },
+            {
+                "id": "HCM_QA_004",
+                "ten_quan": "Hẻm 76 Hai Bà Trưng",
+                "dia_chi": "76 Hai Bà Trưng, Bến Nghé, Quận 1",
+                "gia_trung_binh": "15.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bún thái, Bột chiên, Phá lấu",
+                "dac_diem": "Khu ẩm thực đường phố sầm uất tại lõi trung tâm, hoạt động từ 15:00 - 21:00, đa dạng món ăn vặt phục vụ nhân viên văn phòng."
+            },
+            {
+                "id": "HCM_QA_005",
+                "ten_quan": "Bánh Mì Huỳnh Hoa",
+                "dia_chi": "26 Lê Thị Riêng, Quận 1",
+                "gia_trung_binh": "60.000 - 70.000 VNĐ",
+                "mon_noi_bat": "Bánh mì thịt chả đầy đủ",
+                "dac_diem": "Tiệm bánh mì nổi tiếng bậc nhất với đặc trưng nhân thịt, chả, pate khổng lồ dồn chặt, thường xuyên có hàng dài xếp hàng."
+            },
+            {
+                "id": "HCM_QA_006",
+                "ten_quan": "Vietnam House Restaurant",
+                "dia_chi": "93-97 Đồng Khởi, Quận 1",
+                "gia_trung_binh": "300.000 - 1.000.000 VNĐ",
+                "mon_noi_bat": "Bò Wagyu hầm, Bánh xèo tôm hùm",
+                "dac_diem": "Không gian fine-dining do Chef Luke Nguyễn điều hành, nâng tầm các món ăn truyền thống Việt bằng nguyên liệu thượng hạng toàn cầu."
+            },
+            {
+                "id": "HCM_QA_007",
+                "ten_quan": "Sushi Ko",
+                "dia_chi": "Đường Vĩnh Khánh, Phường 8, Quận 4",
+                "gia_trung_binh": "50.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Sushi Ko Special Maki, Unagi",
+                "dac_diem": "Tiệm sushi mang phong cách ẩm thực đường phố vỉa hè, chất lượng hải sản tươi sống cao cấp nhưng với mức giá cực kỳ bình dân."
+            },
+            {
+                "id": "HCM_QA_008",
+                "ten_quan": "Phố 79",
+                "dia_chi": "79 Đ. Sương Nguyệt Anh, Phạm Ngũ Lão, Quận 1",
+                "gia_trung_binh": "399.000 - 1.000.000 VNĐ",
+                "mon_noi_bat": "Hải sản thượng hạng, Sashimi",
+                "dac_diem": "Chuỗi nhà hàng sang trọng chuyên hải sản tươi sống, không gian VIP khép kín phù hợp cho tiếp khách và tiệc doanh nghiệp cao cấp."
+            },
+            {
+                "id": "HCM_QA_009",
+                "ten_quan": "Lẩu Cua Đất Mũi",
+                "dia_chi": "661 Đ. Trần Hưng Đạo, Phường 1, Quận 5",
+                "gia_trung_binh": "150.000 - 258.000 VNĐ",
+                "mon_noi_bat": "Lẩu cua Cà Mau",
+                "dac_diem": "Món lẩu trứ danh với cua Năm Căn chắc thịt, nước dùng ngọt thanh đậm vị gạch cua, thiết lập chuỗi cung ứng trực tiếp từ đồng bằng."
+            },
+            {
+                "id": "HCM_QA_010",
+                "ten_quan": "Pachi Pachi",
+                "dia_chi": "52 Mạc Đĩnh Chi, Đa Kao, Quận 1",
+                "gia_trung_binh": "180.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Thịt bò nướng ướp sốt Tare",
+                "dac_diem": "Mô hình buffet nướng lẩu Nhật Bản, sử dụng sốt Tare truyền thống mang lại hương vị đậm đà, tích hợp không gian nướng không khói."
+            },
+            {
+                "id": "HCM_QA_011",
+                "ten_quan": "Bếp Mẹ Ỉn",
+                "dia_chi": "136/9 Lê Thánh Tôn, Bến Nghé, Quận 1",
+                "gia_trung_binh": "50.000 - 150.000 VNĐ",
+                "mon_noi_bat": "Bánh xèo, Cơm chiên trái thơm",
+                "dac_diem": "Nằm sâu trong hẻm nhỏ ngay sát chợ Bến Thành, đạt chứng nhận Michelin Bib Gourmand, phục vụ ẩm thực chuẩn vị gia đình Việt."
+            },
+            {
+                "id": "HCM_QA_012",
+                "ten_quan": "Bún Mắm 444",
+                "dia_chi": "369 Lê Quang Định, Phường 5, Bình Thạnh",
+                "gia_trung_binh": "50.000 - 70.000 VNĐ",
+                "mon_noi_bat": "Bún mắm hải sản tôm mực",
+                "dac_diem": "Nước lèo nấu từ mắm cá linh đậm vị miền Tây, topping hải sản tôm, mực, heo quay phong phú, mở cửa từ 09:00 đến 21:00."
+            },
+            {
+                "id": "HCM_QA_013",
+                "ten_quan": "Phá Lấu Lì",
+                "dia_chi": "1A Sương Nguyệt Anh, Quận 1",
+                "gia_trung_binh": "50.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Phá lấu bánh mì, mì gói",
+                "dac_diem": "Không gian sạch sẽ tại khu trung tâm, nước phá lấu thơm béo mùi cốt dừa, xử lý nội tạng kỹ lưỡng, phục vụ lượng lớn khách trẻ."
+            },
+            {
+                "id": "HCM_QA_014",
+                "ten_quan": "Bò Kho 343",
+                "dia_chi": "343/5 Tô Hiến Thành, Phường 12, Quận 10",
+                "gia_trung_binh": "22.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Hủ tiếu bò kho",
+                "dac_diem": "Quán ăn bình dân mọc lên trong khu dân cư, chỉ mở buổi chiều, thịt bò cắt khối to hầm mềm rục với hoa hồi, giá thành cực kỳ sinh viên."
+            },
+            {
+                "id": "HCM_QA_015",
+                "ten_quan": "Lẩu Dê 404",
+                "dia_chi": "218 Nguyễn Công Trứ, Nguyễn Thái Bình, Quận 1",
+                "gia_trung_binh": "125.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Vú dê nướng, Lẩu dê",
+                "dac_diem": "Chuỗi lẩu dê lâu đời tại Sài Gòn, nổi tiếng với kỹ thuật khử mùi tanh của thịt dê và nước chấm chao pha đặc biệt, không gian thoáng đãng."
+            },
+            {
+                "id": "HCM_QA_016",
+                "ten_quan": "Hủ Tiếu Nam Vang Thành Đạt",
+                "dia_chi": "34 Cô Bắc, Phường Cầu Ông Lãnh, Quận 1",
+                "gia_trung_binh": "50.000 - 70.000 VNĐ",
+                "mon_noi_bat": "Hủ tiếu Nam Vang khô/nước",
+                "dac_diem": "Hoạt động 24/7 phục vụ tệp khách ăn đêm, hương vị nước dùng phức hợp, sợi hủ tiếu dai đi kèm thịt bằm, tôm tươi, trứng cút."
+            },
+            {
+                "id": "HCM_QA_017",
+                "ten_quan": "Dim Tu Tac",
+                "dia_chi": "55 Đông Du, Bến Nghé, Quận 1",
+                "gia_trung_binh": "200.000 - 500.000 VNĐ",
+                "mon_noi_bat": "Há cảo tôm, Bánh cuốn nấm",
+                "dac_diem": "Tinh hoa ẩm thực Quảng Đông cao cấp, không gian thiết kế sang trọng, kỹ thuật xếp nếp dimsum đạt mức hoàn mỹ, nguyên liệu nhập khẩu."
+            },
+            {
+                "id": "HCM_QA_018",
+                "ten_quan": "Hoàng Yến Cuisine",
+                "dia_chi": "148 Hai Bà Trưng, Tân Định, Quận 1",
+                "gia_trung_binh": "150.000 - 350.000 VNĐ",
+                "mon_noi_bat": "Cơm hấp lá sen, Tôm càng kho",
+                "dac_diem": "Gìn giữ bản sắc ẩm thực Việt ba miền, kết hợp tinh tế giữa nghệ thuật dân dã và phong cách bài trí sang trọng, thực đơn phong phú."
+            },
+            {
+                "id": "HCM_QA_019",
+                "ten_quan": "Phở Dậu",
+                "dia_chi": "Cư xá 288 M1 Nam Kỳ Khởi Nghĩa, Quận 3",
+                "gia_trung_binh": "70.000 - 100.000 VNĐ",
+                "mon_noi_bat": "Phở tái lăn, Chén hột gà",
+                "dac_diem": "Đại diện tiêu biểu của phở Bắc thuần túy tại Sài Gòn (không phục vụ kèm giá đỗ, tương đen), nước dùng trong vắt, chỉ bán buổi sáng."
+            },
+            {
+                "id": "HCM_QA_020",
+                "ten_quan": "Bún Mắm Soái Kình Lâm",
+                "dia_chi": "482 Trần Hưng Đạo, Quận 5",
+                "gia_trung_binh": "50.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Bún mắm đặc biệt",
+                "dac_diem": "Mở cửa từ 6H - 10H sáng, hương vị nước dùng mắm cá sặc nồng đậm đặc thù, rất được lòng cư dân lâu năm thuộc khu vực Chợ Lớn."
+            },
+            {
+                "id": "HCM_QA_021",
+                "ten_quan": "Bánh Mì Bảy Hổ",
+                "dia_chi": "19 Huỳnh Khương Ninh, Đa Kao, Quận 1",
+                "gia_trung_binh": "25.000 - 40.000 VNĐ",
+                "mon_noi_bat": "Bánh mì thịt luộc phá lấu",
+                "dac_diem": "Hoạt động liên tục qua nhiều thế hệ, từng xuất hiện trên series Netflix \"Street Food\", vỏ bánh giòn rụm, công thức pate gan gia truyền."
+            },
+            {
+                "id": "HCM_QA_022",
+                "ten_quan": "Chả Cá Lã Vọng",
+                "dia_chi": "3-5 Hồ Xuân Hương, Phường 6, Quận 3",
+                "gia_trung_binh": "150.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Chả cá lăng nướng than hoa",
+                "dac_diem": "Mang nguyên bản hương vị ẩm thực truyền thống Hà Nội vào Nam, cá lăng tẩm ướp mẻ, nghệ vàng ươm xèo xèo chảo mỡ nóng, ăn kèm mắm tôm."
+            },
+            {
+                "id": "HCM_QA_023",
+                "ten_quan": "Cô Liêng (Bò lá lốt)",
+                "dia_chi": "321 Võ Văn Tần, Phường 5, Quận 3",
+                "gia_trung_binh": "40.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Bò nướng lá lốt",
+                "dac_diem": "Món ăn chơi trứ danh, thịt bò băm nhuyễn tẩm mỡ chài cuộn lá lốt nướng xém than hoa bốc khói ngun ngút, dùng chung mắm nêm đậm đặc."
+            },
+            {
+                "id": "HCM_QA_024",
+                "ten_quan": "Quán Ăn Vặt 47",
+                "dia_chi": "49 Phó Đức Chính, Phường 1, Bình Thạnh",
+                "gia_trung_binh": "35.000 - 100.000 VNĐ",
+                "mon_noi_bat": "Đồ chiên, Xúc xích, Sinh tố",
+                "dac_diem": "Điểm tụ tập lý tưởng của sinh viên và học sinh, thực đơn đa dạng các món ăn vặt nhẹ, mức chi phí thấp, không khí ồn ào và nhộn nhịp."
+            },
+            {
+                "id": "HCM_QA_025",
+                "ten_quan": "Hồ Câu Tôm Hương Quê",
+                "dia_chi": "10-12 Đường số 24, Phường 11, Quận 6",
+                "gia_trung_binh": "150.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Tôm càng nướng, Lẩu cá",
+                "dac_diem": "Tích hợp giải trí thể thao câu tôm và dịch vụ thưởng thức tại chỗ, không gian sân vườn rộng mở sức chứa 300 khách, thích hợp dịp cuối tuần."
+            },
+            {
+                "id": "HCM_QA_026",
+                "ten_quan": "Đà Lạt Nhỏ",
+                "dia_chi": "170 Võ Văn Tần, Phường 5, Quận 3",
+                "gia_trung_binh": "10.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bánh tráng nướng, Sữa đậu nành",
+                "dac_diem": "Concept mang nét ẩm thực chợ đêm Đà Lạt về giữa trung tâm Sài Gòn, tận dụng hiệu ứng hoài cổ để thu hút tệp khách trẻ giới văn phòng."
+            },
+            {
+                "id": "HCM_QA_027",
+                "ten_quan": "Hapi Chuối",
+                "dia_chi": "03 Phạm Văn Hai, Tân Bình",
+                "gia_trung_binh": "17.000 - 20.000 VNĐ",
+                "mon_noi_bat": "Chuối nếp nướng cốt dừa",
+                "dac_diem": "Món ăn vặt đường phố xuất sắc, xôi nếp dẻo bọc chuối tây nướng xém vỏ chuối, chan đẫm nước cốt dừa rắc đậu phộng rang giã dập."
+            },
+            {
+                "id": "HCM_QA_028",
+                "ten_quan": "Viet Kitchen Sài Gòn",
+                "dia_chi": "8-15 Tôn Đức Thắng, Bến Nghé, Quận 1",
+                "gia_trung_binh": "180.000 - 800.000 VNĐ",
+                "mon_noi_bat": "Buffet hải sản quốc tế",
+                "dac_diem": "Nằm trong khuôn viên khách sạn cao cấp, nhà hàng kết hợp kỹ thuật ẩm thực Á-Âu, quy trình bảo quản khắt khe, chất lượng đạt chuẩn 5 sao."
+            },
+            {
+                "id": "HCM_QA_029",
+                "ten_quan": "Mandarine Sài Gòn",
+                "dia_chi": "11A Ngô Văn Năm, Bến Nghé, Quận 1",
+                "gia_trung_binh": "135.000 - 1.485.000 VNĐ",
+                "mon_noi_bat": "Vịt quay, Hải sản phong cách Việt",
+                "dac_diem": "Bài trí thuần túy Á Đông mang phong vị hoài cổ, không gian trầm mặc thích hợp cho bữa tối lãng mạn hoặc tiếp đón đối tác ngoại giao."
+            },
+            {
+                "id": "HCM_QA_030",
+                "ten_quan": "Cơm Niêu Sài Gòn",
+                "dia_chi": "27 Tú Xương, Phường 7, Quận 3",
+                "gia_trung_binh": "200.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Cơm niêu đập, Cá kho tộ",
+                "dac_diem": "Trình diễn kỹ thuật đập niêu đất ném xôi trên không độc đáo, thực đơn vinh danh ẩm thực ba miền với các nguyên liệu đồng quê."
+            }
+        ]
+    }
+}
