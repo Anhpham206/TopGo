@@ -1,0 +1,1198 @@
+{
+    "Phú Quốc": {
+        "diem_tham_quan": [
+            {
+                "id": "PQC_DTQ_001",
+                "ten": "VinWonders Phú Quốc",
+                "toa_do": {
+                    "lat": 10.334231,
+                    "lng": 103.856214
+                },
+                "tags": [
+                    "Giải trí",
+                    "Hiện đại",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 10.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.8,
+                "gia_ve": 950000
+            },
+            {
+                "id": "PQC_DTQ_002",
+                "ten": "Vinpearl Safari Phú Quốc",
+                "toa_do": {
+                    "lat": 10.342152,
+                    "lng": 103.858342
+                },
+                "tags": [
+                    "Động vật",
+                    "Thiên nhiên",
+                    "Giáo dục"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 16.0
+                },
+                "rating": 4.7,
+                "gia_ve": 850000
+            },
+            {
+                "id": "PQC_DTQ_003",
+                "ten": "Grand World Phú Quốc",
+                "toa_do": {
+                    "lat": 10.328451,
+                    "lng": 103.854312
+                },
+                "tags": [
+                    "Sôi động",
+                    "Kiến trúc",
+                    "Mua sắm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_004",
+                "ten": "Cung điện Hải Vương",
+                "toa_do": {
+                    "lat": 10.336512,
+                    "lng": 103.857123
+                },
+                "tags": [
+                    "Trong nhà",
+                    "Thủy cung",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 10.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.9,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_005",
+                "ten": "Bảo tàng Gấu Teddy",
+                "toa_do": {
+                    "lat": 10.327123,
+                    "lng": 103.853456
+                },
+                "tags": [
+                    "Gia đình",
+                    "Trưng bày",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 21.0
+                },
+                "rating": 4.5,
+                "gia_ve": 200000
+            },
+            {
+                "id": "PQC_DTQ_006",
+                "ten": "Tinh hoa Việt Nam (Show)",
+                "toa_do": {
+                    "lat": 10.329234,
+                    "lng": 103.855678
+                },
+                "tags": [
+                    "Nghệ thuật",
+                    "Văn hóa",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 21.0
+                },
+                "rating": 4.8,
+                "gia_ve": 300000
+            },
+            {
+                "id": "PQC_DTQ_007",
+                "ten": "Sông Venice (Grand World)",
+                "toa_do": {
+                    "lat": 10.328112,
+                    "lng": 103.854987
+                },
+                "tags": [
+                    "Lãng mạn",
+                    "Ngắm cảnh",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.4,
+                "gia_ve": 200000
+            },
+            {
+                "id": "PQC_DTQ_008",
+                "ten": "Cáp treo Hòn Thơm",
+                "toa_do": {
+                    "lat": 10.027123,
+                    "lng": 104.008456
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Biển",
+                    "Kỷ lục"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.8,
+                "gia_ve": 600000
+            },
+            {
+                "id": "PQC_DTQ_009",
+                "ten": "Aquatopia Water Park",
+                "toa_do": {
+                    "lat": 10.005678,
+                    "lng": 104.01789
+                },
+                "tags": [
+                    "Giải trí",
+                    "Nước",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 10.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_010",
+                "ten": "Exotica Park (Hòn Thơm)",
+                "toa_do": {
+                    "lat": 10.006123,
+                    "lng": 104.018234
+                },
+                "tags": [
+                    "Giải trí",
+                    "Mạo hiểm",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_011",
+                "ten": "Cầu Hôn (Kiss Bridge)",
+                "toa_do": {
+                    "lat": 10.025432,
+                    "lng": 104.004567
+                },
+                "tags": [
+                    "Chụp ảnh",
+                    "Kiến trúc",
+                    "Lãng mạn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 23.0
+                },
+                "rating": 4.8,
+                "gia_ve": 100000
+            },
+            {
+                "id": "PQC_DTQ_012",
+                "ten": "Sunset Town (Địa Trung Hải)",
+                "toa_do": {
+                    "lat": 10.026789,
+                    "lng": 104.005678
+                },
+                "tags": [
+                    "Chụp ảnh",
+                    "Kiến trúc",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_013",
+                "ten": "Show Kiss of the Sea",
+                "toa_do": {
+                    "lat": 10.02589,
+                    "lng": 104.004231
+                },
+                "tags": [
+                    "Nghệ thuật",
+                    "Hiện đại",
+                    "Ban đêm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 19.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.9,
+                "gia_ve": 750000
+            },
+            {
+                "id": "PQC_DTQ_014",
+                "ten": "Bãi Sao",
+                "toa_do": {
+                    "lat": 10.053456,
+                    "lng": 104.034567
+                },
+                "tags": [
+                    "Biển",
+                    "Thiên nhiên",
+                    "Thư giãn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_015",
+                "ten": "Bãi Khem",
+                "toa_do": {
+                    "lat": 10.023456,
+                    "lng": 104.035678
+                },
+                "tags": [
+                    "Biển",
+                    "Cao cấp",
+                    "Nghỉ dưỡng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_016",
+                "ten": "Nhà tù Phú Quốc",
+                "toa_do": {
+                    "lat": 10.045678,
+                    "lng": 104.01789
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_017",
+                "ten": "Chùa Hộ Quốc",
+                "toa_do": {
+                    "lat": 10.078901,
+                    "lng": 104.045678
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Kiến trúc",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.8,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_018",
+                "ten": "Suối Tranh",
+                "toa_do": {
+                    "lat": 10.145678,
+                    "lng": 104.005678
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngoài trời",
+                    "Thác"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.3,
+                "gia_ve": 30000
+            },
+            {
+                "id": "PQC_DTQ_019",
+                "ten": "Dinh Cậu",
+                "toa_do": {
+                    "lat": 10.21789,
+                    "lng": 103.956789
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Biểu tượng",
+                    "Hoàng hôn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_020",
+                "ten": "Dinh Bà",
+                "toa_do": {
+                    "lat": 10.218234,
+                    "lng": 103.957123
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Văn hóa",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_021",
+                "ten": "Chợ đêm Phú Quốc",
+                "toa_do": {
+                    "lat": 10.216789,
+                    "lng": 103.958901
+                },
+                "tags": [
+                    "Ẩm thực",
+                    "Mua sắm",
+                    "Sôi động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 17.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.3,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_022",
+                "ten": "Làng chài Hàm Ninh",
+                "toa_do": {
+                    "lat": 10.178901,
+                    "lng": 104.056789
+                },
+                "tags": [
+                    "Văn hóa",
+                    "Ẩm thực",
+                    "Hải sản"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_023",
+                "ten": "Rạch Vẹm (Vương quốc Sao Biển)",
+                "toa_do": {
+                    "lat": 10.356789,
+                    "lng": 103.934567
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Hoang sơ",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_024",
+                "ten": "Mũi Gành Dầu",
+                "toa_do": {
+                    "lat": 10.378901,
+                    "lng": 103.845678
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Biển",
+                    "Biên giới"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_025",
+                "ten": "Vườn Quốc gia Phú Quốc",
+                "toa_do": {
+                    "lat": 10.323456,
+                    "lng": 103.956789
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Rừng",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_026",
+                "ten": "Cơ sở Ngọc trai Ngọc Hiền",
+                "toa_do": {
+                    "lat": 10.176543,
+                    "lng": 103.96789
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Trải nghiệm",
+                    "Trang sức"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_027",
+                "ten": "Nhà thùng Nước mắm Khải Hoàn",
+                "toa_do": {
+                    "lat": 10.219876,
+                    "lng": 103.959876
+                },
+                "tags": [
+                    "Văn hóa",
+                    "Trải nghiệm",
+                    "Đặc sản"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_028",
+                "ten": "Vườn tiêu Khu Tượng",
+                "toa_do": {
+                    "lat": 10.289012,
+                    "lng": 103.96789
+                },
+                "tags": [
+                    "Nông nghiệp",
+                    "Chụp ảnh",
+                    "Đặc sản"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_029",
+                "ten": "Trại Ong Phú Quốc",
+                "toa_do": {
+                    "lat": 10.298765,
+                    "lng": 103.978901
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Giáo dục",
+                    "Nông nghiệp"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_030",
+                "ten": "Rượu sim Bảy Gáo",
+                "toa_do": {
+                    "lat": 10.205678,
+                    "lng": 103.96789
+                },
+                "tags": [
+                    "Đặc sản",
+                    "Tham quan",
+                    "Văn hóa"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.3,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_031",
+                "ten": "Hòn Móng Tay",
+                "toa_do": {
+                    "lat": 9.923456,
+                    "lng": 103.978901
+                },
+                "tags": [
+                    "Đảo",
+                    "Biển",
+                    "Lặn ngắm san hô"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_032",
+                "ten": "Hòn May Rút Trong",
+                "toa_do": {
+                    "lat": 9.905678,
+                    "lng": 103.987654
+                },
+                "tags": [
+                    "Đảo",
+                    "Biển",
+                    "Hoang sơ"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.8,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_033",
+                "ten": "Hòn May Rút Ngoài",
+                "toa_do": {
+                    "lat": 9.901234,
+                    "lng": 103.989012
+                },
+                "tags": [
+                    "Đảo",
+                    "Biển",
+                    "Cắm trại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_034",
+                "ten": "Hòn Dăm Ngang (Gam Ghi)",
+                "toa_do": {
+                    "lat": 9.912345,
+                    "lng": 103.990123
+                },
+                "tags": [
+                    "Đảo",
+                    "San hô",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.9,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_035",
+                "ten": "Hòn Một",
+                "toa_do": {
+                    "lat": 10.356789,
+                    "lng": 104.056789
+                },
+                "tags": [
+                    "Hoang sơ",
+                    "Cầu gỗ",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_036",
+                "ten": "Hòn Đồi Mồi",
+                "toa_do": {
+                    "lat": 10.334567,
+                    "lng": 103.834567
+                },
+                "tags": [
+                    "Đảo nhỏ",
+                    "Hoàng hôn",
+                    "Lặn biển"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_037",
+                "ten": "Bãi Dài",
+                "toa_do": {
+                    "lat": 10.334231,
+                    "lng": 103.856214
+                },
+                "tags": [
+                    "Biển",
+                    "Cát trắng",
+                    "Nghỉ dưỡng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_038",
+                "ten": "Bãi Ông Lang",
+                "toa_do": {
+                    "lat": 10.26789,
+                    "lng": 103.923456
+                },
+                "tags": [
+                    "Biển",
+                    "Yên tĩnh",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_039",
+                "ten": "Bãi Trường (Long Beach)",
+                "toa_do": {
+                    "lat": 10.189012,
+                    "lng": 103.965432
+                },
+                "tags": [
+                    "Biển",
+                    "Sôi động",
+                    "Hoàng hôn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_040",
+                "ten": "Bảo tàng Cội Nguồn",
+                "toa_do": {
+                    "lat": 10.198765,
+                    "lng": 103.96789
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa",
+                    "Trưng bày"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.2,
+                "gia_ve": 20000
+            },
+            {
+                "id": "PQC_DTQ_041",
+                "ten": "Suối Đá Bàn",
+                "toa_do": {
+                    "lat": 10.245678,
+                    "lng": 104.005678
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Picnic",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.1,
+                "gia_ve": 10000
+            },
+            {
+                "id": "PQC_DTQ_042",
+                "ten": "Sunset Sanato Beach Club",
+                "toa_do": {
+                    "lat": 10.176543,
+                    "lng": 103.96789
+                },
+                "tags": [
+                    "Chụp ảnh",
+                    "Giải trí",
+                    "Biển"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 21.0
+                },
+                "rating": 4.4,
+                "gia_ve": 100000
+            },
+            {
+                "id": "PQC_DTQ_043",
+                "ten": "Viewpoint Chuồn Chuồn",
+                "toa_do": {
+                    "lat": 10.218901,
+                    "lng": 103.96789
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Thành phố",
+                    "Chill"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 23.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_044",
+                "ten": "Công viên San hô Namaste",
+                "toa_do": {
+                    "lat": 10.023456,
+                    "lng": 104.01789
+                },
+                "tags": [
+                    "Trải nghiệm",
+                    "Lặn biển",
+                    "San hô"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.7,
+                "gia_ve": 950000
+            },
+            {
+                "id": "PQC_DTQ_045",
+                "ten": "Khu bảo tồn chó xoáy",
+                "toa_do": {
+                    "lat": 10.223456,
+                    "lng": 103.987654
+                },
+                "tags": [
+                    "Động vật",
+                    "Đặc hữu",
+                    "Tham quan"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.3,
+                "gia_ve": 50000
+            },
+            {
+                "id": "PQC_DTQ_046",
+                "ten": "Suối Tiên",
+                "toa_do": {
+                    "lat": 10.156789,
+                    "lng": 104.01789
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Leo núi",
+                    "Hoang sơ"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_047",
+                "ten": "Tiên Sơn Đỉnh",
+                "toa_do": {
+                    "lat": 10.15789,
+                    "lng": 104.018901
+                },
+                "tags": [
+                    "Trekking",
+                    "Ngắm cảnh",
+                    "Mạo hiểm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_048",
+                "ten": "Vui-Fest Bazaar",
+                "toa_do": {
+                    "lat": 10.025678,
+                    "lng": 104.004567
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Nghệ thuật",
+                    "Sôi động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 16.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_049",
+                "ten": "Corona Casino",
+                "toa_do": {
+                    "lat": 10.334567,
+                    "lng": 103.856789
+                },
+                "tags": [
+                    "Giải trí",
+                    "Sang trọng",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "PQC_DTQ_050",
+                "ten": "Cảng An Thới",
+                "toa_do": {
+                    "lat": 10.025678,
+                    "lng": 104.01789
+                },
+                "tags": [
+                    "Giao thương",
+                    "Biển",
+                    "Tham quan"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.2,
+                "gia_ve": 10000
+            }
+        ],
+        "quan_an": [
+            {
+                "id": "PQC_QA_001",
+                "ten_quan": "Nhà hàng Xin Chào",
+                "dia_chi": "66 Trần Hưng Đạo, Dương Đông",
+                "gia_trung_binh": "150.000 - 500.000 VNĐ",
+                "mon_noi_bat": "Gỏi cá trích, Tôm hùm cháy tỏi",
+                "dac_diem": "View biển trực diện, không gian thoáng đãng, hải sản tươi sống chất lượng cao."
+            },
+            {
+                "id": "PQC_QA_002",
+                "ten_quan": "Crab House (Nhà Ghẹ)",
+                "dia_chi": "26 Nguyễn Trãi, Dương Đông",
+                "gia_trung_binh": "200.000 - 1.500.000 VNĐ",
+                "mon_noi_bat": "Seafood boil, Ghẹ sốt Cajun",
+                "dac_diem": "Phong cách Mỹ, chuyên các combo hải sản với nước sốt đặc trưng, phục vụ chuyên nghiệp."
+            },
+            {
+                "id": "PQC_QA_003",
+                "ten_quan": "Quán Ra Khơi",
+                "dia_chi": "131 đường 30/4, Dương Đông",
+                "gia_trung_binh": "100.000 - 400.000 VNĐ",
+                "mon_noi_bat": "Gỏi cá trích, Hải sản nướng",
+                "dac_diem": "Không gian rộng, bình dân nhưng hải sản rất tươi, là điểm đến quen thuộc của khách đoàn."
+            },
+            {
+                "id": "PQC_QA_004",
+                "ten_quan": "Bún Quậy Kiến Xây",
+                "dia_chi": "28 Bạch Đằng, Dương Đông",
+                "gia_trung_binh": "35.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Bún quậy hải sản",
+                "dac_diem": "Đặc sản trứ danh Phú Quốc, khách tự pha nước chấm theo khẩu vị, chế biến tại chỗ."
+            },
+            {
+                "id": "PQC_QA_005",
+                "ten_quan": "Bún Kèn Út Lượm",
+                "dia_chi": "42 đường 30/4, Dương Đông",
+                "gia_trung_binh": "25.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bún kèn cá ngân",
+                "dac_diem": "Món ăn sáng truyền thống, nước dùng béo ngậy vị cốt dừa và đậm đà cá biển."
+            },
+            {
+                "id": "PQC_QA_006",
+                "ten_quan": "Nhà hàng Cơm Bắc 123",
+                "dia_chi": "77 đường 30/4, Dương Đông",
+                "gia_trung_binh": "100.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Gà hấp rẫy, Cá kho tộ",
+                "dac_diem": "Thiết kế đồng quê mộc mạc, thực đơn đa dạng phù hợp cho bữa cơm gia đình chuẩn vị."
+            },
+            {
+                "id": "PQC_QA_007",
+                "ten_quan": "Chuồn Chuồn Bistro",
+                "dia_chi": "Đồi Sao Mai, Dương Đông",
+                "gia_trung_binh": "100.000 - 350.000 VNĐ",
+                "mon_noi_bat": "Cocktails, Món Âu-Á",
+                "dac_diem": "Vị trí trên cao ngắm toàn cảnh Dương Đông, không gian cực \"chill\" vào buổi hoàng hôn."
+            },
+            {
+                "id": "PQC_QA_008",
+                "ten_quan": "On The Rock",
+                "dia_chi": "Mango Bay Resort, Cửa Dương",
+                "gia_trung_binh": "200.000 - 1.000.000 VNĐ",
+                "mon_noi_bat": "Hải sản nướng, Steak",
+                "dac_diem": "Nhà hàng nằm sát mép biển, không gian lãng mạn bậc nhất dành cho các cặp đôi."
+            },
+            {
+                "id": "PQC_QA_009",
+                "ten_quan": "Spice House",
+                "dia_chi": "100C/12 Trần Hưng Đạo",
+                "gia_trung_binh": "150.000 - 600.000 VNĐ",
+                "mon_noi_bat": "Cá chẽm nướng, Salad sim",
+                "dac_diem": "Sự kết hợp tinh tế giữa nguyên liệu bản địa và phong cách chế biến phương Tây."
+            },
+            {
+                "id": "PQC_QA_010",
+                "ten_quan": "Ganesh Indian",
+                "dia_chi": "97 Trần Hưng Đạo, Dương Tơ",
+                "gia_trung_binh": "100.000 - 400.000 VNĐ",
+                "mon_noi_bat": "Cà ri, Bánh Naan",
+                "dac_diem": "Nhà hàng Ấn Độ chuẩn vị, phục vụ lượng lớn khách quốc tế và người ăn chay."
+            },
+            {
+                "id": "PQC_QA_011",
+                "ten_quan": "Winston's Burgers",
+                "dia_chi": "126 Trần Hưng Đạo",
+                "gia_trung_binh": "150.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Classic Beef Burger",
+                "dac_diem": "Burger thủ công chất lượng cao, bia tươi đa dạng, phong cách quán pub năng động."
+            },
+            {
+                "id": "PQC_QA_012",
+                "ten_quan": "BUP Seafood",
+                "dia_chi": "108 Ba Mươi Tháng Tư",
+                "gia_trung_binh": "100.000 - 350.000 VNĐ",
+                "mon_noi_bat": "Nhum nướng mỡ hành",
+                "dac_diem": "Quán hải sản gia đình, chế biến đậm đà, chủ quán nhiệt tình hỗ trợ thực khách."
+            },
+            {
+                "id": "PQC_QA_013",
+                "ten_quan": "Nhà hàng Mỹ Lan",
+                "dia_chi": "Bãi Sao, An Thới",
+                "gia_trung_binh": "150.000 - 500.000 VNĐ",
+                "mon_noi_bat": "Ghẹ hấp, Tôm sú nướng",
+                "dac_diem": "Vị trí ngay bãi Sao, thuận tiện cho du khách nghỉ dưỡng và tắm biển phía Nam."
+            },
+            {
+                "id": "PQC_QA_014",
+                "ten_quan": "Thiên Thanh",
+                "dia_chi": "107 Trần Hưng Đạo",
+                "gia_trung_binh": "100.000 - 500.000 VNĐ",
+                "mon_noi_bat": "Lẩu hải sản, Cua rang me",
+                "dac_diem": "Nhà hàng quy mô lớn, tầng 2 thoáng mát, thực đơn hải sản phong phú và giá cả hợp lý."
+            },
+            {
+                "id": "PQC_QA_015",
+                "ten_quan": "Trùng Dương Marina",
+                "dia_chi": "136 đường 30/4, Dương Đông",
+                "gia_trung_binh": "150.000 - 450.000 VNĐ",
+                "mon_noi_bat": "Cơm chiên ghẹ, Gỏi cá trích",
+                "dac_diem": "Thương hiệu lâu đời, không gian rộng rãi phù hợp tổ chức tiệc và sự kiện lớn."
+            },
+            {
+                "id": "PQC_QA_016",
+                "ten_quan": "On The Sand",
+                "dia_chi": "Mango Bay Resort",
+                "gia_trung_binh": "150.000 - 500.000 VNĐ",
+                "mon_noi_bat": "Pizza nướng củi, Hải sản",
+                "dac_diem": "Không gian mở ven biển, mang lại cảm giác thư giãn tuyệt đối với tiếng sóng vỗ."
+            },
+            {
+                "id": "PQC_QA_017",
+                "ten_quan": "Bánh canh ghẹ Quốc Anh",
+                "dia_chi": "176 Nguyễn Trung Trực",
+                "gia_trung_binh": "40.000 - 100.000 VNĐ",
+                "mon_noi_bat": "Bánh canh ghẹ nguyên con",
+                "dac_diem": "Nước lèo ngọt thanh từ ghẹ tươi, sợi bánh canh dai dẻo đặc trưng của đảo."
+            },
+            {
+                "id": "PQC_QA_018",
+                "ten_quan": "Hủ tiếu mực Tư Hường",
+                "dia_chi": "42 đường 30/4, Dương Đông",
+                "gia_trung_binh": "50.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Hủ tiếu mực tươi",
+                "dac_diem": "Mực giòn ngọt, nước dùng ninh từ xương ống trong vắt, món điểm tâm phổ biến."
+            },
+            {
+                "id": "PQC_QA_019",
+                "ten_quan": "Pizza Regina",
+                "dia_chi": "100/2C Trần Hưng Đạo",
+                "gia_trung_binh": "100.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Pizza hải sản",
+                "dac_diem": "Tiệm pizza nổi tiếng nhất đảo với lò nướng thủ công, vỏ bánh mỏng và giòn."
+            },
+            {
+                "id": "PQC_QA_020",
+                "ten_quan": "Nhà hàng Lá Gốm",
+                "dia_chi": "Trần Hưng Đạo, Dương Tơ",
+                "gia_trung_binh": "50.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Lẩu nấm, Các món chay",
+                "dac_diem": "Không gian chay thanh tịnh, thiết kế mang nét văn hóa truyền thống Việt Nam."
+            },
+            {
+                "id": "PQC_QA_021",
+                "ten_quan": "NẤM Vegan",
+                "dia_chi": "13 Nguyễn Trãi, Dương Đông",
+                "gia_trung_binh": "50.000 - 150.000 VNĐ",
+                "mon_noi_bat": "Gỏi cuốn, Cơm chay phần",
+                "dac_diem": "Nhà hàng thuần chay hiện đại, trang trí tối giản, món ăn trình bày bắt mắt."
+            },
+            {
+                "id": "PQC_QA_022",
+                "ten_quan": "Minh Tâm Vegetarian",
+                "dia_chi": "249 đường 30/4, Khu 1",
+                "gia_trung_binh": "40.000 - 120.000 VNĐ",
+                "mon_noi_bat": "Phở chay, Bánh xèo chay",
+                "dac_diem": "Sử dụng nguyên liệu hoàn toàn tự nhiên, vị thanh đạm, tốt cho sức khỏe."
+            },
+            {
+                "id": "PQC_QA_023",
+                "ten_quan": "Tịnh Tâm Trai",
+                "dia_chi": "83 Nguyễn Trung Trực",
+                "gia_trung_binh": "30.000 - 100.000 VNĐ",
+                "mon_noi_bat": "Chả giò chay, Bún nước",
+                "dac_diem": "Quán chay bình dân với thực đơn phong phú, không gian yên tĩnh giữa lòng phố."
+            },
+            {
+                "id": "PQC_QA_024",
+                "ten_quan": "Bếp Chay Nhà An",
+                "dia_chi": "29 Trần Hưng Đạo, Dương Đông",
+                "gia_trung_binh": "40.000 - 150.000 VNĐ",
+                "mon_noi_bat": "Cơm tấm chay, Lẩu chay",
+                "dac_diem": "Phục vụ các món Việt chay theo phong cách gia đình, ấm cúng và gần gũi."
+            },
+            {
+                "id": "PQC_QA_025",
+                "ten_quan": "Hiên Charcoal Kitchen",
+                "dia_chi": "185 Trần Hưng Đạo",
+                "gia_trung_binh": "200.000 - 1.200.000 VNĐ",
+                "mon_noi_bat": "Thịt nướng than hoa",
+                "dac_diem": "Chuyên các món nướng kiểu truyền thống trên than hồng, nguyên liệu tươi sạch."
+            },
+            {
+                "id": "PQC_QA_026",
+                "ten_quan": "The Pepper Tree",
+                "dia_chi": "La Veranda Resort",
+                "gia_trung_binh": "500.000 - 2.500.000 VNĐ",
+                "mon_noi_bat": "Fine-dining Việt-Pháp",
+                "dac_diem": "Trải nghiệm ẩm thực cao cấp trong không gian biệt thự cổ điển kiểu Pháp."
+            },
+            {
+                "id": "PQC_QA_027",
+                "ten_quan": "Rice Market",
+                "dia_chi": "Regent Phu Quoc",
+                "gia_trung_binh": "800.000 - 3.000.000 VNĐ",
+                "mon_noi_bat": "Phở bò Wagyu, Gỏi vịt",
+                "dac_diem": "Nhà hàng siêu sang, nâng tầm món ăn đường phố Việt Nam bằng nguyên liệu quý."
+            },
+            {
+                "id": "PQC_QA_028",
+                "ten_quan": "Eat Pray Love",
+                "dia_chi": "Tổ 4, Ông Lang",
+                "gia_trung_binh": "100.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Sườn non, Tôm dừa",
+                "dac_diem": "Không gian ấm cúng, phù hợp cho du khách nghỉ dưỡng tại khu vực bãi Ông Lang."
+            },
+            {
+                "id": "PQC_QA_029",
+                "ten_quan": "Cái Mâm Vietnamese",
+                "dia_chi": "Chợ đêm Vuifest, An Thới",
+                "gia_trung_binh": "100.000 - 400.000 VNĐ",
+                "mon_noi_bat": "Phở gà trộn, Trà sả",
+                "dac_diem": "Đậm chất Việt giữa lòng Sunset Town hiện đại, món ăn được nêm nếm rất vừa miệng."
+            },
+            {
+                "id": "PQC_QA_030",
+                "ten_quan": "Phở Tâm",
+                "dia_chi": "Grand World, Bắc Đảo",
+                "gia_trung_binh": "80.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Bún bò, Bánh xèo",
+                "dac_diem": "Phục vụ món Việt chuẩn vị cho khách tham quan quần thể Vinpearl phía Bắc."
+            }
+        ]
+    }
+}

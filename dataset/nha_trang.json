@@ -1,0 +1,1198 @@
+{
+    "Nha Trang": {
+        "diem_tham_quan": [
+            {
+                "id": "NTG_DTQ_001",
+                "ten": "Tháp Bà Ponagar",
+                "toa_do": {
+                    "lat": 12.265355,
+                    "lng": 109.195821
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.6,
+                "gia_ve": 30000
+            },
+            {
+                "id": "NTG_DTQ_002",
+                "ten": "Chùa Long Sơn",
+                "toa_do": {
+                    "lat": 12.250556,
+                    "lng": 109.180278
+                },
+                "tags": [
+                    "Tôn giáo",
+                    "Tâm linh",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_003",
+                "ten": "Nhà thờ Đá Nha Trang",
+                "toa_do": {
+                    "lat": 12.246732,
+                    "lng": 109.188231
+                },
+                "tags": [
+                    "Kiến trúc",
+                    "Tôn giáo",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.25
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_004",
+                "ten": "Viện Hải Dương Học",
+                "toa_do": {
+                    "lat": 12.2075,
+                    "lng": 109.215556
+                },
+                "tags": [
+                    "Khoa học",
+                    "Khám phá",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.5,
+                "gia_ve": 40000
+            },
+            {
+                "id": "NTG_DTQ_005",
+                "ten": "Dinh Bảo Đại",
+                "toa_do": {
+                    "lat": 12.215556,
+                    "lng": 109.215833
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Kiến trúc",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.1,
+                "gia_ve": 40000
+            },
+            {
+                "id": "NTG_DTQ_006",
+                "ten": "VinWonders Nha Trang",
+                "toa_do": {
+                    "lat": 12.218889,
+                    "lng": 109.241389
+                },
+                "tags": [
+                    "Giải trí",
+                    "Hiện đại",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 4.8,
+                "gia_ve": 800000
+            },
+            {
+                "id": "NTG_DTQ_007",
+                "ten": "Vinpearl Harbour",
+                "toa_do": {
+                    "lat": 12.215278,
+                    "lng": 109.231111
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Ẩm thực",
+                    "Hiện đại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 190000
+            },
+            {
+                "id": "NTG_DTQ_008",
+                "ten": "Nhà hát Đó",
+                "toa_do": {
+                    "lat": 12.285278,
+                    "lng": 109.198611
+                },
+                "tags": [
+                    "Nghệ thuật",
+                    "Kiến trúc",
+                    "Hiện đại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_009",
+                "ten": "Tháp Trầm Hương",
+                "toa_do": {
+                    "lat": 12.239722,
+                    "lng": 109.196389
+                },
+                "tags": [
+                    "Biểu tượng",
+                    "Chụp ảnh",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.3,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_010",
+                "ten": "Đảo Hòn Mun",
+                "toa_do": {
+                    "lat": 12.1675,
+                    "lng": 109.303333
+                },
+                "tags": [
+                    "Biển",
+                    "San hô",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.7,
+                "gia_ve": 22000
+            },
+            {
+                "id": "NTG_DTQ_011",
+                "ten": "Đảo Hòn Tằm",
+                "toa_do": {
+                    "lat": 12.213333,
+                    "lng": 109.242778
+                },
+                "tags": [
+                    "Nghỉ dưỡng",
+                    "Tắm bùn",
+                    "Biển"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.6,
+                "gia_ve": 250000
+            },
+            {
+                "id": "NTG_DTQ_012",
+                "ten": "Hòn Chồng",
+                "toa_do": {
+                    "lat": 12.2725,
+                    "lng": 109.206111
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Ngắm cảnh",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 19.0
+                },
+                "rating": 4.4,
+                "gia_ve": 30000
+            },
+            {
+                "id": "NTG_DTQ_013",
+                "ten": "Bãi Tranh",
+                "toa_do": {
+                    "lat": 12.203611,
+                    "lng": 109.231944
+                },
+                "tags": [
+                    "Biển",
+                    "Thể thao nước",
+                    "Sôi động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.2,
+                "gia_ve": 30000
+            },
+            {
+                "id": "NTG_DTQ_014",
+                "ten": "Đảo Yến (Hòn Nội)",
+                "toa_do": {
+                    "lat": 12.185556,
+                    "lng": 109.351389
+                },
+                "tags": [
+                    "Biển đôi",
+                    "Thiên nhiên",
+                    "Đặc biệt"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 16.0
+                },
+                "rating": 4.8,
+                "gia_ve": 490000
+            },
+            {
+                "id": "NTG_DTQ_015",
+                "ten": "Đảo Khỉ (Hòn Lao)",
+                "toa_do": {
+                    "lat": 12.357778,
+                    "lng": 109.213611
+                },
+                "tags": [
+                    "Động vật",
+                    "Khám phá",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.1,
+                "gia_ve": 120000
+            },
+            {
+                "id": "NTG_DTQ_016",
+                "ten": "Suối Hoa Lan",
+                "toa_do": {
+                    "lat": 12.385278,
+                    "lng": 109.235556
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Sinh thái",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.3,
+                "gia_ve": 170000
+            },
+            {
+                "id": "NTG_DTQ_017",
+                "ten": "Đảo Điệp Sơn",
+                "toa_do": {
+                    "lat": 12.601389,
+                    "lng": 109.203611
+                },
+                "tags": [
+                    "Biển",
+                    "Con đường đi bộ",
+                    "Hoang sơ"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 16.0
+                },
+                "rating": 4.5,
+                "gia_ve": 200000
+            },
+            {
+                "id": "NTG_DTQ_018",
+                "ten": "Đảo Bình Ba",
+                "toa_do": {
+                    "lat": 11.838889,
+                    "lng": 109.223611
+                },
+                "tags": [
+                    "Ẩm thực",
+                    "Biển",
+                    "Hoang sơ"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 30000
+            },
+            {
+                "id": "NTG_DTQ_019",
+                "ten": "Đảo Bình Hưng",
+                "toa_do": {
+                    "lat": 11.785278,
+                    "lng": 109.208611
+                },
+                "tags": [
+                    "Biển",
+                    "Hải sản",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 20000
+            },
+            {
+                "id": "NTG_DTQ_020",
+                "ten": "I-Resort Nha Trang",
+                "toa_do": {
+                    "lat": 12.285556,
+                    "lng": 109.188333
+                },
+                "tags": [
+                    "Sức khỏe",
+                    "Tắm bùn",
+                    "Thư giãn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.6,
+                "gia_ve": 170000
+            },
+            {
+                "id": "NTG_DTQ_021",
+                "ten": "Tắm bùn Tháp Bà",
+                "toa_do": {
+                    "lat": 12.268611,
+                    "lng": 109.183611
+                },
+                "tags": [
+                    "Sức khỏe",
+                    "Lịch sử",
+                    "Thư giãn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.4,
+                "gia_ve": 180000
+            },
+            {
+                "id": "NTG_DTQ_022",
+                "ten": "Thác Yang Bay",
+                "toa_do": {
+                    "lat": 12.185278,
+                    "lng": 108.921389
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Thác",
+                    "Văn hóa"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 150000
+            },
+            {
+                "id": "NTG_DTQ_023",
+                "ten": "Thác Ba Hồ",
+                "toa_do": {
+                    "lat": 12.388611,
+                    "lng": 109.141389
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Trekking",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.3,
+                "gia_ve": 100000
+            },
+            {
+                "id": "NTG_DTQ_024",
+                "ten": "Galina Lake View",
+                "toa_do": {
+                    "lat": 12.198611,
+                    "lng": 109.141389
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Chèo thuyền",
+                    "Chill"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.3,
+                "gia_ve": 50000
+            },
+            {
+                "id": "NTG_DTQ_025",
+                "ten": "Suối Thạch Lâm",
+                "toa_do": {
+                    "lat": 12.128611,
+                    "lng": 109.083611
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Giải trí",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.1,
+                "gia_ve": 30000
+            },
+            {
+                "id": "NTG_DTQ_026",
+                "ten": "Chợ Đầm",
+                "toa_do": {
+                    "lat": 12.254167,
+                    "lng": 109.191389
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Văn hóa",
+                    "Sôi động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_027",
+                "ten": "Bãi biển Trần Phú",
+                "toa_do": {
+                    "lat": 12.238611,
+                    "lng": 109.196111
+                },
+                "tags": [
+                    "Biển",
+                    "Miễn phí",
+                    "Sôi động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_028",
+                "ten": "Bãi Dài Cam Ranh",
+                "toa_do": {
+                    "lat": 12.038611,
+                    "lng": 109.196111
+                },
+                "tags": [
+                    "Biển",
+                    "Hoang sơ",
+                    "Nghỉ dưỡng"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_029",
+                "ten": "Biển Dốc Lết",
+                "toa_do": {
+                    "lat": 12.535556,
+                    "lng": 109.228611
+                },
+                "tags": [
+                    "Biển",
+                    "Cát trắng",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.5,
+                "gia_ve": 50000
+            },
+            {
+                "id": "NTG_DTQ_030",
+                "ten": "Quảng trường 2/4",
+                "toa_do": {
+                    "lat": 12.241389,
+                    "lng": 109.196389
+                },
+                "tags": [
+                    "Sôi động",
+                    "Cộng đồng",
+                    "Miễn phí"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_031",
+                "ten": "Đèo Cù Hin",
+                "toa_do": {
+                    "lat": 12.138611,
+                    "lng": 109.208611
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Chụp ảnh",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_032",
+                "ten": "Chùa Suối Đổ",
+                "toa_do": {
+                    "lat": 12.238611,
+                    "lng": 109.101389
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Núi",
+                    "Thác"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_033",
+                "ten": "Đồng Cừu Suối Tiên",
+                "toa_do": {
+                    "lat": 11.901389,
+                    "lng": 109.121389
+                },
+                "tags": [
+                    "Nông trại",
+                    "Chụp ảnh",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.2,
+                "gia_ve": 40000
+            },
+            {
+                "id": "NTG_DTQ_034",
+                "ten": "Kong Forest",
+                "toa_do": {
+                    "lat": 12.181389,
+                    "lng": 108.988611
+                },
+                "tags": [
+                    "Mạo hiểm",
+                    "Rừng",
+                    "Zipline"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.7,
+                "gia_ve": 500000
+            },
+            {
+                "id": "NTG_DTQ_035",
+                "ten": "Hòn Một",
+                "toa_do": {
+                    "lat": 12.181389,
+                    "lng": 109.273611
+                },
+                "tags": [
+                    "Biển",
+                    "Lặn ngắm san hô",
+                    "Yên tĩnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.3,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_036",
+                "ten": "Ga Nha Trang",
+                "toa_do": {
+                    "lat": 12.250278,
+                    "lng": 109.183611
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Kiến trúc",
+                    "Giao thông"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 5.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_037",
+                "ten": "Bảo tàng Khánh Hòa",
+                "toa_do": {
+                    "lat": 12.250556,
+                    "lng": 109.196389
+                },
+                "tags": [
+                    "Văn hóa",
+                    "Lịch sử",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.0,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_038",
+                "ten": "Skylight Nha Trang",
+                "toa_do": {
+                    "lat": 12.241389,
+                    "lng": 109.196389
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Hiện đại",
+                    "Bar"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 200000
+            },
+            {
+                "id": "NTG_DTQ_039",
+                "ten": "Sailing Club",
+                "toa_do": {
+                    "lat": 12.238611,
+                    "lng": 109.196944
+                },
+                "tags": [
+                    "Giải trí đêm",
+                    "Sang trọng",
+                    "Biển"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.5,
+                "gia_ve": 150000
+            },
+            {
+                "id": "NTG_DTQ_040",
+                "ten": "Mũi Đôi",
+                "toa_do": {
+                    "lat": 12.648611,
+                    "lng": 109.458611
+                },
+                "tags": [
+                    "Cực Đông",
+                    "Chinh phục",
+                    "Khám phá"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.8,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_041",
+                "ten": "Đầm Nha Phu",
+                "toa_do": {
+                    "lat": 12.378611,
+                    "lng": 109.201389
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Biển",
+                    "Hoang sơ"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_042",
+                "ten": "Hang Heo",
+                "toa_do": {
+                    "lat": 12.338611,
+                    "lng": 109.208611
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Chụp ảnh",
+                    "Miễn phí"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_043",
+                "ten": "Cầu Trần Phú",
+                "toa_do": {
+                    "lat": 12.258611,
+                    "lng": 109.196111
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Kiến trúc",
+                    "Giao thông"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_044",
+                "ten": "Bãi Tiên",
+                "toa_do": {
+                    "lat": 12.288611,
+                    "lng": 109.201389
+                },
+                "tags": [
+                    "Biển",
+                    "Chụp ảnh",
+                    "Miễn phí"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_045",
+                "ten": "Đảo Robinson",
+                "toa_do": {
+                    "lat": 12.218611,
+                    "lng": 109.263611
+                },
+                "tags": [
+                    "Giải trí",
+                    "Tiệc bãi biển",
+                    "Sôi động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 100000
+            },
+            {
+                "id": "NTG_DTQ_046",
+                "ten": "Hồ cá Trí Nguyên",
+                "toa_do": {
+                    "lat": 12.213333,
+                    "lng": 109.223611
+                },
+                "tags": [
+                    "Tham quan",
+                    "Động vật biển",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.0,
+                "gia_ve": 170000
+            },
+            {
+                "id": "NTG_DTQ_047",
+                "ten": "Công viên nước Phù Đổng",
+                "toa_do": {
+                    "lat": 12.235556,
+                    "lng": 109.198611
+                },
+                "tags": [
+                    "Giải trí",
+                    "Trẻ em",
+                    "Ngoài trời"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 3.8,
+                "gia_ve": 30000
+            },
+            {
+                "id": "NTG_DTQ_048",
+                "ten": "Tranh thêu XQ",
+                "toa_do": {
+                    "lat": 12.235278,
+                    "lng": 109.196111
+                },
+                "tags": [
+                    "Nghệ thuật",
+                    "Văn hóa",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "NTG_DTQ_049",
+                "ten": "Bãi Sỏi",
+                "toa_do": {
+                    "lat": 12.221389,
+                    "lng": 109.228611
+                },
+                "tags": [
+                    "Biển",
+                    "Chụp ảnh",
+                    "Độc đáo"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.0,
+                "gia_ve": 40000
+            },
+            {
+                "id": "NTG_DTQ_050",
+                "ten": "Hòn Đỏ",
+                "toa_do": {
+                    "lat": 12.275833,
+                    "lng": 109.205278
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Biển",
+                    "Yên tĩnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            }
+        ],
+        "quan_an": [
+            {
+                "id": "NTG_QA_001",
+                "ten_quan": "Nem nướng Đặng Văn Quyên",
+                "dia_chi": "16A Lãn Ông, Xương Huân",
+                "gia_trung_binh": "40.000 - 100.000 VNĐ",
+                "mon_noi_bat": "Nem nướng Ninh Hòa",
+                "dac_diem": "Thương hiệu lâu đời, nước chấm gia truyền đặc sắc."
+            },
+            {
+                "id": "NTG_QA_002",
+                "ten_quan": "Bún cá Năm Beo",
+                "dia_chi": "B2 Chung cư Phan Bội Châu",
+                "gia_trung_binh": "30.000 - 65.000 VNĐ",
+                "mon_noi_bat": "Bún cá sứa",
+                "dac_diem": "Nước dùng thanh ngọt, sứa giòn tự nhiên."
+            },
+            {
+                "id": "NTG_QA_003",
+                "ten_quan": "Bò nướng Lạc Cảnh",
+                "dia_chi": "44 Nguyễn Bỉnh Khiêm",
+                "gia_trung_binh": "150.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Bò nướng lụi",
+                "dac_diem": "Bí quyết tẩm ướp mật ong độc quyền, tự nướng tại bàn."
+            },
+            {
+                "id": "NTG_QA_004",
+                "ten_quan": "Cơm gà Trâm Anh",
+                "dia_chi": "10 Bà Triệu, Phương Sài",
+                "gia_trung_binh": "40.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Cơm gà xé",
+                "dac_diem": "Cơm nấu nước luộc gà béo ngậy, sốt bơ trứng đặc trưng."
+            },
+            {
+                "id": "NTG_QA_005",
+                "ten_quan": "Bánh căn 51 Tô Hiến Thành",
+                "dia_chi": "51 Tô Hiến Thành, Tân Lập",
+                "gia_trung_binh": "40.000 - 150.000 VNĐ",
+                "mon_noi_bat": "Bánh căn mực",
+                "dac_diem": "Nhân hải sản tươi, vỏ bánh giòn tan."
+            },
+            {
+                "id": "NTG_QA_006",
+                "ten_quan": "Hải sản Thanh Sương",
+                "dia_chi": "21 Trần Phú, Vĩnh Nguyên",
+                "gia_trung_binh": "100.000 - 500.000 VNĐ",
+                "mon_noi_bat": "Hải sản tươi sống",
+                "dac_diem": "Quán hải sản bình dân đông khách bậc nhất khu Cầu Đá."
+            },
+            {
+                "id": "NTG_QA_007",
+                "ten_quan": "Bún sứa Cô Ba",
+                "dia_chi": "123 Yersin, Phước Hòa",
+                "gia_trung_binh": "25.000 - 45.000 VNĐ",
+                "mon_noi_bat": "Bún sứa, chả cá",
+                "dac_diem": "Hương vị dân dã, nước dùng ngọt tự nhiên từ cá dằm."
+            },
+            {
+                "id": "NTG_QA_008",
+                "ten_quan": "Bánh xèo 85 Tô Hiến Thành",
+                "dia_chi": "81 Tô Hiến Thành, Tân Lập",
+                "gia_trung_binh": "35.000 - 60.000 VNĐ",
+                "mon_noi_bat": "Bánh xèo mực",
+                "dac_diem": "Nhân mực sữa tươi rói, ăn kèm nước mắm chua ngọt."
+            },
+            {
+                "id": "NTG_QA_009",
+                "ten_quan": "Nha Trang Xưa",
+                "dia_chi": "30 Thái Thông, Vĩnh Thái",
+                "gia_trung_binh": "200.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Buffet món quê",
+                "dac_diem": "Không gian nhà cổ mái lá, phục vụ các món miền quê."
+            },
+            {
+                "id": "NTG_QA_010",
+                "ten_quan": "Làng Ngon",
+                "dia_chi": "Hẻm 83 Nguyễn Thị Minh Khai",
+                "gia_trung_binh": "100.000 - 200.000 VNĐ",
+                "mon_noi_bat": "Gỏi cá mai",
+                "dac_diem": "Phong cách hiện đại pha cổ điển, trang trí tinh tế."
+            },
+            {
+                "id": "NTG_QA_011",
+                "ten_quan": "Quán ốc Xuân Anh",
+                "dia_chi": "9C Tháp Bà, Vĩnh Thọ",
+                "gia_trung_binh": "50.000 - 150.000 VNĐ",
+                "mon_noi_bat": "Ốc chảo các loại",
+                "dac_diem": "Điểm tụ tập nổi tiếng, nước chấm đỏ cay nồng."
+            },
+            {
+                "id": "NTG_QA_012",
+                "ten_quan": "Cơm tấm Cây Khói",
+                "dia_chi": "B3 Chung cư Phan Bội Châu",
+                "gia_trung_binh": "30.000 - 55.000 VNĐ",
+                "mon_noi_bat": "Cơm tấm sườn",
+                "dac_diem": "Sườn nướng mật ong thơm phức, hạt cơm tơi xốp."
+            },
+            {
+                "id": "NTG_QA_013",
+                "ten_quan": "Phở Hồng",
+                "dia_chi": "40 Lê Thánh Tôn, Lộc Thọ",
+                "gia_trung_binh": "40.000 - 65.000 VNĐ",
+                "mon_noi_bat": "Phở bò tái nạm",
+                "dac_diem": "Đại diện tiêu biểu cho phở Bắc tại Nha Trang."
+            },
+            {
+                "id": "NTG_QA_014",
+                "ten_quan": "Bánh canh Bà Thừa",
+                "dia_chi": "55 Yersin, Phước Hòa",
+                "gia_trung_binh": "20.000 - 45.000 VNĐ",
+                "mon_noi_bat": "Bánh canh chả cá",
+                "dac_diem": "Sợi bánh nhỏ đặc trưng, chả cá tự làm dai mịn."
+            },
+            {
+                "id": "NTG_QA_015",
+                "ten_quan": "Hải sản Bờ Kè",
+                "dia_chi": "52 Cù Huân, Vĩnh Thọ",
+                "gia_trung_binh": "150.000 - 450.000 VNĐ",
+                "mon_noi_bat": "Tôm hùm, cua",
+                "dac_diem": "Thưởng thức hải sản sát mép biển, view cầu Trần Phú."
+            },
+            {
+                "id": "NTG_QA_016",
+                "ten_quan": "Mì gia Hòa Hòa",
+                "dia_chi": "02 Hai Bà Trưng, Xương Huân",
+                "gia_trung_binh": "45.000 - 85.000 VNĐ",
+                "mon_noi_bat": "Mì hoành thánh",
+                "dac_diem": "Tiệm mì người Hoa lâu đời, mì trứng tự kéo."
+            },
+            {
+                "id": "NTG_QA_017",
+                "ten_quan": "Bún riêu Mã Vòng",
+                "dia_chi": "Ngã 6 Mã Vòng",
+                "gia_trung_binh": "25.000 - 45.000 VNĐ",
+                "mon_noi_bat": "Bún riêu cua",
+                "dac_diem": "Quán xe đẩy nổi tiếng bán khuya, riêu cua béo ngậy."
+            },
+            {
+                "id": "NTG_QA_018",
+                "ten_quan": "Bún bò Hương Giang",
+                "dia_chi": "15B Hoàng Hoa Thám",
+                "gia_trung_binh": "45.000 - 75.000 VNĐ",
+                "mon_noi_bat": "Bún bò giò heo",
+                "dac_diem": "Hương vị chuẩn Huế, nước dùng đậm mùi mắm ruốc."
+            },
+            {
+                "id": "NTG_QA_019",
+                "ten_quan": "Vịt Hàn Thuyên",
+                "dia_chi": "26 Hàn Thuyên, Xương Huân",
+                "gia_trung_binh": "60.000 - 160.000 VNĐ",
+                "mon_noi_bat": "Vịt luộc, gỏi vịt",
+                "dac_diem": "Chuyên các món vịt cỏ chắc thịt, mắm gừng đặc trưng."
+            },
+            {
+                "id": "NTG_QA_020",
+                "ten_quan": "Bánh mì Nguyên Hương",
+                "dia_chi": "Số 1 Tô Hiến Thành",
+                "gia_trung_binh": "15.000 - 30.000 VNĐ",
+                "mon_noi_bat": "Bánh mì chả cá",
+                "dac_diem": "Món ăn sáng phổ biến, chả cá chiên nóng hổi."
+            },
+            {
+                "id": "NTG_QA_021",
+                "ten_quan": "Gỏi cá Hà Ra",
+                "dia_chi": "166 đường 2 tháng 4",
+                "gia_trung_binh": "60.000 - 120.000 VNĐ",
+                "mon_noi_bat": "Gỏi cá mai",
+                "dac_diem": "Kỹ thuật lọc xương tinh tế, sốt gan cá béo ngậy."
+            },
+            {
+                "id": "NTG_QA_022",
+                "ten_quan": "Xóm Mới Garden",
+                "dia_chi": "144 Võ Trứ, Tân Tiến",
+                "gia_trung_binh": "100.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Lẩu hải sản",
+                "dac_diem": "Không gian sân vườn xanh mát, menu đa dạng."
+            },
+            {
+                "id": "NTG_QA_023",
+                "ten_quan": "Bún cá Mịn",
+                "dia_chi": "170 Bạch Đằng, Tân Lập",
+                "gia_trung_binh": "35.000 - 60.000 VNĐ",
+                "mon_noi_bat": "Bún cá sứa",
+                "dac_diem": "Hương vị Ninh Hòa đặc trưng, chả cá chiên vàng."
+            },
+            {
+                "id": "NTG_QA_024",
+                "ten_quan": "Bánh đập Ngô Đức Kế",
+                "dia_chi": "08 Ngô Đức Kế, Tân Lập",
+                "gia_trung_binh": "25.000 - 45.000 VNĐ",
+                "mon_noi_bat": "Bánh đập lòng heo",
+                "dac_diem": "Sự kết hợp bánh ướt và bánh tráng giòn."
+            },
+            {
+                "id": "NTG_QA_025",
+                "ten_quan": "Tiệm Cơm Bà Tôi",
+                "dia_chi": "114 Hoàng Hoa Thám",
+                "gia_trung_binh": "60.000 - 150.000 VNĐ",
+                "mon_noi_bat": "Cơm niêu",
+                "dac_diem": "Mâm cơm gia đình ấm cúng, các món kho tộ."
+            },
+            {
+                "id": "NTG_QA_026",
+                "ten_quan": "Ốc Long Vũ",
+                "dia_chi": "30 Tháp Bà, Vĩnh Thọ",
+                "gia_trung_binh": "50.000 - 130.000 VNĐ",
+                "mon_noi_bat": "Ốc nướng mỡ hành",
+                "dac_diem": "Quán bình dân nổi tiếng với nước chấm đỏ độc đáo."
+            },
+            {
+                "id": "NTG_QA_027",
+                "ten_quan": "Bò né Mỹ Cảnh",
+                "dia_chi": "116 Hoàng Văn Thụ",
+                "gia_trung_binh": "55.000 - 95.000 VNĐ",
+                "mon_noi_bat": "Bò né đặc biệt",
+                "dac_diem": "Bò bít tết chảo gang, pate và trứng lòng đào."
+            },
+            {
+                "id": "NTG_QA_028",
+                "ten_quan": "Bánh canh Cô Hà",
+                "dia_chi": "14 Phan Chu Trinh",
+                "gia_trung_binh": "30.000 - 55.000 VNĐ",
+                "mon_noi_bat": "Bánh canh lòng cá",
+                "dac_diem": "Hương vị đậm đà với lòng cá thu và chả viên."
+            },
+            {
+                "id": "NTG_QA_029",
+                "ten_quan": "Buffet Poseidon",
+                "dia_chi": "Tầng 4 Gold Coast",
+                "gia_trung_binh": "380.000 - 480.000 VNĐ",
+                "mon_noi_bat": "Buffet hải sản",
+                "dac_diem": "Mô hình buffet hiện đại, đa dạng tôm ghẹ tươi."
+            },
+            {
+                "id": "NTG_QA_030",
+                "ten_quan": "Chè Song Nam",
+                "dia_chi": "Góc Quang Trung",
+                "gia_trung_binh": "15.000 - 35.000 VNĐ",
+                "mon_noi_bat": "Chè sương sa",
+                "dac_diem": "Món tráng miệng thanh mát làm từ rong biển."
+            }
+        ]
+    }
+}

@@ -1,0 +1,1198 @@
+{
+    "Đà Nẵng": {
+        "diem_tham_quan": [
+            {
+                "id": "DNG_DTQ_001",
+                "ten": "Sun World Bà Nà Hills",
+                "toa_do": {
+                    "lat": 15.995136,
+                    "lng": 107.996139
+                },
+                "tags": [
+                    "Giải trí",
+                    "Kiến trúc",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.7,
+                "gia_ve": 1000000
+            },
+            {
+                "id": "DNG_DTQ_002",
+                "ten": "Cầu Vàng (Golden Bridge)",
+                "toa_do": {
+                    "lat": 15.996712,
+                    "lng": 107.996514
+                },
+                "tags": [
+                    "Biểu tượng",
+                    "Chụp ảnh",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 19.0
+                },
+                "rating": 4.8,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_003",
+                "ten": "Bãi biển Mỹ Khê",
+                "toa_do": {
+                    "lat": 16.060248,
+                    "lng": 108.246412
+                },
+                "tags": [
+                    "Biển",
+                    "Thiên nhiên",
+                    "Thư giãn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_004",
+                "ten": "Chùa Linh Ứng Bãi Bụt",
+                "toa_do": {
+                    "lat": 16.100145,
+                    "lng": 108.277561
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Kiến trúc",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 21.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_005",
+                "ten": "Danh thắng Ngũ Hành Sơn",
+                "toa_do": {
+                    "lat": 15.9755,
+                    "lng": 108.2609
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Lịch sử",
+                    "Tâm linh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.5,
+                "gia_ve": 40000
+            },
+            {
+                "id": "DNG_DTQ_006",
+                "ten": "Cầu Rồng",
+                "toa_do": {
+                    "lat": 16.061124,
+                    "lng": 108.227231
+                },
+                "tags": [
+                    "Biểu tượng",
+                    "Kiến trúc",
+                    "Giải trí"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_007",
+                "ten": "Bảo tàng Điêu khắc Chăm",
+                "toa_do": {
+                    "lat": 16.061214,
+                    "lng": 108.224152
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa",
+                    "Nghệ thuật"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 60000
+            },
+            {
+                "id": "DNG_DTQ_008",
+                "ten": "Công viên Châu Á (Asia Park)",
+                "toa_do": {
+                    "lat": 16.038412,
+                    "lng": 108.226514
+                },
+                "tags": [
+                    "Giải trí",
+                    "Hiện đại",
+                    "Gia đình"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 15.0,
+                    "dong_cua": 22.0
+                },
+                "rating": 4.3,
+                "gia_ve": 250000
+            },
+            {
+                "id": "DNG_DTQ_009",
+                "ten": "Núi Thần Tài (Hot Spring Park)",
+                "toa_do": {
+                    "lat": 15.981245,
+                    "lng": 107.971241
+                },
+                "tags": [
+                    "Nghỉ dưỡng",
+                    "Thiên nhiên",
+                    "Sức khỏe"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.5,
+                "gia_ve": 450000
+            },
+            {
+                "id": "DNG_DTQ_010",
+                "ten": "Cầu Sông Hàn",
+                "toa_do": {
+                    "lat": 16.072214,
+                    "lng": 108.227541
+                },
+                "tags": [
+                    "Biểu tượng",
+                    "Kỹ thuật",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_011",
+                "ten": "Bán đảo Sơn Trà",
+                "toa_do": {
+                    "lat": 16.121245,
+                    "lng": 108.271241
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Khám phá",
+                    "Sinh thái"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_012",
+                "ten": "Đỉnh Bàn Cờ",
+                "toa_do": {
+                    "lat": 16.11862,
+                    "lng": 108.27304
+                },
+                "tags": [
+                    "Ngắm cảnh",
+                    "Thiên nhiên",
+                    "Trekking"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 19.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_013",
+                "ten": "Bảo tàng Tranh 3D Art",
+                "toa_do": {
+                    "lat": 16.091214,
+                    "lng": 108.241214
+                },
+                "tags": [
+                    "Nghệ thuật",
+                    "Trong nhà",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.5,
+                "gia_ve": 140000
+            },
+            {
+                "id": "DNG_DTQ_014",
+                "ten": "Nhà thờ Chính tòa (Con Gà)",
+                "toa_do": {
+                    "lat": 16.066741,
+                    "lng": 108.223412
+                },
+                "tags": [
+                    "Kiến trúc",
+                    "Tôn giáo",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.3,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_015",
+                "ten": "Chợ Hàn",
+                "toa_do": {
+                    "lat": 16.068214,
+                    "lng": 108.224152
+                },
+                "tags": [
+                    "Mua sắm",
+                    "Văn hóa",
+                    "Ẩm thực"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 6.0,
+                    "dong_cua": 19.0
+                },
+                "rating": 4.1,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_016",
+                "ten": "Công viên APEC",
+                "toa_do": {
+                    "lat": 16.060145,
+                    "lng": 108.225412
+                },
+                "tags": [
+                    "Nghệ thuật",
+                    "Chụp ảnh",
+                    "Hiện đại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_017",
+                "ten": "Mikazuki Water Park 365",
+                "toa_do": {
+                    "lat": 16.112145,
+                    "lng": 108.161241
+                },
+                "tags": [
+                    "Giải trí",
+                    "Trong nhà",
+                    "Nhật Bản"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 20.0
+                },
+                "rating": 4.6,
+                "gia_ve": 350000
+            },
+            {
+                "id": "DNG_DTQ_018",
+                "ten": "Đèo Hải Vân",
+                "toa_do": {
+                    "lat": 16.186712,
+                    "lng": 108.131241
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Khám phá",
+                    "Ngắm cảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.8,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_019",
+                "ten": "Động Âm Phủ",
+                "toa_do": {
+                    "lat": 15.975412,
+                    "lng": 108.261241
+                },
+                "tags": [
+                    "Khám phá",
+                    "Tâm linh",
+                    "Hang động"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.2,
+                "gia_ve": 20000
+            },
+            {
+                "id": "DNG_DTQ_020",
+                "ten": "Chùa Linh Ứng Non Nước",
+                "toa_do": {
+                    "lat": 15.976512,
+                    "lng": 108.264124
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Lịch sử",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_021",
+                "ten": "Bảo tàng Đà Nẵng",
+                "toa_do": {
+                    "lat": 16.075412,
+                    "lng": 108.223412
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Văn hóa",
+                    "Trong nhà"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.3,
+                "gia_ve": 20000
+            },
+            {
+                "id": "DNG_DTQ_022",
+                "ten": "Bảo tàng Mỹ thuật Đà Nẵng",
+                "toa_do": {
+                    "lat": 16.071241,
+                    "lng": 108.221241
+                },
+                "tags": [
+                    "Nghệ thuật",
+                    "Trong nhà",
+                    "Sáng tạo"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.4,
+                "gia_ve": 20000
+            },
+            {
+                "id": "DNG_DTQ_023",
+                "ten": "Cầu Thuận Phước",
+                "toa_do": {
+                    "lat": 16.095412,
+                    "lng": 108.221241
+                },
+                "tags": [
+                    "Kiến trúc",
+                    "Ngắm cảnh",
+                    "Kỹ thuật"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_024",
+                "ten": "Ghềnh Bàng",
+                "toa_do": {
+                    "lat": 16.126514,
+                    "lng": 108.312412
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Hoang sơ",
+                    "Lặn biển"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_025",
+                "ten": "Rạn Nam Ô",
+                "toa_do": {
+                    "lat": 16.115412,
+                    "lng": 108.131241
+                },
+                "tags": [
+                    "Biển",
+                    "Rêu xanh",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.3,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_026",
+                "ten": "Tượng Cá Chép Hóa Rồng",
+                "toa_do": {
+                    "lat": 16.061214,
+                    "lng": 108.228541
+                },
+                "tags": [
+                    "Biểu tượng",
+                    "Chụp ảnh",
+                    "Sông Hàn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_027",
+                "ten": "Cầu Tình Yêu",
+                "toa_do": {
+                    "lat": 16.061412,
+                    "lng": 108.228741
+                },
+                "tags": [
+                    "Lãng mạn",
+                    "Chụp ảnh",
+                    "Giải trí"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_028",
+                "ten": "Nhà trưng bày Hoàng Sa",
+                "toa_do": {
+                    "lat": 16.096741,
+                    "lng": 108.248541
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Chính trị",
+                    "Văn hóa"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_029",
+                "ten": "Chùa Quan Thế Âm",
+                "toa_do": {
+                    "lat": 15.971241,
+                    "lng": 108.251241
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Lễ hội",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_030",
+                "ten": "Làng đá mỹ nghệ Non Nước",
+                "toa_do": {
+                    "lat": 15.971412,
+                    "lng": 108.261412
+                },
+                "tags": [
+                    "Thủ công",
+                    "Lịch sử",
+                    "Mua sắm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_031",
+                "ten": "Suối Lương (Hai Van Park)",
+                "toa_do": {
+                    "lat": 16.161241,
+                    "lng": 108.131241
+                },
+                "tags": [
+                    "Sinh thái",
+                    "Thiên nhiên",
+                    "Cắm trại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.1,
+                "gia_ve": 50000
+            },
+            {
+                "id": "DNG_DTQ_032",
+                "ten": "Khu du lịch Hòa Phú Thành",
+                "toa_do": {
+                    "lat": 15.961241,
+                    "lng": 107.971241
+                },
+                "tags": [
+                    "Mạo hiểm",
+                    "Trượt thác",
+                    "Thiên nhiên"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.4,
+                "gia_ve": 100000
+            },
+            {
+                "id": "DNG_DTQ_033",
+                "ten": "Bảo tàng Đồng Đình",
+                "toa_do": {
+                    "lat": 16.101241,
+                    "lng": 108.261241
+                },
+                "tags": [
+                    "Văn hóa",
+                    "Nghệ thuật",
+                    "Thiên nhiên"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.6,
+                "gia_ve": 20000
+            },
+            {
+                "id": "DNG_DTQ_034",
+                "ten": "Hồ Đồng Xanh - Đồng Nghệ",
+                "toa_do": {
+                    "lat": 15.951241,
+                    "lng": 108.111241
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Yên tĩnh",
+                    "Chèo thuyền"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.3,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_035",
+                "ten": "Bãi biển Non Nước",
+                "toa_do": {
+                    "lat": 15.971241,
+                    "lng": 108.265412
+                },
+                "tags": [
+                    "Biển",
+                    "Nghỉ dưỡng",
+                    "Thư giãn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_036",
+                "ten": "Hải đăng Sơn Trà",
+                "toa_do": {
+                    "lat": 16.136741,
+                    "lng": 108.241241
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Ngắm cảnh",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.4,
+                "gia_ve": 20000
+            },
+            {
+                "id": "DNG_DTQ_037",
+                "ten": "Cung Văn hóa Thiếu nhi",
+                "toa_do": {
+                    "lat": 16.035412,
+                    "lng": 108.221241
+                },
+                "tags": [
+                    "Kiến trúc",
+                    "Nghệ thuật",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_038",
+                "ten": "Upside Down World Danang",
+                "toa_do": {
+                    "lat": 16.046741,
+                    "lng": 108.243412
+                },
+                "tags": [
+                    "Giải trí",
+                    "Sáng tạo",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 9.0,
+                    "dong_cua": 18.0
+                },
+                "rating": 4.3,
+                "gia_ve": 130000
+            },
+            {
+                "id": "DNG_DTQ_039",
+                "ten": "Chợ Cồn",
+                "toa_do": {
+                    "lat": 16.066741,
+                    "lng": 108.216741
+                },
+                "tags": [
+                    "Ẩm thực",
+                    "Văn hóa",
+                    "Mua sắm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 19.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_040",
+                "ten": "Cầu Trần Thị Lý",
+                "toa_do": {
+                    "lat": 16.051241,
+                    "lng": 108.228741
+                },
+                "tags": [
+                    "Kiến trúc",
+                    "Ánh sáng",
+                    "Chụp ảnh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.7,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_041",
+                "ten": "Bãi biển Xuân Thiều",
+                "toa_do": {
+                    "lat": 16.111241,
+                    "lng": 108.151241
+                },
+                "tags": [
+                    "Biển",
+                    "Yên tĩnh",
+                    "Bình minh"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.2,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_042",
+                "ten": "Làng cổ Phong Nam",
+                "toa_do": {
+                    "lat": 15.961241,
+                    "lng": 108.181241
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Nông thôn",
+                    "Kiến trúc"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.1,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_043",
+                "ten": "Khu sinh thái Suối Mơ",
+                "toa_do": {
+                    "lat": 15.991241,
+                    "lng": 108.011241
+                },
+                "tags": [
+                    "Thiên nhiên",
+                    "Tắm suối",
+                    "Thư giãn"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.0,
+                "gia_ve": 40000
+            },
+            {
+                "id": "DNG_DTQ_044",
+                "ten": "Giếng Trời",
+                "toa_do": {
+                    "lat": 15.971241,
+                    "lng": 107.951241
+                },
+                "tags": [
+                    "Hoang sơ",
+                    "Trekking",
+                    "Thiên nhiên"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_045",
+                "ten": "Bãi Bụt",
+                "toa_do": {
+                    "lat": 16.101241,
+                    "lng": 108.271241
+                },
+                "tags": [
+                    "Biển",
+                    "Dã ngoại",
+                    "Thiên nhiên"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_046",
+                "ten": "Công viên Biển Đông",
+                "toa_do": {
+                    "lat": 16.071241,
+                    "lng": 108.246741
+                },
+                "tags": [
+                    "Ngoài trời",
+                    "Sự kiện",
+                    "Chim bồ câu"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 0.0,
+                    "dong_cua": 24.0
+                },
+                "rating": 4.6,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_047",
+                "ten": "Sky36",
+                "toa_do": {
+                    "lat": 16.076741,
+                    "lng": 108.224121
+                },
+                "tags": [
+                    "Giải trí đêm",
+                    "Ngắm cảnh",
+                    "Hiện đại"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 18.0,
+                    "dong_cua": 2.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_048",
+                "ten": "Hải đăng Tiên Sa",
+                "toa_do": {
+                    "lat": 16.136712,
+                    "lng": 108.241245
+                },
+                "tags": [
+                    "Lịch sử",
+                    "Kiến trúc Pháp",
+                    "Biển"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 8.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.3,
+                "gia_ve": 20000
+            },
+            {
+                "id": "DNG_DTQ_049",
+                "ten": "Helio Center",
+                "toa_do": {
+                    "lat": 16.035412,
+                    "lng": 108.224512
+                },
+                "tags": [
+                    "Giải trí",
+                    "Ẩm thực",
+                    "Chợ đêm"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 17.0,
+                    "dong_cua": 0.0
+                },
+                "rating": 4.4,
+                "gia_ve": 0
+            },
+            {
+                "id": "DNG_DTQ_050",
+                "ten": "Chùa Tam Thai",
+                "toa_do": {
+                    "lat": 15.975412,
+                    "lng": 108.261245
+                },
+                "tags": [
+                    "Tâm linh",
+                    "Cổ kính",
+                    "Lịch sử"
+                ],
+                "gio_hoat_dong": {
+                    "mo_cua": 7.0,
+                    "dong_cua": 17.0
+                },
+                "rating": 4.5,
+                "gia_ve": 0
+            }
+        ],
+        "quan_an": [
+            {
+                "id": "DNG_QA_001",
+                "ten_quan": "Bún mắm Vân",
+                "dia_chi": "K23/14 Trần Kế Xương, Hải Châu",
+                "gia_trung_binh": "25.000 - 45.000 VNĐ",
+                "mon_noi_bat": "Bún mắm thịt quay",
+                "dac_diem": "Mắm nêm độc quyền, thơm nức, phục vụ kèm kẹo cao su miễn phí."
+            },
+            {
+                "id": "DNG_QA_002",
+                "ten_quan": "Mì Quảng Bà Mua",
+                "dia_chi": "95A Nguyễn Tri Phương, Thanh Khê",
+                "gia_trung_binh": "35.000 - 125.000 VNĐ",
+                "mon_noi_bat": "Mì Quảng ếch",
+                "dac_diem": "Thương hiệu 40 năm, không gian thoáng đãng, nước dùng đậm đà."
+            },
+            {
+                "id": "DNG_QA_003",
+                "ten_quan": "Bánh xèo Bà Dưỡng",
+                "dia_chi": "K280/23 Hoàng Diệu, Hải Châu",
+                "gia_trung_binh": "50.000 - 150.000 VNĐ",
+                "mon_noi_bat": "Bánh xèo, nem lụi",
+                "dac_diem": "Nước tương gan heo béo bùi đặc trưng, vỏ bánh giòn tan."
+            },
+            {
+                "id": "DNG_QA_004",
+                "ten_quan": "Hải sản Năm Đảnh",
+                "dia_chi": "139/59/38 Trần Quang Khải, Sơn Trà",
+                "gia_trung_binh": "60.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Ghẹ hấp, hàu nướng",
+                "dac_diem": "Quán bình dân nổi tiếng nhất khu Sơn Trà, hải sản tươi bắt tại hồ."
+            },
+            {
+                "id": "DNG_QA_005",
+                "ten_quan": "Bún chả cá Hờn",
+                "dia_chi": "113/3 Nguyễn Chí Thanh, Hải Châu",
+                "gia_trung_binh": "30.000 - 55.000 VNĐ",
+                "mon_noi_bat": "Bún chả cá thu",
+                "dac_diem": "Chả cá tự làm dai ngon, nước dùng thanh vị dứa và cà chua."
+            },
+            {
+                "id": "DNG_QA_006",
+                "ten_quan": "Ẩm thực Trần",
+                "dia_chi": "4 Lê Duẩn, Hải Châu",
+                "gia_trung_binh": "100.000 - 300.000 VNĐ",
+                "mon_noi_bat": "Bánh tráng thịt heo",
+                "dac_diem": "Kỹ thuật thái thịt heo \"hai đầu da\" độc đáo, mắm nêm đậm vị."
+            },
+            {
+                "id": "DNG_QA_007",
+                "ten_quan": "Bún bò Bà Thương",
+                "dia_chi": "23 Trần Quốc Toản, Hải Châu",
+                "gia_trung_binh": "40.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Bún bò tái nạm",
+                "dac_diem": "Quán truyền thống từ năm 1980, nước lèo trong vắt, ít váng mỡ."
+            },
+            {
+                "id": "DNG_QA_008",
+                "ten_quan": "Bếp Cuốn Đà Nẵng",
+                "dia_chi": "54 Nguyễn Van Thoại, Ngũ Hành Sơn",
+                "gia_trung_binh": "85.000 - 250.000 VNĐ",
+                "mon_noi_bat": "Gỏi cuốn ngũ sắc",
+                "dac_diem": "Thiết kế mang đậm phong cách làng quê Việt, thực đơn phong phú."
+            },
+            {
+                "id": "DNG_QA_009",
+                "ten_quan": "Hải sản Bà Thôi",
+                "dia_chi": "96 Lê Đình Dương, Hải Châu",
+                "gia_trung_binh": "150.000 - 550.000 VNĐ",
+                "mon_noi_bat": "Cua gạch, tôm sú",
+                "dac_diem": "Một trong những nhà hàng hải sản lâu đời và uy tín nhất."
+            },
+            {
+                "id": "DNG_QA_010",
+                "ten_quan": "Cơm Niêu Nhà Đỏ",
+                "dia_chi": "176 Nguyễn Tri Phương, Thanh Khê",
+                "gia_trung_binh": "100.000 - 350.000 VNĐ",
+                "mon_noi_bat": "Cơm niêu, cá bống",
+                "dac_diem": "Kỹ thuật đập niêu độc đáo, không gian ấm cúng cho gia đình."
+            },
+            {
+                "id": "DNG_QA_011",
+                "ten_quan": "Mì Quảng 1A",
+                "dia_chi": "1A Hải Phòng, Hải Châu",
+                "gia_trung_binh": "30.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Mì Quảng bò",
+                "dac_diem": "Sử dụng bánh phồng tôm thay bánh tráng, Michelin Selected 2024."
+            },
+            {
+                "id": "DNG_QA_012",
+                "ten_quan": "Bánh tráng thịt heo Mậu",
+                "dia_chi": "35 Đỗ Thúc Tịnh, Cẩm Lệ",
+                "gia_trung_binh": "80.000 - 180.000 VNĐ",
+                "mon_noi_bat": "Thịt heo luộc",
+                "dac_diem": "Chuyên biệt về món cuốn với rau sống đa dạng, mắm nêm vị gốc."
+            },
+            {
+                "id": "DNG_QA_013",
+                "ten_quan": "Gỏi cá Nam Ô Cô Hồng",
+                "dia_chi": "118 Huỳnh Thúc Kháng, Hải Châu",
+                "gia_trung_binh": "50.000 - 150.000 VNĐ",
+                "mon_noi_bat": "Gỏi cá trích khô",
+                "dac_diem": "Cá tươi rói, nước dùng pha từ mắm Nam Ô truyền thống."
+            },
+            {
+                "id": "DNG_QA_014",
+                "ten_quan": "Bún chả cá 109",
+                "dia_chi": "109 Nguyễn Chí Thanh, Hải Châu",
+                "gia_trung_binh": "35.000 - 65.000 VNĐ",
+                "mon_noi_bat": "Bún chả cá đặc biệt",
+                "dac_diem": "Hương vị chuẩn cổ truyền, quán đạt chứng nhận Michelin."
+            },
+            {
+                "id": "DNG_QA_015",
+                "ten_quan": "Bê thui Cầu Mống Rô",
+                "dia_chi": "8 Bắc Sơn, Cẩm Lệ",
+                "gia_trung_binh": "150.000 - 400.000 VNĐ",
+                "mon_noi_bat": "Bê thui tái chanh",
+                "dac_diem": "Thịt bê nướng bằng than củi, da vàng giòn nhưng thịt vẫn hồng."
+            },
+            {
+                "id": "DNG_QA_016",
+                "ten_quan": "Bánh bèo Bà Bé",
+                "dia_chi": "100 Hoàng Văn Thụ, Hải Châu",
+                "gia_trung_binh": "20.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bánh bèo, nậm, lọc",
+                "dac_diem": "Chén bánh nhỏ, nhân tôm cháy thơm phức, nước mắm cay nhẹ."
+            },
+            {
+                "id": "DNG_QA_017",
+                "ten_quan": "Hải sản Mộc Quán",
+                "dia_chi": "26 Tô Hiến Thành, Sơn Trà",
+                "gia_trung_binh": "100.000 - 450.000 VNĐ",
+                "mon_noi_bat": "Hải sản nướng BBQ",
+                "dac_diem": "Kiến trúc nhà tre thân thiện, món ăn trình bày bắt mắt."
+            },
+            {
+                "id": "DNG_QA_018",
+                "ten_quan": "Bún riêu cua 8",
+                "dia_chi": "10/15 Yên Bái, Hải Châu",
+                "gia_trung_binh": "25.000 - 45.000 VNĐ",
+                "mon_noi_bat": "Bún riêu chả",
+                "dac_diem": "Nước dùng vị chua thanh của cà chua, riêu cua đồng nguyên chất."
+            },
+            {
+                "id": "DNG_QA_019",
+                "ten_quan": "Cơm gà A Hải",
+                "dia_chi": "94 Phan Châu Trinh, Hải Châu",
+                "gia_trung_binh": "45.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Cơm gà quay",
+                "dac_diem": "Lớp da gà giòn tan, cơm thơm mùi nghệ và nước dùng gà."
+            },
+            {
+                "id": "DNG_QA_020",
+                "ten_quan": "Ốc hút Cây Bàng",
+                "dia_chi": "59 Ông Ích Đường, Cẩm Lệ",
+                "gia_trung_binh": "20.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Ốc đinh xào sả ớt",
+                "dac_diem": "Vị cay xè đặc trưng, ăn kèm đu đủ chua và bánh tráng."
+            },
+            {
+                "id": "DNG_QA_021",
+                "ten_quan": "Madame Lân",
+                "dia_chi": "04 Bạch Đằng, Hải Châu",
+                "gia_trung_binh": "150.000 - 500.000 VNĐ",
+                "mon_noi_bat": "Bún chả Hà Nội",
+                "dac_diem": "Nhà hàng có kiến trúc cổ kính ven sông Hàn, lọt top Michelin."
+            },
+            {
+                "id": "DNG_QA_022",
+                "ten_quan": "Cao lầu Hoài Phố",
+                "dia_chi": "255 Nguyễn Chí Thanh, Hải Châu",
+                "gia_trung_binh": "35.000 - 60.000 VNĐ",
+                "mon_noi_bat": "Cao lầu xá xíu",
+                "dac_diem": "Sợi cao lầu dai, thịt xá xíu đậm đà, chuẩn vị Hội An."
+            },
+            {
+                "id": "DNG_QA_023",
+                "ten_quan": "Bún bò Huế O Ngọc",
+                "dia_chi": "48/2 Đường 2/9, Hải Châu",
+                "gia_trung_binh": "40.000 - 75.000 VNĐ",
+                "mon_noi_bat": "Bún bò nạm chả",
+                "dac_diem": "Nước lèo nấu theo kiểu Huế nhưng gia giảm hợp vị người Đà Nẵng."
+            },
+            {
+                "id": "DNG_QA_024",
+                "ten_quan": "Zé Food",
+                "dia_chi": "112/71 Trần Cao Vân, Thanh Khê",
+                "gia_trung_binh": "30.000 - 120.000 VNĐ",
+                "mon_noi_bat": "Tokbokki, Kimbap",
+                "dac_diem": "Điểm hẹn ưa thích của giới trẻ với các món ăn vặt hiện đại."
+            },
+            {
+                "id": "DNG_QA_025",
+                "ten_quan": "Chè Liên",
+                "dia_chi": "189 Hoàng Diệu, Hải Châu",
+                "gia_trung_binh": "20.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Chè Thái sầu riêng",
+                "dac_diem": "Món tráng miệng nổi tiếng nhất Đà Nẵng, vị sầu riêng đậm đặc."
+            },
+            {
+                "id": "DNG_QA_026",
+                "ten_quan": "Nem lụi Bà Dưỡng",
+                "dia_chi": "K280/23 Hoàng Diệu, Hải Châu",
+                "gia_trung_binh": "10.000 - 80.000 VNĐ",
+                "mon_noi_bat": "Nem lụi nướng",
+                "dac_diem": "Nem nướng thơm mùi sả, ăn kèm rau sống và mắm đậu phụng."
+            },
+            {
+                "id": "DNG_QA_027",
+                "ten_quan": "Nhà hàng Si Dining",
+                "dia_chi": "01 Giang Châu 2, Ngũ Hành Sơn",
+                "gia_trung_binh": "300.000 - 2.000.000 VNĐ",
+                "mon_noi_bat": "Ý kết hợp Việt",
+                "dac_diem": "Fine-dining Ý hiện đại, đạt giải Michelin Guide Service 2024."
+            },
+            {
+                "id": "DNG_QA_028",
+                "ten_quan": "Bún mắm Bà Đông",
+                "dia_chi": "145 Huỳnh Thúc Kháng, Hải Châu",
+                "gia_trung_binh": "30.000 - 50.000 VNĐ",
+                "mon_noi_bat": "Bún mắm thập cẩm",
+                "dac_diem": "Topping phong phú (nem, chả, heo quay), mắm nêm thơm dịu."
+            },
+            {
+                "id": "DNG_QA_029",
+                "ten_quan": "La Maison 1888",
+                "dia_chi": "InterContinental Resort",
+                "gia_trung_binh": "5.000.000+ VNĐ",
+                "mon_noi_bat": "Fine-dining Pháp",
+                "dac_diem": "Nhà hàng 1 sao Michelin đầu tiên tại Đà Nẵng, đẳng cấp 5 sao."
+            },
+            {
+                "id": "DNG_QA_030",
+                "ten_quan": "Bánh cuốn Tiến Hưng",
+                "dia_chi": "190 Trần Phú, Hải Châu",
+                "gia_trung_binh": "25.000 - 55.000 VNĐ",
+                "mon_noi_bat": "Bánh cuốn chả quế",
+                "dac_diem": "Bánh tráng mỏng, mềm, ăn kèm hành phi và chả quế thơm nồng."
+            }
+        ]
+    }
+}
