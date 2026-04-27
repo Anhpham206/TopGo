@@ -2,7 +2,7 @@
     "Hội An": {
         "diem_tham_quan": [
             {
-                "id": "HA_DTQ_001",
+                "id": "HAN_DTQ_001",
                 "ten": "Chùa Cầu",
                 "toa_do": {
                     "lat": 15.876853,
@@ -20,7 +20,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_002",
+                "id": "HAN_DTQ_002",
                 "ten": "Hội quán Phúc Kiến",
                 "toa_do": {
                     "lat": 15.877397,
@@ -38,7 +38,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_003",
+                "id": "HAN_DTQ_003",
                 "ten": "Nhà cổ Tấn Ký",
                 "toa_do": {
                     "lat": 15.876481,
@@ -56,7 +56,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_004",
+                "id": "HAN_DTQ_004",
                 "ten": "Hội quán Quảng Đông",
                 "toa_do": {
                     "lat": 15.877286,
@@ -74,7 +74,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_005",
+                "id": "HAN_DTQ_005",
                 "ten": "Nhà cổ Phùng Hưng",
                 "toa_do": {
                     "lat": 15.877134,
@@ -92,7 +92,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_006",
+                "id": "HAN_DTQ_006",
                 "ten": "Nhà thờ tộc Trần",
                 "toa_do": {
                     "lat": 15.87895,
@@ -110,7 +110,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_007",
+                "id": "HAN_DTQ_007",
                 "ten": "Bảo tàng Sa Huỳnh",
                 "toa_do": {
                     "lat": 15.877025,
@@ -128,7 +128,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_008",
+                "id": "HAN_DTQ_008",
                 "ten": "Bảo tàng Gốm sứ",
                 "toa_do": {
                     "lat": 15.877341,
@@ -146,7 +146,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_009",
+                "id": "HAN_DTQ_009",
                 "ten": "Bảo tàng Dân gian",
                 "toa_do": {
                     "lat": 15.876321,
@@ -164,7 +164,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_010",
+                "id": "HAN_DTQ_010",
                 "ten": "Đình Cẩm Phô",
                 "toa_do": {
                     "lat": 15.877843,
@@ -182,7 +182,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_011",
+                "id": "HAN_DTQ_011",
                 "ten": "Miếu Quan Công",
                 "toa_do": {
                     "lat": 15.877412,
@@ -200,7 +200,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_012",
+                "id": "HAN_DTQ_012",
                 "ten": "Nhà cổ Đức An",
                 "toa_do": {
                     "lat": 15.877543,
@@ -218,7 +218,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_013",
+                "id": "HAN_DTQ_013",
                 "ten": "Nhà cổ Quân Thắng",
                 "toa_do": {
                     "lat": 15.877231,
@@ -236,7 +236,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_014",
+                "id": "HAN_DTQ_014",
                 "ten": "Hội quán Hải Nam",
                 "toa_do": {
                     "lat": 15.877843,
@@ -254,7 +254,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_015",
+                "id": "HAN_DTQ_015",
                 "ten": "Xứ Đàng Trong",
                 "toa_do": {
                     "lat": 15.876843,
@@ -272,7 +272,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_016",
+                "id": "HAN_DTQ_016",
                 "ten": "Lăng mộ Gu Sokukun",
                 "toa_do": {
                     "lat": 15.885045,
@@ -290,7 +290,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_017",
+                "id": "HAN_DTQ_017",
                 "ten": "Rừng dừa Bảy Mẫu",
                 "toa_do": {
                     "lat": 15.865012,
@@ -308,7 +308,7 @@
                 "gia_ve": 30000
             },
             {
-                "id": "HA_DTQ_018",
+                "id": "HAN_DTQ_018",
                 "ten": "Làng gốm Thanh Hà",
                 "toa_do": {
                     "lat": 15.878021,
@@ -326,7 +326,7 @@
                 "gia_ve": 35000
             },
             {
-                "id": "HA_DTQ_019",
+                "id": "HAN_DTQ_019",
                 "ten": "Công viên Terracotta",
                 "toa_do": {
                     "lat": 15.878543,
@@ -344,7 +344,7 @@
                 "gia_ve": 35000
             },
             {
-                "id": "HA_DTQ_020",
+                "id": "HAN_DTQ_020",
                 "ten": "Làng rau Trà Quế",
                 "toa_do": {
                     "lat": 15.905012,
@@ -362,7 +362,7 @@
                 "gia_ve": 35000
             },
             {
-                "id": "HA_DTQ_021",
+                "id": "HAN_DTQ_021",
                 "ten": "Làng mộc Kim Bồng",
                 "toa_do": {
                     "lat": 15.868045,
@@ -380,7 +380,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_022",
+                "id": "HAN_DTQ_022",
                 "ten": "Đảo Cù Lao Chàm",
                 "toa_do": {
                     "lat": 15.951111,
@@ -398,7 +398,7 @@
                 "gia_ve": 70000
             },
             {
-                "id": "HA_DTQ_023",
+                "id": "HAN_DTQ_023",
                 "ten": "Chùa Hải Tạng",
                 "toa_do": {
                     "lat": 15.946012,
@@ -416,7 +416,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_024",
+                "id": "HAN_DTQ_024",
                 "ten": "Giếng cổ Chăm-pa",
                 "toa_do": {
                     "lat": 15.945512,
@@ -434,7 +434,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_025",
+                "id": "HAN_DTQ_025",
                 "ten": "VinWonders Nam Hội An",
                 "toa_do": {
                     "lat": 15.815045,
@@ -452,7 +452,7 @@
                 "gia_ve": 650000
             },
             {
-                "id": "HA_DTQ_026",
+                "id": "HAN_DTQ_026",
                 "ten": "Công viên Ấn tượng",
                 "toa_do": {
                     "lat": 15.874512,
@@ -470,7 +470,7 @@
                 "gia_ve": 100000
             },
             {
-                "id": "HA_DTQ_027",
+                "id": "HAN_DTQ_027",
                 "ten": "Show Ký ức Hội An",
                 "toa_do": {
                     "lat": 15.874012,
@@ -488,7 +488,7 @@
                 "gia_ve": 600000
             },
             {
-                "id": "HA_DTQ_028",
+                "id": "HAN_DTQ_028",
                 "ten": "Chùa Bà Mụ",
                 "toa_do": {
                     "lat": 15.877912,
@@ -506,7 +506,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_029",
+                "id": "HAN_DTQ_029",
                 "ten": "Làng Lụa Hội An",
                 "toa_do": {
                     "lat": 15.885512,
@@ -524,7 +524,7 @@
                 "gia_ve": 50000
             },
             {
-                "id": "HA_DTQ_030",
+                "id": "HAN_DTQ_030",
                 "ten": "Biển An Bàng",
                 "toa_do": {
                     "lat": 15.912045,
@@ -542,7 +542,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_031",
+                "id": "HAN_DTQ_031",
                 "ten": "Biển Cửa Đại",
                 "toa_do": {
                     "lat": 15.895012,
@@ -560,7 +560,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_032",
+                "id": "HAN_DTQ_032",
                 "ten": "Sông Hoài",
                 "toa_do": {
                     "lat": 15.876045,
@@ -578,7 +578,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_033",
+                "id": "HAN_DTQ_033",
                 "ten": "Chợ Hội An",
                 "toa_do": {
                     "lat": 15.878234,
@@ -596,7 +596,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_034",
+                "id": "HAN_DTQ_034",
                 "ten": "Chợ đêm Nguyễn Hoàng",
                 "toa_do": {
                     "lat": 15.876512,
@@ -614,7 +614,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_035",
+                "id": "HAN_DTQ_035",
                 "ten": "Phố đèn lồng",
                 "toa_do": {
                     "lat": 15.877045,
@@ -632,7 +632,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_036",
+                "id": "HAN_DTQ_036",
                 "ten": "Hẻm tường vàng",
                 "toa_do": {
                     "lat": 15.877234,
@@ -650,7 +650,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_037",
+                "id": "HAN_DTQ_037",
                 "ten": "Faifo Coffee",
                 "toa_do": {
                     "lat": 15.877341,
@@ -668,7 +668,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_038",
+                "id": "HAN_DTQ_038",
                 "ten": "Làng đúc đồng",
                 "toa_do": {
                     "lat": 15.885012,
@@ -686,7 +686,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_039",
+                "id": "HAN_DTQ_039",
                 "ten": "Tụy Tiên Đường",
                 "toa_do": {
                     "lat": 15.877543,
@@ -704,7 +704,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_040",
+                "id": "HAN_DTQ_040",
                 "ten": "Bảo tàng Nghề Y",
                 "toa_do": {
                     "lat": 15.876612,
@@ -722,7 +722,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_041",
+                "id": "HAN_DTQ_041",
                 "ten": "Chùa Viên Giác",
                 "toa_do": {
                     "lat": 15.882045,
@@ -740,7 +740,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_042",
+                "id": "HAN_DTQ_042",
                 "ten": "Chùa Chúc Thánh",
                 "toa_do": {
                     "lat": 15.889012,
@@ -758,7 +758,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_043",
+                "id": "HAN_DTQ_043",
                 "ten": "Nhà thờ tộc Nguyễn Tường",
                 "toa_do": {
                     "lat": 15.878045,
@@ -776,7 +776,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_044",
+                "id": "HAN_DTQ_044",
                 "ten": "Lò gạch cũ Duy Vinh",
                 "toa_do": {
                     "lat": 15.845012,
@@ -794,7 +794,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_045",
+                "id": "HAN_DTQ_045",
                 "ten": "Cầu An Hội",
                 "toa_do": {
                     "lat": 15.876543,
@@ -812,7 +812,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_046",
+                "id": "HAN_DTQ_046",
                 "ten": "Roving Chillhouse",
                 "toa_do": {
                     "lat": 15.892045,
@@ -830,7 +830,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_047",
+                "id": "HAN_DTQ_047",
                 "ten": "Bảo tàng Hội An",
                 "toa_do": {
                     "lat": 15.878012,
@@ -848,7 +848,7 @@
                 "gia_ve": 80000
             },
             {
-                "id": "HA_DTQ_048",
+                "id": "HAN_DTQ_048",
                 "ten": "Đảo Ký Ức Hội An",
                 "toa_do": {
                     "lat": 15.874234,
@@ -866,7 +866,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_049",
+                "id": "HAN_DTQ_049",
                 "ten": "Sân bóng rổ Lễ Nghĩa",
                 "toa_do": {
                     "lat": 15.878512,
@@ -884,7 +884,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HA_DTQ_050",
+                "id": "HAN_DTQ_050",
                 "ten": "Phố cổ Hội An",
                 "toa_do": {
                     "lat": 15.877012,
@@ -904,7 +904,7 @@
         ],
         "quan_an": [
             {
-                "id": "HA_QA_001",
+                "id": "HAN_QA_001",
                 "ten_quan": "Cơm gà Bà Buội",
                 "dia_chi": "22 Đ. Phan Chu Trinh, Phường Minh An",
                 "gia_trung_binh": "35.000 - 60.000 VNĐ",
@@ -912,7 +912,7 @@
                 "dac_diem": "Thương hiệu lâu đời nhất, gà thả vườn xé nhỏ, cơm vàng dẻo thơm."
             },
             {
-                "id": "HA_QA_002",
+                "id": "HAN_QA_002",
                 "ten_quan": "Bánh mì Phượng",
                 "dia_chi": "2b Đ. Phan Chu Trinh, Cẩm Châu",
                 "gia_trung_binh": "20.000 - 35.000 VNĐ",
@@ -920,7 +920,7 @@
                 "dac_diem": "Nổi tiếng thế giới, hơn 20 loại nhân, nước sốt đặc trưng."
             },
             {
-                "id": "HA_QA_003",
+                "id": "HAN_QA_003",
                 "ten_quan": "Madam Khánh",
                 "dia_chi": "115 Trần Cao Vân",
                 "gia_trung_binh": "25.000 - 30.000 VNĐ",
@@ -928,7 +928,7 @@
                 "dac_diem": "\"Nữ hoàng bánh mì\", pate béo ngậy, sốt gia truyền gần 40 năm."
             },
             {
-                "id": "HA_QA_004",
+                "id": "HAN_QA_004",
                 "ten_quan": "Thanh Cao Lầu",
                 "dia_chi": "26 Thái Phiên, Phường Minh An",
                 "gia_trung_binh": "30.000 - 45.000 VNĐ",
@@ -936,7 +936,7 @@
                 "dac_diem": "Hơn 20 năm tuổi, sợi mì dai, xá xíu đậm đà, chuẩn vị."
             },
             {
-                "id": "HA_QA_005",
+                "id": "HAN_QA_005",
                 "ten_quan": "Mì Quảng Ông Hai",
                 "dia_chi": "6A Trương Minh Lượng, Cẩm Châu",
                 "gia_trung_binh": "35.000 - 50.000 VNĐ",
@@ -944,7 +944,7 @@
                 "dac_diem": "Chuẩn vị miền Trung, sợi mì nghệ vàng, nước dùng thanh."
             },
             {
-                "id": "HA_QA_006",
+                "id": "HAN_QA_006",
                 "ten_quan": "Nhà hàng Bông hồng trắng",
                 "dia_chi": "533 Đ. Hai Bà Trưng, Phường Cẩm Phổ",
                 "gia_trung_binh": "35.000 - 60.000 VNĐ",
@@ -952,7 +952,7 @@
                 "dac_diem": "Lò làm bánh gốc, bánh nặn thủ công tinh xảo như hoa hồng."
             },
             {
-                "id": "HA_QA_007",
+                "id": "HAN_QA_007",
                 "ten_quan": "Giếng Bá Lễ",
                 "dia_chi": "45/51 Trần Hưng Đạo, Phường Minh An",
                 "gia_trung_binh": "100.000 - 200.000 VNĐ",
@@ -960,7 +960,7 @@
                 "dac_diem": "Nước chấm làm từ gan và đậu nành độc quyền từ giếng cổ."
             },
             {
-                "id": "HA_QA_008",
+                "id": "HAN_QA_008",
                 "ten_quan": "Nước Mót Hội An",
                 "dia_chi": "150 Trần Phú, Cẩm Châu",
                 "gia_trung_binh": "12.000 - 15.000 VNĐ",
@@ -968,7 +968,7 @@
                 "dac_diem": "Đồ uống biểu tượng, thanh nhiệt, decor hoa sen đẹp mắt."
             },
             {
-                "id": "HA_QA_009",
+                "id": "HAN_QA_009",
                 "ten_quan": "Cơm gà Bà Nga",
                 "dia_chi": "09 Đ. Phan Chu Trinh, Cẩm Châu",
                 "gia_trung_binh": "40.000 - 65.000 VNĐ",
@@ -976,7 +976,7 @@
                 "dac_diem": "Gà chặt miếng to, vị đậm đà hơn cơm gà xé truyền thống."
             },
             {
-                "id": "HA_QA_010",
+                "id": "HAN_QA_010",
                 "ten_quan": "Cao lầu Bá Lễ",
                 "dia_chi": "49/3 Trần Hưng Đạo, Phường Minh An",
                 "gia_trung_binh": "30.000 - 45.000 VNĐ",
@@ -984,7 +984,7 @@
                 "dac_diem": "Phục vụ chuyên nghiệp, sạch sẽ, nguyên liệu tuyển chọn."
             },
             {
-                "id": "HA_QA_011",
+                "id": "HAN_QA_011",
                 "ten_quan": "Bánh đập  Bà Già",
                 "dia_chi": "34 Nguyễn Tri Phương, Cẩm Nam",
                 "gia_trung_binh": "20.000 - 45.000 VNĐ",
@@ -992,7 +992,7 @@
                 "dac_diem": "Hến xào ngọt lịm, bánh đập giòn, mắm nêm thơm nồng."
             },
             {
-                "id": "HA_QA_012",
+                "id": "HAN_QA_012",
                 "ten_quan": "Phở Liến",
                 "dia_chi": "25 Lê Lợi, Phường Minh An",
                 "gia_trung_binh": "20.000 - 50.000 VNĐ",
@@ -1000,7 +1000,7 @@
                 "dac_diem": "Phở phong cách Hội An với nước dùng trong và thanh ngọt."
             },
             {
-                "id": "HA_QA_013",
+                "id": "HAN_QA_013",
                 "ten_quan": "Anh Dũng",
                 "dia_chi": "14 Bà Triệu, Phường Cẩm Phổ",
                 "gia_trung_binh": "25.000 - 65.000 VNĐ",
@@ -1008,7 +1008,7 @@
                 "dac_diem": "Vỏ mỏng giòn, nhân tôm thịt quết dẻo, sốt hấp dẫn."
             },
             {
-                "id": "HA_QA_014",
+                "id": "HAN_QA_014",
                 "ten_quan": "Bánh bèo Bà Bảy",
                 "dia_chi": "02 Hoàng Văn Thụ, Phường Minh  An",
                 "gia_trung_binh": "10.000 - 35.000 VNĐ",
@@ -1016,7 +1016,7 @@
                 "dac_diem": "Nhân tôm thịt béo ngậy, ăn kèm ram sợi cao lầu giòn."
             },
             {
-                "id": "HA_QA_015",
+                "id": "HAN_QA_015",
                 "ten_quan": "Cơm Gà Ty",
                 "dia_chi": "23 Phan Chu Trinh, Phường Minh An",
                 "gia_trung_binh": "25.000 - 50.000 VNĐ",
@@ -1024,7 +1024,7 @@
                 "dac_diem": "Cơm dẻo nấu nước luộc gà, giá cả rất bình dân."
             },
             {
-                "id": "HA_QA_016",
+                "id": "HAN_QA_016",
                 "ten_quan": "Quán Chay An Nhiên",
                 "dia_chi": "126 Lạc Long Quân, An Bàng, Hội An Tây",
                 "gia_trung_binh": "45.000 - 120.000 VNĐ",
@@ -1032,7 +1032,7 @@
                 "dac_diem": "Không gian tĩnh lặng, các món chay thuần khiết, bổ dưỡng."
             },
             {
-                "id": "HA_QA_017",
+                "id": "HAN_QA_017",
                 "ten_quan": "Xí Mà Phủ",
                 "dia_chi": "Đối diện 108 Nguyễn Trường Tộ, Phường Minh An",
                 "gia_trung_binh": "5.000 - 10.000 VNĐ",
@@ -1040,7 +1040,7 @@
                 "dac_diem": "Gánh chè ký ức, vị ngọt bùi, tốt cho sức khỏe."
             },
             {
-                "id": "HA_QA_018",
+                "id": "HAN_QA_018",
                 "ten_quan": "Secret Garden",
                 "dia_chi": "132/2 Trần Phú, Phường Minh An",
                 "gia_trung_binh": "100.000 - 400.000 VNĐ",
@@ -1048,7 +1048,7 @@
                 "dac_diem": "Ẩn mình trong vườn xanh, không gian lãng mạn cao cấp."
             },
             {
-                "id": "HA_QA_019",
+                "id": "HAN_QA_019",
                 "ten_quan": "Hải sản Bé Nhi",
                 "dia_chi": "Âu Cơ, Cửa Đại,",
                 "gia_trung_binh": "70.000 - 500.000 VNĐ",
@@ -1056,7 +1056,7 @@
                 "dac_diem": "Nhà hàng ven biển, nguyên liệu tươi đánh bắt trong ngày."
             },
             {
-                "id": "HA_QA_020",
+                "id": "HAN_QA_020",
                 "ten_quan": "Morning Glory",
                 "dia_chi": "106 Nguyễn Thái Học, Phường Minh An",
                 "gia_trung_binh": "120.000 - 350.000 VNĐ",
@@ -1064,7 +1064,7 @@
                 "dac_diem": "Nhà hàng sang trọng, bếp mở, phong cách phục vụ chuẩn quốc tế."
             },
             {
-                "id": "HA_QA_021",
+                "id": "HAN_QA_021",
                 "ten_quan": "Mì Quảng Bà Minh",
                 "dia_chi": "Số 61 đường 18/8",
                 "gia_trung_binh": "25.000 - 50.000 VNĐ",
@@ -1072,7 +1072,7 @@
                 "dac_diem": "View sông Thu Bồn, không gian quê yên bình, dân dã."
             },
             {
-                "id": "HA_QA_022",
+                "id": "HAN_QA_022",
                 "ten_quan": "Cơm Niêu Phố Hội",
                 "dia_chi": "51 Lý Thường Kiệt, Cẩm Châu, Hội An Đông",
                 "gia_trung_binh": "120.000 - 300.000 VNĐ",
@@ -1080,7 +1080,7 @@
                 "dac_diem": "Chuẩn vị cơm nhà miền Trung, ấm cúng và truyền thống."
             },
             {
-                "id": "HA_QA_023",
+                "id": "HAN_QA_023",
                 "ten_quan": "Quán Mọi BBQ",
                 "dia_chi": "55 18 Tháng 8, Phường Minh An",
                 "gia_trung_binh": "69.000 - 250.000 VNĐ",
@@ -1088,7 +1088,7 @@
                 "dac_diem": "Menu đa dạng, phong cách street-style trẻ trung, sôi động."
             },
             {
-                "id": "HA_QA_024",
+                "id": "HAN_QA_024",
                 "ten_quan": "Reu Dining",
                 "dia_chi": "Trà Quế, Cẩm Hà, Hội An Tây",
                 "gia_trung_binh": "100.000 - 700.000 VNĐ",
@@ -1096,7 +1096,7 @@
                 "dac_diem": "Kết hợp du lịch làng nghề và ăn uống cao cấp, view đẹp."
             },
             {
-                "id": "HA_QA_025",
+                "id": "HAN_QA_025",
                 "ten_quan": "The Canh Dong",
                 "dia_chi": "436 Đ. Hai Bà Trưng, Cẩm Sơn, Hội An Tây",
                 "gia_trung_binh": "29.000 - 299.000 VNĐ",
@@ -1104,7 +1104,7 @@
                 "dac_diem": "View cánh đồng lúa xanh mướt, món ăn dân dã Việt."
             },
             {
-                "id": "HA_QA_026",
+                "id": "HAN_QA_026",
                 "ten_quan": "Bánh ướt Cô Lợi",
                 "dia_chi": "20A Lý Thái Tổ, Sơn Phong",
                 "gia_trung_binh": "30.000 - 60.000 VNĐ",
@@ -1112,7 +1112,7 @@
                 "dac_diem": "Thịt nướng thơm nức, cuốn bánh ướt mỏng mịn, đậm đà."
             },
             {
-                "id": "HA_QA_027",
+                "id": "HAN_QA_027",
                 "ten_quan": "Chè Thưng Cô Lệ",
                 "dia_chi": "369 Cửa Đại, Cẩm Châu, Hội An Đông",
                 "gia_trung_binh": "10.000 - 25.000 VNĐ",
@@ -1120,7 +1120,7 @@
                 "dac_diem": "Vị ngọt thanh, nước cốt dừa béo ngậy đặc trưng."
             },
             {
-                "id": "HA_QA_028",
+                "id": "HAN_QA_028",
                 "ten_quan": "Gỏi Cá Trích Hội An",
                 "dia_chi": "46 Nguyễn Tuân",
                 "gia_trung_binh": "59.000 - 119.000 VNĐ",
@@ -1128,7 +1128,7 @@
                 "dac_diem": "Đặc sản biển Cửa Đại, cá tươi trộn gia vị đậm đà."
             },
             {
-                "id": "HA_QA_029",
+                "id": "HAN_QA_029",
                 "ten_quan": "Nhà hàng Nón Lá",
                 "dia_chi": "Đảo Ký Ức Hội An, Cồn Hến",
                 "gia_trung_binh": "70.000 - 250.000 VNĐ",
@@ -1136,7 +1136,7 @@
                 "dac_diem": "Kiến trúc tre độc đáo, phục vụ thực khách xem show diễn."
             },
             {
-                "id": "HA_QA_030",
+                "id": "HAN_QA_030",
                 "ten_quan": "V Vegan",
                 "dia_chi": "108 Nguyễn Thái Học, Old Town",
                 "gia_trung_binh": "70.000 - 200.000 VNĐ",
