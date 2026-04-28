@@ -2,7 +2,7 @@
     "Hà Nội": {
         "diem_tham_quan": [
             {
-                "id": "HN_DTQ_001",
+                "id": "HNI_DTQ_001",
                 "ten": "Văn Miếu - Quốc Tử Giám",
                 "toa_do": {
                     "lat": 21.028267,
@@ -21,7 +21,7 @@
                 "gia_ve": 70000
             },
             {
-                "id": "HN_DTQ_002",
+                "id": "HNI_DTQ_002",
                 "ten": "Hoàng thành Thăng Long",
                 "toa_do": {
                     "lat": 21.035453,
@@ -40,7 +40,7 @@
                 "gia_ve": 100000
             },
             {
-                "id": "HN_DTQ_003",
+                "id": "HNI_DTQ_003",
                 "ten": "Lăng Chủ tịch Hồ Chí Minh",
                 "toa_do": {
                     "lat": 21.037077,
@@ -58,7 +58,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_004",
+                "id": "HNI_DTQ_004",
                 "ten": "Đền Ngọc Sơn",
                 "toa_do": {
                     "lat": 21.030868,
@@ -77,7 +77,7 @@
                 "gia_ve": 30000
             },
             {
-                "id": "HN_DTQ_005",
+                "id": "HNI_DTQ_005",
                 "ten": "Hồ Hoàn Kiếm",
                 "toa_do": {
                     "lat": 21.029165,
@@ -95,7 +95,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_006",
+                "id": "HNI_DTQ_006",
                 "ten": "Nhà hát Lớn Hà Nội",
                 "toa_do": {
                     "lat": 21.024474,
@@ -113,7 +113,7 @@
                 "gia_ve": 120000
             },
             {
-                "id": "HN_DTQ_007",
+                "id": "HNI_DTQ_007",
                 "ten": "Chợ Đồng Xuân",
                 "toa_do": {
                     "lat": 21.038333,
@@ -131,7 +131,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_008",
+                "id": "HNI_DTQ_008",
                 "ten": "Nhà tù Hỏa Lò",
                 "toa_do": {
                     "lat": 21.025529,
@@ -149,7 +149,7 @@
                 "gia_ve": 50000
             },
             {
-                "id": "HN_DTQ_009",
+                "id": "HNI_DTQ_009",
                 "ten": "Bảo tàng Dân tộc học VN",
                 "toa_do": {
                     "lat": 21.040452,
@@ -167,7 +167,7 @@
                 "gia_ve": 40000
             },
             {
-                "id": "HN_DTQ_010",
+                "id": "HNI_DTQ_010",
                 "ten": "Chùa Một Cột",
                 "toa_do": {
                     "lat": 21.035927,
@@ -185,7 +185,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_011",
+                "id": "HNI_DTQ_011",
                 "ten": "Chùa Trấn Quốc",
                 "toa_do": {
                     "lat": 21.04804,
@@ -203,7 +203,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_012",
+                "id": "HNI_DTQ_012",
                 "ten": "Phố cổ Hà Nội",
                 "toa_do": {
                     "lat": 21.034269,
@@ -221,7 +221,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_013",
+                "id": "HNI_DTQ_013",
                 "ten": "Nhà thờ Lớn Hà Nội",
                 "toa_do": {
                     "lat": 21.028915,
@@ -239,7 +239,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_014",
+                "id": "HNI_DTQ_014",
                 "ten": "Làng gốm Bát Tràng",
                 "toa_do": {
                     "lat": 20.975229,
@@ -257,7 +257,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_015",
+                "id": "HNI_DTQ_015",
                 "ten": "Phố đi bộ Tạ Hiện",
                 "toa_do": {
                     "lat": 21.035338,
@@ -275,7 +275,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_016",
+                "id": "HNI_DTQ_016",
                 "ten": "Chùa Hương",
                 "toa_do": {
                     "lat": 20.633698,
@@ -293,7 +293,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_017",
+                "id": "HNI_DTQ_017",
                 "ten": "Vườn Quốc gia Ba Vì",
                 "toa_do": {
                     "lat": 21.081281,
@@ -311,7 +311,7 @@
                 "gia_ve": 60000
             },
             {
-                "id": "HN_DTQ_018",
+                "id": "HNI_DTQ_018",
                 "ten": "Thung lũng hoa Hồ Tây",
                 "toa_do": {
                     "lat": 21.074323,
@@ -329,7 +329,7 @@
                 "gia_ve": 120000
             },
             {
-                "id": "HN_DTQ_019",
+                "id": "HNI_DTQ_019",
                 "ten": "Bãi đá sông Hồng",
                 "toa_do": {
                     "lat": 21.078832,
@@ -347,7 +347,7 @@
                 "gia_ve": 50000
             },
             {
-                "id": "HN_DTQ_020",
+                "id": "HNI_DTQ_020",
                 "ten": "Làng cổ Đường Lâm",
                 "toa_do": {
                     "lat": 21.157445,
@@ -365,7 +365,7 @@
                 "gia_ve": 20000
             },
             {
-                "id": "HN_DTQ_021",
+                "id": "HNI_DTQ_021",
                 "ten": "Bảo tàng Lịch sử QG",
                 "toa_do": {
                     "lat": 21.024767,
@@ -383,7 +383,7 @@
                 "gia_ve": 40000
             },
             {
-                "id": "HN_DTQ_022",
+                "id": "HNI_DTQ_022",
                 "ten": "Bảo tàng Mỹ thuật VN",
                 "toa_do": {
                     "lat": 21.030744,
@@ -401,7 +401,7 @@
                 "gia_ve": 40000
             },
             {
-                "id": "HN_DTQ_023",
+                "id": "HNI_DTQ_023",
                 "ten": "Bảo tàng Hà Nội",
                 "toa_do": {
                     "lat": 21.013534,
@@ -419,7 +419,7 @@
                 "gia_ve": 30000
             },
             {
-                "id": "HN_DTQ_024",
+                "id": "HNI_DTQ_024",
                 "ten": "Khu du lịch Long Việt",
                 "toa_do": {
                     "lat": 21.087023,
@@ -437,7 +437,7 @@
                 "gia_ve": 75000
             },
             {
-                "id": "HN_DTQ_025",
+                "id": "HNI_DTQ_025",
                 "ten": "Thiên Sơn - Suối Ngà",
                 "toa_do": {
                     "lat": 21.072376,
@@ -455,7 +455,7 @@
                 "gia_ve": 150000
             },
             {
-                "id": "HN_DTQ_026",
+                "id": "HNI_DTQ_026",
                 "ten": "Trang trại Đồng Quê Ba Vì",
                 "toa_do": {
                     "lat": 21.087662,
@@ -473,7 +473,7 @@
                 "gia_ve": 200000
             },
             {
-                "id": "HN_DTQ_027",
+                "id": "HNI_DTQ_027",
                 "ten": "Làng Văn hóa các Dân tộc",
                 "toa_do": {
                     "lat": 21.02395,
@@ -491,7 +491,7 @@
                 "gia_ve": 30000
             },
             {
-                "id": "HN_DTQ_028",
+                "id": "HNI_DTQ_028",
                 "ten": "Cầu Long Biên",
                 "toa_do": {
                     "lat": 21.04242,
@@ -509,7 +509,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_029",
+                "id": "HNI_DTQ_029",
                 "ten": "Đền Quán Thánh",
                 "toa_do": {
                     "lat": 21.043215,
@@ -527,7 +527,7 @@
                 "gia_ve": 10000
             },
             {
-                "id": "HN_DTQ_030",
+                "id": "HNI_DTQ_030",
                 "ten": "Cột cờ Hà Nội",
                 "toa_do": {
                     "lat": 21.032625,
@@ -545,7 +545,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_031",
+                "id": "HNI_DTQ_031",
                 "ten": "Hồ Tây",
                 "toa_do": {
                     "lat": 21.054908,
@@ -563,7 +563,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_032",
+                "id": "HNI_DTQ_032",
                 "ten": "Phố đường tàu (Train Street)",
                 "toa_do": {
                     "lat": 21.032023,
@@ -581,7 +581,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_033",
+                "id": "HNI_DTQ_033",
                 "ten": "Di tích Nhà 87 Mã Mây",
                 "toa_do": {
                     "lat": 21.034629,
@@ -599,7 +599,7 @@
                 "gia_ve": 10000
             },
             {
-                "id": "HN_DTQ_034",
+                "id": "HNI_DTQ_034",
                 "ten": "Bảo tàng Phụ nữ VN",
                 "toa_do": {
                     "lat": 21.023473,
@@ -617,7 +617,7 @@
                 "gia_ve": 40000
             },
             {
-                "id": "HN_DTQ_035",
+                "id": "HNI_DTQ_035",
                 "ten": "Chùa Thầy",
                 "toa_do": {
                     "lat": 21.023178,
@@ -635,7 +635,7 @@
                 "gia_ve": 30000
             },
             {
-                "id": "HN_DTQ_036",
+                "id": "HNI_DTQ_036",
                 "ten": "Đền Bạch Mã",
                 "toa_do": {
                     "lat": 21.036133,
@@ -653,7 +653,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_037",
+                "id": "HNI_DTQ_037",
                 "ten": "Đền Kim Liên",
                 "toa_do": {
                     "lat": 21.010852,
@@ -671,7 +671,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_038",
+                "id": "HNI_DTQ_038",
                 "ten": "Đền Voi Phục",
                 "toa_do": {
                     "lat": 21.03076,
@@ -689,7 +689,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_039",
+                "id": "HNI_DTQ_039",
                 "ten": "Núi Trầm",
                 "toa_do": {
                     "lat": 20.94043,
@@ -707,7 +707,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_040",
+                "id": "HNI_DTQ_040",
                 "ten": "Chợ đêm phố cổ",
                 "toa_do": {
                     "lat": 21.033952,
@@ -725,7 +725,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_041",
+                "id": "HNI_DTQ_041",
                 "ten": "Công viên Thủ Lệ",
                 "toa_do": {
                     "lat": 21.031248,
@@ -743,7 +743,7 @@
                 "gia_ve": 30000
             },
             {
-                "id": "HN_DTQ_042",
+                "id": "HNI_DTQ_042",
                 "ten": "Lotte Observation Deck",
                 "toa_do": {
                     "lat": 21.032252,
@@ -761,7 +761,7 @@
                 "gia_ve": 230000
             },
             {
-                "id": "HN_DTQ_043",
+                "id": "HNI_DTQ_043",
                 "ten": "Khu di tích Cổ Loa",
                 "toa_do": {
                     "lat": 21.11168,
@@ -779,7 +779,7 @@
                 "gia_ve": 10000
             },
             {
-                "id": "HN_DTQ_044",
+                "id": "HNI_DTQ_044",
                 "ten": "Làng lụa Vạn Phúc",
                 "toa_do": {
                     "lat": 20.980283,
@@ -797,7 +797,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_045",
+                "id": "HNI_DTQ_045",
                 "ten": "Thủy cung Lotte World",
                 "toa_do": {
                     "lat": 21.076207,
@@ -815,7 +815,7 @@
                 "gia_ve": 280000
             },
             {
-                "id": "HN_DTQ_046",
+                "id": "HNI_DTQ_046",
                 "ten": "Tháp nước Hàng Đậu",
                 "toa_do": {
                     "lat": 21.040226,
@@ -833,7 +833,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_047",
+                "id": "HNI_DTQ_047",
                 "ten": "Công viên Yên Sở",
                 "toa_do": {
                     "lat": 20.964641,
@@ -851,7 +851,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_048",
+                "id": "HNI_DTQ_048",
                 "ten": "Múa rối nước Thăng Long",
                 "toa_do": {
                     "lat": 21.031772,
@@ -869,7 +869,7 @@
                 "gia_ve": 150000
             },
             {
-                "id": "HN_DTQ_049",
+                "id": "HNI_DTQ_049",
                 "ten": "Chợ hoa Quảng Bá",
                 "toa_do": {
                     "lat": 21.073491,
@@ -887,7 +887,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "HN_DTQ_050",
+                "id": "HNI_DTQ_050",
                 "ten": "Phố bích họa Phùng Hưng",
                 "toa_do": {
                     "lat": 21.038549,
@@ -907,7 +907,7 @@
         ],
         "quan_an": [
             {
-                "id": "HN_QA_001",
+                "id": "HNI_QA_001",
                 "ten_quan": "Phở Thìn Lò Đúc",
                 "dia_chi": "13 Lò Đúc, Hai Bà Trưng",
                 "gia_trung_binh": "60.000 - 100.000 VNĐ",
@@ -915,7 +915,7 @@
                 "dac_diem": "Nổi danh với món tái lăn, thịt bò xào tỏi gừng mềm tan cùng nước dùng béo ngập hành lá."
             },
             {
-                "id": "HN_QA_002",
+                "id": "HNI_QA_002",
                 "ten_quan": "Phở 49 Bát Đàn",
                 "dia_chi": "49 Bát Đàn, Hoàn Kiếm",
                 "gia_trung_binh": "50.000 - 70.000 VNĐ",
@@ -923,7 +923,7 @@
                 "dac_diem": "Quán phở gia truyền nổi tiếng với văn hóa xếp hàng tự phục vụ, nước dùng thơm đậm đà, bánh phở dai."
             },
             {
-                "id": "HN_QA_003",
+                "id": "HNI_QA_003",
                 "ten_quan": "Phở 10 Lý Quốc Sư",
                 "dia_chi": "10 Lý Quốc Sư, Hoàn Kiếm",
                 "gia_trung_binh": "60.000 - 120.000 VNĐ",
@@ -931,7 +931,7 @@
                 "dac_diem": "Thương hiệu phở nhượng quyền uy tín, nước lèo thanh ngọt từ xương hầm, thịt mềm mịn, không gian sạch sẽ."
             },
             {
-                "id": "HN_QA_004",
+                "id": "HNI_QA_004",
                 "ten_quan": "Bún chả Hương Liên",
                 "dia_chi": "24 Lê Văn Hưu, Hai Bà Trưng",
                 "gia_trung_binh": "40.000 - 130.000 VNĐ",
@@ -939,7 +939,7 @@
                 "dac_diem": "Quán nổi tiếng toàn cầu sau khi đón cựu Tổng thống Mỹ Obama. Thịt nướng than hoa thơm lừng."
             },
             {
-                "id": "HN_QA_005",
+                "id": "HNI_QA_005",
                 "ten_quan": "Bún chả Hàng Mành (Đắc Kim)",
                 "dia_chi": "1 Hàng Mành, Hoàn Kiếm",
                 "gia_trung_binh": "50.000 - 60.000 VNĐ",
@@ -947,7 +947,7 @@
                 "dac_diem": "Quán lâu đời tại phố cổ, suất ăn cực kỳ nhiều thịt nướng, chả băm mềm ngọt, nước mắm pha tỏi ớt chuẩn vị."
             },
             {
-                "id": "HN_QA_006",
+                "id": "HNI_QA_006",
                 "ten_quan": "Chả cá Thăng Long",
                 "dia_chi": "6B Đường Thành, Hoàn Kiếm",
                 "gia_trung_binh": "200.000 - 300.000 VNĐ",
@@ -955,7 +955,7 @@
                 "dac_diem": "Cá lăng xắt khúc ướp thì là, nghệ, nướng chảo mỡ tại bàn. Đạt chuẩn Michelin Bib Gourmand."
             },
             {
-                "id": "HN_QA_007",
+                "id": "HNI_QA_007",
                 "ten_quan": "Bánh cuốn Bà Hoành",
                 "dia_chi": "66 Tô Hiến Thành, Hai Bà Trưng",
                 "gia_trung_binh": "30.000 - 50.000 VNĐ",
@@ -963,7 +963,7 @@
                 "dac_diem": "Vỏ bánh tráng tay mỏng dính rắc ruốc tôm, ăn kèm chả quế cỡ lớn và thịt nướng cực kỳ bắt miệng."
             },
             {
-                "id": "HN_QA_008",
+                "id": "HNI_QA_008",
                 "ten_quan": "Bún đậu Hàng Khay",
                 "dia_chi": "Ngõ 31 Hàng Khay, Hoàn Kiếm",
                 "gia_trung_binh": "40.000 - 70.000 VNĐ",
@@ -971,7 +971,7 @@
                 "dac_diem": "Nằm sâu trong ngõ nhỏ, đậu rán giòn rụm bên ngoài mềm bên trong, mắm tôm đánh bọt thơm phức."
             },
             {
-                "id": "HN_QA_009",
+                "id": "HNI_QA_009",
                 "ten_quan": "Bún ốc Cô Huệ",
                 "dia_chi": "43 Nguyễn Siêu, Hoàn Kiếm",
                 "gia_trung_binh": "30.000 - 50.000 VNĐ",
@@ -979,7 +979,7 @@
                 "dac_diem": "Nước dùng chua thanh vị giấm bỗng, ốc nhồi to giòn sần sật, giữ nguyên bản vị Hà Nội xưa."
             },
             {
-                "id": "HN_QA_010",
+                "id": "HNI_QA_010",
                 "ten_quan": "Quán Ốc Vi Sài Gòn",
                 "dia_chi": "21 Gia Ngư, Hoàn Kiếm",
                 "gia_trung_binh": "60.000 - 350.000 VNĐ",
@@ -987,7 +987,7 @@
                 "dac_diem": "Đem phong cách chế biến ốc miền Nam ra Bắc, thực đơn đa dạng các món xào, hấp, nướng mỡ hành."
             },
             {
-                "id": "HN_QA_011",
+                "id": "HNI_QA_011",
                 "ten_quan": "Bò tơ Quán Mộc",
                 "dia_chi": "102 Thái Thịnh, Đống Đa",
                 "gia_trung_binh": "200.000 - 300.000 VNĐ",
@@ -995,7 +995,7 @@
                 "dac_diem": "Chuyên đặc sản bò tơ non mềm, không gian bài trí hoài cổ thập niên 80, thích hợp tụ họp gia đình."
             },
             {
-                "id": "HN_QA_012",
+                "id": "HNI_QA_012",
                 "ten_quan": "Bún chả Sinh Từ",
                 "dia_chi": "Nguyễn Khuyến, Đống Đa",
                 "gia_trung_binh": "70.000 - 100.000 VNĐ",
@@ -1003,7 +1003,7 @@
                 "dac_diem": "Hệ thống chuỗi bún chả chuyên nghiệp, không gian sạch sẽ, chất lượng thịt nướng đồng đều, nước chấm cân bằng."
             },
             {
-                "id": "HN_QA_013",
+                "id": "HNI_QA_013",
                 "ten_quan": "Bún ốc sườn 57",
                 "dia_chi": "57 Hai Bà Trưng, Hoàn Kiếm",
                 "gia_trung_binh": "40.000 - 70.000 VNĐ",
@@ -1011,7 +1011,7 @@
                 "dac_diem": "Bát bún nhỏ nhắn nhưng topping đầy ắp ốc và sườn non ninh nhừ, hương vị đậm đà rất đông khách."
             },
             {
-                "id": "HN_QA_014",
+                "id": "HNI_QA_014",
                 "ten_quan": "Cháo sườn 61A Ngõ Huyện",
                 "dia_chi": "61A Ngõ Huyện, Hoàn Kiếm",
                 "gia_trung_binh": "30.000 - 50.000 VNĐ",
@@ -1019,7 +1019,7 @@
                 "dac_diem": "Nấu từ bột gạo xay nhuyễn, mịn như kem, sườn ninh tan trong miệng, rắc tiêu và ruốc ăn cùng quẩy giòn."
             },
             {
-                "id": "HN_QA_015",
+                "id": "HNI_QA_015",
                 "ten_quan": "Mì gà tần Hàng Bồ",
                 "dia_chi": "24 Hàng Bồ, Hoàn Kiếm",
                 "gia_trung_binh": "55.000 - 105.000 VNĐ",
@@ -1027,7 +1027,7 @@
                 "dac_diem": "Món ăn đêm bổ dưỡng sưởi ấm mùa đông, gà ác hầm ngải cứu nhừ tơi mềm ngọt hòa quyện nước dùng thuốc bắc."
             },
             {
-                "id": "HN_QA_016",
+                "id": "HNI_QA_016",
                 "ten_quan": "Phở cuốn Hương Mai",
                 "dia_chi": "25 Ngũ Xã, Ba Đình",
                 "gia_trung_binh": "20.000 - 55.000 VNĐ",
@@ -1035,7 +1035,7 @@
                 "dac_diem": "Nổi tiếng tại \"đảo\" Ngũ Xã, thịt bò xào lăn cuộn bánh phở tươi chấm mắm tỏi chua ngọt cực kỳ dễ ăn."
             },
             {
-                "id": "HN_QA_017",
+                "id": "HNI_QA_017",
                 "ten_quan": "Bún ngan Nhàn",
                 "dia_chi": "11 Ngõ Trung Yên, Hoàn Kiếm",
                 "gia_trung_binh": "40.000 - 60.000 VNĐ",
@@ -1043,7 +1043,7 @@
                 "dac_diem": "Quán ăn gây sốt cộng đồng mạng vì nước lèo ninh xương ngan ngọt lịm, thịt ngan béo ngậy chấm mắm tỏi ớt."
             },
             {
-                "id": "HN_QA_018",
+                "id": "HNI_QA_018",
                 "ten_quan": "Bún thang Hàng Hòm",
                 "dia_chi": "11 Hàng Hòm, Hoàn Kiếm",
                 "gia_trung_binh": "20.000 - 35.000 VNĐ",
@@ -1051,7 +1051,7 @@
                 "dac_diem": "Thể hiện sự tinh tế ẩm thực Hà Thành với trứng tráng mỏng, giò lụa, gà xé phay thái sợi tỉ mỉ."
             },
             {
-                "id": "HN_QA_019",
+                "id": "HNI_QA_019",
                 "ten_quan": "Nộm Long Vi Dung",
                 "dia_chi": "23 Hồ Hoàn Kiếm, Hoàn Kiếm",
                 "gia_trung_binh": "35.000 - 50.000 VNĐ",
@@ -1059,7 +1059,7 @@
                 "dac_diem": "Nằm ngay hàm cá mập, đu đủ bào sợi trộn khô bò, gân bò, gan sấy chan nước sốt chua ngọt hấp dẫn."
             },
             {
-                "id": "HN_QA_020",
+                "id": "HNI_QA_020",
                 "ten_quan": "Xôi Yến",
                 "dia_chi": "35B Nguyễn Hữu Huân, Hoàn Kiếm",
                 "gia_trung_binh": "30.000 - 50.000 VNĐ",
@@ -1067,7 +1067,7 @@
                 "dac_diem": "Quán xôi huyền thoại bán đến tận đêm khuya, hạt xôi dẻo quánh tẩm mỡ hành, đậu xanh nát và trứng ốp."
             },
             {
-                "id": "HN_QA_021",
+                "id": "HNI_QA_021",
                 "ten_quan": "Lòng nướng Gầm Cầu",
                 "dia_chi": "29A Nguyễn Thiếp, Hoàn Kiếm",
                 "gia_trung_binh": "80.000 - 150.000 VNĐ",
@@ -1075,7 +1075,7 @@
                 "dac_diem": "Mùi thơm nức mũi cả góc phố, lòng và nầm tẩm ướp sa tế nướng xèo xèo trên chảo bọc giấy bạc lót bơ."
             },
             {
-                "id": "HN_QA_022",
+                "id": "HNI_QA_022",
                 "ten_quan": "Phở gà trộn 47 Mã Mây",
                 "dia_chi": "47 Mã Mây, Hoàn Kiếm",
                 "gia_trung_binh": "40.000 - 60.000 VNĐ",
@@ -1083,7 +1083,7 @@
                 "dac_diem": "Gà ta tuyển chọn da giòn sần sật, trộn cùng xì dầu, hành phi, rau thơm đậm đà không bị ngấy."
             },
             {
-                "id": "HN_QA_023",
+                "id": "HNI_QA_023",
                 "ten_quan": "Ốc chị Lệ",
                 "dia_chi": "88 Cửa Bắc, Ba Đình",
                 "gia_trung_binh": "30.000 - 80.000 VNĐ",
@@ -1091,7 +1091,7 @@
                 "dac_diem": "Tụ điểm ăn vặt quen thuộc của học sinh, sinh viên với nước mắm gừng sả pha cực kỳ điệu nghệ."
             },
             {
-                "id": "HN_QA_024",
+                "id": "HNI_QA_024",
                 "ten_quan": "Bánh cuốn Bà Xuân",
                 "dia_chi": "16 Dốc Hòe Nhai, Ba Đình",
                 "gia_trung_binh": "30.000 - 50.000 VNĐ",
@@ -1099,7 +1099,7 @@
                 "dac_diem": "Đạt chuẩn Michelin Bib Gourmand, bánh tráng tay truyền thống mềm mịn, hành phi tự làm giòn tan."
             },
             {
-                "id": "HN_QA_025",
+                "id": "HNI_QA_025",
                 "ten_quan": "Bánh mì 25",
                 "dia_chi": "25 Hàng Bạc, Hoàn Kiếm",
                 "gia_trung_binh": "35.000 - 45.000 VNĐ",
@@ -1107,7 +1107,7 @@
                 "dac_diem": "Điểm đến ưa thích của du khách phương Tây, pate gan tự làm béo ngậy kẹp trong ổ bánh mì nóng giòn."
             },
             {
-                "id": "HN_QA_026",
+                "id": "HNI_QA_026",
                 "ten_quan": "Phở chiên giòn 206",
                 "dia_chi": "206 Khâm Thiên, Đống Đa",
                 "gia_trung_binh": "40.000 - 65.000 VNĐ",
@@ -1115,7 +1115,7 @@
                 "dac_diem": "Tấm phở vuông vức chiên ngập dầu giòn phồng, chan nước sốt bò xào rau cải sền sệt đậm đà."
             },
             {
-                "id": "HN_QA_027",
+                "id": "HNI_QA_027",
                 "ten_quan": "Bún chả 74 Hàng Quạt",
                 "dia_chi": "Ngõ 74 Hàng Quạt, Hoàn Kiếm",
                 "gia_trung_binh": "40.000 - 50.000 VNĐ",
@@ -1123,7 +1123,7 @@
                 "dac_diem": "Nép mình trong con ngõ siêu hẹp, thịt nướng xém cạnh cháy xém tẩm ướp mật ong quyến rũ."
             },
             {
-                "id": "HN_QA_028",
+                "id": "HNI_QA_028",
                 "ten_quan": "Nem chua Phượng",
                 "dia_chi": "10 Ấu Triệu, Hoàn Kiếm",
                 "gia_trung_binh": "20.000 - 50.000 VNĐ",
@@ -1131,7 +1131,7 @@
                 "dac_diem": "Quán ăn vặt vỉa hè nổi tiếng sát Nhà Thờ Lớn, nem nướng xém vỏ ngoài nhưng bên trong vẫn dẻo hồng."
             },
             {
-                "id": "HN_QA_029",
+                "id": "HNI_QA_029",
                 "ten_quan": "Tầm Vị",
                 "dia_chi": "4B Yên Thế, Đống Đa",
                 "gia_trung_binh": "200.000 - 500.000 VNĐ",
@@ -1139,7 +1139,7 @@
                 "dac_diem": "Nhà hàng đạt 1 Sao Michelin, phục vụ mâm cơm Bắc Bộ cổ truyền trong không gian nhà gỗ mộc mạc."
             },
             {
-                "id": "HN_QA_030",
+                "id": "HNI_QA_030",
                 "ten_quan": "Nhà hàng Vua Chả Cá",
                 "dia_chi": "26C Trần Hưng Đạo, Hoàn Kiếm",
                 "gia_trung_binh": "150.000 - 250.000 VNĐ",

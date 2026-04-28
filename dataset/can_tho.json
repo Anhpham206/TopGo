@@ -2,7 +2,7 @@
     "Cần Thơ": {
         "diem_tham_quan": [
             {
-                "id": "CT_DTQ_001",
+                "id": "CTO_DTQ_001",
                 "ten": "Bến Ninh Kiều",
                 "toa_do": {
                     "lat": 10.032481,
@@ -21,7 +21,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_002",
+                "id": "CTO_DTQ_002",
                 "ten": "Chợ nổi Cái Răng",
                 "toa_do": {
                     "lat": 10.005152,
@@ -40,7 +40,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_003",
+                "id": "CTO_DTQ_003",
                 "ten": "Nhà cổ Bình Thủy",
                 "toa_do": {
                     "lat": 10.067195,
@@ -59,7 +59,7 @@
                 "gia_ve": 15000
             },
             {
-                "id": "CT_DTQ_004",
+                "id": "CTO_DTQ_004",
                 "ten": "Làng du lịch Mỹ Khánh",
                 "toa_do": {
                     "lat": 9.990836,
@@ -78,7 +78,7 @@
                 "gia_ve": 99000
             },
             {
-                "id": "CT_DTQ_005",
+                "id": "CTO_DTQ_005",
                 "ten": "Thiền viện Trúc Lâm Phương Nam",
                 "toa_do": {
                     "lat": 9.990748,
@@ -97,7 +97,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_006",
+                "id": "CTO_DTQ_006",
                 "ten": "Vườn cò Bằng Lăng",
                 "toa_do": {
                     "lat": 10.28179,
@@ -116,7 +116,7 @@
                 "gia_ve": 20000
             },
             {
-                "id": "CT_DTQ_007",
+                "id": "CTO_DTQ_007",
                 "ten": "Chợ đêm Tây Đô",
                 "toa_do": {
                     "lat": 10.03296,
@@ -135,7 +135,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_008",
+                "id": "CTO_DTQ_008",
                 "ten": "Cầu đi bộ Ninh Kiều",
                 "toa_do": {
                     "lat": 10.037044,
@@ -154,7 +154,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_009",
+                "id": "CTO_DTQ_009",
                 "ten": "Chùa Ông",
                 "toa_do": {
                     "lat": 10.034507,
@@ -173,7 +173,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_010",
+                "id": "CTO_DTQ_010",
                 "ten": "Làng hoa Bà Bộ",
                 "toa_do": {
                     "lat": 10.037347,
@@ -192,7 +192,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_011",
+                "id": "CTO_DTQ_011",
                 "ten": "Bảo tàng Cần Thơ",
                 "toa_do": {
                     "lat": 10.035429,
@@ -211,7 +211,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_012",
+                "id": "CTO_DTQ_012",
                 "ten": "Cồn Sơn",
                 "toa_do": {
                     "lat": 10.084061,
@@ -230,7 +230,7 @@
                 "gia_ve": 50000
             },
             {
-                "id": "CT_DTQ_013",
+                "id": "CTO_DTQ_013",
                 "ten": "Vườn ca cao Mười Cương",
                 "toa_do": {
                     "lat": 9.989498,
@@ -249,7 +249,7 @@
                 "gia_ve": 50000
             },
             {
-                "id": "CT_DTQ_014",
+                "id": "CTO_DTQ_014",
                 "ten": "Giàn Gừa Phong Điền",
                 "toa_do": {
                     "lat": 9.978894,
@@ -268,7 +268,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_015",
+                "id": "CTO_DTQ_015",
                 "ten": "Bãi tắm Cần Thơ (Nhân tạo)",
                 "toa_do": {
                     "lat": 10.044089,
@@ -287,7 +287,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_016",
+                "id": "CTO_DTQ_016",
                 "ten": "Phim trường Căn Nhà Màu Tím",
                 "toa_do": {
                     "lat": 9.970206,
@@ -306,7 +306,7 @@
                 "gia_ve": 60000
             },
             {
-                "id": "CT_DTQ_017",
+                "id": "CTO_DTQ_017",
                 "ten": "Chợ cổ Cần Thơ",
                 "toa_do": {
                     "lat": 10.034246,
@@ -325,7 +325,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_018",
+                "id": "CTO_DTQ_018",
                 "ten": "Khám Lớn Cần Thơ",
                 "toa_do": {
                     "lat": 10.036462,
@@ -344,7 +344,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_019",
+                "id": "CTO_DTQ_019",
                 "ten": "Chùa Phật Học",
                 "toa_do": {
                     "lat": 10.033087,
@@ -363,7 +363,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_020",
+                "id": "CTO_DTQ_020",
                 "ten": "Chùa Munir Ansay",
                 "toa_do": {
                     "lat": 10.033692,
@@ -382,7 +382,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_021",
+                "id": "CTO_DTQ_021",
                 "ten": "KDL Lung Cột Cầu",
                 "toa_do": {
                     "lat": 9.969212,
@@ -401,7 +401,7 @@
                 "gia_ve": 20000
             },
             {
-                "id": "CT_DTQ_022",
+                "id": "CTO_DTQ_022",
                 "ten": "KDL Sinh thái Ông Đề",
                 "toa_do": {
                     "lat": 9.991892,
@@ -419,7 +419,7 @@
                 "gia_ve": 50000
             },
             {
-                "id": "CT_DTQ_023",
+                "id": "CTO_DTQ_023",
                 "ten": "Vườn trái cây Chín Hồng",
                 "toa_do": {
                     "lat": 9.992457,
@@ -438,7 +438,7 @@
                 "gia_ve": 30000
             },
             {
-                "id": "CT_DTQ_024",
+                "id": "CTO_DTQ_024",
                 "ten": "Cầu Cần Thơ",
                 "toa_do": {
                     "lat": 10.034359,
@@ -457,7 +457,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_025",
+                "id": "CTO_DTQ_025",
                 "ten": "Chùa Nam Nhã",
                 "toa_do": {
                     "lat": 10.072368,
@@ -476,7 +476,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_026",
+                "id": "CTO_DTQ_026",
                 "ten": "Đình Bình Thủy",
                 "toa_do": {
                     "lat": 10.07273,
@@ -495,7 +495,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_027",
+                "id": "CTO_DTQ_027",
                 "ten": "Đền thờ Châu Văn Liêm",
                 "toa_do": {
                     "lat": 10.0951,
@@ -513,7 +513,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_028",
+                "id": "CTO_DTQ_028",
                 "ten": "Công viên Lưu Hữu Phước",
                 "toa_do": {
                     "lat": 10.032253,
@@ -532,7 +532,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_029",
+                "id": "CTO_DTQ_029",
                 "ten": "Lò Hủ Tiếu Sáu Hoài",
                 "toa_do": {
                     "lat": 9.997141,
@@ -550,7 +550,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_030",
+                "id": "CTO_DTQ_030",
                 "ten": "Lò Hủ Tiếu Chín Của",
                 "toa_do": {
                     "lat": 9.997763,
@@ -569,7 +569,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_031",
+                "id": "CTO_DTQ_031",
                 "ten": "Đền thờ các Vua Hùng",
                 "toa_do": {
                     "lat": 10.066399,
@@ -588,7 +588,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_032",
+                "id": "CTO_DTQ_032",
                 "ten": "Nhà lồng chợ Cái Khế",
                 "toa_do": {
                     "lat": 10.04406,
@@ -607,7 +607,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_033",
+                "id": "CTO_DTQ_033",
                 "ten": "Chùa Pôthi Somrôn",
                 "toa_do": {
                     "lat": 10.110352,
@@ -626,7 +626,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_034",
+                "id": "CTO_DTQ_034",
                 "ten": "Vườn dâu Hạ Châu",
                 "toa_do": {
                     "lat": 9.97184,
@@ -644,7 +644,7 @@
                 "gia_ve": 30000
             },
             {
-                "id": "CT_DTQ_035",
+                "id": "CTO_DTQ_035",
                 "ten": "Vườn trái cây Ba Cống",
                 "toa_do": {
                     "lat": 10.028386,
@@ -663,7 +663,7 @@
                 "gia_ve": 30000
             },
             {
-                "id": "CT_DTQ_036",
+                "id": "CTO_DTQ_036",
                 "ten": "Chùa Long Quang",
                 "toa_do": {
                     "lat": 10.065622,
@@ -682,7 +682,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_037",
+                "id": "CTO_DTQ_037",
                 "ten": "Vườn Sinh Thái Xẻo Nhum",
                 "toa_do": {
                     "lat": 9.998051,
@@ -701,7 +701,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_038",
+                "id": "CTO_DTQ_038",
                 "ten": "KDL Bảo Gia Trang Viên",
                 "toa_do": {
                     "lat": 9.960419,
@@ -720,7 +720,7 @@
                 "gia_ve": 50000
             },
             {
-                "id": "CT_DTQ_039",
+                "id": "CTO_DTQ_039",
                 "ten": "Chợ nổi Phong Điền",
                 "toa_do": {
                     "lat": 9.990308,
@@ -738,7 +738,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_040",
+                "id": "CTO_DTQ_040",
                 "ten": "Đình thần Tân Lộc",
                 "toa_do": {
                     "lat": 10.214768,
@@ -757,7 +757,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_041",
+                "id": "CTO_DTQ_041",
                 "ten": "Khu di tích Vườn Mận",
                 "toa_do": {
                     "lat": 10.017876,
@@ -776,7 +776,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_042",
+                "id": "CTO_DTQ_042",
                 "ten": "Sense City Cần Thơ",
                 "toa_do": {
                     "lat": 10.034489,
@@ -795,7 +795,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_043",
+                "id": "CTO_DTQ_043",
                 "ten": "Vincom Plaza Xuân Khánh",
                 "toa_do": {
                     "lat": 10.024823,
@@ -814,7 +814,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_044",
+                "id": "CTO_DTQ_044",
                 "ten": "GO! Cần Thơ",
                 "toa_do": {
                     "lat": 10.014214,
@@ -833,7 +833,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_045",
+                "id": "CTO_DTQ_045",
                 "ten": "Chợ An Khánh",
                 "toa_do": {
                     "lat": 10.039457,
@@ -851,7 +851,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_046",
+                "id": "CTO_DTQ_046",
                 "ten": "Làng du lịch sinh thái Hoa Súng",
                 "toa_do": {
                     "lat": 9.996179,
@@ -870,7 +870,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_047",
+                "id": "CTO_DTQ_047",
                 "ten": "Vườn sinh thái Lê Lộc",
                 "toa_do": {
                     "lat": 9.985131,
@@ -889,7 +889,7 @@
                 "gia_ve": 40000
             },
             {
-                "id": "CT_DTQ_048",
+                "id": "CTO_DTQ_048",
                 "ten": "Chợ Tân An",
                 "toa_do": {
                     "lat": 10.028802,
@@ -908,7 +908,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_049",
+                "id": "CTO_DTQ_049",
                 "ten": "Bảo tàng Quân khu 9",
                 "toa_do": {
                     "lat": 10.035876,
@@ -927,7 +927,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "CT_DTQ_050",
+                "id": "CTO_DTQ_050",
                 "ten": "Khu Di Tích Chiến Thắng Ông Hào",
                 "toa_do": {
                     "lat": 9.979307,
@@ -948,7 +948,7 @@
         ],
         "quan_an": [
             {
-                "id": "CT_QA_001",
+                "id": "CTO_QA_001",
                 "ten_quan": "Vịt Nấu Chao Thành Giao",
                 "dia_chi": "1/8 Lý Tự Trọng, An Phú, Ninh Kiều",
                 "gia_trung_binh": "100.000 - 200.000 VNĐ",
@@ -956,7 +956,7 @@
                 "dac_diem": "Quán nổi tiếng nhất nhì Cần Thơ, từng đón nhiều người nổi tiếng, vịt nấu mềm, chao thơm béo không bị hôi."
             },
             {
-                "id": "CT_QA_002",
+                "id": "CTO_QA_002",
                 "ten_quan": "Lẩu Mắm Dạ Lý",
                 "dia_chi": "89 Đường 3 Tháng 2, Hưng Lợi, Ninh Kiều",
                 "gia_trung_binh": "150.000 - 500.000 VNĐ",
@@ -964,7 +964,7 @@
                 "dac_diem": "Điểm đến đặc sản danh tiếng, nồi lẩu đầy ắp cá tôm cùng hàng chục loại rau đồng đặc trưng."
             },
             {
-                "id": "CT_QA_003",
+                "id": "CTO_QA_003",
                 "ten_quan": "Bánh Xèo Bảy Tới",
                 "dia_chi": "45 Hoàng Quốc Việt, An Bình, Ninh Kiều",
                 "gia_trung_binh": "50.000 - 100.000 VNĐ",
@@ -972,7 +972,7 @@
                 "dac_diem": "Vỏ bánh mỏng giòn, nhân tôm thịt củ hủ dừa ngọt thanh, ăn kèm rổ rau rừng khổng lồ."
             },
             {
-                "id": "CT_QA_004",
+                "id": "CTO_QA_004",
                 "ten_quan": "Nhà hàng Cây Bưởi",
                 "dia_chi": "9 Lý Thái Tổ, Hưng Phú, Cái Răng",
                 "gia_trung_binh": "100.000 - 300.000 VNĐ",
@@ -980,7 +980,7 @@
                 "dac_diem": "Hệ thống nhà hàng lâu đời, không gian sân vườn rộng lớn thích hợp cho gia đình và khách đoàn."
             },
             {
-                "id": "CT_QA_005",
+                "id": "CTO_QA_005",
                 "ten_quan": "Sủi cảo A Chảy",
                 "dia_chi": "38 Nguyễn An Ninh, Tân An, Ninh Kiều",
                 "gia_trung_binh": "30.000 - 50.000 VNĐ",
@@ -988,7 +988,7 @@
                 "dac_diem": "Quán ăn lâu đời mang phong vị Hoa, sủi cảo nhân tôm thịt chắc nịch, nước lèo thanh ngọt."
             },
             {
-                "id": "CT_QA_006",
+                "id": "CTO_QA_006",
                 "ten_quan": "Bánh mì chảo Viễn Hưng",
                 "dia_chi": "61 Võ Văn Tần, Tân An, Ninh Kiều",
                 "gia_trung_binh": "30.000 - 50.000 VNĐ",
@@ -996,7 +996,7 @@
                 "dac_diem": "Quán ăn sáng hút khách với chảo xíu mại, ốp la nóng hổi, xíu mại viên to mềm tan."
             },
             {
-                "id": "CT_QA_007",
+                "id": "CTO_QA_007",
                 "ten_quan": "Phố nướng 102",
                 "dia_chi": "Quang Trung, Hưng Phú, Cái Răng",
                 "gia_trung_binh": "80.000 - 200.000 VNĐ",
@@ -1004,7 +1004,7 @@
                 "dac_diem": "Không gian nướng ngói dân dã, menu đa dạng với mức giá bình dân, là điểm hẹn của sinh viên và gia đình."
             },
             {
-                "id": "CT_QA_008",
+                "id": "CTO_QA_008",
                 "ten_quan": "Quán Hồi Đó",
                 "dia_chi": "54 Trần Bình Trọng, An Phú, Ninh Kiều",
                 "gia_trung_binh": "50.000 - 150.000 VNĐ",
@@ -1012,7 +1012,7 @@
                 "dac_diem": "Tái hiện không gian Nam Bộ xưa cũ, mâm cơm gia đình với các món kho quẹt, canh chua chuẩn vị mẹ nấu."
             },
             {
-                "id": "CT_QA_009",
+                "id": "CTO_QA_009",
                 "ten_quan": "Nem Nướng Thanh Vân",
                 "dia_chi": "17 Đại lộ Hòa Bình, Tân An, Ninh Kiều",
                 "gia_trung_binh": "50.000 - 100.000 VNĐ",
@@ -1020,7 +1020,7 @@
                 "dac_diem": "Viên nem mập mạp nướng xém cạnh, cuộn bánh tráng rau sống chấm tương đậu nành béo bùi."
             },
             {
-                "id": "CT_QA_010",
+                "id": "CTO_QA_010",
                 "ten_quan": "Lẩu Bò Sìl Mỳ",
                 "dia_chi": "13/2 Lê Lai, An Phú, Ninh Kiều",
                 "gia_trung_binh": "100.000 - 250.000 VNĐ",
@@ -1028,7 +1028,7 @@
                 "dac_diem": "Quán lẩu bò mang hương vị người Hoa, nước lèo ninh xương đậm đà, thịt bò mềm và gân bò giòn sần sật."
             },
             {
-                "id": "CT_QA_011",
+                "id": "CTO_QA_011",
                 "ten_quan": "Quán Bò nướng ngói Cù Lần",
                 "dia_chi": "88/19A Đề Thám, Tân An, Ninh Kiều",
                 "gia_trung_binh": "80.000 - 180.000 VNĐ",
@@ -1036,7 +1036,7 @@
                 "dac_diem": "Thịt bò nướng trên ngói giữ được độ ngọt và mềm, ăn không bị khét, tẩm ướp đậm đà."
             },
             {
-                "id": "CT_QA_012",
+                "id": "CTO_QA_012",
                 "ten_quan": "Quán Hải Sản Biển Đông",
                 "dia_chi": "30 Lê Lợi, Cái Khế, Ninh Kiều",
                 "gia_trung_binh": "150.000 - 400.000 VNĐ",
@@ -1044,7 +1044,7 @@
                 "dac_diem": "Hải sản bơi tại hồ, không gian rộng rãi chuyên phục vụ tiệc và khách du lịch thích hải sản tươi."
             },
             {
-                "id": "CT_QA_013",
+                "id": "CTO_QA_013",
                 "ten_quan": "Quán Pallet",
                 "dia_chi": "142B Mậu Thân, An Nghiệp, Ninh Kiều",
                 "gia_trung_binh": "50.000 - 150.000 VNĐ",
@@ -1052,7 +1052,7 @@
                 "dac_diem": "Bày trí độc đáo bằng gỗ pallet, món nướng tẩm ướp vừa miệng, phù hợp ăn nhậu bình dân."
             },
             {
-                "id": "CT_QA_014",
+                "id": "CTO_QA_014",
                 "ten_quan": "Ẩm Thực Đồng Quê",
                 "dia_chi": "14 Lương Đình Của, Ninh Kiều",
                 "gia_trung_binh": "80.000 - 200.000 VNĐ",
@@ -1060,7 +1060,7 @@
                 "dac_diem": "Quán chuyên các món đồng quê miệt vườn miền Tây, nguyên liệu tươi bắt sống chế biến tại chỗ."
             },
             {
-                "id": "CT_QA_015",
+                "id": "CTO_QA_015",
                 "ten_quan": "Quán Lẩu Mắm Cần Thơ",
                 "dia_chi": "162/18 Trần Ngọc Quế, Xuân Khánh",
                 "gia_trung_binh": "100.000 - 250.000 VNĐ",
@@ -1068,7 +1068,7 @@
                 "dac_diem": "Điểm thưởng thức lẩu mắm đậm đà, rau nhúng lẩu tươi phong phú, không gian giản dị gần gũi."
             },
             {
-                "id": "CT_QA_016",
+                "id": "CTO_QA_016",
                 "ten_quan": "Dê Phố Núi",
                 "dia_chi": "180 Võ Văn Kiệt, An Thới, Bình Thủy",
                 "gia_trung_binh": "100.000 - 250.000 VNĐ",
@@ -1076,7 +1076,7 @@
                 "dac_diem": "Đặc sản dê núi chế biến không bị hăng mùi, thịt mềm ngọt, không gian mở thoáng mát."
             },
             {
-                "id": "CT_QA_017",
+                "id": "CTO_QA_017",
                 "ten_quan": "Bánh Tráng Phơi Sương Đồng Xanh 2",
                 "dia_chi": "211 Nguyễn Văn Linh, Hưng Lợi",
                 "gia_trung_binh": "80.000 - 200.000 VNĐ",
@@ -1084,7 +1084,7 @@
                 "dac_diem": "Bánh tráng Trảng Bàng dẻo thơm, thịt bắp heo luộc mỏng cuốn rau rừng mắm nêm xuất sắc."
             },
             {
-                "id": "CT_QA_018",
+                "id": "CTO_QA_018",
                 "ten_quan": "Quán cơm cô Út Bông",
                 "dia_chi": "Hẻm 126 Đường 30 Tháng 4",
                 "gia_trung_binh": "25.000 - 50.000 VNĐ",
@@ -1092,7 +1092,7 @@
                 "dac_diem": "Quán cơm bình dân giá sinh viên nhưng chất lượng tuyệt hảo, sườn nướng than hoa thơm nức."
             },
             {
-                "id": "CT_QA_019",
+                "id": "CTO_QA_019",
                 "ten_quan": "Bếp Mẹ Miên",
                 "dia_chi": "294 Đồng Văn Cống, An Thới, Bình Thủy",
                 "gia_trung_binh": "100.000 - 200.000 VNĐ",
@@ -1100,7 +1100,7 @@
                 "dac_diem": "Ẩm thực Khmer Nam Bộ kết hợp Thái Lan, vị chua cay mặn ngọt bùng nổ, lạ miệng."
             },
             {
-                "id": "CT_QA_020",
+                "id": "CTO_QA_020",
                 "ten_quan": "Quán ăn 134",
                 "dia_chi": "134 Huỳnh Cương, An Cư, Ninh Kiều",
                 "gia_trung_binh": "50.000 - 120.000 VNĐ",
@@ -1108,7 +1108,7 @@
                 "dac_diem": "Quán ăn cạnh bờ hồ Xáng Thổi thoáng mát, chuyên các món ăn chơi và lai rai Nam Bộ."
             },
             {
-                "id": "CT_QA_021",
+                "id": "CTO_QA_021",
                 "ten_quan": "Quán Lẩu Mờ Ắm",
                 "dia_chi": "19 Nguyễn Cư Trinh, An Phú, Ninh Kiều",
                 "gia_trung_binh": "100.000 - 200.000 VNĐ",
@@ -1116,7 +1116,7 @@
                 "dac_diem": "Phục vụ lẩu cá linh ngon đúng điệu mùa nước nổi, vị chua thanh của me và ngọt của cá linh non."
             },
             {
-                "id": "CT_QA_022",
+                "id": "CTO_QA_022",
                 "ten_quan": "Quán Mẫn",
                 "dia_chi": "184 Huỳnh Cương, An Cư, Ninh Kiều",
                 "gia_trung_binh": "80.000 - 150.000 VNĐ",
@@ -1124,7 +1124,7 @@
                 "dac_diem": "Kỹ thuật nướng trui rơm truyền thống giúp thịt cá lóc chín thơm, cuốn bánh tráng rau sống cực cuốn."
             },
             {
-                "id": "CT_QA_023",
+                "id": "CTO_QA_023",
                 "ten_quan": "Quán Bánh Cống 292",
                 "dia_chi": "292 Đường 30 Tháng 4, Ninh Kiều",
                 "gia_trung_binh": "20.000 - 40.000 VNĐ",
@@ -1132,7 +1132,7 @@
                 "dac_diem": "Bánh cống giòn rụm bên ngoài, nhân đậu xanh thịt bằm bùi béo bên trong, đặc sản ăn xế lý tưởng."
             },
             {
-                "id": "CT_QA_024",
+                "id": "CTO_QA_024",
                 "ten_quan": "Bún tôm khô Nguyễn Đệ",
                 "dia_chi": "10 Nguyễn Đệ, An Hòa, Ninh Kiều",
                 "gia_trung_binh": "30.000 - 50.000 VNĐ",
@@ -1140,7 +1140,7 @@
                 "dac_diem": "Nước lèo trong vắt ninh từ tôm khô, chả lụa và huyết heo, hương vị thanh tao mộc mạc."
             },
             {
-                "id": "CT_QA_025",
+                "id": "CTO_QA_025",
                 "ten_quan": "Lẩu bần Phù Sa",
                 "dia_chi": "KDL Phù Sa, Cái Răng",
                 "gia_trung_binh": "150.000 - 300.000 VNĐ",
@@ -1148,7 +1148,7 @@
                 "dac_diem": "Vị chua thanh chát nhẹ của trái bần chín hòa quyện mỡ cá tra béo ngậy tạo nên nồi lẩu độc nhất vô nhị."
             },
             {
-                "id": "CT_QA_026",
+                "id": "CTO_QA_026",
                 "ten_quan": "Quán Nhậu Tư Minh",
                 "dia_chi": "41/7 Mạc Thiên Tích, Ninh Kiều",
                 "gia_trung_binh": "80.000 - 180.000 VNĐ",
@@ -1156,7 +1156,7 @@
                 "dac_diem": "Món cá kèo nướng ống sậy giữ nước ngọt, thịt mềm không khô, địa điểm nhậu bình dân."
             },
             {
-                "id": "CT_QA_027",
+                "id": "CTO_QA_027",
                 "ten_quan": "Cơm Niêu Quê Ngoại",
                 "dia_chi": "268D Nguyễn Văn Linh, Hưng Lợi",
                 "gia_trung_binh": "100.000 - 250.000 VNĐ",
@@ -1164,7 +1164,7 @@
                 "dac_diem": "Quán ăn gia đình mang phong vị quê hương, cơm niêu đáy giòn rụm, thực đơn phong phú."
             },
             {
-                "id": "CT_QA_028",
+                "id": "CTO_QA_028",
                 "ten_quan": "Nhà hàng Alô Dzô 100",
                 "dia_chi": "55B1B Hồ Búng Xáng, An Khánh",
                 "gia_trung_binh": "100.000 - 300.000 VNĐ",
@@ -1172,7 +1172,7 @@
                 "dac_diem": "View hồ cực kỳ chill, sức chứa lớn, món ăn đa dạng từ nhậu đến gia đình, phục vụ chuyên nghiệp."
             },
             {
-                "id": "CT_QA_029",
+                "id": "CTO_QA_029",
                 "ten_quan": "Nhà Hàng Hoa Sứ",
                 "dia_chi": "Vòng xoay Cồn Cái Khế, Lê Lợi",
                 "gia_trung_binh": "150.000 - 400.000 VNĐ",
@@ -1180,7 +1180,7 @@
                 "dac_diem": "Khu ẩm thực bờ sông lộng gió, nổi tiếng với món ốc bươu nướng tiêu xanh cay nồng và lẩu cua đồng."
             },
             {
-                "id": "CT_QA_030",
+                "id": "CTO_QA_030",
                 "ten_quan": "Bún mắm 173",
                 "dia_chi": "594 Đường 30 Tháng 4, Hưng Lợi",
                 "gia_trung_binh": "40.000 - 60.000 VNĐ",

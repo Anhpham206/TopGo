@@ -2,7 +2,7 @@
     "Bình Thuận": {
         "diem_tham_quan": [
             {
-                "id": "BIT_DTQ_001",
+                "id": "BTN_DTQ_001",
                 "ten": "Đồi Cát Đỏ (Red Sand Dunes)",
                 "toa_do": {
                     "lat": 10.949296,
@@ -21,7 +21,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_002",
+                "id": "BTN_DTQ_002",
                 "ten": "Bàu Trắng - Đồi Cát Trắng (Minh Thái)",
                 "toa_do": {
                     "lat": 11.060948,
@@ -40,7 +40,7 @@
                 "gia_ve": 15000
             },
             {
-                "id": "BIT_DTQ_003",
+                "id": "BTN_DTQ_003",
                 "ten": "Hồ Bàu Trắng (White Lake)",
                 "toa_do": {
                     "lat": 11.063895,
@@ -59,7 +59,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_004",
+                "id": "BTN_DTQ_004",
                 "ten": "Bàu Trắng U&Me",
                 "toa_do": {
                     "lat": 11.063796,
@@ -78,7 +78,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_005",
+                "id": "BTN_DTQ_005",
                 "ten": "Đồi Cát Trắng ít khách (Less Touristy)",
                 "toa_do": {
                     "lat": 11.112394,
@@ -97,7 +97,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_006",
+                "id": "BTN_DTQ_006",
                 "ten": "Suối Tiên (Fairy Stream)",
                 "toa_do": {
                     "lat": 10.95122,
@@ -116,7 +116,7 @@
                 "gia_ve": 50000
             },
             {
-                "id": "BIT_DTQ_007",
+                "id": "BTN_DTQ_007",
                 "ten": "Núi Tà Cú (Khu Du Lịch)",
                 "toa_do": {
                     "lat": 10.82348,
@@ -135,7 +135,7 @@
                 "gia_ve": 250000
             },
             {
-                "id": "BIT_DTQ_008",
+                "id": "BTN_DTQ_008",
                 "ten": "Cáp Treo Núi Tà Cú",
                 "toa_do": {
                     "lat": 10.823204,
@@ -154,7 +154,7 @@
                 "gia_ve": 250000
             },
             {
-                "id": "BIT_DTQ_009",
+                "id": "BTN_DTQ_009",
                 "ten": "Mũi Kê Gà (Cape Ke Ga)",
                 "toa_do": {
                     "lat": 10.699425,
@@ -173,7 +173,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_010",
+                "id": "BTN_DTQ_010",
                 "ten": "Hải Đăng Kê Gà (Ke Ga Lighthouse)",
                 "toa_do": {
                     "lat": 10.695289,
@@ -192,7 +192,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_011",
+                "id": "BTN_DTQ_011",
                 "ten": "Tháp Chàm Poshanư (Po Sah Inu)",
                 "toa_do": {
                     "lat": 10.935968,
@@ -211,7 +211,7 @@
                 "gia_ve": 15000
             },
             {
-                "id": "BIT_DTQ_012",
+                "id": "BTN_DTQ_012",
                 "ten": "Đình Vạn Thủy Tú (Whale Temple)",
                 "toa_do": {
                     "lat": 10.922917,
@@ -230,7 +230,7 @@
                 "gia_ve": 15000
             },
             {
-                "id": "BIT_DTQ_013",
+                "id": "BTN_DTQ_013",
                 "ten": "Tháp Nước Phan Thiết (Water Tower)",
                 "toa_do": {
                     "lat": 10.928808,
@@ -249,7 +249,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_014",
+                "id": "BTN_DTQ_014",
                 "ten": "Bảo Tàng Hồ Chí Minh Phan Thiết",
                 "toa_do": {
                     "lat": 10.928683,
@@ -268,7 +268,7 @@
                 "gia_ve": 10000
             },
             {
-                "id": "BIT_DTQ_015",
+                "id": "BTN_DTQ_015",
                 "ten": "Bãi Biển Đồi Dương",
                 "toa_do": {
                     "lat": 10.924222,
@@ -287,7 +287,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_016",
+                "id": "BTN_DTQ_016",
                 "ten": "Công Viên Đồi Dương",
                 "toa_do": {
                     "lat": 10.925517,
@@ -306,7 +306,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_017",
+                "id": "BTN_DTQ_017",
                 "ten": "Bãi Biển Thương Chánh",
                 "toa_do": {
                     "lat": 10.917281,
@@ -325,7 +325,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_018",
+                "id": "BTN_DTQ_018",
                 "ten": "Bãi Biển Hàm Tiến",
                 "toa_do": {
                     "lat": 10.940443,
@@ -344,7 +344,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_019",
+                "id": "BTN_DTQ_019",
                 "ten": "Bãi Biển Mũi Né",
                 "toa_do": {
                     "lat": 10.95375,
@@ -363,7 +363,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_020",
+                "id": "BTN_DTQ_020",
                 "ten": "Bãi Sau Mũi Né",
                 "toa_do": {
                     "lat": 10.922947,
@@ -382,7 +382,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_021",
+                "id": "BTN_DTQ_021",
                 "ten": "Gành Đá Mũi Né",
                 "toa_do": {
                     "lat": 10.914832,
@@ -401,7 +401,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_022",
+                "id": "BTN_DTQ_022",
                 "ten": "Làng Chài Mũi Né (Fishing Village)",
                 "toa_do": {
                     "lat": 10.94101,
@@ -420,7 +420,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_023",
+                "id": "BTN_DTQ_023",
                 "ten": "Cảng Cá Mũi Né (Fishing Harbour)",
                 "toa_do": {
                     "lat": 10.942081,
@@ -439,7 +439,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_024",
+                "id": "BTN_DTQ_024",
                 "ten": "Làng Chài Hòn Rơm",
                 "toa_do": {
                     "lat": 10.958232,
@@ -458,7 +458,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_025",
+                "id": "BTN_DTQ_025",
                 "ten": "Lâu Đài Rượu Vang RD Phan Thiết",
                 "toa_do": {
                     "lat": 10.947464,
@@ -477,7 +477,7 @@
                 "gia_ve": 145000
             },
             {
-                "id": "BIT_DTQ_026",
+                "id": "BTN_DTQ_026",
                 "ten": "Bờ Kè Sông Cà Ty",
                 "toa_do": {
                     "lat": 10.922923,
@@ -496,7 +496,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_027",
+                "id": "BTN_DTQ_027",
                 "ten": "Bãi Biển Cổ Thạch",
                 "toa_do": {
                     "lat": 11.176661,
@@ -515,7 +515,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_028",
+                "id": "BTN_DTQ_028",
                 "ten": "Đức Mẹ Tà Pao (Our Lady of Ta Pao)",
                 "toa_do": {
                     "lat": 11.138395,
@@ -534,7 +534,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_029",
+                "id": "BTN_DTQ_029",
                 "ten": "Đền Thầy Thím (Lagi)",
                 "toa_do": {
                     "lat": 10.723474,
@@ -553,7 +553,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_030",
+                "id": "BTN_DTQ_030",
                 "ten": "Chùa Thiện Quang Mũi Né",
                 "toa_do": {
                     "lat": 10.971099,
@@ -572,7 +572,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_031",
+                "id": "BTN_DTQ_031",
                 "ten": "Chùa Thanh Minh Phan Thiết",
                 "toa_do": {
                     "lat": 10.92912,
@@ -591,7 +591,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_032",
+                "id": "BTN_DTQ_032",
                 "ten": "Chùa Phước Thiền Mũi Né",
                 "toa_do": {
                     "lat": 10.954492,
@@ -610,7 +610,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_033",
+                "id": "BTN_DTQ_033",
                 "ten": "Chùa Linh Long Mũi Né",
                 "toa_do": {
                     "lat": 10.927608,
@@ -629,7 +629,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_034",
+                "id": "BTN_DTQ_034",
                 "ten": "Hội Quán Quan Thánh (Guan Yu Temple)",
                 "toa_do": {
                     "lat": 10.927197,
@@ -648,7 +648,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_035",
+                "id": "BTN_DTQ_035",
                 "ten": "Chùa Bà Đức Sanh Phan Thiết",
                 "toa_do": {
                     "lat": 10.92489,
@@ -667,7 +667,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_036",
+                "id": "BTN_DTQ_036",
                 "ten": "Bảo Tàng Cổ Vật Mũi Né",
                 "toa_do": {
                     "lat": 10.937589,
@@ -686,7 +686,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_037",
+                "id": "BTN_DTQ_037",
                 "ten": "Mian Farm Bình Thuận",
                 "toa_do": {
                     "lat": 11.05453,
@@ -705,7 +705,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_038",
+                "id": "BTN_DTQ_038",
                 "ten": "Điểm Tham Quan Du Lịch Suối Tiên",
                 "toa_do": {
                     "lat": 10.955615,
@@ -724,7 +724,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_039",
+                "id": "BTN_DTQ_039",
                 "ten": "Bãi Biển Lagi (Ham Tan)",
                 "toa_do": {
                     "lat": 10.704616,
@@ -743,7 +743,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_040",
+                "id": "BTN_DTQ_040",
                 "ten": "Hòn Bà Lagi Resort & Beach",
                 "toa_do": {
                     "lat": 10.668982,
@@ -762,7 +762,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_041",
+                "id": "BTN_DTQ_041",
                 "ten": "Đền Liệt Sĩ Phan Thiết",
                 "toa_do": {
                     "lat": 10.944022,
@@ -781,7 +781,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_042",
+                "id": "BTN_DTQ_042",
                 "ten": "Hồ Tôm Phan Thiết (Ho Tom Restaurant Area)",
                 "toa_do": {
                     "lat": 10.938267,
@@ -800,7 +800,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_043",
+                "id": "BTN_DTQ_043",
                 "ten": "Gành Đá Bảy Màu (Co Thach)",
                 "toa_do": {
                     "lat": 11.176661,
@@ -819,7 +819,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_044",
+                "id": "BTN_DTQ_044",
                 "ten": "Tượng Tam Thế Phật Tà Cú",
                 "toa_do": {
                     "lat": 10.813573,
@@ -838,7 +838,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_045",
+                "id": "BTN_DTQ_045",
                 "ten": "Đỉnh Tà Cú (Trekking 695m)",
                 "toa_do": {
                     "lat": 10.811897,
@@ -857,7 +857,7 @@
                 "gia_ve": 50000
             },
             {
-                "id": "BIT_DTQ_046",
+                "id": "BTN_DTQ_046",
                 "ten": "Chợ Phan Thiết (Phan Thiet Market)",
                 "toa_do": {
                     "lat": 10.9295,
@@ -876,7 +876,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_047",
+                "id": "BTN_DTQ_047",
                 "ten": "Bãi Biển Hòn Rơm",
                 "toa_do": {
                     "lat": 10.960961,
@@ -895,7 +895,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_048",
+                "id": "BTN_DTQ_048",
                 "ten": "Điểm Lướt Ván Diều Mũi Né (Kite Surfing)",
                 "toa_do": {
                     "lat": 10.952035,
@@ -914,7 +914,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_049",
+                "id": "BTN_DTQ_049",
                 "ten": "Suối Nước Mũi Né (Suoi Nuoc)",
                 "toa_do": {
                     "lat": 10.984673,
@@ -933,7 +933,7 @@
                 "gia_ve": 0
             },
             {
-                "id": "BIT_DTQ_050",
+                "id": "BTN_DTQ_050",
                 "ten": "Faro Café - Điểm Ngắm Cảnh Mũi Né",
                 "toa_do": {
                     "lat": 10.950925,
@@ -954,7 +954,7 @@
         ],
         "quan_an": [
             {
-                "id": "BT_QA_001",
+                "id": "BTN_QA_001",
                 "ten_quan": "Quán Gỏi Cá Trích Đào Duy Từ",
                 "dia_chi": "14 Đào Duy Từ, Phường Đức Thắng, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "50.000 – 150.000 VNĐ",
@@ -962,7 +962,7 @@
                 "dac_diem": "Quán nổi tiếng nhất Phan Thiết với đặc sản gỏi cuốn chả giò cá trích – món ăn biểu tượng của vùng biển Bình Thuận. Cá trích xay nhuyễn, cuốn bánh tráng chiên giòn, ăn kèm rau sống, trứng gà và nước mắm mặn đặc biệt."
             },
             {
-                "id": "BT_QA_002",
+                "id": "BTN_QA_002",
                 "ten_quan": "Cơm Gà Hạnh Hương",
                 "dia_chi": "55 Tuyên Quang, Phường Bình Hưng, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "50.000 – 120.000 VNĐ",
@@ -970,7 +970,7 @@
                 "dac_diem": "Quán cơm gà 20 năm tuổi nổi tiếng nhất Phan Thiết, cơm nấu bằng nước gà luộc thơm dẻo sánh vàng, gà luộc lọc xương béo ngậy. Luôn đông khách cả ngày, phục vụ khách đoàn và gia đình rất tốt."
             },
             {
-                "id": "BT_QA_003",
+                "id": "BTN_QA_003",
                 "ten_quan": "Bánh Canh Chả Cá Cô Xí",
                 "dia_chi": "1 Kim Đồng, Phường Đức Nghĩa, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "30.000 – 60.000 VNĐ",
@@ -978,7 +978,7 @@
                 "dac_diem": "Quán bánh canh chả cá lâu đời quen thuộc của dân địa phương, sợi bánh canh thủ công từ bột gạo mềm dai, chả cá tươi gồm chả chiên và chả hấp, nước dùng ngọt thanh từ xương ống và tôm khô đặc trưng."
             },
             {
-                "id": "BT_QA_004",
+                "id": "BTN_QA_004",
                 "ten_quan": "Hải Sản Quán 06",
                 "dia_chi": "06 Đặng Văn Ngữ, Phường Phú Trinh, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "80.000 – 400.000 VNĐ",
@@ -986,7 +986,7 @@
                 "dac_diem": "Quán hải sản nổi tiếng luôn đông khách trên đường Đặng Văn Ngữ, nguyên liệu hải sản tươi sống chế biến tỉ mỉ kỹ càng. Các món nổi bật như tôm càng, ghẹ, mực tươi và hàu nướng được thực khách đánh giá rất cao về chất lượng."
             },
             {
-                "id": "BT_QA_005",
+                "id": "BTN_QA_005",
                 "ten_quan": "Nhà Hàng Hằng Loan",
                 "dia_chi": "104 Trưng Trắc, Phường Đức Thắng, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "80.000 – 350.000 VNĐ",
@@ -994,7 +994,7 @@
                 "dac_diem": "Nhà hàng hải sản view sông Cà Ty trữ tình nổi tiếng Phan Thiết, phong cách chế biến dân dã thôn quê, giá cả bình dân phù hợp mọi đối tượng. Còn kiêm vựa cung cấp hải sản tươi sống và đông lạnh để mua về làm quà."
             },
             {
-                "id": "BT_QA_006",
+                "id": "BTN_QA_006",
                 "ten_quan": "Cơm Niêu Panda Food",
                 "dia_chi": "54-55 Hùng Vương, Phường Phú Thủy, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "60.000 – 250.000 VNĐ",
@@ -1002,7 +1002,7 @@
                 "dac_diem": "Nhà hàng gia đình nổi tiếng nhất Phan Thiết với cơm niêu đặc trưng, gỏi cá đặc sản địa phương và lẩu hải sản đa dạng. Không gian 2 tầng rộng rãi, phù hợp cả gia đình lẫn nhóm đông, được người dân địa phương tin tưởng lâu năm."
             },
             {
-                "id": "BT_QA_007",
+                "id": "BTN_QA_007",
                 "ten_quan": "Bánh Xèo Cô Phượng",
                 "dia_chi": "Đường Tuyên Quang, Phường Bình Hưng, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "30.000 – 80.000 VNĐ",
@@ -1010,7 +1010,7 @@
                 "dac_diem": "Quán bánh xèo nức tiếng Phan Thiết, buổi chiều tối khói bốc lên thơm lừng và tiếng xèo xèo của bột đổ khuôn thu hút khách ngang qua. Bánh xèo giòn vỏ, nhân tôm thịt đầy đặn, ăn kèm rau sống và nước chấm đậm đà."
             },
             {
-                "id": "BT_QA_008",
+                "id": "BTN_QA_008",
                 "ten_quan": "Mì Quảng Trần Phú",
                 "dia_chi": "129 Trần Phú, Phường Đức Nghĩa, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "30.000 – 70.000 VNĐ",
@@ -1018,7 +1018,7 @@
                 "dac_diem": "Quán mì Quảng ăn sáng ngon nổi tiếng được người dân địa phương và du khách rất yêu thích. Mì vàng dẻo dai, nước dùng đậm đà ít nước theo đúng chuẩn vị miền Trung, topping tôm thịt tươi, đậu phụng giòn, bánh đa giòn rụm."
             },
             {
-                "id": "BT_QA_009",
+                "id": "BTN_QA_009",
                 "ten_quan": "Bánh Hỏi Đồng Khánh",
                 "dia_chi": "40 Trần Phú, Phường Lạc Đạo, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "25.000 – 60.000 VNĐ",
@@ -1026,7 +1026,7 @@
                 "dac_diem": "Quán bánh hỏi lòng heo lâu đời gần 16 năm, nổi tiếng với bánh hỏi cực to mềm mịn, lòng heo chế biến không hôi tanh và mềm ngon, nước chấm mắm tỏi theo công thức riêng độc quyền của quán. Là điểm ăn sáng không thể bỏ qua."
             },
             {
-                "id": "BT_QA_010",
+                "id": "BTN_QA_010",
                 "ten_quan": "Quán Nhậu Tư Minh",
                 "dia_chi": "34 Chu Văn An, Phường Đức Thắng, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "60.000 – 300.000 VNĐ",
@@ -1034,7 +1034,7 @@
                 "dac_diem": "Quán nhậu hải sản nằm bờ kè sông Cà Ty cực kỳ đông vui, chuyên hải sản tươi sống loại 1 như tôm, mực, bạch tuộc, cá biển. Gỏi hải sản và lẩu cá kèo là các món được gọi nhiều nhất, không gian sôi động rất phù hợp tụ tập bạn bè."
             },
             {
-                "id": "BT_QA_011",
+                "id": "BTN_QA_011",
                 "ten_quan": "Cơm Niêu Công Phụng",
                 "dia_chi": "B102 Đại lộ Hùng Vương, Phường Phú Thủy, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "60.000 – 200.000 VNĐ",
@@ -1042,7 +1042,7 @@
                 "dac_diem": "Nhà hàng cơm niêu nổi tiếng với thực đơn truyền thống đa dạng: rau muống xào tỏi, vịt nướng chao, gỏi cá bóp, khổ qua kho, canh chua cá. Cơm niêu nấu trong nồi đất hạt cơm dẻo thơm, phục vụ chuẩn nhà hàng mở đến 15h."
             },
             {
-                "id": "BT_QA_012",
+                "id": "BTN_QA_012",
                 "ten_quan": "Quán Lâm Tòng Mũi Né",
                 "dia_chi": "92 Nguyễn Đình Chiểu, Phường Hàm Tiến, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "80.000 – 400.000 VNĐ",
@@ -1050,7 +1050,7 @@
                 "dac_diem": "Quán hải sản view biển nổi tiếng trên đường bờ kè Nguyễn Đình Chiểu, tầm nhìn hướng ra biển xanh. Nguyên liệu hải sản chế biến theo cách truyền thống và hiện đại, thực khách tự chọn hải sản từ bể rồi yêu cầu cách chế biến."
             },
             {
-                "id": "BT_QA_013",
+                "id": "BTN_QA_013",
                 "ten_quan": "Nhà Hàng DejaVu Mũi Né",
                 "dia_chi": "122 Nguyễn Đình Chiểu, Khu phố 1, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "100.000 – 350.000 VNĐ",
@@ -1058,7 +1058,7 @@
                 "dac_diem": "Nhà hàng ăn tối đẹp nổi tiếng Mũi Né với không gian ấm cúng lãng mạn có khu vui chơi trẻ em. Đánh giá 4.2/5 trên Google, mở đến 0h, phù hợp gia đình và cặp đôi hẹn hò bên bờ biển Mũi Né về đêm tuyệt đẹp."
             },
             {
-                "id": "BT_QA_014",
+                "id": "BTN_QA_014",
                 "ten_quan": "Pit Stop Food Court Mũi Né",
                 "dia_chi": "122 Nguyễn Đình Chiểu, Phường Hàm Tiến, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "50.000 – 200.000 VNĐ",
@@ -1066,7 +1066,7 @@
                 "dac_diem": "Khu ẩm thực food court đa dạng nhất Mũi Né, tập hợp món ngon của nhiều quốc gia, hải sản tươi sống và đặc sản lẩu thả cá mai Phan Thiết độc quyền. Có nhạc sống và sự kiện giải trí hàng đêm, không gian rộng thoáng mát sạch sẽ."
             },
             {
-                "id": "BT_QA_015",
+                "id": "BTN_QA_015",
                 "ten_quan": "Nhà Hàng Ngọc Sương Mũi Né",
                 "dia_chi": "179 Nguyễn Đình Chiểu, Phường Hàm Tiến, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "80.000 – 350.000 VNĐ",
@@ -1074,7 +1074,7 @@
                 "dac_diem": "Nhà hàng hải sản không gian đồng quê mát mẻ nổi tiếng với cơm chiên hải sản – sự kết hợp hoàn hảo màu sắc và hương vị cùng nước mắm Phan Thiết trứ danh. Hải sản đảm bảo tươi ngon, là điểm đến ưa thích của cả gia đình và nhóm du lịch."
             },
             {
-                "id": "BT_QA_016",
+                "id": "BTN_QA_016",
                 "ten_quan": "Bờ Kè 888 Mũi Né",
                 "dia_chi": "187 Nguyễn Đình Chiểu, Phường Hàm Tiến, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "50.000 – 200.000 VNĐ",
@@ -1082,7 +1082,7 @@
                 "dac_diem": "Quán hải sản bình dân nổi tiếng bờ kè Mũi Né đánh giá 4.0/5 Google, chuyên các món tôm đặc sắc như tôm nướng xiên que và tôm hùm nướng bơ. Không gian rộng thoải mái, giá cả hợp lý, mở đến 23h phù hợp ăn tối gia đình."
             },
             {
-                "id": "BT_QA_017",
+                "id": "BTN_QA_017",
                 "ten_quan": "Gỏi Cá Mai Vân Anh",
                 "dia_chi": "19 Huỳnh Thúc Kháng, Phường Hàm Tiến, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "60.000 – 150.000 VNĐ",
@@ -1090,7 +1090,7 @@
                 "dac_diem": "Quán gỏi cá đặc sản tuyệt vời nổi tiếng Mũi Né, chuyên gỏi cá mai, cá trích và cá suốt lọc xương, trộn gia vị tái chanh tươi. Du khách đánh giá cao sự tươi ngon và hương vị hợp khẩu vị, giá cả hợp lý so với chất lượng."
             },
             {
-                "id": "BT_QA_018",
+                "id": "BTN_QA_018",
                 "ten_quan": "Thùng Gỗ Restaurant",
                 "dia_chi": "360 Nguyễn Đình Chiểu, Phường Mũi Né, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "80.000 – 300.000 VNĐ",
@@ -1098,7 +1098,7 @@
                 "dac_diem": "Nhà hàng Việt được yêu thích tại Mũi Né với không gian mộc mạc gỗ ấm cúng gợi nhớ làng quê. Lẩu thả Phan Thiết là món nổi tiếng nhất vị tươi ngon chuẩn truyền thống, cùng thực đơn hải sản và món Việt gia đình phong phú."
             },
             {
-                "id": "BT_QA_019",
+                "id": "BTN_QA_019",
                 "ten_quan": "Nhà Hàng Sóng Biển",
                 "dia_chi": "162 Lê Lợi, Phường Hưng Long, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "100.000 – 400.000 VNĐ",
@@ -1106,7 +1106,7 @@
                 "dac_diem": "Nhà hàng mệnh danh view gần biển nhất Phan Thiết, nằm gần bãi biển Đồi Dương – Thương Chánh thu hút đông đảo gia đình. Hải sản tươi sống đa dạng, không gian rộng sân đỗ ô tô thoải mái, phù hợp cho các nhóm khách đoàn lớn."
             },
             {
-                "id": "BT_QA_020",
+                "id": "BTN_QA_020",
                 "ten_quan": "Tùng Xẻo Hương Sơn – Dê Đặc Sản",
                 "dia_chi": "13-14 Đào Duy Tùng, Phường Phú Thủy, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "100.000 – 350.000 VNĐ",
@@ -1114,7 +1114,7 @@
                 "dac_diem": "Quán dê đặc sản nổi tiếng được rất nhiều thực khách địa phương yêu thích, dê tươi xử lý kỹ không hôi, nêm nếm vừa miệng. Không gian rộng rãi thoáng mát phù hợp tiệc tùng họp mặt, là lựa chọn đổi gió với đặc sản núi rừng tại vùng biển."
             },
             {
-                "id": "BT_QA_021",
+                "id": "BTN_QA_021",
                 "ten_quan": "Nhà Hàng Năm Loan",
                 "dia_chi": "N61 Đào Tấn, Phường Phú Thủy, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "80.000 – 400.000 VNĐ",
@@ -1122,7 +1122,7 @@
                 "dac_diem": "Nhà hàng hải sản 2 tầng rộng rãi view biển trên đường Hùng Vương, hướng từ Phan Thiết ra Mũi Né rất dễ tìm. Khu đậu xe ô tô thoải mái, chất lượng món ăn được thực khách đánh giá tốt, là lựa chọn hàng đầu cho gia đình đông người."
             },
             {
-                "id": "BT_QA_022",
+                "id": "BTN_QA_022",
                 "ten_quan": "Breeze Restaurant & Bar",
                 "dia_chi": "Hẻm 283 Nguyễn Đình Chiểu, Phường Hàm Tiến, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "100.000 – 500.000 VNĐ",
@@ -1130,7 +1130,7 @@
                 "dac_diem": "Nhà hàng Á–Âu–Mỹ fusion nổi tiếng nhất Mũi Né với không gian mở thoáng hướng biển lãng mạn. Nhân viên nhiệt tình hiếu khách, thực đơn đa dạng từ hải sản đến món Âu tinh tế, lý tưởng cho bữa tối cặp đôi và sự kiện đặc biệt."
             },
             {
-                "id": "BT_QA_023",
+                "id": "BTN_QA_023",
                 "ten_quan": "Bánh Căn Cô Hà",
                 "dia_chi": "134 Thủ Khoa Huân, Phường Phú Thủy, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "15.000 – 40.000 VNĐ",
@@ -1138,7 +1138,7 @@
                 "dac_diem": "Quán bánh căn chiều tối nổi tiếng nhất Phan Thiết, chỉ mở từ chiều nhưng hết hàng rất nhanh. Bánh căn vỏ giòn nhân tôm thịt thơm ngon, ăn kèm nước mắm chua ngọt, luôn có hàng dài khách xếp chờ vào cuối tuần."
             },
             {
-                "id": "BT_QA_024",
+                "id": "BTN_QA_024",
                 "ten_quan": "Bún Bò Nguyệt",
                 "dia_chi": "34 Thủ Khoa Huân, Phường Phú Thủy, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "40.000 – 80.000 VNĐ",
@@ -1146,7 +1146,7 @@
                 "dac_diem": "Quán bún bò Huế nổi tiếng ai ở Phan Thiết cũng biết, nước dùng đậm đà đúng vị Huế truyền thống, thịt bò mềm thơm ngon. Không gian sạch sẽ thoáng mát, nguyên liệu luôn tươi ngon chọn lọc kỹ, phong cách phục vụ nhiệt tình giá hợp lý."
             },
             {
-                "id": "BT_QA_025",
+                "id": "BTN_QA_025",
                 "ten_quan": "Nhà Hàng Bé Hiếu Hải Sản",
                 "dia_chi": "137 Hùng Vương, Phường Phú Thủy, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "60.000 – 300.000 VNĐ",
@@ -1154,7 +1154,7 @@
                 "dac_diem": "Quán hải sản bình dân nổi tiếng nhất đường Hùng Vương, hải sản còn bơi trong thùng chậu khách tự bắt chọn. Giá cả hợp lý, chế biến vừa miệng chuẩn phong cách miền biển, luôn đông khách cả ngày, phù hợp mọi túi tiền."
             },
             {
-                "id": "BT_QA_026",
+                "id": "BTN_QA_026",
                 "ten_quan": "Nam Phương Quán Mũi Né",
                 "dia_chi": "07 Nguyễn Minh Châu, Phường Mũi Né, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "70.000 – 250.000 VNĐ",
@@ -1162,7 +1162,7 @@
                 "dac_diem": "Quán hải sản lâu năm đậm chất biển tại Mũi Né, giữ được hương vị truyền thống trong từng món, nguyên liệu tươi ngon từng bữa. Không gian sạch sẽ thoáng mát, phục vụ nhanh thân thiện, là địa chỉ ăn hải sản đúng vị và giá hợp lý."
             },
             {
-                "id": "BT_QA_027",
+                "id": "BTN_QA_027",
                 "ten_quan": "Cánh Buồm Vàng Quán",
                 "dia_chi": "72D Huỳnh Thúc Kháng, Khu phố 4, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "80.000 – 350.000 VNĐ",
@@ -1170,7 +1170,7 @@
                 "dac_diem": "Quán hải sản tọa lạc gần Làng Chài Mũi Né với không gian mở rộng rãi view biển đẹp. Thực đơn phong phú từ mặt tiền đường Huỳnh Thúc Kháng nhộn nhịp, nguyên liệu tươi ngon, điểm hẹn lý tưởng cho cả gia đình hoặc nhóm bạn."
             },
             {
-                "id": "BT_QA_028",
+                "id": "BTN_QA_028",
                 "ten_quan": "Phố Mũi Né – Cơm Niêu Hải Sản",
                 "dia_chi": "122 Nguyễn Đình Chiểu, Phường Hàm Tiến, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "80.000 – 280.000 VNĐ",
@@ -1178,7 +1178,7 @@
                 "dac_diem": "Nhà hàng cơm niêu hải sản nổi bật đường Nguyễn Đình Chiểu, thực đơn kết hợp cơm niêu truyền thống với hải sản Mũi Né tươi ngon. Không gian rộng rãi hiện đại nhưng gần gũi, phục vụ nhanh, phù hợp nhóm bạn và gia đình đi du lịch."
             },
             {
-                "id": "BT_QA_029",
+                "id": "BTN_QA_029",
                 "ten_quan": "Chả Lụi Hàm Tân",
                 "dia_chi": "246 Nguyễn Đình Chiểu, Khu phố 3, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "20.000 – 60.000 VNĐ",
@@ -1186,7 +1186,7 @@
                 "dac_diem": "Quán chả lụi đặc sản nổi tiếng Mũi Né, biểu tượng hương vị đậm đà tinh tế của vùng biển Bình Thuận. Chả lụi hấp dẫn ăn kèm rau sống tươi mát và nước chấm độc đáo, là món ăn vặt được giới trẻ và du khách tìm đến nhiều nhất."
             },
             {
-                "id": "BT_QA_030",
+                "id": "BTN_QA_030",
                 "ten_quan": "Nhà Hàng Lacheln Mũi Né",
                 "dia_chi": "130D Nguyễn Đình Chiểu, Khu phố 2, Phường Mũi Né, TP. Phan Thiết, Tỉnh Bình Thuận",
                 "gia_trung_binh": "150.000 – 600.000 VNĐ",
