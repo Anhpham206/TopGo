@@ -6,17 +6,36 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+.pytest_cache/
 
 # Environment
 .env
+.env.*
+!.env.example
 
 # Logs
 logs/
 
-# IDE
+# Node.js / Frontend
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE / Editors
 .vscode/
 .idea/
+.cursor/
+.qodo/
 
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Temporary / Backup
+*.bak
+*.swp
+*.tmp
+
+# Script cá nhân & Công cụ hỗ trợ
+tools/

@@ -1,0 +1,365 @@
+/* 
+  ========================================================================
+  FILE: chatbot.css
+  CHỨC NĂNG: 
+  - Định dạng giao diện chat (tin nhắn người dùng, tin nhắn bot).
+  - Style cho các card thông tin phong phú (thời tiết, chi phí) trong ô chat.
+  ========================================================================
+*/
+.chatbot-fullscreen-with-nav {
+  display: block;               /* thay vì flex column, để trang kéo dài theo nội dung */
+  background: transparent;
+  min-height: 100vh;           /* chiếm ít nhất toàn màn hình, nhưng có thể cao hơn */
+}
+.chatbot-header-page {
+  background: linear-gradient(90deg, var(--p1), var(--p2));
+  padding: 20px 32px;
+  text-align: center;
+  color: #fff;
+}
+.chatbot-header-page h1 {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+.chatbot-header-page p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+.chatbot-container-full-width {
+  width: 90%;
+  max-width: 1400px;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-radius: var(--r-xl);
+  overflow: hidden;            /* chỉ ẩn phần thừa, không tạo scroll riêng */
+  box-shadow: var(--sh-l), inset 0 1px 0 rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.55);
+}
+.chatbot-messages-full-width {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* Không có overflow-y: auto -> toàn trang cuộn tự nhiên */
+}
+/* custom scrollbar vẫn giữ cho toàn bộ trình duyệt (tuỳ chọn) */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+body::-webkit-scrollbar { width: 5px; }
+body::-webkit-scrollbar-track { background: transparent; }
+body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+.message {
+  display: flex;
+  max-width: 80%;
+}
+.message.bot { align-self: flex-start; justify-content: flex-start; }
+.message.user { align-self: flex-end; justify-content: flex-end; }
+/* Card messages need more width */
+.message.bot:has(.card-message) {
+  max-width: 95%;
+  width: 95%;
+}
+.message-content {
+  padding: 12px 18px;
+  border-radius: 24px;
+  font-size: 14px;
+  line-height: 1.5;
+  background: rgba(255,255,255,0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: var(--sh), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.message.bot .message-content {
+  background: rgba(255,255,255,0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-left-radius: 4px;
+}
+.message.user .message-content {
+  background: linear-gradient(135deg, rgba(0,169,255,0.85), rgba(137,207,243,0.85));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.card-message {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: var(--r);
+  padding: 16px;
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.65);
+}
+.card-title {
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: var(--p1);
+}
+.card-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+/* Liquid glass card items */
+.card-item-vertical {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-radius: var(--r-l);
+  padding: 18px;
+  transition: var(--t);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 4px 16px rgba(0,169,255,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+  position: relative;
+  overflow: hidden;
+}
+/* Glass sheen overlay */
+.card-item-vertical::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 60%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.card-item-vertical:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 12px 32px rgba(0,169,255,0.18), 0 0 0 1px rgba(0,169,255,0.2), inset 0 1px 0 rgba(255,255,255,0.9);
+  border-color: rgba(0,169,255,0.35);
+  background: rgba(255, 255, 255, 0.72);
+}
+.card-item-name-vertical {
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.card-item-desc-vertical {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.card-item-info-vertical {
+  font-size: 12px;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.card-item-rating-vertical {
+  font-size: 13px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-top: 8px;
+}
+.chatbot-input-area-full-width {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255,255,255,0.55);
+}
+.chatbot-input-full-width {
+  flex: 1;
+  padding: 12px 20px;
+  border: 1.5px solid rgba(255,255,255,0.7);
+  border-radius: 40px;
+  font-family: var(--font);
+  font-size: 14px;
+  outline: none;
+  transition: all var(--t);
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.04), 0 1px 0 rgba(255,255,255,0.8);
+  color: var(--text);
+}
+.chatbot-input-full-width:focus {
+  border-color: rgba(0,169,255,0.5);
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 0 0 3px rgba(0,169,255,0.12), inset 0 2px 6px rgba(0,0,0,0.03);
+}
+/* Liquid glass send button */
+.chatbot-send-full-width {
+  background: linear-gradient(135deg, rgba(0,169,255,0.80), rgba(137,207,243,0.70));
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: 40px;
+  padding: 11px 26px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--t);
+  box-shadow: 0 4px 14px rgba(0,169,255,0.25), inset 0 1px 0 rgba(255,255,255,0.4);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.12);
+  position: relative;
+  overflow: hidden;
+}
+.chatbot-send-full-width::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.25), transparent);
+  border-radius: 40px 40px 0 0;
+  pointer-events: none;
+}
+.chatbot-send-full-width:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,169,255,0.40), inset 0 1px 0 rgba(255,255,255,0.5);
+  background: linear-gradient(135deg, rgba(0,169,255,0.92), rgba(137,207,243,0.82));
+}
+.chatbot-send-full-width:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0,169,255,0.2);
+}
+
+
+/* ========== CHATBOT: BOT AVATAR & TYPING INDICATOR ========== */
+
+.message-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+.message-wrap.user { flex-direction: row-reverse; }
+.bot-avatar {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--p1), var(--p2));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,169,255,0.3);
+  border: 2px solid #fff;
+}
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 18px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 24px 24px 24px 4px;
+  box-shadow: var(--sh);
+  width: fit-content;
+}
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--p1);
+  border-radius: 50%;
+  animation: typingBounce 1.2s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30%            { transform: translateY(-6px); opacity: 1; }
+}
+
+/* Quick-reply suggestion chips in chatbot */
+.chat-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 4px 40px;
+}
+.chat-chip {
+  background: rgba(0,169,255,0.1);
+  border: 1px solid rgba(0,169,255,0.3);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--p1);
+  cursor: pointer;
+  transition: all var(--t);
+}
+.chat-chip:hover {
+  background: rgba(0,169,255,0.2);
+  transform: translateY(-1px);
+}
+
+/* Bot message with icon prefix */
+.bot-msg-icon {
+  display: inline-block;
+  margin-right: 6px;
+  font-style: normal;
+}
+.bot-section-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--p1);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+.weather-day {
+  background: rgba(0,169,255,0.08);
+  border-radius: var(--r-s);
+  padding: 8px;
+  text-align: center;
+  font-size: 11.5px;
+}
+.weather-day .wd-icon  { font-size: 22px; display: block; margin-bottom: 3px; }
+.weather-day .wd-label { font-weight: 600; color: var(--text); }
+.weather-day .wd-temp  { color: var(--muted); }
+.budget-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 8px;
+}
+.budget-table th {
+  text-align: left;
+  padding: 6px 8px;
+  background: rgba(0,169,255,0.08);
+  font-weight: 700;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.budget-table td {
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+}
+.budget-table tr:last-child td { border-bottom: none; font-weight: 700; color: var(--p1); }
+.food-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  background: rgba(255,255,255,0.6);
+  border-radius: var(--r-s);
+  margin-bottom: 6px;
+}
+.food-emoji { font-size: 28px; flex-shrink: 0; }
+.food-info  { flex: 1; }
+.food-name  { font-weight: 700; font-size: 14px; color: var(--text); }
+.food-desc  { font-size: 12px; color: var(--muted); }
+.food-price { font-size: 12px; color: var(--p1); font-weight: 600; margin-top: 2px; }
+

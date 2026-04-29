@@ -1,0 +1,29 @@
+<!-- 
+  ========================================================================
+  FILE: loading.html
+  CHỨC NĂNG: 
+  - Component hiển thị màn hình chờ (Loading) khi AI đang xử lý.
+  - Chứa các bước loading động và hiệu ứng máy bay.
+  ========================================================================
+-->
+<div class="screen" id="screen-loading">
+    <div class="loading-wrap">
+        <div class="loading-plane"></div>
+        <div class="loading-dots">
+            <div class="ld"></div>
+            <div class="ld"></div>
+            <div class="ld"></div>
+        </div>
+        <div class="loading-title">AI đang lên lịch trình cho bạn...</div>
+        <div class="loading-steps">
+            <div class="ls done" id="ls-1"><span class="ls-ico">✓</span> Phân tích yêu cầu chuyến đi</div>
+            <div class="ls active" id="ls-2">
+                <div class="ls-spin"></div> Tìm kiếm địa điểm phù hợp
+            </div>
+            <div class="ls" id="ls-3"><span class="ls-ico">○</span> Tối ưu hóa lộ trình</div>
+            <div class="ls" id="ls-4"><span class="ls-ico">○</span> Gợi ý phương tiện &amp; chi phí</div>
+            <div class="ls" id="ls-5"><span class="ls-ico">○</span> Hoàn thiện lịch trình</div>
+        </div>
+        <button class="loading-cancel" id="btn-loading-cancel">Hủy</button>
+    </div>
+</div>
