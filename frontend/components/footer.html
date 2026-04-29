@@ -1,0 +1,73 @@
+<!-- 
+  ========================================================================
+  FILE: footer.html
+  CHỨC NĂNG: 
+  - Component chân trang dùng chung.
+  - Chứa popup hiển thị thông báo, banner quảng cáo và cấu trúc Toast message.
+  ========================================================================
+-->
+<!-- 3 BANNER ADS -->
+<div class="fullwidth-ad ad-chatbot" data-nav="chatbot">
+    <div class="ad-overlay-full">
+        <div class="ad-content">
+            <h3>Trò chuyện cùng TopChat</h3>
+            <p>Gợi ý địa điểm, thời tiết, mẹo du lịch – hỗ trợ 24/7</p>
+            <div class="ad-btn-glass">Khám phá ngay →</div>
+        </div>
+    </div>
+</div>
+
+<div class="fullwidth-ad ad-itinerary" data-nav="planner">
+    <div class="ad-overlay-full">
+        <div class="ad-content">
+            <h3>AI Itinerary Planner</h3>
+            <p>Lên lịch trình thông minh, tối ưu thời gian &amp; chi phí</p>
+            <div class="ad-btn-glass">Bắt đầu ngay →</div>
+        </div>
+    </div>
+</div>
+
+<div class="fullwidth-ad ad-footer" data-nav="chatbot">
+    <div class="ad-overlay-full">
+        <div class="ad-content">
+            <h3>TopGo – Đồng hành cùng mọi chuyến đi</h3>
+            <p>Từ lên ý tưởng đến đặt chỗ, AI lo liệu giúp bạn</p>
+            <div class="ad-btn-glass">Trải nghiệm ngay →</div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <div class="logo-text">TopGo</div>
+            <p>Smart Tourism Planner – Lên lịch trình du lịch thông minh với AI.</p>
+        </div>
+        <div class="footer-links">
+            <a href="#">Về chúng tôi</a>
+            <a href="#">Điều khoản</a>
+            <a href="#">Bảo mật</a>
+            <a href="#">Liên hệ</a>
+        </div>
+        <div class="footer-copyright">
+            © 2025 TopGo. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<!-- Popup Login -->
+<div class="popup-ov" id="popup-login">
+    <div class="popup-card glass-card">
+        <div class="popup-icon">🔐</div>
+        <div class="popup-title">Đăng nhập để tiếp tục</div>
+        <div class="popup-msg">Bạn cần đăng nhập để lưu lịch trình vào hồ sơ cá nhân. Mọi dữ liệu đã nhập sẽ được giữ nguyên.</div>
+        <div class="popup-acts">
+            <button class="popup-cancel" data-popup-close="popup-login">Để sau</button>
+            <button class="popup-confirm blue" data-popup-close="popup-login" data-toast-success="Đăng nhập thành công!">Đăng nhập</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"><span id="toast-msg"></span></div>

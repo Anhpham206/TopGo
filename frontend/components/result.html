@@ -1,0 +1,130 @@
+<!-- 
+  ========================================================================
+  FILE: result.html
+  CHỨC NĂNG: 
+  - Component màn hình hiển thị kết quả lịch trình từ AI.
+  - Chứa bản đồ, danh sách địa điểm theo ngày và hộp thoại phản hồi.
+  ========================================================================
+-->
+<div class="screen" id="screen-result">
+    <div class="result-wrap">
+        <!-- Header summary -->
+        <div class="result-header glass-card">
+            <div style="flex:1;min-width:200px">
+                <div class="result-title" id="res-title">Hành trình...</div>
+                <div class="result-meta">
+                    <span class="m-item" id="res-dates">📅 <strong>...</strong></span>
+                    <span class="m-item" id="res-pax">👤 <strong>...</strong></span>
+                    <span class="m-item" id="res-budget">💰 <strong>...</strong></span>
+                    <span class="m-item" id="res-weather">🌤 <strong>Nắng, 31°C</strong></span>
+                    <span class="score-badge">⭐ 4.7 AI Score</span>
+                </div>
+            </div>
+            <div class="result-acts">
+                <button class="r-btn r-btn-out" id="btn-edit-req">Sửa yêu cầu</button>
+                <button class="r-btn r-btn-solid" id="btn-save-plan">Lưu lịch trình</button>
+            </div>
+        </div>
+
+        <!-- Map + Itinerary grid -->
+        <div class="result-grid">
+            <!-- Left: interactive Leaflet map -->
+            <div>
+                <div class="map-panel glass-card" id="map-preview-card">
+                    <div class="map-hd">Sơ đồ hành trình (click để phóng to)</div>
+                    <div id="leaflet-map" style="cursor: pointer;"></div>
+                    <div class="map-stats">
+                        <div class="map-stat">
+                            <span class="lbl">Tổng quãng đường</span>
+                            <span class="val" id="res-dist">~148 km</span>
+                        </div>
+                        <div class="map-stat">
+                            <span class="lbl">Số địa điểm</span>
+                            <span class="val" id="res-places-count">11 điểm</span>
+                        </div>
+                        <div class="map-stat">
+                            <span class="lbl">Chi phí ước tính</span>
+                            <span class="val" style="color:var(--p1)" id="res-total-budget">8.200.000 ₫</span>
+                        </div>
+                        <div class="map-stat">
+                            <span class="lbl">Chi phí / người</span>
+                            <span class="val" style="color:var(--p2)" id="res-budget-pp">2.050.000 ₫</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: day-by-day itinerary -->
+            <div class="itinerary">
+                <!-- NEW: Travel Prep Suggestion (Moved to top of right column) -->
+                <div class="glass-card prep-card">
+                    <div class="prep-header">
+                        <span class="prep-header-icon">⏱</span> Gợi ý Mốc thời gian Xuất phát
+                    </div>
+                    <div class="prep-body">
+                        <div class="prep-row">
+                            <span class="prep-lbl">Bắt đầu tham quan:</span> 
+                            <strong id="res-prep-start" class="prep-val-dark">--</strong>
+                        </div>
+                        <div class="prep-row last">
+                            <span class="prep-lbl">Phương tiện & Thời gian đi:</span> 
+                            <strong id="res-prep-duration" class="prep-val-primary">--</strong>
+                        </div>
+                        <div class="prep-result-box">
+                            <div class="prep-result-lbl">Bạn nên xuất phát lúc:</div>
+                            <div id="res-prep-recommend" class="prep-result-val">--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="itinerary-container"></div>
+
+                <!-- Feedback / adjust itinerary -->
+                <div class="feedback-card glass-card">
+                    <div class="feedback-title">Phản hồi cho AI · Điều chỉnh lịch trình</div>
+                    <textarea class="feedback-area" id="feedback-input"
+                        placeholder="Ví dụ: Thêm buổi tối xem show ánh sáng Cầu Rồng..."
+                        maxlength="500"></textarea>
+                    <div class="feedback-foot">
+                        <span class="feedback-lim" id="feedback-count">0 / 500</span>
+                        <button class="btn-feedback" id="btn-feedback">Cập nhật lịch trình</button>
+                    </div>
+                </div>
+            </div><!-- /itinerary -->
+        </div><!-- /result-grid -->
+    </div><!-- /result-wrap -->
+</div><!-- /screen-result -->
+
+<!-- SCREEN: ERROR -->
+<div class="screen" id="screen-error">
+    <div class="error-hero">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.55);text-transform:uppercase;margin-bottom:8px">
+            TopGo · AI Planner
+        </div>
+        <h2>Không thể tạo lịch trình</h2>
+    </div>
+    <div class="error-outer">
+        <div class="error-card glass-card">
+            <div class="error-icon">⚠️</div>
+            <div class="error-title">Yêu cầu chưa đạt điều kiện</div>
+            <div class="error-msg">AI phát hiện một số vấn đề với thông tin của bạn:</div>
+            <div class="error-issues" id="error-issues"></div>
+            <div class="popup-acts" style="margin-top: 20px; justify-content: center;">
+                <button class="btn-back-err" id="btn-back-to-form">← Quay lại chỉnh sửa</button>
+                <button class="btn-continue" id="btn-continue-error" style="display: none;">Tiếp tục →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL MAP -->
+<div class="popup-ov" id="popup-map">
+    <div class="popup-card" style="max-width:90vw;width:90vw;max-height:90vh;padding:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div class="popup-title" style="font-size:18px;">Bản đồ hành trình chi tiết</div>
+            <button id="btn-close-map"
+                style="background:none;border:none;font-size:24px;cursor:pointer;">&times;</button>
+        </div>
+        <div id="leaflet-modal-map" style="height:70vh;width:100%;border-radius:var(--r-l);"></div>
+    </div>
+</div>

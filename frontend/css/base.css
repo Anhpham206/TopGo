@@ -1,0 +1,295 @@
+/* 
+  ========================================================================
+  FILE: base.css
+  CHỨC NĂNG: 
+  - Quản lý CSS Reset, định nghĩa CSS Variables (màu sắc, font, bo góc).
+  - Chứa các class tiện ích chung, hiệu ứng background và Responsive Media Queries.
+  ========================================================================
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --p1: #00a9ff;
+  --p2: #89cff3;
+  --a1: #a0e9ff;
+  --a2: #cdf5fd;
+  --bg: #f0faff;
+  --bg2: #f8fdff;
+  --white: #ffffff;
+  --stub: #f5fbfe;
+  --border: #cde9f5;
+  --border-light: #e5f3fa;
+  --text: #1a3b4f;
+  --muted: #6b8ca0;
+  --success: #2e7d64;
+  --error: #d62929;
+  --error-bg: #fef2f2;
+  --gold: #ffb347;
+  --font: "Plus Jakarta Sans", sans-serif;
+  --r: 10px;
+  --r-s: 8px;
+  --r-l: 18px;
+  --r-xl: 24px;
+  --sh: 0 2px 16px rgba(0, 169, 255, 0.1);
+  --sh-m: 0 8px 32px rgba(0, 169, 255, 0.15);
+  --sh-l: 0 20px 60px rgba(0, 169, 255, 0.2);
+  --t: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --glow: 0 0 15px rgba(0, 169, 255, 0.3);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font);
+  background: linear-gradient(135deg, #fafcff 0%, #e5f3fa 100%);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  font-size: 15px;
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Global Website Floating Background Blobs (Similar to Ads) */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -999;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+body::before {
+  width: 50vw;
+  height: 50vw;
+  max-width: 800px;
+  max-height: 800px;
+  background: rgba(0, 169, 255, 0.15);
+  top: -10%;
+  left: -10%;
+  animation: floatGlobal1 20s infinite alternate ease-in-out;
+}
+
+body::after {
+  width: 45vw;
+  height: 45vw;
+  max-width: 600px;
+  max-height: 600px;
+  background: rgba(137, 207, 243, 0.25);
+  bottom: -10%;
+  right: -5%;
+  animation: floatGlobal2 25s infinite alternate ease-in-out;
+}
+
+@keyframes floatGlobal1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(10vw, 5vh) scale(1.15);
+  }
+}
+
+@keyframes floatGlobal2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-8vw, -8vh) scale(1.2);
+  }
+}
+
+/* Liquid Glass (iOS style) – base class */
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--r-l);
+  box-shadow: var(--sh-m);
+}
+
+/* Glass button style (applies to all buttons) */
+.glass-btn {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--r-s);
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text);
+}
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.glass-btn-primary {
+  background: linear-gradient(90deg, var(--p1), var(--p2));
+  border: none;
+  color: #fff;
+}
+.glass-btn-primary:hover {
+  background: linear-gradient(90deg, var(--p2), var(--p1));
+  box-shadow: var(--glow);
+}
+
+/* Enhanced gradient & glow */
+.gradient-bg {
+  background: linear-gradient(135deg, var(--p1), var(--p2), var(--a1));
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.glow {
+  box-shadow: var(--glow);
+  transition: box-shadow 0.3s;
+}
+.glow:hover {
+  box-shadow: 0 0 25px rgba(0, 169, 255, 0.5);
+}
+
+/* ========== SCREENS ========== */
+
+.screen {
+  display: none;
+}
+.screen.active {
+  display: block;
+  animation: fadeUp 0.35s ease;
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== MEDIA QUERIES ========== */
+
+@media (max-width: 780px) {
+  .ticket-body {
+    grid-template-columns: 1fr;
+  }
+  .ticket-perf {
+    display: none;
+  }
+  .ticket-stub {
+    border-top: 1px solid var(--border-light);
+  }
+  .header-inner {
+    padding: 0 16px;
+  }
+  .form-wrapper {
+    margin: -30px auto 40px;
+  }
+  .ticket-main,
+  .ticket-stub,
+  .ticket-actions,
+  .ticket-bottom {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .ticket-bar {
+    padding: 11px 18px;
+  }
+  .from-to {
+    grid-template-columns: 1fr 44px 1fr;
+  }
+  .ft-city-display {
+    font-size: 18px;
+  }
+  .header-nav .nav-a {
+    display: none;
+  }
+  .hotel-card-inline {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hotel-img-inline {
+    margin-bottom: 8px;
+  }
+  .card-items-grid {
+    grid-template-columns: 1fr;
+  }
+  .message {
+    max-width: 90%;
+  }
+  .fullwidth-ad {
+    height: 220px;
+    width: 92%;
+  }
+  .ad-content h3 {
+    font-size: 24px;
+  }
+  .ad-content p {
+    font-size: 14px;
+  }
+  .chatbot-container-full-width {
+    width: 95%;
+  }
+}
+@media (max-width: 520px) {
+  .hero h1 {
+    font-size: 26px;
+  }
+  .result-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .result-acts {
+    margin-left: 0;
+  }
+  .stop-card {
+    grid-template-columns: 85px 1fr;
+  }
+  .user-details {
+    display: none;
+  }
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+  .fullwidth-ad {
+    height: 180px;
+    width: 96%;
+  }
+  .ad-content h3 {
+    font-size: 20px;
+  }
+  .ad-content p {
+    font-size: 12px;
+  }
+  .chatbot-container-full-width {
+    width: 98%;
+    margin: 10px auto;
+  }
+}
