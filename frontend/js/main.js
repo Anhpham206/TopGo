@@ -12,10 +12,10 @@
   ========================================================================
 */
 import { state } from './data.js';
-import { detectDepartureCity }              from './data.js';
+import { detectDepartureCity } from './data.js';
 import { runComprehensiveValidation, sanitizeText, isNonsensicalText } from './utils.js';
-import { fetchCities, fetchPlaces, generateItinerary, sendFeedback }   from './api.js';
-import { initLeafletMap }                   from './map.js';
+import { fetchCities, fetchPlaces, generateItinerary, sendFeedback } from './api.js';
+import { initLeafletMap } from './map.js';
 import {
     showScreen, renderCityList, renderDepList, renderItinerary,
     updateDeparture, getRawBudget, validateDates, updateBudgetPP,
@@ -29,7 +29,7 @@ import { fetchHtmlFragment } from './fragmentLoader.js';
 
 async function loadData() {
     const [cData, pData] = await Promise.all([fetchCities(), fetchPlaces()]);
-    state.CITIES        = cData;
+    state.CITIES = cData;
     state.PLACES_BY_CITY = pData;
 
     if (!state.CITIES.length || !Object.keys(state.PLACES_BY_CITY).length) {
@@ -41,7 +41,7 @@ async function loadData() {
     renderCityList('');
     renderDepList('');
 
-    const hn = state.CITIES.find(c=>c.id==='ha_noi');
+    const hn = state.CITIES.find(c => c.id === 'ha_noi');
     if (hn) {
         state.selectedDepCity = hn;
         const depSearch = document.getElementById('dep-search');
@@ -77,9 +77,9 @@ function handleGenerate() {
         document.getElementById('budget-input')?.classList.add('err');
         valid = false;
     }
-    const rawNotes    = document.getElementById('notes-input')?.value || '';
+    const rawNotes = document.getElementById('notes-input')?.value || '';
     const trimmedNotes = rawNotes.trim();
-    const errNotes    = document.getElementById('err-notes');
+    const errNotes = document.getElementById('err-notes');
     errNotes?.classList.remove('show');
     if (!trimmedNotes || trimmedNotes.length < 5) {
         if (errNotes) { errNotes.textContent = trimmedNotes ? 'Nội dung quá ngắn (tối thiểu 5 ký tự).' : 'Vui lòng nhập mô tả sở thích hoặc ghi chú.'; errNotes.classList.add('show'); }
@@ -87,25 +87,25 @@ function handleGenerate() {
     }
     if (!valid) {
         showToast('Vui lòng kiểm tra lại các trường bắt buộc', 'error');
-        document.querySelector('.f-err.show')?.scrollIntoView({behavior:'smooth',block:'center'});
+        document.querySelector('.f-err.show')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
     }
 
-    const transport   = document.getElementById('transport-type')?.value;
+    const transport = document.getElementById('transport-type')?.value;
     const payload = {
-        city_id:       state.selectedCity.id,
-        city_name:     state.selectedCity.name,
-        dep_city_id:   state.selectedDepCity?.id || null,
+        city_id: state.selectedCity.id,
+        city_name: state.selectedCity.name,
+        dep_city_id: state.selectedDepCity?.id || null,
         budget,
-        pax:           parseInt(document.getElementById('pax-val')?.value),
-        date_start:    document.getElementById('date-start')?.value,
-        date_end:      document.getElementById('date-end')?.value,
-        notes:         sanitizeText(rawNotes),
+        pax: parseInt(document.getElementById('pax-val')?.value),
+        date_start: document.getElementById('date-start')?.value,
+        date_end: document.getElementById('date-end')?.value,
+        notes: sanitizeText(rawNotes),
         transport,
         accommodation: document.getElementById('accommodation-type')?.value,
-        departure_time:document.getElementById('time-start')?.value,
-        return_time:   document.getElementById('time-end')?.value,
-        places: state.selectedPlaces.map(p => typeof p==='string' ? {id:p,ten:p,loai:'diem_tham_quan'} : {id:p.id,ten:p.ten,loai:p.loai}),
+        departure_time: document.getElementById('time-start')?.value,
+        return_time: document.getElementById('time-end')?.value,
+        places: state.selectedPlaces.map(p => typeof p === 'string' ? { id: p, ten: p, loai: 'diem_tham_quan' } : { id: p.id, ten: p.ten, loai: p.loai }),
     };
 
     const validation = runComprehensiveValidation(payload);
@@ -114,7 +114,7 @@ function handleGenerate() {
         return;
     }
 
-    const tripId = 'AI·' + Math.random().toString(36).substr(2,4).toUpperCase() + '·' + new Date().getFullYear();
+    const tripId = 'AI·' + Math.random().toString(36).substr(2, 4).toUpperCase() + '·' + new Date().getFullYear();
     const tripEl = document.getElementById('tb-trip-id');
     if (tripEl) tripEl.textContent = 'TRIP — ' + tripId;
     window._lastPayload = payload;
@@ -122,17 +122,57 @@ function handleGenerate() {
     showScreen('loading');
     resetLoadingSteps();
 
-    generateItinerary(payload)
+    generateItinerary(payload, (stepIdx) => {
+        const ids = ['ls-1', 'ls-2', 'ls-3', 'ls-4', 'ls-5'];
+        for (let i = 0; i < stepIdx; i++) {
+            const el = document.getElementById(ids[i]);
+            if (el) {
+                const sp = el.querySelector('.ls-spin') || el.querySelector('.ls-ico');
+                if (sp) sp.outerHTML = '<span class="ls-ico">✓</span>';
+                el.classList.remove('active');
+                el.classList.add('done');
+            }
+        }
+        if (stepIdx < 5) {
+            const current = document.getElementById(ids[stepIdx]);
+            if (current) {
+                const ico = current.querySelector('.ls-ico');
+                if (ico) ico.outerHTML = '<div class="ls-spin"></div>';
+                current.classList.add('active');
+            }
+        }
+    })
         .then(data => {
-            if (data.status === 'error') { _showBackendError(data, payload); }
-            else { renderItinerary(data.status === 'success' ? data.itinerary : null); animateLoading(true); }
+            if (data.status === 'error') {
+                _showBackendError(data, payload);
+            } else {
+                if (data.status === 'success') {
+                    console.log("đã nhận data ở main.js");
+                }
+                if (data.status == 'success') {
+                    console.log("đã nhận data ở main.js");
+                }
+                if (data.status == "success") {
+                    console.log("đã nhận data ở main.js");
+                }
+                renderItinerary(data.status === 'success' ? data.output : null);
+                document.querySelectorAll('.ls-spin').forEach(s => s.outerHTML = '<span class="ls-ico">✓</span>');
+                document.querySelectorAll('.ls').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
+                setTimeout(() => showScreen('result'), 450);
+            }
         })
-        .catch(() => { renderItinerary(null); animateLoading(true); });
+        .catch((err) => {
+            console.error(err);
+            renderItinerary(null);
+            document.querySelectorAll('.ls-spin').forEach(s => s.outerHTML = '<span class="ls-ico">✓</span>');
+            document.querySelectorAll('.ls').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
+            setTimeout(() => showScreen('result'), 450);
+        });
 }
 
 function _showValidationErrors(errors, continueAllowed, payload) {
     const el = document.getElementById('error-issues');
-    if (el) el.innerHTML = errors.map(e => `<div class="error-issue${e.type==='warning'?' warning-issue':''}">${e.msg}</div>`).join('');
+    if (el) el.innerHTML = errors.map(e => `<div class="error-issue${e.type === 'warning' ? ' warning-issue' : ''}">${e.msg}</div>`).join('');
     const btn = document.getElementById('btn-continue-error');
     if (btn) btn.style.display = continueAllowed ? 'inline-flex' : 'none';
     window._continueAllowed = continueAllowed;
@@ -142,7 +182,7 @@ function _showValidationErrors(errors, continueAllowed, payload) {
 
 function _showBackendError(data, payload) {
     const el = document.getElementById('error-issues');
-    if (el) { const html = (data.errors||[]).map(e=>`<div class="error-issue">${e}</div>`).join(''); el.innerHTML = window.DOMPurify ? DOMPurify.sanitize(html) : html; }
+    if (el) { const html = (data.errors || []).map(e => `<div class="error-issue">${e}</div>`).join(''); el.innerHTML = window.DOMPurify ? DOMPurify.sanitize(html) : html; }
     const btn = document.getElementById('btn-continue-error');
     if (btn) btn.style.display = data.continue_allowed ? 'inline-flex' : 'none';
     window._continueAllowed = data.continue_allowed;
@@ -178,30 +218,30 @@ async function handleFeedback() {
 // ── Loading animation ─────────────────────────────────────────
 
 function resetLoadingSteps() {
-    const labels = ['Phân tích yêu cầu chuyến đi','Tìm kiếm địa điểm phù hợp','Tối ưu hóa lộ trình','Gợi ý phương tiện & chi phí','Hoàn thiện lịch trình'];
-    ['ls-1','ls-2','ls-3','ls-4','ls-5'].forEach((id,i) => {
-        const el=document.getElementById(id); if (!el) return;
-        el.className='ls'+(i===0?' done':i===1?' active':'');
-        el.innerHTML=(i===0?'<span class="ls-ico">✓</span>':i===1?'<div class="ls-spin"></div>':'<span class="ls-ico">○</span>')+' '+labels[i];
+    const labels = ['Phân tích yêu cầu chuyến đi', 'Tìm kiếm địa điểm phù hợp', 'Tối ưu hóa lộ trình', 'Gợi ý phương tiện & chi phí', 'Hoàn thiện lịch trình'];
+    ['ls-1', 'ls-2', 'ls-3', 'ls-4', 'ls-5'].forEach((id, i) => {
+        const el = document.getElementById(id); if (!el) return;
+        el.className = 'ls' + (i === 0 ? ' done' : i === 1 ? ' active' : '');
+        el.innerHTML = (i === 0 ? '<span class="ls-ico">✓</span>' : i === 1 ? '<div class="ls-spin"></div>' : '<span class="ls-ico">○</span>') + ' ' + labels[i];
     });
 }
 
 function animateLoading(success) {
-    const ids=['ls-2','ls-3','ls-4','ls-5']; let delay=0;
-    ids.forEach((id,i) => {
-        const nextId=ids[i+1]; delay+=1100+Math.random()*400;
-        setTimeout(()=>{
-            const prev=document.getElementById(id); if (!prev) return;
-            const sp=prev.querySelector('.ls-spin'); if(sp) sp.outerHTML='<span class="ls-ico">✓</span>';
+    const ids = ['ls-2', 'ls-3', 'ls-4', 'ls-5']; let delay = 0;
+    ids.forEach((id, i) => {
+        const nextId = ids[i + 1]; delay += 1100 + Math.random() * 400;
+        setTimeout(() => {
+            const prev = document.getElementById(id); if (!prev) return;
+            const sp = prev.querySelector('.ls-spin'); if (sp) sp.outerHTML = '<span class="ls-ico">✓</span>';
             prev.classList.remove('active'); prev.classList.add('done');
-            if (nextId) { const next=document.getElementById(nextId); if (!next) return; const ico=next.querySelector('.ls-ico'); if(ico) ico.outerHTML='<div class="ls-spin"></div>'; next.classList.add('active'); }
+            if (nextId) { const next = document.getElementById(nextId); if (!next) return; const ico = next.querySelector('.ls-ico'); if (ico) ico.outerHTML = '<div class="ls-spin"></div>'; next.classList.add('active'); }
         }, delay);
     });
-    delay+=700;
-    setTimeout(()=>{
-        document.querySelectorAll('.ls-spin').forEach(s=>s.outerHTML='<span class="ls-ico">✓</span>');
-        document.querySelectorAll('.ls').forEach(s=>{s.classList.remove('active');s.classList.add('done');});
-        setTimeout(()=>showScreen(success?'result':'error'), 450);
+    delay += 700;
+    setTimeout(() => {
+        document.querySelectorAll('.ls-spin').forEach(s => s.outerHTML = '<span class="ls-ico">✓</span>');
+        document.querySelectorAll('.ls').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
+        setTimeout(() => showScreen(success ? 'result' : 'error'), 450);
     }, delay);
 }
 
@@ -215,7 +255,7 @@ async function initApp() {
         // Load fragments dynamically (Loading, Result, Error, Map modal)
         const loadingUrl = new URL('../components/loading.html', import.meta.url);
         const resultUrl = new URL('../components/result.html', import.meta.url);
-        
+
         const [loadingFrag, resultFrag] = await Promise.all([
             fetchHtmlFragment('loading', loadingUrl),
             fetchHtmlFragment('result', resultUrl)
@@ -228,13 +268,13 @@ async function initApp() {
 
         // Attach all events via callbacks — no inline onclick
         initFormUIEvents({
-            onGenerate:          handleGenerate,
-            onFeedback:          handleFeedback,
+            onGenerate: handleGenerate,
+            onFeedback: handleFeedback,
             onContinueFromError: handleContinueFromError,
         });
 
         await loadData();
-    } catch(err) {
+    } catch (err) {
         console.error('[TopGo] initApp failed:', err);
         showToast('Lỗi khởi tạo ứng dụng: ' + err.message, 'error');
     }
