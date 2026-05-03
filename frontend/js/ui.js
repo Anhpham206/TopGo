@@ -283,72 +283,124 @@ export function doReset() {
     showToast('Đã đặt lại tất cả thông tin','success');
 }
 
-// ── Itinerary rendering ───────────────────────────────────────
 export function renderItinerary(data) {
-    const container=document.getElementById('itinerary-container');
-    const p=window._lastPayload;
-    if (p) {
-        const titleEl=document.getElementById('res-title');
-        if (titleEl) { titleEl.textContent = `Hành trình ${p.city_name}`; }
-        const datesEl=document.getElementById('res-dates');
-        if (datesEl&&p.date_start&&p.date_end) datesEl.innerHTML=`📅 <strong>${p.date_start.split('-').reverse().join('/')} – ${p.date_end.split('-').reverse().join('/')}</strong>`;
-        const paxEl=document.getElementById('res-pax'); if(paxEl&&p.pax) paxEl.innerHTML=`👤 <strong>${p.pax} người</strong>`;
-        if (p.budget) {
-            const fmt=new Intl.NumberFormat('vi-VN').format(p.budget)+' ₫';
-            const be=document.getElementById('res-budget'); if(be) be.innerHTML=`💰 <strong>~${fmt}</strong>`;
-            const tb=document.getElementById('res-total-budget'); if(tb) tb.textContent=fmt;
-            if (p.pax) { const bp=document.getElementById('res-budget-pp'); if(bp) bp.textContent=new Intl.NumberFormat('vi-VN').format(Math.round(p.budget/p.pax))+' ₫'; }
-        }
-        const pc=document.getElementById('res-places-count'); if(pc&&p.places) pc.textContent=`${p.places.length} điểm`;
+    const container = document.getElementById('itinerary-container');
+    const p = window._lastPayload;
 
-        // Tính toán gợi ý xuất phát
-        if (p.date_start && p.transport) {
-            const prepStart = document.getElementById('res-prep-start');
-            const prepDuration = document.getElementById('res-prep-duration');
-            const prepRecommend = document.getElementById('res-prep-recommend');
-            
-            const timeStr = p.departure_time || '07:00';
-            const dateStr = p.date_start.split('-').reverse().join('/');
-            if (prepStart) prepStart.textContent = `${timeStr}, ${dateStr}`;
-            
-            let travelHours = 0;
-            if (p.dep_city_id && p.city_id && p.dep_city_id !== p.city_id) {
-                travelHours = getTravelHours(p.dep_city_id, p.city_id, p.transport);
-            }
-            
-            if (prepDuration) {
-                if (travelHours > 0) {
-                    prepDuration.textContent = `${p.transport} (~${travelHours.toFixed(1)} giờ)`;
-                } else {
-                    prepDuration.textContent = `${p.transport} (Cùng khu vực)`;
-                }
-            }
-            
-            if (prepRecommend) {
-                if (travelHours > 0) {
-                    const startDateObj = new Date(`${p.date_start}T${timeStr}:00`);
-                    startDateObj.setMinutes(startDateObj.getMinutes() - Math.round(travelHours * 60));
-                    
-                    // Thêm buffer chuẩn bị (2h cho máy bay, 1h cho xe/tàu)
-                    let bufferHours = (p.transport === 'Máy bay') ? 2 : 1;
-                    startDateObj.setHours(startDateObj.getHours() - bufferHours);
-                    
-                    const recDate = startDateObj.toISOString().split('T')[0].split('-').reverse().join('/');
-                    const recTime = startDateObj.toTimeString().substring(0, 5);
-                    prepRecommend.textContent = `${recTime}, ${recDate}`;
-                } else {
-                    prepRecommend.textContent = `Thong thả, trước ${timeStr} một chút`;
-                }
-            }
-        }
-    }
     if (!container) return;
-    if (!data||data.length===0) {
-        if (typeof MOCK_ITINERARY_HTML!=='undefined') {
-            container.innerHTML=window.DOMPurify?DOMPurify.sanitize(MOCK_ITINERARY_HTML,{ADD_ATTR:['onclick','target','style']}):MOCK_ITINERARY_HTML;
+    
+    // Nếu chưa có dữ liệu hợp lệ
+    if (!data || !data.output) {
+        if (typeof MOCK_ITINERARY_HTML !== 'undefined') {
+            container.innerHTML = window.DOMPurify ? DOMPurify.sanitize(MOCK_ITINERARY_HTML, { ADD_ATTR: ['onclick', 'target', 'style'] }) : MOCK_ITINERARY_HTML;
         } else {
-            container.innerHTML='<div style="padding:20px;text-align:center;color:var(--sub);">Đang chờ dữ liệu lịch trình từ máy chủ...</div>';
+            container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--sub);">Đang chờ dữ liệu lịch trình từ máy chủ...</div>';
         }
+        return;
+    }
+
+    const aiOut = data.output;
+    const ttc = aiOut.Thong_tin_chung || {};
+    
+    // 1. Cập nhật Thông tin chung
+    const titleEl = document.getElementById('res-title');
+    if (titleEl) titleEl.textContent = ttc.Ten_hanh_trinh || (p ? `Hành trình ${p.city_name}` : 'Hành trình gợi ý');
+    
+    if (p && p.date_start && p.date_end) {
+        const datesEl = document.getElementById('res-dates');
+        if (datesEl) datesEl.innerHTML = `📅 <strong>${p.date_start.split('-').reverse().join('/')} – ${p.date_end.split('-').reverse().join('/')}</strong>`;
+    }
+    
+    const paxEl = document.getElementById('res-pax');
+    if (paxEl) paxEl.innerHTML = `👤 <strong>${ttc.So_nguoi || (p ? p.pax + ' người' : 'N/A')}</strong>`;
+    
+    const be = document.getElementById('res-budget');
+    if (be) be.innerHTML = `💰 <strong>~${ttc.Tong_ngan_sach || (p ? new Intl.NumberFormat('vi-VN').format(p.budget) + ' ₫' : 'N/A')}</strong>`;
+    
+    const tb = document.getElementById('res-total-budget');
+    if (tb) tb.textContent = ttc.Tong_ngan_sach || '';
+
+    // Cập nhật AIScore lên tiêu đề nếu có
+    if (ttc.AIScore_Hanh_trinh) {
+        const scoreSpan = document.createElement('span');
+        scoreSpan.style.cssText = "background:var(--p1);color:#fff;font-size:12px;padding:2px 8px;border-radius:12px;margin-left:10px;vertical-align:middle;";
+        scoreSpan.textContent = ttc.AIScore_Hanh_trinh;
+        if (titleEl) titleEl.appendChild(scoreSpan);
+    }
+
+    // 2. Render Lịch trình
+    let html = '';
+    const lichTrinh = aiOut.Lich_trinh || [];
+    
+    lichTrinh.forEach((dayData, dayIndex) => {
+        const ds = p && p.date_start ? new Date(p.date_start) : new Date();
+        ds.setDate(ds.getDate() + dayIndex);
+        const dateStr = ds.toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' });
+
+        html += `<div class="day-block glass-card">
+            <div class="day-hd">
+                <div class="day-badge">NGÀY ${dayIndex + 1}</div>
+                <div class="day-title">${dateStr}</div>
+                <div class="day-stats">
+                    <span class="day-st">${dayData.length} điểm</span>
+                </div>
+            </div>`;
+
+        dayData.forEach((stop, stopIdx) => {
+            const timeParts = (stop.Thoi_gian || "").split("-");
+            const tStart = timeParts[0] ? timeParts[0].trim() : "";
+            const tEnd = timeParts[1] ? timeParts[1].trim() : "";
+            const isLast = stopIdx === dayData.length - 1;
+
+            html += `<div class="stop-card">
+                <div class="stop-tl">
+                    <div class="stop-ts">${tStart}</div>
+                    <div class="stop-dot">📍</div>
+                    <div class="stop-te">${tEnd}</div>
+                    ${!isLast ? '<div class="stop-ln"></div>' : ''}
+                </div>
+                <div class="stop-ct">
+                    <div class="stop-top">
+                        <div class="stop-img">✨</div>
+                        <div>
+                            <div class="stop-nm"><a href="https://www.google.com/search?q=${encodeURIComponent(stop.Dia_diem)}" target="_blank">${stop.Dia_diem}</a></div>
+                            <div class="stop-desc">${stop.Gioi_thieu || ''}</div>
+                            <div class="stop-dur">⏱ Tham quan: ${stop.Thoi_luong || ''}</div>`;
+            
+            if (stop.Di_chuyen && !isLast) {
+                html += `<div class="transport-simple">🚕 Di chuyển: ${stop.Di_chuyen.Phuong_tien || ''} (${stop.Di_chuyen.Khoang_cach || ''}, ~${stop.Di_chuyen.Thoi_gian_di_chuyen || ''})</div>`;
+            }
+
+            html += `       </div>
+                    </div>
+                </div>
+            </div>`;
+        });
+        html += `</div><!-- /day-${dayIndex+1} -->`;
+    });
+
+    // 3. Render Khách sạn
+    const khachSan = aiOut.Khach_san_goi_y || [];
+    if (khachSan.length > 0) {
+        html += `<h3 style="margin-top:20px; font-size:18px;">🏨 Gợi ý Lưu trú</h3>
+        <div style="display:flex; gap:15px; overflow-x:auto; padding-bottom:10px;">`;
+        
+        khachSan.forEach(ks => {
+            html += `<div class="glass-card" style="min-width: 200px; padding: 15px; border-radius: 12px; flex: 1;">
+                <div style="font-weight: 600; font-size: 15px; margin-bottom: 5px;">${ks.Ten}</div>
+                <div style="color: var(--p1); font-size: 13px; margin-bottom: 5px;">⭐ ${ks.rate || 'N/A'}</div>
+                <div style="font-size: 13px; margin-bottom: 5px;">Phù hợp: <strong>${ks.AIScore || 'N/A'}</strong></div>
+                <div style="font-weight: 600; color: #dc3545; font-size: 14px;">${ks.Gia_tien || ''}</div>
+            </div>`;
+        });
+        html += `</div>`;
+    }
+
+    container.innerHTML = window.DOMPurify ? DOMPurify.sanitize(html, { ADD_ATTR: ['target', 'style'] }) : html;
+
+    // 4. Vẽ Lộ trình lên bản đồ nếu có dữ liệu map
+    if (data.routing && typeof window.drawItinerary === 'function') {
+        window.drawItinerary(data.routing);
     }
 }
 

@@ -13,6 +13,20 @@ import os
 from datetime import datetime
 import math
 
+def haversine_distance(lat1, lon1, lat2, lon2):
+    R = 6371000  # radius of Earth in meters
+    phi1 = math.radians(lat1)
+    phi2 = math.radians(lat2)
+    delta_phi = math.radians(lat2 - lat1)
+    delta_lambda = math.radians(lon2 - lon1)
+
+    a = math.sin(delta_phi / 2.0) ** 2 + \
+        math.cos(phi1) * math.cos(phi2) * \
+        math.sin(delta_lambda / 2.0) ** 2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+    return R * c
+
 
 
 
@@ -66,23 +80,38 @@ async def get_distance_matrix(places: list, optimal_coord: dict) -> dict:
     print(
         f"[OSRM] Gửi yêu cầu ma trận khoảng cách: {len(places)} địa điểm + 1 tọa độ tối ưu")
 
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        response = await client.get(url)
-        data = response.json()
+    try:
+        async with httpx.AsyncClient(timeout=300.0) as client:
+            response = await client.get(url)
+            data = response.json()
+            if data.get("code") != "Ok":
+                raise Exception(f"OSRM returned error code: {data.get('code')}")
+            
+            print(f"[OSRM] Nhận ma trận khoảng cách thành công: {len(data['distances'])}x{len(data['distances'][0])}")
+            return {
+                "distances": data["distances"],
+                "durations": data["durations"]
+            }
+    except Exception as e:
+        print(f"[OSRM] Lỗi lấy ma trận ({e}). Sử dụng Fallback tính toán (Haversine)...")
+        # Fallback tính tay matrix
+        all_places = [optimal_coord] + places
+        n = len(all_places)
+        distances = [[0] * n for _ in range(n)]
+        durations = [[0] * n for _ in range(n)]
+        
+        for i in range(n):
+            for j in range(n):
+                if i != j:
+                    dist_m = haversine_distance(all_places[i]["lat"], all_places[i]["lon"], all_places[j]["lat"], all_places[j]["lon"])
+                    distances[i][j] = dist_m
+                    # Giả định tốc độ 30km/h = ~8.33 m/s
+                    durations[i][j] = dist_m / 8.33
 
-
-
-    if data.get("code") != "Ok":
-        raise Exception(
-            f"OSRM Table API lỗi: {data.get('message', 'Unknown error')}")
-
-    print(
-        f"[OSRM] Nhận ma trận khoảng cách thành công: {len(data['distances'])}x{len(data['distances'][0])}")
-
-    return {
-        "distances": data["distances"],
-        "durations": data["durations"]
-    }
+        return {
+            "distances": distances,
+            "durations": durations
+        }
 
 
 def group_places_by_day(places: list, distance_matrix: dict, optimal_coord: dict, days: int, max_places_per_day: int) -> list:
@@ -185,69 +214,122 @@ async def get_daily_routes(day_groups: list, optimal_coord: dict) -> list:
 
     async with httpx.AsyncClient(timeout=30.0) as client:
         for day_idx, day_places in enumerate(day_groups):
-            # Xây dựng tọa độ chu trình: optimal → place1 → place2 → ... → optimal
-            coords_list = [f"{optimal_coord['lon']},{optimal_coord['lat']}"]
+            for day_idx, day_places in enumerate(day_groups):
+                # Xây dựng tọa độ chu trình: optimal → place1 → place2 → ... → optimal
+                coords_list = [f"{optimal_coord['lon']},{optimal_coord['lat']}"]
 
-            for place in day_places:
-                coords_list.append(f"{place['lon']},{place['lat']}")
-                
-            coords_list.append(f"{optimal_coord['lon']},{optimal_coord['lat']}")
+                for place in day_places:
+                    coords_list.append(f"{place['lon']},{place['lat']}")
+                    
+                coords_list.append(f"{optimal_coord['lon']},{optimal_coord['lat']}")
 
-            coords_str = ";".join(coords_list)
+                coords_str = ";".join(coords_list)
 
-            url = f"http://router.project-osrm.org/route/v1/driving/{coords_str}?overview=full&geometries=geojson&steps=true"
+                url = f"http://router.project-osrm.org/route/v1/driving/{coords_str}?overview=full&geometries=geojson&steps=true"
 
-            print(
-                f"[OSRM] Gửi yêu cầu route ngày {day_idx + 1}: {len(day_places)} địa điểm (chu trình khép kín)")
-
-            response = await client.get(url)
-            data = response.json()
-
-
-
-            if data.get("code") != "Ok":
                 print(
-                    f"[OSRM] Lỗi route ngày {day_idx + 1}: {data.get('message')}")
-                continue
+                    f"[OSRM] Gửi yêu cầu route ngày {day_idx + 1}: {len(day_places)} địa điểm (chu trình khép kín)")
 
-            route = data["routes"][0]
-            legs = route["legs"]
+                try:
+                    async with httpx.AsyncClient(timeout=10.0) as client:
+                        response = await client.get(url)
+                        data = response.json()
+                        
+                        if data.get("code") != "Ok":
+                            raise Exception(f"OSRM Error: {data.get('message')}")
+                        
+                        route = data["routes"][0]
+                        legs = route["legs"]
 
-            # Tính thông tin khoảng cách từng chặng
-            leg_details = []
-            for leg_idx, leg in enumerate(legs):
-                if leg_idx == 0:
-                    from_name = "Điểm tối ưu"
-                    to_name = day_places[0].get("name", "N/A")
-                elif leg_idx == len(legs) - 1:
-                    from_name = day_places[-1].get("name", "N/A")
-                    to_name = "Điểm tối ưu"
-                else:
-                    from_name = day_places[leg_idx - 1].get("name", "N/A")
-                    to_name = day_places[leg_idx].get("name", "N/A")
+                        # Tính thông tin khoảng cách từng chặng
+                        leg_details = []
+                        for leg_idx, leg in enumerate(legs):
+                            if leg_idx == 0:
+                                from_name = "Điểm tối ưu"
+                                to_name = day_places[0].get("name", "N/A")
+                            elif leg_idx == len(legs) - 1:
+                                from_name = day_places[-1].get("name", "N/A")
+                                to_name = "Điểm tối ưu"
+                            else:
+                                from_name = day_places[leg_idx - 1].get("name", "N/A")
+                                to_name = day_places[leg_idx].get("name", "N/A")
 
-                leg_details.append({
-                    "from": from_name,
-                    "to": to_name,
-                    "distance_m": round(leg["distance"], 2),
-                    "distance_km": round(leg["distance"] / 1000, 2),
-                    "duration_s": round(leg["duration"], 2),
-                    "duration_min": round(leg["duration"] / 60, 2)
-                })
+                            leg_details.append({
+                                "from": from_name,
+                                "to": to_name,
+                                "distance_m": round(leg["distance"], 2),
+                                "distance_km": round(leg["distance"] / 1000, 2),
+                                "duration_s": round(leg["duration"], 2),
+                                "duration_min": round(leg["duration"] / 60, 2)
+                            })
 
-            daily_routes.append({
-                "day": day_idx + 1,
-                "places": day_places,
-                "route_geometry": route["geometry"],
-                "total_distance_m": round(route["distance"], 2),
-                "total_distance_km": round(route["distance"] / 1000, 2),
-                "total_duration_s": round(route["duration"], 2),
-                "total_duration_min": round(route["duration"] / 60, 2),
-                "legs": leg_details
-            })
+                        daily_routes.append({
+                            "day": day_idx + 1,
+                            "places": day_places,
+                            "route_geometry": route["geometry"],
+                            "total_distance_m": round(route["distance"], 2),
+                            "total_distance_km": round(route["distance"] / 1000, 2),
+                            "total_duration_s": round(route["duration"], 2),
+                            "total_duration_min": round(route["duration"] / 60, 2),
+                            "legs": leg_details
+                        })
 
-            print(
-                f"[OSRM] Route ngày {day_idx + 1}: {route['distance']/1000:.2f} km, {route['duration']/60:.1f} phút")
+                        print(
+                            f"[OSRM] Route ngày {day_idx + 1}: {route['distance']/1000:.2f} km, {route['duration']/60:.1f} phút")
+                except Exception as e:
+                    print(f"[OSRM] Lỗi route ngày {day_idx + 1} ({e}). Sử dụng Fallback (LineString)...")
+                    # Fallback tạo LineString cơ bản nối thẳng các điểm
+                    route_coords = [[optimal_coord['lon'], optimal_coord['lat']]]
+                    total_dist = 0
+                    
+                    leg_details = []
+                    prev_lat, prev_lon = optimal_coord['lat'], optimal_coord['lon']
+                    
+                    for leg_idx, place in enumerate(day_places):
+                        route_coords.append([place['lon'], place['lat']])
+                        dist = haversine_distance(prev_lat, prev_lon, place['lat'], place['lon'])
+                        total_dist += dist
+                        leg_details.append({
+                            "from": "Điểm tối ưu" if leg_idx == 0 else day_places[leg_idx - 1].get("name", "N/A"),
+                            "to": place.get("name", "N/A"),
+                            "distance_m": round(dist, 2),
+                            "distance_km": round(dist / 1000, 2),
+                            "duration_s": round(dist / 8.33, 2),
+                            "duration_min": round((dist / 8.33) / 60, 2)
+                        })
+                        prev_lat, prev_lon = place['lat'], place['lon']
+                        
+                    # Vòng về điểm xuất phát
+                    route_coords.append([optimal_coord['lon'], optimal_coord['lat']])
+                    dist = haversine_distance(prev_lat, prev_lon, optimal_coord['lat'], optimal_coord['lon'])
+                    total_dist += dist
+                    leg_details.append({
+                        "from": day_places[-1].get("name", "N/A"),
+                        "to": "Điểm tối ưu",
+                        "distance_m": round(dist, 2),
+                        "distance_km": round(dist / 1000, 2),
+                        "duration_s": round(dist / 8.33, 2),
+                        "duration_min": round((dist / 8.33) / 60, 2)
+                    })
+                    
+                    total_duration = total_dist / 8.33
+
+                    daily_routes.append({
+                        "day": day_idx + 1,
+                        "places": day_places,
+                        "route_geometry": {
+                            "type": "LineString",
+                            "coordinates": route_coords
+                        },
+                        "total_distance_m": round(total_dist, 2),
+                        "total_distance_km": round(total_dist / 1000, 2),
+                        "total_duration_s": round(total_duration, 2),
+                        "total_duration_min": round(total_duration / 60, 2),
+                        "legs": leg_details
+                    })
+
+                    print(
+                        f"[OSRM] Route ngày {day_idx + 1}: {route['distance']/1000:.2f} km, {route['duration']/60:.1f} phút")
 
     return daily_routes
 

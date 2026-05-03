@@ -23,6 +23,8 @@ export async function fetchOSRMRoute(stops) {
     return stops.map(s=>[s.lat,s.lng]);
 }
 
+const DAY_COLORS = ['#3674B5', '#0C9E72', '#E8A914', '#7B4FBE', '#dc3545', '#17a2b8', '#fd7e14'];
+
 export function addMarkersToMap(mapInstance, stops, sizeMultiplier=1) {
     const bs=Math.round(38*sizeMultiplier), fs=Math.round(19*sizeMultiplier), ls=Math.round(9*sizeMultiplier);
     stops.forEach(s=>{
@@ -35,8 +37,8 @@ export function addMarkersToMap(mapInstance, stops, sizeMultiplier=1) {
     });
 }
 
-export function addRouteToMap(mapInstance, routeLatLngs, weight=4) {
-    L.polyline(routeLatLngs,{color:'#00A9FF',weight,opacity:.9,dashArray:'10,7',lineJoin:'round'}).addTo(mapInstance);
+export function addRouteToMap(mapInstance, routeLatLngs, color, weight=4) {
+    L.polyline(routeLatLngs,{color:color||'#00A9FF',weight,opacity:.9,dashArray:'10,7',lineJoin:'round'}).addTo(mapInstance);
 }
 
 const DEMO_STOPS = [
@@ -48,30 +50,79 @@ const DEMO_STOPS = [
     {name:'Biển Cửa Đại',lat:15.867,lng:108.355,emoji:'🏖️',color:'#0BB5D5',day:3},
 ];
 
+let currentStops = DEMO_STOPS;
+let currentRoutes = [];
+
 export async function initLeafletMap() {
     const container = document.getElementById('leaflet-map');
     if (!container || typeof L==='undefined') return;
     if (state.leafletMapInstance) { state.leafletMapInstance.remove(); state.leafletMapInstance=null; }
     state.leafletMapInstance = L.map('leaflet-map',{zoomControl:true,scrollWheelZoom:false}).setView([16.0,108.1],10);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom:18}).addTo(state.leafletMapInstance);
-    const routeLatLngs = await fetchOSRMRoute(DEMO_STOPS);
-    addRouteToMap(state.leafletMapInstance, routeLatLngs, 4);
-    addMarkersToMap(state.leafletMapInstance, DEMO_STOPS, 1);
-    state.leafletMapInstance.fitBounds(DEMO_STOPS.map(s=>[s.lat,s.lng]),{padding:[24,24]});
+    
+    if (currentRoutes.length === 0) {
+        const routeLatLngs = await fetchOSRMRoute(currentStops);
+        currentRoutes.push({ latLngs: routeLatLngs, color: '#00A9FF' });
+    }
+
+    currentRoutes.forEach(r => addRouteToMap(state.leafletMapInstance, r.latLngs, r.color, 4));
+    addMarkersToMap(state.leafletMapInstance, currentStops, 1);
+    state.leafletMapInstance.fitBounds(currentStops.map(s=>[s.lat,s.lng]),{padding:[24,24]});
     setTimeout(()=>state.leafletMapInstance.invalidateSize(), 250);
+    
     container.style.cursor='pointer';
-    container.addEventListener('click',()=>openFullMapModal(DEMO_STOPS, routeLatLngs),{once:true});
+    container.addEventListener('click',()=>openFullMapModal(currentStops, currentRoutes),{once:true});
 }
 
-export function openFullMapModal(stops, routeLatLngs) {
+export function openFullMapModal(stops, routes) {
     const mc = document.getElementById('leaflet-modal-map');
     if (!mc) return;
     if (state.leafletModalMapInstance) { state.leafletModalMapInstance.remove(); state.leafletModalMapInstance=null; }
     state.leafletModalMapInstance = L.map('leaflet-modal-map',{zoomControl:true,scrollWheelZoom:true}).setView([16.0,108.1],10);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(state.leafletModalMapInstance);
-    addRouteToMap(state.leafletModalMapInstance, routeLatLngs, 5);
+    
+    routes.forEach(r => addRouteToMap(state.leafletModalMapInstance, r.latLngs, r.color, 5));
     addMarkersToMap(state.leafletModalMapInstance, stops, 1.1);
     state.leafletModalMapInstance.fitBounds(stops.map(s=>[s.lat,s.lng]),{padding:[30,30]});
     setTimeout(()=>state.leafletModalMapInstance.invalidateSize(), 200);
     showPopup('popup-map');
 }
+
+export function drawItinerary(routingData) {
+    if (!routingData || !routingData.daily_routes) return;
+    
+    let allStops = [];
+    let allRoutes = [];
+    
+    routingData.daily_routes.forEach((dayRoute, idx) => {
+        const dayColor = DAY_COLORS[idx % DAY_COLORS.length];
+        const dayNumber = dayRoute.day || (idx + 1);
+        
+        if (dayRoute.places && dayRoute.places.length > 0) {
+            dayRoute.places.forEach(p => {
+                allStops.push({
+                    name: p.name,
+                    lat: p.lat,
+                    lng: p.lon,
+                    emoji: '📍',
+                    color: dayColor,
+                    day: dayNumber
+                });
+            });
+        }
+        
+        if (dayRoute.route_geometry && dayRoute.route_geometry.coordinates) {
+            // route_geometry of OSRM uses [lon, lat], Leaflet needs [lat, lon]
+            const latLngs = dayRoute.route_geometry.coordinates.map(c => [c[1], c[0]]);
+            allRoutes.push({ latLngs, color: dayColor });
+        }
+    });
+    
+    currentStops = allStops;
+    currentRoutes = allRoutes;
+    
+    // Re-initialize map with new data
+    initLeafletMap();
+}
+
+window.drawItinerary = drawItinerary;
