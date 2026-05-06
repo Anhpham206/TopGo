@@ -71,7 +71,7 @@ pip install -r requirements.txt
 | `pydantic` | Kiểm tra và xác thực dữ liệu |
 | `python-dotenv` | Đọc biến môi trường từ file `.env` |
 
-### Bước 4: Cấu hình file `.env.example` -> `.env` (chứa các key API)
+### Bước 4: Cấu hình file `.env.example`, copy ra đổi tên thành `.env` (chứa các key API)
 đổi tên .env.example thành .env và điền key API
 ```bash
 GEMINI_API_KEY=your_api_key_here
