@@ -144,3 +144,20 @@ export async function sendFeedback(feedback) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return res.json();
 }
+
+/**
+ * Gửi tin nhắn chat tới TopGo AI backend.
+ * @param {string} message  - Tin nhắn của người dùng
+ * @param {string} sessionId - ID phiên chat (mỗi tab tạo 1 UUID riêng)
+ * @returns {Promise<string>} - Phản hồi từ Gemini AI
+ */
+export async function sendChatMessage(message, sessionId) {
+    const res = await fetch(`${API_BASE}/api/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, session_id: sessionId }),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    return data.reply;
+}

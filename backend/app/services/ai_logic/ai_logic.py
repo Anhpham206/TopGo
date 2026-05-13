@@ -18,7 +18,7 @@ client = genai.Client(api_key=API_KEY)
 client2 = genai.Client(api_key=API_KEY2)
 
 # 2. Cấu hình Model & Generation Config
-MODEL_ID = "gemini-3-flash-preview"
+MODEL_ID = "gemini-2.5-flash-lite"
 config_ai1 = types.GenerateContentConfig(
     response_mime_type="application/json",
     temperature=0.0,
