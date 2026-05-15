@@ -1,9 +1,13 @@
 import requests
 import math
 import json
+import os
+from dotenv import load_dotenv
 
-# Sử dụng Key SerpAPI của ông
-SERPAPI_KEY = "a39aa607f980bf1f586c96a24350f95db5984fc96d9f461d42537548786ee5d2" #
+load_dotenv()
+
+# Sử dụng Key SerpAPI từ file .env
+SERPAPI_KEY = os.environ.get("SERPAPI_KEY")
 
 def tinh_khoang_cach(lat1, lon1, lat2, lon2):
     """Tính khoảng cách đường chim bay bằng Haversine"""
