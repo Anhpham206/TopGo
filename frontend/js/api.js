@@ -7,7 +7,7 @@
   - Hỗ trợ cơ chế Fallback (Dự phòng ngắt mạng): Tự động lazy-load file \`mockFallback.js\` nếu kết nối tới server bị lỗi hoặc môi trường không sẵn sàng, đảm bảo UI không bị sập.
   ========================================================================
 */
-const _isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+const _isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
 const API_BASE = _isLocal
     ? 'http://localhost:8000'
     : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
