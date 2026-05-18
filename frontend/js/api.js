@@ -7,7 +7,7 @@
   - Hỗ trợ cơ chế Fallback (Dự phòng ngắt mạng): Tự động lazy-load file \`mockFallback.js\` nếu kết nối tới server bị lỗi hoặc môi trường không sẵn sàng, đảm bảo UI không bị sập.
   ========================================================================
 */
-const _isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+const _isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
 const API_BASE = _isLocal
     ? 'http://localhost:8000'
     : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
@@ -143,4 +143,21 @@ export async function sendFeedback(feedback) {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return res.json();
+}
+
+/**
+ * Gửi tin nhắn chat tới TopGo AI backend.
+ * @param {string} message  - Tin nhắn của người dùng
+ * @param {string} sessionId - ID phiên chat (mỗi tab tạo 1 UUID riêng)
+ * @returns {Promise<string>} - Phản hồi từ Gemini AI
+ */
+export async function sendChatMessage(message, sessionId) {
+    const res = await fetch(`${API_BASE}/api/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, session_id: sessionId }),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    return data.reply;
 }
