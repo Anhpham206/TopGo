@@ -1,0 +1,204 @@
+{
+    "status": "success",
+    "khach_san_chon": {
+        "ten": "Grand Mercure Danang",
+        "lat": 16.0483415,
+        "lng": 108.22670409999999,
+        "gia_tien": 70,
+        "rating": 4.7,
+        "khoang_cach_tam": 2.70377686695936,
+        "website": "https://grandmercuredanang.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb&utm_content=listing",
+        "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH5bVNpMWRIC7v9wrD0basn9mieJvzKKP9rlwkeuGBUoexFRnMXuPBT0YVc_KMOkJlS6HxB8GD5iDQvTWGWUuDOEqRZQUvAp-6oAbti7WQ3xjTlhfVdu-paT5eqxUTxGhczzFRXV0URCC0o=w1000-h1000-c-n",
+        "tags": [
+            "Bể bơi",
+            "Spa",
+            "Đỗ xe miễn phí",
+            "Bữa sáng miễn phí"
+        ],
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x314219db392e5bb5%3A0x2a43b2cacea4567a&engine=google_maps_reviews&hl=vi",
+        "loai_hinh_tim_kiem": "Resort nghỉ dưỡng",
+        "diem_tong": 3.7709677419354843
+    },
+    "danh_sach_goi_y": [
+        {
+            "ten": "Grand Mercure Danang",
+            "lat": 16.0483415,
+            "lng": 108.22670409999999,
+            "gia_tien": 70,
+            "rating": 4.7,
+            "khoang_cach_tam": 2.70377686695936,
+            "website": "https://grandmercuredanang.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb&utm_content=listing",
+            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH5bVNpMWRIC7v9wrD0basn9mieJvzKKP9rlwkeuGBUoexFRnMXuPBT0YVc_KMOkJlS6HxB8GD5iDQvTWGWUuDOEqRZQUvAp-6oAbti7WQ3xjTlhfVdu-paT5eqxUTxGhczzFRXV0URCC0o=w1000-h1000-c-n",
+            "tags": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí"
+            ],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314219db392e5bb5%3A0x2a43b2cacea4567a&engine=google_maps_reviews&hl=vi",
+            "loai_hinh_tim_kiem": "Resort nghỉ dưỡng",
+            "diem_tong": 3.7709677419354843
+        },
+        {
+            "ten": "Santa Luxury Hotel",
+            "lat": 16.0517799,
+            "lng": 108.2467562,
+            "gia_tien": 47,
+            "rating": 4.9,
+            "khoang_cach_tam": 4.770135338261386,
+            "website": "https://santaluxuryhotel.com/",
+            "url_img": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhHfcldvC3Qaf1_IcrHYPX_UzL5S5meKCp2NPI1tm9vGBb0oahUhR4C1MNLPBI7qkJF6Ov8cK-MZoQMJm641gylp8x6W9nYec5uaBdcOz1d_WvxEHEw5xCYsEadw2nnmIaqx6bK1Soac0ckO6Dpakabv9-dXNWnDny_OfczhkK24cRwhoCZtZqjN=w1000-h1000-c-n",
+            "tags": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí"
+            ],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217b4e3029189%3A0x2184d10ffbf867ec&engine=google_maps_reviews&hl=vi",
+            "loai_hinh_tim_kiem": "Resort nghỉ dưỡng",
+            "diem_tong": 3.6604946531337563
+        },
+        {
+            "ten": "THE BLOSSOM RESORT ISLAND DA NANG - Onsen Included",
+            "lat": 16.0450402,
+            "lng": 108.2269589,
+            "gia_tien": 47,
+            "rating": 4.6,
+            "khoang_cach_tam": 2.843098379792553,
+            "website": "https://www.theblossomhotels.com/",
+            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHsYs41-KfwiKBjJ8zrgegfgvTbRmJHuStY5tKzOUDg7MS42Et5lheccaIAbs6MlIjgfG8MpfynzrFgjZsjJw0cw37Ku0krGwhPAHLGGOfavDMgFlaUwBewcLUFxQrwhz_BvMU=w1000-h1000-c-n",
+            "tags": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí"
+            ],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314219dca34ae1d3%3A0x66a4d38a6e610248&engine=google_maps_reviews&hl=vi",
+            "loai_hinh_tim_kiem": "Resort nghỉ dưỡng",
+            "diem_tong": 3.5994508041258
+        },
+        {
+            "ten": "Yarra Ocean Suites Danang",
+            "lat": 16.0488945,
+            "lng": 108.2488008,
+            "gia_tien": 50,
+            "rating": 4.8,
+            "khoang_cach_tam": 5.017238115230021,
+            "website": "https://yarraoceansuitesdanang.com/",
+            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFApRdndxstFYH4ZOj77ZlrrOszOmbL_LxJk-n3IasAJxkcj1K3xhMaZrWxkk0Fyl2GYppTboTYJwWG1qtIuqQHJwoXXw-XmhUuGrmsSqZgXapE7HlpfiSDD7psxvS0AhI0aSue=w1000-h1000-c-n",
+            "tags": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí"
+            ],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x31421738a38987cb%3A0x987cf70eea39eeda&engine=google_maps_reviews&hl=vi",
+            "loai_hinh_tim_kiem": "Resort nghỉ dưỡng",
+            "diem_tong": 3.3825869797799157
+        },
+        {
+            "ten": "Khách sạn Nesta Celia",
+            "lat": 16.0610867,
+            "lng": 108.24603789999999,
+            "gia_tien": 94,
+            "rating": 4.8,
+            "khoang_cach_tam": 4.743004936988106,
+            "website": "https://nestahotel.com.vn/accommodation/nesta-celia-danang-hotel/",
+            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFgsWHzx1sR3yNFILyjDgGmB1Rxof8Zu8djLy-ftW_iIj1ZlF-A6RBLBPAgMYUKR6asJUIFjYTcBqwTYq19BN1pWJYLL8jBmLPx1nr0k7A4_aMI82oxIib5oGOmCu6pSU7FzTfhyyg4QQgB=w1000-h1000-c-n",
+            "tags": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí"
+            ],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x3142170026a6348f%3A0x2ae11db5b03d5de0&engine=google_maps_reviews&hl=vi",
+            "loai_hinh_tim_kiem": "Resort nghỉ dưỡng",
+            "diem_tong": 3.330252606294123
+        },
+        {
+            "ten": "Serenity Retreat Danang",
+            "lat": 16.0732621,
+            "lng": 108.2432429,
+            "gia_tien": 26,
+            "rating": 4.7,
+            "khoang_cach_tam": 4.86129060842043,
+            "website": "https://www.facebook.com/SerenityRetreatDanang",
+            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHIT1tbUnLWoSzatRYfZ1WGq0rX3giePSIegn7V0DF770l3e21_8sbQa_f8ydTlK-VbYAx9jKZWGXrGOJ_LOAPjdJyywfhLadYd6zpysLEbfYnRh2T36iy6UNL6IpQWSQvFdw0=w1000-h1000-c-n",
+            "tags": [],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217003fe6a1b9%3A0x4ae0ba54862c4bd0&engine=google_maps_reviews&hl=vi",
+            "loai_hinh_tim_kiem": "Resort nghỉ dưỡng",
+            "diem_tong": 3.296583808784739
+        },
+        {
+            "ten": "Luxury Villas Beach Da Nang",
+            "lat": 16.037712,
+            "lng": 108.25272799999999,
+            "gia_tien": 197,
+            "rating": 5,
+            "khoang_cach_tam": 5.709517427199232,
+            "website": "",
+            "url_img": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhHniVP3ikZOqKuaYEVD3o0y8rz1XIlW8zwsia1qiwasAa2-nl1Aj9Kv8uDF9sw6FHTgLhMWIANHPzbc_aquwL_AIdMEcOVUHF9EAN9cwTBOxLaBKu0ioiqqMn11DSCv-YPzUHJvfc-r1YhOhK1JDUpe8XwNOUQTnSRHnbI-Zi9YwlfahU7v6cQ=w1000-h1000-c-n",
+            "tags": [],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217b33b690ef9%3A0x6cb7e33f7c951e5c&engine=google_maps_reviews&hl=vi",
+            "loai_hinh_tim_kiem": "Resort nghỉ dưỡng",
+            "diem_tong": 3.1578843760709394
+        },
+        {
+            "ten": "Risemount Premier Resort Đà Nẵng",
+            "lat": 16.0546179,
+            "lng": 108.2420798,
+            "gia_tien": 34,
+            "rating": 4.5,
+            "khoang_cach_tam": 4.2615531830460265,
+            "website": "https://www.booking.com/hotel/vn/risemount-resort-danang.html?aid=7955654&selected_currency=USD&lang=en-us&soz=1&lang_changed=1",
+            "url_img": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhHHJ4L0NizEj3f1Kjiv17MzeKP_IsU1YqbPR1pdODA_vXoVjqK3dupAvEEUEtQG_xzTWDoqG5GkaeSpOK1UbGv_LTt6KGvmXLRfYNn_Tw3trUC_YpGFt2zUU3U2FLQTwgn-NEcq81l0_QfhAvXDE4snIGn_4T0rJ1zMbwvj2EWcI2kfm_vgb_uUDw=w1000-h1000-c-n",
+            "tags": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí"
+            ],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x3142177c46837343%3A0xf40f5197d1ba3cb1&engine=google_maps_reviews&hl=vi",
+            "loai_hinh_tim_kiem": "Resort nghỉ dưỡng",
+            "diem_tong": 3.0408587252357595
+        },
+        {
+            "ten": "Khách sạn Radisson Đà Nẵng",
+            "lat": 16.0739298,
+            "lng": 108.24474,
+            "gia_tien": 80,
+            "rating": 4.6,
+            "khoang_cach_tam": 5.0376318746940445,
+            "website": "https://www.radissonhotels.com/en-us/hotels/radisson-da-nang?cid=a:se+b:gmb+c:apac+i:local+e:rad+d:seap+h:VNDAD1",
+            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEL4oUJ18NZjbtekhESzV7ze_9E7DtcXIuugoobHUGxOytG8t9_IN2NEUIDjJcctIumx-Wxv338K6Tz-1YqMqguIoF4J15EgMzb88cYrq2FYlCuWoBfDrIDb6upD9uaGIabCRbX=w1000-h1000-c-n",
+            "tags": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Wi-Fi miễn phí"
+            ],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217072e7d4a4b%3A0x7ebd58a80ed57046&engine=google_maps_reviews&hl=vi",
+            "loai_hinh_tim_kiem": "Resort nghỉ dưỡng",
+            "diem_tong": 2.888906687568249
+        },
+        {
+            "ten": "Pullman Danang Beach Resort",
+            "lat": 16.0405647,
+            "lng": 108.2500872,
+            "gia_tien": 146,
+            "rating": 4.7,
+            "khoang_cach_tam": 5.3435661084376145,
+            "website": "https://all.accor.com/lien_externe.svlt?goto=fiche_hotel&code_hotel=8838&merchantid=seo-maps-VN-8838&sourceid=aw-cen&utm_medium=seo%20maps&utm_source=google%20Maps&utm_campaign=seo%20maps",
+            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHCi_1NsfWVbQA8PZKklzC3WwSTRqDneAI9PAGKyGXorKtq6k2HuVgIQ0iwyyKnDsSoeD4qwUzLqwGRQglmQ7S1d9sH4FyHVN1DTHqQ4EtiHGDF6yjDimi3qd19MvptsesSJbbbtiSMjt4b=w1000-h1000-c-n",
+            "tags": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Wi-Fi miễn phí"
+            ],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217686dfcf229%3A0xa17b1ae3b14af658&engine=google_maps_reviews&hl=vi",
+            "loai_hinh_tim_kiem": "Resort nghỉ dưỡng",
+            "diem_tong": 2.809794224312735
+        }
+    ]
+}

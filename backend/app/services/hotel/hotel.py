@@ -53,12 +53,26 @@ def cham_diem_khach_san(danh_sach_ks):
     danh_sach_ks.sort(key=lambda x: x["diem_tong"], reverse=True) #[cite: 20]
     return danh_sach_ks
 
-def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach):
-    """Hàm quét API Google Maps và lọc dữ liệu thô"""
+# Mapping các loại hình từ Frontend sang từ khóa tìm kiếm tối ưu trên Google Maps
+ACCOMMODATION_TYPES = {
+    "Khách sạn": "Khách sạn",
+    "Homestay": "Homestay",
+    "Resort": "Resort nghỉ dưỡng",
+    "Villa": "Biệt thự Villa",
+    "Căn hộ": "Căn hộ dịch vụ"
+}
+
+def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach, loai_hinh_luu_tru="khách sạn"):
+    """Hàm quét API Google Maps và lọc dữ liệu thô theo loại hình lưu trú"""
+    
+    # 1. Xử lý loại hình lưu trú (Fallback về Khách sạn nếu không hợp lệ)
+    loai_hinh_key = loai_hinh_luu_tru.lower().strip()
+    search_query = ACCOMMODATION_TYPES.get(loai_hinh_key, "Khách sạn")
+
     url = "https://serpapi.com/search.json"
     params = {
         "engine": "google_maps",
-        "q": "Khách sạn",
+        "q": search_query,
         "ll": f"@{tam_lat},{tam_lng},14z",
         "hl": "vi",
         "gl": "vn",
@@ -69,6 +83,18 @@ def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach):
     try:
         res = requests.get(url, params=params)
         data_ks = res.json() #[cite: 20]
+
+         # Log toàn bộ dữ liệu trả về từ SerpApi ra file để dễ quan sát cấu trúc
+        # Sử dụng os.path để tính đường dẫn tuyệt đối, tránh lỗi sai đường dẫn (cwd) và lỗi escape char (\b, \a)
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        result_dir = os.path.join(current_dir, "result_test")
+        os.makedirs(result_dir, exist_ok=True) # Tạo thư mục nếu chưa có
+        
+        log_file_path = os.path.join(result_dir, "serpapi_raw_log.json")
+        with open(log_file_path, "w", encoding="utf-8") as f:
+            json.dump(data_ks, f, indent=4, ensure_ascii=False)
+
+        
         if "error" in data_ks:
             return {"status": "error", "message": data_ks["error"]}
         ks_tho = data_ks.get("local_results", [])
@@ -77,7 +103,7 @@ def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach):
 
     danh_sach_hop_le = []
     for ks in ks_tho:
-        ten = ks.get("title", "Khách sạn") #[cite: 20]
+        ten = ks.get("title", "Không tên") #[cite: 20]
         lat = ks.get("gps_coordinates", {}).get("latitude") #[cite: 20]
         lng = ks.get("gps_coordinates", {}).get("longitude") #[cite: 20]
         rating = ks.get("rating", 3.0) #[cite: 20]
@@ -88,13 +114,25 @@ def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach):
 
         khoang_cach = tinh_khoang_cach(tam_lat, tam_lng, lat, lng) #[cite: 20]
 
+        # 2. Trích xuất các trường "ngon" như nhóm trưởng yêu cầu
+        website = ks.get("website", "")
+        url_img = ks.get("thumbnail", ks.get("serpapi_thumbnail", ""))
+        tags = ks.get("amenities", [])
+        reviews_link = ks.get("reviews_link", "")
+
         danh_sach_hop_le.append({
             "ten": ten,
             "lat": lat,
             "lng": lng,
             "gia_tien": gia_tien,
             "rating": rating,
-            "khoang_cach_tam": khoang_cach
+            "khoang_cach_tam": khoang_cach,
+            # Thêm các field mới
+            "website": website,
+            "url_img": url_img,
+            "tags": tags,
+            "reviews_link": reviews_link,
+            "loai_hinh_tim_kiem": search_query # Track xem tìm theo loại gì
         })
 
     if not danh_sach_hop_le:
@@ -117,9 +155,18 @@ if __name__ == "__main__":
     test_lat = 16.0544
     test_lng = 108.2022
     test_ngan_sach = 1000000
+    loai_hinh_test = "resort" # Test thử với resort
 
     # Chạy hàm và in kết quả ra terminal
-    ket_qua_json = quet_khach_san_quanh_trung_vi(test_lat, test_lng, test_ngan_sach)
+    ket_qua_json = quet_khach_san_quanh_trung_vi(test_lat, test_lng, test_ngan_sach, loai_hinh_test)
     
-    print("--- LOG CẤU TRÚC JSON MODULE HOTEL ENGINE ---")
-    print(json.dumps(ket_qua_json, indent=10, ensure_ascii=False))
+    # Ghi đè ra file để bạn dễ đọc vì terminal dễ bị lỗi font tiếng việt
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    result_dir = os.path.join(current_dir, "result_test")
+    os.makedirs(result_dir, exist_ok=True)
+    
+    test_result_path = os.path.join(result_dir, "ket_qua_xu_ly.json")
+    with open(test_result_path, "w", encoding="utf-8") as f:
+        json.dump(ket_qua_json, f, indent=4, ensure_ascii=False)
+        
+    print(f"--- ĐÃ CHẠY XONG! Hãy kiểm tra file ket_qua_xu_ly.json tại: {test_result_path} ---")
