@@ -18,7 +18,7 @@ client = genai.Client(api_key=API_KEY)
 client2 = genai.Client(api_key=API_KEY2)
 
 # 2. Cấu hình Model & Generation Config
-MODEL_ID = "gemini-3-flash-preview"
+MODEL_ID = "gemini-2.5-flash-lite"
 config_ai1 = types.GenerateContentConfig(
     response_mime_type="application/json",
     temperature=0.0,
@@ -208,20 +208,3 @@ def call_ai_2(ai1_result_dict, db_data_dict):
     print("AI 2 đã soạn xong nội dung lịch trình\n")
 
     return json.loads(response.text)
-
-
-def generate_itinerary_flow(fe_input):
-    try:
-        ai1_output = call_ai_1(fe_input)
-        # Chỗ này chưa code lấy dl be trả ra -> lấy tạmtừ file mock
-        db_mock_file = os.path.join(BASE_DIR, "db_mock.json")
-        with open(db_mock_file, "r", encoding="utf-8") as f:
-            db_data = json.load(f)
-
-        final_output = call_ai_2(ai1_output, db_data)
-
-        return final_output
-
-    except Exception as e:
-        print(f"❌ Lỗi trong luồng xử lý: {e}")
-        return {"error": str(e)}
