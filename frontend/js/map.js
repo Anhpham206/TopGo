@@ -23,31 +23,43 @@ export async function fetchOSRMRoute(stops) {
     return stops.map(s=>[s.lat,s.lng]);
 }
 
-const DAY_COLORS = ['#3674B5', '#0C9E72', '#E8A914', '#7B4FBE', '#dc3545', '#17a2b8', '#fd7e14'];
+const DAY_COLORS = ['#00A9FF', '#2A82DA', '#0055A4', '#4DB8FF', '#1E73BE', '#89CFF3', '#3674B5'];
 
 export function addMarkersToMap(mapInstance, stops, sizeMultiplier=1) {
-    const bs=Math.round(38*sizeMultiplier), fs=Math.round(19*sizeMultiplier), ls=Math.round(9*sizeMultiplier);
+    const bs=Math.round(32*sizeMultiplier), fs=Math.round(15*sizeMultiplier);
     stops.forEach(s=>{
-        const icon=L.divIcon({className:'',html:`
+        const icon=L.divIcon({className:'glass-marker-container',html:`
         <div style="display:flex;flex-direction:column;align-items:center;">
-          <div style="background:${s.color};color:#fff;border-radius:50%;width:${bs}px;height:${bs}px;display:flex;align-items:center;justify-content:center;font-size:${fs}px;box-shadow:0 3px 10px rgba(0,0,0,.3);border:2.5px solid #fff">${s.emoji}</div>
-          <div style="background:${s.color};color:#fff;font-size:${ls}px;font-weight:700;padding:2px 6px;border-radius:8px;margin-top:2px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.2)">Ngày ${s.day}</div>
-        </div>`,iconSize:[bs,Math.round(bs*1.42)],iconAnchor:[Math.round(bs/2),Math.round(bs*1.42)],popupAnchor:[0,Math.round(-bs*1.47)]});
-        L.marker([s.lat,s.lng],{icon}).addTo(mapInstance).bindPopup(`<strong>${s.name}</strong><br><small>Ngày ${s.day} trong lịch trình</small>`);
+          <div class="glass-marker" style="--mc: ${s.color}; width:${bs}px;height:${bs}px;font-size:${fs}px;">
+            ${s.day}
+          </div>
+        </div>`,iconSize:[bs,bs],iconAnchor:[Math.round(bs/2),Math.round(bs/2)],popupAnchor:[0,-Math.round(bs/2)]});
+        L.marker([s.lat,s.lng],{icon}).addTo(mapInstance).bindTooltip(`
+            <div class="glass-tooltip-content">
+                <strong class="gt-title">${s.name}</strong>
+                <div class="gt-day">Lịch trình Ngày ${s.day}</div>
+            </div>
+        `, {
+            className: 'glass-tooltip',
+            direction: 'top',
+            offset: [0, -Math.round(bs/2) - 5],
+            opacity: 1
+        });
     });
 }
 
-export function addRouteToMap(mapInstance, routeLatLngs, color, weight=4) {
-    L.polyline(routeLatLngs,{color:color||'#00A9FF',weight,opacity:.9,dashArray:'10,7',lineJoin:'round'}).addTo(mapInstance);
+export function addRouteToMap(mapInstance, routeLatLngs, color, weight=3) {
+    L.polyline(routeLatLngs,{color:color||'#00A9FF',weight:weight+8,opacity:0.25,lineJoin:'round',lineCap:'round',className:'route-glow'}).addTo(mapInstance);
+    L.polyline(routeLatLngs,{color:color||'#00A9FF',weight,opacity:0.9,lineJoin:'round',lineCap:'round',className:'route-core'}).addTo(mapInstance);
 }
 
 const DEMO_STOPS = [
-    {name:'Sân bay Đà Nẵng',lat:16.044,lng:108.200,emoji:'✈️',color:'#3674B5',day:1},
-    {name:'Bãi biển Mỹ Khê',lat:16.065,lng:108.247,emoji:'🏖️',color:'#0C9E72',day:1},
-    {name:'Bảo tàng Chăm',lat:16.047,lng:108.221,emoji:'🏛️',color:'#578FCA',day:1},
-    {name:'Bà Nà Hills',lat:15.997,lng:107.990,emoji:'🌉',color:'#7B4FBE',day:2},
-    {name:'Phố Cổ Hội An',lat:15.880,lng:108.326,emoji:'🏮',color:'#E8A914',day:3},
-    {name:'Biển Cửa Đại',lat:15.867,lng:108.355,emoji:'🏖️',color:'#0BB5D5',day:3},
+    {name:'Sân bay Đà Nẵng',lat:16.044,lng:108.200,emoji:'✈️',color:'#00A9FF',day:1},
+    {name:'Bãi biển Mỹ Khê',lat:16.065,lng:108.247,emoji:'🏖️',color:'#00A9FF',day:1},
+    {name:'Bảo tàng Chăm',lat:16.047,lng:108.221,emoji:'🏛️',color:'#00A9FF',day:1},
+    {name:'Bà Nà Hills',lat:15.997,lng:107.990,emoji:'🌉',color:'#2A82DA',day:2},
+    {name:'Phố Cổ Hội An',lat:15.880,lng:108.326,emoji:'🏮',color:'#0055A4',day:3},
+    {name:'Biển Cửa Đại',lat:15.867,lng:108.355,emoji:'🏖️',color:'#0055A4',day:3},
 ];
 
 let currentStops = DEMO_STOPS;
@@ -65,10 +77,14 @@ export async function initLeafletMap() {
         currentRoutes.push({ latLngs: routeLatLngs, color: '#00A9FF' });
     }
 
-    currentRoutes.forEach(r => addRouteToMap(state.leafletMapInstance, r.latLngs, r.color, 4));
+    currentRoutes.forEach(r => addRouteToMap(state.leafletMapInstance, r.latLngs, r.color, 3));
     addMarkersToMap(state.leafletMapInstance, currentStops, 1);
     state.leafletMapInstance.fitBounds(currentStops.map(s=>[s.lat,s.lng]),{padding:[24,24]});
-    setTimeout(()=>state.leafletMapInstance.invalidateSize(), 250);
+    setTimeout(()=>{
+        state.leafletMapInstance.invalidateSize();
+        // Zoom in closer by 1 level to prevent markers from overlapping too much
+        state.leafletMapInstance.setZoom(state.leafletMapInstance.getZoom() + 1);
+    }, 250);
     
     container.style.cursor='pointer';
     container.addEventListener('click',()=>openFullMapModal(currentStops, currentRoutes),{once:true});
@@ -81,10 +97,13 @@ export function openFullMapModal(stops, routes) {
     state.leafletModalMapInstance = L.map('leaflet-modal-map',{zoomControl:true,scrollWheelZoom:true}).setView([16.0,108.1],10);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(state.leafletModalMapInstance);
     
-    routes.forEach(r => addRouteToMap(state.leafletModalMapInstance, r.latLngs, r.color, 5));
+    routes.forEach(r => addRouteToMap(state.leafletModalMapInstance, r.latLngs, r.color, 4));
     addMarkersToMap(state.leafletModalMapInstance, stops, 1.1);
-    state.leafletModalMapInstance.fitBounds(stops.map(s=>[s.lat,s.lng]),{padding:[30,30]});
-    setTimeout(()=>state.leafletModalMapInstance.invalidateSize(), 200);
+    state.leafletModalMapInstance.fitBounds(stops.map(s=>[s.lat,s.lng]),{padding:[40,40]});
+    setTimeout(()=>{
+        state.leafletModalMapInstance.invalidateSize();
+        state.leafletModalMapInstance.setZoom(state.leafletModalMapInstance.getZoom() + 1);
+    }, 200);
     showPopup('popup-map');
 }
 

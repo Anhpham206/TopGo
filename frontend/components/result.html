@@ -2,103 +2,151 @@
   ========================================================================
   FILE: result.html
   CHỨC NĂNG: 
-  - Component màn hình hiển thị kết quả lịch trình từ AI.
-  - Chứa bản đồ, danh sách địa điểm theo ngày và hộp thoại phản hồi.
+  - Component màn hình hiển thị kết quả lịch trình từ AI (Bionic UI / Liquid Glass).
+  - Chứa Hero Bento Box, Bản đồ Immersive và Timeline lộ trình.
   ========================================================================
 -->
 <div class="screen" id="screen-result">
-    <div class="result-wrap">
-        <!-- Header summary -->
-        <div class="result-header glass-card">
-            <div style="flex:1;min-width:200px">
-                <div class="result-title" id="res-title">Hành trình...</div>
-                <div class="result-meta">
-                    <span class="m-item" id="res-dates">📅 <strong>...</strong></span>
-                    <span class="m-item" id="res-pax">👤 <strong>...</strong></span>
-                    <span class="m-item" id="res-budget">💰 <strong>...</strong></span>
-                    <span class="m-item" id="res-weather">🌤 <strong>Nắng, 31°C</strong></span>
-                    <span class="score-badge">⭐ 4.7 AI Score</span>
+    <!-- Liquid Glass Floating Orbs -->
+    <div class="res-bg-orb orb-1"></div>
+    <div class="res-bg-orb orb-2"></div>
+    <div class="res-bg-orb orb-3"></div> <!-- Thêm orb 3 cho chiều sâu -->
+
+    <div class="result-wrap bionic-wrap">
+        <!-- 1. UNIFIED HERO HEADER -->
+        <div class="bento-hero-unified glass-panel glow-container" id="res-hero-panel">
+            <div class="hero-bg-image" id="res-hero-img"></div>
+            <div class="hero-bg-overlay"></div>
+            
+            <div class="hero-content-wrapper">
+                <!-- Left side: Main Title & Actions -->
+                <div class="hero-main-content">
+                    <div class="res-eyebrow">
+                        <span class="res-dot"></span>
+                        TOPGO AI PLANNER
+                    </div>
+                    <h1 class="res-title-massive" id="res-title">Hành trình...</h1>
+                    <div class="res-actions">
+                        <button class="glass-btn btn-outline" id="btn-edit-req">Sửa yêu cầu</button>
+                        <button class="glass-btn glass-btn-primary glow" id="btn-save-plan">Lưu lịch trình</button>
+                    </div>
                 </div>
-            </div>
-            <div class="result-acts">
-                <button class="r-btn r-btn-out" id="btn-edit-req">Sửa yêu cầu</button>
-                <button class="r-btn r-btn-solid" id="btn-save-plan">Lưu lịch trình</button>
+
+                <!-- Ticket Divider (Răng cưa) -->
+                <div class="ticket-divider"></div>
+
+                <!-- Right side: Key Stats Grid -->
+                <div class="hero-stats-container">
+                    <div class="hero-stats-grid">
+                        <div class="hero-stat-item">
+                            <div class="bento-lbl">Thời gian</div>
+                            <div class="bento-val" id="res-dates">...</div>
+                        </div>
+                        <div class="hero-stat-item">
+                            <div class="bento-lbl">Thời tiết</div>
+                            <div class="bento-val" id="res-weather">Nắng, 31°C</div>
+                        </div>
+                        <div class="hero-stat-item">
+                            <div class="bento-lbl">Số người</div>
+                            <div class="bento-val" id="res-pax">...</div>
+                        </div>
+                        <div class="hero-stat-item">
+                            <div class="bento-lbl">Ngân sách</div>
+                            <div class="bento-val highlight" id="res-budget">...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-divider-v"></div>
+
+                    <div class="hero-prep-row">
+                        <div class="hero-stat-item">
+                            <div class="bento-lbl">Bắt đầu đi</div>
+                            <div class="bento-val" id="res-departure">--</div>
+                        </div>
+                        <div class="hero-stat-item">
+                            <div class="bento-lbl">Phương tiện</div>
+                            <div class="bento-val" id="res-transport">--</div>
+                        </div>
+                        <div class="hero-stat-item">
+                            <div class="bento-lbl">Khuyên dùng</div>
+                            <div class="bento-val highlight" id="res-best-time">--</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Map + Itinerary grid -->
-        <div class="result-grid">
-            <!-- Left: interactive Leaflet map -->
-            <div>
-                <div class="map-panel glass-card" id="map-preview-card">
-                    <div class="map-hd">Sơ đồ hành trình (click để phóng to)</div>
-                    <div id="leaflet-map" style="cursor: pointer;"></div>
-                    <div class="map-stats">
-                        <div class="map-stat">
-                            <span class="lbl">Tổng quãng đường</span>
-                            <span class="val" id="res-dist">~148 km</span>
+        <!-- 2 + 3. TWO-COLUMN: MAP (left) + TIMELINE (right) -->
+        <section class="wow-section split-section">
+            <div class="split-left glass-panel">
+                <!-- Section Label -->
+                <div class="section-label">
+                    <span class="section-label-text">Lộ Trình Trực Quan</span>
+                </div>
+
+                <!-- Immersive Map -->
+                <div class="immersive-map-container glow-container" style="border-radius: var(--r-xl); overflow: hidden;">
+                    <div id="leaflet-map" class="bionic-map"></div>
+                    <!-- Floating Stats Overlay -->
+                    <div class="floating-stats-overlay">
+                        <div class="stat-glass">
+                            <div class="stat-val" id="res-dist">~148 km</div>
+                            <div class="stat-lbl">Quãng đường</div>
                         </div>
-                        <div class="map-stat">
-                            <span class="lbl">Số địa điểm</span>
-                            <span class="val" id="res-places-count">11 điểm</span>
+                        <div class="stat-glass">
+                            <div class="stat-val" id="res-places-count">11 điểm</div>
+                            <div class="stat-lbl">Địa điểm</div>
                         </div>
-                        <div class="map-stat">
-                            <span class="lbl">Chi phí ước tính</span>
-                            <span class="val" style="color:var(--p1)" id="res-total-budget">8.200.000 ₫</span>
+                        <div class="stat-glass highlight-stat">
+                            <div class="stat-val" id="res-total-budget">8.2M ₫</div>
+                            <div class="stat-lbl">Tổng chi phí</div>
                         </div>
-                        <div class="map-stat">
-                            <span class="lbl">Chi phí / người</span>
-                            <span class="val" style="color:var(--p2)" id="res-budget-pp">2.050.000 ₫</span>
+                        <div class="stat-glass">
+                            <div class="stat-val" id="res-budget-pp">--</div>
+                            <div class="stat-lbl">Chi phí/người</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Right: day-by-day itinerary -->
-            <div class="itinerary">
-                <!-- NEW: Travel Prep Suggestion (Moved to top of right column) -->
-                <div class="glass-card prep-card">
-                    <div class="prep-header">
-                        <span class="prep-header-icon">⏱</span> Gợi ý Mốc thời gian Xuất phát
-                    </div>
-                    <div class="prep-body">
-                        <div class="prep-row">
-                            <span class="prep-lbl">Bắt đầu tham quan:</span> 
-                            <strong id="res-prep-start" class="prep-val-dark">--</strong>
-                        </div>
-                        <div class="prep-row last">
-                            <span class="prep-lbl">Phương tiện & Thời gian đi:</span> 
-                            <strong id="res-prep-duration" class="prep-val-primary">--</strong>
-                        </div>
-                        <div class="prep-result-box">
-                            <div class="prep-result-lbl">Bạn nên xuất phát lúc:</div>
-                            <div id="res-prep-recommend" class="prep-result-val">--</div>
-                        </div>
-                    </div>
+            <div class="split-right glass-panel">
+                <!-- Section Label -->
+                <div class="section-label">
+                    <span class="section-label-text">Lịch Trình Chi Tiết</span>
                 </div>
+                <div id="itinerary-container" class="wow-timeline">
+                    <!-- Rendered dynamically by JS -->
+                </div>
+            </div>
+        </section>
 
-                <div id="itinerary-container"></div>
-
-                <!-- Feedback / adjust itinerary -->
-                <div class="feedback-card glass-card">
-                    <div class="feedback-title">Phản hồi cho AI · Điều chỉnh lịch trình</div>
-                    <textarea class="feedback-area" id="feedback-input"
-                        placeholder="Ví dụ: Thêm buổi tối xem show ánh sáng Cầu Rồng..."
+        <!-- 4. FLOATING AI COMMAND CENTER -->
+        <section class="wow-section feedback-section">
+            <div class="ai-command-center glass-panel glow-container">
+                <div class="ai-cc-header">
+                    <span class="section-label-text">Tinh chỉnh cùng AI</span>
+                </div>
+                <div class="ai-cc-body">
+                    <textarea class="ai-cc-input" id="feedback-input"
+                        placeholder="Bạn muốn thay đổi điều gì? (VD: Đổi món ăn tối sang hải sản, giảm bớt điểm đi bộ...)"
                         maxlength="500"></textarea>
-                    <div class="feedback-foot">
-                        <span class="feedback-lim" id="feedback-count">0 / 500</span>
-                        <button class="btn-feedback" id="btn-feedback">Cập nhật lịch trình</button>
+                    <div class="ai-cc-actions">
+                        <span class="ai-cc-count" id="feedback-count">0 / 500</span>
+                        <button class="glass-btn glass-btn-primary glow ai-pulse-btn" id="btn-feedback">
+                            Cập nhật lịch trình
+                        </button>
                     </div>
                 </div>
-            </div><!-- /itinerary -->
-        </div><!-- /result-grid -->
-    </div><!-- /result-wrap -->
-</div><!-- /screen-result -->
+            </div>
+        </section>
+    </div>
+</div>
 
 <!-- SCREEN: ERROR -->
 <div class="screen" id="screen-error">
     <div class="error-hero">
-        <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.55);text-transform:uppercase;margin-bottom:8px">
+        <div
+            style="font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.55);text-transform:uppercase;margin-bottom:8px">
             TopGo · AI Planner
         </div>
         <h2>Không thể tạo lịch trình</h2>
@@ -110,8 +158,8 @@
             <div class="error-msg">AI phát hiện một số vấn đề với thông tin của bạn:</div>
             <div class="error-issues" id="error-issues"></div>
             <div class="popup-acts" style="margin-top: 20px; justify-content: center;">
-                <button class="btn-back-err" id="btn-back-to-form">← Quay lại chỉnh sửa</button>
-                <button class="btn-continue" id="btn-continue-error" style="display: none;">Tiếp tục →</button>
+                <button class="popup-cancel" id="btn-back-to-form">← Quay lại chỉnh sửa</button>
+                <button class="popup-confirm blue" id="btn-continue-error" style="display: none;">Tiếp tục →</button>
             </div>
         </div>
     </div>

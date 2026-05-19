@@ -1,40 +1,36 @@
-<!-- 
+<!--
   ========================================================================
   FILE: header.html
-  CHỨC NĂNG: 
+  CHỨC NĂNG:
   - Component thanh điều hướng (Navigation Bar) phía trên cùng.
   - Chứa logo, các liên kết chuyển trang và thông tin user.
+  - User info: hiển thị avatar + tên khi đã đăng nhập, nút đăng nhập khi chưa.
   ========================================================================
 -->
 <div class="header-inner">
-    <a class="logo" href="./home.html">
-        <div class="logo-mark">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
-            </svg>
-        </div>
-        <div>
+    <a class="logo" href="./index.html">
+        <div class="logo-container">
             <div class="logo-text">TopGo</div>
             <div class="logo-tag">Smart Tourism</div>
         </div>
     </a>
     <nav class="header-nav">
-        <a class="nav-a" href="./home.html" id="nav-home">Trang chủ</a>
+        <a class="nav-a" href="./index.html" id="nav-home">Trang chủ</a>
         <a class="nav-a" href="./chatbot.html" id="nav-chatbot">TopChat</a>
-        <a class="nav-a" href="./index.html" id="nav-planner">AI Planner</a>
+        <a class="nav-a" href="./planner.html" id="nav-planner">AI Planner</a>
         <a class="nav-a" href="#">Khám phá</a>
         <a class="nav-a" href="#">Khách sạn</a>
         <a class="nav-a" href="#">Hoạt động</a>
     </nav>
-    <div class="user-info">
-        <div class="user-icon">
+    <a class="user-info" id="user-info-btn" href="./auth.html">
+        <div class="user-icon" id="user-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
             </svg>
         </div>
         <div class="user-details">
-            <div class="user-name">TopGo</div>
+            <div class="user-name" id="user-name-display">Đăng nhập</div>
         </div>
-    </div>
+    </a>
 </div>

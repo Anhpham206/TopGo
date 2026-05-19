@@ -1,75 +1,96 @@
-<!-- 
-  ========================================================================
-  FILE: chatbot.html
-  CHỨC NĂNG: 
-  - Giao diện độc lập (Standalone UI) dành riêng cho tính năng TopChat - Trợ lý du lịch AI.
-  - Cung cấp trải nghiệm trò chuyện toàn màn hình (fullscreen chat) với cấu trúc hiển thị tin nhắn (người dùng/bot).
-  - Tích hợp hệ thống các thẻ gợi ý câu hỏi nhanh (suggestions chips) hỗ trợ thao tác nhanh cho người dùng.
-  - Kế thừa Header và Footer chung qua cơ chế tải động.
-  - Kích hoạt điểm nạp (entry point) \`js/chatbot.js\` chịu trách nhiệm xử lý logic phản hồi và tương tác chat.
-  ========================================================================
--->
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TopChat — Trợ lý du lịch AI</title>
-    <meta name="description" content="TopChat — Trợ lý du lịch AI của TopGo. Hỏi về địa điểm, đặc sản, thời tiết, ngân sách cho bất kỳ thành phố nào tại Việt Nam. Hỗ trợ 24/7.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <meta name="description"
+        content="TopChat — Trợ lý du lịch AI của TopGo. Hỏi về địa điểm, đặc sản, thời tiết, ngân sách cho bất kỳ thành phố nào tại Việt Nam. Hỗ trợ 24/7.">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/shared.css?v=2">
     <link rel="stylesheet" href="./css/chatbot.css">
 </head>
+
 <body>
-    <!-- Header — loaded from components/header.html -->
     <header class="header" id="site-header">
         <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
     </header>
 
     <main>
-        <div class="chatbot-fullscreen-with-nav">
-            <div class="chatbot-header-page">
-                <h1>Ai gọi đó, TopChat nghe đây!</h1>
-                <p>Trợ lý du lịch thông minh — sẵn sàng hỗ trợ bạn 24/7</p>
+        <div class="chatbot-fullscreen-with-nav" id="chatbot-wrapper">
+
+            <!-- ── HERO SECTION ─────────────────────────────── -->
+            <section class="chat-hero" id="chat-hero">
+                <div class="chat-ray-bg" aria-hidden="true">
+                    <div class="chat-ray-halo"></div>
+                    <div class="chat-ray-ring-wrap">
+                        <div class="chat-ray-ring chat-ray-ring--1"></div>
+                        <div class="chat-ray-ring chat-ray-ring--2"></div>
+                        <div class="chat-ray-ring chat-ray-ring--3"></div>
+                        <div class="chat-ray-ring chat-ray-ring--4"></div>
+                    </div>
+                </div>
+
+                <div class="chat-hero-content">
+                    <div class="chat-hero-title-wrap">
+                        <h1 class="chat-hero-title">
+                            Bạn muốn khám phá
+                            <span class="chat-hero-highlight">điều gì</span>
+                            hôm nay?
+                        </h1>
+                        <p class="chat-hero-sub">Trợ lý AI đồng hành trên mọi hành trình.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── CONVERSATION STICKY HEADER ──────────────── -->
+            <div class="chat-conv-header" id="chat-conv-header">
+                <div class="chat-conv-header-info">
+                    <div class="chat-conv-header-name">TopGo</div>
+                </div>
+                <button class="chat-conv-back-btn" id="chat-conv-back-btn">Trang chủ</button>
             </div>
+
+            <!-- ── CHAT CONTAINER ───────────────────────────── -->
             <div class="chatbot-container-full-width">
-                <div class="chatbot-messages-full-width" id="chatbot-messages">
-                    <div class="message bot">
-                        <div class="message-wrap">
-                            <div class="message-content">
-                                🌟 Đi "chữa lành" dễ lắm, <strong>TopGo chỉ cho!</strong><br>
-                                Hỏi tui về <em>địa điểm, đặc sản, ngân sách, thời tiết</em> bất kỳ thành phố nào nhé!
-                            </div>
-                        </div>
+
+                <!-- Sidebar Ads — only visible in conversation mode -->
+                <aside class="chat-sidebar-ad chat-sidebar-ad--left" aria-hidden="true">
+                    <div class="sidebar-ad-text">
+                        <div class="sidebar-ad-eyebrow">AI Planner</div>
+                        <div class="sidebar-ad-title">Lên lịch<br>thông minh</div>
+                        <p class="sidebar-ad-sub">Chỉ vài giây để có lịch trình hoàn hảo</p>
                     </div>
-                    <!-- data-suggestion thay thế onclick -->
-                    <div class="chat-suggestions">
-                        <button class="chat-chip" data-suggestion="Gợi ý địa điểm Đà Lạt">Địa điểm Đà Lạt</button>
-                        <button class="chat-chip" data-suggestion="Đặc sản Hội An có gì ngon?">Đặc sản Hội An</button>
-                        <button class="chat-chip" data-suggestion="Đà Nẵng có địa điểm nào nổi bật?">Địa điểm Đà Nẵng</button>
-                        <button class="chat-chip" data-suggestion="Thời tiết Phú Quốc tháng 6 thế nào?">Thời tiết Phú Quốc</button>
-                        <button class="chat-chip" data-suggestion="Kinh nghiệm đi Hạ Long">Kinh nghiệm Hạ Long</button>
+                </aside>
+
+                <aside class="chat-sidebar-ad chat-sidebar-ad--right" aria-hidden="true">
+                    <div class="sidebar-ad-text">
+                        <div class="sidebar-ad-eyebrow">Khám Phá</div>
+                        <div class="sidebar-ad-title">Việt Nam<br>tươi đẹp</div>
+                        <p class="sidebar-ad-sub">Hơn 50 điểm đến đang chờ bạn</p>
                     </div>
-                </div>
-                <div class="chatbot-input-area-full-width">
-                    <input type="text" id="chatbot-input" placeholder="Nhập câu hỏi của bạn..." class="chatbot-input-full-width">
-                    <button id="chatbot-send" class="chatbot-send-full-width">✈ Gửi</button>
+                </aside>
+
+                <!-- Messages: empty by default, only visible in conversation mode -->
+                <div class="chatbot-messages-full-width" id="chatbot-messages"></div>
+
+                <!-- Single input bar -->
+                <div class="chatbot-input-area-full-width" id="chat-input-area">
+                    <input type="text" id="chatbot-input" placeholder="Hỏi TopChat bất cứ điều gì về du lịch..."
+                        class="chatbot-input-full-width" autocomplete="off">
+                    <button id="chatbot-send" class="chatbot-send-full-width">Gửi</button>
                 </div>
             </div>
+
         </div>
     </main>
 
-    <!-- Footer + Banners + Popup + Toast — loaded from components/footer.html -->
     <div id="site-shared"></div>
-
-    <!-- DOMPurify (regular script — global trước khi module chạy) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
-    <!-- mockFallback: load async (non-blocking), sẵn sàng trước khi user gõ -->
-    <script async src="./js/mockFallback.js"></script>
-    <!-- Entry point duy nhất cho chatbot -->
+    <script defer src="./js/mockFallback.js"></script>
     <script type="module" src="./js/chatbot.js"></script>
 </body>
+
 </html>

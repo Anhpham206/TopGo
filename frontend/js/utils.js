@@ -8,7 +8,7 @@
   - Xử lý làm sạch chuỗi văn bản (sanitizeText) và bộ lọc phát hiện nội dung vô nghĩa/spam (isNonsensicalText).
   ========================================================================
 */
-import { getApproxDistance, TRANSPORT_MIN_PER_PAX, TRAIN_COST_PER_KM, BUS_COST_PER_KM, AVG_SPEED, ACCOMMODATION_MIN_PER_NIGHT } from './data.js';
+import { getApproxDistance, TRANSPORT_MIN_PER_PAX, TRAIN_COST_PER_KM, BUS_COST_PER_KM, AVG_SPEED, ACCOMMODATION_MIN_PER_NIGHT, VALID_TRANSPORT_TYPES, VALID_ACCOMMODATION_TYPES } from './data.js';
 
 export function getTravelHours(depId, destId, transport) {
     if (!depId || !destId || depId === destId) return 0;
@@ -27,22 +27,28 @@ export function validateTransportRules(depId, destId, transport, days, pax, budg
     }
     if (isIntercity && distance > 0) {
         // Removed travel time warnings based on user input. Travel time is now separate.
+        if (transport === 'Xe máy' && distance > 200) {
+            result.push({type:'error',msg:`Khoảng cách quá xa (${Math.round(distance)} km). Việc đi xe máy liên tỉnh trên 200km không được khuyến nghị để đảm bảo an toàn.`});
+        }
         if (transport === 'Tàu hỏa') {
-            const cost = pax * distance * TRAIN_COST_PER_KM;
-            if (budget < cost) result.push({type:'error',msg:`💰 Ngân sách không đủ cho vé tàu hỏa (ước tính ${cost.toLocaleString('vi-VN')} ₫ cho ${pax} người).`});
+            const cost = pax * distance * TRAIN_COST_PER_KM * 2;
+            if (budget < cost) result.push({type:'error',msg:`Ngân sách không đủ cho vé tàu hỏa khứ hồi (ước tính ${cost.toLocaleString('vi-VN')} ₫ cho ${pax} người).`});
         }
         if (transport === 'Xe khách') {
-            const cost = pax * distance * BUS_COST_PER_KM;
-            if (budget < cost) result.push({type:'error',msg:`💰 Ngân sách không đủ cho vé xe khách (ước tính ${cost.toLocaleString('vi-VN')} ₫ cho ${pax} người).`});
+            if (distance > 800) {
+                result.push({type:'error',msg:`Khoảng cách quá xa (${Math.round(distance)} km). Đi xe khách trên 800km sẽ rất mệt mỏi, hệ thống khuyên dùng máy bay hoặc tàu hỏa.`});
+            }
+            const cost = pax * distance * BUS_COST_PER_KM * 2;
+            if (budget < cost) result.push({type:'error',msg:`Ngân sách không đủ cho vé xe khách khứ hồi (ước tính ${cost.toLocaleString('vi-VN')} ₫ cho ${pax} người).`});
         }
     }
     if (transport === 'Máy bay') {
         const minFlight = pax * TRANSPORT_MIN_PER_PAX['Máy bay'] * 2;
-        if (budget < minFlight) result.push({type:'error',msg:`💰 Ngân sách quá thấp cho vé máy bay khứ hồi. Cần tối thiểu ~${minFlight.toLocaleString('vi-VN')} ₫.`});
+        if (budget < minFlight) result.push({type:'error',msg:`Ngân sách quá thấp cho vé máy bay khứ hồi. Cần tối thiểu ~${minFlight.toLocaleString('vi-VN')} ₫.`});
     }
     if (transport === 'Thuê ô tô tự lái') {
         const rentalCost = 500_000 * days;
-        if (budget < rentalCost) result.push({type:'error',msg:`💰 Ngân sách không đủ cho thuê xe tự lái ${days} ngày (tối thiểu ${rentalCost.toLocaleString('vi-VN')} ₫).`});
+        if (budget < rentalCost) result.push({type:'error',msg:`Ngân sách không đủ cho thuê xe tự lái ${days} ngày (tối thiểu ${rentalCost.toLocaleString('vi-VN')} ₫).`});
     }
     return result;
 }
@@ -54,18 +60,18 @@ export function validateAccommodationRules(accommodation, budget, pax, days) {
     const roomsNeeded = Math.ceil(pax / 2);
     const totalMin = minPerNight * roomsNeeded * days;
     if (budget < totalMin)
-        errors.push({type:'error',msg:`💰 Ngân sách không đủ cho ${accommodation} với ${pax} người trong ${days} ngày. Cần tối thiểu ~${totalMin.toLocaleString('vi-VN')} ₫.`});
+        errors.push({type:'error',msg:`Ngân sách không đủ cho ${accommodation} với ${pax} người trong ${days} ngày. Cần tối thiểu ~${totalMin.toLocaleString('vi-VN')} ₫.`});
     return errors;
 }
 
 export function simulatePricingCheck(budget, pax, days) {
     const warnings = [];
     const recBudget = pax * days * 200_000;
-    if (budget < recBudget)
-        warnings.push({type:'warning',msg:`💰 Ngân sách thấp hơn mức khuyến nghị (tối thiểu ${recBudget.toLocaleString('vi-VN')} ₫).`});
     const required = pax * days * 500_000;
-    if (budget < required)
-        warnings.push({type:'warning',msg:`💰 Hệ thống ước tính cần tối thiểu ${required.toLocaleString('vi-VN')} ₫ cho ${pax} người trong ${days} ngày.`});
+    if (budget < recBudget)
+        warnings.push({type:'warning',msg:`Ngân sách thấp. Phù hợp du lịch tiết kiệm.`});
+    else if (budget < required)
+        warnings.push({type:'warning',msg:`Ngân sách trung bình. Đáp ứng tốt các dịch vụ tiêu chuẩn.`});
     return warnings;
 }
 
@@ -83,34 +89,33 @@ export function isNonsensicalText(text) {
 export function runComprehensiveValidation(payload) {
     const errors = []; let continueAllowed = true; let days = 1;
     const {city_id,dep_city_id,budget,pax,date_start,date_end,transport,accommodation,departure_time,return_time,notes} = payload;
-    if (!city_id) { errors.push({type:'error',msg:'📍 Chưa chọn thành phố muốn đến.'}); continueAllowed=false; }
-    if (!budget||budget<=0) { errors.push({type:'error',msg:'💰 Ngân sách phải là số dương lớn hơn 0.'}); continueAllowed=false; }
-    else if (budget<100_000) { errors.push({type:'error',msg:'💰 Ngân sách tối thiểu 100.000 ₫.'}); continueAllowed=false; }
-    if (!pax||pax<1||pax>50) { errors.push({type:'error',msg:'👥 Số lượng hành khách phải từ 1 đến 50.'}); continueAllowed=false; }
+    if (!city_id) { errors.push({type:'error',msg:'Chưa chọn thành phố muốn đến.'}); continueAllowed=false; }
+    if (!pax||pax<1||pax>50) { errors.push({type:'error',msg:'Số lượng hành khách phải từ 1 đến 50.'}); continueAllowed=false; }
     if (date_start && date_end) {
         const ds=new Date(date_start),de=new Date(date_end),today=new Date();
         today.setHours(0,0,0,0);
-        if (isNaN(ds.getTime())||isNaN(de.getTime())) { errors.push({type:'error',msg:'📅 Định dạng ngày không hợp lệ.'}); continueAllowed=false; }
+        if (isNaN(ds.getTime())||isNaN(de.getTime())) { errors.push({type:'error',msg:'Định dạng ngày không hợp lệ.'}); continueAllowed=false; }
         else {
-            if (ds<today) { errors.push({type:'error',msg:'📅 Ngày bắt đầu tham quan không được ở quá khứ.'}); continueAllowed=false; }
+            if (ds<today) { errors.push({type:'error',msg:'Ngày bắt đầu tham quan không được ở quá khứ.'}); continueAllowed=false; }
             const diff=Math.round((de-ds)/864e5); days=Math.max(diff,1);
-            if (diff>7) { errors.push({type:'error',msg:`📅 Khoảng thời gian vượt quá 7 ngày (hiện tại: ${diff} ngày).`}); continueAllowed=false; }
-            if (diff<0) { errors.push({type:'error',msg:'📅 Ngày kết thúc phải sau hoặc bằng ngày bắt đầu.'}); continueAllowed=false; }
-            if (diff===0&&departure_time&&return_time&&return_time<=departure_time) { errors.push({type:'error',msg:'⏰ Trong cùng một ngày, giờ kết thúc tham quan phải sau giờ bắt đầu.'}); continueAllowed=false; }
+            if (diff>7) { errors.push({type:'error',msg:`Khoảng thời gian vượt quá 7 ngày (hiện tại: ${diff} ngày).`}); continueAllowed=false; }
+            if (diff<0) { errors.push({type:'error',msg:'Ngày kết thúc phải sau hoặc bằng ngày bắt đầu.'}); continueAllowed=false; }
+            if (diff===0&&departure_time&&return_time&&return_time<=departure_time) { errors.push({type:'error',msg:'Trong cùng một ngày, giờ kết thúc tham quan phải sau giờ bắt đầu.'}); continueAllowed=false; }
         }
-    } else { errors.push({type:'error',msg:'📅 Vui lòng chọn ngày bắt đầu và ngày kết thúc tham quan.'}); continueAllowed=false; }
-    if (!dep_city_id) errors.push({type:'warning',msg:'📍 Bạn chưa nhập điểm xuất phát. Hệ thống sẽ mặc định xuất phát từ thành phố đích.'});
-    if (notes&&notes.length>0&&isNonsensicalText(notes)) errors.push({type:'warning',msg:'Nội dung ghi chú có vẻ không rõ ràng. AI có thể không hiểu đúng ý bạn.'});
+    } else { errors.push({type:'error',msg:'Vui lòng chọn ngày bắt đầu và ngày kết thúc tham quan.'}); continueAllowed=false; }
     
-    const standardTransports = ['Xe khách', 'Máy bay', 'Tàu hỏa', 'Ô tô riêng', 'Xe máy', 'Thuê ô tô tự lái', 'Xe đạp'];
-    if (transport && !standardTransports.includes(transport) && isNonsensicalText(transport)) {
-        errors.push({type:'warning',msg:'Phương tiện bạn nhập tay có vẻ không hợp lệ hoặc quá ngắn (dưới 5 ký tự). AI có thể không hiểu đúng.'});
+    if (!budget||budget<=0) { errors.push({type:'error',msg:'Ngân sách phải là số dương lớn hơn 0.'}); continueAllowed=false; }
+    else {
+        const minBudget = (pax || 1) * days * 50_000;
+        if (budget<minBudget) { errors.push({type:'error',msg:`Ngân sách quá thấp. Tối thiểu ${minBudget.toLocaleString('vi-VN')} ₫.`}); continueAllowed=false; }
     }
 
-    const standardAccom = ['Khách sạn', 'Homestay', 'Airbnb', 'Resort', 'Villa', 'Căn hộ'];
-    if (accommodation && !standardAccom.includes(accommodation) && isNonsensicalText(accommodation)) {
-        errors.push({type:'warning',msg:'Loại chỗ ở bạn nhập tay có vẻ không hợp lệ hoặc quá ngắn (dưới 5 ký tự). AI có thể không hiểu đúng.'});
-    }
+    if (!dep_city_id) errors.push({type:'warning',msg:'Bạn chưa nhập điểm xuất phát. Hệ thống sẽ mặc định xuất phát từ thành phố đích.'});
+    if (transport && !VALID_TRANSPORT_TYPES.includes(transport)) { errors.push({type:'error',msg:'Loại phương tiện không hợp lệ. Vui lòng chọn lại từ danh sách.'}); continueAllowed=false; }
+    if (accommodation && !VALID_ACCOMMODATION_TYPES.includes(accommodation)) { errors.push({type:'error',msg:'Loại hình lưu trú không hợp lệ. Vui lòng chọn lại từ danh sách.'}); continueAllowed=false; }
+    const places = payload.places || [];
+    if (places.length > 10) { errors.push({type:'error',msg:'Số lượng địa điểm tham quan không được vượt quá 10.'}); continueAllowed=false; }
+    if (notes&&notes.length>0&&isNonsensicalText(notes)) { errors.push({type:'error',msg:'Ghi chú không chứa thông tin hữu ích. Vui lòng mô tả cụ thể hơn hoặc để trống hoàn toàn.'}); continueAllowed=false; }
     const transportIssues = validateTransportRules(dep_city_id,city_id,transport,days,pax,budget);
     for (const issue of transportIssues) { errors.push(issue); if(issue.type==='error') continueAllowed=false; }
     const accomIssues = validateAccommodationRules(accommodation,budget,pax,days);

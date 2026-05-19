@@ -83,56 +83,133 @@ export async function fetchPlaces() {
 }
 
 export async function generateItinerary(payload, onProgress) {
-    const res = await fetch(`${API_BASE}/api/generate`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    try {
+        const res = await fetch(`${API_BASE}/api/generate`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder("utf-8");
-    let buffer = "";
-    let finalData = null;
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder("utf-8");
+        let buffer = "";
+        let finalData = null;
 
-    while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
 
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split('\n');
-        buffer = lines.pop();
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop();
 
-        for (const line of lines) {
-            if (line.trim() === '') continue;
-            try {
-                const data = JSON.parse(line);
-                if (data.step === 'done') {
-                    console.log("nhận được data ở api.js");
-                    finalData = data.result;
-                } else if (data.step && onProgress) {
-                    onProgress(data.step);
+            for (const line of lines) {
+                if (line.trim() === '') continue;
+                try {
+                    const data = JSON.parse(line);
+                    if (data.step === 'done') {
+                        console.log("nhận được data ở api.js");
+                        finalData = data.result;
+                    } else if (data.step && onProgress) {
+                        onProgress(data.step);
+                    }
+                } catch (e) {
+                    console.warn("[TopGo] Failed to parse JSON line:", line);
                 }
-            } catch (e) {
-                console.warn("[TopGo] Failed to parse JSON line:", line);
             }
         }
-    }
 
-    if (buffer.trim()) {
-        try {
-            const data = JSON.parse(buffer);
-            if (data.step === 'done') {
-                console.log("nhận được data ở api.js 2");
-                finalData = data.result;
-            }
-        } catch (e) { }
-    }
+        if (buffer.trim()) {
+            try {
+                const data = JSON.parse(buffer);
+                if (data.step === 'done') {
+                    console.log("nhận được data ở api.js 2");
+                    finalData = data.result;
+                }
+            } catch (e) { }
+        }
 
-    if (!finalData) {
-        throw new Error("Không nhận được dữ liệu kết quả cuối cùng");
+        if (!finalData) {
+            throw new Error("Không nhận được dữ liệu kết quả cuối cùng");
+        }
+        return finalData;
+    } catch (e) {
+        console.warn("[TopGo] Lỗi kết nối BE, sử dụng mock fallback cho lịch trình:", e);
+        // Simulate progress for UI
+        if (onProgress) {
+            onProgress('Đang tìm kiếm thông tin...');
+            await new Promise(r => setTimeout(r, 1000));
+            onProgress('Đang lên lịch trình...');
+            await new Promise(r => setTimeout(r, 1000));
+        }
+        return getMockItineraryFallback(payload);
     }
-    return finalData;
+}
+
+function getMockItineraryFallback(payload) {
+    const pax = payload?.pax || 1;
+    const budget = payload?.budget || 5000000;
+    const city = payload?.city_name || "Tuyệt Vời";
+
+    return {
+        status: "success",
+        output: {
+            Thong_tin_chung: {
+                Ten_hanh_trinh: `Khám phá ${city} (Mock)`,
+                So_nguoi: `${pax} người`,
+                Tong_ngan_sach: new Intl.NumberFormat('vi-VN').format(budget) + " ₫",
+                AIScore: "9.5/10"
+            },
+            Lich_trinh: [
+                [
+                    {
+                        Thoi_gian: "08:30 - 10:30",
+                        Dia_diem: `Điểm nổi bật 1 tại ${city}`,
+                        Gioi_thieu: "Khám phá nét đẹp đặc trưng và văn hóa độc đáo tại điểm đến hấp dẫn này.",
+                        Thoi_luong: "2 tiếng",
+                        Di_chuyen: {
+                            Phuong_tien: "Taxi",
+                            Khoang_cach: "3 km",
+                            Thoi_gian_di_chuyen: "10 phút"
+                        }
+                    },
+                    {
+                        Thoi_gian: "11:00 - 13:00",
+                        Dia_diem: "Nhà hàng đặc sản địa phương",
+                        Gioi_thieu: "Thưởng thức các món ăn đặc sản truyền thống với hương vị khó quên.",
+                        Thoi_luong: "2 tiếng",
+                        Di_chuyen: {
+                            Phuong_tien: "Đi bộ",
+                            Khoang_cach: "500 m",
+                            Thoi_gian_di_chuyen: "5 phút"
+                        }
+                    },
+                    {
+                        Thoi_gian: "14:00 - 17:00",
+                        Dia_diem: "Khu tham quan tự do",
+                        Gioi_thieu: "Trải nghiệm các hoạt động giải trí thú vị và thư giãn buổi chiều.",
+                        Thoi_luong: "3 tiếng"
+                    }
+                ]
+            ],
+            Khach_san_goi_y: [
+                {
+                    Ten: `Khách sạn Trung Tâm ${city}`,
+                    rate: 4.8,
+                    AIScore: "9.6/10",
+                    Gia_tien: "1.200.000 ₫"
+                },
+                {
+                    Ten: `Resort Ven Biển ${city}`,
+                    rate: 4.5,
+                    AIScore: "8.9/10",
+                    Gia_tien: "1.800.000 ₫"
+                }
+            ],
+            routing: []
+        }
+    };
 }
 
 export async function sendFeedback(feedback) {

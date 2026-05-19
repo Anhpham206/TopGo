@@ -1,0 +1,397 @@
+<!-- 
+  ========================================================================
+  FILE: planner.html
+  CHỨC NĂNG: 
+  - Trang chính của ứng dụng TopGo AI Itinerary Planner.
+  - Định nghĩa bộ khung giao diện chính: Header, Form cấu hình chuyến đi (vé máy bay ảo), và Footer.
+  - Là container gốc tải tự động các đoạn mã HTML phụ trợ (components/loading.html, components/result.html) qua JS để tạo trải nghiệm ứng dụng đơn trang (SPA).
+  - Tích hợp CSS toàn cục (base.css, shared.css, form.css, result.css) và thư viện bản đồ Leaflet.js.
+  - Kích hoạt điểm nạp (entry point) \`js/main.js\` để xử lý logic hiển thị và tạo lịch trình.
+  ========================================================================
+-->
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopGo — AI Planner</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <meta name="description"
+        content="TopGo AI Itinerary Planner — Lên lịch trình du lịch thông minh với AI. Nhập điểm đến, ngân sách, số người để nhận lịch trình tối ưu trong vài giây.">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/shared.css?v=2">
+    <link rel="stylesheet" href="./css/form.css">
+    <link rel="stylesheet" href="./css/result.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+</head>
+
+<body>
+    <!-- Header — loaded from components/header.html by shared.js -->
+    <header class="header" id="site-header">
+        <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
+    </header>
+
+    <main id="app-main">
+        <!-- ============================================================
+             SCREEN: FORM (from components/form.html)
+             ============================================================ -->
+        <div class="screen active" id="screen-form">
+            <section class="hero">
+                <svg class="flight-path-svg" viewBox="0 0 1200 40" preserveAspectRatio="none" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 30 Q300 8 600 20 Q900 32 1200 10" stroke="white" stroke-width="1.5"
+                        stroke-dasharray="8 6" opacity=".35" />
+                </svg>
+                <div class="hero-plane"></div>
+                <div class="hero-eyebrow"><span class="hero-dot"></span> AI Itinerary Planner · Powered by TopGo</div>
+                <h1>Lên lịch trình <em>hoàn hảo</em><br>trong tích tắc ✦</h1>
+            </section>
+
+            <div class="form-wrapper">
+                <div class="ticket-card glass-card">
+                    <!-- Boarding pass bar -->
+                    <div class="ticket-bar">
+                        <div class="tb-brand">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="white"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                            </svg>
+                            <div>
+                                <div class="tb-brand-name">TopGo</div>
+                                <div class="tb-brand-sub">Smart Tourism Planner</div>
+                            </div>
+                        </div>
+                        <div class="tb-label">BOARDING PASS · AI ITINERARY</div>
+                        <div class="tb-trip" id="tb-trip-id">TRIP — AI·GEN·2026</div>
+                    </div>
+
+                    <!-- Ticket body -->
+                    <div class="ticket-body">
+                        <div class="ticket-main">
+                            <!-- Boarding pass display -->
+                            <div class="from-to">
+                                <div class="ft-block">
+                                    <span class="ft-label">Xuất phát từ</span>
+                                    <div class="ft-city-display" id="ft-from-city">—</div>
+                                    <div class="ft-city-sub" id="ft-from-sub">Nhập điểm xuất phát bên dưới</div>
+                                </div>
+                                <div class="ft-middle">
+                                    <div class="ft-plane-icon">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ft-dashed"></div>
+                                </div>
+                                <div class="ft-block" style="text-align:right">
+                                    <span class="ft-label" style="text-align:right;display:block">Điểm đến</span>
+                                    <div class="ft-city-display" id="ft-to-city">—</div>
+                                    <div class="ft-city-sub" id="ft-to-sub">Chọn thành phố bên dưới</div>
+                                </div>
+                            </div>
+
+                            <!-- Departure input -->
+                            <div class="field-group">
+                                <label class="label-sm">Thành phố xuất phát</label>
+                                <div class="dd-wrap" id="dd-dep">
+                                    <div class="dd-trigger" id="dep-trigger" tabindex="0">
+                                        <input class="dd-search" id="dep-search" type="text"
+                                            placeholder="Tìm thành phố xuất phát..." autocomplete="off">
+                                        <span class="dd-chevron">▾</span>
+                                    </div>
+                                    <div class="dd-list" id="dep-list"></div>
+                                </div>
+                            </div>
+
+                            <!-- City selector -->
+                            <div class="field-group">
+                                <label class="label-sm">Thành phố muốn đến <span
+                                        style="color:var(--error);margin-left:3px">*</span></label>
+                                <div class="dd-wrap" id="dd-city">
+                                    <div class="dd-trigger" id="city-trigger" tabindex="0">
+                                        <input class="dd-search" id="city-search" type="text"
+                                            placeholder="Tìm thành phố..." autocomplete="off">
+                                        <span class="dd-chevron">▾</span>
+                                    </div>
+                                    <div class="dd-list" id="city-list"></div>
+                                </div>
+                                <div class="f-err" id="err-city">Vui lòng chọn 1 thành phố</div>
+                            </div>
+
+                            <!-- Specific places -->
+                            <div class="field-group">
+                                <label class="label-sm">Các điểm tham quan cụ thể</label>
+                                <div class="dd-wrap" id="dd-place">
+                                    <div class="places-box" id="places-box">
+                                        <input class="places-search" id="place-search" type="text"
+                                            placeholder="Tìm và thêm địa điểm...">
+                                    </div>
+                                    <div class="dd-list" id="place-list"></div>
+                                </div>
+                            </div>
+                        </div><!-- /ticket-main -->
+
+                        <div class="ticket-perf">
+                            <div class="perf-notch-top"></div>
+                            <div class="perf-notch-bot"></div>
+                        </div>
+
+                        <!-- Ticket stub: options -->
+                        <div class="ticket-stub">
+                            <!-- Pax -->
+                            <div class="stub-field">
+                                <span class="stub-label">Số hành khách <span style="color:var(--error)">*</span></span>
+                                <div class="stepper">
+                                    <button class="step-btn" id="pax-minus" disabled>−</button>
+                                    <input class="step-val" id="pax-val" type="number" value="1" min="1" max="50"
+                                        readonly>
+                                    <button class="step-btn" id="pax-plus">+</button>
+                                </div>
+                                <div class="f-err" id="err-pax" style="margin-top:5px">Từ 1 đến 50 người</div>
+                            </div>
+
+                            <!-- Dates -->
+                            <div class="stub-field">
+                                <span class="stub-label" title="Thời gian bạn chính thức bắt đầu hành trình">Ngày bắt
+                                    đầu chuyến đi <span style="color:var(--error)">*</span></span>
+                                <input class="stub-date" id="date-start" type="date">
+                                <div class="f-err" id="err-date-s">Ngày không hợp lệ</div>
+                            </div>
+                            <div class="stub-field">
+                                <span class="stub-label" title="Thời gian dự kiến bạn bắt đầu chuyến đi">Giờ bắt đầu
+                                    chuyến đi</span>
+                                <input class="stub-date" id="time-start" type="time" value="07:00">
+                            </div>
+                            <div class="stub-field">
+                                <span class="stub-label">Ngày kết thúc chuyến đi <span
+                                        style="color:var(--error)">*</span></span>
+                                <input class="stub-date" id="date-end" type="date">
+                                <div class="date-duration" id="date-dur"></div>
+                                <div class="f-err" id="err-date-e">Phải sau ngày bắt đầu, tối đa 7 ngày</div>
+                            </div>
+                            <div class="stub-field">
+                                <span class="stub-label">Giờ kết thúc chuyến đi</span>
+                                <input class="stub-date" id="time-end" type="time" value="18:00">
+                            </div>
+
+                            <!-- Transport -->
+                            <div class="stub-field">
+                                <span class="stub-label">Loại hình phương tiện</span>
+                                <div class="dd-wrap" id="dd-transport" style="margin-top:4px;">
+                                    <div class="dd-trigger" id="transport-trigger" tabindex="0">
+                                        <input class="dd-search" id="transport-type" type="text" value="Xe khách"
+                                            readonly style="cursor:pointer; padding:0;">
+                                        <span class="dd-chevron">▾</span>
+                                    </div>
+                                    <div class="dd-list" id="transport-list">
+                                        <div class="dd-item sel" data-val="Xe khách">
+                                            <div class="di-info">
+                                                <div class="di-name">Xe khách</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Máy bay">
+                                            <div class="di-info">
+                                                <div class="di-name">Máy bay</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Tàu hỏa">
+                                            <div class="di-info">
+                                                <div class="di-name">Tàu hỏa</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Ô tô riêng">
+                                            <div class="di-info">
+                                                <div class="di-name">Ô tô riêng</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Xe máy">
+                                            <div class="di-info">
+                                                <div class="di-name">Xe máy</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Thuê ô tô tự lái">
+                                            <div class="di-info">
+                                                <div class="di-name">Thuê ô tô tự lái</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Xe đạp">
+                                            <div class="di-info">
+                                                <div class="di-name">Xe đạp</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Khác">
+                                            <div class="di-info">
+                                                <div class="di-name">Khác</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Accommodation -->
+                            <div class="stub-field">
+                                <span class="stub-label">Loại hình chỗ ở</span>
+                                <div class="dd-wrap" id="dd-accom" style="margin-top:4px;">
+                                    <div class="dd-trigger" id="accom-trigger" tabindex="0">
+                                        <input class="dd-search" id="accommodation-type" type="text" value="Khách sạn"
+                                            readonly style="cursor:pointer; padding:0;">
+                                        <span class="dd-chevron">▾</span>
+                                    </div>
+                                    <div class="dd-list" id="accom-list">
+                                        <div class="dd-item sel" data-val="Khách sạn">
+                                            <div class="di-info">
+                                                <div class="di-name">Khách sạn</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Homestay">
+                                            <div class="di-info">
+                                                <div class="di-name">Homestay</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Airbnb">
+                                            <div class="di-info">
+                                                <div class="di-name">Airbnb</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Resort">
+                                            <div class="di-info">
+                                                <div class="di-name">Resort</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Villa">
+                                            <div class="di-info">
+                                                <div class="di-name">Villa</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Căn hộ">
+                                            <div class="di-info">
+                                                <div class="di-name">Căn hộ</div>
+                                            </div>
+                                        </div>
+                                        <div class="dd-item" data-val="Khác">
+                                            <div class="di-info">
+                                                <div class="di-name">Khác</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Budget -->
+                            <div class="stub-field">
+                                <span class="stub-label">Ngân sách tổng <span style="color:var(--error)">*</span></span>
+                                <div class="budget-wrap">
+                                    <span class="budget-pre">₫</span>
+                                    <input class="budget-input" id="budget-input" type="text" placeholder="0">
+                                </div>
+                                <div class="budget-chips">
+                                    <button class="b-chip" data-budget="100000">100K</button>
+                                    <button class="b-chip" data-budget="500000">500K</button>
+                                    <button class="b-chip" data-budget="1000000">1M</button>
+                                    <button class="b-chip" data-budget="2000000">2M</button>
+                                    <button class="b-chip" data-budget="5000000">5M</button>
+                                    <button class="b-chip" data-budget="10000000">10M</button>
+                                    <button class="b-chip" data-budget="20000000">20M</button>
+                                </div>
+                                <div class="budget-pp" id="budget-pp"></div>
+                                <div class="f-err" id="err-budget">Tối thiểu 100.000 ₫</div>
+                            </div>
+                        </div><!-- /ticket-stub -->
+                    </div><!-- /ticket-body -->
+
+                    <!-- Preferences & notes -->
+                    <div class="ticket-bottom">
+                        <div class="section-head">Sở thích &amp; phong cách du lịch</div>
+                        <div class="pref-chips" id="pref-chips">
+                            <button class="p-chip" data-pref="Ẩm thực địa phương">Ẩm thực địa phương</button>
+                            <button class="p-chip" data-pref="Di tích lịch sử">Di tích lịch sử</button>
+                            <button class="p-chip" data-pref="Thiên nhiên &amp; leo núi">Thiên nhiên &amp; leo
+                                núi</button>
+                            <button class="p-chip" data-pref="Mua sắm">Mua sắm</button>
+                            <button class="p-chip" data-pref="Check-in &amp; chụp ảnh">Check-in đẹp</button>
+                            <button class="p-chip" data-pref="Nghệ thuật &amp; văn hóa">Nghệ thuật &amp; văn
+                                hóa</button>
+                            <button class="p-chip" data-pref="Biển &amp; bơi lội">Biển &amp; bơi lội</button>
+                            <button class="p-chip" data-pref="Spa &amp; nghỉ dưỡng">Spa &amp; nghỉ dưỡng</button>
+                            <button class="p-chip" data-pref="Phù hợp gia đình">Gia đình &amp; trẻ em</button>
+                            <button class="p-chip" data-pref="Thuê xe tự lái">Thuê xe tự lái</button>
+                        </div>
+                        <div class="section-head">Ghi chú thêm cho AI</div>
+                        <textarea class="notes-area" id="notes-input"
+                            placeholder="Ví dụ: Có trẻ nhỏ 5 tuổi, không đi xa được, thích ngủ nướng buổi sáng, dị ứng hải sản..."
+                            maxlength="500"></textarea>
+                        <div class="notes-foot"><span class="char-c" id="notes-count">0 / 500</span></div>
+                        <div class="f-err" id="err-notes">Vui lòng nhập mô tả sở thích hoặc ghi chú.</div>
+                    </div>
+
+                    <div class="ticket-actions">
+                        <button class="btn-reset" id="btn-reset">Điền lại</button>
+                        <button class="btn-reset" id="btn-mock" style="border-color: var(--p1); color: var(--p1); background: rgba(0, 169, 255, 0.05); margin-right: auto;">Mock Design</button>
+                        <button class="btn-gen" id="btn-gen">
+                            Tạo lịch trình với AI <span class="plane-tail"></span>
+                        </button>
+                    </div><!-- /ticket-actions -->
+
+                    <!-- Diagonal stripe separator — boarding pass style -->
+                    <div class="ticket-stripe" aria-hidden="true"></div>
+
+                </div><!-- /ticket-card -->
+            </div>
+        </div><!-- /screen-form -->
+
+        <!-- Reset confirmation popup -->
+        <div class="popup-ov" id="popup-reset">
+            <div class="popup-card glass-card">
+                <div class="popup-icon">🔄</div>
+                <div class="popup-title">Điền lại từ đầu?</div>
+                <div class="popup-msg">Toàn bộ thông tin đã nhập sẽ bị xóa và đặt về mặc định. Thao tác này không thể
+                    hoàn tác.
+                </div>
+                <div class="popup-acts">
+                    <button class="popup-cancel" data-popup-close="popup-reset">Hủy</button>
+                    <button class="popup-confirm" id="btn-do-reset">Xóa tất cả</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+             DYNAMIC COMPONENTS (Loading, Result, Error)
+             ============================================================ -->
+        <div id="dynamic-fragments"></div>
+    </main>
+
+    <!-- Footer + Banners + Popup + Toast — loaded from components/footer.html by shared.js -->
+    <div id="site-shared"></div>
+
+    <!-- Leaflet JS (regular script — global L cần có trước module chạy) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <!-- DOMPurify (regular script — global DOMPurify cần có trước module chạy) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    <script src="./js/mockFallback.js"></script>
+
+    <script type="module" src="./js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkHeader = () => {
+                const header = document.getElementById('site-header');
+                const hero = document.querySelector('.hero');
+                if (header && hero) {
+                    if (window.scrollY < hero.offsetHeight - 50) {
+                        header.classList.add('header-solid');
+                    } else {
+                        header.classList.remove('header-solid');
+                    }
+                }
+            };
+            window.addEventListener('scroll', checkHeader);
+            const observer = new MutationObserver(checkHeader);
+            observer.observe(document.body, { childList: true, subtree: true });
+        });
+    </script>
+</body>
+
+</html>

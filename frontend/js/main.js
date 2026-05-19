@@ -19,7 +19,7 @@ import { initLeafletMap } from './map.js';
 import {
     showScreen, renderCityList, renderDepList, renderItinerary,
     updateDeparture, getRawBudget, validateDates, updateBudgetPP,
-    initFormUIEvents
+    initFormUIEvents, getTripDays
 } from './ui.js';
 import { showToast, showPopup, closePopup } from './shared.js';
 import { fetchHtmlFragment } from './fragmentLoader.js';
@@ -72,7 +72,10 @@ function handleGenerate() {
     let valid = true;
     if (!state.selectedCity) { document.getElementById('err-city')?.classList.add('show'); valid = false; }
     const budget = getRawBudget();
-    if (!budget || budget < 100_000) {
+    const paxVal = parseInt(document.getElementById('pax-val')?.value) || 1;
+    const tripDays = getTripDays();
+    const minBudgetL2 = paxVal * tripDays * 50_000;
+    if (!budget || budget < minBudgetL2) {
         document.getElementById('err-budget')?.classList.add('show');
         document.getElementById('budget-input')?.classList.add('err');
         valid = false;
@@ -81,8 +84,8 @@ function handleGenerate() {
     const trimmedNotes = rawNotes.trim();
     const errNotes = document.getElementById('err-notes');
     errNotes?.classList.remove('show');
-    if (!trimmedNotes || trimmedNotes.length < 5) {
-        if (errNotes) { errNotes.textContent = trimmedNotes ? 'Nội dung quá ngắn (tối thiểu 5 ký tự).' : 'Vui lòng nhập mô tả sở thích hoặc ghi chú.'; errNotes.classList.add('show'); }
+    if (trimmedNotes && trimmedNotes.length < 5) {
+        if (errNotes) { errNotes.textContent = 'Nội dung quá ngắn (tối thiểu 5 ký tự).'; errNotes.classList.add('show'); }
         valid = false;
     }
     if (!valid) {

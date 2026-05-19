@@ -102,7 +102,7 @@ function renderBudgetResponse(t) {
       <tbody>${bdata.rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}<tr><td>💼 Tổng</td><td>${bdata.total[0]}</td><td>${bdata.total[1]}</td></tr></tbody></table>
     </div></div>`;
     chatMessages.appendChild(div);
-    setTimeout(()=>addMessage(`📊 Muốn lên lịch chi tiết? Thử <a href="./index.html" style="color:var(--p1);font-weight:700">AI Planner</a> nhé!`, false), 700);
+    setTimeout(()=>addMessage(`📊 Muốn lên lịch chi tiết? Thử <a href="./planner.html" style="color:var(--p1);font-weight:700">AI Planner</a> nhé!`, false), 700);
 }
 
 function renderWeatherResponse(t) {
@@ -137,10 +137,25 @@ function renderItineraryCard(data) {
     chatMessages.appendChild(div);
 }
 
+// ── Conversation mode ─────────────────────────────────────────
+let conversationStarted = false;
+const chatWrapper = document.getElementById('chatbot-wrapper');
+
+function activateConversationMode() {
+    if (conversationStarted) return;
+    conversationStarted = true;
+    chatWrapper?.classList.add('chat-conversation-active');
+    document.body.classList.add('chat-conversation-active');
+    setTimeout(() => {
+        document.getElementById('chatbot-messages')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 250);
+}
+
 // ── Send message ──────────────────────────────────────────────
 function sendMessage(textOverride) {
     const text = (textOverride || chatInput.value).trim();
     if (!text) return;
+    activateConversationMode();
     addMessage(text, true);
     chatInput.value = '';
     chatSend.disabled = true;
@@ -148,11 +163,11 @@ function sendMessage(textOverride) {
     setTimeout(()=>{ removeTyping(); processMessage(text); chatSend.disabled=false; }, 700+Math.random()*400);
 }
 
-// ── Event listeners (Task 9: no inline onclick) ───────────────
+// ── Event listeners ───────────────────────────────────────────
 chatSend.addEventListener('click', ()=>sendMessage());
 chatInput.addEventListener('keypress', e=>{ if(e.key==='Enter') sendMessage(); });
 
-// Task 9: delegation for data-suggestion chips
+// Suggestion chips (data-suggestion delegation)
 chatMessages.addEventListener('click', e=>{
     const chip = e.target.closest('[data-suggestion]');
     if (!chip) return;
@@ -160,3 +175,24 @@ chatMessages.addEventListener('click', e=>{
     if (suggestions) { suggestions.style.opacity='0'; setTimeout(()=>suggestions.remove(),300); }
     sendMessage(chip.dataset.suggestion);
 });
+
+// ── Back button: full reset ───────────────────────────────────
+document.getElementById('chat-conv-back-btn')?.addEventListener('click', () => {
+    chatWrapper?.classList.add('chat-conv-exiting');
+    setTimeout(() => {
+        chatMessages.innerHTML = '';
+        chatWrapper?.classList.remove('chat-conversation-active', 'chat-conv-exiting');
+        document.body.classList.remove('chat-conversation-active');
+        conversationStarted = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 290);
+});
+
+// Auto-start conversation if query parameter 'q' is present
+const urlParams = new URLSearchParams(window.location.search);
+const initQuery = urlParams.get('q');
+if (initQuery) {
+    // Remove 'q' from URL to prevent loop on reload
+    window.history.replaceState({}, document.title, window.location.pathname);
+    setTimeout(() => sendMessage(initQuery), 100); 
+}

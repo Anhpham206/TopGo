@@ -1,3 +1,10 @@
+import sys
+import io
+
+# Fix lỗi 'charmap' codec trên Windows - buộc dùng UTF-8 cho output
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles

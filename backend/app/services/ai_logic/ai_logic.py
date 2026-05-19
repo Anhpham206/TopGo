@@ -15,7 +15,7 @@ if not API_KEY:
         "❌ Không tìm thấy GEMINI_API_KEY! Hãy kiểm tra lại file .env")
 
 client = genai.Client(api_key=API_KEY)
-client2 = genai.Client(api_key=API_KEY)
+client2 = genai.Client(api_key=API_KEY2)
 
 # 2. Cấu hình Model & Generation Config
 MODEL_ID = "gemini-3-flash-preview"
