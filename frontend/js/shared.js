@@ -84,6 +84,7 @@ export async function loadSharedComponents() {
             let activeId = 'nav-planner';
             if (currentPage === 'chatbot.html') activeId = 'nav-chatbot';
             else if (currentPage === 'index.html' || currentPage === '' || currentPage === '/') activeId = 'nav-home';
+            else if (currentPage === 'pricing.html') activeId = 'nav-pricing';
             else if (currentPage === 'auth.html' || currentPage === 'profile.html') activeId = null;
             if (activeId) document.getElementById(activeId)?.classList.add('active');
 
@@ -194,23 +195,51 @@ export async function loadSharedComponents() {
             });
 
             // Chuẩn bị sẵn function call BE trong tương lai
+            // Khởi tạo session_id riêng biệt cho mini chatbot
+            const miniSessionId = 'mini_' + Math.random().toString(36).substring(2, 11);
+
             const fetchMiniChatResponse = async (query) => {
-                return new Promise(resolve => {
-                    setTimeout(() => {
-                        const lowerQ = query.toLowerCase();
-                        if (lowerQ.includes('đà nẵng')) {
-                            resolve("Đà Nẵng là thành phố biển tuyệt vời nhất Việt Nam. Bạn có thể ghé thăm Bà Nà Hills với Cầu Vàng nổi tiếng, check-in tại Cầu Rồng phun lửa vào cuối tuần, và tận hưởng bãi biển Mỹ Khê trong xanh. Về ẩm thực, đừng quên thử mì Quảng, bánh tráng cuốn thịt heo và hải sản tươi sống ở các quán ven biển. Mình có thể lên một lịch trình chi tiết 3 ngày 2 đêm cho bạn, bao gồm cả Hội An nếu bạn muốn.");
-                        } else if (lowerQ.includes('phú quốc')) {
-                            resolve("Phú Quốc được mệnh danh là Đảo Ngọc với những bãi biển đẹp như Bãi Sao, Bãi Dài. Khi đến đây, bạn nhất định phải thử bún quậy Kiến Xây, gỏi cá trích cực kỳ tươi ngon, và hải sản tại làng chài Hàm Ninh. Ngoài ra, việc trải nghiệm đi cáp treo Hòn Thơm và lặn ngắm san hô là những hoạt động không thể bỏ qua. Nếu bạn dự định đi gia đình, khu vui chơi VinWonders cũng là một lựa chọn xuất sắc.");
-                        } else {
-                            resolve(`Địa điểm "${query}" rất thú vị! Chuyến đi đến đây sẽ mang lại nhiều trải nghiệm đáng nhớ. Khu vực này nổi tiếng với các danh lam thắng cảnh tự nhiên tuyệt đẹp cùng nền văn hóa ẩm thực vô cùng đa dạng và độc đáo. Có rất nhiều hoạt động từ khám phá mạo hiểm đến nghỉ dưỡng thư giãn. Để mình lên một kế hoạch chi tiết nhất phù hợp với sở thích của bạn nhé.`);
-                        }
-                    }, 600); // Giả lập độ trễ mạng
-                });
+                try {
+                    const _isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+                    const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
+                    
+                    // Thêm chỉ thị yêu cầu trả lời ngắn gọn vào câu hỏi gửi lên backend
+                    const modifiedQuery = query + "\n\n(Lưu ý từ hệ thống: Vì đây là ô chat nhỏ góc màn hình, hãy trả lời thật ngắn gọn, súc tích trong vòng 2-3 câu ngắn, tối giản nhưng đầy đủ ý)";
+                    
+                    const res = await fetch(`${API_BASE}/api/chat`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: modifiedQuery, session_id: miniSessionId }),
+                    });
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    const data = await res.json();
+                    
+                    // Phát hiện lỗi từ backend trả về thành công dạng chuỗi lỗi
+                    if (data.reply && (data.reply.includes('Lỗi khi giao tiếp với AI') || data.reply.includes('429') || data.reply.includes('RESOURCE_EXHAUSTED') || data.reply.includes('Quota exceeded'))) {
+                        throw new Error('AI_QUOTA_EXCEEDED');
+                    }
+                    
+                    return data.reply;
+                } catch(err) {
+                    console.warn('[TopGo] Mini chatbot API error, falling back to mock:', err);
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            const prefix = "⚠️ [AI Bận - Offline Mode] ";
+                            const lowerQ = query.toLowerCase();
+                            if (lowerQ.includes('đà nẵng')) {
+                                resolve(prefix + "Đà Nẵng có bãi biển Mỹ Khê, Bà Nà Hills và ẩm thực đa dạng (mì Quảng, hải sản). Rất đáng để ghé thăm trải nghiệm!");
+                            } else if (lowerQ.includes('phú quốc')) {
+                                resolve(prefix + "Phú Quốc có các bãi biển đẹp như Bãi Sao, Bãi Dài, đặc sản bún quậy, gỏi cá trích và cáp treo Hòn Thơm.");
+                            } else {
+                                resolve(prefix + `Điểm đến ${query} rất thú vị! Hãy dùng công cụ AI Planner để thiết lập lịch trình cụ thể nhé.`);
+                            }
+                        }, 500);
+                    });
+                }
             };
 
             const appendBotMessage = (content, query) => {
-                const maxLen = 100;
+                const maxLen = 200;
                 let textToShow = content;
                 let showContinueBtn = false;
                 
@@ -219,7 +248,13 @@ export async function loadSharedComponents() {
                     showContinueBtn = true;
                 }
                 
-                let bubbleHTML = `<div class="mc-bubble">${textToShow}`;
+                // Format basic Markdown to HTML
+                const formattedText = textToShow
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/\n/g, '<br>');
+                
+                let bubbleHTML = `<div class="mc-bubble">${formattedText}`;
                 if (showContinueBtn) {
                     bubbleHTML += `<br><a href="./chatbot.html?q=${encodeURIComponent(query)}" class="mc-continue-btn">Tiếp tục trò chuyện &rarr;</a>`;
                 }
@@ -228,6 +263,7 @@ export async function loadSharedComponents() {
                 mcBody.insertAdjacentHTML('beforeend', `<div class="mc-msg bot">${bubbleHTML}</div>`);
                 mcBody.scrollTop = mcBody.scrollHeight;
             };
+
 
             const sendMsg = async (text) => {
                 if (!text.trim()) return;

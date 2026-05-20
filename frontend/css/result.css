@@ -391,6 +391,16 @@
   gap: 4px;
 }
 
+.bento-lbl {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 2px;
+}
+
 .bento-val {
   font-family: var(--font-heading);
   font-size: 15px; /* Slightly smaller for unified look */
@@ -903,7 +913,7 @@
 /* ========== ERROR PAGE ========== */
 .error-hero {
   background: linear-gradient(135deg, var(--p1) 0%, #d62929 100%);
-  padding: 48px 28px 36px;
+  padding: 130px 28px 48px;
   text-align: center;
 }
 .error-hero h2 {

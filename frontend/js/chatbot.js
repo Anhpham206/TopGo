@@ -9,6 +9,9 @@
   ========================================================================
 */
 import './shared.js'; // auto-loads header + footer components
+import { sendChatMessage } from './api.js';
+
+const sessionId = 'session_' + Math.random().toString(36).substring(2, 11);
 
 // ── DOM references ────────────────────────────────────────────
 const chatInput    = document.getElementById('chatbot-input');
@@ -53,7 +56,63 @@ function showTyping() {
 function removeTyping() { document.getElementById('typing-indicator')?.remove(); }
 
 // ── processMessage ────────────────────────────────────────────
-function processMessage(text) {
+async function processMessage(text) {
+    try {
+        const data = await sendChatMessage(text, sessionId);
+        removeTyping();
+
+        // Phát hiện lỗi quota/API từ backend gửi về dưới dạng chuỗi thông báo lỗi
+        if (data.reply && (data.reply.includes('Lỗi khi giao tiếp với AI') || data.reply.includes('429') || data.reply.includes('RESOURCE_EXHAUSTED') || data.reply.includes('Quota exceeded'))) {
+            const warningHtml = `
+                <div class="api-quota-warning">
+                    <div class="api-quota-warning-title">
+                        <span>⚠️</span> HỆ THỐNG AI TẠM THỜI QUÁ TẢI (RESOURCE EXHAUSTED)
+                    </div>
+                    <div class="api-quota-warning-desc">
+                        Tài khoản kết nối với Gemini AI hiện đã vượt quá giới hạn lượt gọi miễn phí trong ngày (Error 429).
+                    </div>
+                    <div class="api-quota-warning-solution">
+                        TopGo đã tự động chuyển câu hỏi của bạn sang Chế độ Ngoại tuyến (Offline Engine) để phản hồi ngay lập tức!
+                    </div>
+                </div>
+            `;
+            addMessage(warningHtml, false);
+            setTimeout(() => {
+                runMockFallback(text);
+            }, 800);
+            return;
+        }
+
+        // Render the backend response, format basic Markdown to HTML
+        const formattedReply = data.reply
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/\n/g, '<br>');
+        addMessage(formattedReply, false);
+    } catch (e) {
+        console.warn('[TopGo] Lỗi kết nối BE, đang chuyển sang mock fallback:', e);
+        removeTyping();
+        const connectionWarningHtml = `
+            <div class="api-quota-warning">
+                <div class="api-quota-warning-title">
+                    <span>⚠️</span> KHÔNG THỂ KẾT NỐI VỚI MÁY CHỦ AI
+                </div>
+                <div class="api-quota-warning-desc">
+                    Không thể thiết lập kết nối đến máy chủ AI (Backend có thể chưa được khởi động hoặc gặp sự cố mạng).
+                </div>
+                <div class="api-quota-warning-solution">
+                    Hệ thống tự động chuyển sang Chế độ Ngoại tuyến (Offline Engine) để hỗ trợ bạn ngay lập tức!
+                </div>
+            </div>
+        `;
+        addMessage(connectionWarningHtml, false);
+        setTimeout(() => {
+            runMockFallback(text);
+        }, 800);
+    }
+}
+
+function runMockFallback(text) {
     const t = text.toLowerCase();
     if (typeof MOCK_CHATBOT_RESPONSES === 'undefined') {
         addMessage('⚠️ Dữ liệu chatbot chưa được nạp. Vui lòng tải lại trang.', false); return;
@@ -152,7 +211,7 @@ function activateConversationMode() {
 }
 
 // ── Send message ──────────────────────────────────────────────
-function sendMessage(textOverride) {
+async function sendMessage(textOverride) {
     const text = (textOverride || chatInput.value).trim();
     if (!text) return;
     activateConversationMode();
@@ -160,7 +219,8 @@ function sendMessage(textOverride) {
     chatInput.value = '';
     chatSend.disabled = true;
     showTyping();
-    setTimeout(()=>{ removeTyping(); processMessage(text); chatSend.disabled=false; }, 700+Math.random()*400);
+    await processMessage(text);
+    chatSend.disabled = false;
 }
 
 // ── Event listeners ───────────────────────────────────────────

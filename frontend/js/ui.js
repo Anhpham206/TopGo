@@ -389,30 +389,20 @@ export function renderItinerary(data) {
     // 1. Cập nhật Thông tin chung
     const titleEl = document.getElementById('res-title');
     if (titleEl) titleEl.textContent = ttc.Ten_hanh_trinh || (p ? `Hành trình ${p.city_name}` : 'Hành trình gợi ý');
-
-    // Cập nhật background image của hero panel
-    const heroImgEl = document.getElementById('res-hero-img');
-    if (heroImgEl) {
-        let cityImg = state.selectedCity?.img;
-        // Nếu dùng mock hoặc chưa chọn city cụ thể, tìm theo tên từ payload
-        if (!cityImg && p?.city_name) {
-            const found = state.CITIES.find(c => c.name.toLowerCase() === p.city_name.toLowerCase());
-            if (found) cityImg = found.img;
-        }
-        // Fallback: nếu vẫn chưa có (ví dụ Mock Design chưa chọn gì), lấy đại một thành phố đầu tiên
-        if (!cityImg && state.CITIES.length > 0) {
-            cityImg = state.CITIES[0].img;
-        }
-        
-        if (cityImg) {
-            // Chuyển path sang absolute hoặc tương đối chính xác
-            heroImgEl.style.backgroundImage = `url('${cityImg}')`;
-        }
-    }
     
     if (p && p.date_start && p.date_end) {
         const datesEl = document.getElementById('res-dates');
         if (datesEl) datesEl.innerHTML = `<strong>${p.date_start.split('-').reverse().join('/')} – ${p.date_end.split('-').reverse().join('/')}</strong>`;
+    }
+    
+    const weatherEl = document.getElementById('res-weather');
+    if (weatherEl) {
+        const city = p?.city_name || '';
+        let weather = 'Nắng, 31°C';
+        if (city.includes('Đà Lạt') || city.includes('Lâm Đồng')) weather = 'Mát mẻ, 19°C';
+        else if (city.includes('Hà Nội')) weather = 'Nắng nhẹ, 28°C';
+        else if (city.includes('Nha Trang') || city.includes('Phú Quốc')) weather = 'Nắng đẹp, 30°C';
+        weatherEl.innerHTML = `<strong>${weather}</strong>`;
     }
     
     const paxEl = document.getElementById('res-pax');
@@ -420,6 +410,36 @@ export function renderItinerary(data) {
     
     const be = document.getElementById('res-budget');
     if (be) be.innerHTML = `<strong>~${ttc.Tong_ngan_sach || (p ? new Intl.NumberFormat('vi-VN').format(p.budget) + ' ₫' : 'N/A')}</strong>`;
+    
+    const departureEl = document.getElementById('res-departure');
+    if (departureEl) {
+        const depCity = p?.dep_city_id ? state.CITIES.find(c => c.id === p.dep_city_id) : state.selectedDepCity;
+        departureEl.innerHTML = `<strong>${depCity ? depCity.name : 'Hà Nội'}</strong>`;
+    }
+
+    const transportEl = document.getElementById('res-transport');
+    if (transportEl) {
+        transportEl.innerHTML = `<strong>${p?.transport || 'Tự chọn'}</strong>`;
+    }
+
+    const bestTimeEl = document.getElementById('res-best-time');
+    if (bestTimeEl) {
+        let bestTime = '';
+        if (ttc.Goi_y_khoi_hanh) {
+            // Đọc lời khuyên khởi hành trực tiếp từ AI gửi về
+            bestTime = Array.isArray(ttc.Goi_y_khoi_hanh) ? ttc.Goi_y_khoi_hanh.join(', ') : ttc.Goi_y_khoi_hanh;
+        } else if (p?.departure_time) {
+            // Lớp dự phòng offline nếu AI/BE chưa tích hợp hoặc thiếu trường này
+            const hr = parseInt(p.departure_time.split(':')[0]);
+            if (hr >= 5 && hr <= 10) bestTime = `${p.departure_time} Sáng`;
+            else if (hr > 10 && hr <= 14) bestTime = `${p.departure_time} Trưa`;
+            else if (hr > 14 && hr <= 18) bestTime = `${p.departure_time} Chiều`;
+            else bestTime = `${p.departure_time} Tối`;
+        } else {
+            bestTime = '08:00 Sáng';
+        }
+        bestTimeEl.innerHTML = `<strong>${bestTime}</strong>`;
+    }
     
     const tb = document.getElementById('res-total-budget');
     if (tb) tb.textContent = ttc.Tong_ngan_sach || '';
@@ -627,50 +647,6 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
 
     // Generate
     document.getElementById('btn-gen')?.addEventListener('click', onGenerate);
-    
-    // Mock Data
-    document.getElementById('btn-mock')?.addEventListener('click', () => {
-        // Set default mock payload if empty
-        if (!window._lastPayload) {
-            window._lastPayload = { city_name: 'Đà Nẵng', date_start: '2024-06-01', date_end: '2024-06-03', pax: 2 };
-        }
-        
-        showScreen('loading');
-        const labels = ['Phân tích yêu cầu chuyến đi', 'Tìm kiếm địa điểm phù hợp', 'Tối ưu hóa lộ trình', 'Gợi ý phương tiện & chi phí', 'Hoàn thiện lịch trình'];
-        const ids = ['ls-1', 'ls-2', 'ls-3', 'ls-4', 'ls-5'];
-        
-        // Reset steps
-        ids.forEach((id, i) => {
-            const el = document.getElementById(id); if (!el) return;
-            el.className = 'ls' + (i === 0 ? ' active' : '');
-            el.innerHTML = (i === 0 ? '<div class="ls-spin"></div>' : '<span class="ls-ico">○</span>') + ' ' + labels[i];
-        });
-
-        let step = 0;
-        const interval = setInterval(() => {
-            const currentEl = document.getElementById(ids[step]);
-            if (currentEl) {
-                currentEl.className = 'ls done';
-                currentEl.innerHTML = '<span class="ls-ico">✓</span> ' + labels[step];
-            }
-            step++;
-            if (step < ids.length) {
-                const nextEl = document.getElementById(ids[step]);
-                if (nextEl) {
-                    nextEl.className = 'ls active';
-                    nextEl.innerHTML = '<div class="ls-spin"></div> ' + labels[step];
-                }
-            } else {
-                clearInterval(interval);
-                setTimeout(() => {
-                    renderItinerary(null);
-                    showScreen('result');
-                }, 500);
-            }
-        }, 2000); // 10s total (5 steps * 2s)
-
-        window._mockLoadingInterval = interval;
-    });
 
     // Loading screen
     document.getElementById('btn-loading-cancel')?.addEventListener('click', () => {
