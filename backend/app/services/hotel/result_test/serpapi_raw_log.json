@@ -1,19 +1,19 @@
 {
     "search_metadata": {
-        "id": "6a0b4384b24c5dab7a774c45",
+        "id": "6a0df550a4817c3ee2d3ca58",
         "status": "Success",
-        "json_endpoint": "https://serpapi.com/searches/B9gDS7LXaICVI-dYTl95wg/6a0b4384b24c5dab7a774c45.json",
-        "created_at": "2026-05-18 16:51:16 UTC",
-        "processed_at": "2026-05-18 16:51:16 UTC",
-        "google_maps_url": "https://www.google.com/maps/search/Resort+ngh%E1%BB%89+d%C6%B0%E1%BB%A1ng/@16.0544,108.2022,14z/?hl=vi&gl=vn",
-        "raw_html_file": "https://serpapi.com/searches/B9gDS7LXaICVI-dYTl95wg/6a0b4384b24c5dab7a774c45.html",
-        "prettify_html_file": "https://serpapi.com/searches/B9gDS7LXaICVI-dYTl95wg/6a0b4384b24c5dab7a774c45.prettify",
-        "total_time_taken": 4.52
+        "json_endpoint": "https://serpapi.com/searches/SsYao6fY_q5EesAQPbVBIA/6a0df550a4817c3ee2d3ca58.json",
+        "created_at": "2026-05-20 17:54:24 UTC",
+        "processed_at": "2026-05-20 17:54:24 UTC",
+        "google_maps_url": "https://www.google.com/maps/search/Resort/@16.0544,108.2022,14z/?hl=vi&gl=vn",
+        "raw_html_file": "https://serpapi.com/searches/SsYao6fY_q5EesAQPbVBIA/6a0df550a4817c3ee2d3ca58.html",
+        "prettify_html_file": "https://serpapi.com/searches/SsYao6fY_q5EesAQPbVBIA/6a0df550a4817c3ee2d3ca58.prettify",
+        "total_time_taken": 1.93
     },
     "search_parameters": {
         "engine": "google_maps",
         "type": "search",
-        "q": "Resort nghỉ dưỡng",
+        "q": "Resort",
         "ll": "@16.0544,108.2022,14z",
         "google_domain": "google.com.vn",
         "hl": "vi",
@@ -21,7 +21,7 @@
     },
     "search_information": {
         "local_results_state": "Results for exact spelling",
-        "query_displayed": "Resort nghỉ dưỡng"
+        "query_displayed": "Resort"
     },
     "local_results": [
         {
@@ -39,9 +39,9 @@
             "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJWcFCas8QQjERQGJzK8w1ta4",
             "provider_id": "/g/1tp0b4j2",
             "rating": 4.5,
-            "reviews": 5541,
-            "price": "159 US$",
-            "extracted_price": 159,
+            "reviews": 5543,
+            "price": "98.760 KZT",
+            "extracted_price": 98760,
             "type": "Khách sạn",
             "types": [
                 "Khách sạn"
@@ -50,7 +50,7 @@
             "type_ids": [
                 "hotel"
             ],
-            "address": "5 Truong Sa Street, Ngu Hanh Son Ward, Đà Nẵng, 550000, Việt Nam",
+            "address": "5 Truong Sa Street, Ngu Hanh Son Ward, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
             "phone": "+84 236 3981 234",
             "website": "https://www.hyatt.com/hyatt-regency/en-US/danhr-hyatt-regency-danang-resort-and-spa?src=corp_lclb_google_seo_danhr&utm_source=google&utm_medium=organic&utm_campaign=lmr",
             "description": "Resort cao cấp ven biển, có bể bơi, spa. Khu nghỉ dưỡng sang trọng bên bãi biển, phòng ở cao cấp, bể bơi, khu spa và nhà hàng sang trọng, thoải mái.",
@@ -60,27 +60,73 @@
                 "Đỗ xe miễn phí",
                 "Wi-Fi miễn phí"
             ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGnjqCIXBF9_IkYcPIdfEbKmGkArtZw6IHkZq3gADmCfsnEBVwCEgGS9o1IL2jI3HSJ0Dw62TM8D3g1MOL3Bq3zpOuIqVL-4LTSmar2OsSUag_ipM4Zgk4T03EMA3OlYz9-L8yeWSE3tWVb=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/a4pP63icHcTBboIwAADQL6oUSows8VCgw25FNGU4uRjtsMxCC7SG6E_uvL9Zsnd4vz-tc4N98byuRQtpjOyau20mYbRrtFsI03tysEBYYD282-4VzvRtTOhn_BqdqDqKHf26kst7nyk8uXpe0o2qRyRx2idXq0lczQmRGY-MT1lwo2jD32A6L4MyX6VI-nnBUDyi51Dc6VgxELKS9-cpKCz_OMvT95CHtVRhCRHJMSq64zMCbPVoDpwgd6gu69mHEIL2fwH0Hw7VRUQ"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGV8prRuLF2LKBCWnu1fAWpVPeBpp8bGaSVkxByLGDR6n0YtAuzOH7Uwca9aW8aVxf202lxsY3KmJmJEY2NdMGt9qzr4WfJdld7OGtJ3GlqPlXPK0NV6BwOBRTv2KlZbtkapXF6jiVHD4ng=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/9A3GenicHcRLcoIwAADQEyExOIjOdEFqjQMIiG0QdzH8KiFEEgS9pGtv05m-xXu_aq2lWpsmr61Z1XUVLwZV9KwTuhB6xrrWrKQymDKU6cbhoXExcWSfDMEWBj76TMUwL91UkrhAUjoXTI-kmdAjwJvEFiDT7vCMdsufkdEVTR1KphICyCeVWX7rtd5XBsN8j_Xq9uwXaenlPF9GWHsW5reYn2IfhMRGY4SS7zv0-fmiGypPW_v6S3abhag-xjkAwKj_Z4b4A4MxRxQ"
         },
         {
             "position": 2,
-            "title": "TIA Wellness Resort",
-            "place_id": "ChIJz0RiIUQXQjER_XbsI16KkBE",
-            "data_id": "0x31421744216244cf:0x11908a5e23ec76fd",
-            "data_cid": "1265663632225367805",
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x31421744216244cf%3A0x11908a5e23ec76fd&engine=google_maps_reviews&hl=vi",
-            "photos_link": "https://serpapi.com/search.json?data_id=0x31421744216244cf%3A0x11908a5e23ec76fd&engine=google_maps_photos&hl=vi",
+            "title": "Da Nang Mikazuki Japanese Resorts & Spa",
+            "place_id": "ChIJDZsVkg4ZQjER7u0k8Siz7SE",
+            "data_id": "0x3142190e92159b0d:0x21edb328f124edee",
+            "data_cid": "2444807161157840366",
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x3142190e92159b0d%3A0x21edb328f124edee&engine=google_maps_reviews&hl=vi",
+            "photos_link": "https://serpapi.com/search.json?data_id=0x3142190e92159b0d%3A0x21edb328f124edee&engine=google_maps_photos&hl=vi",
             "gps_coordinates": {
-                "latitude": 16.031278099999998,
-                "longitude": 108.25436429999999
+                "latitude": 16.0934007,
+                "longitude": 108.14468749999999
             },
-            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJz0RiIUQXQjER_XbsI16KkBE",
-            "provider_id": "/g/1tdkp88n",
-            "rating": 4.6,
-            "reviews": 1578,
-            "price": "367 US$",
-            "extracted_price": 367,
+            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJDZsVkg4ZQjER7u0k8Siz7SE",
+            "provider_id": "/g/11hzv0ksgc",
+            "rating": 4.7,
+            "reviews": 5055,
+            "price": "79.981 KZT",
+            "extracted_price": 79981,
+            "type": "Khách sạn",
+            "types": [
+                "Khách sạn"
+            ],
+            "type_id": "hotel",
+            "type_ids": [
+                "hotel"
+            ],
+            "address": "Nguyễn Tất Thành, Hải Vân, Đà Nẵng 55000, Việt Nam",
+            "phone": "+84 236 3774 555",
+            "website": "https://mikazuki.com.vn/",
+            "description": "Khu nghỉ dưỡng xa hoa có công viên nước và cảnh biển. Khu nghỉ dưỡng cao cấp có công viên nước, khu spa, nhà tắm và phòng ở thoải mái. Một số phòng nhìn ra biển.",
+            "amenities": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Wi-Fi miễn phí"
+            ],
+            "extensions": [
+                {
+                    "crowd": [
+                        "Chào đón những người thuộc giới LGBTQ+"
+                    ]
+                }
+            ],
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGWe-ja4_iTRZadi9h2lkX0Fi0O0x_xA1DbP4OdwNE45BckC5R_v9Ys3logLDmcxoGg8bcWwORpNUriFlHGqNCXAkpxD4r7cMvb0iHuoWGbRmPCLG_-IlVaYQthE5WKuU_OtR4p=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/HCAZD3icHcRdboIwAADgE1WqlExNfGCg1ej4aebQvTRQSVsptKNFuKFn8DYm-x6-11M4Z-za85TwZ1xrrurB1j3Tnas7N2O69bixgFlgvTBL8ibERQ3uJaLym_yWN7kSC9Vc4E7CFE50CudxlaH0NiZbFHyyJgoIfayu1lean-KWTRrzZcWKMSUmOfdyp_b4L4kuYWOmGPUf7OtRQbkfdIEr0mbRCVNwUD_lNXdiGxTH4UxTR5DZjHMIIRD_M9C9AT71RJ4"
+        },
+        {
+            "position": 3,
+            "title": "Furama Resort Danang",
+            "place_id": "ChIJ7zjMyNsPQjER0iUSEjE-apo",
+            "data_id": "0x31420fdbc8cc38ef:0x9a6a3e31121225d2",
+            "data_cid": "11126774209849730514",
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x31420fdbc8cc38ef%3A0x9a6a3e31121225d2&engine=google_maps_reviews&hl=vi",
+            "photos_link": "https://serpapi.com/search.json?data_id=0x31420fdbc8cc38ef%3A0x9a6a3e31121225d2&engine=google_maps_photos&hl=vi",
+            "gps_coordinates": {
+                "latitude": 16.0399456,
+                "longitude": 108.2510681
+            },
+            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJ7zjMyNsPQjER0iUSEjE-apo",
+            "provider_id": "/g/1hc12jlwq",
+            "rating": 4.5,
+            "reviews": 6196,
+            "price": "84.120 KZT",
+            "extracted_price": 84120,
             "type": "Khách sạn nghỉ dưỡng",
             "types": [
                 "Khách sạn nghỉ dưỡng"
@@ -89,20 +135,21 @@
             "type_ids": [
                 "resort_hotel"
             ],
-            "address": "109 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng 557276, Việt Nam",
-            "phone": "+84 236 3967 999",
-            "website": "https://tiawellnessresort.com/",
+            "address": "105 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
+            "phone": "+84 236 3847 333",
+            "website": "https://furamavietnam.com/",
+            "description": "Phòng nghỉ thoải mái, nhà hàng ven biển và spa.. Những phòng nghỉ thư giãn và dãy phòng sang trọng tại khu nghỉ dưỡng ven biển với nhiều lựa chọn ăn uống, spa và sòng bạc.",
             "amenities": [
                 "Bể bơi",
                 "Spa",
                 "Đỗ xe miễn phí",
                 "Bữa sáng miễn phí"
             ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEktyCkt1ZLqwE7_JgtAssV5n7d_8tjqhnMBHswRtME7woyEB7nlfHCNHkr81yjJ-sDeb4rDcFLz2SnrPs_-3Nb_0658sfjKM_P4b1yiIqiCcvp4kgupQsGe_bpA2lw79KoRn4yHQ=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/HThGt3icHcTRboIwFADQL6qAomVL9oCIMhUCmuxhL02otUhZW7jXNd0f-gn-zRLPw3k-OkQL70EwdIuZNEYO4g5i4kaj0Djj5ieQFggHAkFaV41Kc4U-Uxh9H0eXU7aXmAJ8LTW9sAT7sdPlugB3wjKnzvh8TfVwLbKqUFMS-X5PYCPaeNrw7fFvftZTDYwsqpaFq2UC1_5QsjpuI3_7HG8Z_7WxknfbwE6w1qbzwdG3gznp2BfNh4vCMCTda070P2FgRls"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGEi49bRPWwRlSh5XzMaGeqx_jUZ5rPE-d7sfTZLpretSMiBIwWPjpnT1S2VWAX9tG-aFx1RKYEsTBh3fzmkLERF6DG7O9mgOmxgP5KMqYErFMq-UgusJpIuPvvnCynv3A11AfijQ=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/Otjls3icHcRLcoIwAADQE0VIER0600WwgfGDRsCibjqKIQEhBBI-ekOP4G0607d47xfXWqpPwyi5NWF1zUraKdqmtdBU6ElaVwaTCqQKKAOR7f6OfJxPnWtIkiEsI24fn8HFp834WxzOdkswuM1VFp83sqU6CnJ3OSSkkCKG0cdPgo6O9sHFG2G4PmEVu9zKntV9g0Nv9u3Pd07FdtXIiL0OmhNuvaABB9aplVx2pO_F4iF6C0GIsrzYfw3QNE3A_0-B-AMFKEWl"
         },
         {
-            "position": 3,
+            "position": 4,
             "title": "Pullman Danang Beach Resort",
             "place_id": "ChIJKfL8bWgXQjERWPZKseMae6E",
             "data_id": "0x314217686dfcf229:0xa17b1ae3b14af658",
@@ -116,9 +163,9 @@
             "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJKfL8bWgXQjERWPZKseMae6E",
             "provider_id": "/g/1ts3c2xn",
             "rating": 4.7,
-            "reviews": 4188,
-            "price": "146 US$",
-            "extracted_price": 146,
+            "reviews": 4194,
+            "price": "85.154 KZT",
+            "extracted_price": 85154,
             "type": "Khách sạn nghỉ dưỡng",
             "types": [
                 "Khách sạn nghỉ dưỡng",
@@ -158,27 +205,27 @@
                     ]
                 }
             ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHCi_1NsfWVbQA8PZKklzC3WwSTRqDneAI9PAGKyGXorKtq6k2HuVgIQ0iwyyKnDsSoeD4qwUzLqwGRQglmQ7S1d9sH4FyHVN1DTHqQ4EtiHGDF6yjDimi3qd19MvptsesSJbbbtiSMjt4b=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/AkO623icHcTBToMwGADgJ2JQIVNMPDTrRieO0HUys4tJWYUOaOn-zqZ7Sc--jYnf4fv96Z2b4TmOxz5ddMZ0o7yBvLZGO6ndojVT3M0QtRBBjOuKDZiu1Ceq4OvYCIaf6lM5jPdVevT8sLdES7zNa1yUofgw19LZ5fBAb023ZYnyIZSaADeSZNa_39-sL_asGyf2yNE5B5ptAm0qRA7UsmztFC3IZhkuRE0qtWeU775nBxL4qxDCKb67uEy8eJQkSdT_30b6D9TzSE4"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHV9OMQTuFVBO9ZWI18SaBhCSmPtW1W3Uveu-qtZmsStNq3JekLWItp_Lw0EhEpmYJN6altALncmAVBHku6rEYFd6R8-84DngpVC_aVGPGMBxkBhTg5KZRMpTKybpAkGGt3EY5xtkgiNuCy=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/6zhZcnicHcTdboIwGADQJ6pAmASX7IIyxB9AFFYCN4Z1TbuUlmq_Tn3KXe9tTHYuzt-vADD21fMmES74PPOJOcuudNbANCzorDxuLKIWWS-pq6NMNmR1KI-tWxN8WA3dNoibEYu0UTV0QRd-_DCHLjAo20B1CXdMFt0WzLm4-ZnIjOp3VTROkBSaqoTgjXTRNevXX9EpRvHLu-aGpOeR5HVe4rvEouXL_XAqTbt_fJpE5jmEWb-8g-TflUsfb7fA930k_qdIPwFsu0dD"
         },
         {
-            "position": 4,
-            "title": "Furama Resort Danang",
-            "place_id": "ChIJ7zjMyNsPQjER0iUSEjE-apo",
-            "data_id": "0x31420fdbc8cc38ef:0x9a6a3e31121225d2",
-            "data_cid": "11126774209849730514",
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x31420fdbc8cc38ef%3A0x9a6a3e31121225d2&engine=google_maps_reviews&hl=vi",
-            "photos_link": "https://serpapi.com/search.json?data_id=0x31420fdbc8cc38ef%3A0x9a6a3e31121225d2&engine=google_maps_photos&hl=vi",
+            "position": 5,
+            "title": "TIA Wellness Resort",
+            "place_id": "ChIJz0RiIUQXQjER_XbsI16KkBE",
+            "data_id": "0x31421744216244cf:0x11908a5e23ec76fd",
+            "data_cid": "1265663632225367805",
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x31421744216244cf%3A0x11908a5e23ec76fd&engine=google_maps_reviews&hl=vi",
+            "photos_link": "https://serpapi.com/search.json?data_id=0x31421744216244cf%3A0x11908a5e23ec76fd&engine=google_maps_photos&hl=vi",
             "gps_coordinates": {
-                "latitude": 16.0399456,
-                "longitude": 108.2510681
+                "latitude": 16.031278099999998,
+                "longitude": 108.25436429999999
             },
-            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJ7zjMyNsPQjER0iUSEjE-apo",
-            "provider_id": "/g/1hc12jlwq",
-            "rating": 4.5,
-            "reviews": 6188,
-            "price": "153 US$",
-            "extracted_price": 153,
+            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJz0RiIUQXQjER_XbsI16KkBE",
+            "provider_id": "/g/1tdkp88n",
+            "rating": 4.6,
+            "reviews": 1580,
+            "price": "211.613 KZT",
+            "extracted_price": 211613,
             "type": "Khách sạn nghỉ dưỡng",
             "types": [
                 "Khách sạn nghỉ dưỡng"
@@ -187,64 +234,17 @@
             "type_ids": [
                 "resort_hotel"
             ],
-            "address": "105 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
-            "phone": "+84 236 3847 333",
-            "website": "https://furamavietnam.com/",
-            "description": "Phòng nghỉ thoải mái, nhà hàng ven biển và spa.. Những phòng nghỉ thư giãn và dãy phòng sang trọng tại khu nghỉ dưỡng ven biển với nhiều lựa chọn ăn uống, spa và sòng bạc.",
+            "address": "109 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng 557276, Việt Nam",
+            "phone": "+84 236 3967 999",
+            "website": "https://tiawellnessresort.com/",
             "amenities": [
                 "Bể bơi",
                 "Spa",
                 "Đỗ xe miễn phí",
                 "Bữa sáng miễn phí"
             ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHIJZItJnK7iZDrnugH7oiVRGppY2nk-ChMZIW-sFAT-2UdAk5jqoWLXE8Sr-4EVwm2Lh0nuwQiaSoCtEms-kFjT_EgyfcjGgN9P82fMGstFOeiTcontdMJVn5vhMShh61GQOsPYA=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/-WcMRHicHc7dEoFAGADQJ_qU_JtxsUOliFJCN8as7FbaTd-m8YgewdsYbs71-by5UhVONe3Oex0mJbunDaY1lUKlQnWoLDVWIVAE1Ii_CQqydNzEUa5YjbJkUYuGLUcyi3d2VZ0MUcCce4lzALRIBMb-SopB_pCH9dEchzX0zbgtjTXXRdMG2SWUc2WWCIWVR2eTvW40t9lm4o-Nm2ejsrZpFv0mV8-NxeDJvZDzYdcOtuifyKzt6roO_C8F8QXoxkV7"
-        },
-        {
-            "position": 5,
-            "title": "Da Nang Mikazuki Japanese Resorts & Spa",
-            "place_id": "ChIJDZsVkg4ZQjER7u0k8Siz7SE",
-            "data_id": "0x3142190e92159b0d:0x21edb328f124edee",
-            "data_cid": "2444807161157840366",
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x3142190e92159b0d%3A0x21edb328f124edee&engine=google_maps_reviews&hl=vi",
-            "photos_link": "https://serpapi.com/search.json?data_id=0x3142190e92159b0d%3A0x21edb328f124edee&engine=google_maps_photos&hl=vi",
-            "gps_coordinates": {
-                "latitude": 16.0934007,
-                "longitude": 108.14468749999999
-            },
-            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJDZsVkg4ZQjER7u0k8Siz7SE",
-            "provider_id": "/g/11hzv0ksgc",
-            "rating": 4.7,
-            "reviews": 5050,
-            "price": "134 US$",
-            "extracted_price": 134,
-            "type": "Khách sạn",
-            "types": [
-                "Khách sạn"
-            ],
-            "type_id": "hotel",
-            "type_ids": [
-                "hotel"
-            ],
-            "address": "Nguyễn Tất Thành, Hải Vân, Đà Nẵng 55000, Việt Nam",
-            "phone": "+84 236 3774 555",
-            "website": "https://mikazuki.com.vn/",
-            "description": "Khu nghỉ dưỡng xa hoa có công viên nước và cảnh biển. Khu nghỉ dưỡng cao cấp có công viên nước, khu spa, nhà tắm và phòng ở thoải mái. Một số phòng nhìn ra biển.",
-            "amenities": [
-                "Bể bơi",
-                "Spa",
-                "Đỗ xe miễn phí",
-                "Wi-Fi miễn phí"
-            ],
-            "extensions": [
-                {
-                    "crowd": [
-                        "Chào đón những người thuộc giới LGBTQ+"
-                    ]
-                }
-            ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGjcqCMWdJFAlT1hshdP_agUFX3QxV6QSQWSlOu572qeU9URGZJPSyPfmjItStwrcPAb9qTNhnSNz2_Fe0Y2vpQycwgOgaBcNB6gS77vYh54FnQtymI_i9bourCI_zlt0mqRWLY=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/kstHWnicHcRdDoIgAADgE5lkP862HqzNZiuDyMxenBJBhaCCmV2wM3Sbtr6H7_vhxlR6ZtuCjwZMKSZoq2lDlDRUmgFRpc0qbRFtaduHEXr4qzupl9vksg58cRhyzS8wy1kcnEbodZwijBIsdu3EdWoae_F-dV5D3MNreQ8NNl1DoF949SHiEkdvJwsoSJ1nhXrSsR3LFyRaTBl23WfKJ-NAItOXYXbzCtU2yzB7CwPKep9s0nk3BABY_D-x5A-dc0XN"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGwks4cAkyvgwRmCaZrQgQK1WP0FjYs6KiAappf6pZCoq6wjgTBDxLarteUy9-QEKM7ta-o3S95CmtwY3JR55vJa6TKO_wm409is9oW1Zowda2ncvfsJcWi3cxADKyqiIRNhallag=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/j8RdTnicHcRJDoIwFADQE1WKCAYTFxWHSJ1ADZGNaSoWZGjlVypH9AjexsS3eN9PrrWCiWVVuTMQUooqe0HWctnorNEDLmtLKEAcEFjksItKsjIljDgp-06YuA5Y2kYionZywMvHBTxaEKbU3VNpIJ-eeYjTbP7esFZn595H0YJux5oh6Rx9N6i1uThh7LpdyLwT3V9NPcJ-Ab5M7FSaGxs2vLtDyJPC4W8yp_2zWMe7nFUVE1NjY4xR_p-j5gdQfkZ3"
         },
         {
             "position": 6,
@@ -261,9 +261,9 @@
             "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJd3RleOYXQjERQQD0TduMYnU",
             "provider_id": "/g/1tfjc0dd",
             "rating": 4,
-            "reviews": 1403,
-            "price": "52 US$",
-            "extracted_price": 52,
+            "reviews": 1407,
+            "price": "26.501 KZT",
+            "extracted_price": 26501,
             "type": "Khách sạn nghỉ dưỡng",
             "types": [
                 "Khách sạn nghỉ dưỡng",
@@ -306,11 +306,82 @@
                     ]
                 }
             ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEP8wH3ZxyQeS9yzwfrW0aeGpCLxRV5WC4UPoWgDdzjggL9jB3L41ECy8aPsengksfaIPe-GCkjjfvDBlJOo3L3B98jbqDpBAPya64FOYyUXJzdxvtEUq-otZDkZCvv0ULXshpk=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/F5mlcHicHcRRboIwAADQE1VqigZM_ICCbqaZ1QVR_hBLSctotRUoF_QM3maJ7-O9X4212qw8r23QjCvFW_Y07FGpzrLOzir153FtQGWA8SL6c5BRSoPhCxWjO7Df0E1D_chhybYak_F4WuTYz6jKeXKbBOckFDEi_jzFLiipYR2Xpi6_KQNbLIWo-yRud3uFCIrDQFzviY4j6sqlv9lfXHbeTbext2l2B8oWiSxw38OMnE2j5XqYQwhB87kC3T-OskWE"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFF4_l1P-GE3TSnvVGcQCMIObGjnRM7YM8zn9VhEwevH8alJI8OBrX785ikqs5dfatEKW7jr1VqpY0vpvzft0kJ4c3tQ9bgU_x2vszhO-56z0eJwVUfyefI-q8BPTRpsqJTcu4o=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/j-uPsnicHcRBjoIwAADAF1WKgFSTPahBBMMCCqgno7VQhW0LrWXlg77B35g4h3m_qFJCzgyjodao4rxqyEOSDnOmCFMjzP-MSkiAJZDGPPlN6_lqZZ8aMwG-Z2U7pgsfp8soiC_-nW0j9xihgU0L6vVEr9G5CQMUL7qDi5xb3UrnWp6Vt9m7984sWnGEWuihVLAObWypdHqp8tP_WMuBxsCZDJCEfZGXT1IGoEWLJNsK2YYZftj8pzchhIB-x4B9AB8_RLY"
         },
         {
             "position": 7,
+            "title": "Risemount Premier Resort Đà Nẵng",
+            "place_id": "ChIJQ3ODRnwXQjERsTy60ZdRD_Q",
+            "data_id": "0x3142177c46837343:0xf40f5197d1ba3cb1",
+            "data_cid": "17586364782405631153",
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x3142177c46837343%3A0xf40f5197d1ba3cb1&engine=google_maps_reviews&hl=vi",
+            "photos_link": "https://serpapi.com/search.json?data_id=0x3142177c46837343%3A0xf40f5197d1ba3cb1&engine=google_maps_photos&hl=vi",
+            "gps_coordinates": {
+                "latitude": 16.0546179,
+                "longitude": 108.2420798
+            },
+            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJQ3ODRnwXQjERsTy60ZdRD_Q",
+            "provider_id": "/g/11cr_gdp6p",
+            "rating": 4.5,
+            "reviews": 2738,
+            "price": "17.782 KZT",
+            "extracted_price": 17782,
+            "type": "Khách sạn nghỉ dưỡng",
+            "types": [
+                "Khách sạn nghỉ dưỡng",
+                "Khách sạn"
+            ],
+            "type_id": "resort_hotel",
+            "type_ids": [
+                "resort_hotel",
+                "hotel"
+            ],
+            "address": "120 Nguyễn Văn Thoại, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
+            "phone": "+84 236 3899 999",
+            "website": "https://www.booking.com/hotel/vn/risemount-resort-danang.html?aid=7955654&selected_currency=USD&lang=en-us&soz=1&lang_changed=1",
+            "amenities": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí"
+            ],
+            "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhFmZdKpIp20LzhuVAGyppP565iEpJaLzIWE0aWpdif2g_E995K5ASiygMTG-nKvN3wg-UcPwngsawCvhl0OFWEgyEQbNJ42K2m3KPLuO03WfPzE2MCoJaL0svzBOsJ45e7djNIfRKgHLMme8ZQd6MCRC00m9q9a0-O4FlGIeBIc2rIkHsQjKPQv0A=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/IlWwrHicHcxLUoMwAADQE6XEAFWccUEx0BC-9cNMNw5CSKhAIqEg3NSruNJx85bv-0dMk9L3htEJc8el5B27ajZWcpjYMO0q2RtcaaBG-bUablRbj8LvzzVVRCEYbeL66garUpm9t1uswjLaSIFhWai6bRB_w45jU9t9alcePwdgoHNiLhy8VNkycF0u3iw6mPoF5ivO35PQQhT1Js2iawrNosk2jGJP_rVQz9sh1aFls9v6kpDmRPkxint2d87rfeydPAh759MpIUgtvwsIO5AKjeTjqPMLzfIZug_LDYQQiH8rMPwCBM5UKg"
+        },
+        {
+            "position": 8,
+            "title": "Luxury Villas Beach Da Nang",
+            "place_id": "ChIJ-Q5pO7MXQjERXB6VfD_jt2w",
+            "data_id": "0x314217b33b690ef9:0x6cb7e33f7c951e5c",
+            "data_cid": "7833979938646859356",
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217b33b690ef9%3A0x6cb7e33f7c951e5c&engine=google_maps_reviews&hl=vi",
+            "photos_link": "https://serpapi.com/search.json?data_id=0x314217b33b690ef9%3A0x6cb7e33f7c951e5c&engine=google_maps_photos&hl=vi",
+            "gps_coordinates": {
+                "latitude": 16.037712,
+                "longitude": 108.25272799999999
+            },
+            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJ-Q5pO7MXQjERXB6VfD_jt2w",
+            "provider_id": "/g/11tnmbny77",
+            "rating": 5,
+            "reviews": 6,
+            "price": "182.012 KZT",
+            "extracted_price": 182012,
+            "unclaimed_listing": true,
+            "type": "Khách sạn",
+            "types": [
+                "Khách sạn"
+            ],
+            "type_id": "hotel",
+            "type_ids": [
+                "hotel"
+            ],
+            "address": "Furama Resort Danang, 105 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
+            "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhFwXKuHJEUavh_bHS0bNl3Chz3Z4rlDJTq6fCJKIqo2IfsL7t9u-257g9xwa-LIAbzR6F5FIcCnkFAcckg95p5VsFYWtuxIGfN0fzSN9on3HDAsacER_YbWOBCqrYWdvRcB2EQHGzJV5T0eF6GfkN32LaFcpVKge5tD8SYJpcbdWWCdz8vC09I=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/soH4-nicHcTbckQwAADQL7JSll2d6YMNIRidsqX6skNcMkMlJC71p_2Svnam5-H8_FIpuXhW1YHqp46xbmgW0cyEjbIZ5YmwL7XjQuEz279VO6rPDkXbR7j4gftervRR-Smo4kGH9NA_z_PgBPfJbGEQ4olpuBXRRVqLohmXztq3UomwXR2JiQyECRx7ZBPSd5bBjUygIpfLjr02Bu2RxhYbdd-xRUnc5FFU-esNTnOR12tCbpr75ntHkBl30CDTa_tY16ISEZ6FXWNI55oWASdVneewPq4rBBZ-2Z4AAAr9nyjjH_prU8k"
+        },
+        {
+            "position": 9,
             "title": "Furama Villas Danang",
             "place_id": "ChIJoU79wkIXQjERHEL7m6VtW74",
             "data_id": "0x31421742c2fd4ea1:0xbe5b6da59bfb421c",
@@ -324,7 +395,7 @@
             "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJoU79wkIXQjERHEL7m6VtW74",
             "provider_id": "/g/1tgj69jp",
             "rating": 4.5,
-            "reviews": 1849,
+            "reviews": 1851,
             "type": "Biệt thự",
             "types": [
                 "Biệt thự",
@@ -360,28 +431,27 @@
             "service_options": {
                 "dịch_vụ_tại_chỗ": true
             },
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFSH3kpfv_0NCuYySWQhGiz1JMe1vsl76On08li-9wniQ5U-STr836i_XchMdAE31N-j13vNQ_gTFnmV4ZcJNcbje-lHWApI1D_ySTnkTsTFh5qoyYLwHwbErDhHYKnsh2Rpoa9Cg=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/X20-7XicHcRRboIwAADQE1Vaq0yX-EFQhk46kTqHP0S62iK17ShC8IYeYbdZsvfxfp-yba179Twl8UgYIxS_O94wo1uu2xEzN09YB5gDzgt2JK2DKItxbS9dAUl4z4fsmMq36oE2CUedUy_-h4YzVYF5r6t0egAZbWbYr4ovJpPvYIURAVeEO5IWgkb69jk5sQ1h5ZUDFR8Du0bLYsiorqmjkZz-mCHf9nFfrpqljPN37eR4b815HopFjyCEQP7PgP4DrdBFFw"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGyZHeO5DqOQsH2qsKM0E392SqWnjvpaMjvEAM26i9_8NuNgjhQ8WDqNLhVyak-j34nxVWbj-XPANeEu5HtuJ5FXXeoYEW7dyNScy4DI2j-qX2ra9KoO517ctOv3bZjwdzjCLWBbA=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/OAuj1XicHcRLjoIwAADQE1WwgIqJizow4ociMbGMmwnUhlq1pbageEOP4G1MfIv3fnFrGzN1nAv3BrVS9YW1ht2okpZJO6Dq6tSNAdQA46Atzs9o0R8SlgWRznKTQG3WqRt7IdxpIkXXlKnoYpTC0Sn8n-AW14LnExJpvOH7vjwD4fnysSeVAMUWYRa3QWLbVfBbFEz9xWR87PGO9n60hALoAt7KcK2yYDimNuu86iDux6f42ZB5hWb3oeu6gH-nQH4ArAFEog"
         },
         {
-            "position": 8,
-            "title": "Luxury Villas Beach Da Nang",
-            "place_id": "ChIJ-Q5pO7MXQjERXB6VfD_jt2w",
-            "data_id": "0x314217b33b690ef9:0x6cb7e33f7c951e5c",
-            "data_cid": "7833979938646859356",
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217b33b690ef9%3A0x6cb7e33f7c951e5c&engine=google_maps_reviews&hl=vi",
-            "photos_link": "https://serpapi.com/search.json?data_id=0x314217b33b690ef9%3A0x6cb7e33f7c951e5c&engine=google_maps_photos&hl=vi",
+            "position": 10,
+            "title": "Temple Beach Resort Da Nang",
+            "place_id": "ChIJw-GXsNoXQjER-0JP0yCtPW4",
+            "data_id": "0x314217dab097e1c3:0x6e3dad20d34f42fb",
+            "data_cid": "7943695674247168763",
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217dab097e1c3%3A0x6e3dad20d34f42fb&engine=google_maps_reviews&hl=vi",
+            "photos_link": "https://serpapi.com/search.json?data_id=0x314217dab097e1c3%3A0x6e3dad20d34f42fb&engine=google_maps_photos&hl=vi",
             "gps_coordinates": {
-                "latitude": 16.037712,
-                "longitude": 108.25272799999999
+                "latitude": 16.074097899999998,
+                "longitude": 108.2460464
             },
-            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJ-Q5pO7MXQjERXB6VfD_jt2w",
-            "provider_id": "/g/11tnmbny77",
-            "rating": 5,
-            "reviews": 6,
-            "price": "197 US$",
-            "extracted_price": 197,
-            "unclaimed_listing": true,
+            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJw-GXsNoXQjER-0JP0yCtPW4",
+            "provider_id": "/g/1hc3jnxrk",
+            "rating": 3.9,
+            "reviews": 1251,
+            "price": "18.693 KZT",
+            "extracted_price": 18693,
             "type": "Khách sạn",
             "types": [
                 "Khách sạn"
@@ -390,12 +460,19 @@
             "type_ids": [
                 "hotel"
             ],
-            "address": "Furama Resort Danang, 105 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
-            "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhHniVP3ikZOqKuaYEVD3o0y8rz1XIlW8zwsia1qiwasAa2-nl1Aj9Kv8uDF9sw6FHTgLhMWIANHPzbc_aquwL_AIdMEcOVUHF9EAN9cwTBOxLaBKu0ioiqqMn11DSCv-YPzUHJvfc-r1YhOhK1JDUpe8XwNOUQTnSRHnbI-Zi9YwlfahU7v6cQ=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/qJwoKXicHcTNboIwAADgJ6rQsThYskMdkCK_TkDxYmpF2o21QIEqb7on2XXJvsP388vGsVOvhtEya9VI2bT1pOqBSjHWYlxR-W00nQLdIO8PA0XXZ5dhwcvM4l-ntA8nUnmla0nzYQ8LPAbtwV604gT2XBOFyBMQLUSfTjjbk-s7Sq99nDcRiw8BSnC2XOiZ9JOOzii4xh5NywL7jocSh-p8k94jsgknk0ve97GA0N2_z6DKlgJv5xsFA6xYykK4dYuuto86SYtdLvYfWFwCcOJOpdsbYcXLvKa7Nw1N0wTsfwrEH7niVYY"
+            "address": "11 Võ Nguyên Giáp, An Hải, Đà Nẵng 550000, Việt Nam",
+            "phone": "+84 905 798 838",
+            "amenities": [
+                "Bể bơi",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí",
+                "Wi-Fi miễn phí"
+            ],
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH-eJgvkhqHx6QxXjsbORl4zKE19uworGjRtT4XC0BvS_HBBNBnCJvaeLaB4ZyEcX8sgwglSMEpGHyTPf7nEPyY0VC0oEX4FT3WtX76VX8zuZQ5TXZ_CkpDlsrUoc-0pCUOX0Vv=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/k_X48XicHcTbDoIgAADQLyJp2XXrIYhyXbXMyJdWjHBJQIKa_WDf0N-0dR7O95M5Z-zI82TWaQmtheSl5QXTynHlWkw_PGEsYBZYbxJuonwSAL4QVZ49g1cvetG7vW530n8vSXtY1rqY33cu9imGqNqfA4Q2SOFFdeGrC_LThjA6sKIWcr8mZh40cXjrKxI2J5hgqAn1Z3Hn6Gi_l9DBu0yjbkzTM87NVNrioBmABh-2FCbVuG5DCEH2nwH1A4CpRJ0"
         },
         {
-            "position": 9,
+            "position": 11,
             "title": "THE BLOSSOM RESORT ISLAND DA NANG - Onsen Included",
             "place_id": "ChIJ0-FKo9wZQjERSAJhborTpGY",
             "data_id": "0x314219dca34ae1d3:0x66a4d38a6e610248",
@@ -409,9 +486,9 @@
             "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJ0-FKo9wZQjERSAJhborTpGY",
             "provider_id": "/g/11b7vvp6_s",
             "rating": 4.6,
-            "reviews": 1389,
-            "price": "47 US$",
-            "extracted_price": 47,
+            "reviews": 1390,
+            "price": "27.929 KZT",
+            "extracted_price": 27929,
             "type": "Khách sạn",
             "types": [
                 "Khách sạn"
@@ -437,51 +514,49 @@
                     ]
                 }
             ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHsYs41-KfwiKBjJ8zrgegfgvTbRmJHuStY5tKzOUDg7MS42Et5lheccaIAbs6MlIjgfG8MpfynzrFgjZsjJw0cw37Ku0krGwhPAHLGGOfavDMgFlaUwBewcLUFxQrwhz_BvMU=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/Eqzzw3icHcRNjoIwGADQE1XqD2pMXEAQEOyo47BgNhNs2q-DFUi_QpUDeoe5jcm8xft7KWs73HieVvMJtC1o0aMwvG2saOyEt3cPOiQcCXrB6eN8C1IscTEluXS_eVhn69GAAAnD1_XznqX9xZa-zcdjEcGKXRaznfW1EpxX--CKS6b3NchkzTr5bEYTQ_2NdeYod_NV3tObSZw6BekhSY6yGiIGsa4KFwrHD0X8OBunxp9wYMXWTSmlRP3PSfMGoNlGTg"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHzb0tbGmK1c_VS3MbdMeiw5VLaiNu_vP6NJQe0mbp0lGxOxiwoZ5DPU7xNHo1L9DVsog8kYrg7m8oDGT-E4HAn5MymxDwotVhPgw-R4ohH3pTz1kU8uHIxktxZa-j1_05bzBM=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/VJ5HCnicHcRRToMwGADgExXaMASX-IDB0OlgTAeJeyFr17QI5SdrsZUDegdvY7Lv4fv7VdbOZhuGo4oCCSBHsRhx4zBZMdmAgw7lbBA3yIRZXR2HjK4MW1boN8K79iMq2bUUvYvb_aWvlu67fqhejwJrNuOx8AffOzjHed0kvqJA9o95a0Cmw-dNJjqFvDihlw3Nprj80T53YFtVS4feN6BoNJ9WMjTpQnd-sP58QV-kwzFbn8snRzDGSN3naPoHQSdEqQ"
         },
         {
-            "position": 10,
-            "title": "Risemount Premier Resort Đà Nẵng",
-            "place_id": "ChIJQ3ODRnwXQjERsTy60ZdRD_Q",
-            "data_id": "0x3142177c46837343:0xf40f5197d1ba3cb1",
-            "data_cid": "17586364782405631153",
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x3142177c46837343%3A0xf40f5197d1ba3cb1&engine=google_maps_reviews&hl=vi",
-            "photos_link": "https://serpapi.com/search.json?data_id=0x3142177c46837343%3A0xf40f5197d1ba3cb1&engine=google_maps_photos&hl=vi",
+            "position": 12,
+            "title": "Santa Luxury Hotel",
+            "place_id": "ChIJiZEC47QXQjER7Gf4-w_RhCE",
+            "data_id": "0x314217b4e3029189:0x2184d10ffbf867ec",
+            "data_cid": "2415285166759503852",
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217b4e3029189%3A0x2184d10ffbf867ec&engine=google_maps_reviews&hl=vi",
+            "photos_link": "https://serpapi.com/search.json?data_id=0x314217b4e3029189%3A0x2184d10ffbf867ec&engine=google_maps_photos&hl=vi",
             "gps_coordinates": {
-                "latitude": 16.0546179,
-                "longitude": 108.2420798
+                "latitude": 16.0517799,
+                "longitude": 108.2467562
             },
-            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJQ3ODRnwXQjERsTy60ZdRD_Q",
-            "provider_id": "/g/11cr_gdp6p",
-            "rating": 4.5,
-            "reviews": 2738,
-            "price": "34 US$",
-            "extracted_price": 34,
-            "type": "Khách sạn nghỉ dưỡng",
+            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJiZEC47QXQjER7Gf4-w_RhCE",
+            "provider_id": "/g/11jnstgy76",
+            "rating": 4.9,
+            "reviews": 3038,
+            "price": "30.633 KZT",
+            "extracted_price": 30633,
+            "type": "Khách sạn",
             "types": [
-                "Khách sạn nghỉ dưỡng",
                 "Khách sạn"
             ],
-            "type_id": "resort_hotel",
+            "type_id": "hotel",
             "type_ids": [
-                "resort_hotel",
                 "hotel"
             ],
-            "address": "120 Nguyễn Văn Thoại, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
-            "phone": "+84 236 3899 999",
-            "website": "https://www.booking.com/hotel/vn/risemount-resort-danang.html?aid=7955654&selected_currency=USD&lang=en-us&soz=1&lang_changed=1",
+            "address": "362W+PP6, 09 Đỗ Bá, Bắc Mỹ Phú, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
+            "phone": "+84 236 3589 999",
+            "website": "https://santaluxuryhotel.com/",
             "amenities": [
                 "Bể bơi",
                 "Spa",
                 "Đỗ xe miễn phí",
                 "Bữa sáng miễn phí"
             ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhHHJ4L0NizEj3f1Kjiv17MzeKP_IsU1YqbPR1pdODA_vXoVjqK3dupAvEEUEtQG_xzTWDoqG5GkaeSpOK1UbGv_LTt6KGvmXLRfYNn_Tw3trUC_YpGFt2zUU3U2FLQTwgn-NEcq81l0_QfhAvXDE4snIGn_4T0rJ1zMbwvj2EWcI2kfm_vgb_uUDw=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/jJCBB3icHcRLcoIwAADQEyEJ0M90pgumxIggiiUVVpnyFyEJEILmpr1KV53pW7yf31ZKMb-ZZt_am4bzpq-WuZoKzmTF5Kbgg9mI2RATvz9MNywdr93t9k4IoqtGnV3DoLsq-HLQVXCi_kxgNuanMxTl0XOpSvlXNwZ2uQhXIUSQjDG96-Ti8RE_4dt39SmOASQ5VjRM5HOA1ZCG5zqLGE1WW07kg2YCb6WlCbGJtQ3jZG2YEaFifIU9oHHduir1kDMzHzPqJGDaQ33IV9VZ6FL41q0eqGpyuhBvfV8hAMBo_y8M9gelh1b-"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhF_uIznjhUt1AYJl13Pmtt-B1JGXr4-6zpdnp8g-CF7gmM68YeLKAZVRc0G694WY5S65L3BZu5cBXyZJDob2cz9FfmRWpanVSVzd-8s9-uarF7wBylkpsxSkUHksEKkvwEMwpdt-D5vcC3_OyMrIORTjjj4cwbWBg7hv0eVcy_j_cOcLBTxPkgH=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/tsOP23icHcTbboIwAADQL6rAuC_ZAxVREYIRBeGFaGFtuJSGluuf7k_2uGTn4fz8EiEY_5Sklqg73Pe4rUZeDainoqJih_pOwowDNvTLKjlBqbnEK8bzRmvyEIqT-a2iXjshAFT843PQgLGxkjILg71n4i40rKwKLk6e3JB8NGwtzfTY0AMV5qOO4HPNfbd_f6DN9r67W8peNImTrQQWt8H4GjxzhmvbML7EzePU8MOlmeZDOLNSAFef0F4tojUcztHtXte1huZ3CrFJJrlK0FrUBYpQAO_LtcGnr1mRZRmQ_xGgf3C9Vew"
         },
         {
-            "position": 11,
+            "position": 13,
             "title": "Khách sạn Radisson Đà Nẵng",
             "place_id": "ChIJS0p9LgcXQjERRnDVDqhYvX4",
             "data_id": "0x314217072e7d4a4b:0x7ebd58a80ed57046",
@@ -495,9 +570,9 @@
             "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJS0p9LgcXQjERRnDVDqhYvX4",
             "provider_id": "/g/11l4bbdcv9",
             "rating": 4.6,
-            "reviews": 2533,
-            "price": "80 US$",
-            "extracted_price": 80,
+            "reviews": 2535,
+            "price": "35.510 KZT",
+            "extracted_price": 35510,
             "type": "Khách sạn",
             "types": [
                 "Khách sạn"
@@ -523,59 +598,11 @@
                     ]
                 }
             ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEL4oUJ18NZjbtekhESzV7ze_9E7DtcXIuugoobHUGxOytG8t9_IN2NEUIDjJcctIumx-Wxv338K6Tz-1YqMqguIoF4J15EgMzb88cYrq2FYlCuWoBfDrIDb6upD9uaGIabCRbX=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/knbunXicHcxBcoIwFADQE0VArAZnXKiJNFRRW1HpxjGZNIwiAfKjlAt6Bm-j4-Yt3-OeAZRm6Dh55neU1iqX1sha6AJkAR2hL44qDRIGGWe8itfnMZ33dBJ5OP49cZDnjP6020ErDwEdEBB7Zu2r4Z9J2Cz_IcQQHFjcjWnCyCkSApi9NGjXXH0ff_U3LfLSalEpy_SsF3kfVC1ajrFI66o7S_Op3enJH6kZ4X1bksAeQ3bk02--H90813VR9lag4glkukSO"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFFIla_ue5z38pFSkKlA-EklbBvSDSmjy_9khJItHp0STaELnKmjWp_G2-5GM1s38UGhLifTflHnoQ-ENCU5XrocVgBO-iM59ZGAHW_diAfc3pGxdtNUD7zr8f8S5dgusTQV6K2=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/_yn_tHicHcRRboIwAADQE1VQUocmftQJxaE4UkDjD9ECLVLahha3eUHP4G1M9j7e68mt1WbpOIJ7E6YUE_Vo6oEqaWtpJ1T1DtMGUAOMg76TtENhuBWXcqzhw_N1SLpYIBB04rq-kw3pb3_louNfWxtpl2SXYCfj_nbUJZ4BiPdT4_k55ru2yRoRSZWCIPnM4WlQtGDrA2j3cHHGKDqWVYsa6mn8W9kk33w8Br_xCazYaLK0mMez1c_UdV3A_6dAvgEsTUPE"
         },
         {
-            "position": 12,
-            "title": "Yarra Ocean Suites Danang",
-            "place_id": "ChIJy4eJozgXQjER2u456g73fJg",
-            "data_id": "0x31421738a38987cb:0x987cf70eea39eeda",
-            "data_cid": "10987928834308435674",
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x31421738a38987cb%3A0x987cf70eea39eeda&engine=google_maps_reviews&hl=vi",
-            "photos_link": "https://serpapi.com/search.json?data_id=0x31421738a38987cb%3A0x987cf70eea39eeda&engine=google_maps_photos&hl=vi",
-            "gps_coordinates": {
-                "latitude": 16.0488945,
-                "longitude": 108.2488008
-            },
-            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJy4eJozgXQjER2u456g73fJg",
-            "provider_id": "/g/11kb1vgtvb",
-            "rating": 4.8,
-            "reviews": 2578,
-            "price": "50 US$",
-            "extracted_price": 50,
-            "type": "Khách sạn",
-            "types": [
-                "Khách sạn",
-                "Khách sạn nghỉ dưỡng"
-            ],
-            "type_id": "hotel",
-            "type_ids": [
-                "hotel",
-                "resort_hotel"
-            ],
-            "address": "304 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
-            "phone": "+84 236 6269 888",
-            "website": "https://yarraoceansuitesdanang.com/",
-            "description": "Khách sạn sang trọng với phòng tập thể dục và hồ bơi trên sân thượng.. Các phòng nghỉ trang nhã, một số phòng có tầm nhìn ra biển, nằm trong một khách sạn sang trọng cung cấp phòng tập thể dục, nhà hàng và hồ bơi trên sân thượng.",
-            "amenities": [
-                "Bể bơi",
-                "Spa",
-                "Đỗ xe miễn phí",
-                "Bữa sáng miễn phí"
-            ],
-            "extensions": [
-                {
-                    "crowd": [
-                        "Chào đón những người thuộc giới LGBTQ+"
-                    ]
-                }
-            ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFApRdndxstFYH4ZOj77ZlrrOszOmbL_LxJk-n3IasAJxkcj1K3xhMaZrWxkk0Fyl2GYppTboTYJwWG1qtIuqQHJwoXXw-XmhUuGrmsSqZgXapE7HlpfiSDD7psxvS0AhI0aSue=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/9dQLw3icHcTbboIwGADgJ6oUMSEx8aKJcvLAHC4CNwtWpNrSlv5F6l5wz7C3Mdl38f39Mms1LD1PsGDWKdWJdoTWUCVtK-2Mqt7rNCAKCDzycThyEhH9eZVXBzaqkkWdP8KwFsbk8JP3l933zmUcySBtgGSO04e_DRzbN7U5O85x9BLzuNL6dFGnKpvOsT_YdByOSTapspxQ2bOvMTY9FEPdlY3ehInQt3uxXoca3LPAhKW4KcZ2NfkYY8T-p0i-ATehRzs"
-        },
-        {
-            "position": 13,
+            "position": 14,
             "title": "Crowne Plaza Danang",
             "place_id": "ChIJb4AnA0YXQjER9lcWjC_84pM",
             "data_id": "0x314217460327806f:0x93e2fc2f8c1657f6",
@@ -589,9 +616,9 @@
             "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJb4AnA0YXQjER9lcWjC_84pM",
             "provider_id": "/g/1hhxjxwn5",
             "rating": 4.5,
-            "reviews": 2604,
-            "price": "119 US$",
-            "extracted_price": 119,
+            "reviews": 2615,
+            "price": "57.035 KZT",
+            "extracted_price": 57035,
             "type": "Khách sạn",
             "types": [
                 "Khách sạn",
@@ -629,11 +656,43 @@
                     ]
                 }
             ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE_ec82Lcsqd7brNiPcfDzGPbsuGBNRDIKCnjsgwtPveIwfj4JyWySDkRwT75omzl2vKQ5iFasQ87Gb8nplKJ5Rx2eP588hjNLhOpx8N_p9qutKV845V_fne_N0l-2KPPuo4vQ=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/cA6dZXicHcRRboIwGADgE1UQaahL9qBjEq2phRl8JKMrVKxt9S-gHtA7eJslfg_f66m8d_ARBFrNJq21rZY9yKuwxkvjJ8Keg9YBEoAgWHCWnxbflRQk2gq4_CX1lR25aNJHxmvosyUr0jX9Mh20o-eDXI9NF2_uh_tPeirGfYLt-aGjgeb4uPqFnCRZTYzTdIOLWyQ5JkR1bKt27kZY5eaX3tOSxLisGiMrFmoUUc57Gw_55zgNwxCp9wKZf4HqRPQ"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE-VpzM5KLkLpZpYEJ8RDVd4SxNukMaB-Bk15WlEXvcJuT4yCljQS8ua87CSFXn63KJ9wAN0XzaPjCE172WyRwHhahBtuU_5BF54aVVmTZyQmuRjz9RNxrV8OWPBpGJewJwgL8=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/GrznqXicHcTbboIwAADQL6rAhFlNfKCIWyoiFy3oi2k6QsO1sa0VPnD_4N8s2Xk471-ulJAby-r4clGPY91VWlYPNg6qGtSCjb1VCwmYBNLykzht_RAQMR-9Q9RG4iauIYbZjvy4-SvW7ZEigFrHK7qwfDKsz-4UdE2aQ03hKsj35fC5POC18WO7nGnSBKGz-iimzHxzypHSl7uH9p5LCenPtyntddbM6yx-PQg8FQkSX7gy2NQR3BrHtm3A_2dg-AOsTENu"
         },
         {
-            "position": 14,
+            "position": 15,
+            "title": "Serenity Retreat Danang",
+            "place_id": "ChIJuaHmPwAXQjER0EsshlS64Eo",
+            "data_id": "0x314217003fe6a1b9:0x4ae0ba54862c4bd0",
+            "data_cid": "5395517225780923344",
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217003fe6a1b9%3A0x4ae0ba54862c4bd0&engine=google_maps_reviews&hl=vi",
+            "photos_link": "https://serpapi.com/search.json?data_id=0x314217003fe6a1b9%3A0x4ae0ba54862c4bd0&engine=google_maps_photos&hl=vi",
+            "gps_coordinates": {
+                "latitude": 16.0732621,
+                "longitude": 108.2432429
+            },
+            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJuaHmPwAXQjER0EsshlS64Eo",
+            "provider_id": "/g/11wr9924g9",
+            "rating": 4.7,
+            "reviews": 435,
+            "price": "20.058 KZT",
+            "extracted_price": 20058,
+            "type": "Khách sạn nghỉ dưỡng",
+            "types": [
+                "Khách sạn nghỉ dưỡng"
+            ],
+            "type_id": "resort_hotel",
+            "type_ids": [
+                "resort_hotel"
+            ],
+            "address": "129 Hồ Nghinh, An Hải, Đà Nẵng 550000, Việt Nam",
+            "phone": "+84 868 523 068",
+            "website": "https://www.facebook.com/SerenityRetreatDanang",
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEE6Quzz_0Mqg5A9-0T2kX9FGSeIx7ImnZ4PFQyHaRhRfoWLI8y8WOuduF9t6Vf1J4JLhi_z6CtzMwqmQTZUr0AS2UrJ_5xKMSo1G4NY003l-LtlLnVfZgTqyYXN0-LzC6SAig=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/e-Jo3nicHcRLDoIwFADAE1UeiigmLhojChYUwR8bYhBaI7RCS5Qe0Dt4GxNnMd8PU-opZ4ZRsdGACkGropNFmwuuCq4GuagN-pQol0gaeBdGD7xc2lGndQZBQ8fYQZAMH2fHXcWF9554NU-tnRv16-ue7UtxIt60n5623a1zHWUfS9O3fMLumbYXSgevpo6S9NACjoeH1s_G700QC3NlhReAUYWIqgg_lilNmv5yDgERvbBjfKfzlwkAiP3PEf8BnANC7g"
+        },
+        {
+            "position": 16,
             "title": "Khách sạn Nesta Celia",
             "place_id": "ChIJjzSmJgAXQjER4F09sLUd4So",
             "data_id": "0x3142170026a6348f:0x2ae11db5b03d5de0",
@@ -647,9 +706,9 @@
             "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJjzSmJgAXQjER4F09sLUd4So",
             "provider_id": "/g/11xrc86gkc",
             "rating": 4.8,
-            "reviews": 466,
-            "price": "94 US$",
-            "extracted_price": 94,
+            "reviews": 459,
+            "price": "44.060 KZT",
+            "extracted_price": 44060,
             "type": "Khách sạn nghỉ dưỡng",
             "types": [
                 "Khách sạn nghỉ dưỡng",
@@ -669,187 +728,11 @@
                 "Đỗ xe miễn phí",
                 "Bữa sáng miễn phí"
             ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFgsWHzx1sR3yNFILyjDgGmB1Rxof8Zu8djLy-ftW_iIj1ZlF-A6RBLBPAgMYUKR6asJUIFjYTcBqwTYq19BN1pWJYLL8jBmLPx1nr0k7A4_aMI82oxIib5oGOmCu6pSU7FzTfhyyg4QQgB=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/RfMvqHicHcTBboIwAADQL6rQiYhLdmhnqtXKACEEL8Z1UKxA0ZZI_UnP_o3J3uG9nrUxvf50nKaeToRSoikHXd646kzZmQlXrSN6DbgG2kFRGF8QETpfP0aok6kNCWVWLsWqxTAZVRUchuBPMgsqkx_PVMJDQwDyE8xwhMSuyLaJf9KbjBJZpBxf72lxhQscwj7fFIwFErcsGmF3cy9z5B1POxp8qJGef2dq9dN-D36_z-bkkVa1tcKLY4G_7tB1XVD_z0H3BngaRrU"
-        },
-        {
-            "position": 15,
-            "title": "Fusion Suites Đà Nẵng",
-            "place_id": "ChIJmQtyqY0XQjERsbn3TfURpXk",
-            "data_id": "0x3142178da9720b99:0x79a511f54df7b9b1",
-            "data_cid": "8765431995019278769",
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x3142178da9720b99%3A0x79a511f54df7b9b1&engine=google_maps_reviews&hl=vi",
-            "photos_link": "https://serpapi.com/search.json?data_id=0x3142178da9720b99%3A0x79a511f54df7b9b1&engine=google_maps_photos&hl=vi",
-            "gps_coordinates": {
-                "latitude": 16.081160399999998,
-                "longitude": 108.2470304
-            },
-            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJmQtyqY0XQjERsbn3TfURpXk",
-            "provider_id": "/g/11b7l81m0j",
-            "rating": 4.4,
-            "reviews": 1819,
-            "price": "89 US$",
-            "extracted_price": 89,
-            "type": "Khách sạn chăm sóc sức khỏe",
-            "types": [
-                "Khách sạn chăm sóc sức khỏe"
-            ],
-            "type_id": "wellness_hotel",
-            "type_ids": [
-                "wellness_hotel"
-            ],
-            "address": "88 Võ Nguyên Giáp, Sơn Trà, Đà Nẵng 50410, Việt Nam",
-            "website": "https://www.facebook.com/canhofusionbeachdanang",
-            "description": "KS sang trọng hướng biển, toàn căn suite. Khách sạn cao tầng hướng ra biển, có bể bơi gần bãi biển và phòng suite sang trọng có bếp nhỏ.",
-            "amenities": [
-                "Bể bơi",
-                "Spa",
-                "Đỗ xe miễn phí",
-                "Bữa sáng miễn phí"
-            ],
-            "extensions": [
-                {
-                    "offerings": [
-                        "Nhà tắm hơi"
-                    ]
-                },
-                {
-                    "crowd": [
-                        "Chào đón những người thuộc giới LGBTQ+"
-                    ]
-                }
-            ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhE-CTlZ6_bgF_oPR7OxVcWeFLw9I-95CW_jMSjcsO8DwbfiX1DoJCYkp9ksktU2mxk2Viqaiu_Be_8tzAAr4LnWa51k--wmfg-NPXNGlMudEs5E-phDkqdD1Agf93MJjM2kv1J60sOl0kpWD8ucIoFYIPO9Uv15SZIXOJEGFPpc8zHq7KOnKYcR=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/cTci0XicHcRLcoIwAADQE0UIikJnuqB8LAiG0SrghtHwD5BAglBv2pt02Zm-xfv5rYRg_E2S2mq9Kikt23zi-YhpL_JerDDtpJJxwEa6fEuGn22sygbmV3vbpo_SSWl42qHliqPc8WfdBbpqRmkTnBvMkWbNj6KOoUU9MyFMJ5yIi9ItRLnWw72e0o881cTLMMaN30d3FRIA5q4owTGMj_s2mDKbqzZglUWGzIJGWejrwGsChTyht5U5amXCIkubsEudxA2RfnlC9XxzY-TZeydkWHt9DrsD6g8JPr3PUJZlUP2PQf8HmlxUlA"
-        },
-        {
-            "position": 16,
-            "title": "Santa Luxury Hotel",
-            "place_id": "ChIJiZEC47QXQjER7Gf4-w_RhCE",
-            "data_id": "0x314217b4e3029189:0x2184d10ffbf867ec",
-            "data_cid": "2415285166759503852",
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217b4e3029189%3A0x2184d10ffbf867ec&engine=google_maps_reviews&hl=vi",
-            "photos_link": "https://serpapi.com/search.json?data_id=0x314217b4e3029189%3A0x2184d10ffbf867ec&engine=google_maps_photos&hl=vi",
-            "gps_coordinates": {
-                "latitude": 16.0517799,
-                "longitude": 108.2467562
-            },
-            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJiZEC47QXQjER7Gf4-w_RhCE",
-            "provider_id": "/g/11jnstgy76",
-            "rating": 4.9,
-            "reviews": 3023,
-            "price": "47 US$",
-            "extracted_price": 47,
-            "type": "Khách sạn",
-            "types": [
-                "Khách sạn"
-            ],
-            "type_id": "hotel",
-            "type_ids": [
-                "hotel"
-            ],
-            "address": "362W+PP6, 09 Đỗ Bá, Bắc Mỹ Phú, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
-            "phone": "+84 236 3589 999",
-            "website": "https://santaluxuryhotel.com/",
-            "amenities": [
-                "Bể bơi",
-                "Spa",
-                "Đỗ xe miễn phí",
-                "Bữa sáng miễn phí"
-            ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhHfcldvC3Qaf1_IcrHYPX_UzL5S5meKCp2NPI1tm9vGBb0oahUhR4C1MNLPBI7qkJF6Ov8cK-MZoQMJm641gylp8x6W9nYec5uaBdcOz1d_WvxEHEw5xCYsEadw2nnmIaqx6bK1Soac0ckO6Dpakabv9-dXNWnDny_OfczhkK24cRwhoCZtZqjN=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/_-e-33icHcRJboMwAADAFxEwARoq9VCWFsKaRBGBCzJmsQrYBhy2n-YnPVbqHOb1izln07sodvh4aChtuuo5VSOihFeEHxDtxYZNAhvpuomffqlY2KlRV87m8QJrkLtodNL4kd93X72pfeWZTA5jF_Ben7-NQqIQ3_FVMUEQ-rHhvg3t-UuL5hPyhCCjl-Dcawpoto6dVi3RSVoh9QmNEkU7KPNkXm3HXtTVTCcblotMSO_CYdUKD9woRBJqI81isIXFrAvlI0yIRbY8qtGOW09W0HXB1Mx4NvyEHwuQJEnA_yOB_AGpeVZB"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFiaVXhbr_bh61MhdjnuTEgdmxzcufDqRQEknAw3kBaRSMyrOdBcJOAETFZVLlPq2CgnStysyYEswEE2AP9-VPrsTHkHlBwE3_8RlDf52xSZhOp9-0LIIKFONQi4Y-TsUjYnUbqqk3At9bH=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/bnjjmXicHcTbboIwGADgJ6og6DJMvCijBDeVo0S8MVKw1dZy-EsQX9Lrvc2SfRff75tr3cLKMCS3Z6xpmKwHqHvaKF0rPaPNw2AtIAoIDBztY4H92yU_8rI_l_xjvuPVXQ0ZYdXj-aLD1euSmAiFR1u4lyTdTX1YufQ7xCTzT_lWRp31xVSqJ5gKAiMhFo4clEc9ZIEIpDsS-_yZSO-6tJ7piYetg8ztZvPjh_v4tihQBod7oQ5l1wkba6cM1uPcNE3E_6dI_QEuIEft"
         },
         {
             "position": 17,
-            "title": "Awaken Danang Hotel",
-            "place_id": "ChIJl5do9bkXQjER6jW9wftsC-s",
-            "data_id": "0x314217b9f5689797:0xeb0b6cfbc1bd35ea",
-            "data_cid": "16936750652199876074",
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217b9f5689797%3A0xeb0b6cfbc1bd35ea&engine=google_maps_reviews&hl=vi",
-            "photos_link": "https://serpapi.com/search.json?data_id=0x314217b9f5689797%3A0xeb0b6cfbc1bd35ea&engine=google_maps_photos&hl=vi",
-            "gps_coordinates": {
-                "latitude": 16.075818899999998,
-                "longitude": 108.2445848
-            },
-            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJl5do9bkXQjER6jW9wftsC-s",
-            "provider_id": "/g/11v5nssh0l",
-            "rating": 4.5,
-            "reviews": 1410,
-            "price": "52 US$",
-            "extracted_price": 52,
-            "type": "Khách sạn nghỉ dưỡng",
-            "types": [
-                "Khách sạn nghỉ dưỡng"
-            ],
-            "type_id": "resort_hotel",
-            "type_ids": [
-                "resort_hotel"
-            ],
-            "address": "148 Võ Nguyên Giáp, An Hải, Đà Nẵng 550000, Việt Nam",
-            "phone": "+84 236 6558 558",
-            "website": "https://awakenhotel.com/",
-            "amenities": [
-                "Bể bơi",
-                "Spa",
-                "Đỗ xe miễn phí",
-                "Bữa sáng miễn phí"
-            ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGO8aO3pY22uacNYBss7hu2ZfQ3csUBmN3hraMwPEYJ3VehZ2HnLKHyNY5rFpVxI8luT90SpeOWTdrVBjWCSPbBstOCtEDBoXSyfVDfn8_x0FhBusjnsHBGx-FDtS4QuJHesCVJ4Q=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/AJFTmnicHcTdboIwGADQJ6pUqpEt2YUFEZnjJ2gVbwzWQqPYNnxtxEfcI_g2S3YuzvtXWmvg0_N6SSad1l0vHIiBa2WFshOuH15nAHFA4C2LrLwv13nQ5MTUvu8antUUYCGdf2pLwmFPHxmRQ_PzLFZ1SpiQJz9R2-_kldXzITZs3AS9233gyoj8sLsOjN4OYVVcKNg8tKuI6mP1alnUquA84lhSBzcFCV2PKI5sNStdmggIWTorv55TjDGS_3Ok_gDZo0U2"
-        },
-        {
-            "position": 18,
-            "title": "Grand Mercure Danang",
-            "place_id": "ChIJtVsuOdsZQjERelakzsqyQyo",
-            "data_id": "0x314219db392e5bb5:0x2a43b2cacea4567a",
-            "data_cid": "3045474357152601722",
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x314219db392e5bb5%3A0x2a43b2cacea4567a&engine=google_maps_reviews&hl=vi",
-            "photos_link": "https://serpapi.com/search.json?data_id=0x314219db392e5bb5%3A0x2a43b2cacea4567a&engine=google_maps_photos&hl=vi",
-            "gps_coordinates": {
-                "latitude": 16.0483415,
-                "longitude": 108.22670409999999
-            },
-            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJtVsuOdsZQjERelakzsqyQyo",
-            "provider_id": "/g/1vn9lkpb",
-            "rating": 4.7,
-            "reviews": 4720,
-            "price": "70 US$",
-            "extracted_price": 70,
-            "type": "Khách sạn",
-            "types": [
-                "Khách sạn",
-                "Khách sạn nghỉ dưỡng",
-                "Khách sạn chăm sóc sức khỏe"
-            ],
-            "type_id": "hotel",
-            "type_ids": [
-                "hotel",
-                "resort_hotel",
-                "wellness_hotel"
-            ],
-            "address": "Zone Of The Villas Of Green Island, Lot A1, Hòa Cường, Đà Nẵng 550000, Việt Nam",
-            "phone": "+84 236 3797 777",
-            "website": "https://grandmercuredanang.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb&utm_content=listing",
-            "description": "Khách sạn cao cấp có nhà hàng và hồ bơi. Khách sạn sang trọng có 2 nhà hàng, hồ bơi ngoài trời, sân quần vợt và phòng ốc ấm cúng.",
-            "amenities": [
-                "Bể bơi",
-                "Spa",
-                "Đỗ xe miễn phí",
-                "Bữa sáng miễn phí"
-            ],
-            "extensions": [
-                {
-                    "crowd": [
-                        "Chào đón những người thuộc giới LGBTQ+"
-                    ]
-                }
-            ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH5bVNpMWRIC7v9wrD0basn9mieJvzKKP9rlwkeuGBUoexFRnMXuPBT0YVc_KMOkJlS6HxB8GD5iDQvTWGWUuDOEqRZQUvAp-6oAbti7WQ3xjTlhfVdu-paT5eqxUTxGhczzFRXV0URCC0o=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/75YeFXicHcTNToMwAADgJ-qoWdjExAM_jjnCBrWF6cWMWinStR2l0PCSO_s2Jn6H7_fOx1GbJ88TfL1qlWoFs4YNVMmRyXFF1dVrtQHUAOOFxbHsw73fVEed1-g13k7BPCSwuRgZXDt2mJYsK4JBzD2zaUQUczsk87MtIgzfK_qZ5af-IN42exc9ponfJeWE67QmNjm93NBHSaZQg40Km7Hb1uXa_WDBv6svC_QF--zmCHYpp8uyQ-cKEhTHUD3PDxBCwP-nQP4B4JZIEw"
-        },
-        {
-            "position": 19,
             "title": "Four Points by Sheraton Danang",
             "place_id": "ChIJBQUmvI4XQjERUA6DoRis7sY",
             "data_id": "0x3142178ebc260505:0xc6eeac18a1830e50",
@@ -863,9 +746,9 @@
             "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJBQUmvI4XQjERUA6DoRis7sY",
             "provider_id": "/g/11c5_wxr1b",
             "rating": 4.4,
-            "reviews": 3299,
-            "price": "76 US$",
-            "extracted_price": 76,
+            "reviews": 3301,
+            "price": "43.566 KZT",
+            "extracted_price": 43566,
             "type": "Khách sạn",
             "types": [
                 "Khách sạn",
@@ -892,27 +775,27 @@
                     ]
                 }
             ],
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFbzsufEieWbJd6qOwsGaVQRr8KB0VmRMud5mrKOaduZ6snYyHHXmficlYBb-RjiLpS_nqwp1O_d-kex0eBaCqgxPLk_033keClLiha0CKAACLMPbq6eg0JxqCrz6go-KvoAWFzqIqpmgx2=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/zVvoTHicHcRJDoIwAADAF1WqRGJMPJTGFRTExO1CoNSC0I2CIJ_07G9MnMN8P3nTKDO3rCq3R0xKVtHW0JpI0VDRjIjkFlMGEAOMhcLDsUSrdDDtY1nQS7rLHB10Zp2cj1E981x45tG-zaa89oIka--OEbf3ZnPlj4JUNzcF0bPw1SkWulPjIM5ASXtI3QRr1od-GUPbLimu_CJPIPYQwv4-TLVDGdz1GteDwyTwXhJdVoPeasVZP1l0YwghyP8TIH5iHklB"
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAETsl8Wj2stuhhyKIoAoZhibC7XVQxnzhmoZEqFh9LantT9XI4wgH65dsG1ZZYpgVFPbnKyBP9QkuBlfV9QIdssi_QUWHLMndMHaj5aLCewtMt5-Epluc57CB1dk3U8b34okPnkdfx20Mvz=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/fqNXunicHcTBboIwGADgJ6qAiMqSHYDgIIKhiaLjskCLrba2bH8R4SU9-zYm-w7f68mN6eDDsiR3Z0xrJtse2j-ilWmVmRF9s1gHiAACKyh2WATxHuT6eJ2D6Tkft6kOdMUvTbQ6lfihJn7TVfy74X5WK7P3T-liYMnSo_DlVNV3x8pN0ajtGBY-Fn0oz6WPUwpw-cGHY5LliuZJffXqLGoHkxsPxZ3sibeKQocK97Bu3IUWhRL0_Jjb-X36HBzbthH_nyD1BkGzSIU"
         },
         {
-            "position": 20,
-            "title": "Serenity Retreat Danang",
-            "place_id": "ChIJuaHmPwAXQjER0EsshlS64Eo",
-            "data_id": "0x314217003fe6a1b9:0x4ae0ba54862c4bd0",
-            "data_cid": "5395517225780923344",
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217003fe6a1b9%3A0x4ae0ba54862c4bd0&engine=google_maps_reviews&hl=vi",
-            "photos_link": "https://serpapi.com/search.json?data_id=0x314217003fe6a1b9%3A0x4ae0ba54862c4bd0&engine=google_maps_photos&hl=vi",
+            "position": 18,
+            "title": "Anstay Beach Da Nang",
+            "place_id": "ChIJjwoNcQUXQjER_KxaLlw66aw",
+            "data_id": "0x31421705710d0a8f:0xace93a5c2e5aacfc",
+            "data_cid": "12459554011686284540",
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x31421705710d0a8f%3A0xace93a5c2e5aacfc&engine=google_maps_reviews&hl=vi",
+            "photos_link": "https://serpapi.com/search.json?data_id=0x31421705710d0a8f%3A0xace93a5c2e5aacfc&engine=google_maps_photos&hl=vi",
             "gps_coordinates": {
-                "latitude": 16.0732621,
-                "longitude": 108.2432429
+                "latitude": 16.0846183,
+                "longitude": 108.247592
             },
-            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJuaHmPwAXQjER0EsshlS64Eo",
-            "provider_id": "/g/11wr9924g9",
-            "rating": 4.7,
-            "reviews": 433,
-            "price": "26 US$",
-            "extracted_price": 26,
+            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJjwoNcQUXQjER_KxaLlw66aw",
+            "provider_id": "/g/11kjp1hmkp",
+            "rating": 4.5,
+            "reviews": 88,
+            "price": "20.043 KZT",
+            "extracted_price": 20043,
             "type": "Khách sạn nghỉ dưỡng",
             "types": [
                 "Khách sạn nghỉ dưỡng"
@@ -921,14 +804,110 @@
             "type_ids": [
                 "resort_hotel"
             ],
-            "address": "129 Hồ Nghinh, An Hải, Đà Nẵng 550000, Việt Nam",
-            "phone": "+84 868 523 068",
-            "website": "https://www.facebook.com/SerenityRetreatDanang",
-            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHIT1tbUnLWoSzatRYfZ1WGq0rX3giePSIegn7V0DF770l3e21_8sbQa_f8ydTlK-VbYAx9jKZWGXrGOJ_LOAPjdJyywfhLadYd6zpysLEbfYnRh2T36iy6UNL6IpQWSQvFdw0=w1000-h1000-c-n",
-            "serpapi_thumbnail": "https://serpapi.com/images/url/2xVp93icHcRRDoIgAADQE5GYm1pbH26Vmaw0LbMfp4JQGZhQRgfsDt2mrffxvh-mVCenhtEya0SFoC15SNLXgivC1agWN4N2EtQSSMOLNvHVWwWpqao9R5lI3qXa5c3JzPw77I8WPZMoCQjlzgHOl44DW4uMzcKVVVwWjatx2obgUOXea3IJT5l_7P3tukBbL7rgtdZDw1CJc2y_Oy3RompyvmPj1LLP2t5vkB10cZbEzyUe4GwwIYSA_a8B_wEL-0RT"
+            "address": "8 Lê Bôi, Sơn Trà, Đà Nẵng 550000, Việt Nam",
+            "phone": "+84 946 589 922",
+            "website": "https://www.facebook.com/profile.php?id=100063571644797&mibextid=LQQJ4d",
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEAjSoTgUvSNcYkf3LF09pUWygUi_WuEAJbtlbRySSiNlROVOAYih1fdieWxrC18j4Tvc0wlrRmm1eaBYKrj14Vui18_FMvqhGRnAe4TvaOaqCMkqb3EZ-JRGm0a30jOknh10bQ=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/5SPF-3icHcrNDoIgAADgJyJhdqi2DtSsrR8tzJxdmhIBiqCCVk_YM_Q2tS7f6fu8hXONnXmeEv6IG8MV6y3rqNGOaTeipvZ4YwG1wHr4EB4rHOAyNieeDHFIs-ru71Zw2iTpiyfymvYB3hROFeQVxzJUJDpHOJMC3W-Spc9uiSbl-DRQ-FAdqWvE8kW27Uo0PvcSTa6r_dCKNdGY_VIe5e1yX7WFH1zAhqxrmPuwjCotECyO8weCEALxlwL9Bba0RQ4"
+        },
+        {
+            "position": 19,
+            "title": "Grand Mercure Danang",
+            "place_id": "ChIJtVsuOdsZQjERelakzsqyQyo",
+            "data_id": "0x314219db392e5bb5:0x2a43b2cacea4567a",
+            "data_cid": "3045474357152601722",
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314219db392e5bb5%3A0x2a43b2cacea4567a&engine=google_maps_reviews&hl=vi",
+            "photos_link": "https://serpapi.com/search.json?data_id=0x314219db392e5bb5%3A0x2a43b2cacea4567a&engine=google_maps_photos&hl=vi",
+            "gps_coordinates": {
+                "latitude": 16.0483415,
+                "longitude": 108.22670409999999
+            },
+            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJtVsuOdsZQjERelakzsqyQyo",
+            "provider_id": "/g/1vn9lkpb",
+            "rating": 4.7,
+            "reviews": 4721,
+            "price": "33.324 KZT",
+            "extracted_price": 33324,
+            "type": "Khách sạn",
+            "types": [
+                "Khách sạn",
+                "Khách sạn nghỉ dưỡng",
+                "Khách sạn chăm sóc sức khỏe"
+            ],
+            "type_id": "hotel",
+            "type_ids": [
+                "hotel",
+                "resort_hotel",
+                "wellness_hotel"
+            ],
+            "address": "Zone Of The Villas Of Green Island, Lot A1, Hòa Cường, Đà Nẵng 550000, Việt Nam",
+            "phone": "+84 236 3797 777",
+            "website": "https://all.accor.com/lien_externe.svlt?goto=fiche_hotel&code_hotel=7821&merchantid=seo-maps-VN-7821&sourceid=aw-cen&utm_medium=seo%20maps&utm_source=google%20Maps&utm_campaign=seo%20maps",
+            "description": "Khách sạn cao cấp có nhà hàng và hồ bơi. Khách sạn sang trọng có 2 nhà hàng, hồ bơi ngoài trời, sân quần vợt và phòng ốc ấm cúng.",
+            "amenities": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí"
+            ],
+            "extensions": [
+                {
+                    "crowd": [
+                        "Chào đón những người thuộc giới LGBTQ+"
+                    ]
+                }
+            ],
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHtgR-DDYm85GJTDjddx11i-hgnb7Uo3y8tWLGG-bjjSEgm6EjrLPCS9NPdU1Ku5Iegwg9avUUgHB9-Amse8WUoVKX5DeNGcHLaYLyJlzntqjqls1ljYXJpBAaN0Ft-BAkIvThwGDDV4b-8=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/Z92iBXicHcTBToMwGADgJ_oHzUTBxEOxs4wRgm7dxhFK09qVlq3dcL6kZ9_GxO_w_f6oECb_HEVGLRfSOWnE1YsLdzYIGxbcjZGcPHAPPsJN_X7CRZAfQEg7pgktd0QPwxdCn6Ck7Z-YW97TcKgohV7r7UqOjyt9qZrXbVY3A0Oba7IWcpZZd2NMFnkGePQiPTC33xwTImrKi6prq3tpvm0467PxyOj2WE457ur4LUCOT-vbTs2UkP1DD-nLjOI4BvU_B_sHRNJGeg"
+        },
+        {
+            "position": 20,
+            "title": "HAIAN Beach Hotel & Spa",
+            "place_id": "ChIJW7iIXnoXQjERwzVF2LpQ_m4",
+            "data_id": "0x3142177a5e88b85b:0x6efe50bad84535c3",
+            "data_cid": "7997918751679133123",
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x3142177a5e88b85b%3A0x6efe50bad84535c3&engine=google_maps_reviews&hl=vi",
+            "photos_link": "https://serpapi.com/search.json?data_id=0x3142177a5e88b85b%3A0x6efe50bad84535c3&engine=google_maps_photos&hl=vi",
+            "gps_coordinates": {
+                "latitude": 16.0530442,
+                "longitude": 108.24752819999999
+            },
+            "place_id_search": "https://serpapi.com/search.json?engine=google_maps&google_domain=google.com&hl=vi&place_id=ChIJW7iIXnoXQjERwzVF2LpQ_m4",
+            "provider_id": "/g/11f66td7p7",
+            "rating": 4.6,
+            "reviews": 3774,
+            "price": "31.137 KZT",
+            "extracted_price": 31137,
+            "type": "Khách sạn",
+            "types": [
+                "Khách sạn"
+            ],
+            "type_id": "hotel",
+            "type_ids": [
+                "hotel"
+            ],
+            "address": "278 Võ Nguyên Giáp, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
+            "phone": "+84 236 2228 666",
+            "website": "http://haianbeachhotelspa.com/",
+            "description": "Khách sạn hiện đại nhìn ra biển. Khách sạn cao tầng hiện đại có phòng ở ấm cúng, bể bơi vô cực tầng thượng, khu spa và cảnh biển.",
+            "amenities": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí"
+            ],
+            "extensions": [
+                {
+                    "crowd": [
+                        "Chào đón những người thuộc giới LGBTQ+"
+                    ]
+                }
+            ],
+            "thumbnail": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH9IQRwg5PL7rC_KOqjqJGTcbEebqXhv1zg4t_eLNlfNtsOAj2SAyjkYa8Y9c4k_waL8cZitvAr-jpTRDEBRgSYt5ydvqVzXwyqQto62TSn4NyA6-7NF7GbkW1E7Cz6hX_II_Y=w1000-h1000-c-n",
+            "serpapi_thumbnail": "https://serpapi.com/images/url/hrpY3nicHcTdToMwGADQJ-qAjcFmsouKOFHSjZ842E0zam0FpJR-QuAB9w6-jYnn4vzeJUBvHiyrlZuVUEq0_MfwgakOeAcrpr4t0RvEDDIWPpOkwS_7KEknsT3H_hDQt5Ou9esxZ1XIK13I0VmEC5THpP0kYE64Xmd4rpvytiv3zG3odIt37PoFIx5Q3efpU_iYiqyE7fwx6velmGadgPLWeda5ZMYe8smzf6yaixP6weLJgkYRLQ-TY9s2kv8z1P0BavdE1Q"
         }
     ],
     "serpapi_pagination": {
-        "next": "https://serpapi.com/search.json?engine=google_maps&gl=vn&google_domain=google.com.vn&hl=vi&ll=%4016.0544%2C108.2022%2C14z&q=Resort+ngh%E1%BB%89+d%C6%B0%E1%BB%A1ng&start=20&type=search"
+        "next": "https://serpapi.com/search.json?engine=google_maps&gl=vn&google_domain=google.com.vn&hl=vi&ll=%4016.0544%2C108.2022%2C14z&q=Resort&start=20&type=search"
     }
 }
