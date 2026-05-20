@@ -3,20 +3,40 @@
   FILE: chatbot.js
   CHỨC NĂNG: 
   - Entry point (tệp thực thi chính) cho luồng giao diện TopChat (chatbot.html).
-  - Điều khiển logic hiển thị tương tác chat giữa Người dùng và Bot trên DOM (thêm bong bóng chat, cuộn trang, hiệu ứng gõ phím).
-  - Xử lý phân tích từ khóa (tại client-side bằng \`processMessage\`) dựa trên bộ dữ liệu mock (\`mockFallback.js\`) để trả lời tức thời.
-  - Cung cấp các hàm render giao diện tin nhắn đặc thù (Card, bảng giá, biểu đồ thời tiết) từ cấu trúc dữ liệu JSON nội bộ.
+  - Gọi backend API /api/chat → Gemini AI thật sự (AI-first).
+  - Fallback sang mock data nếu backend không khả dụng.
+  - Render Markdown cơ bản (bold, italic, bullet list, xuống dòng).
   ========================================================================
 */
 import './shared.js'; // auto-loads header + footer components
 import { sendChatMessage } from './api.js';
 
-const sessionId = 'session_' + Math.random().toString(36).substring(2, 11);
+// ── Session ID (mỗi tab browser có 1 session riêng) ──────────
+const sessionId = crypto.randomUUID ? crypto.randomUUID()
+    : `session-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 // ── DOM references ────────────────────────────────────────────
 const chatInput    = document.getElementById('chatbot-input');
 const chatSend     = document.getElementById('chatbot-send');
 const chatMessages = document.getElementById('chatbot-messages');
+
+// ── Markdown renderer (cơ bản) ────────────────────────────────
+function renderMarkdown(text) {
+    return text
+        // Code inline `code`
+        .replace(/`([^`]+)`/g, '<code style="background:rgba(0,0,0,.08);padding:1px 5px;border-radius:4px;font-size:.92em">$1</code>')
+        // **bold**
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        // *italic*
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        // Bullet list: dòng bắt đầu bằng "- "
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        .replace(/(<li>[\s\S]*?<\/li>)/g, '<ul style="margin:6px 0 6px 18px;padding:0">$1</ul>')
+        // Numbered list: "1. text"
+        .replace(/^\d+\.\s(.+)$/gm, '<li>$1</li>')
+        // Xuống dòng
+        .replace(/\n/g, '<br>');
+}
 
 // ── Message helpers ───────────────────────────────────────────
 function addMessage(html, isUser) {
