@@ -170,10 +170,7 @@ function handleGenerate() {
         })
         .catch((err) => {
             console.error(err);
-            renderItinerary(null);
-            document.querySelectorAll('.ls-spin').forEach(s => s.outerHTML = '<span class="ls-ico">✓</span>');
-            document.querySelectorAll('.ls').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
-            setTimeout(() => showScreen('result'), 450);
+            _showBackendError({ errors: [err?.message || String(err)] }, payload);
         });
 }
 

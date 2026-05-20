@@ -135,15 +135,8 @@ export async function generateItinerary(payload, onProgress) {
         }
         return finalData;
     } catch (e) {
-        console.warn("[TopGo] Lỗi kết nối BE, sử dụng mock fallback cho lịch trình:", e);
-        // Simulate progress for UI
-        if (onProgress) {
-            onProgress('Đang tìm kiếm thông tin...');
-            await new Promise(r => setTimeout(r, 1000));
-            onProgress('Đang lên lịch trình...');
-            await new Promise(r => setTimeout(r, 1000));
-        }
-        return getMockItineraryFallback(payload);
+        console.warn("[TopGo] Lỗi kết nối BE khi tạo lịch trình:", e);
+        throw e;
     }
 }
 

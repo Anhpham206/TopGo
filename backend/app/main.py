@@ -1,13 +1,7 @@
-import sys
-import io
-
-# Fix lỗi 'charmap' codec trên Windows - buộc dùng UTF-8 cho output
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from app.routes.api import router as api_router
 import os
 
@@ -31,6 +25,10 @@ app.mount("/dataset", StaticFiles(directory=dataset_dir), name="dataset")
 # Đảm bảo thư mục logs tồn tại ở frontend
 frontend_logs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../frontend/logs"))
 os.makedirs(frontend_logs_dir, exist_ok=True)
+
+# Serve frontend tĩnh — PHẢI đặt CUỐI CÙNG sau tất cả các route API
+frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../frontend"))
+app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
 
 if __name__ == "__main__":
     import uvicorn
