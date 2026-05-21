@@ -25,7 +25,7 @@ export function showScreen(name) {
 
 // ── Hotel map ─────────────────────────────────────────────────
 function attachHotelClickEvents() {
-    document.querySelectorAll('.hotel-c-card').forEach(card=>{
+    document.querySelectorAll('.bionic-accom-card').forEach(card=>{
         card.addEventListener('click', function() {
             const h=JSON.parse(this.getAttribute('data-hotel'));
             if (!h||!state.leafletMapInstance) return;
@@ -39,37 +39,73 @@ function attachHotelClickEvents() {
 }
 
 // ── Dropdown helpers ──────────────────────────────────────────
-function openDrop(id)   { document.getElementById(id)?.classList.add('open'); if(id==='dd-city') renderCityList(''); if(id==='dd-place') renderPlaceList(''); }
+let _lastCityFilter = null;
+let _lastSelectedCityId = null;
+let _lastDepFilter = null;
+let _lastSelectedDepId = null;
+let _lastPlaceFilter = null;
+let _lastPlaceCityId = null;
+let _lastSelectedPlacesIds = null;
+
+export function invalidateCityCache() { _lastCityFilter = null; }
+export function invalidateDepCache()  { _lastDepFilter = null; }
+
+function openDrop(id) {
+    document.getElementById(id)?.classList.add('open');
+    if (id === 'dd-city')  renderCityList('');
+    if (id === 'dd-dep')   renderDepList('');
+    if (id === 'dd-place') renderPlaceList('');
+}
 function closeDrop(id)  { document.getElementById(id)?.classList.remove('open'); }
 function toggleDrop(id) { document.getElementById(id)?.classList.contains('open') ? closeDrop(id) : openDrop(id); }
 
 // ── City dropdown ─────────────────────────────────────────────
 export function renderCityList(filter) {
-    const list=document.getElementById('city-list'); if (!list) return;
-    const q=(filter||'').toLowerCase();
-    const filtered=state.CITIES.filter(c=>c.name.toLowerCase().includes(q)||c.sub.toLowerCase().includes(q));
-    if (!filtered.length) { list.innerHTML=`<div class="dd-empty">${state.CITIES.length===0?'Chưa có dữ liệu — Backend chưa kết nối':'Không tìm thấy thành phố'}</div>`; return; }
-    const raw=filtered.map(c=>{
-        const isSel=state.selectedCity?.id===c.id;
-        return `<div class="dd-item${isSel?' sel':''}" data-city-id="${c.id}">
-          <img class="di-img" src="${c.img}" loading="lazy" decoding="async" onerror="this.style.background='${c.color}';this.removeAttribute('src')" alt="${c.name}" style="background:${c.color}">
+    const list = document.getElementById('city-list'); if (!list) return;
+    const q = (filter || '').toLowerCase();
+    const selId = state.selectedCity ? state.selectedCity.id : null;
+
+    if (_lastCityFilter === q && _lastSelectedCityId === selId && list.innerHTML.trim() !== '') {
+        return;
+    }
+
+    const filtered = state.CITIES.filter(c => c.name.toLowerCase().includes(q) || c.sub.toLowerCase().includes(q));
+    if (!filtered.length) {
+        list.innerHTML = `<div class="dd-empty">${state.CITIES.length === 0 ? 'Chưa có dữ liệu — Backend chưa kết nối' : 'Không tìm thấy thành phố'}</div>`;
+        return;
+    }
+    const raw = filtered.map(c => {
+        const isSel = state.selectedCity?.id === c.id;
+        return `<div class="dd-item${isSel ? ' sel' : ''}" data-city-id="${c.id}">
+          <img class="di-img" src="${c.img}" width="40" height="30" onerror="this.onerror=null;this.style.background='${c.color}';this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='" alt="${c.name}" style="background:${c.color}">
           <div class="di-info"><div class="di-name">${c.name}</div><div class="di-sub">${c.sub}</div></div>
-          ${isSel?'<span class="di-check">✓</span>':''}
+          ${isSel ? '<span class="di-check">✓</span>' : ''}
         </div>`;
     }).join('');
-    list.innerHTML=window.DOMPurify ? DOMPurify.sanitize(raw,{ADD_ATTR:['data-city-id','onerror','style']}) : raw;
+    list.innerHTML = raw;
+    _lastCityFilter = q;
+    _lastSelectedCityId = selId;
 }
 
 export function renderDepList(filter) {
-    const list=document.getElementById('dep-list'); if (!list) return;
-    const q=(filter||'').toLowerCase();
-    const html=state.CITIES.filter(c=>c.name.toLowerCase().includes(q))
-        .map(c=>`<div class="dd-item${state.selectedDepCity?.id===c.id?' sel':''}" data-dep-id="${c.id}">
-            <img class="di-img" src="${c.img}" loading="lazy" decoding="async" onerror="this.onerror=null;this.style.backgroundColor='${c.color}';this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-            <div class="di-info"><div class="di-name">${c.name}</div><div class="di-sub">${c.sub||'Thành phố'}</div></div>
-            ${state.selectedDepCity?.id===c.id?'<span class="di-check">✓</span>':''}
+    const list = document.getElementById('dep-list'); if (!list) return;
+    const q = (filter || '').toLowerCase();
+    const selId = state.selectedDepCity ? state.selectedDepCity.id : null;
+
+    if (_lastDepFilter === q && _lastSelectedDepId === selId && list.innerHTML.trim() !== '') {
+        return;
+    }
+
+    const html = state.CITIES.filter(c => c.name.toLowerCase().includes(q))
+        .map(c => `<div class="dd-item${state.selectedDepCity?.id === c.id ? ' sel' : ''}" data-dep-id="${c.id}">
+            <img class="di-img" src="${c.img}" width="40" height="30" onerror="this.onerror=null;this.style.backgroundColor='${c.color}';this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+            <div class="di-info"><div class="di-name">${c.name}</div><div class="di-sub">${c.sub || 'Thành phố'}</div></div>
+            ${state.selectedDepCity?.id === c.id ? '<span class="di-check">✓</span>' : ''}
           </div>`).join('');
-    list.innerHTML=window.DOMPurify ? DOMPurify.sanitize(html,{ADD_ATTR:['data-dep-id','onerror','style']}) : html;
+    list.innerHTML = html;
+    
+    _lastDepFilter = q;
+    _lastSelectedDepId = selId;
 }
 
 export function filterCities(val) {
@@ -78,33 +114,54 @@ export function filterCities(val) {
 }
 
 export function selectCity(id) {
-    const city=state.CITIES.find(c=>c.id===id);
+    const city = state.CITIES.find(c => c.id === id);
     if (!city) return;
-    state.selectedCity=city; state.selectedPlaces=[];
-    renderPlaceTags(); renderCityList(document.getElementById('city-search')?.value||'');
-    const cs=document.getElementById('city-search'); if(cs) cs.value=city.name;
+    state.selectedCity = city; state.selectedPlaces = [];
+    // Xóa cache để lần mở tiếp theo render lại với checkmark ✓ đúng vị trí
+    invalidateCityCache();
+    renderPlaceTags();
+    const cs = document.getElementById('city-search'); if (cs) cs.value = city.name;
+    renderCityList(''); // render lại để cập nhật trạng thái sel
     closeDrop('dd-city'); updateFromToDisplay();
     document.getElementById('err-city')?.classList.remove('show');
-    const ps=document.getElementById('place-search'); if(ps) ps.value='';
+    const ps = document.getElementById('place-search'); if (ps) ps.value = '';
 }
 
 export function filterDepCities(val) {
     if (state.depSearchDebounceTimer) clearTimeout(state.depSearchDebounceTimer);
-    state.depSearchDebounceTimer=setTimeout(()=>renderDepList(val),200);
+    state.depSearchDebounceTimer = setTimeout(() => renderDepList(val), 200);
 }
 
 export function selectDepCity(id) {
-    const city=state.CITIES.find(c=>c.id===id);
+    const city = state.CITIES.find(c => c.id === id);
     if (!city) return;
-    state.selectedDepCity=city;
-    renderDepList(document.getElementById('dep-search')?.value||'');
-    const cs=document.getElementById('dep-search'); if(cs) cs.value=city.name;
+    state.selectedDepCity = city;
+    // Xóa cache để cập nhật checkmark ✓ cho dep dropdown
+    invalidateDepCache();
+    renderDepList('');
+    const cs = document.getElementById('dep-search'); if (cs) cs.value = city.name;
     closeDrop('dd-dep'); updateDeparture();
+}
+
+function getAbbr(city) {
+    if (city.abbr) return city.abbr;
+    if (!city.name) return '—';
+    
+    // Xóa phần trong ngoặc đơn (VD: (Đà Lạt)) và các ký tự không phải chữ/khoảng trắng
+    const cleanName = city.name.replace(/\(.*?\)/g, '').replace(/[^\p{L}\s]/gu, '').trim();
+    const words = cleanName.split(/\s+/).filter(Boolean);
+    
+    // Nếu có tiền tố "TP", bỏ qua để lấy tên chính xác (VD: TP Hồ Chí Minh -> HCM)
+    if (words.length > 0 && words[0].toUpperCase() === 'TP') {
+        words.shift();
+    }
+    
+    return words.map(w => w[0]).join('').toUpperCase().substring(0, 3);
 }
 
 export function updateFromToDisplay() {
     const toEl=document.getElementById('ft-to-city'), toSub=document.getElementById('ft-to-sub');
-    if (state.selectedCity) { if(toEl) toEl.textContent=state.selectedCity.abbr; if(toSub) toSub.textContent=state.selectedCity.name; }
+    if (state.selectedCity) { if(toEl) toEl.textContent=getAbbr(state.selectedCity); if(toSub) toSub.textContent=state.selectedCity.name; }
     else { if(toEl) toEl.textContent='—'; if(toSub) toSub.textContent='Chọn thành phố bên dưới'; }
 }
 
@@ -112,7 +169,7 @@ export function updateDeparture() {
     const fromEl=document.getElementById('ft-from-city'), fromSub=document.getElementById('ft-from-sub');
     if (!fromEl) return;
     if (state.selectedDepCity) {
-        fromEl.textContent=state.selectedDepCity.abbr || state.selectedDepCity.name.substring(0,3).toUpperCase();
+        fromEl.textContent=getAbbr(state.selectedDepCity);
         if(fromSub) fromSub.textContent=state.selectedDepCity.name;
     } else { 
         fromEl.textContent='—'; 
@@ -125,6 +182,14 @@ export function renderPlaceList(filter) {
     const list=document.getElementById('place-list'); if (!list) return;
     if (!state.selectedCity) { list.innerHTML='<div class="dd-empty">Chọn thành phố trước</div>'; return; }
     const q=(filter||'').toLowerCase(), cityData=state.PLACES_BY_CITY[state.selectedCity.id];
+    
+    const selIds=state.selectedPlaces.map(p=>typeof p==='string'?p:p.id);
+    const selIdsStr = selIds.join(',');
+
+    if (_lastPlaceFilter === q && _lastPlaceCityId === state.selectedCity.id && _lastSelectedPlacesIds === selIdsStr && list.innerHTML.trim() !== '' && !list.querySelector('.dd-empty')) {
+        return;
+    }
+
     let dtqItems=[], qaItems=[];
     if (Array.isArray(cityData)) {
         dtqItems=cityData.map(item=>typeof item==='string'?{id:item,ten:item,tags:[],_loai:'diem_tham_quan'}:{id:item.id||item.name,ten:item.name||item.ten,tags:item.tags||[],_loai:item.category||item.loai||'diem_tham_quan'});
@@ -132,7 +197,7 @@ export function renderPlaceList(filter) {
         dtqItems=(cityData.diem_tham_quan||[]).map(d=>({...d,_loai:'diem_tham_quan'}));
         qaItems=(cityData.quan_an||[]).map(q=>({...q,ten:q.ten_quan||q.ten,_loai:'quan_an'}));
     }
-    const selIds=state.selectedPlaces.map(p=>typeof p==='string'?p:p.id);
+    
     const ff=item=>{
         const t=(item.ten||'').trim();
         return t && t.toLowerCase().includes(q) && !selIds.includes(item.id);
@@ -142,7 +207,11 @@ export function renderPlaceList(filter) {
     let html='';
     if (fDTQ.length) html+='<div class="dd-section-label">Điểm tham quan</div>'+fDTQ.map(renderPlaceItem).join('');
     if (fQA.length)  html+='<div class="dd-section-label">Quán ăn</div>'+fQA.map(renderPlaceItem).join('');
-    list.innerHTML=window.DOMPurify ? DOMPurify.sanitize(html,{ADD_ATTR:['data-place-id','data-place-name','data-place-loai']}) : html;
+    list.innerHTML = html;
+
+    _lastPlaceFilter = q;
+    _lastPlaceCityId = state.selectedCity.id;
+    _lastSelectedPlacesIds = selIdsStr;
 }
 
 function renderPlaceItem(item) {
@@ -208,7 +277,7 @@ export function validateDates() {
     const diff=Math.round((de-ds)/864e5);
     if (diff<0) { errE?.classList.add('show'); if(errE) errE.textContent='Ngày về phải sau hoặc bằng ngày đi'; e.classList.add('err'); return; }
     if (diff>7) { errE?.classList.add('show'); if(errE) errE.textContent=`Tối đa 7 ngày (hiện tại: ${diff} ngày)`; e.classList.add('err'); return; }
-    if(dur) dur.textContent=diff===0?`✓ ${diff+1} ngày (trong ngày)`:`✓ ${diff} ngày ${diff-1} đêm`;
+    if(dur) dur.textContent=diff===0?`${diff+1} ngày (trong ngày)`:`${diff+1} ngày ${diff} đêm`;
     updateBudgetPP();
 }
 
@@ -237,8 +306,31 @@ export function getRawBudget() {
 
 export function validateBudget() {
     const v=getRawBudget(), err=document.getElementById('err-budget'), inp=document.getElementById('budget-input');
-    if (v>0&&v<100_000) { err?.classList.add('show'); if(err) err.textContent='Tối thiểu 100.000 ₫'; inp?.classList.add('err'); }
-    else { err?.classList.remove('show'); inp?.classList.remove('err'); }
+    const pax=parseInt(document.getElementById('pax-val')?.value)||1;
+    const days=getTripDays();
+    const minBudget = pax * days * 50_000;
+    const lowBudget = pax * days * 200_000;
+    const medBudget = pax * days * 500_000;
+    
+    if (v>0) {
+        err?.classList.add('show');
+        if (v < minBudget) { 
+            if(err) { err.textContent=`Ngân sách quá thấp. Tối thiểu ${minBudget.toLocaleString('vi-VN')} ₫.`; err.style.color='var(--error)'; }
+            inp?.classList.add('err'); 
+        } else if (v < lowBudget) {
+            if(err) { err.textContent=`Ngân sách thấp. Phù hợp du lịch tiết kiệm.`; err.style.color='#f39c12'; }
+            inp?.classList.remove('err');
+        } else if (v < medBudget) {
+            if(err) { err.textContent=`Ngân sách trung bình. Đáp ứng tốt các dịch vụ tiêu chuẩn.`; err.style.color='#3498db'; }
+            inp?.classList.remove('err');
+        } else {
+            err?.classList.remove('show');
+            inp?.classList.remove('err');
+        }
+    } else { 
+        err?.classList.remove('show'); 
+        inp?.classList.remove('err'); 
+    }
 }
 
 export function updateBudgetPP() {
@@ -308,26 +400,60 @@ export function renderItinerary(data) {
     
     if (p && p.date_start && p.date_end) {
         const datesEl = document.getElementById('res-dates');
-        if (datesEl) datesEl.innerHTML = `📅 <strong>${p.date_start.split('-').reverse().join('/')} – ${p.date_end.split('-').reverse().join('/')}</strong>`;
+        if (datesEl) datesEl.innerHTML = `<strong>${p.date_start.split('-').reverse().join('/')} – ${p.date_end.split('-').reverse().join('/')}</strong>`;
+    }
+    
+    const weatherEl = document.getElementById('res-weather');
+    if (weatherEl) {
+        const city = p?.city_name || '';
+        let weather = 'Nắng, 31°C';
+        if (city.includes('Đà Lạt') || city.includes('Lâm Đồng')) weather = 'Mát mẻ, 19°C';
+        else if (city.includes('Hà Nội')) weather = 'Nắng nhẹ, 28°C';
+        else if (city.includes('Nha Trang') || city.includes('Phú Quốc')) weather = 'Nắng đẹp, 30°C';
+        weatherEl.innerHTML = `<strong>${weather}</strong>`;
     }
     
     const paxEl = document.getElementById('res-pax');
-    if (paxEl) paxEl.innerHTML = `👤 <strong>${ttc.So_nguoi || (p ? p.pax + ' người' : 'N/A')}</strong>`;
+    if (paxEl) paxEl.innerHTML = `<strong>${ttc.So_nguoi || (p ? p.pax + ' người' : 'N/A')}</strong>`;
     
     const be = document.getElementById('res-budget');
-    if (be) be.innerHTML = `💰 <strong>~${ttc.Tong_ngan_sach || (p ? new Intl.NumberFormat('vi-VN').format(p.budget) + ' ₫' : 'N/A')}</strong>`;
+    if (be) be.innerHTML = `<strong>~${ttc.Tong_ngan_sach || (p ? new Intl.NumberFormat('vi-VN').format(p.budget) + ' ₫' : 'N/A')}</strong>`;
+    
+    const departureEl = document.getElementById('res-departure');
+    if (departureEl) {
+        const depCity = p?.dep_city_id ? state.CITIES.find(c => c.id === p.dep_city_id) : state.selectedDepCity;
+        departureEl.innerHTML = `<strong>${depCity ? depCity.name : 'Hà Nội'}</strong>`;
+    }
+
+    const transportEl = document.getElementById('res-transport');
+    if (transportEl) {
+        transportEl.innerHTML = `<strong>${p?.transport || 'Tự chọn'}</strong>`;
+    }
+
+    const bestTimeEl = document.getElementById('res-best-time');
+    if (bestTimeEl) {
+        let bestTime = '';
+        if (ttc.Goi_y_khoi_hanh) {
+            // Đọc lời khuyên khởi hành trực tiếp từ AI gửi về
+            bestTime = Array.isArray(ttc.Goi_y_khoi_hanh) ? ttc.Goi_y_khoi_hanh.join(', ') : ttc.Goi_y_khoi_hanh;
+        } else if (p?.departure_time) {
+            // Lớp dự phòng offline nếu AI/BE chưa tích hợp hoặc thiếu trường này
+            const hr = parseInt(p.departure_time.split(':')[0]);
+            if (hr >= 5 && hr <= 10) bestTime = `${p.departure_time} Sáng`;
+            else if (hr > 10 && hr <= 14) bestTime = `${p.departure_time} Trưa`;
+            else if (hr > 14 && hr <= 18) bestTime = `${p.departure_time} Chiều`;
+            else bestTime = `${p.departure_time} Tối`;
+        } else {
+            bestTime = '08:00 Sáng';
+        }
+        bestTimeEl.innerHTML = `<strong>${bestTime}</strong>`;
+    }
     
     const tb = document.getElementById('res-total-budget');
     if (tb) tb.textContent = ttc.Tong_ngan_sach || '';
 
-    // Cập nhật AIScore lên tiêu đề nếu có
-    if (ttc.AIScore_Hanh_trinh) {
-        const scoreSpan = document.createElement('span');
-        scoreSpan.style.cssText = "background:var(--p1);color:#fff;font-size:12px;padding:2px 8px;border-radius:12px;margin-left:10px;vertical-align:middle;";
-        scoreSpan.textContent = ttc.AIScore_Hanh_trinh;
-        if (titleEl) titleEl.appendChild(scoreSpan);
-    }
-
+    // Cập nhật AIScore (không chèn inline vào title nữa, design mới hiển thị score trong .mag-score-row ở ngoài HTML)
+    
     // 2. Render Lịch trình
     let html = '';
     const lichTrinh = aiOut.Lich_trinh || [];
@@ -337,63 +463,63 @@ export function renderItinerary(data) {
         ds.setDate(ds.getDate() + dayIndex);
         const dateStr = ds.toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' });
 
-        html += `<div class="day-block glass-card">
-            <div class="day-hd">
-                <div class="day-badge">NGÀY ${dayIndex + 1}</div>
-                <div class="day-title">${dateStr}</div>
-                <div class="day-stats">
-                    <span class="day-st">${dayData.length} điểm</span>
-                </div>
+        html += `<div class="timeline-day-group">
+            <div class="timeline-track"></div>
+            <div class="timeline-day-header">
+                <div class="tdh-num">N${dayIndex + 1}</div>
+                <div class="tdh-date">${dateStr} · ${dayData.length} điểm</div>
             </div>`;
 
         dayData.forEach((stop, stopIdx) => {
             const timeParts = (stop.Thoi_gian || "").split("-");
             const tStart = timeParts[0] ? timeParts[0].trim() : "";
-            const tEnd = timeParts[1] ? timeParts[1].trim() : "";
             const isLast = stopIdx === dayData.length - 1;
 
-            html += `<div class="stop-card">
-                <div class="stop-tl">
-                    <div class="stop-ts">${tStart}</div>
-                    <div class="stop-dot">📍</div>
-                    <div class="stop-te">${tEnd}</div>
-                    ${!isLast ? '<div class="stop-ln"></div>' : ''}
+            html += `<div class="timeline-stop">
+                <div class="ts-time-col">
+                    <div class="ts-time">${tStart || '--'}</div>
+                    <div class="timeline-node"></div>
                 </div>
-                <div class="stop-ct">
-                    <div class="stop-top">
-                        <div class="stop-img">✨</div>
-                        <div>
-                            <div class="stop-nm"><a href="https://www.google.com/search?q=${encodeURIComponent(stop.Dia_diem)}" target="_blank">${stop.Dia_diem}</a></div>
-                            <div class="stop-desc">${stop.Gioi_thieu || ''}</div>
-                            <div class="stop-dur">⏱ Tham quan: ${stop.Thoi_luong || ''}</div>`;
-            
-            if (stop.Di_chuyen && !isLast) {
-                html += `<div class="transport-simple">🚕 Di chuyển: ${stop.Di_chuyen.Phuong_tien || ''} (${stop.Di_chuyen.Khoang_cach || ''}, ~${stop.Di_chuyen.Thoi_gian_di_chuyen || ''})</div>`;
-            }
-
-            html += `       </div>
+                <div class="timeline-stop-card">
+                    <h3 class="tsc-name"><a href="https://www.google.com/search?q=${encodeURIComponent(stop.Dia_diem)}" target="_blank">${stop.Dia_diem}</a></h3>
+                    <p class="tsc-desc">${stop.Gioi_thieu || ''}</p>
+                    <div class="tsc-tags">
+                        <span class="tsc-tag"><span class="glow-text">THỜI GIAN:</span> ${stop.Thoi_luong || ''}</span>
                     </div>
                 </div>
             </div>`;
+            
+            if (stop.Di_chuyen && !isLast) {
+                html += `<div class="timeline-transport">
+                    <span class="glow-text">DI CHUYỂN:</span> ${stop.Di_chuyen.Phuong_tien || ''} · ${stop.Di_chuyen.Khoang_cach || ''} · ~${stop.Di_chuyen.Thoi_gian_di_chuyen || ''}
+                </div>`;
+            }
         });
-        html += `</div><!-- /day-${dayIndex+1} -->`;
+        html += `</div><!-- /timeline-day-group -->`;
     });
 
-    // 3. Render Khách sạn
+    // 3. Render Khách sạn — appended after itinerary inside .split-right
     const khachSan = aiOut.Khach_san_goi_y || [];
     if (khachSan.length > 0) {
-        html += `<h3 style="margin-top:20px; font-size:18px;">🏨 Gợi ý Lưu trú</h3>
-        <div style="display:flex; gap:15px; overflow-x:auto; padding-bottom:10px;">`;
+        html += `<section class="res-accom-section">
+            <div class="section-label">
+                <span class="section-label-text">Gợi Ý Lưu Trú</span>
+            </div>
+            <div class="bionic-accom-grid">`;
         
         khachSan.forEach(ks => {
-            html += `<div class="glass-card" style="min-width: 200px; padding: 15px; border-radius: 12px; flex: 1;">
-                <div style="font-weight: 600; font-size: 15px; margin-bottom: 5px;">${ks.Ten}</div>
-                <div style="color: var(--p1); font-size: 13px; margin-bottom: 5px;">⭐ ${ks.rate || 'N/A'}</div>
-                <div style="font-size: 13px; margin-bottom: 5px;">Phù hợp: <strong>${ks.AIScore || 'N/A'}</strong></div>
-                <div style="font-weight: 600; color: #dc3545; font-size: 14px;">${ks.Gia_tien || ''}</div>
+            html += `<div class="bionic-accom-card">
+                <div class="rac-name">${ks.Ten}</div>
+                <div class="rac-meta">
+                    <div class="rac-rate"><span class="glow-text">${ks.rate || 'N/A'}</span> / 5.0</div>
+                    <div class="rac-ai">Phù hợp <strong class="glow-text">${ks.AIScore || 'N/A'}</strong></div>
+                </div>
+                <div class="rac-price-wrap">
+                    <div class="rac-price">${ks.Gia_tien || ''}</div>
+                </div>
             </div>`;
         });
-        html += `</div>`;
+        html += `</div></section>`;
     }
 
     container.innerHTML = window.DOMPurify ? DOMPurify.sanitize(html, { ADD_ATTR: ['target', 'style'] }) : html;
@@ -412,6 +538,7 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
     if (cityTrigger) cityTrigger.addEventListener('click',()=>toggleDrop('dd-city'));
     const citySearch=document.getElementById('city-search');
     if (citySearch) {
+        citySearch.addEventListener('click', e => e.stopPropagation());
         citySearch.addEventListener('input', e=>filterCities(e.target.value));
         citySearch.addEventListener('focus', ()=>openDrop('dd-city'));
         citySearch.addEventListener('blur',  ()=>setTimeout(()=>closeDrop('dd-city'),200));
@@ -443,9 +570,12 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
         }
     });
 
-    // Dep input
+    // Dep dropdown
+    const depTrigger=document.getElementById('dep-trigger');
+    if (depTrigger) depTrigger.addEventListener('click',()=>toggleDrop('dd-dep'));
     const depSearch=document.getElementById('dep-search');
     if (depSearch) {
+        depSearch.addEventListener('click', e => e.stopPropagation());
         depSearch.addEventListener('input', e=>filterDepCities(e.target.value));
         depSearch.addEventListener('focus', ()=>openDrop('dd-dep'));
         depSearch.addEventListener('blur',  ()=>setTimeout(()=>closeDrop('dd-dep'),200));
@@ -482,19 +612,9 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
             const item = e.target.closest('.dd-item');
             if (item) {
                 e.preventDefault();
-                const val = item.dataset.val;
-                if (val === 'Khác') {
-                    input.removeAttribute('readonly');
-                    input.value = '';
-                    input.focus();
-                    input.placeholder = 'Nhập thông tin khác...';
-                    input.style.cursor = 'text';
-                    showToast('Vui lòng gõ loại hình bạn muốn vào ô nhé!', 'info');
-                } else {
-                    input.setAttribute('readonly', 'true');
-                    input.value = val;
-                    input.style.cursor = 'pointer';
-                }
+                input.setAttribute('readonly', 'true');
+                input.value = item.dataset.val;
+                input.style.cursor = 'pointer';
                 list.querySelectorAll('.dd-item.sel').forEach(el => el.classList.remove('sel'));
                 item.classList.add('sel');
                 wrap.classList.remove('open');
@@ -517,6 +637,10 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
     });
     const budgetInput=document.getElementById('budget-input');
     if (budgetInput) { budgetInput.addEventListener('input', ()=>formatBudget(budgetInput)); budgetInput.addEventListener('blur',validateBudget); }
+    
+    // Also revalidate budget when pax changes
+    document.getElementById('pax-minus')?.addEventListener('click', validateBudget);
+    document.getElementById('pax-plus')?.addEventListener('click', validateBudget);
 
     // Preference chips: event delegation on #pref-chips
     document.getElementById('pref-chips')?.addEventListener('click', e=>{
@@ -534,10 +658,16 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
     document.getElementById('popup-reset')?.addEventListener('click', e=>{ if(e.target===e.currentTarget) closePopup('popup-reset'); });
 
     // Generate
-    document.getElementById('btn-gen')?.addEventListener('click', onGenerate);
+    document.getElementById('btn-gen')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (onGenerate) onGenerate(e);
+    });
 
     // Loading screen
-    document.getElementById('btn-loading-cancel')?.addEventListener('click', ()=>showScreen('form'));
+    document.getElementById('btn-loading-cancel')?.addEventListener('click', () => {
+        if (window._mockLoadingInterval) clearInterval(window._mockLoadingInterval);
+        showScreen('form');
+    });
 
     // Result screen buttons
     document.getElementById('btn-edit-req')?.addEventListener('click',    ()=>showScreen('form'));

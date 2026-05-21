@@ -12,7 +12,7 @@ import './shared.js'; // auto-loads header + footer components
 import { sendChatMessage } from './api.js';
 
 // ── Session ID (mỗi tab browser có 1 session riêng) ──────────
-const SESSION_ID = crypto.randomUUID ? crypto.randomUUID()
+const sessionId = crypto.randomUUID ? crypto.randomUUID()
     : `session-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 // ── DOM references ────────────────────────────────────────────
@@ -76,7 +76,63 @@ function showTyping() {
 function removeTyping() { document.getElementById('typing-indicator')?.remove(); }
 
 // ── processMessage ────────────────────────────────────────────
-function processMessage(text) {
+async function processMessage(text) {
+    try {
+        const data = await sendChatMessage(text, sessionId);
+        removeTyping();
+
+        // Phát hiện lỗi quota/API từ backend gửi về dưới dạng chuỗi thông báo lỗi
+        if (data.reply && (data.reply.includes('Lỗi khi giao tiếp với AI') || data.reply.includes('429') || data.reply.includes('RESOURCE_EXHAUSTED') || data.reply.includes('Quota exceeded'))) {
+            const warningHtml = `
+                <div class="api-quota-warning">
+                    <div class="api-quota-warning-title">
+                        <span>⚠️</span> HỆ THỐNG AI TẠM THỜI QUÁ TẢI (RESOURCE EXHAUSTED)
+                    </div>
+                    <div class="api-quota-warning-desc">
+                        Tài khoản kết nối với Gemini AI hiện đã vượt quá giới hạn lượt gọi miễn phí trong ngày (Error 429).
+                    </div>
+                    <div class="api-quota-warning-solution">
+                        TopGo đã tự động chuyển câu hỏi của bạn sang Chế độ Ngoại tuyến (Offline Engine) để phản hồi ngay lập tức!
+                    </div>
+                </div>
+            `;
+            addMessage(warningHtml, false);
+            setTimeout(() => {
+                runMockFallback(text);
+            }, 800);
+            return;
+        }
+
+        // Render the backend response, format basic Markdown to HTML
+        const formattedReply = data.reply
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/\n/g, '<br>');
+        addMessage(formattedReply, false);
+    } catch (e) {
+        console.warn('[TopGo] Lỗi kết nối BE, đang chuyển sang mock fallback:', e);
+        removeTyping();
+        const connectionWarningHtml = `
+            <div class="api-quota-warning">
+                <div class="api-quota-warning-title">
+                    <span>⚠️</span> KHÔNG THỂ KẾT NỐI VỚI MÁY CHỦ AI
+                </div>
+                <div class="api-quota-warning-desc">
+                    Không thể thiết lập kết nối đến máy chủ AI (Backend có thể chưa được khởi động hoặc gặp sự cố mạng).
+                </div>
+                <div class="api-quota-warning-solution">
+                    Hệ thống tự động chuyển sang Chế độ Ngoại tuyến (Offline Engine) để hỗ trợ bạn ngay lập tức!
+                </div>
+            </div>
+        `;
+        addMessage(connectionWarningHtml, false);
+        setTimeout(() => {
+            runMockFallback(text);
+        }, 800);
+    }
+}
+
+function runMockFallback(text) {
     const t = text.toLowerCase();
     if (typeof MOCK_CHATBOT_RESPONSES === 'undefined') {
         addMessage('⚠️ Dữ liệu chatbot chưa được nạp. Vui lòng tải lại trang.', false); return;
@@ -125,7 +181,7 @@ function renderBudgetResponse(t) {
       <tbody>${bdata.rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}<tr><td>💼 Tổng</td><td>${bdata.total[0]}</td><td>${bdata.total[1]}</td></tr></tbody></table>
     </div></div>`;
     chatMessages.appendChild(div);
-    setTimeout(()=>addMessage(`📊 Muốn lên lịch chi tiết? Thử <a href="./index.html" style="color:var(--p1);font-weight:700">AI Planner</a> nhé!`, false), 700);
+    setTimeout(()=>addMessage(`📊 Muốn lên lịch chi tiết? Thử <a href="./planner.html" style="color:var(--p1);font-weight:700">AI Planner</a> nhé!`, false), 700);
 }
 
 function renderWeatherResponse(t) {
@@ -160,36 +216,38 @@ function renderItineraryCard(data) {
     chatMessages.appendChild(div);
 }
 
-// ── Send message (AI-first với mock fallback) ─────────────────
+// ── Conversation mode ─────────────────────────────────────────
+let conversationStarted = false;
+const chatWrapper = document.getElementById('chatbot-wrapper');
+
+function activateConversationMode() {
+    if (conversationStarted) return;
+    conversationStarted = true;
+    chatWrapper?.classList.add('chat-conversation-active');
+    document.body.classList.add('chat-conversation-active');
+    setTimeout(() => {
+        document.getElementById('chatbot-messages')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 250);
+}
+
+// ── Send message ──────────────────────────────────────────────
 async function sendMessage(textOverride) {
     const text = (textOverride || chatInput.value).trim();
     if (!text) return;
-
+    activateConversationMode();
     addMessage(text, true);
     chatInput.value = '';
     chatSend.disabled = true;
     showTyping();
-
-    try {
-        // Gọi Gemini AI qua backend
-        const reply = await sendChatMessage(text, SESSION_ID);
-        removeTyping();
-        addMessage(renderMarkdown(reply), false);
-    } catch (err) {
-        // Backend offline / lỗi → dùng mock fallback
-        console.warn('[TopGo] Backend không khả dụng, dùng mock fallback:', err.message);
-        removeTyping();
-        processMessage(text);
-    } finally {
-        chatSend.disabled = false;
-    }
+    await processMessage(text);
+    chatSend.disabled = false;
 }
 
 // ── Event listeners ───────────────────────────────────────────
 chatSend.addEventListener('click', ()=>sendMessage());
 chatInput.addEventListener('keypress', e=>{ if(e.key==='Enter') sendMessage(); });
 
-// Delegation for data-suggestion chips
+// Suggestion chips (data-suggestion delegation)
 chatMessages.addEventListener('click', e=>{
     const chip = e.target.closest('[data-suggestion]');
     if (!chip) return;
@@ -198,3 +256,23 @@ chatMessages.addEventListener('click', e=>{
     sendMessage(chip.dataset.suggestion);
 });
 
+// ── Back button: full reset ───────────────────────────────────
+document.getElementById('chat-conv-back-btn')?.addEventListener('click', () => {
+    chatWrapper?.classList.add('chat-conv-exiting');
+    setTimeout(() => {
+        chatMessages.innerHTML = '';
+        chatWrapper?.classList.remove('chat-conversation-active', 'chat-conv-exiting');
+        document.body.classList.remove('chat-conversation-active');
+        conversationStarted = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 290);
+});
+
+// Auto-start conversation if query parameter 'q' is present
+const urlParams = new URLSearchParams(window.location.search);
+const initQuery = urlParams.get('q');
+if (initQuery) {
+    // Remove 'q' from URL to prevent loop on reload
+    window.history.replaceState({}, document.title, window.location.pathname);
+    setTimeout(() => sendMessage(initQuery), 100); 
+}
