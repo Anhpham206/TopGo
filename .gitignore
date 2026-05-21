@@ -39,3 +39,9 @@ desktop.ini
 
 # Script cá nhân & Công cụ hỗ trợ
 tools/
+
+# Project Documentation
+docs/
+
+# Shortcuts
+*.bat

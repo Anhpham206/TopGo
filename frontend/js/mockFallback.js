@@ -7,340 +7,201 @@
   ========================================================================
 */
 const MOCK_ITINERARY_HTML = `<!-- Day 1 -->
-                <div class="day-block glass-card">
-                    <div class="day-hd">
-                        <div class="day-badge">NGÀY 1</div>
-                        <div class="day-title">Thứ Tư · 25/06/2025 — Đà Nẵng</div>
-                        <div class="day-stats">
-                            <span class="day-st">4 điểm</span>
-                            <span class="day-st">~9 tiếng</span>
-                            <span class="day-st">~1.8M ₫</span>
-                        </div>
-                    </div>
-                    <div class="stop-card">
-                        <div class="stop-tl">
-                            <div class="stop-ts">07:00</div>
-                            <div class="stop-dot">✈</div>
-                            <div class="stop-te">08:30</div>
-                            <div class="stop-ln"></div>
-                        </div>
-                        <div class="stop-ct">
-                            <div class="stop-top">
-                                <div class="stop-img">✈</div>
-                                <div>
-                                    <div class="stop-nm"><a href="#" target="_blank">Sân bay Đà Nẵng (DAD)</a><span
-                                            class="stop-rt">⭐ 4.2</span></div>
-                                    <div class="stop-desc">Bay từ Hà Nội, chuyến sớm để tận dụng ngày đầu. Nhận phòng
-                                        khách sạn.</div>
-                                    <div class="stop-dur">⏱ Di chuyển: 30 phút (taxi) · Khoảng cách: 5 km</div>
-                                    <div class="transport-simple">🚕 Di chuyển bằng taxi, ~30 phút, dự kiến đến lúc
-                                        08:30</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stop-card">
-                        <div class="stop-tl">
-                            <div class="stop-ts">09:00</div>
-                            <div class="stop-dot">🏖</div>
-                            <div class="stop-te">12:00</div>
-                            <div class="stop-ln"></div>
-                        </div>
-                        <div class="stop-ct">
-                            <div class="stop-top">
-                                <div class="stop-img">🏖</div>
-                                <div>
-                                    <div class="stop-nm"><a href="#" target="_blank">Bãi biển Mỹ Khê</a><span
-                                            class="stop-rt">⭐ 4.8</span></div>
-                                    <div class="stop-desc">Một trong những bãi biển đẹp nhất châu Á. Nước trong xanh,
-                                        cát trắng mịn.</div>
-                                    <div class="stop-dur">⏱ Tham quan ~3 tiếng · Khoảng cách từ trung tâm: 3 km</div>
-                                    <div class="transport-simple">🚕 Di chuyển bằng taxi, ~10 phút, dự kiến đến lúc
-                                        09:10</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stop-card">
-                        <div class="stop-tl">
-                            <div class="stop-ts">12:30</div>
-                            <div class="stop-dot">🍜</div>
-                            <div class="stop-te">14:00</div>
-                            <div class="stop-ln"></div>
-                        </div>
-                        <div class="stop-ct">
-                            <div class="stop-top">
-                                <div class="stop-img">🍜</div>
-                                <div>
-                                    <div class="stop-nm"><a href="#" target="_blank">Quán Mỳ Quảng Bà Cụ</a><span
-                                            class="stop-rt">⭐ 4.6</span></div>
-                                    <div class="stop-desc">Quán mỳ quảng lâu đời, đông khách địa phương, giá bình dân.
-                                    </div>
-                                    <div class="stop-dur">⏱ ~1.5 tiếng · ~80.000 ₫/người</div>
-                                    <div class="transport-simple">🚶 Di chuyển bộ, ~5 phút, dự kiến đến lúc 12:35</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stop-card">
-                        <div class="stop-tl">
-                            <div class="stop-ts">15:00</div>
-                            <div class="stop-dot">🏛</div>
-                            <div class="stop-te">17:00</div>
-                        </div>
-                        <div class="stop-ct">
-                            <div class="stop-top">
-                                <div class="stop-img">🏛</div>
-                                <div>
-                                    <div class="stop-nm"><a href="#" target="_blank">Bảo tàng Điêu khắc Chăm</a><span
-                                            class="stop-rt">⭐ 4.5</span></div>
-                                    <div class="stop-desc">Bảo tàng lưu giữ bộ sưu tập hiện vật Chăm lớn nhất thế giới.
-                                    </div>
-                                    <div class="stop-dur">⏱ Tham quan ~2 tiếng · Khoảng cách từ trung tâm: 1.5 km</div>
-                                    <div class="transport-simple">🚕 Di chuyển bằng taxi, ~10 phút, dự kiến đến lúc
-                                        15:10</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /day-1 -->
+<div class="timeline-day-group">
+    <div class="timeline-track"></div>
+    <div class="timeline-day-header">
+        <div class="tdh-num">N1</div>
+        <div class="tdh-date">Thứ Tư · 25/06/2025 · 4 điểm</div>
+    </div>
+    
+    <div class="timeline-stop">
+        <div class="ts-time-col">
+            <div class="ts-time">07:00</div>
+            <div class="timeline-node"></div>
+        </div>
+        <div class="timeline-stop-card">
+            <h3 class="tsc-name"><a href="#" target="_blank">Sân bay Đà Nẵng (DAD)</a></h3>
+            <p class="tsc-desc">Bay từ Hà Nội, chuyến sớm để tận dụng ngày đầu. Nhận phòng khách sạn.</p>
+            <div class="tsc-tags">
+                <span class="tsc-tag"><span class="glow-text">THỜI GIAN:</span> ~1 tiếng</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="timeline-transport">
+        <span class="glow-text">DI CHUYỂN:</span> Taxi · 5 km · ~30 phút
+    </div>
+    
+    <div class="timeline-stop">
+        <div class="ts-time-col">
+            <div class="ts-time">09:00</div>
+            <div class="timeline-node"></div>
+        </div>
+        <div class="timeline-stop-card">
+            <h3 class="tsc-name"><a href="#" target="_blank">Bãi biển Mỹ Khê</a></h3>
+            <p class="tsc-desc">Một trong những bãi biển đẹp nhất châu Á. Nước trong xanh, cát trắng mịn.</p>
+            <div class="tsc-tags">
+                <span class="tsc-tag"><span class="glow-text">THỜI GIAN:</span> ~3 tiếng</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="timeline-transport">
+        <span class="glow-text">DI CHUYỂN:</span> Taxi · 3 km · ~10 phút
+    </div>
+    
+    <div class="timeline-stop">
+        <div class="ts-time-col">
+            <div class="ts-time">12:30</div>
+            <div class="timeline-node"></div>
+        </div>
+        <div class="timeline-stop-card">
+            <h3 class="tsc-name"><a href="#" target="_blank">Quán Mỳ Quảng Bà Cụ</a></h3>
+            <p class="tsc-desc">Quán mỳ quảng lâu đời, đông khách địa phương, giá bình dân.</p>
+            <div class="tsc-tags">
+                <span class="tsc-tag"><span class="glow-text">THỜI GIAN:</span> ~1.5 tiếng</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="timeline-transport">
+        <span class="glow-text">DI CHUYỂN:</span> Đi bộ · 500 m · ~5 phút
+    </div>
+    
+    <div class="timeline-stop">
+        <div class="ts-time-col">
+            <div class="ts-time">15:00</div>
+            <div class="timeline-node"></div>
+        </div>
+        <div class="timeline-stop-card">
+            <h3 class="tsc-name"><a href="#" target="_blank">Bảo tàng Điêu khắc Chăm</a></h3>
+            <p class="tsc-desc">Bảo tàng lưu giữ bộ sưu tập hiện vật Chăm lớn nhất thế giới.</p>
+            <div class="tsc-tags">
+                <span class="tsc-tag"><span class="glow-text">THỜI GIAN:</span> ~2 tiếng</span>
+            </div>
+        </div>
+    </div>
+</div><!-- /day-1 -->
 
-                <!-- Day 2 -->
-                <div class="day-block glass-card">
-                    <div class="day-hd">
-                        <div class="day-badge">NGÀY 2</div>
-                        <div class="day-title">Thứ Năm · 26/06/2025 — Bà Nà Hills</div>
-                        <div class="day-stats">
-                            <span class="day-st">2 điểm</span>
-                            <span class="day-st">~10 tiếng</span>
-                            <span class="day-st">~3.2M ₫</span>
-                        </div>
-                    </div>
-                    <div class="stop-card">
-                        <div class="stop-tl">
-                            <div class="stop-ts">07:30</div>
-                            <div class="stop-dot">🌉</div>
-                            <div class="stop-te">17:00</div>
-                        </div>
-                        <div class="stop-ct">
-                            <div class="stop-top">
-                                <div class="stop-img">🌉</div>
-                                <div>
-                                    <div class="stop-nm"><a href="#" target="_blank">Bà Nà Hills · Cầu Vàng</a><span
-                                            class="stop-rt">⭐ 4.7</span></div>
-                                    <div class="stop-desc">Khu du lịch trên đỉnh núi nổi tiếng với Cầu Vàng biểu tượng.
-                                    </div>
-                                    <div class="stop-dur">⏱ Cả ngày ~9 tiếng · Vé ~750.000 ₫/người</div>
-                                    <div class="transport-simple">🚌 Di chuyển bằng xe đưa đón, ~45 phút, dự kiến đến
-                                        lúc 08:15</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /day-2 -->
+<!-- Day 2 -->
+<div class="timeline-day-group">
+    <div class="timeline-track"></div>
+    <div class="timeline-day-header">
+        <div class="tdh-num">N2</div>
+        <div class="tdh-date">Thứ Năm · 26/06/2025 · 2 điểm</div>
+    </div>
+    
+    <div class="timeline-stop">
+        <div class="ts-time-col">
+            <div class="ts-time">07:30</div>
+            <div class="timeline-node"></div>
+        </div>
+        <div class="timeline-stop-card">
+            <h3 class="tsc-name"><a href="#" target="_blank">Bà Nà Hills · Cầu Vàng</a></h3>
+            <p class="tsc-desc">Khu du lịch trên đỉnh núi nổi tiếng với Cầu Vàng biểu tượng.</p>
+            <div class="tsc-tags">
+                <span class="tsc-tag"><span class="glow-text">THỜI GIAN:</span> Cả ngày (~9 tiếng)</span>
+            </div>
+        </div>
+    </div>
+</div><!-- /day-2 -->
 
-                <!-- Day 3 -->
-                <div class="day-block glass-card">
-                    <div class="day-hd">
-                        <div class="day-badge">NGÀY 3</div>
-                        <div class="day-title">Thứ Sáu · 27/06/2025 — Hội An</div>
-                        <div class="day-stats">
-                            <span class="day-st">3 điểm</span>
-                            <span class="day-st">~8 tiếng</span>
-                            <span class="day-st">~1.5M ₫</span>
-                        </div>
-                    </div>
-                    <div class="stop-card">
-                        <div class="stop-tl">
-                            <div class="stop-ts">08:00</div>
-                            <div class="stop-dot">🏮</div>
-                            <div class="stop-te">10:30</div>
-                            <div class="stop-ln"></div>
-                        </div>
-                        <div class="stop-ct">
-                            <div class="stop-top">
-                                <div class="stop-img">🏮</div>
-                                <div>
-                                    <div class="stop-nm"><a href="#" target="_blank">Phố Cổ Hội An</a><span
-                                            class="stop-rt">⭐ 4.9</span></div>
-                                    <div class="stop-desc">Di sản văn hóa thế giới, kiến trúc cổ kính, không gian yên
-                                        bình.</div>
-                                    <div class="stop-dur">⏱ Tham quan ~2.5 tiếng · Khoảng cách từ trung tâm: 25 km</div>
-                                    <div class="transport-simple">🚗 Di chuyển bằng ô tô riêng, ~45 phút, dự kiến đến
-                                        lúc 08:45</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stop-card">
-                        <div class="stop-tl">
-                            <div class="stop-ts">11:00</div>
-                            <div class="stop-dot">🍲</div>
-                            <div class="stop-te">12:30</div>
-                            <div class="stop-ln"></div>
-                        </div>
-                        <div class="stop-ct">
-                            <div class="stop-top">
-                                <div class="stop-img">🍲</div>
-                                <div>
-                                    <div class="stop-nm"><a href="#" target="_blank">Cao Lầu Thanh</a><span
-                                            class="stop-rt">⭐ 4.5</span></div>
-                                    <div class="stop-desc">Thưởng thức món cao lầu đặc sản Hội An.</div>
-                                    <div class="stop-dur">⏱ ~1.5 tiếng · ~50.000 ₫/người</div>
-                                    <div class="transport-simple">🚶 Di chuyển bộ, ~10 phút, dự kiến đến lúc 11:10</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stop-card">
-                        <div class="stop-tl">
-                            <div class="stop-ts">14:00</div>
-                            <div class="stop-dot">🏖</div>
-                            <div class="stop-te">16:30</div>
-                        </div>
-                        <div class="stop-ct">
-                            <div class="stop-top">
-                                <div class="stop-img">🏖</div>
-                                <div>
-                                    <div class="stop-nm"><a href="#" target="_blank">Biển Cửa Đại</a><span
-                                            class="stop-rt">⭐ 4.3</span></div>
-                                    <div class="stop-desc">Bãi biển đẹp, nước ấm, thích hợp tắm biển.</div>
-                                    <div class="stop-dur">⏱ Tham quan ~2.5 tiếng · Khoảng cách từ phố cổ: 5 km</div>
-                                    <div class="transport-simple">🛵 Di chuyển bằng xe máy, ~15 phút, dự kiến đến lúc
-                                        14:15</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /day-3 -->
+<!-- Day 3 -->
+<div class="timeline-day-group">
+    <div class="timeline-track"></div>
+    <div class="timeline-day-header">
+        <div class="tdh-num">N3</div>
+        <div class="tdh-date">Thứ Sáu · 27/06/2025 · 3 điểm</div>
+    </div>
+    
+    <div class="timeline-stop">
+        <div class="ts-time-col">
+            <div class="ts-time">08:00</div>
+            <div class="timeline-node"></div>
+        </div>
+        <div class="timeline-stop-card">
+            <h3 class="tsc-name"><a href="#" target="_blank">Phố Cổ Hội An</a></h3>
+            <p class="tsc-desc">Di sản văn hóa thế giới, kiến trúc cổ kính, không gian yên bình.</p>
+            <div class="tsc-tags">
+                <span class="tsc-tag"><span class="glow-text">THỜI GIAN:</span> ~2.5 tiếng</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="timeline-transport">
+        <span class="glow-text">DI CHUYỂN:</span> Ô tô riêng · 25 km · ~45 phút
+    </div>
+    
+    <div class="timeline-stop">
+        <div class="ts-time-col">
+            <div class="ts-time">11:00</div>
+            <div class="timeline-node"></div>
+        </div>
+        <div class="timeline-stop-card">
+            <h3 class="tsc-name"><a href="#" target="_blank">Cao Lầu Thanh</a></h3>
+            <p class="tsc-desc">Thưởng thức món cao lầu đặc sản Hội An.</p>
+            <div class="tsc-tags">
+                <span class="tsc-tag"><span class="glow-text">THỜI GIAN:</span> ~1.5 tiếng</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="timeline-transport">
+        <span class="glow-text">DI CHUYỂN:</span> Đi bộ · 1 km · ~10 phút
+    </div>
+    
+    <div class="timeline-stop">
+        <div class="ts-time-col">
+            <div class="ts-time">14:00</div>
+            <div class="timeline-node"></div>
+        </div>
+        <div class="timeline-stop-card">
+            <h3 class="tsc-name"><a href="#" target="_blank">Biển Cửa Đại</a></h3>
+            <p class="tsc-desc">Bãi biển đẹp, nước ấm, thích hợp tắm biển.</p>
+            <div class="tsc-tags">
+                <span class="tsc-tag"><span class="glow-text">THỜI GIAN:</span> ~2.5 tiếng</span>
+            </div>
+        </div>
+    </div>
+</div><!-- /day-3 -->
 
-                <!-- ====================================================
-                     HOTEL COMPARISON SECTION (standalone, not per-day)
-                ==================================================== -->
-                <div class="hotels-section">
-                    <div class="hotels-sec-hd">
-                        <div class="hotels-sec-title">Top 3 Chỗ ở Phù Hợp Nhất</div>
-                        <div class="hotels-sec-sub">Gợi ý dựa trên tiêu chí: 4 người · Khách sạn · ~2.050.000 ₫/người ·
-                            Gần trung tâm &amp; biển</div>
-                    </div>
-                    <div class="hotels-grid">
-
-                        <!-- Hotel 1: Best match -->
-                        <div class="hotel-c-card recommended"
-                            data-hotel='{"name":"Pulchra Resort Đà Nẵng","lat":16.055,"lng":108.245,"color":"#3674B5"}'>
-                            <div class="hotel-c-badge">Phù hợp nhất</div>
-                            <img class="hotel-c-photo"
-                                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80"
-                                onerror="this.src='https://picsum.photos/seed/hotel-dn1/400/140'"
-                                alt="Pulchra Resort Đà Nẵng">
-                            <div class="hotel-c-body">
-                                <div class="hotel-c-name">Pulchra Resort Đà Nẵng</div>
-                                <div class="hotel-c-stars">⭐⭐⭐⭐⭐</div>
-                                <div class="hotel-c-addr">📍 Sơn Trà, Đà Nẵng</div>
-                                <div class="hotel-c-price">1.850.000 ₫ <span>/đêm/phòng</span></div>
-                                <div class="hotel-c-compare">
-                                    <div class="hc-row"><span>Giá/đêm</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:75%"></div>
-                                        </div><span class="hc-val">1.85M</span>
-                                    </div>
-                                    <div class="hc-row"><span>Đánh giá</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:96%"></div>
-                                        </div><span class="hc-val">4.8 ⭐</span>
-                                    </div>
-                                    <div class="hc-row"><span>Cách Mỹ Khê</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:80%"></div>
-                                        </div><span class="hc-val">500m</span>
-                                    </div>
-                                    <div class="hc-row"><span>AI Score</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:92%"></div>
-                                        </div><span class="hc-val">9.2/10</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Hotel 2: Best value -->
-                        <div class="hotel-c-card"
-                            data-hotel='{"name":"Fusion Suites Đà Nẵng","lat":16.062,"lng":108.250,"color":"#0C9E72"}'>
-                            <div class="hotel-c-badge green">Tốt nhất tầm giá</div>
-                            <img class="hotel-c-photo"
-                                src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&q=80"
-                                onerror="this.src='https://picsum.photos/seed/hotel-dn2/400/140'"
-                                alt="Fusion Suites Đà Nẵng">
-                            <div class="hotel-c-body">
-                                <div class="hotel-c-name">Fusion Suites Đà Nẵng</div>
-                                <div class="hotel-c-stars">⭐⭐⭐⭐⭐</div>
-                                <div class="hotel-c-addr">📍 Phạm Văn Đồng, Đà Nẵng</div>
-                                <div class="hotel-c-price">1.250.000 ₫ <span>/đêm/phòng</span></div>
-                                <div class="hotel-c-compare">
-                                    <div class="hc-row"><span>Giá/đêm</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:50%"></div>
-                                        </div><span class="hc-val">1.25M</span>
-                                    </div>
-                                    <div class="hc-row"><span>Đánh giá</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:92%"></div>
-                                        </div><span class="hc-val">4.6 ⭐</span>
-                                    </div>
-                                    <div class="hc-row"><span>Cách Mỹ Khê</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:90%"></div>
-                                        </div><span class="hc-val">200m</span>
-                                    </div>
-                                    <div class="hc-row"><span>AI Score</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:89%"></div>
-                                        </div><span class="hc-val">8.9/10</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Hotel 3: Budget-friendly -->
-                        <div class="hotel-c-card"
-                            data-hotel='{"name":"Monarque Hotel Đà Nẵng","lat":16.058,"lng":108.242,"color":"#E8A914"}'>
-                            <div class="hotel-c-badge orange">Tiết kiệm nhất</div>
-                            <img class="hotel-c-photo"
-                                src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&q=80"
-                                onerror="this.src='https://picsum.photos/seed/hotel-dn3/400/140'"
-                                alt="Monarque Hotel Đà Nẵng">
-                            <div class="hotel-c-body">
-                                <div class="hotel-c-name">Monarque Hotel Đà Nẵng</div>
-                                <div class="hotel-c-stars">⭐⭐⭐⭐</div>
-                                <div class="hotel-c-addr">📍 Nguyễn Văn Thoại, Đà Nẵng</div>
-                                <div class="hotel-c-price">980.000 ₫ <span>/đêm/phòng</span></div>
-                                <div class="hotel-c-compare">
-                                    <div class="hc-row"><span>Giá/đêm</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:38%"></div>
-                                        </div><span class="hc-val">980K</span>
-                                    </div>
-                                    <div class="hc-row"><span>Đánh giá</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:90%"></div>
-                                        </div><span class="hc-val">4.5 ⭐</span>
-                                    </div>
-                                    <div class="hc-row"><span>Cách trung tâm</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:72%"></div>
-                                        </div><span class="hc-val">1.8km</span>
-                                    </div>
-                                    <div class="hc-row"><span>AI Score</span>
-                                        <div class="hc-bar">
-                                            <div class="hc-fill" style="width:85%"></div>
-                                        </div><span class="hc-val">8.5/10</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div><!-- /hotels-grid -->
-                </div><!-- /hotels-section -->`;
+<section class="res-accom-section">
+    <div class="section-label">
+        <span class="section-label-text">Gợi Ý Lưu Trú</span>
+    </div>
+    <div class="bionic-accom-grid">
+        <div class="bionic-accom-card" data-hotel='{"name":"Pulchra Resort Đà Nẵng","lat":16.055,"lng":108.245,"color":"#3674B5"}'>
+            <div class="rac-name">Pulchra Resort Đà Nẵng</div>
+            <div class="rac-meta">
+                <div class="rac-rate"><span class="glow-text">4.8</span> / 5.0</div>
+                <div class="rac-ai">Phù hợp <strong class="glow-text">92%</strong></div>
+            </div>
+            <div class="rac-price-wrap">
+                <div class="rac-price">1.850.000 ₫</div>
+            </div>
+        </div>
+        <div class="bionic-accom-card" data-hotel='{"name":"Fusion Suites Đà Nẵng","lat":16.062,"lng":108.250,"color":"#0C9E72"}'>
+            <div class="rac-name">Fusion Suites Đà Nẵng</div>
+            <div class="rac-meta">
+                <div class="rac-rate"><span class="glow-text">4.6</span> / 5.0</div>
+                <div class="rac-ai">Phù hợp <strong class="glow-text">89%</strong></div>
+            </div>
+            <div class="rac-price-wrap">
+                <div class="rac-price">1.250.000 ₫</div>
+            </div>
+        </div>
+        <div class="bionic-accom-card" data-hotel='{"name":"Monarque Hotel Đà Nẵng","lat":16.058,"lng":108.242,"color":"#E8A914"}'>
+            <div class="rac-name">Monarque Hotel Đà Nẵng</div>
+            <div class="rac-meta">
+                <div class="rac-rate"><span class="glow-text">4.5</span> / 5.0</div>
+                <div class="rac-ai">Phù hợp <strong class="glow-text">85%</strong></div>
+            </div>
+            <div class="rac-price-wrap">
+                <div class="rac-price">980.000 ₫</div>
+            </div>
+        </div>
+    </div>
+</section>`;
 
 const MOCK_CHATBOT_RESPONSES = {
         dalat: {
@@ -527,7 +388,7 @@ const MOCK_CITIES = [
         "id": "binh_thuan",
         "name": "Bình Thuận",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/binh-thuan.jpg",
+        "img": "./assets/img/cities/binh-thuan.webp",
         "color": "#3674B5",
         "abbr": "BTN"
     },
@@ -535,7 +396,7 @@ const MOCK_CITIES = [
         "id": "can_tho",
         "name": "Cần Thơ",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/can-tho.jpg",
+        "img": "./assets/img/cities/can-tho.webp",
         "color": "#3674B5",
         "abbr": "CTO"
     },
@@ -543,7 +404,7 @@ const MOCK_CITIES = [
         "id": "ca_mau",
         "name": "Cà Mau",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ca-mau.jpg",
+        "img": "./assets/img/cities/ca-mau.webp",
         "color": "#3674B5",
         "abbr": "CMU"
     },
@@ -551,7 +412,7 @@ const MOCK_CITIES = [
         "id": "da_nang",
         "name": "Đà Nẵng",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/da-nang.jpg",
+        "img": "./assets/img/cities/da-nang.webp",
         "color": "#3674B5",
         "abbr": "DAD"
     },
@@ -559,7 +420,7 @@ const MOCK_CITIES = [
         "id": "ha_noi",
         "name": "Hà Nội",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ha-noi.png",
+        "img": "./assets/img/cities/ha-noi.webp",
         "color": "#3674B5",
         "abbr": "HAN"
     },
@@ -567,7 +428,7 @@ const MOCK_CITIES = [
         "id": "hoi_an",
         "name": "Hội An",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/hoi-an.jpg",
+        "img": "./assets/img/cities/hoi-an.webp",
         "color": "#3674B5",
         "abbr": "HOI"
     },
@@ -575,7 +436,7 @@ const MOCK_CITIES = [
         "id": "lam_dong",
         "name": "Lâm Đồng",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/da-lat.jpg",
+        "img": "./assets/img/cities/da-lat.webp",
         "color": "#3674B5",
         "abbr": "DLI"
     },
@@ -583,7 +444,7 @@ const MOCK_CITIES = [
         "id": "nha_trang",
         "name": "Nha Trang",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/nha-trang.jpg",
+        "img": "./assets/img/cities/nha-trang.webp",
         "color": "#3674B5",
         "abbr": "CXR"
     },
@@ -591,7 +452,7 @@ const MOCK_CITIES = [
         "id": "ninh_binh",
         "name": "Ninh Bình",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ninh-binh.jpg",
+        "img": "./assets/img/cities/ninh-binh.webp",
         "color": "#3674B5",
         "abbr": "NBH"
     },
@@ -599,7 +460,7 @@ const MOCK_CITIES = [
         "id": "ninh_thuan",
         "name": "Ninh Thuận",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ninh-thuan.jpg",
+        "img": "./assets/img/cities/ninh-thuan.webp",
         "color": "#3674B5",
         "abbr": "NTN"
     },
@@ -607,7 +468,7 @@ const MOCK_CITIES = [
         "id": "phu_quoc",
         "name": "Phú Quốc",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/phu-quoc.jpg",
+        "img": "./assets/img/cities/phu-quoc.webp",
         "color": "#3674B5",
         "abbr": "PQC"
     },
@@ -615,7 +476,7 @@ const MOCK_CITIES = [
         "id": "thanh_pho_ho_chi_minh",
         "name": "Thành phố Hồ Chí Minh",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/hcm.jpg",
+        "img": "./assets/img/cities/hcm.webp",
         "color": "#3674B5",
         "abbr": "SGN"
     }

@@ -1,0 +1,1068 @@
+/* 
+  ========================================================================
+  FILE: pricing.css
+  CHỨC NĂNG: 
+  - Giao diện biểu giá dịch vụ (Pricing Plans) của TopGo AI.
+  - Thiết kế: Liquid Glassmorphism cao cấp, hiện đại, tối giản nhưng cực kỳ lôi cuốn.
+  - Hỗ trợ hiệu ứng hover tinh tế, quét sáng gương (Shine Effect), bóng phát sáng (Glow).
+  ========================================================================
+*/
+
+/* ── 1. PRICING MAIN LAYOUT ── */
+.pricing-main {
+  max-width: 1200px;
+  margin: 140px auto 80px;
+  padding: 0 24px;
+  position: relative;
+  z-index: 10;
+}
+
+/* ── 2. PRICING HERO BANNER ── */
+.pricing-hero {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  border-radius: var(--r-xl);
+  perspective: 1200px; /* Thêm phối cảnh 3D */
+  padding: 20px 10px;
+}
+
+/* Liquid Glass Frame */
+.hero-glass-panel {
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 30px 60px rgba(0, 169, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-radius: 36px;
+  padding: 60px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) ease;
+}
+
+/* Backlit Glow Behind Glass */
+.hero-glass-panel::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(0, 169, 255, 0.15) 0%, transparent 60%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ── 3D REALISTIC TICKETS ── */
+.hero-3d-tickets {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20; /* Bay lơ lửng phía trước khung kính */
+  transform-style: preserve-3d;
+}
+
+.realistic-ticket {
+  position: absolute;
+  width: 220px; /* Kích thước vừa phải, dễ đọc text */
+  height: 110px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 40%, #e2e8f0 70%, #ffffff 100%);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    -5px 10px 20px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  
+  /* Cắt rãnh (Notch cutout effect) ở lề phải */
+  mask-image: radial-gradient(circle at 100% 50%, transparent 14px, black 15px);
+  -webkit-mask-image: radial-gradient(circle at 100% 50%, transparent 14px, black 15px);
+  border-right: 2px dashed rgba(38, 78, 107, 0.2);
+}
+
+/* Bóng đổ chân thực nhẹ nhàng hơn */
+.realistic-ticket::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 10%;
+  width: 80%;
+  height: 15px;
+  background: rgba(0, 0, 0, 0.15);
+  filter: blur(12px);
+  transform: translateZ(-20px);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.t-top {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: auto;
+}
+
+.t-main {
+  text-align: left;
+}
+
+.t-flight {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.t-flight strong {
+  font-weight: 800;
+}
+
+.t-class {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--p1);
+  letter-spacing: 1.5px;
+}
+
+/* Hiệu ứng Barcode css-based */
+.t-barcode {
+  height: 12px;
+  margin-top: 8px;
+  width: 85%;
+  background: repeating-linear-gradient(90deg, #1e293b, #1e293b 2px, transparent 2px, transparent 4px, #1e293b 4px, #1e293b 5px, transparent 5px, transparent 7px, #1e293b 7px, #1e293b 9px, transparent 9px, transparent 10px);
+  opacity: 0.6;
+}
+
+/* --- TÙY BIẾN CHO TỪNG VÉ (Sắp xếp quanh text và tràn viền) --- */
+
+/* TICKET 1: Left top corner, flying outwards */
+.ticket-1 {
+  top: -8%;
+  left: -8%;
+  transform: scale(1.05);
+  animation: floatTicket1 15s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  z-index: 21;
+  will-change: transform;
+}
+
+/* TICKET 2: Right bottom, very close, large, cropped */
+.ticket-2 {
+  bottom: -15%;
+  right: -12%;
+  transform: scale(1.25);
+  animation: floatTicket2 18s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate-reverse;
+  z-index: 30;
+  will-change: transform;
+}
+
+/* TICKET 3: Left bottom side, deep background */
+.ticket-3 {
+  bottom: 12%;
+  left: -8%;
+  transform: scale(0.8);
+  opacity: 0.65;
+  filter: blur(1.5px);
+  animation: floatTicket3 20s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  z-index: 5;
+  will-change: transform;
+}
+
+/* TICKET 4: Right top, flying out, cropped */
+.ticket-4 {
+  top: -12%;
+  right: -6%;
+  transform: scale(1.1);
+  animation: floatTicket4 16s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate-reverse;
+  z-index: 22;
+  will-change: transform;
+}
+
+/* TICKET 5: Left bottom corner, close, large, cropped */
+.ticket-5 {
+  bottom: -18%;
+  left: -12%;
+  transform: scale(1.2);
+  animation: floatTicket5 19s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  z-index: 29;
+  will-change: transform;
+}
+
+/* TICKET 7: Left center background */
+.ticket-7 {
+  top: 25%;
+  left: -10%;
+  transform: scale(0.65);
+  opacity: 0.6;
+  filter: blur(2px);
+  animation: floatTicket7 17s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate-reverse;
+  z-index: 4;
+  will-change: transform;
+}
+
+/* TICKET 8: Right middle, sticking out */
+.ticket-8 {
+  top: 35%;
+  right: -8%;
+  transform: scale(0.95);
+  animation: floatTicket8 21s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  z-index: 23;
+  will-change: transform;
+}
+
+/* --- KEYFRAMES CHO TỪNG VÉ (Mặt hướng trực diện + Trôi lơ lửng siêu nhẹ + Bay chéo theo cuộn lướt) --- */
+@keyframes floatTicket1 {
+  0% { 
+    transform: perspective(1200px) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * -110px), 
+                 calc(var(--scroll-progress, 0) * -110px), 
+                 calc(var(--scroll-progress, 0) * 140px + 20px)
+               ) 
+               rotateY(-5deg) rotateX(4deg) rotateZ(30deg); 
+  }
+  100% { 
+    transform: perspective(1200px) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * -110px - 6px), 
+                 calc(var(--scroll-progress, 0) * -110px - 6px), 
+                 calc(var(--scroll-progress, 0) * 140px + 32px)
+               ) 
+               rotateY(-7deg) rotateX(-2deg) rotateZ(26deg); 
+  }
+}
+
+@keyframes floatTicket2 {
+  0% { 
+    transform: perspective(1200px) scale(1.25) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * 140px), 
+                 calc(var(--scroll-progress, 0) * 140px), 
+                 calc(var(--scroll-progress, 0) * 180px + 40px)
+               ) 
+               rotateY(-5deg) rotateX(4deg) rotateZ(10deg); 
+  }
+  100% { 
+    transform: perspective(1200px) scale(1.25) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * 140px + 8px), 
+                 calc(var(--scroll-progress, 0) * 140px + 8px), 
+                 calc(var(--scroll-progress, 0) * 180px + 52px)
+               ) 
+               rotateY(-7deg) rotateX(-2deg) rotateZ(14deg); 
+  }
+}
+
+@keyframes floatTicket3 {
+  0% { 
+    transform: perspective(1200px) scale(0.8) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * -60px), 
+                 calc(var(--scroll-progress, 0) * 40px), 
+                 calc(var(--scroll-progress, 0) * -80px - 40px)
+               ) 
+               rotateY(5deg) rotateX(-3deg) rotateZ(-8deg); 
+  }
+  100% { 
+    transform: perspective(1200px) scale(0.8) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * -60px - 5px), 
+                 calc(var(--scroll-progress, 0) * 40px + 5px), 
+                 calc(var(--scroll-progress, 0) * -80px - 50px)
+               ) 
+               rotateY(3deg) rotateX(3deg) rotateZ(-12deg); 
+  }
+}
+
+@keyframes floatTicket4 {
+  0% { 
+    transform: perspective(1200px) scale(1.1) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * 110px), 
+                 calc(var(--scroll-progress, 0) * -110px), 
+                 calc(var(--scroll-progress, 0) * 140px + 30px)
+               ) 
+               rotateY(5deg) rotateX(4deg) rotateZ(-30deg); 
+  }
+  100% { 
+    transform: perspective(1200px) scale(1.1) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * 110px + 6px), 
+                 calc(var(--scroll-progress, 0) * -110px - 6px), 
+                 calc(var(--scroll-progress, 0) * 140px + 42px)
+               ) 
+               rotateY(7deg) rotateX(-2deg) rotateZ(-26deg); 
+  }
+}
+
+@keyframes floatTicket5 {
+  0% { 
+    transform: perspective(1200px) scale(1.2) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * -140px), 
+                 calc(var(--scroll-progress, 0) * 140px), 
+                 calc(var(--scroll-progress, 0) * 180px + 30px)
+               ) 
+               rotateY(-5deg) rotateX(-4deg) rotateZ(-12deg); 
+  }
+  100% { 
+    transform: perspective(1200px) scale(1.2) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * -140px - 8px), 
+                 calc(var(--scroll-progress, 0) * 140px + 8px), 
+                 calc(var(--scroll-progress, 0) * 180px + 42px)
+               ) 
+               rotateY(-7deg) rotateX(2deg) rotateZ(-8deg); 
+  }
+}
+
+@keyframes floatTicket7 {
+  0% { 
+    transform: perspective(1200px) scale(0.65) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * -40px), 
+                 calc(var(--scroll-progress, 0) * -30px), 
+                 calc(var(--scroll-progress, 0) * -70px - 50px)
+               ) 
+               rotateY(6deg) rotateX(3deg) rotateZ(6deg); 
+  }
+  100% { 
+    transform: perspective(1200px) scale(0.65) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * -40px - 4px), 
+                 calc(var(--scroll-progress, 0) * -30px - 4px), 
+                 calc(var(--scroll-progress, 0) * -70px - 60px)
+               ) 
+               rotateY(3deg) rotateX(-3deg) rotateZ(2deg); 
+  }
+}
+
+@keyframes floatTicket8 {
+  0% { 
+    transform: perspective(1200px) scale(0.95) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * 90px), 
+                 calc(var(--scroll-progress, 0) * 15px), 
+                 calc(var(--scroll-progress, 0) * 100px + 10px)
+               ) 
+               rotateY(-5deg) rotateX(-3deg) rotateZ(12deg); 
+  }
+  100% { 
+    transform: perspective(1200px) scale(0.95) 
+               translate3d(
+                 calc(var(--scroll-progress, 0) * 90px + 5px), 
+                 calc(var(--scroll-progress, 0) * 15px - 5px), 
+                 calc(var(--scroll-progress, 0) * 100px + 20px)
+               ) 
+               rotateY(-7deg) rotateX(3deg) rotateZ(8deg); 
+  }
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 169, 255, 0.08);
+  border: 1px solid rgba(0, 169, 255, 0.2);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--p1);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--p1);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 8px var(--p1);
+  animation: pulseDot 1.8s infinite alternate ease-in-out;
+}
+
+@keyframes pulseDot {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.5;
+    box-shadow: 0 0 4px var(--p1);
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 1;
+    box-shadow: 0 0 12px var(--p1);
+  }
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(28px, 4.2vw, 48px);
+  font-weight: 800;
+  color: #0091ff;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.hero-title span {
+  background: linear-gradient(135deg, var(--p1) 20%, var(--p2) 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.hero-desc {
+  font-size: 20px;
+  color: var(--muted);
+  max-width: 750px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── 3. BILLING TOGGLE ── */
+.billing-toggle-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 30px rgba(0, 169, 255, 0.04);
+  padding: 10px 24px;
+  border-radius: 100px;
+  margin: 0 auto 50px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 12;
+  animation: fadeUp 0.9s cubic-bezier(0.4, 0, 0.2, 1) ease;
+}
+
+.billing-label {
+  font-family: var(--font-label);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--muted);
+  transition: var(--t);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.billing-label.active {
+  color: var(--p1);
+  font-weight: 700;
+}
+
+.discount-badge {
+  background: linear-gradient(135deg, #ff9f43, var(--gold));
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 100px;
+  box-shadow: 0 4px 10px rgba(255, 179, 71, 0.3);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  animation: pulseBadge 2s infinite alternate ease-in-out;
+}
+
+@keyframes pulseBadge {
+  0% { transform: scale(0.97); }
+  100% { transform: scale(1.05); }
+}
+
+/* Custom Switch styles */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(38, 78, 107, 0.15);
+  transition: .4s;
+  border-radius: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--p1);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+/* ── 4. MODERN PRICING GRID ── */
+.modern-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 80px;
+  align-items: stretch;
+  animation: fadeUp 1s cubic-bezier(0.4, 0, 0.2, 1) ease;
+}
+
+/* ── 5. GLASS PRICING CARD ── */
+.pricing-card {
+  position: relative;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  overflow: hidden;
+}
+
+/* Mirror sheen sweep effect on hover */
+.pricing-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: 0.75s ease-in-out;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 
+    0 25px 60px rgba(0, 169, 255, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+.pricing-card:hover::after {
+  left: 150%;
+}
+
+/* ── CARD HEADER ── */
+.card-header {
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.plan-badge {
+  display: inline-block;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 30px;
+  margin-bottom: 16px;
+}
+
+.free-card .plan-badge {
+  background: rgba(38, 78, 107, 0.08);
+  color: var(--muted);
+}
+
+.pro-card .plan-badge {
+  background: rgba(0, 169, 255, 0.12);
+  color: var(--p1);
+}
+
+.premium-card .plan-badge {
+  background: rgba(255, 179, 71, 0.15);
+  color: #d68000;
+}
+
+.plan-name {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.plan-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── PLAN PRICE ── */
+.plan-price-wrap {
+  display: flex;
+  align-items: baseline;
+  color: var(--text);
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.plan-currency {
+  font-size: 20px;
+  font-weight: 700;
+  align-self: flex-start;
+  margin-top: 6px;
+  margin-right: 2px;
+}
+
+.plan-price {
+  font-family: var(--font-heading);
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.plan-period {
+  font-size: 14.5px;
+  color: var(--muted);
+  margin-left: 6px;
+  transition: opacity 0.2s ease;
+}
+
+.card-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(38, 78, 107, 0.1), rgba(38, 78, 107, 0.03));
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── CARD FEATURES ── */
+.card-features {
+  flex-grow: 1;
+  margin-bottom: 35px;
+  position: relative;
+  z-index: 2;
+}
+
+.plan-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.plan-features-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14.5px;
+  color: var(--text);
+  line-height: 1.45;
+  transition: var(--t);
+}
+
+.plan-features-list li.disabled-feature {
+  color: var(--muted);
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+
+.feature-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.feature-icon.check {
+  background: rgba(46, 125, 100, 0.1);
+  color: var(--success);
+}
+
+.feature-icon.cross {
+  background: rgba(38, 78, 107, 0.08);
+  color: var(--muted);
+}
+
+.feature-icon svg {
+  width: 11px;
+  height: 11px;
+}
+
+/* ── CARD CTA BUTTONS ── */
+.card-cta {
+  position: relative;
+  z-index: 4;
+}
+
+.plan-btn {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 13.5px;
+  font-weight: 800;
+  text-align: center;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  font-family: var(--font-label);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  border: none;
+  display: block;
+}
+
+.plan-btn-outline {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1.5px solid rgba(0, 169, 255, 0.4);
+  color: var(--p1);
+}
+
+.plan-btn-outline:hover {
+  background: var(--p1);
+  border-color: var(--p1);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 169, 255, 0.2);
+}
+
+.plan-btn-solid {
+  background: linear-gradient(90deg, var(--p1), var(--p2));
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 169, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Button glow effect on Pro */
+.plan-btn-solid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: 0.6s ease;
+}
+
+.plan-btn-solid:hover {
+  background: linear-gradient(90deg, var(--p2), var(--p1));
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 169, 255, 0.3);
+}
+
+.plan-btn-solid:hover::before {
+  left: 150%;
+}
+
+/* ── 6. PRO CARD (POPULAR SPECIAL DESIGN) ── */
+.pricing-card.popular {
+  border: 2px solid var(--p1) !important;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 
+    0 20px 50px rgba(0, 169, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Backlit Glow for Pro Card */
+.pricing-card.popular::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: 10%;
+  width: 80%;
+  height: 40%;
+  background: radial-gradient(circle, rgba(0, 169, 255, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.popular-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: linear-gradient(90deg, var(--p1), var(--p2));
+  color: white;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 100px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 12;
+  box-shadow: 0 4px 10px rgba(0, 169, 255, 0.15);
+}
+
+/* ── 7. PREMIUM CARD DESIGN ── */
+.premium-card {
+  border: 1px solid rgba(255, 179, 71, 0.35) !important;
+}
+
+.premium-card:hover {
+  border-color: rgba(255, 179, 71, 0.7) !important;
+  box-shadow: 
+    0 25px 60px rgba(255, 179, 71, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.premium-card .plan-btn-outline {
+  border-color: rgba(255, 179, 71, 0.5);
+  color: #d68000;
+}
+
+.premium-card .plan-btn-outline:hover {
+  background: linear-gradient(135deg, var(--gold), #ffa500);
+  border-color: #ffa500;
+  color: white;
+  box-shadow: 0 8px 24px rgba(255, 179, 71, 0.25);
+}
+
+/* ── 8. FAQ SECTION ── */
+.faq-section {
+  max-width: 800px;
+  margin: 110px auto 40px;
+  animation: fadeUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) ease;
+}
+
+.faq-title {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 40px;
+}
+
+.faq-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faq-item {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--r-l);
+  padding: 24px 28px;
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(0, 169, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 169, 255, 0.04);
+}
+
+.faq-q {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-a {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── 9. RESPONSIVE MEDIA QUERIES ── */
+@media (max-width: 1024px) {
+  .modern-pricing-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  
+  .premium-card {
+    grid-column: span 2;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-main {
+    margin-top: 110px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .modern-pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 440px;
+    margin: 0 auto 60px;
+  }
+  
+  .premium-card {
+    grid-column: span 1;
+  }
+
+  .pricing-card {
+    padding: 36px 24px;
+  }
+
+  .faq-title {
+    font-size: 26px;
+  }
+
+  .faq-item {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+  }
+
+  .billing-toggle-wrap {
+    padding: 8px 18px;
+    gap: 10px;
+  }
+
+  .billing-label {
+    font-size: 13px;
+  }
+
+  .plan-price {
+    font-size: 40px;
+  }
+}
+
+/* ── 10. TICKET PUNCH HOLE ── */
+.t-hole {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 8px;
+  height: 8px;
+  background: rgba(38, 78, 107, 0.12);
+  border-radius: 50%;
+  border: 1px dashed rgba(38, 78, 107, 0.3);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ── 11. COMING SOON HIGHLIGHT (Subtext formatting) ── */
+.cs-highlight-desc {
+  font-size: 17px !important; /* Giảm 30% từ 24px để cực kỳ tinh tế và gọn gàng */
+  font-weight: 700;
+  line-height: 1.6;
+  color: #0052a3 !important; /* Xanh đậm sang trọng, rực rỡ, không dùng màu đen */
+  text-transform: uppercase; /* Co lên in hoa */
+  letter-spacing: 2px; /* Tăng khoảng cách chữ */
+  background: rgba(0, 169, 255, 0.04);
+  border: none;
+  padding: 20px 30px;
+  border-radius: 24px;
+  max-width: 780px;
+  margin: 30px auto 0 !important;
+  position: relative;
+  box-shadow: 
+    0 15px 35px rgba(0, 169, 255, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: csFadeInDesc 1s ease-out;
+}
+
+@keyframes csFadeInDesc {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustment for highlighted subtext */
+@media (max-width: 768px) {
+  .cs-highlight-desc {
+    font-size: 13px !important; /* Giảm 30% từ 18px cho di động */
+    padding: 16px 20px;
+    margin-top: 20px !important;
+    border-radius: 18px;
+    letter-spacing: 1.2px;
+  }
+}

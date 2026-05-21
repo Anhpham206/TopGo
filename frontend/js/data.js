@@ -63,6 +63,8 @@ export const ACCOMMODATION_MIN_PER_NIGHT = {
     "Resort":1_200_000,"Villa":1_500_000,"Khách sạn":400_000,
     "Homestay":250_000,"Airbnb":350_000,"Căn hộ":300_000,
 };
+export const VALID_TRANSPORT_TYPES = ['Xe khách','Máy bay','Tàu hỏa','Ô tô riêng','Xe máy','Thuê ô tô tự lái','Xe đạp','Khác'];
+export const VALID_ACCOMMODATION_TYPES = ['Khách sạn','Homestay','Airbnb','Resort','Villa','Căn hộ','Khác'];
 
 export function detectDepartureCity(val) {
     const v = val.toLowerCase();

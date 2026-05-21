@@ -14,12 +14,12 @@
 import { state } from './data.js';
 import { detectDepartureCity } from './data.js';
 import { runComprehensiveValidation, sanitizeText, isNonsensicalText } from './utils.js';
-import { fetchCities, fetchPlaces, generateItinerary, sendFeedback } from './api.js';
+import { fetchCities, fetchPlaces, generateItinerary, sendFeedback, getMockItineraryFallback } from './api.js';
 import { initLeafletMap } from './map.js';
 import {
     showScreen, renderCityList, renderDepList, renderItinerary,
     updateDeparture, getRawBudget, validateDates, updateBudgetPP,
-    initFormUIEvents
+    initFormUIEvents, getTripDays
 } from './ui.js';
 import { showToast, showPopup, closePopup } from './shared.js';
 import { fetchHtmlFragment } from './fragmentLoader.js';
@@ -69,10 +69,17 @@ function _initDefaultDates() {
 // ── Business logic handlers ───────────────────────────────────
 
 function handleGenerate() {
+    if (window._quotaCountdownInterval) {
+        clearInterval(window._quotaCountdownInterval);
+        window._quotaCountdownInterval = null;
+    }
     let valid = true;
     if (!state.selectedCity) { document.getElementById('err-city')?.classList.add('show'); valid = false; }
     const budget = getRawBudget();
-    if (!budget || budget < 100_000) {
+    const paxVal = parseInt(document.getElementById('pax-val')?.value) || 1;
+    const tripDays = getTripDays();
+    const minBudgetL2 = paxVal * tripDays * 50_000;
+    if (!budget || budget < minBudgetL2) {
         document.getElementById('err-budget')?.classList.add('show');
         document.getElementById('budget-input')?.classList.add('err');
         valid = false;
@@ -81,8 +88,8 @@ function handleGenerate() {
     const trimmedNotes = rawNotes.trim();
     const errNotes = document.getElementById('err-notes');
     errNotes?.classList.remove('show');
-    if (!trimmedNotes || trimmedNotes.length < 5) {
-        if (errNotes) { errNotes.textContent = trimmedNotes ? 'Nội dung quá ngắn (tối thiểu 5 ký tự).' : 'Vui lòng nhập mô tả sở thích hoặc ghi chú.'; errNotes.classList.add('show'); }
+    if (trimmedNotes && trimmedNotes.length < 5) {
+        if (errNotes) { errNotes.textContent = 'Nội dung quá ngắn (tối thiểu 5 ký tự).'; errNotes.classList.add('show'); }
         valid = false;
     }
     if (!valid) {
@@ -163,10 +170,7 @@ function handleGenerate() {
         })
         .catch((err) => {
             console.error(err);
-            renderItinerary(null);
-            document.querySelectorAll('.ls-spin').forEach(s => s.outerHTML = '<span class="ls-ico">✓</span>');
-            document.querySelectorAll('.ls').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
-            setTimeout(() => showScreen('result'), 450);
+            _showBackendError({ errors: [err?.message || String(err)] }, payload);
         });
 }
 
@@ -174,25 +178,285 @@ function _showValidationErrors(errors, continueAllowed, payload) {
     const el = document.getElementById('error-issues');
     if (el) el.innerHTML = errors.map(e => `<div class="error-issue${e.type === 'warning' ? ' warning-issue' : ''}">${e.msg}</div>`).join('');
     const btn = document.getElementById('btn-continue-error');
-    if (btn) btn.style.display = continueAllowed ? 'inline-flex' : 'none';
+    if (btn) {
+        btn.style.display = continueAllowed ? 'inline-flex' : 'none';
+        btn.textContent = "Tiếp tục →";
+        btn.className = "popup-confirm blue";
+        btn.style.background = "";
+        btn.style.borderColor = "";
+        btn.style.boxShadow = "";
+        btn.style.color = "";
+    }
     window._continueAllowed = continueAllowed;
+    window._useMockData = false;
     window._lastPayload = payload;
     showScreen('error');
 }
 
 function _showBackendError(data, payload) {
     const el = document.getElementById('error-issues');
-    if (el) { const html = (data.errors || []).map(e => `<div class="error-issue">${e}</div>`).join(''); el.innerHTML = window.DOMPurify ? DOMPurify.sanitize(html) : html; }
-    const btn = document.getElementById('btn-continue-error');
-    if (btn) btn.style.display = data.continue_allowed ? 'inline-flex' : 'none';
-    window._continueAllowed = data.continue_allowed;
+    const titleEl = document.querySelector('#screen-error .error-title');
+    const msgEl = document.querySelector('#screen-error .error-msg');
+    const iconEl = document.querySelector('#screen-error .error-icon');
+    const btnContinue = document.getElementById('btn-continue-error');
+    
+    // Clear any active countdown interval to prevent overlapping
+    if (window._quotaCountdownInterval) {
+        clearInterval(window._quotaCountdownInterval);
+        window._quotaCountdownInterval = null;
+    }
+    
+    // Remove old retry button if exists
+    const oldRetryBtn = document.getElementById('btn-retry-quota');
+    if (oldRetryBtn) oldRetryBtn.remove();
+    
+    // Reset standard styles
+    if (titleEl) titleEl.textContent = "Yêu cầu chưa đạt điều kiện";
+    if (msgEl) {
+        msgEl.textContent = "AI phát hiện một số vấn đề với thông tin của bạn:";
+        msgEl.style.color = "#4b5563";
+    }
+    if (iconEl) {
+        iconEl.textContent = "";
+        iconEl.style.display = 'none';
+    }
+    
+    window._continueAllowed = false;
+    window._useMockData = false;
+    if (btnContinue) {
+        btnContinue.style.display = 'none';
+        btnContinue.textContent = "Tiếp tục →";
+        btnContinue.className = "popup-confirm blue";
+        btnContinue.style.background = "";
+        btnContinue.style.borderColor = "";
+        btnContinue.style.boxShadow = "";
+        btnContinue.style.color = "";
+    }
+    
+    const errors = data.errors || [];
+    const has429 = errors.some(e => 
+        e.includes('429') || 
+        e.toUpperCase().includes('RESOURCE_EXHAUSTED') || 
+        e.toLowerCase().includes('quota')
+    );
+    
+    if (has429) {
+        // Cấu hình UI lỗi Quota đặc biệt - Tông màu sáng hợp với website
+        if (titleEl) titleEl.innerHTML = `<span style="color:#dc2626; font-weight: 800; text-shadow:0 0 10px rgba(220,38,38,0.1)">Đã hết lượt dùng thử Gemini AI</span>`;
+        if (msgEl) {
+            msgEl.textContent = "Hệ thống AI miễn phí hiện tại đã đạt giới hạn cuộc gọi tối đa (429 Rate Limit):";
+            msgEl.style.color = "#4b5563";
+        }
+        if (iconEl) {
+            iconEl.textContent = "";
+            iconEl.style.display = 'none';
+        }
+        
+        // Parse thời gian chờ nếu có
+        let cooldownSeconds = 48; // fallback default
+        const timeMatch = errors.join(' ').match(/retry in ([\d\.]+)(s|ms)/i);
+        if (timeMatch) {
+            const value = parseFloat(timeMatch[1]);
+            const unit = timeMatch[2].toLowerCase();
+            cooldownSeconds = unit === 'ms' ? value / 1000 : value;
+        } else {
+            const delayMatch = errors.join(' ').match(/retryDelay['":\s]+(\d+)/i);
+            if (delayMatch) {
+                cooldownSeconds = parseInt(delayMatch[1], 10);
+            }
+        }
+        
+        // Inject styles for custom quota animations
+        if (!document.getElementById('quota-countdown-styles')) {
+            const style = document.createElement('style');
+            style.id = 'quota-countdown-styles';
+            style.innerHTML = `
+                @keyframes pulse-quota {
+                    0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.5); }
+                    70% { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
+                    100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+                }
+                .pulse-quota-btn {
+                    animation: pulse-quota 2s infinite !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        const errorHtml = `
+            <div class="api-quota-warning" style="margin-bottom:15px;background:#fef2f2;border:1px solid rgba(239,68,68,0.25);border-radius:12px;padding:18px;text-align:left;backdrop-filter:blur(10px);box-shadow:0 8px 32px rgba(239,68,68,0.05);">
+                <div style="font-weight:700;color:#dc2626;margin-bottom:8px;font-size:15px;">
+                    Lỗi vượt quá hạn ngạch (Quota Exceeded - 429)
+                </div>
+                <p style="font-size:13px;color:#4b5563;line-height:1.6;margin:0 0 12px 0;">
+                    Tài khoản API Key Gemini miễn phí trên máy chủ đã đạt giới hạn 20 lượt yêu cầu/ngày hoặc số lượng yêu cầu mỗi phút quá cao.
+                </p>
+                
+                <!-- Premium Countdown Banner -->
+                <div id="quota-countdown-banner" style="display:flex;align-items:center;gap:12px;background:#fff5f5;padding:12px 16px;border-radius:8px;margin-bottom:12px;border:1px dashed rgba(239,68,68,0.2);transition: all 0.3s ease;">
+                    <div id="quota-timer-circle" style="width:36px;height:36px;border-radius:50%;border:3px solid rgba(220,38,38,0.1);border-top-color:#dc2626;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;color:#dc2626;background:#ffffff;transition: all 0.3s ease;flex-shrink:0;">
+                        ${Math.ceil(cooldownSeconds)}
+                    </div>
+                    <div style="flex-grow:1;">
+                        <div id="quota-countdown-title" style="font-size:12px;color:#6b7280;margin-bottom:2px;">Thời gian chờ tải lại:</div>
+                        <div id="quota-countdown-text" style="font-size:14px;font-weight:700;color:#dc2626;">Đang tính toán...</div>
+                    </div>
+                </div>
+
+                <details style="margin-top:10px;">
+                    <summary style="font-size:11px;color:#6b7280;cursor:pointer;user-select:none;outline:none;">Xem log lỗi chi tiết</summary>
+                    <pre style="font-family:monospace;font-size:10px;color:#991b1b;background:#f9fafb;padding:8px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;margin-top:6px;max-height:100px;border:1px solid rgba(239,68,68,0.15);">${errors.join('\n')}</pre>
+                </details>
+            </div>
+            
+            <div class="api-quota-warning" style="margin-top:15px;background:#ecfdf5;border:1px solid rgba(16,185,129,0.25);border-radius:12px;padding:18px;text-align:left;backdrop-filter:blur(10px);box-shadow:0 8px 32px rgba(16,185,129,0.05);">
+                <div style="font-weight:700;color:#059669;margin-bottom:8px;font-size:15px;">
+                    Trải nghiệm ngoại tuyến (Offline Mode)
+                </div>
+                <p style="font-size:13px;color:#4b5563;line-height:1.6;margin:0 0 12px 0;">
+                    Bạn có thể chọn tiếp tục tham quan bằng lịch trình mẫu được tạo sẵn để trải nghiệm nhanh bố cục thiết kế của hệ thống.
+                </p>
+            </div>
+        `;
+        
+        if (el) el.innerHTML = errorHtml;
+        
+        // Tạo nút retry gửi lại yêu cầu khi hết thời gian chờ
+        const actsContainer = document.querySelector('#screen-error .popup-acts');
+        let btnRetry = document.getElementById('btn-retry-quota');
+        if (!btnRetry && actsContainer) {
+            btnRetry = document.createElement('button');
+            btnRetry.id = 'btn-retry-quota';
+            btnRetry.className = 'popup-confirm blue pulse-quota-btn';
+            btnRetry.style.display = 'none'; // hidden initially
+            btnRetry.style.background = 'linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%)';
+            btnRetry.style.borderColor = '#4f46e5';
+            btnRetry.style.boxShadow = '0 4px 14px rgba(79, 70, 229, 0.35)';
+            btnRetry.style.color = '#fff';
+            btnRetry.style.gap = '8px';
+            btnRetry.style.alignItems = 'center';
+            btnRetry.style.justifyContent = 'center';
+            btnRetry.innerHTML = `Gửi lại yêu cầu AI ngay`;
+            actsContainer.appendChild(btnRetry);
+            
+            btnRetry.addEventListener('click', () => {
+                if (window._quotaCountdownInterval) {
+                    clearInterval(window._quotaCountdownInterval);
+                    window._quotaCountdownInterval = null;
+                }
+                btnRetry.style.display = 'none';
+                showScreen('loading');
+                handleGenerate();
+            });
+        }
+        
+        // Bắt đầu đếm ngược live ticking
+        let secondsLeft = Math.ceil(cooldownSeconds);
+        const timerTextEl = document.getElementById('quota-countdown-text');
+        const timerCircleEl = document.getElementById('quota-timer-circle');
+        const countdownTitleEl = document.getElementById('quota-countdown-title');
+        const countdownBannerEl = document.getElementById('quota-countdown-banner');
+        
+        const updateTimerDisplay = () => {
+            if (secondsLeft > 0) {
+                if (timerTextEl) timerTextEl.innerHTML = `Thử lại sau <strong>${secondsLeft.toFixed(0)}s</strong>`;
+                if (timerCircleEl) {
+                    timerCircleEl.textContent = secondsLeft.toFixed(0);
+                    timerCircleEl.style.borderColor = 'rgba(220,38,38,0.1)';
+                    timerCircleEl.style.borderTopColor = '#dc2626';
+                    timerCircleEl.style.color = '#dc2626';
+                }
+            } else {
+                if (window._quotaCountdownInterval) {
+                    clearInterval(window._quotaCountdownInterval);
+                    window._quotaCountdownInterval = null;
+                }
+                if (timerTextEl) timerTextEl.innerHTML = `<span style="color:#059669; font-weight:600;">Bạn có thể thử gửi lại yêu cầu ngay bây giờ!</span>`;
+                if (countdownTitleEl) countdownTitleEl.style.display = 'none';
+                if (countdownBannerEl) {
+                    countdownBannerEl.style.background = '#ecfdf5';
+                    countdownBannerEl.style.borderColor = 'rgba(16,185,129,0.3)';
+                }
+                if (timerCircleEl) {
+                    timerCircleEl.textContent = 'OK';
+                    timerCircleEl.style.borderColor = 'rgba(16,185,129,0.4)';
+                    timerCircleEl.style.borderTopColor = '#059669';
+                    timerCircleEl.style.color = '#059669';
+                    timerCircleEl.style.fontSize = '12px';
+                }
+                if (btnRetry) {
+                    btnRetry.style.display = 'inline-flex';
+                }
+            }
+        };
+        
+        updateTimerDisplay();
+        window._quotaCountdownInterval = setInterval(() => {
+            secondsLeft--;
+            updateTimerDisplay();
+        }, 1000);
+        
+        window._continueAllowed = false;
+        
+        if (btnContinue) {
+            btnContinue.textContent = "Trải nghiệm ngoại tuyến →";
+            btnContinue.className = "popup-confirm green";
+            btnContinue.style.background = "linear-gradient(135deg, #10b981 0%, #059669 100%)";
+            btnContinue.style.borderColor = "#10b981";
+            btnContinue.style.boxShadow = "0 4px 14px rgba(16, 185, 129, 0.25)";
+            btnContinue.style.color = "#fff";
+            btnContinue.style.display = "inline-flex";
+            btnContinue.style.justifyContent = "center";
+            btnContinue.style.alignItems = "center";
+        }
+        window._useMockData = true;
+    } else {
+        // Standard error rendering
+        if (el) {
+            const errListHtml = errors.map(e => `<div class="error-issue">${e}</div>`).join('');
+            const offlineHtml = `
+                <div class="api-quota-warning" style="margin-top:15px;background:#ecfdf5;border:1px solid rgba(16,185,129,0.25);border-radius:12px;padding:18px;text-align:left;backdrop-filter:blur(10px);box-shadow:0 8px 32px rgba(16,185,129,0.05);">
+                    <div style="font-weight:700;color:#059669;margin-bottom:8px;font-size:15px;">
+                        Trải nghiệm ngoại tuyến (Offline Mode)
+                    </div>
+                    <p style="font-size:13px;color:#4b5563;line-height:1.6;margin:0 0 12px 0;">
+                        Bạn có thể chọn tiếp tục tham quan bằng lịch trình mẫu được tạo sẵn để trải nghiệm nhanh bố cục thiết kế của hệ thống.
+                    </p>
+                </div>
+            `;
+            el.innerHTML = (window.DOMPurify ? DOMPurify.sanitize(errListHtml) : errListHtml) + offlineHtml;
+        }
+        if (btnContinue) {
+            btnContinue.textContent = "Trải nghiệm ngoại tuyến →";
+            btnContinue.className = "popup-confirm green";
+            btnContinue.style.background = "linear-gradient(135deg, #10b981 0%, #059669 100%)";
+            btnContinue.style.borderColor = "#10b981";
+            btnContinue.style.boxShadow = "0 4px 14px rgba(16, 185, 129, 0.25)";
+            btnContinue.style.color = "#fff";
+            btnContinue.style.display = "inline-flex";
+            btnContinue.style.justifyContent = "center";
+            btnContinue.style.alignItems = "center";
+        }
+        window._useMockData = true;
+    }
+    
     window._lastPayload = payload;
     showScreen('error');
 }
 
 function handleContinueFromError() {
-    if (window._continueAllowed) { renderItinerary(null); showScreen('result'); setTimeout(initLeafletMap, 150); }
-    else showScreen('form');
+    if (window._useMockData) {
+        const mockData = getMockItineraryFallback(window._lastPayload);
+        renderItinerary(mockData.output);
+        showScreen('result');
+        setTimeout(initLeafletMap, 150);
+    } else if (window._continueAllowed) {
+        renderItinerary(null);
+        showScreen('result');
+        setTimeout(initLeafletMap, 150);
+    } else {
+        showScreen('form');
+    }
 }
 
 async function handleFeedback() {

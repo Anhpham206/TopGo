@@ -1,0 +1,136 @@
+<!-- 
+  ========================================================================
+  FILE: pricing.html
+  CHỨC NĂNG: 
+  - Trang biểu giá dịch vụ (Pricing Plans) của TopGo AI.
+  - Thiết kế theo Concept Vé Tàu Hỏa & Bảng giờ nhà ga (Train Ticket & Station Timetable).
+  - Cung cấp các gói dịch vụ Free, Pro, và Premium.
+  - Tích hợp tính năng chuyển đổi chu kỳ thanh toán (Tháng/Năm) có chiết khấu.
+  - Kế thừa và sử dụng chung thanh điều hướng Header và chân trang Footer thông qua shared.js.
+  ========================================================================
+-->
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopGo — Bảng giá</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <meta name="description" content="TopGo Pricing — Khám phá các gói dịch vụ và tính năng cao cấp của TopGo AI Itinerary Planner.">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/shared.css?v=2">
+    <link rel="stylesheet" href="./css/pricing.css">
+</head>
+
+<body>
+    <!-- Header — loaded dynamically by shared.js -->
+    <header class="header" id="site-header">
+        <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
+    </header>
+
+    <main class="pricing-main">
+        <!-- Pricing Hero: 3D Flying Tickets & Liquid Glass -->
+        <div class="pricing-hero travel-concept-hero">
+            
+            <!-- 3D Realistic Flying Tickets Background -->
+            <div class="hero-3d-tickets">
+                <!-- TICKET 1: Left top corner, flying outwards -->
+                <div class="realistic-ticket ticket-1">
+                    <div class="t-hole"></div>
+                    <div class="t-top">BOARDING PASS</div>
+                    <div class="t-main">
+                        <div class="t-flight"><strong>SGN</strong> ✈ <strong>TYO</strong></div>
+                        <div class="t-class">FIRST CLASS</div>
+                    </div>
+                    <div class="t-barcode"></div>
+                </div>
+                
+                <!-- TICKET 2: Right bottom, very close, large, cropped -->
+                <div class="realistic-ticket ticket-2">
+                    <div class="t-hole"></div>
+                    <div class="t-top">VIP TICKET</div>
+                    <div class="t-main">
+                        <div class="t-flight"><strong>AI</strong> ✈ <strong>PRO</strong></div>
+                        <div class="t-class">PREMIUM MATE</div>
+                    </div>
+                    <div class="t-barcode"></div>
+                </div>
+
+                <!-- TICKET 3: Left middle/bottom, deep background -->
+                <div class="realistic-ticket ticket-3">
+                    <div class="t-hole"></div>
+                    <div class="t-top">LOCAL PASS</div>
+                    <div class="t-main">
+                        <div class="t-flight"><strong>HAN</strong> ✈ <strong>SGN</strong></div>
+                        <div class="t-class">ECONOMY</div>
+                    </div>
+                    <div class="t-barcode"></div>
+                </div>
+                
+                <!-- TICKET 4: Right top, flying out, cropped -->
+                <div class="realistic-ticket ticket-4">
+                    <div class="t-hole"></div>
+                    <div class="t-top">FAST TRACK</div>
+                    <div class="t-main">
+                        <div class="t-flight"><strong>VIP</strong> ✈ <strong>PASS</strong></div>
+                        <div class="t-class">BUSINESS</div>
+                    </div>
+                    <div class="t-barcode"></div>
+                </div>
+
+                <!-- TICKET 5: Left bottom corner, close, large, cropped -->
+                <div class="realistic-ticket ticket-5">
+                    <div class="t-hole"></div>
+                    <div class="t-top">SMART PASS</div>
+                    <div class="t-main">
+                        <div class="t-flight"><strong>DAD</strong> ✈ <strong>SIN</strong></div>
+                        <div class="t-class">ASIA PASS</div>
+                    </div>
+                    <div class="t-barcode"></div>
+                </div>
+
+
+                <!-- TICKET 7: Left center background -->
+                <div class="realistic-ticket ticket-7">
+                    <div class="t-hole"></div>
+                    <div class="t-top">SMART PASS</div>
+                    <div class="t-main">
+                        <div class="t-flight"><strong>AI</strong> ✈ <strong>TOUR</strong></div>
+                        <div class="t-class">PREMIUM</div>
+                    </div>
+                    <div class="t-barcode"></div>
+                </div>
+
+                <!-- TICKET 8: Right middle, sticking out -->
+                <div class="realistic-ticket ticket-8">
+                    <div class="t-hole"></div>
+                    <div class="t-top">WORLD PASS</div>
+                    <div class="t-main">
+                        <div class="t-flight"><strong>SGN</strong> ✈ <strong>CDG</strong></div>
+                        <div class="t-class">FIRST CLASS</div>
+                    </div>
+                    <div class="t-barcode"></div>
+                </div>
+            </div>
+
+            <!-- Liquid Glass Frame wrapping the text -->
+            <div class="hero-glass-panel">
+                <div class="hero-eyebrow">
+                    <div class="hero-dot"></div>
+                    Gói dịch vụ sắp ra mắt
+                </div>
+                <h1 class="hero-title">Nâng tầm trải nghiệm du lịch cùng <span>TopGo AI</span></h1>
+                <p class="hero-desc cs-highlight-desc">Các gói dịch vụ tối ưu sắp ra mắt, đồng hành cùng hành trình của bạn.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer — loaded dynamically by shared.js -->
+    <div id="site-shared"></div>
+
+    <script type="module" src="./js/shared.js"></script>
+    <script src="./js/pricing.js"></script>
+</body>
+
+</html>
