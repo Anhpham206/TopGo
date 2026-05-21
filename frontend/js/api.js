@@ -35,18 +35,18 @@ function loadMockFallback() {
 
 export async function fetchCities() {
     return [
-        { id: 'ha_noi', name: 'Hà Nội', sub: 'Thủ đô ngàn năm văn hiến', img: './assets/img/cities/ha-noi.png', color: '#ffb3ba' },
-        { id: 'da_nang', name: 'Đà Nẵng', sub: 'Thành phố đáng sống', img: './assets/img/cities/da-nang.jpg', color: '#baffc9' },
-        { id: 'thanh_pho_ho_chi_minh', name: 'TP. Hồ Chí Minh', sub: 'Hòn ngọc Viễn Đông', img: './assets/img/cities/hcm.jpg', color: '#bae1ff' },
-        { id: 'nha_trang', name: 'Nha Trang', sub: 'Thành phố biển', img: './assets/img/cities/nha-trang.jpg', color: '#ffffba' },
-        { id: 'lam_dong', name: 'Lâm Đồng (Đà Lạt)', sub: 'Thành phố mờ sương', img: './assets/img/cities/da-lat.jpg', color: '#e6ccff' },
-        { id: 'phu_quoc', name: 'Phú Quốc', sub: 'Đảo ngọc', img: './assets/img/cities/phu-quoc.jpg', color: '#ffdfba' },
-        { id: 'hoi_an', name: 'Hội An', sub: 'Phố cổ yên bình', img: './assets/img/cities/hoi-an.jpg', color: '#f7d6e0' },
-        { id: 'binh_thuan', name: 'Bình Thuận', sub: 'Biển xanh cát trắng', img: './assets/img/cities/binh-thuan.jpg', color: '#d6f7e0' },
-        { id: 'ca_mau', name: 'Cà Mau', sub: 'Mũi đất phương Nam', img: './assets/img/cities/ca-mau.jpg', color: '#f7f6d6' },
-        { id: 'can_tho', name: 'Cần Thơ', sub: 'Thủ phủ miền Tây', img: './assets/img/cities/can-tho.jpg', color: '#d6dcf7' },
-        { id: 'ninh_binh', name: 'Ninh Bình', sub: 'Vịnh Hạ Long trên cạn', img: './assets/img/cities/ninh-binh.jpg', color: '#e8d6f7' },
-        { id: 'ninh_thuan', name: 'Ninh Thuận', sub: 'Xứ sở nho', img: './assets/img/cities/ninh-thuan.jpg', color: '#f7d6e8' }
+        { id: 'ha_noi', name: 'Hà Nội', sub: 'Thủ đô ngàn năm văn hiến', img: './assets/img/cities/ha-noi.webp', color: '#ffb3ba' },
+        { id: 'da_nang', name: 'Đà Nẵng', sub: 'Thành phố đáng sống', img: './assets/img/cities/da-nang.webp', color: '#baffc9' },
+        { id: 'thanh_pho_ho_chi_minh', name: 'TP. Hồ Chí Minh', sub: 'Hòn ngọc Viễn Đông', img: './assets/img/cities/hcm.webp', color: '#bae1ff' },
+        { id: 'nha_trang', name: 'Nha Trang', sub: 'Thành phố biển', img: './assets/img/cities/nha-trang.webp', color: '#ffffba' },
+        { id: 'lam_dong', name: 'Lâm Đồng (Đà Lạt)', sub: 'Thành phố mờ sương', img: './assets/img/cities/da-lat.webp', color: '#e6ccff' },
+        { id: 'phu_quoc', name: 'Phú Quốc', sub: 'Đảo ngọc', img: './assets/img/cities/phu-quoc.webp', color: '#ffdfba' },
+        { id: 'hoi_an', name: 'Hội An', sub: 'Phố cổ yên bình', img: './assets/img/cities/hoi-an.webp', color: '#f7d6e0' },
+        { id: 'binh_thuan', name: 'Bình Thuận', sub: 'Biển xanh cát trắng', img: './assets/img/cities/binh-thuan.webp', color: '#d6f7e0' },
+        { id: 'ca_mau', name: 'Cà Mau', sub: 'Mũi đất phương Nam', img: './assets/img/cities/ca-mau.webp', color: '#f7f6d6' },
+        { id: 'can_tho', name: 'Cần Thơ', sub: 'Thủ phủ miền Tây', img: './assets/img/cities/can-tho.webp', color: '#d6dcf7' },
+        { id: 'ninh_binh', name: 'Ninh Bình', sub: 'Vịnh Hạ Long trên cạn', img: './assets/img/cities/ninh-binh.webp', color: '#e8d6f7' },
+        { id: 'ninh_thuan', name: 'Ninh Thuận', sub: 'Xứ sở nho', img: './assets/img/cities/ninh-thuan.webp', color: '#f7d6e8' }
     ];
 }
 
@@ -67,12 +67,34 @@ export async function fetchPlaces() {
             { file: 'thanh_pho_ho_chi_minh.json', id: 'thanh_pho_ho_chi_minh' }
         ];
         const placesByCity = {};
-        for (const item of files) {
-            let res = await fetch(`${API_BASE}/dataset/${item.file}`).catch(() => null);
-            if (res && res.ok) {
-                const data = await res.json();
-                const cityName = Object.keys(data)[0];
-                placesByCity[item.id] = data[cityName].diem_tham_quan || [];
+        
+        // Chia nhỏ thành các batch (3 request/lần) để tránh sập local dev server (gây lỗi không fetch được)
+        for (let i = 0; i < files.length; i += 3) {
+            const batch = files.slice(i, i + 3);
+            await Promise.all(batch.map(async (item) => {
+                let res = await fetch(`${API_BASE}/dataset/${item.file}`).catch(() => null);
+                if (res && res.ok) {
+                    try {
+                        const data = await res.json();
+                        const cityName = Object.keys(data)[0];
+                        placesByCity[item.id] = data[cityName].diem_tham_quan || [];
+                    } catch (e) {
+                        console.error(`[TopGo] Error parsing ${item.file}:`, e);
+                    }
+                }
+            }));
+        }
+
+        // Tự động load dữ liệu dự phòng (mockFallback) nếu có bất kỳ file nào tải thất bại
+        if (Object.keys(placesByCity).length < files.length) {
+            console.warn("[TopGo] Một số dữ liệu địa điểm bị lỗi khi tải. Đang nạp dữ liệu dự phòng...");
+            await loadMockFallback().catch(() => null);
+            if (typeof MOCK_PLACES_BY_CITY !== 'undefined') {
+                for (const item of files) {
+                    if (!placesByCity[item.id]) {
+                        placesByCity[item.id] = MOCK_PLACES_BY_CITY[item.id] || [];
+                    }
+                }
             }
         }
         return placesByCity;

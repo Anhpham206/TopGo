@@ -388,7 +388,7 @@ const MOCK_CITIES = [
         "id": "binh_thuan",
         "name": "Bình Thuận",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/binh-thuan.jpg",
+        "img": "./assets/img/cities/binh-thuan.webp",
         "color": "#3674B5",
         "abbr": "BTN"
     },
@@ -396,7 +396,7 @@ const MOCK_CITIES = [
         "id": "can_tho",
         "name": "Cần Thơ",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/can-tho.jpg",
+        "img": "./assets/img/cities/can-tho.webp",
         "color": "#3674B5",
         "abbr": "CTO"
     },
@@ -404,7 +404,7 @@ const MOCK_CITIES = [
         "id": "ca_mau",
         "name": "Cà Mau",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ca-mau.jpg",
+        "img": "./assets/img/cities/ca-mau.webp",
         "color": "#3674B5",
         "abbr": "CMU"
     },
@@ -412,7 +412,7 @@ const MOCK_CITIES = [
         "id": "da_nang",
         "name": "Đà Nẵng",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/da-nang.jpg",
+        "img": "./assets/img/cities/da-nang.webp",
         "color": "#3674B5",
         "abbr": "DAD"
     },
@@ -420,7 +420,7 @@ const MOCK_CITIES = [
         "id": "ha_noi",
         "name": "Hà Nội",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ha-noi.png",
+        "img": "./assets/img/cities/ha-noi.webp",
         "color": "#3674B5",
         "abbr": "HAN"
     },
@@ -428,7 +428,7 @@ const MOCK_CITIES = [
         "id": "hoi_an",
         "name": "Hội An",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/hoi-an.jpg",
+        "img": "./assets/img/cities/hoi-an.webp",
         "color": "#3674B5",
         "abbr": "HOI"
     },
@@ -436,7 +436,7 @@ const MOCK_CITIES = [
         "id": "lam_dong",
         "name": "Lâm Đồng",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/da-lat.jpg",
+        "img": "./assets/img/cities/da-lat.webp",
         "color": "#3674B5",
         "abbr": "DLI"
     },
@@ -444,7 +444,7 @@ const MOCK_CITIES = [
         "id": "nha_trang",
         "name": "Nha Trang",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/nha-trang.jpg",
+        "img": "./assets/img/cities/nha-trang.webp",
         "color": "#3674B5",
         "abbr": "CXR"
     },
@@ -452,7 +452,7 @@ const MOCK_CITIES = [
         "id": "ninh_binh",
         "name": "Ninh Bình",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ninh-binh.jpg",
+        "img": "./assets/img/cities/ninh-binh.webp",
         "color": "#3674B5",
         "abbr": "NBH"
     },
@@ -460,7 +460,7 @@ const MOCK_CITIES = [
         "id": "ninh_thuan",
         "name": "Ninh Thuận",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ninh-thuan.jpg",
+        "img": "./assets/img/cities/ninh-thuan.webp",
         "color": "#3674B5",
         "abbr": "NTN"
     },
@@ -468,7 +468,7 @@ const MOCK_CITIES = [
         "id": "phu_quoc",
         "name": "Phú Quốc",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/phu-quoc.jpg",
+        "img": "./assets/img/cities/phu-quoc.webp",
         "color": "#3674B5",
         "abbr": "PQC"
     },
@@ -476,7 +476,7 @@ const MOCK_CITIES = [
         "id": "thanh_pho_ho_chi_minh",
         "name": "Thành phố Hồ Chí Minh",
         "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/hcm.jpg",
+        "img": "./assets/img/cities/hcm.webp",
         "color": "#3674B5",
         "abbr": "SGN"
     }

@@ -77,13 +77,12 @@ export function renderCityList(filter) {
     const raw = filtered.map(c => {
         const isSel = state.selectedCity?.id === c.id;
         return `<div class="dd-item${isSel ? ' sel' : ''}" data-city-id="${c.id}">
-          <img class="di-img" src="${c.img}" loading="lazy" decoding="async" onerror="this.style.background='${c.color}';this.removeAttribute('src')" alt="${c.name}" style="background:${c.color}">
+          <img class="di-img" src="${c.img}" width="40" height="30" onerror="this.onerror=null;this.style.background='${c.color}';this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='" alt="${c.name}" style="background:${c.color}">
           <div class="di-info"><div class="di-name">${c.name}</div><div class="di-sub">${c.sub}</div></div>
           ${isSel ? '<span class="di-check">✓</span>' : ''}
         </div>`;
     }).join('');
-    const sanitized = window.DOMPurify ? DOMPurify.sanitize(raw, { ADD_ATTR: ['data-city-id', 'onerror', 'style'] }) : raw;
-    list.innerHTML = sanitized;
+    list.innerHTML = raw;
     _lastCityFilter = q;
     _lastSelectedCityId = selId;
 }
@@ -99,12 +98,11 @@ export function renderDepList(filter) {
 
     const html = state.CITIES.filter(c => c.name.toLowerCase().includes(q))
         .map(c => `<div class="dd-item${state.selectedDepCity?.id === c.id ? ' sel' : ''}" data-dep-id="${c.id}">
-            <img class="di-img" src="${c.img}" loading="lazy" decoding="async" onerror="this.onerror=null;this.style.backgroundColor='${c.color}';this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+            <img class="di-img" src="${c.img}" width="40" height="30" onerror="this.onerror=null;this.style.backgroundColor='${c.color}';this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
             <div class="di-info"><div class="di-name">${c.name}</div><div class="di-sub">${c.sub || 'Thành phố'}</div></div>
             ${state.selectedDepCity?.id === c.id ? '<span class="di-check">✓</span>' : ''}
           </div>`).join('');
-    const sanitized = window.DOMPurify ? DOMPurify.sanitize(html, { ADD_ATTR: ['data-dep-id', 'onerror', 'style'] }) : html;
-    list.innerHTML = sanitized;
+    list.innerHTML = html;
     
     _lastDepFilter = q;
     _lastSelectedDepId = selId;
@@ -148,7 +146,17 @@ export function selectDepCity(id) {
 function getAbbr(city) {
     if (city.abbr) return city.abbr;
     if (!city.name) return '—';
-    return city.name.split(/\s+/).map(w=>w[0]).join('').toUpperCase().substring(0,3);
+    
+    // Xóa phần trong ngoặc đơn (VD: (Đà Lạt)) và các ký tự không phải chữ/khoảng trắng
+    const cleanName = city.name.replace(/\(.*?\)/g, '').replace(/[^\p{L}\s]/gu, '').trim();
+    const words = cleanName.split(/\s+/).filter(Boolean);
+    
+    // Nếu có tiền tố "TP", bỏ qua để lấy tên chính xác (VD: TP Hồ Chí Minh -> HCM)
+    if (words.length > 0 && words[0].toUpperCase() === 'TP') {
+        words.shift();
+    }
+    
+    return words.map(w => w[0]).join('').toUpperCase().substring(0, 3);
 }
 
 export function updateFromToDisplay() {
@@ -199,7 +207,7 @@ export function renderPlaceList(filter) {
     let html='';
     if (fDTQ.length) html+='<div class="dd-section-label">Điểm tham quan</div>'+fDTQ.map(renderPlaceItem).join('');
     if (fQA.length)  html+='<div class="dd-section-label">Quán ăn</div>'+fQA.map(renderPlaceItem).join('');
-    list.innerHTML=window.DOMPurify ? DOMPurify.sanitize(html,{ADD_ATTR:['data-place-id','data-place-name','data-place-loai']}) : html;
+    list.innerHTML = html;
 
     _lastPlaceFilter = q;
     _lastPlaceCityId = state.selectedCity.id;
@@ -530,6 +538,7 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
     if (cityTrigger) cityTrigger.addEventListener('click',()=>toggleDrop('dd-city'));
     const citySearch=document.getElementById('city-search');
     if (citySearch) {
+        citySearch.addEventListener('click', e => e.stopPropagation());
         citySearch.addEventListener('input', e=>filterCities(e.target.value));
         citySearch.addEventListener('focus', ()=>openDrop('dd-city'));
         citySearch.addEventListener('blur',  ()=>setTimeout(()=>closeDrop('dd-city'),200));
@@ -561,9 +570,12 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
         }
     });
 
-    // Dep input
+    // Dep dropdown
+    const depTrigger=document.getElementById('dep-trigger');
+    if (depTrigger) depTrigger.addEventListener('click',()=>toggleDrop('dd-dep'));
     const depSearch=document.getElementById('dep-search');
     if (depSearch) {
+        depSearch.addEventListener('click', e => e.stopPropagation());
         depSearch.addEventListener('input', e=>filterDepCities(e.target.value));
         depSearch.addEventListener('focus', ()=>openDrop('dd-dep'));
         depSearch.addEventListener('blur',  ()=>setTimeout(()=>closeDrop('dd-dep'),200));
@@ -646,7 +658,10 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
     document.getElementById('popup-reset')?.addEventListener('click', e=>{ if(e.target===e.currentTarget) closePopup('popup-reset'); });
 
     // Generate
-    document.getElementById('btn-gen')?.addEventListener('click', onGenerate);
+    document.getElementById('btn-gen')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (onGenerate) onGenerate(e);
+    });
 
     // Loading screen
     document.getElementById('btn-loading-cancel')?.addEventListener('click', () => {

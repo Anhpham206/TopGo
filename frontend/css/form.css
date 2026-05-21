@@ -99,7 +99,10 @@
   font-style: normal;
   font-size: 1em;
   font-weight: 600;
-  color: var(--a2);
+  background: linear-gradient(135deg, #ffffff 0%, #cdf5fd 50%, #e0f7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   letter-spacing: 0;
   line-height: 0.9;
 }
@@ -465,8 +468,9 @@
   z-index: 80;
   max-height: 220px;
   overflow-y: auto;
-  /* Dùng visibility thay display:none để browser giữ layout trong bộ nhớ.
-     Khi toggle open/close không phải reflow từ đầu → không lag */
+  /* GPU compositing — tách layer riêng tránh repaint hero background */
+  will-change: opacity, transform;
+  contain: layout style paint;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -514,6 +518,7 @@
   border-radius: 5px;
   object-fit: cover;
   flex-shrink: 0;
+  content-visibility: auto;
 }
 .di-info {
   flex: 1;

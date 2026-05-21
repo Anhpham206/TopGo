@@ -377,18 +377,43 @@
         document.addEventListener('DOMContentLoaded', () => {
             const checkHeader = () => {
                 const header = document.getElementById('site-header');
-                const hero = document.querySelector('.hero');
-                if (header && hero) {
-                    if (window.scrollY < hero.offsetHeight - 50) {
+                
+                let activeHero = null;
+                const formScreen = document.getElementById('screen-form');
+                const errorScreen = document.getElementById('screen-error');
+                const resultScreen = document.getElementById('screen-result');
+
+                if (formScreen && formScreen.classList.contains('active')) {
+                    activeHero = document.querySelector('.hero');
+                } else if (errorScreen && errorScreen.classList.contains('active')) {
+                    activeHero = document.querySelector('.error-hero');
+                } else if (resultScreen && resultScreen.classList.contains('active')) {
+                    activeHero = document.querySelector('.bento-hero-unified');
+                }
+
+                if (header) {
+                    if (activeHero && window.scrollY < activeHero.offsetHeight - 50) {
                         header.classList.add('header-solid');
                     } else {
                         header.classList.remove('header-solid');
                     }
                 }
             };
+            
             window.addEventListener('scroll', checkHeader);
+            
             const observer = new MutationObserver(checkHeader);
-            observer.observe(document.body, { childList: true, subtree: true });
+            const header = document.getElementById('site-header');
+            if (header) {
+                observer.observe(header, { childList: true });
+            }
+            
+            const appMain = document.getElementById('app-main');
+            if (appMain) {
+                observer.observe(appMain, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+            }
+            
+            checkHeader();
         });
     </script>
 </body>
