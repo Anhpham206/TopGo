@@ -957,7 +957,7 @@
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: var(--r-s);
+  border-radius: 100px;
   padding: 12px 22px;
   font-family: var(--font-label);
   font-size: 14px;
@@ -979,7 +979,7 @@
   flex: 1;
   background: linear-gradient(90deg, var(--p1) 0%, var(--p2) 100%);
   border: none;
-  border-radius: var(--r-s);
+  border-radius: 100px;
   padding: 13px 24px;
   font-family: var(--font-label);
   font-size: 15.5px;

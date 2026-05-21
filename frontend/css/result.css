@@ -213,7 +213,10 @@
   flex-direction: column;
   padding: 0;
   position: relative;
-  min-height: 240px; /* Reduced height */
+  min-height: 240px;
+  box-shadow: 0 16px 40px rgba(0, 169, 255, 0.08),
+              inset 0 2px 4px rgba(255, 255, 255, 0.5),
+              inset 0 -1px 3px rgba(0, 169, 255, 0.04);
 }
 
 .hero-bg-image {
@@ -230,9 +233,9 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(160deg, 
-    rgba(0, 169, 255, 0.2) 0%, 
-    rgba(137, 207, 243, 0.15) 45%, 
-    rgba(160, 233, 255, 0.05) 100%
+    rgba(0, 169, 255, 0.04) 0%, 
+    rgba(137, 207, 243, 0.02) 60%, 
+    transparent 100%
   );
   z-index: 1;
 }
@@ -241,36 +244,36 @@
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 7fr;
   gap: 40px;
   padding: 32px 40px;
   align-items: center;
   height: 100%;
 }
 
+/* Left stub — subtle tint to mimic boarding pass stub */
 .hero-main-content {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-/* Removed bento-main */
-.hero-main-content {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: flex-start; /* Fit eyebrow to text */
-  padding-left: 20px; /* Indent main text */
+  align-items: flex-start;
+  padding-left: 20px;
+  padding-right: 12px;
+  background: rgba(240, 250, 255, 0.25);
+  border-radius: var(--r-l);
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 /* TICKET DIVIDER (Răng cưa Boarding Pass) */
 .ticket-divider {
   position: absolute;
-  left: 50%;
+  left: calc(30% + 24px);
   top: 0;
   bottom: 0;
   width: 2px;
-  /* Dotted/Dashed line for the tear-off effect */
-  border-left: 3px dashed rgba(0, 169, 255, 0.4);
+  /* Dotted/Dashed line — bright sky blue for ticket feel */
+  border-left: 3px dashed rgba(0, 169, 255, 0.35);
   transform: translateX(-50%);
   z-index: 3;
 }
@@ -355,6 +358,14 @@
   text-transform: uppercase;
   border-radius: 100px;
 }
+.res-actions .btn-outline {
+  border: 1.5px solid rgba(0, 169, 255, 0.45);
+  color: var(--p1);
+}
+.res-actions .btn-outline:hover {
+  border-color: var(--p1);
+  background: rgba(0, 169, 255, 0.08);
+}
 
 /* Unified Stats Styling */
 .hero-stats-container {
@@ -380,9 +391,10 @@
 }
 
 .hero-prep-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 120px 110px 1fr;
+  gap: 20px;
+  align-items: start;
 }
 
 .hero-stat-item {
@@ -411,6 +423,15 @@
   line-height: 1.3;
 }
 .bento-val.highlight { color: var(--p1); font-size: 16px; font-weight: 700; }
+#res-best-time {
+  text-transform: none;
+  font-family: var(--font);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #1b4965;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
 .bento-divider {
   width: 100%;
   height: 1px;
@@ -895,13 +916,14 @@
   .split-section { grid-template-columns: 1fr; }
   .split-right { max-height: none; }
   .hero-content-wrapper { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+  .ticket-divider { display: none; }
   .floating-stats-overlay { flex-wrap: wrap; }
   .stat-glass { min-width: 45%; }
 }
 @media (max-width: 768px) {
   .bionic-wrap { padding: 20px 16px; gap: 40px; }
   .hero-stats-container { padding: 16px; }
-  .hero-prep-row { flex-direction: column; gap: 12px; }
+  .hero-prep-row { display: flex; flex-direction: column; gap: 12px; }
   .ai-command-center { padding: 20px; }
   .immersive-map-container { height: 320px; }
   .timeline-stop { grid-template-columns: 44px 1fr; gap: 0 12px; }
