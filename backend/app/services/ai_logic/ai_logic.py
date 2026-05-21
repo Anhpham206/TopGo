@@ -73,20 +73,20 @@ Chỉ trả về duy nhất đối tượng JSON, không kèm theo lời giải 
 
 PROMPT_AI2 = """Vai trò của bạn: Bạn là một hệ thống phân tích dữ liệu và chuyên gia lên kế hoạch du lịch tự động.
 Dữ liệu đầu vào: chuỗi JSON chứa các thông tin yêu cầu của người dùng, đặc biệt chú ý đến:
-    1. cho_o_partialscore_tags: Danh sách các chỗ ở (gồm tên, rating, AIScore ban đầu, giá, url, và mảng các tag).
+    1. danh_sach_goi_y: Danh sách các chỗ ở (gồm các thông tin về nơi lưu trú).
     2. tag_nguoi_dung: những yêu cầu cụ thể về chỗ ở của người dùng
     3. Giá trị trọng số w2 (đã được tính từ bước trước).
     4. lo_trinh_toi_uu và thoi_gian: Dữ liệu để xây dựng lịch trình.
 Nhiệm vụ của bạn: Thực hiện tuần tự 2 bước sau:
 
 Bước 1: Tính toán số tag khớp và Cập nhật AIScore cho từng chỗ ở
-    1. Đếm số tag khớp (x): So sánh mảng tag của từng chỗ ở thứ i trong cho_o_partialscore_tags với tag_nguoi_dung. Đếm xem có bao nhiêu tag khớp nhau (về mặt ngữ nghĩa hoặc từ khóa). Gọi số lượng này là x_i.
+    1. Đếm số tag khớp (x): So sánh mảng tag của từng chỗ ở thứ i trong danh_sach_goi_y với tag_nguoi_dung. Đếm xem có bao nhiêu tag khớp nhau (về mặt ngữ nghĩa hoặc từ khóa). Gọi số lượng này là x_i.
     2. Tìm Min / Max: Tìm ra số lượng tag khớp lớn nhất (max) và nhỏ nhất (min) trong toàn bộ danh sách chỗ ở.
     3. Chuẩn hóa (Min-Max Scaling): Đối với mỗi chỗ ở, tính Điểm Tag (TagScore) theo công thức:
-        - Nếu max > min: TagScore = frac{x_i - min}{max - min}
+        - Nếu max > min: TagScore = (x_i - min) / (max - min)
         - Nếu max = min (tất cả chỗ ở có số tag khớp bằng nhau): TagScore = 1
     4. Cập nhật AIScore: Tính điểm số mới cho từng chỗ ở:
-        AIScore_Moi = AIScore_Ban_Dau + w_2 * TagScore
+        AIScore_Moi = diem_tong + w_2 * TagScore
     5. Chọn lọc: Sắp xếp danh sách chỗ ở theo AIScore_Moi từ cao xuống thấp và chỉ giữ lại Top 3 chỗ ở có điểm cao nhất để đưa vào kết quả đầu ra. Đổi AIScore_Moi thành định dạng phần trăm (VD: 95%).
 
 Bước 2: Xây dựng Lịch trình Tối ưu
@@ -94,9 +94,10 @@ Bước 2: Xây dựng Lịch trình Tối ưu
         - Sắp xếp thời gian hợp lý (có thời gian di chuyển, thời gian tham quan).
         - Viết lời giới thiệu ngắn gọn, hấp dẫn cho từng địa điểm.
         - Gợi ý  phương tiện di chuyển phù hợp với khoảng cách giữa các điểm.
-    2. Dựa vào dia_diem_xuat_phat, dia_diem_den, ngay_khoi_hanh,  loai_hinh_phuong_tien, hãy gợi ý thời gian đặt vé/ bắt đầu khởi hành để có thể kịp lịch trình du lịch đã tạo.
+    2. Dựa vào dia_diem_xuat_phat, dia_diem_den, ngay_khoi_hanh, phuong_tien_di_chuyen, hãy gợi ý thời gian đặt vé/ bắt đầu khởi hành để có thể kịp lịch trình du lịch đã tạo.
 
-    YÊU CẦU ĐẦU RA: CHỈ trả về ĐÚNG cấu trúc JSON được cung cấp, không bọc trong markdown code block, không thêm bất kỳ văn bản giải thích nào khác. Thay thế các giá trị giả định bằng dữ liệu nhận được từ JSON và đã xử lý ở Bước 1 và Bước 2.”
+    YÊU CẦU ĐẦU RA: CHỈ trả về ĐÚNG cấu trúc JSON được cung cấp, không bọc trong markdown code block, không thêm bất kỳ văn bản giải thích nào khác. Thay thế các giá trị giả định bằng dữ liệu nhận được từ JSON và đã xử lý ở Bước 1 và Bước 2.
+    LƯU Ý: Các dữ liệu khách sạn không được thay đổi, chỉ thêm 1 trường điểm AIScore_Moi”
 """
 
 TEMPLATE_AI2 = """
@@ -106,8 +107,7 @@ TEMPLATE_AI2 = """
             "Ten_hanh_trinh": "[Tạo một tên hành trình hấp dẫn]",
             "So_nguoi": "[Lấy từ so_luong_hanh_khach]",
             "Tong_ngan_sach": "[Lấy từ ngan_sach_tong_k, format VNĐ]",
-“Goi_y_khoi_hanh”: [lời gợi ý về thời điểm đặt vé/ khỏi hành để kịp lịch trình
-            ],
+            "Goi_y_khoi_hanh": [lời gợi ý về thời điểm đặt vé/ khỏi hành để kịp lịch trình],
             "AIScore_Hanh_trinh": "[Điểm đánh giá chung độ phù hợp, VD: 98% Phù hợp]"
         },
         "Lich_trinh": [
@@ -142,31 +142,22 @@ TEMPLATE_AI2 = """
         ],
         "Khach_san_goi_y": [
             {
-                "Ten": "[Tên Top 1]",
-                "rate": "[Rating Top 1]",
-                "AIScore": "[AIScore_Moi Top 1 %]",
-                "Gia_tien": "[Giá tiền Top 1]",
-                "url_img":
+                "AIScore": "[AIScore_Moi]",
+                "ten": "Tên khách sạn",
+                "lat": "lat",
+                "lng": "lng",
+                "gia_tien": "giá tiền",
+                "rating": "rating",
+                "khoang_cach_tam": khoang_cach,
+                "website": "link website",
+                "url_img": "url_img",
+                "address": address,
             },
-            {
-                "Ten": "[Tên Top 2]",
-                "rate": "[Rating Top 2]",
-                "AIScore": "[AIScore_Moi Top 2 %]",
-                "Gia_tien": "[Giá tiền Top 2]",
-                "url_img":
-            },
-            {
-                "Ten": "[Tên Top 3]",
-                "rate": "[Rating Top 3]",
-                "AIScore": "[AIScore_Moi Top 3 %]",
-                "Gia_tien": "[Giá tiền Top 3]",
-                "url_img":
-            }
+            ...
         ]
     }
 }
 """
-
 
 
 def call_ai_1(user_input_dict):

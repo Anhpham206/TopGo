@@ -123,7 +123,7 @@ function handleGenerate() {
     resetLoadingSteps();
 
     generateItinerary(payload, (stepIdx) => {
-        const ids = ['ls-1', 'ls-2', 'ls-3', 'ls-4', 'ls-5'];
+        const ids = ['ls-1', 'ls-2', 'ls-3', 'ls-4', 'ls-5', 'ls-6'];
         for (let i = 0; i < stepIdx; i++) {
             const el = document.getElementById(ids[i]);
             if (el) {
@@ -133,7 +133,7 @@ function handleGenerate() {
                 el.classList.add('done');
             }
         }
-        if (stepIdx < 5) {
+        if (stepIdx < 6) {
             const current = document.getElementById(ids[stepIdx]);
             if (current) {
                 const ico = current.querySelector('.ls-ico');
@@ -147,12 +147,6 @@ function handleGenerate() {
                 _showBackendError(data, payload);
             } else {
                 if (data.status === 'success') {
-                    console.log("đã nhận data ở main.js");
-                }
-                if (data.status == 'success') {
-                    console.log("đã nhận data ở main.js");
-                }
-                if (data.status == "success") {
                     console.log("đã nhận data ở main.js");
                 }
                 renderItinerary(data.status === 'success' ? data.output : null);
@@ -218,8 +212,8 @@ async function handleFeedback() {
 // ── Loading animation ─────────────────────────────────────────
 
 function resetLoadingSteps() {
-    const labels = ['Phân tích yêu cầu chuyến đi', 'Tìm kiếm địa điểm phù hợp', 'Tối ưu hóa lộ trình', 'Gợi ý phương tiện & chi phí', 'Hoàn thiện lịch trình'];
-    ['ls-1', 'ls-2', 'ls-3', 'ls-4', 'ls-5'].forEach((id, i) => {
+    const labels = ['Phân tích yêu cầu chuyến đi', 'Tìm kiếm địa điểm phù hợp', 'Tối ưu hóa lộ trình', 'Tìm kiếm khách sạn phù hợp', 'Gợi ý phương tiện & chi phí', 'Hoàn thiện lịch trình'];
+    ['ls-1', 'ls-2', 'ls-3', 'ls-4', 'ls-5', 'ls-6'].forEach((id, i) => {
         const el = document.getElementById(id); if (!el) return;
         el.className = 'ls' + (i === 0 ? ' done' : i === 1 ? ' active' : '');
         el.innerHTML = (i === 0 ? '<span class="ls-ico">✓</span>' : i === 1 ? '<div class="ls-spin"></div>' : '<span class="ls-ico">○</span>') + ' ' + labels[i];
@@ -227,7 +221,7 @@ function resetLoadingSteps() {
 }
 
 function animateLoading(success) {
-    const ids = ['ls-2', 'ls-3', 'ls-4', 'ls-5']; let delay = 0;
+    const ids = ['ls-2', 'ls-3', 'ls-4', 'ls-5', 'ls-6']; let delay = 0;
     ids.forEach((id, i) => {
         const nextId = ids[i + 1]; delay += 1100 + Math.random() * 400;
         setTimeout(() => {

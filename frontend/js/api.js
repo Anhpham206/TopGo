@@ -108,7 +108,6 @@ export async function generateItinerary(payload, onProgress) {
             try {
                 const data = JSON.parse(line);
                 if (data.step === 'done') {
-                    console.log("nhận được data ở api.js");
                     finalData = data.result;
                 } else if (data.step && onProgress) {
                     onProgress(data.step);
@@ -123,7 +122,6 @@ export async function generateItinerary(payload, onProgress) {
         try {
             const data = JSON.parse(buffer);
             if (data.step === 'done') {
-                console.log("nhận được data ở api.js 2");
                 finalData = data.result;
             }
         } catch (e) { }

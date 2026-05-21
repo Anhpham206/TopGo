@@ -4,10 +4,13 @@ import datetime
 import asyncio
 from app.services.ai_logic.ai_logic import call_ai_1, call_ai_2
 from app.services.routing_service.routing_service import generate_itinerary
+from app.services.hotel.hotel import quet_khach_san_quanh_trung_vi
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # backend/
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))  # backend/
 DATASET_DIR = os.path.abspath(os.path.join(BASE_DIR, "../dataset"))
 FRONTEND_LOGS_DIR = os.path.abspath(os.path.join(BASE_DIR, "../frontend/logs"))
+
 
 async def generate_itinerary_stream(payload: dict):
     try:
@@ -28,6 +31,7 @@ async def generate_itinerary_stream(payload: dict):
         budget = payload.get("budget", 0)
         pax = payload.get("pax", 1)
         notes = payload.get("notes", "")
+        transport_type = payload.get("transport", "")
 
         date_start = payload.get("date_start")
         date_end = payload.get("date_end")
@@ -60,10 +64,10 @@ async def generate_itinerary_stream(payload: dict):
                 "rating": dp.get("rating", 0.0),
             }
         min_places = 3 * days
-        
+
         selected_places_formatted = []
         selected_ids = set()
-        
+
         for p in places:
             p_id = p.get("id")
             selected_ids.add(p_id)
@@ -76,9 +80,9 @@ async def generate_itinerary_stream(payload: dict):
             })
 
         kiem_tra = len(selected_places_formatted) >= min_places
-        
+
         dataset_ai1 = []
-        if(not kiem_tra):
+        if (not kiem_tra):
             for dp in dataset_data:
                 dataset_ai1.append({
                     "id": dp.get("id"),
@@ -86,7 +90,6 @@ async def generate_itinerary_stream(payload: dict):
                     "tags": dp.get("tags", []),
                     "gia_ve": dp.get("gia_ve", 0),
                 })
-
 
         ai1_input = {
             "so_luong_hanh_khach": pax,
@@ -127,12 +130,13 @@ async def generate_itinerary_stream(payload: dict):
                 "thoi_luong_tham_quan": "Ghé qua/Chụp ảnh nhanh: 30-45 phút; Tham quan/Cà phê: 1-1.5 giờ; Tìm hiểu/Chữa lành: 2-4 giờ."
             }
         }
-        
+
         # AI 1
         ai1_output = call_ai_1(ai1_input)
-        
+
         # Lưu log AI 1
-        ai_logic_logs_dir = os.path.join(BASE_DIR, "app", "services", "ai_logic", "logs")
+        ai_logic_logs_dir = os.path.join(
+            BASE_DIR, "app", "services", "ai_logic", "logs")
         os.makedirs(ai_logic_logs_dir, exist_ok=True)
         with open(os.path.join(ai_logic_logs_dir, f"output_ai1_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(ai1_output, f, ensure_ascii=False, indent=2)
@@ -140,7 +144,8 @@ async def generate_itinerary_stream(payload: dict):
         yield json.dumps({"step": 2}) + "\n"
 
         # Routing (Bước 4.2)
-        routing_logs_dir = os.path.join(BASE_DIR, "app", "services", "routing_service", "logs")
+        routing_logs_dir = os.path.join(
+            BASE_DIR, "app", "services", "routing_service", "logs")
         os.makedirs(routing_logs_dir, exist_ok=True)
 
         ai_places = ai1_output.get("diem_tham_quan", [])
@@ -148,7 +153,7 @@ async def generate_itinerary_stream(payload: dict):
         w = ai1_output.get("trong_so_danh_gia", [0.25, 0.25, 0.25, 0.25])
         ngan_sach_luu_tru = ai1_output.get("ngan_sach_luu_tru", 0)
         tag_nguoi_dung = ai1_output.get("tag_nguoi_dung", [])
-        
+
         routing_input_places = []
         for ap in ai_places:
             ap_id = ap.get("id")
@@ -180,7 +185,7 @@ async def generate_itinerary_stream(payload: dict):
             json.dump(routing_input_places, f, ensure_ascii=False, indent=2)
 
         routing_output = await generate_itinerary(routing_input_places, days, so_luong_diem_tham_quan)
-        
+
         # Lưu log Routing
         with open(os.path.join(routing_logs_dir, f"output_routing_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(routing_output, f, ensure_ascii=False, indent=2)
@@ -189,45 +194,54 @@ async def generate_itinerary_stream(payload: dict):
 
         # Lọc kết quả cho AI 2 (Bước 4.3)
         filtered_daily_routes = []
+        otm_coordinate = {}
         if routing_output.get("status") == "success":
+            otm_coordinate = routing_output.get("optimal_coordinate", {})
             for dr in routing_output.get("daily_routes", []):
                 new_dr = dr.copy()
                 new_dr.pop("places", None)
                 new_dr.pop("route_geometry", None)
                 filtered_daily_routes.append(new_dr)
+        
+
+        hotel_output = await quet_khach_san_quanh_trung_vi(otm_coordinate.get(
+            "lat", 0), otm_coordinate.get("lon", 0), ngan_sach_luu_tru, "khách sạn", w)
+        danh_sach_goi_y = []
+        if hotel_output.get("status") == "success":
+            danh_sach_goi_y = hotel_output.get("danh_sach_goi_y")
 
         db_data_dict = {
             "w2": w[1] if len(w) > 1 else 0.25,
             "ngan_sach_luu_tru": ngan_sach_luu_tru,
             "tag_nguoi_dung": tag_nguoi_dung,
             "lo_trinh_toi_uu": filtered_daily_routes,
-            "thoi_gian": ai1_input["thoi_gian"]
+            "thoi_gian": ai1_input["thoi_gian"],
+            "phuong_tien_di_chuyen": transport_type,
+            "danh_sach_goi_y": danh_sach_goi_y,
         }
+
+        yield json.dumps({"step": 4}) + "\n"
 
         # AI 2
         ai2_output = call_ai_2(ai1_output, db_data_dict)
-        
+
         # Lưu log AI 2
         with open(os.path.join(ai_logic_logs_dir, f"output_ai2_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(ai2_output, f, ensure_ascii=False, indent=2)
 
-        yield json.dumps({"step": 4}) + "\n"
-
-        
+        yield json.dumps({"step": 5}) + "\n"
 
         # Gửi dữ liệu xuống client
         data_output = {
-            "output": ai2_output.get("output", ai2_output), 
+            "output": ai2_output.get("output", ai2_output),
             "routing": routing_output
         }
         final_output = {
             "status": "success",
             "output": data_output
         }
-        
+
         yield json.dumps({"step": "done", "result": final_output}) + "\n"
-    
+
     except Exception as e:
         yield json.dumps({"step": "done", "result": {"status": "error", "errors": [str(e)]}}) + "\n"
-
-    
