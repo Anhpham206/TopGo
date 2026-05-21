@@ -383,104 +383,6 @@ const MOCK_WEATHER_DATA = {
         },
     };
 
-const MOCK_CITIES = [
-    {
-        "id": "binh_thuan",
-        "name": "Bình Thuận",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/binh-thuan.webp",
-        "color": "#3674B5",
-        "abbr": "BTN"
-    },
-    {
-        "id": "can_tho",
-        "name": "Cần Thơ",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/can-tho.webp",
-        "color": "#3674B5",
-        "abbr": "CTO"
-    },
-    {
-        "id": "ca_mau",
-        "name": "Cà Mau",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ca-mau.webp",
-        "color": "#3674B5",
-        "abbr": "CMU"
-    },
-    {
-        "id": "da_nang",
-        "name": "Đà Nẵng",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/da-nang.webp",
-        "color": "#3674B5",
-        "abbr": "DAD"
-    },
-    {
-        "id": "ha_noi",
-        "name": "Hà Nội",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ha-noi.webp",
-        "color": "#3674B5",
-        "abbr": "HAN"
-    },
-    {
-        "id": "hoi_an",
-        "name": "Hội An",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/hoi-an.webp",
-        "color": "#3674B5",
-        "abbr": "HOI"
-    },
-    {
-        "id": "lam_dong",
-        "name": "Lâm Đồng",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/da-lat.webp",
-        "color": "#3674B5",
-        "abbr": "DLI"
-    },
-    {
-        "id": "nha_trang",
-        "name": "Nha Trang",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/nha-trang.webp",
-        "color": "#3674B5",
-        "abbr": "CXR"
-    },
-    {
-        "id": "ninh_binh",
-        "name": "Ninh Bình",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ninh-binh.webp",
-        "color": "#3674B5",
-        "abbr": "NBH"
-    },
-    {
-        "id": "ninh_thuan",
-        "name": "Ninh Thuận",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/ninh-thuan.webp",
-        "color": "#3674B5",
-        "abbr": "NTN"
-    },
-    {
-        "id": "phu_quoc",
-        "name": "Phú Quốc",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/phu-quoc.webp",
-        "color": "#3674B5",
-        "abbr": "PQC"
-    },
-    {
-        "id": "thanh_pho_ho_chi_minh",
-        "name": "Thành phố Hồ Chí Minh",
-        "sub": "Thành phố du lịch",
-        "img": "./assets/img/cities/hcm.webp",
-        "color": "#3674B5",
-        "abbr": "SGN"
-    }
-];
 
 const MOCK_PLACES_BY_CITY = {
     "binh_thuan": [
@@ -490,7 +392,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.949296,
             "lng": 108.29635,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -504,7 +406,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.060948,
             "lng": 108.427948,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 15000,
             "tags": [
                 "Thiên nhiên",
@@ -518,7 +420,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.063895,
             "lng": 108.423154,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -532,7 +434,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.063796,
             "lng": 108.432414,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -546,7 +448,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.112394,
             "lng": 108.485899,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -560,7 +462,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.95122,
             "lng": 108.25634,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 50000,
             "tags": [
                 "Thiên nhiên",
@@ -574,7 +476,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.82348,
             "lng": 107.882394,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 250000,
             "tags": [
                 "Tâm linh",
@@ -588,7 +490,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.823204,
             "lng": 107.882084,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 250000,
             "tags": [
                 "Tâm linh",
@@ -602,7 +504,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.699425,
             "lng": 107.992976,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -616,7 +518,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.695289,
             "lng": 107.991564,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -630,7 +532,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.935968,
             "lng": 108.146018,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 15000,
             "tags": [
                 "Lịch sử",
@@ -644,7 +546,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.922917,
             "lng": 108.10013,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 15000,
             "tags": [
                 "Tôn giáo",
@@ -658,7 +560,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.928808,
             "lng": 108.099939,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -672,7 +574,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.928683,
             "lng": 108.095498,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 10000,
             "tags": [
                 "Lịch sử",
@@ -686,7 +588,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.924222,
             "lng": 108.115016,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -700,7 +602,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.925517,
             "lng": 108.115651,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -714,7 +616,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.917281,
             "lng": 108.107973,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -728,7 +630,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.940443,
             "lng": 108.193159,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -742,7 +644,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.95375,
             "lng": 108.306505,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -756,7 +658,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.922947,
             "lng": 108.294598,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -770,7 +672,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.914832,
             "lng": 108.292048,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -784,7 +686,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.94101,
             "lng": 108.279127,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 0,
             "tags": [
                 "Văn hóa",
@@ -798,7 +700,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.942081,
             "lng": 108.276591,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Văn hóa địa phương",
@@ -812,7 +714,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.958232,
             "lng": 108.327178,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -826,7 +728,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.947464,
             "lng": 108.181997,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 145000,
             "tags": [
                 "Kiến trúc độc đáo",
@@ -840,7 +742,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.922923,
             "lng": 108.106305,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Đi bộ",
@@ -854,7 +756,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.176661,
             "lng": 108.71396,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -868,7 +770,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.138395,
             "lng": 107.728715,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tâm linh",
@@ -882,7 +784,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.723474,
             "lng": 107.844593,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -896,7 +798,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.971099,
             "lng": 108.261678,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -910,7 +812,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.92912,
             "lng": 108.116291,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -924,7 +826,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.954492,
             "lng": 108.220335,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -938,7 +840,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.927608,
             "lng": 108.286062,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -952,7 +854,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.927197,
             "lng": 108.096222,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -966,7 +868,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.92489,
             "lng": 108.097096,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -980,7 +882,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.937589,
             "lng": 108.289448,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -994,7 +896,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.05453,
             "lng": 108.40395,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Nông trại",
@@ -1008,7 +910,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.955615,
             "lng": 108.258945,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -1022,7 +924,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.704616,
             "lng": 107.843798,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -1036,7 +938,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.668982,
             "lng": 107.788122,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -1050,7 +952,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.944022,
             "lng": 108.098817,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -1064,7 +966,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.938267,
             "lng": 108.117773,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Ẩm thực",
@@ -1078,7 +980,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.176661,
             "lng": 108.71396,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -1092,7 +994,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.813573,
             "lng": 107.894317,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tâm linh",
@@ -1106,7 +1008,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.811897,
             "lng": 107.900003,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 50000,
             "tags": [
                 "Trekking",
@@ -1120,7 +1022,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.9295,
             "lng": 108.097,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Ẩm thực",
@@ -1134,7 +1036,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.960961,
             "lng": 108.318668,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -1148,7 +1050,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.952035,
             "lng": 108.212628,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thể thao biển",
@@ -1162,7 +1064,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.984673,
             "lng": 108.342553,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -1176,313 +1078,13 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.950925,
             "lng": 108.272871,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Ngắm cảnh",
                 "Chill",
                 "Chụp ảnh"
             ]
-        },
-        {
-            "id": "BT_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "BT_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ],
     "can_tho": [
@@ -1520,7 +1122,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.067195,
             "lng": 105.749663,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 15000,
             "tags": [
                 "Kiến trúc",
@@ -1534,7 +1136,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.990836,
             "lng": 105.706141,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 99000,
             "tags": [
                 "Sinh thái",
@@ -1964,7 +1566,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.028386,
             "lng": 105.732194,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 30000,
             "tags": [
                 "Sinh thái",
@@ -2006,7 +1608,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.960419,
             "lng": 105.758009,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 50000,
             "tags": [
                 "Trải nghiệm",
@@ -2020,7 +1622,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.990308,
             "lng": 105.663285,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 0,
             "tags": [
                 "Giao thương sông nước",
@@ -2179,306 +1781,6 @@ const MOCK_PLACES_BY_CITY = {
                 "Khám phá",
                 "Tưởng niệm"
             ]
-        },
-        {
-            "id": "CT_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CT_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ],
     "ca_mau": [
@@ -2516,7 +1818,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.179023,
             "lng": 104.802054,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 40000,
             "tags": [
                 "Biển",
@@ -2530,7 +1832,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.999779,
             "lng": 104.935965,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Sinh thái",
@@ -2544,7 +1846,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.160601,
             "lng": 105.155683,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Văn hóa",
@@ -2558,7 +1860,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.1722,
             "lng": 105.1528,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Động vật",
@@ -2572,7 +1874,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.7562,
             "lng": 105.0001,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Sinh thái",
@@ -2586,7 +1888,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.181028,
             "lng": 105.141022,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -2600,7 +1902,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.566853,
             "lng": 104.828653,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 30000,
             "tags": [
                 "Biển",
@@ -2614,7 +1916,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.177787,
             "lng": 105.146526,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -2628,7 +1930,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.18524,
             "lng": 105.137171,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -2642,7 +1944,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.431651,
             "lng": 104.830869,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -2656,7 +1958,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.381423,
             "lng": 105.00156,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 30000,
             "tags": [
                 "Nông trại",
@@ -2670,7 +1972,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.164436,
             "lng": 105.219512,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 50000,
             "tags": [
                 "Giải trí",
@@ -2684,7 +1986,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.176207,
             "lng": 105.150853,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biểu tượng",
@@ -2698,7 +2000,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.171,
             "lng": 105.148,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -2712,7 +2014,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.168261,
             "lng": 105.183754,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tâm linh",
@@ -2726,7 +2028,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.140742,
             "lng": 105.12918,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -2740,7 +2042,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.605564,
             "lng": 104.722946,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 30000,
             "tags": [
                 "Thiên nhiên",
@@ -2754,7 +2056,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.176528,
             "lng": 105.147182,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 0,
             "tags": [
                 "Mua sắm",
@@ -2768,7 +2070,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.172333,
             "lng": 105.147884,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Chụp ảnh",
@@ -2782,7 +2084,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.182044,
             "lng": 105.136122,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 10000,
             "tags": [
                 "Lịch sử",
@@ -2796,7 +2098,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.178857,
             "lng": 105.1517,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Giải trí",
@@ -2810,7 +2112,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.221859,
             "lng": 105.397617,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tâm linh",
@@ -2824,7 +2126,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.35,
             "lng": 105.3,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -2838,7 +2140,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.688525,
             "lng": 104.874336,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -2852,7 +2154,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.969714,
             "lng": 105.20778,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Khám phá",
@@ -2866,7 +2168,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.040856,
             "lng": 104.830037,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Sôi động",
@@ -2880,7 +2182,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.139967,
             "lng": 105.210934,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -2894,7 +2196,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.186623,
             "lng": 105.167112,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Sôi động",
@@ -2908,7 +2210,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.245352,
             "lng": 104.868524,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 20000,
             "tags": [
                 "Trải nghiệm",
@@ -2922,7 +2224,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.853272,
             "lng": 105.019991,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Cảnh quan",
@@ -2936,7 +2238,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.293388,
             "lng": 104.998469,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 30000,
             "tags": [
                 "Sinh thái",
@@ -2950,7 +2252,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.188,
             "lng": 105.143,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -2964,7 +2266,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.180839,
             "lng": 105.149411,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -2978,7 +2280,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.76,
             "lng": 105.02,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -2992,7 +2294,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.756809,
             "lng": 104.990437,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -3006,7 +2308,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.759634,
             "lng": 104.992305,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Mua sắm",
@@ -3020,7 +2322,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.605564,
             "lng": 104.722946,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 30000,
             "tags": [
                 "Khám phá",
@@ -3034,7 +2336,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.855762,
             "lng": 104.912056,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -3048,7 +2350,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.175,
             "lng": 105.153,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Ngoài trời",
@@ -3062,7 +2364,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.8,
             "lng": 104.9,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -3076,7 +2378,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.020357,
             "lng": 105.422366,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -3090,7 +2392,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.18,
             "lng": 105.15,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 20000,
             "tags": [
                 "Kiến trúc",
@@ -3104,7 +2406,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.180937,
             "lng": 105.149357,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Giao thông",
@@ -3118,7 +2420,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.266983,
             "lng": 105.178792,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Văn hóa",
@@ -3132,7 +2434,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.94,
             "lng": 105.21,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Động vật",
@@ -3146,7 +2448,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.176095,
             "lng": 104.810054,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 40000,
             "tags": [
                 "Biển",
@@ -3160,7 +2462,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 9.182,
             "lng": 105.146,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -3174,313 +2476,13 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 8.566853,
             "lng": 104.828653,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
                 "Thiên nhiên",
                 "Cảnh quan"
             ]
-        },
-        {
-            "id": "CM_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "CM_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ],
     "da_nang": [
@@ -4078,7 +3080,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 15.991241,
             "lng": 108.011241,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 40000,
             "tags": [
                 "Thiên nhiên",
@@ -4183,306 +3185,6 @@ const MOCK_PLACES_BY_CITY = {
                 "Cổ kính",
                 "Lịch sử"
             ]
-        },
-        {
-            "id": "DNG_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DNG_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ],
     "ha_noi": [
@@ -5138,306 +3840,6 @@ const MOCK_PLACES_BY_CITY = {
                 "Chụp ảnh",
                 "Nghệ thuật"
             ]
-        },
-        {
-            "id": "HN_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HN_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ],
     "hoi_an": [
@@ -6090,306 +4492,6 @@ const MOCK_PLACES_BY_CITY = {
                 "Di sản UNESCO",
                 "Đi bộ"
             ]
-        },
-        {
-            "id": "HA_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HA_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ],
     "lam_dong": [
@@ -6427,7 +4529,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.903629,
             "lng": 108.437711,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Kiến trúc",
@@ -6441,7 +4543,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.903432,
             "lng": 108.429638,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 20000,
             "tags": [
                 "Lịch sử",
@@ -6455,7 +4557,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.97881,
             "lng": 108.435711,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -6469,7 +4571,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 12.019321,
             "lng": 108.4497,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 60000,
             "tags": [
                 "Thiên nhiên",
@@ -6483,7 +4585,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.939362,
             "lng": 108.448308,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 50000,
             "tags": [
                 "Lãng mạn",
@@ -6497,7 +4599,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.941617,
             "lng": 108.424388,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 100000,
             "tags": [
                 "Thiên nhiên",
@@ -6511,7 +4613,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.944633,
             "lng": 108.445203,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Sôi động",
@@ -6525,7 +4627,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.950248,
             "lng": 108.454465,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 10000,
             "tags": [
                 "Lịch sử",
@@ -6539,7 +4641,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.89983,
             "lng": 108.499322,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -6553,7 +4655,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.923215,
             "lng": 108.449829,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 100000,
             "tags": [
                 "Thiên nhiên",
@@ -6567,7 +4669,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 12.026012,
             "lng": 108.42983,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -6581,7 +4683,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.701881,
             "lng": 108.443778,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 150000,
             "tags": [
                 "Ngắm cảnh",
@@ -6595,7 +4697,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.940772,
             "lng": 108.3637,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 150000,
             "tags": [
                 "Văn hóa dân tộc",
@@ -6609,7 +4711,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.941401,
             "lng": 108.41973,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 250000,
             "tags": [
                 "Tâm linh",
@@ -6623,7 +4725,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.963378,
             "lng": 108.459852,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 22000,
             "tags": [
                 "Lịch sử",
@@ -6637,7 +4739,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.877211,
             "lng": 108.437291,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Ẩm thực",
@@ -6651,7 +4753,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.950169,
             "lng": 108.444231,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -6665,7 +4767,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.947693,
             "lng": 108.470557,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 30000,
             "tags": [
                 "Thiên nhiên",
@@ -6679,7 +4781,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.824434,
             "lng": 108.436954,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -6693,7 +4795,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.934733,
             "lng": 108.409073,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 120000,
             "tags": [
                 "Thiên nhiên",
@@ -6707,7 +4809,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.956837,
             "lng": 108.333592,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -6721,7 +4823,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.935623,
             "lng": 108.430881,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 60000,
             "tags": [
                 "Kiến trúc độc đáo",
@@ -6735,7 +4837,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.944336,
             "lng": 108.47898,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 20000,
             "tags": [
                 "Lãng mạn",
@@ -6749,7 +4851,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.915731,
             "lng": 108.447997,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 20000,
             "tags": [
                 "Lịch sử",
@@ -6763,7 +4865,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.902427,
             "lng": 108.46971,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 50000,
             "tags": [
                 "Lịch sử",
@@ -6777,7 +4879,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 12.002715,
             "lng": 108.339222,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 120000,
             "tags": [
                 "Giải trí",
@@ -6791,7 +4893,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.972613,
             "lng": 108.344222,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 100000,
             "tags": [
                 "Chụp ảnh",
@@ -6805,7 +4907,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.941805,
             "lng": 108.350434,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 150000,
             "tags": [
                 "Sinh thái",
@@ -6819,7 +4921,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.943796,
             "lng": 108.482737,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Hoa",
@@ -6833,7 +4935,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.945467,
             "lng": 108.420848,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 20000,
             "tags": [
                 "Thiên nhiên",
@@ -6847,7 +4949,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.952483,
             "lng": 108.422043,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -6861,7 +4963,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.984206,
             "lng": 108.452773,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Kiến trúc Pháp",
@@ -6875,7 +4977,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 12.047434,
             "lng": 108.444571,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thể thao",
@@ -6889,7 +4991,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.923215,
             "lng": 108.450973,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -6903,7 +5005,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.879081,
             "lng": 108.440737,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 100000,
             "tags": [
                 "Trekking",
@@ -6917,7 +5019,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.955,
             "lng": 108.443778,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Ngắm cảnh",
@@ -6931,7 +5033,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.940736,
             "lng": 108.560507,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Sinh thái",
@@ -6945,7 +5047,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.938,
             "lng": 108.43,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 30000,
             "tags": [
                 "Nông trại",
@@ -6959,7 +5061,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.948,
             "lng": 108.44154,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -6973,7 +5075,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.895,
             "lng": 108.461,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -6987,7 +5089,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.880797,
             "lng": 108.452,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 50000,
             "tags": [
                 "Hoa hồng",
@@ -7001,7 +5103,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 12.044,
             "lng": 108.41,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 80000,
             "tags": [
                 "Sinh thái",
@@ -7015,7 +5117,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.958292,
             "lng": 108.562855,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 150000,
             "tags": [
                 "Hoa",
@@ -7029,7 +5131,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.944,
             "lng": 108.432,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 0,
             "tags": [
                 "Ngắm cảnh",
@@ -7043,7 +5145,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.880064,
             "lng": 108.397299,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 50000,
             "tags": [
                 "Thiên nhiên",
@@ -7057,7 +5159,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.949656,
             "lng": 108.43,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Chụp ảnh",
@@ -7071,7 +5173,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.8800644,
             "lng": 108.41235,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 30000,
             "tags": [
                 "Thiên nhiên",
@@ -7085,313 +5187,13 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.9496557,
             "lng": 108.430241,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Kiến trúc Pháp",
                 "Tôn giáo",
                 "Chụp ảnh"
             ]
-        },
-        {
-            "id": "DL_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "DL_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ],
     "nha_trang": [
@@ -7905,7 +5707,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 12.250556,
             "lng": 109.196389,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 0,
             "tags": [
                 "Văn hóa",
@@ -8031,7 +5833,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 12.213333,
             "lng": 109.223611,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 170000,
             "tags": [
                 "Tham quan",
@@ -8073,7 +5875,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 12.221389,
             "lng": 109.228611,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 40000,
             "tags": [
                 "Biển",
@@ -8094,306 +5896,6 @@ const MOCK_PLACES_BY_CITY = {
                 "Biển",
                 "Yên tĩnh"
             ]
-        },
-        {
-            "id": "NTG_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NTG_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ],
     "ninh_binh": [
@@ -8557,7 +6059,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 20.195459,
             "lng": 105.852066,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 120000,
             "tags": [
                 "Hang động",
@@ -8750,7 +6252,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 20.219126,
             "lng": 105.936235,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 50000,
             "tags": [
                 "Làng cổ",
@@ -9072,306 +6574,6 @@ const MOCK_PLACES_BY_CITY = {
                 "Trưng bày",
                 "Lịch sử văn hóa"
             ]
-        },
-        {
-            "id": "NB_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NB_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ],
     "ninh_thuan": [
@@ -9381,7 +6583,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.71762,
             "lng": 109.202127,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -9395,7 +6597,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.601906,
             "lng": 108.946504,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 20000,
             "tags": [
                 "Lịch sử",
@@ -9409,7 +6611,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.501211,
             "lng": 108.865829,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -9423,7 +6625,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.676042,
             "lng": 109.035627,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -9437,7 +6639,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.680879,
             "lng": 109.175057,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 50000,
             "tags": [
                 "Thiên nhiên",
@@ -9451,7 +6653,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.50879,
             "lng": 108.997104,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -9465,7 +6667,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.586519,
             "lng": 109.033244,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -9479,7 +6681,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.564854,
             "lng": 109.024474,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -9493,7 +6695,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.745862,
             "lng": 109.223417,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển hoang sơ",
@@ -9507,7 +6709,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.716037,
             "lng": 109.221121,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lặn san hô",
@@ -9521,7 +6723,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.70633,
             "lng": 109.202628,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -9535,7 +6737,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.713526,
             "lng": 109.200402,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 0,
             "tags": [
                 "Lặn san hô",
@@ -9549,7 +6751,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.71327,
             "lng": 109.200664,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -9563,7 +6765,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.529783,
             "lng": 108.924957,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Văn hóa Chăm",
@@ -9577,7 +6779,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.527764,
             "lng": 108.925866,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Văn hóa Chăm",
@@ -9591,7 +6793,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.521536,
             "lng": 108.942482,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Văn hóa Chăm",
@@ -9605,7 +6807,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.522624,
             "lng": 108.940482,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Văn hóa Chăm",
@@ -9619,7 +6821,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.564286,
             "lng": 108.999495,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lịch sử",
@@ -9633,7 +6835,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.360804,
             "lng": 109.013972,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 10000,
             "tags": [
                 "Ngắm cảnh",
@@ -9647,7 +6849,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.355811,
             "lng": 109.005907,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển hoang sơ",
@@ -9661,7 +6863,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.633983,
             "lng": 109.020017,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Văn hóa địa phương",
@@ -9675,7 +6877,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.725591,
             "lng": 109.196587,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 150000,
             "tags": [
                 "Tham quan vịnh",
@@ -9689,7 +6891,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.608149,
             "lng": 109.145843,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Lướt ván diều",
@@ -9703,7 +6905,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.772456,
             "lng": 109.053675,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -9717,7 +6919,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.341141,
             "lng": 108.894768,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -9731,7 +6933,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.493764,
             "lng": 108.785342,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -9745,7 +6947,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.225074,
             "lng": 108.826927,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển hoang sơ",
@@ -9759,7 +6961,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.561979,
             "lng": 109.023218,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 0,
             "tags": [
                 "Nghỉ dưỡng",
@@ -9773,7 +6975,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.671466,
             "lng": 109.175653,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Nông trại",
@@ -9787,7 +6989,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.667647,
             "lng": 109.039916,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Sinh thái",
@@ -9801,7 +7003,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.501211,
             "lng": 108.865829,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -9815,7 +7017,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.324337,
             "lng": 108.839128,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -9829,7 +7031,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.72885,
             "lng": 109.198715,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Ngắm cảnh",
@@ -9843,7 +7045,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.5635,
             "lng": 108.988,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Ẩm thực",
@@ -9857,7 +7059,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.680879,
             "lng": 109.175057,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 50000,
             "tags": [
                 "Thiên nhiên",
@@ -9871,7 +7073,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.607758,
             "lng": 109.146572,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -9885,7 +7087,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.53,
             "lng": 108.992,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -9899,7 +7101,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.355811,
             "lng": 109.005907,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Sinh thái",
@@ -9913,7 +7115,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.862931,
             "lng": 108.941309,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -9927,7 +7129,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.727719,
             "lng": 109.189084,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 50000,
             "tags": [
                 "Thiên nhiên",
@@ -9941,7 +7143,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.266654,
             "lng": 108.692141,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Tôn giáo",
@@ -9955,7 +7157,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.725591,
             "lng": 109.196587,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Văn hóa địa phương",
@@ -9969,7 +7171,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.64,
             "lng": 109.015,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Sinh thái",
@@ -9983,7 +7185,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.413364,
             "lng": 109.006533,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -9997,7 +7199,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.501211,
             "lng": 108.865829,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -10011,7 +7213,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.671466,
             "lng": 109.175653,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 30000,
             "tags": [
                 "Nông trại nho",
@@ -10025,7 +7227,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.564854,
             "lng": 109.024474,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Biển",
@@ -10039,7 +7241,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.601906,
             "lng": 108.946504,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 20000,
             "tags": [
                 "Lịch sử",
@@ -10053,7 +7255,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.72885,
             "lng": 109.198715,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 0,
             "tags": [
                 "Ngắm cảnh",
@@ -10067,313 +7269,13 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 11.680879,
             "lng": 109.175057,
             "category": "diem_tham_quan",
-            "rating": 0.0,
+            "rating": 0,
             "price": 40000,
             "tags": [
                 "Thiên nhiên",
                 "Ngắm cảnh",
                 "Trekking"
             ]
-        },
-        {
-            "id": "NT_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "NT_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ],
     "phu_quoc": [
@@ -11013,7 +7915,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.156789,
             "lng": 104.01789,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 0,
             "tags": [
                 "Thiên nhiên",
@@ -11076,306 +7978,6 @@ const MOCK_PLACES_BY_CITY = {
                 "Biển",
                 "Tham quan"
             ]
-        },
-        {
-            "id": "PQC_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "PQC_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ],
     "thanh_pho_ho_chi_minh": [
@@ -11413,7 +8015,7 @@ const MOCK_PLACES_BY_CITY = {
             "lat": 10.772737,
             "lng": 106.697962,
             "category": "diem_tham_quan",
-            "rating": 4.0,
+            "rating": 4,
             "price": 0,
             "tags": [
                 "Sôi động",
@@ -12078,315 +8680,6 @@ const MOCK_PLACES_BY_CITY = {
                 "Giải trí",
                 "Nghệ thuật"
             ]
-        },
-        {
-            "id": "HCM_QA_001",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_002",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_003",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_004",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_005",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_006",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_007",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_008",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_009",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_010",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_011",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_012",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_013",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_014",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_015",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_016",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_017",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_018",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_019",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_020",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_021",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_022",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_023",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_024",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_025",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_026",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_027",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_028",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_029",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
-        },
-        {
-            "id": "HCM_QA_030",
-            "name": null,
-            "lat": null,
-            "lng": null,
-            "category": "quan_an",
-            "rating": 4.5,
-            "price": 0,
-            "tags": []
         }
     ]
 };
-
-const MOCK_MAP_STOPS = [
-    { name: 'Sân bay Đà Nẵng', lat: 16.044, lng: 108.200, emoji: '✈️', color: '#3674B5', day: 1 },
-    { name: 'Bãi biển Mỹ Khê', lat: 16.065, lng: 108.247, emoji: '🏖️', color: '#0C9E72', day: 1 },
-    { name: 'Bảo tàng Điêu khắc Chăm', lat: 16.047, lng: 108.221, emoji: '🏛️', color: '#578FCA', day: 1 },
-    { name: 'Bà Nà Hills', lat: 15.997, lng: 107.990, emoji: '🌉', color: '#7B4FBE', day: 2 },
-    { name: 'Phố Cổ Hội An', lat: 15.880, lng: 108.326, emoji: '🏮', color: '#E8A914', day: 3 },
-    { name: 'Biển Cửa Đại', lat: 15.867, lng: 108.355, emoji: '🏖️', color: '#0BB5D5', day: 3 },
-];

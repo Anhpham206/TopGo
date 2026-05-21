@@ -21,7 +21,7 @@ function loadMockFallback() {
     if (_mockLoaded) return Promise.resolve();
     if (_mockLoading) return _mockLoading;
     _mockLoading = new Promise((resolve, reject) => {
-        if (typeof MOCK_CITIES !== 'undefined') { _mockLoaded = true; resolve(); return; }
+        if (typeof MOCK_CHATBOT_RESPONSES !== 'undefined') { _mockLoaded = true; resolve(); return; }
         const s = document.createElement('script');
         s.src = MOCK_FALLBACK_URL.href;
         s.onload = () => { _mockLoaded = true; resolve(); };
