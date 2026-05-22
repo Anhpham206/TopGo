@@ -1,328 +1,273 @@
 {
     "search_metadata": {
-        "id": "6a0df55a3c99bab5cb0bd7ea",
+        "id": "6a0f3748bf04d5c2261c7e01",
         "status": "Success",
-        "json_endpoint": "https://serpapi.com/searches/nR08AeRLkId6bDBBorGniw/6a0df55a3c99bab5cb0bd7ea.json",
-        "created_at": "2026-05-20 17:54:34 UTC",
-        "processed_at": "2026-05-20 17:54:34 UTC",
-        "google_maps_reviews_url": "https://www.google.com/maps/place/data=!4m7!3m6!1s0x314217003fe6a1b9:0x4ae0ba54862c4bd0!5m2!4m1!1i2!9m1!1b1?hl=vi",
-        "raw_html_file": "https://serpapi.com/searches/nR08AeRLkId6bDBBorGniw/6a0df55a3c99bab5cb0bd7ea.html",
-        "prettify_html_file": "https://serpapi.com/searches/nR08AeRLkId6bDBBorGniw/6a0df55a3c99bab5cb0bd7ea.prettify",
-        "total_time_taken": 1.18
+        "json_endpoint": "https://serpapi.com/searches/fVhdTgyrgzHXVFTUBcbnHA/6a0f3748bf04d5c2261c7e01.json",
+        "created_at": "2026-05-21 16:48:08 UTC",
+        "processed_at": "2026-05-21 16:48:08 UTC",
+        "google_maps_reviews_url": "https://www.google.com/maps/place/data=!4m7!3m6!1s0x314217dab097e1c3:0x6e3dad20d34f42fb!5m2!4m1!1i2!9m1!1b1?hl=vi",
+        "raw_html_file": "https://serpapi.com/searches/fVhdTgyrgzHXVFTUBcbnHA/6a0f3748bf04d5c2261c7e01.html",
+        "prettify_html_file": "https://serpapi.com/searches/fVhdTgyrgzHXVFTUBcbnHA/6a0f3748bf04d5c2261c7e01.prettify",
+        "total_time_taken": 6.34
     },
     "search_parameters": {
         "engine": "google_maps_reviews",
-        "data_id": "0x314217003fe6a1b9:0x4ae0ba54862c4bd0",
+        "data_id": "0x314217dab097e1c3:0x6e3dad20d34f42fb",
         "hl": "vi"
     },
     "place_info": {
-        "title": "Serenity Retreat Danang",
-        "address": "129 Hồ Nghinh, An Hải, Đà Nẵng 550000, Việt Nam",
-        "rating": 4.7,
-        "reviews": 435,
-        "type": "Khách sạn nghỉ dưỡng"
+        "title": "Temple Beach Resort Da Nang",
+        "address": "11 Võ Nguyên Giáp, An Hải, Đà Nẵng 550000, Việt Nam",
+        "rating": 3.9,
+        "reviews": 1251,
+        "type": "Khách sạn"
     },
     "reviews": [
         {
             "position": 1,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2tSQmRFSm9ORXR4ZEdkWU1FTkJRMEpGYUV4Tk1GRRAB!2m1!1s0x0:0x4ae0ba54862c4bd0!3m1!1s2@1:CAIQACodChtycF9oOkRBdEJoNEtxdGdYMENBQ0JFaExNMFE%7C%7C?hl=vi",
-            "rating": 5.0,
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pZell6TnhTa05pVkVJeGFYSlVZMkpwY1dwbWNGRRAB!2m1!1s0x0:0x6e3dad20d34f42fb!3m1!1s2@1:CAIQACodChtycF9oOjYzYzNxSkNiVEIxaXJUY2JpcWpmcFE%7C%7C?hl=vi",
+            "rating": 4.0,
             "date": "3 tháng trước",
-            "iso_date": "2026-02-01T05:19:26Z",
-            "iso_date_of_last_edit": "2026-02-01T05:19:26Z",
+            "iso_date": "2026-02-05T04:33:24Z",
+            "iso_date_of_last_edit": "2026-02-05T04:33:24Z",
             "images": [
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3toWsRwNMNzIrJmRK4LviOdyl4cyjiSDImtCXDWp2Mow8nXV36hWpEOx_pXQ0cWZWnvz6lZYWvCliqtxBda-PM0euR0pUa31XdnKeFf7Rpr7jpO4iLE-FY3bBXzptP9iM95XqnDEAbuHQ8=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3-Q8Adm8NnCgusHvpTmgI9jVRLMoM7m57wTy1osRDNzRv0490pCyEy7RPbeTgcPQWj4IsIazNANig8AvNNCaW1WG6szHp5Z8kBIlrEdInaDGNAmODhbuaoEmXF4s779Pnbyc0UpL9A0NzA=k-no"
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0CByyBENtZTHZ1kxLPKAYzwyCGncMYeuiPADP5ov0WuHODSr3OscU4ifW7a0dj_KdA-1qh-NFDMFVQviNCBtdg0azqEMQiD_lSAoAC8jKt-v839sJyuh30cWaUHJbt1RIdwmF1bU4sBvB9=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2fqh2EKtokcBO-Mu0XPhzVFmF9rbBSHzF-R71wzpQLVuHrcEd_ZOvtysNXQgBFmC1zMp-hwOboXUr_OO5gg1etmLzOMGn1yTZkAItE9x5IsCYlHAR81czi2OlDPyMR4mc59JcIIfKDPj7_=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0kjvZtL-1LIPaJQqS6KL4tOOgvX68iPkwLX1a3b0t9FD4sY4e3J-TGVasLl8iH3SL0UdbeKx_ccFb-Vd2Qn_RKoRPTsoYIXG_qIUwpX5eGs_jasb3uGJG5VRnR8xiV5rdMEek6vfxrrOgt=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0mlvkqvKlbTjlja5eEPz4nOmwQ-kL4G_4xnfcBV9Zv2eKIEYvSRZd-GQ_vhzWJOuNOOmj24XDi_a0MhWEom_15gEOD_tiEMGoQMqaXSaIwf9aPocaHQoZ6hrQoVI3vRryyd75oAbefSZNM=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn239MRnZflPIwOXEVM1OZ1I8TqH2jU5j50jO4zkNhHamPMjfa2yM31OuofPwmyQ2SjMla06-4Z1swwYU6xT3l31lSvijIigxfQ_FdlxWztYH2v6cA9lOd7sSIlLd3x93I8_7wqvHDc4_D2E=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2Ktutd_0D9V9izhcq_D1OpuWSlalcNEKcfMOlJWo1Cm5nMFpX9LJW85jkkRYfn24loXWqEdNtgHL6T0n3TZ4PQAMMpUCiR3JRgMOhaB9cX7GfJhLE3_Qlg1X__Nzc8GTv9cQn00dbV9PU=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0rHYBLErB7aa79L7qQrGqqQ2aOcSM1tTn3XbHz9yUfr1HCGjuu6o-NzDuowNHWtHslo4eg8b7uGHauEUDEuafeHG_IcAMugHOSgTE61BL1FpQ911ZuH4e2Npqoz9zFy-b3yaoFqq6NeC61=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3gL0n5Dh168gmmGX4iydtWnqJHUiwPch4iWt-KF1c6YVOi8CkVG5JidJDTv0EV4t4j7XdaPinCsLI_QtnWF5Sz3A8thhhQQLCF-pEB991YTM1xaqU1FWJDERg5ttwIMmEInj2-JBKoXwo=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2UyvP4Jhlps9y2jxJ55i-puLFqdZehPNXmX9FT7URA-VNcjihC8haHqTploM0yyGU7KE31Rqdkglha8jlw07SjmDoyW4aWEewz4fxzV4fsKH9eUFTWQ5xZOQdWT8wKGoNiX4YHMeWfA56u=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0ng3WvTBpPoUueAEfybAbXa8bqEeHbpbce0fhSufpYbWiVUa7iyd50SNkfl4zXL3_u-6cYujppWF2NjQJiqAFToMBexAUF9kcrL58vN2SQnGEk8dr5S7ZNkCps0x7Pj2FUOPpoUEkKO_c=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3cC1cPu4PA3JrgHrT0NCTO4xEqu7fczOZchbi9gB9w-vCjvOa8D9dHTxKnOUrtHcCnspfnwh7TJkRNE13BqCwSVa42r6Ws6wJvgGl9vvBC5tDzMgmYePP4Iq_r1QVkpymkT3R4VgEkx5g=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3Z2nLfLzJNItnqbxeX6QupIhd5738kKgu3m2vAttCMvsYRsPFQx4tKqFGQR7kHK_BFamJtQDbs0dP_iLXW2gauxTVCf142xgRHOn2kFm-S6SnS8wvM9QhG2WIP6pYhANTAgrnv110epdg=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0kZYhbTJc4TmnHZoBb8jJ8Q7UncM9bRz4jXWrRSFeeMCRTBHEfLOH-wZOiEYOUF9P7FRVp63iYVnuSsHUxtnOqqtk1snjrNHxceiySov5q8LDMmyHwltYAHpdzQjtqCirhByo25caL0AoP=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1mfME_Q6KTYosCwDpiP97EgBjNC7QIeKJvPhD2IaN8zFUrCP1Ngia6_V4GrEeUBGwI9ZF8lT1OhZNk-1FjtPJP_-RQmiCjx3Qs1lf-zbzhOqNzdWzjj2H1HsD1MqYUByrdY2LC1n-ZhYGU=k-no",
+                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0kVcEa1nD0OqmhSec-MRft6bx5zui8Dh7nHVGCr2QGr34vTOt5qcnJ93RRLddgpVHK_jmI6I-eCdHPEsLG686_AtMCz7fpdwqYSq14S_LH_EZD4kQw9nbTdwfQC0eYSXl8fYy16PFZ-no=k-no"
             ],
             "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2tSQmRFSm9ORXR4ZEdkWU1FTkJRMEpGYUV4Tk1GRRAB",
+            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2pZell6TnhTa05pVkVJeGFYSlVZMkpwY1dwbWNGRRAB",
             "user": {
-                "name": "Ngan Pham",
-                "link": "https://www.google.com/maps/contrib/104786862319887339335?hl=vi",
-                "contributor_id": "104786862319887339335",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjVDHnW2Nyst3GrGP6UmjMOAhwsHds7voLS0Amp8RYGxmjVBY6IC=s120-c-rp-mo-br100",
+                "name": "Minh Nguyen",
+                "link": "https://www.google.com/maps/contrib/104825453985796034742?hl=vi",
+                "contributor_id": "104825453985796034742",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjUoHNj_Q9seSZcurBaK2o8QUqWIZ6j39vTKo3AsS_Tw-xH9Wx8X=s120-c-rp-mo-ba6-br100",
                 "local_guide": true,
-                "reviews": 5,
-                "photos": 12
+                "reviews": 186,
+                "photos": 2216
             },
-            "snippet": "10/10 cho dịch vụ & phòng ốc ❤️\nMình đặt phòng ở đây qua Agoda, vừa được giá tốt lại còn được miễn phí xe đưa rước từ sân bay. Về phòng ốc thì mình xác nhận là bên ngoài y chang hình trên app, rất mới và sạch sẽ. Giá phòng đã bao gồm buffet sáng nên rất tiện, gia đình mình không phải lo lắng chuyện ăn uống buổi sáng trước khi di chuyển đến địa điểm đi chơi.\nNhân viên ở đây thì siêu siêuuuu dễ thươnggg, Ở nơi đất khách quê người mà gặp được những bạn nhân viên có tâm thực sự làm mình thấy rất ấm lòng. Mình muốn gửi lời cảm ơn đặc biệt đến bạn Khánh đã hỗ trợ mình xử lý vấn đề phòng ốc cực kỳ nhanh nhẹn. Và anh Huy rất nhiệt tình, mình thắc mắc gì anh cũng giải đáp cặn kẽ và vui vẻ 🫶🏼❤️\nChính nhờ hai anh mà mình có ấn tượng rất đẹp về người Đà Nẵng 🥰",
+            "snippet": "Khách sạn ven biển cũng dễ thương, nhưng có vẻ đã lâu nên một số thứ cũng cũ và chưa được tối ưu như rèm 1 lớp và đã cũ.\nẤm điện siêu tốc rất bẩn. Chai nước nhỏ 350ml và không phải loại có thương hiệu lớn.\n\nNhân viên nhiệt tình.\nBuffet sáng hơi sơ sài, và không có đến 1 món có hải sản. Được cái view biển nên ok. 😅",
             "extracted_snippet": {
-                "original": "10/10 cho dịch vụ & phòng ốc ❤️\nMình đặt phòng ở đây qua Agoda, vừa được giá tốt lại còn được miễn phí xe đưa rước từ sân bay. Về phòng ốc thì mình xác nhận là bên ngoài y chang hình trên app, rất mới và sạch sẽ. Giá phòng đã bao gồm buffet sáng nên rất tiện, gia đình mình không phải lo lắng chuyện ăn uống buổi sáng trước khi di chuyển đến địa điểm đi chơi.\nNhân viên ở đây thì siêu siêuuuu dễ thươnggg, Ở nơi đất khách quê người mà gặp được những bạn nhân viên có tâm thực sự làm mình thấy rất ấm lòng. Mình muốn gửi lời cảm ơn đặc biệt đến bạn Khánh đã hỗ trợ mình xử lý vấn đề phòng ốc cực kỳ nhanh nhẹn. Và anh Huy rất nhiệt tình, mình thắc mắc gì anh cũng giải đáp cặn kẽ và vui vẻ 🫶🏼❤️\nChính nhờ hai anh mà mình có ấn tượng rất đẹp về người Đà Nẵng 🥰"
+                "original": "Khách sạn ven biển cũng dễ thương, nhưng có vẻ đã lâu nên một số thứ cũng cũ và chưa được tối ưu như rèm 1 lớp và đã cũ.\nẤm điện siêu tốc rất bẩn. Chai nước nhỏ 350ml và không phải loại có thương hiệu lớn.\n\nNhân viên nhiệt tình.\nBuffet sáng hơi sơ sài, và không có đến 1 món có hải sản. Được cái view biển nên ok. 😅"
             },
             "details": {
-                "loại_chuyến_đi": "Chuyến nghỉ mát",
-                "nhóm_khách_du_lịch": "Gia đình",
-                "phòng": 5,
-                "dịch_vụ": 5,
+                "nhóm_khách_du_lịch": "Bạn bè",
+                "phòng": 4,
+                "dịch_vụ": 3,
                 "vị_trí": 5,
-                "điểm_nổi_bật_của_khách_sạn": "Cảnh đẹp, Giá tốt"
+                "điểm_nổi_bật_của_khách_sạn": "Cảnh đẹp"
             },
             "likes": 0
         },
         {
             "position": 2,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2tOcFMzRTVTazlsY0Y5SE16bHRVbE5GVG5KcVVHYxAB!2m1!1s0x0:0x4ae0ba54862c4bd0!3m1!1s2@1:CAIQACodChtycF9oOkNpS3E5Sk9lcF9HMzltUlNFTnJqUGc%7C%7C?hl=vi",
+            "link": "https://www.tripadvisor.com.vn/ShowUserReviews-g19779171-d6538576-r1040268180?m=68573&staydates=2026_05_31_2026_06_01&uguests=1_2_0&supdv=unknown&supuc=US&supul=vi",
             "rating": 5.0,
-            "date": "3 tháng trước",
-            "iso_date": "2026-02-08T04:00:13Z",
-            "iso_date_of_last_edit": "2026-02-08T04:00:13Z",
-            "images": [
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2vmkR8A0p4JQnJGXbf6bIR4amWZen8E5sHmeTZhuMtfLt5hfw1IGH4JHa2_bgTmhu6atjsnROLeZEtwT9qfarlOipEqsjSNeRj1mxtmFKRB12M48w2S004eekJbuHSgZ1cGihKqKxsOic0=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2HnQm8nbQee2JSraV_OVksJKqnXEVvEFxcN1aN_Dxvzm5cC2JxNDVOX4oa2iFMuPsXSpbyyZXvt_ZYX8TriJHLA56P_4ywLqdZnvRhL86JX622gEOaY1IxwBkpTxCFWCshov9mLNhHTRPI=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1ft4WCYMs9DciUgut3lB3Hls8JsxkTCBmGVBjAqUnifySWuTszzmMpx7Zr-_RfNLe8t0ojKseByHBjs0cRHMZ4YwnLBG0iGUJj_0nnNZZlFpbs2vJhDX8TERKSO3RUe8GDaFn_M6aasPbo=k-no"
-            ],
-            "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2tOcFMzRTVTazlsY0Y5SE16bHRVbE5GVG5KcVVHYxAB",
+            "date": "5 tháng trước",
+            "iso_date": "2025-11-25T23:59:59Z",
+            "iso_date_of_last_edit": "2025-11-25T23:59:59Z",
+            "source": "Tripadvisor",
+            "review_id": "ChZDSUhNMG9nS0VKbUVoZGVacjZlNUJREAE",
             "user": {
-                "name": "Khánh Ly Lê",
-                "link": "https://www.google.com/maps/contrib/110629892741605719021?hl=vi",
-                "contributor_id": "110629892741605719021",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjUHlZrwIzW4EN4LEpgospzMiExNX5V2SZGw6tfmDkGKDxoO-Hw=s120-c-rp-mo-br100",
-                "local_guide": true,
-                "reviews": 2,
-                "photos": 4
+                "name": "D7958CIn_h",
+                "link": "https://www.tripadvisor.com.vn/ShowUserReviews-g19779171-d6538576-r1040268180?m=68573&staydates=2026_05_31_2026_06_01&uguests=1_2_0&supdv=unknown&supuc=US&supul=vi",
+                "thumbnail": "https://lh3.googleusercontent.com/local-reviews/AJMZ0Qczn4VDfUM6-AtEt-6oaNazFa-i9Fy6kqPVfGIlPil6vJulEYyK8t930jZwOW4hD80mzw=s120-c-br100"
             },
-            "snippet": "Mình đã có một trải nghiệm vô cùng tuyệt vời tại khách sạn này, và thật sự muốn chia sẻ cảm xúc của mình. Từ khâu đặt phòng mình được bạn Võ Hưng Quốc Khánh hỗ trợ tận tình, đề xuất các lựa chọn dịch vụ phù hợp cho trải nghiệm cá nhân tốt nhất. Bạn Khánh cực kì cực kì nhiệt tình, cảm giác như người em đón chị mình đến chơi nhà vậy, ăn gì chơi đâu đều được bạn hướng dẫn tận tình, mà ngon với vui lắm🤩🤩\n\nHình ảnh và giá phòng minh bạch, công khai, hỗ trợ uprate phòng thoải mái. Ngay từ khoảnh khắc bước vào sảnh, mình đã cảm nhận được sự ấm áp và chuyên nghiệp từ đội ngũ nhân viên. Ai cũng mỉm cười thân thiện, chủ động hỗ trợ và tạo cảm giác như đang được chào đón về một ngôi nhà thứ hai, chứ không chỉ đơn thuần là một nơi lưu trú.\n\nPhòng ở đẹp hơn cả mong đợi: sạch sẽ, thơm tho, không gian thoáng đãng và được thiết kế tinh tế. Mình đặc biệt thích chiếc giường êm ái, cửa sổ lớn đón ánh nắng buổi sáng và khung cảnh thành phố biển Đà Nẵng nhìn từ trên cao—thật sự rất chill và dễ chịu. Mỗi tối trở về phòng, cảm giác được thư giãn trọn vẹn, bỏ lại mọi mệt mỏi sau một ngày khám phá. Khách sạn có chiếc hồ bơi xanh mướt, ánh sáng rất đẹp nhờ cửa sổ trời chiếu vào. Ngoài ra, nếu bạn nào cần chụp hình thì có thể nhờ nhân viên set up đèn chụp, khách sạn có thể nói là chiều khách hết cỡ🤭🤭🤭\n\nDịch vụ ở đây làm mình rất ấn tượng. Nhân viên lễ tân, buồng phòng và nhà hàng đều cực kỳ nhiệt tình, quan tâm đến từng chi tiết nhỏ. Chỉ cần một yêu cầu nhỏ là được hỗ trợ rất nhanh, với thái độ nhẹ nhàng và chân thành. Khách sạn ở gần biển và nhiều địa điểm ăn ngon, thuận tiện ko cần đi đâu xa cả. Bữa sáng cũng là một điểm cộng lớn: món ăn đa dạng, ngon miệng và trình bày đẹp, khiến mình cảm thấy mỗi buổi sáng đều là một trải nghiệm đáng mong chờ.\n\nKỳ nghỉ này thật sự mang lại cho mình cảm giác bình yên và hạnh phúc. Nếu có cơ hội quay lại Đà Nẵng, mình chắc chắn sẽ chọn khách sạn này một lần nữa và giới thiệu cho bạn bè, người thân. Cảm ơn khách sạn đã mang đến một trải nghiệm tuyệt vời và đầy cảm xúc!💕💕💕",
+            "snippet": "Tuyệt vời , bên cạnh bờ biển thiên nhiên . Chúng tôi rất thich nơi đây . Bờ biển , phong cảnh , nhân viên , phòng ốc …. Chúng tôi rất thích có khu nghỉ dưỡng như vậy",
             "extracted_snippet": {
-                "original": "Mình đã có một trải nghiệm vô cùng tuyệt vời tại khách sạn này, và thật sự muốn chia sẻ cảm xúc của mình. Từ khâu đặt phòng mình được bạn Võ Hưng Quốc Khánh hỗ trợ tận tình, đề xuất các lựa chọn dịch vụ phù hợp cho trải nghiệm cá nhân tốt nhất. Bạn Khánh cực kì cực kì nhiệt tình, cảm giác như người em đón chị mình đến chơi nhà vậy, ăn gì chơi đâu đều được bạn hướng dẫn tận tình, mà ngon với vui lắm🤩🤩\n\nHình ảnh và giá phòng minh bạch, công khai, hỗ trợ uprate phòng thoải mái. Ngay từ khoảnh khắc bước vào sảnh, mình đã cảm nhận được sự ấm áp và chuyên nghiệp từ đội ngũ nhân viên. Ai cũng mỉm cười thân thiện, chủ động hỗ trợ và tạo cảm giác như đang được chào đón về một ngôi nhà thứ hai, chứ không chỉ đơn thuần là một nơi lưu trú.\n\nPhòng ở đẹp hơn cả mong đợi: sạch sẽ, thơm tho, không gian thoáng đãng và được thiết kế tinh tế. Mình đặc biệt thích chiếc giường êm ái, cửa sổ lớn đón ánh nắng buổi sáng và khung cảnh thành phố biển Đà Nẵng nhìn từ trên cao—thật sự rất chill và dễ chịu. Mỗi tối trở về phòng, cảm giác được thư giãn trọn vẹn, bỏ lại mọi mệt mỏi sau một ngày khám phá. Khách sạn có chiếc hồ bơi xanh mướt, ánh sáng rất đẹp nhờ cửa sổ trời chiếu vào. Ngoài ra, nếu bạn nào cần chụp hình thì có thể nhờ nhân viên set up đèn chụp, khách sạn có thể nói là chiều khách hết cỡ🤭🤭🤭\n\nDịch vụ ở đây làm mình rất ấn tượng. Nhân viên lễ tân, buồng phòng và nhà hàng đều cực kỳ nhiệt tình, quan tâm đến từng chi tiết nhỏ. Chỉ cần một yêu cầu nhỏ là được hỗ trợ rất nhanh, với thái độ nhẹ nhàng và chân thành. Khách sạn ở gần biển và nhiều địa điểm ăn ngon, thuận tiện ko cần đi đâu xa cả. Bữa sáng cũng là một điểm cộng lớn: món ăn đa dạng, ngon miệng và trình bày đẹp, khiến mình cảm thấy mỗi buổi sáng đều là một trải nghiệm đáng mong chờ.\n\nKỳ nghỉ này thật sự mang lại cho mình cảm giác bình yên và hạnh phúc. Nếu có cơ hội quay lại Đà Nẵng, mình chắc chắn sẽ chọn khách sạn này một lần nữa và giới thiệu cho bạn bè, người thân. Cảm ơn khách sạn đã mang đến một trải nghiệm tuyệt vời và đầy cảm xúc!💕💕💕"
+                "original": "Tuyệt vời , bên cạnh bờ biển thiên nhiên . Chúng tôi rất thich nơi đây . Bờ biển , phong cảnh , nhân viên , phòng ốc …. Chúng tôi rất thích có khu nghỉ dưỡng như vậy"
+            }
+        },
+        {
+            "position": 3,
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pOR09GZzJjV3RxVjFjNU4zVlRkQzFJYTJNeFlVRRAB!2m1!1s0x0:0x6e3dad20d34f42fb!3m1!1s2@1:CAIQACodChtycF9oOjNGOFg2cWtqV1c5N3VTdC1Ia2MxYUE%7C%7C?hl=vi",
+            "rating": 5.0,
+            "date": "7 tháng trước",
+            "iso_date": "2025-10-15T08:46:50Z",
+            "iso_date_of_last_edit": "2025-10-15T08:46:50Z",
+            "source": "Google",
+            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2pOR09GZzJjV3RxVjFjNU4zVlRkQzFJYTJNeFlVRRAB",
+            "user": {
+                "name": "Thịnh Toàn",
+                "link": "https://www.google.com/maps/contrib/104725329653733534876?hl=vi",
+                "contributor_id": "104725329653733534876",
+                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocK96p7ZF1tGdsVo3y_PJqzdioQWFTMRgbdFMLxVpv8YO48wVg=s120-c-rp-mo-br100",
+                "local_guide": true,
+                "reviews": 1,
+                "photos": 0
+            },
+            "snippet": "tôi và gia đình có đặt 2 phòng tại Resort này. Giờ rảnh mới nghĩ tới và viết review cho Resort. Resort tuy hơi cũ nhưng tôi vẫn đánh giá 5 sao vì lý do sau:\n- Là resort rất gần trung tâm Đà Nẵng, ngay biển Mỹ Khê. Rất tiện đi lại hầu như các Resort khác đều ở rất xa trung tâm.\n- Giá thành rẻ so với những gì nhận được. Với 800k chỉ đặt được ks 3* không có biển. Đây Resort có biển và chỗ vui chơi cho bọn trẻ nhà tôi.\n- đồ ăn khá ngon và giá hợp lý. Sau này tôi ăn cơm niêu ngoài nhiều chất lượng chỉ tương đương.",
+            "extracted_snippet": {
+                "original": "tôi và gia đình có đặt 2 phòng tại Resort này. Giờ rảnh mới nghĩ tới và viết review cho Resort. Resort tuy hơi cũ nhưng tôi vẫn đánh giá 5 sao vì lý do sau:\n- Là resort rất gần trung tâm Đà Nẵng, ngay biển Mỹ Khê. Rất tiện đi lại hầu như các Resort khác đều ở rất xa trung tâm.\n- Giá thành rẻ so với những gì nhận được. Với 800k chỉ đặt được ks 3* không có biển. Đây Resort có biển và chỗ vui chơi cho bọn trẻ nhà tôi.\n- đồ ăn khá ngon và giá hợp lý. Sau này tôi ăn cơm niêu ngoài nhiều chất lượng chỉ tương đương."
             },
             "details": {
                 "phòng": 5,
                 "dịch_vụ": 5,
-                "vị_trí": 5,
-                "điểm_nổi_bật_của_khách_sạn": "Sang trọng, Cảnh đẹp, Lãng mạn, Yên tĩnh, Giá tốt"
-            },
-            "likes": 0
-        },
-        {
-            "position": 3,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT25aclUycHVaVmRXZHkwNFZEaHRSbmhETTBsNFMyYxAB!2m1!1s0x0:0x4ae0ba54862c4bd0!3m1!1s2@1:CAIQACodChtycF9oOnZrU2puZVdWdy04VDhtRnhDM0l4S2c%7C%7C?hl=vi",
-            "rating": 3.0,
-            "date": "2 tháng trước",
-            "iso_date": "2026-02-25T16:44:56Z",
-            "iso_date_of_last_edit": "2026-02-25T16:44:56Z",
-            "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT25aclUycHVaVmRXZHkwNFZEaHRSbmhETTBsNFMyYxAB",
-            "user": {
-                "name": "Hưng Nguyễn Tiến",
-                "link": "https://www.google.com/maps/contrib/112128572952978403532?hl=vi",
-                "contributor_id": "112128572952978403532",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjUxotyKLz-q0DQgslqhCm8uu_5czzR3KhARAc8zTGVmJnn55fA=s120-c-rp-mo-ba3-br100",
-                "local_guide": true,
-                "reviews": 55,
-                "photos": 11
-            },
-            "snippet": "Dịch vụ khá tốt, phòng khá đẹp. Nhưng có duy nhất 1 lễ tân nên không đảm đương hết việc được. Phòng thiếu bàn ủi, tủ lạnh không hoạt động, thiết kế vòi tắm khó xử dụng và hơi tối",
-            "extracted_snippet": {
-                "original": "Dịch vụ khá tốt, phòng khá đẹp. Nhưng có duy nhất 1 lễ tân nên không đảm đương hết việc được. Phòng thiếu bàn ủi, tủ lạnh không hoạt động, thiết kế vòi tắm khó xử dụng và hơi tối"
-            },
-            "details": {
-                "loại_chuyến_đi": "Chuyến nghỉ mát",
-                "nhóm_khách_du_lịch": "Cặp đôi",
-                "phòng": 3,
-                "dịch_vụ": 4,
-                "vị_trí": 4
+                "vị_trí": 5
             },
             "likes": 0
         },
         {
             "position": 4,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pKNVZGQk9iV3BVVmtSVmJXMU9ka1pVWmxaTFJuYxAB!2m1!1s0x0:0x4ae0ba54862c4bd0!3m1!1s2@1:CAIQACodChtycF9oOjJ5VFBObWpUVkRVbW1OdkZUZlZLRnc%7C%7C?hl=vi",
-            "rating": 5.0,
-            "date": "4 tháng trước",
-            "iso_date": "2026-01-18T05:00:26Z",
-            "iso_date_of_last_edit": "2026-01-18T05:00:26Z",
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2xwdmJGbFhka2gxTlRKek5HOUdVemhTY1ZodmJGRRAB!2m1!1s0x0:0x6e3dad20d34f42fb!3m1!1s2@1:CAIQACodChtycF9oOlpvbFlXdkh1NTJzNG9GUzhScVhvbFE%7C%7C?hl=vi",
+            "rating": 1.0,
+            "date": "2 tháng trước",
+            "iso_date": "2026-02-28T12:57:20Z",
+            "iso_date_of_last_edit": "2026-02-28T12:57:20Z",
             "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2pKNVZGQk9iV3BVVmtSVmJXMU9ka1pVWmxaTFJuYxAB",
+            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2xwdmJGbFhka2gxTlRKek5HOUdVemhTY1ZodmJGRRAB",
             "user": {
-                "name": "Hoàng Yến Vũ",
-                "link": "https://www.google.com/maps/contrib/106799164132847746446?hl=vi",
-                "contributor_id": "106799164132847746446",
-                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocKBwvhBcVxHgW1hDHW7Hj_-xHxuNXVRwGQFmqsiBRuVD18VvA=s120-c-rp-mo-ba2-br100",
+                "name": "Khánh An Huỳnh",
+                "link": "https://www.google.com/maps/contrib/106416052982698072688?hl=vi",
+                "contributor_id": "106416052982698072688",
+                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocIE5pip1HrVxXJBCQjSMREE9A9UzJ1G_42dEZkNmhmAdWrSHg=s120-c-rp-mo-br100",
                 "local_guide": true,
-                "reviews": 11,
-                "photos": 17
+                "reviews": 9,
+                "photos": 8
             },
-            "snippet": "Khách sạn đẹp, nằm ngay trung tâm. Phòng sạch đẹp, có ăn sáng miễn phí, hồ bơi miễn phí, massage chân 30p free luôn. Các bạn nhân viên dễ thương, nhất là bạn Khánh lễ tân hỗ trợ mình rất nhiệt tình. Lần sau đến Đà Nẵng nhất định sẽ ghé",
+            "snippet": "tôi có dự tiệc cưới tại đây.chất lượng quá tệ. từ món ăn đến vật tự chén bát",
             "extracted_snippet": {
-                "original": "Khách sạn đẹp, nằm ngay trung tâm. Phòng sạch đẹp, có ăn sáng miễn phí, hồ bơi miễn phí, massage chân 30p free luôn. Các bạn nhân viên dễ thương, nhất là bạn Khánh lễ tân hỗ trợ mình rất nhiệt tình. Lần sau đến Đà Nẵng nhất định sẽ ghé"
-            },
-            "details": {
-                "loại_chuyến_đi": "Chuyến nghỉ mát",
-                "nhóm_khách_du_lịch": "Gia đình",
-                "phòng": 5,
-                "dịch_vụ": 5,
-                "vị_trí": 5,
-                "điểm_nổi_bật_của_khách_sạn": "Cảnh đẹp, Lãng mạn, Yên tĩnh, Giá tốt"
+                "original": "tôi có dự tiệc cưới tại đây.chất lượng quá tệ. từ món ăn đến vật tự chén bát"
             },
             "likes": 0
         },
         {
             "position": 5,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pWUlREVkJkRkEzY1hCdlp6QkRaMWhKT1haTVRtYxAB!2m1!1s0x0:0x4ae0ba54862c4bd0!3m1!1s2@1:CAIQACodChtycF9oOjVRTDVBdFA3cXBvZzBDZ1hJOXZMTmc%7C%7C?hl=vi",
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2psUVFYUTNTMU5uTjI5bVdsVnBhRWwwTjBWUGNtYxAB!2m1!1s0x0:0x6e3dad20d34f42fb!3m1!1s2@1:CAIQACodChtycF9oOjlQQXQ3S1NnN29mWlVpaEl0N0VPcmc%7C%7C?hl=vi",
             "rating": 4.0,
-            "date": "5 tháng trước",
-            "iso_date": "2025-11-24T17:25:45Z",
-            "iso_date_of_last_edit": "2025-11-24T17:30:15Z",
-            "images": [
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn12oUKA_vxun1qvJCAoiRrLMaKtnoE3p_SvEQkSuiIT_76PMSBaXWagsYTQa8lga4C9L24fWfE5ES-MyX13fV50j3NI0xzHqrexvD4tn85Vs9ee62mqufQMdA_C_KapF4CWB95TX01P9SFv=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3vXZfik6xKT_jk9I6QRiYi7Iv9Iku7xA5Sn5HJ_kvRVDJbgi37bd_sIKm4DU3erYmd_1A0yBZDmxi6h-3cNEYoXFBKppNt1FVHlGlN8vxGFfFYjDif6Nx0PJb4y4saLDRCO61MJSI0k-o=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0MeOlAkZ9fdA9qR9TXLHPq4M2_apQmnCLt9cbKJghFt3pL0YgM3lp5InPqZecM9IhPb61YqGr9SLakkJ_6sWmwJQvHiuRrY-rtO-JjqCT7CKHssOGJbavyo6C8e4tY7jcJH9Ci5xLGqyZf=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1dypW_gDHOw8OrS83XtVASEt_5LQlN_bdqAAyluwUEDWWuiVE9rvPuIzJDPFCliPjXYkmFs1-7jRpbSqV_LxvDO2b-lSKkrRFyLDs3bbC2Gxn3qgUbQ3kcd73BIbWbW7praC8J1ZbzixsN=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3X4d_RWZr7yL6b0zvJlSeX5gt986iCeDzW6MGt6UG53FYdS5OBHCdhpALwX3nL7K2NORdBc6c4HYSXNLQorgHvxu2JTuK4PsKFHBJnZjWpjnsEtXS9of6pC6-1kupq69nGZNHbs3sY7TWN=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn23-eFKCwsBMYNFMOEGCPOzCLX8OSFKjlUPWY9xZY790a0Ut7wl5g_W1xn7IypwzRQysmAQ7G9lghtb9Ae9_PQNghSG-c2cvvdCIBJSAsAafuhREC85Xv8mhP-mDD5n8f7jk4DW1rWLQpgu=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1ZxnS-V5JBkElcd-pdJJxRt84YtQMOq5SGjjDEmsfPrk-clvFKLoY6goABmXvGO-UE8LSRaUVXeHBZ9Lk7YuBvVqVH5XE4ZQla7r-y5QeFKZ2jG6uX9d_vldbZwZpMxraPJMakh7tr6wTI=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1mCefw9xoDf43r4T3rJ0fbHqN2aegI-Z3kjR1xK5yCsRuOiKgV_IBClpEgguLQYXGya8dunQA6EBdryaH95s6R3QYYxvrgR8TFTsbF7vP6rNInVPxjoEAFoOWQuDE9Uj9p_wCNNf7eWGs=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0Xqwj_IoK5eTZFjAWnsYyc2yamlUxEQ_vYdzv4mRa0DNVuOi5zshvq2JvHNwp51uC6AFBCQaoSWPMIoOMkSRCfzHeNqiXVYI79fkLtmkU2Ft-g0CbgTvdbvUUPreR0ZpVUG2VzORYMqCu_=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3EfCwgy3SpxbhRKTeJuTu4GGA2t1pf5KI6Yg_8i2wV-VbiK3UhpKSRj_LgFIxYjU7ivWFwQgduVeZhYWeSi0G1J_Y0az3ksSu_D8xgrwey_DeEDJY3bfnX0g-h9vUqixKB6UC1Snhmiuqp=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1Pfx7FEewvYXYYQ8H3BBANLfI98iKOmzeOI1zO6nhjqhB6ic9gZ_pbv2u_470HMO1cci0_X1xl1wUvFR_rU3Wtj0iRZ4tmjKca3Hu4CbDS7EPYqCv7tC2SuLlAPnQPZxVXuT14tkivU8-z=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn16X258GoTRmRv0F8y7smvkVeD7DrAm1-YXwfdz0Q7kphbGYgaFAf-wAVz0j-_-7GTtJGzt-GyxFuCg8Hp6EdJhvRRt9-xIuUl4baopP2kE88wgyzcNeScTtjOZx_L5RwwJxrcFpxNcAPXI=k-no"
-            ],
+            "date": "7 tháng trước",
+            "iso_date": "2025-10-15T07:20:55Z",
+            "iso_date_of_last_edit": "2025-10-15T07:20:55Z",
             "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2pWUlREVkJkRkEzY1hCdlp6QkRaMWhKT1haTVRtYxAB",
+            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2psUVFYUTNTMU5uTjI5bVdsVnBhRWwwTjBWUGNtYxAB",
             "user": {
-                "name": "Nguyen Eirlys (Ms.Eirlys)",
-                "link": "https://www.google.com/maps/contrib/108465057574344690151?hl=vi",
-                "contributor_id": "108465057574344690151",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXKAHRwpIT-X2xRTM-0Ku52ez1S2WxNWh4rdmAYcQzliCArjQ8-=s120-c-rp-mo-ba2-br100",
+                "name": "Ngô Hào",
+                "link": "https://www.google.com/maps/contrib/101954165997493167382?hl=vi",
+                "contributor_id": "101954165997493167382",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjV57aRtYq5aKTYsoQwG6cWM7HqyugOkMyYUaxT-vDZcnTdSjR4m=s120-c-rp-mo-br100",
                 "local_guide": true,
-                "reviews": 5,
-                "photos": 39
+                "reviews": 2,
+                "photos": 0
             },
-            "snippet": "T11/2025\n*Ưu điểm:\n- KS decor theo kiểu địa trung hải màu rất xinh yêu.\n- Phòng ốc sạch sẽ, thơm tho, có dọn phòng hàng ngày. Phòng 35m2 có cả ko gian bếp nho nhỏ, có bàn làm việc và bàn trang điểm + ban công view bể bơi.\n- Khu vực phòng tắm, nvs và bồn rửa tay tách làm 3 khu riêng biệt rất tiện lợi.\n- Giường lớn, êm, chăn ga mềm mại, thoải mái.\n- Vị trí gần bãi biển và các khu ăn uống ven biển.\n- Nhân viên ở đây từ cô bếp đến mấy bạn ở lễ tân và chị dọn buồng phòng đều rất thân thiện. 2 ngày mình lưu trú có bạn Nghĩa và Khánh hỗ trợ nhóm mình rất nhiệt tình. Mình có báo các bạn fill đồ, thay ga, thay khăn tắm, hay có thắc mắc đều đc các bạn trả lời và hỗ trợ nhiệt tình.\n- Zalo của KS rep 24/7, mình ib KS lúc 1-2h sáng vẫn có nhân viên reply và tư vấn cho mình (rất ấn tượng). Mình đặt phòng qua zalo của KS với giá 899k/phòng 35m2/đêm bao gồm ăn sáng (chỉ cần cọc 1 phần và thanh toán phần còn lại khi check in tại KS).\n- Mình thuê xe máy để ở KS cứ đến đêm là đc dắt vào tận bên trong KS để yên tâm nhé.\n\n*Nhược điểm:\n- Mình đặt 2 phòng 35m2 nhưng thiết kế của KS lại là phòng giống nhau sẽ khác tầng, hơi bất tiện vs các nhóm đi chung. (1p ở tầng 2 và 1p ở tầng 3)\n- 2 phòng mình đặt phòng thì ko có cửa NVS, phòng thì ko có cửa nhà tắm.\n- Bàn gương trang điểm ko có đèn, nhà tắm ko có đèn. Trong phòng có mỗi 1 cái ghế chỗ bàn làm việc, đúng ra nên để thêm 1 cái ghế ở khu vực bàn trang điểm nữa chứ.\n- Nước nóng nhanh hết, mình tắm tầm 15-20 phút là đoạn cuối nước hơi lạnh rồi.\n- Có ko gian bếp, có bếp từ nhưng mình ko thấy có nồi niêu xoong chảo gì, chắc bếp để chưng cho đẹp thôi.\n- Cầu thang gỗ đi hơi ọp ẹp, mỗi lần đi kêu cót két, có 1 số bậc cầu thang còn trũng hẳn xuống như sắp gãy, hơi nguy hiểm.\n- Ban đêm tầm 22h trở đi KS sẽ tắt đèn ở hành lang, hành lang tối om luôn.\n- Đồ ăn sáng ở đây hơi ít món: mì quảng (tầm 9h mình xuống chỉ còn 1 bát mỳ quảng); trứng rán, chả, thịt ăn kèm bánh mì, bánh cuốn. Mình đc cô bếp recommend món me đá uống chua chua dễ uống. Mình ăn đc 1 bữa sáng ở KS còn ngày hôm sau ra ngoài ăn cho nhiều lựa chọn hơn.\n- Cách âm ko tốt lắm, bật âm lượng TV tầm 20 là ngoài hành lang nghe rõ.\n\n-> KS đẹp, sạch sẽ, nhân viên thân thiện, nhiệt tình tuy nhiên cơ sở vật chất còn thiếu sót và cần sửa chữa.",
+            "snippet": "Mình ở đây 2 đêm và thật sự rất ưng! Từ lúc check-in đến check-out đều rất nhanh và chuyên nghiệp.m. Nhân viên dễ thương, hỗ trợ mọi yêu cầu. Đặc biệt là view biển buổi tối cực đẹp! Sẽ giới thiệu cho bạn bè.",
             "extracted_snippet": {
-                "original": "T11/2025\n*Ưu điểm:\n- KS decor theo kiểu địa trung hải màu rất xinh yêu.\n- Phòng ốc sạch sẽ, thơm tho, có dọn phòng hàng ngày. Phòng 35m2 có cả ko gian bếp nho nhỏ, có bàn làm việc và bàn trang điểm + ban công view bể bơi.\n- Khu vực phòng tắm, nvs và bồn rửa tay tách làm 3 khu riêng biệt rất tiện lợi.\n- Giường lớn, êm, chăn ga mềm mại, thoải mái.\n- Vị trí gần bãi biển và các khu ăn uống ven biển.\n- Nhân viên ở đây từ cô bếp đến mấy bạn ở lễ tân và chị dọn buồng phòng đều rất thân thiện. 2 ngày mình lưu trú có bạn Nghĩa và Khánh hỗ trợ nhóm mình rất nhiệt tình. Mình có báo các bạn fill đồ, thay ga, thay khăn tắm, hay có thắc mắc đều đc các bạn trả lời và hỗ trợ nhiệt tình.\n- Zalo của KS rep 24/7, mình ib KS lúc 1-2h sáng vẫn có nhân viên reply và tư vấn cho mình (rất ấn tượng). Mình đặt phòng qua zalo của KS với giá 899k/phòng 35m2/đêm bao gồm ăn sáng (chỉ cần cọc 1 phần và thanh toán phần còn lại khi check in tại KS).\n- Mình thuê xe máy để ở KS cứ đến đêm là đc dắt vào tận bên trong KS để yên tâm nhé.\n\n*Nhược điểm:\n- Mình đặt 2 phòng 35m2 nhưng thiết kế của KS lại là phòng giống nhau sẽ khác tầng, hơi bất tiện vs các nhóm đi chung. (1p ở tầng 2 và 1p ở tầng 3)\n- 2 phòng mình đặt phòng thì ko có cửa NVS, phòng thì ko có cửa nhà tắm.\n- Bàn gương trang điểm ko có đèn, nhà tắm ko có đèn. Trong phòng có mỗi 1 cái ghế chỗ bàn làm việc, đúng ra nên để thêm 1 cái ghế ở khu vực bàn trang điểm nữa chứ.\n- Nước nóng nhanh hết, mình tắm tầm 15-20 phút là đoạn cuối nước hơi lạnh rồi.\n- Có ko gian bếp, có bếp từ nhưng mình ko thấy có nồi niêu xoong chảo gì, chắc bếp để chưng cho đẹp thôi.\n- Cầu thang gỗ đi hơi ọp ẹp, mỗi lần đi kêu cót két, có 1 số bậc cầu thang còn trũng hẳn xuống như sắp gãy, hơi nguy hiểm.\n- Ban đêm tầm 22h trở đi KS sẽ tắt đèn ở hành lang, hành lang tối om luôn.\n- Đồ ăn sáng ở đây hơi ít món: mì quảng (tầm 9h mình xuống chỉ còn 1 bát mỳ quảng); trứng rán, chả, thịt ăn kèm bánh mì, bánh cuốn. Mình đc cô bếp recommend món me đá uống chua chua dễ uống. Mình ăn đc 1 bữa sáng ở KS còn ngày hôm sau ra ngoài ăn cho nhiều lựa chọn hơn.\n- Cách âm ko tốt lắm, bật âm lượng TV tầm 20 là ngoài hành lang nghe rõ.\n\n-> KS đẹp, sạch sẽ, nhân viên thân thiện, nhiệt tình tuy nhiên cơ sở vật chất còn thiếu sót và cần sửa chữa."
+                "original": "Mình ở đây 2 đêm và thật sự rất ưng! Từ lúc check-in đến check-out đều rất nhanh và chuyên nghiệp.m. Nhân viên dễ thương, hỗ trợ mọi yêu cầu. Đặc biệt là view biển buổi tối cực đẹp! Sẽ giới thiệu cho bạn bè."
             },
             "details": {
                 "loại_chuyến_đi": "Chuyến nghỉ mát",
-                "nhóm_khách_du_lịch": "Bạn bè",
-                "phòng": 3,
-                "dịch_vụ": 5,
-                "vị_trí": 5,
-                "điểm_nổi_bật_của_khách_sạn": "Yên tĩnh"
+                "nhóm_khách_du_lịch": "Gia đình",
+                "phòng": 4,
+                "dịch_vụ": 4,
+                "vị_trí": 4,
+                "điểm_nổi_bật_của_khách_sạn": "Cảnh đẹp, Lãng mạn"
             },
-            "likes": 1
+            "likes": 0
         },
         {
             "position": 6,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2tOTE5GOVdTVGhQVEhFNFJrOWZhRGh4TW1GcGRrRRAB!2m1!1s0x0:0x4ae0ba54862c4bd0!3m1!1s2@1:CAIQACodChtycF9oOkNLNF9WSThPTHE4Rk9faDhxMmFpdkE%7C%7C?hl=vi",
-            "rating": 5.0,
-            "date": "3 tháng trước",
-            "iso_date": "2026-01-24T03:11:00Z",
-            "iso_date_of_last_edit": "2026-01-24T03:11:00Z",
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2tSVmVGVnFNbGRmYlhsTWVGZzJkamhWZEdNeVgwRRAB!2m1!1s0x0:0x6e3dad20d34f42fb!3m1!1s2@1:CAIQACodChtycF9oOkRVeFVqMldfbXlMeFg2djhVdGMyX0E%7C%7C?hl=vi",
+            "rating": 4.0,
+            "date": "7 tháng trước",
+            "iso_date": "2025-10-21T16:13:00Z",
+            "iso_date_of_last_edit": "2025-10-21T16:13:00Z",
             "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2tOTE5GOVdTVGhQVEhFNFJrOWZhRGh4TW1GcGRrRRAB",
+            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2tSVmVGVnFNbGRmYlhsTWVGZzJkamhWZEdNeVgwRRAB",
             "user": {
-                "name": "Khánh Quỳnh Huỳnh Nguyễn",
-                "link": "https://www.google.com/maps/contrib/111069817768660488587?hl=vi",
-                "contributor_id": "111069817768660488587",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXBYgEyfhalU-TIUfhnBK2-wSWTzYbJ75BnNshp2NZmzCusDInc=s120-c-rp-mo-br100",
+                "name": "P",
+                "link": "https://www.google.com/maps/contrib/102113495520580324199?hl=vi",
+                "contributor_id": "102113495520580324199",
+                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocI59OsRgtqpw7F-4n4mJ5qxTQW4HRoGhgEnHSIFXUQXIYCrXQ=s120-c-rp-mo-ba5-br100",
                 "local_guide": true,
-                "reviews": 3,
-                "photos": 1
+                "reviews": 525,
+                "photos": 6
             },
-            "snippet": "Vị trí khách sạn thuận lợi di chuyển trong trung tâm thành phố, mình đi công tác nên book phòng này trên Agoda khá tiện. Em Khánh receptionist hỗ trợ mình nhiệt tình khi nhận phòng & check out, then kiu em so muchhhh. Mình sẽ quay lại book tiếp khi có dịp công tác sau ở Đà Nẵng",
+            "snippet": "Temple Beach Resort Đà Nẵng có vị trí rất thuận lợi, nằm ngay sát biển Mỹ Khê, chỉ cần vài bước là ra đến bãi cát. Đây là điểm cộng lớn với những ai thích ngắm bình minh hoặc tận hưởng không khí biển cả ngày. Nhiều khách đánh giá cao không gian thoáng đãng, view biển đẹp từ phòng và hồ bơi, cùng với sự thân thiện của nhân viên.\n\nTuy nhiên, resort đã có dấu hiệu xuống cấp. Một số khách phản ánh phòng có mùi khó chịu, khăn tắm và máy sấy có mùi mốc, và việc đặt giường không đúng như yêu cầu ban đầu. Dịch vụ chưa thực sự tương xứng với mức giá, đặc biệt là với những phòng nằm sâu trong khuôn viên, gần quầy lễ tân.\n\nTóm lại, Temple Beach Resort phù hợp với những ai ưu tiên vị trí sát biển và không gian rộng rãi. Nếu bạn không quá khắt khe về chất lượng phòng hay dịch vụ hoàn hảo, đây vẫn là một lựa chọn hợp lý trong tầm giá.",
             "extracted_snippet": {
-                "original": "Vị trí khách sạn thuận lợi di chuyển trong trung tâm thành phố, mình đi công tác nên book phòng này trên Agoda khá tiện. Em Khánh receptionist hỗ trợ mình nhiệt tình khi nhận phòng & check out, then kiu em so muchhhh. Mình sẽ quay lại book tiếp khi có dịp công tác sau ở Đà Nẵng"
+                "original": "Temple Beach Resort Đà Nẵng có vị trí rất thuận lợi, nằm ngay sát biển Mỹ Khê, chỉ cần vài bước là ra đến bãi cát. Đây là điểm cộng lớn với những ai thích ngắm bình minh hoặc tận hưởng không khí biển cả ngày. Nhiều khách đánh giá cao không gian thoáng đãng, view biển đẹp từ phòng và hồ bơi, cùng với sự thân thiện của nhân viên.\n\nTuy nhiên, resort đã có dấu hiệu xuống cấp. Một số khách phản ánh phòng có mùi khó chịu, khăn tắm và máy sấy có mùi mốc, và việc đặt giường không đúng như yêu cầu ban đầu. Dịch vụ chưa thực sự tương xứng với mức giá, đặc biệt là với những phòng nằm sâu trong khuôn viên, gần quầy lễ tân.\n\nTóm lại, Temple Beach Resort phù hợp với những ai ưu tiên vị trí sát biển và không gian rộng rãi. Nếu bạn không quá khắt khe về chất lượng phòng hay dịch vụ hoàn hảo, đây vẫn là một lựa chọn hợp lý trong tầm giá."
             },
             "details": {
-                "loại_chuyến_đi": "Chuyến công tác",
-                "nhóm_khách_du_lịch": "Cặp đôi",
-                "phòng": 5,
-                "dịch_vụ": 5,
-                "vị_trí": 5,
-                "điểm_nổi_bật_của_khách_sạn": "Yên tĩnh"
+                "phòng": 4,
+                "dịch_vụ": 4,
+                "vị_trí": 4
             },
             "likes": 1
         },
         {
             "position": 7,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pONVZ6bGhWMG8zUkhkSWNVOUNXRU01WW5kNVYzYxAB!2m1!1s0x0:0x4ae0ba54862c4bd0!3m1!1s2@1:CAIQACodChtycF9oOjN5VzlhV0o3RHdIcU9CWEM5Ynd5V3c%7C%7C?hl=vi",
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT25Kb1pVUk9Ua056V2xscGJHbGFTRTVaV1haSVFYYxAB!2m1!1s0x0:0x6e3dad20d34f42fb!3m1!1s2@1:CAIQACodChtycF9oOnJoZUROTkNzWllpbGlaSE5ZWXZIQXc%7C%7C?hl=vi",
             "rating": 5.0,
-            "date": "4 tháng trước",
-            "iso_date": "2026-01-18T03:51:15Z",
-            "iso_date_of_last_edit": "2026-01-18T03:51:15Z",
-            "images": [
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn14FGKbh53UXAO9EcyQrfKKTKQifUJImLvCFYPfs-JsLvyFx8-6XSbSgu-Aiq3yzNuARss7x02zu3I4SQuuUBOvLgQBN2x81Wl4vGSfiJDeYZwz96mVzK2Gedsu51nd2FdrgtMaLHyK1qdL=k-no"
-            ],
+            "date": "7 tháng trước",
+            "iso_date": "2025-10-15T09:17:41Z",
+            "iso_date_of_last_edit": "2025-10-15T09:29:28Z",
             "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2pONVZ6bGhWMG8zUkhkSWNVOUNXRU01WW5kNVYzYxAB",
+            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT25Kb1pVUk9Ua056V2xscGJHbGFTRTVaV1haSVFYYxAB",
             "user": {
-                "name": "Ngọc Huyền Nguyễn",
-                "link": "https://www.google.com/maps/contrib/113660184057316523933?hl=vi",
-                "contributor_id": "113660184057316523933",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjVQq6vXB96C5gDuEXx2n5uojMDUGm4S66JrJAWh4mUkpaNYZp0=s120-c-rp-mo-br100",
+                "name": "Quyn Quang",
+                "link": "https://www.google.com/maps/contrib/107706163589445158942?hl=vi",
+                "contributor_id": "107706163589445158942",
+                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocK7AL-gIwU_w_oqS1jtkUEAjofTemX8bvLEDJ6oHEof8rYWFQ=s120-c-rp-mo-br100",
                 "local_guide": true,
-                "reviews": 1,
+                "reviews": 3,
                 "photos": 1
             },
-            "snippet": "Một ks rất đáng để thử ở ĐN:\n- Nhân viên khách sạn cực nhiệt tình. Bạn lễ tân Khánh hỗ trợ chúng mình rất nhanh chóng và chuyên nghiệp.\n- Phòng mới, rộng rãi\n- Nhiều cây xanh, vào đây dễ thở hẳn",
+            "snippet": "Temple Đà Nẵng có lợi thế rất lớn về vị trí biển và mức giá hợp lý so với vị trí. Nếu bạn chủ yếu cần chỗ lưu trú gần biển để đi chơi, nghỉ ngơi và không quá khắt khe với nội thất, tiện nghi cao cấp — thì đây có thể là lựa chọn chấp nhận được.\nTuy nhiên, nếu bạn mong muốn trải nghiệm “resort 4 sao” thật sự, phòng đẹp mới, dịch vụ hoàn hảo, thì có thể nên cân nhắc các khách sạn hoặc resort mới hơn, được đánh giá cao hơn ở Đà Nẵng.\nNếu bạn muốn, mình có thể so sánh Temple với vài khách sạn/resort tốt trong khu vực để bạn chọn được chỗ nghỉ",
             "extracted_snippet": {
-                "original": "Một ks rất đáng để thử ở ĐN:\n- Nhân viên khách sạn cực nhiệt tình. Bạn lễ tân Khánh hỗ trợ chúng mình rất nhanh chóng và chuyên nghiệp.\n- Phòng mới, rộng rãi\n- Nhiều cây xanh, vào đây dễ thở hẳn"
-            },
-            "likes": 0
-        },
-        {
-            "position": 8,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT204NGFIUlNURXhyV0ZKWmJGRlZZV3B4VVRKdVowRRAB!2m1!1s0x0:0x4ae0ba54862c4bd0!3m1!1s2@1:CAIQACodChtycF9oOm84aHRSTExrWFJZbFFVYWpxUTJuZ0E%7C%7C?hl=vi",
-            "rating": 5.0,
-            "date": "4 tháng trước",
-            "iso_date": "2025-12-22T18:15:40Z",
-            "iso_date_of_last_edit": "2025-12-22T18:15:40Z",
-            "images": [
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1kIPHmvyR8nfkMBFlZb8t0jouz3FAKAt4CZzbUcGI2wK8MCm5O44dnps6c6XOnHzwnZ02YugPjLXuoyAkoGF6Hmz9CRq0GxH0NQm8e8JyboYgZZtgBGOMdAI-0oioCO1wT_fsQPQePKWo0=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn14GEZk4b9c9ihqTVS5GRpwTIqn7qEfy9TJskK2RJw0-aZcqpjRMLnNLb0oahZnC3lvDDq-lEwV0FtGEW-DjhaNw3KKRvUs56Vf7tIWKqqplJsc5fZgWeW6WAHxgN_m0Yb--XEyXKMY8BoW=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3WV9Fpez367Kon8yiR3ge150IpIsiyvaYDgL4G9Dtmjj6trZG9fv1lfznDMb7HEOpxKEhGD97_X7eTuSu_WjbwTQxlMPvV9wB1i2e6wBYIx318R52f6F8UBj_QzuFvXUkTHMQ7ThnlDRg9=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn201IZgVS6lzG0uuGBGWrv39ymHaqLSFSv9sf_1Ze1y9m9QWKw66dULZRCKkkSmXPR5oAZtHcX7nJNeEnpIqR9U1Wbb8blwhU8vtBMVxH-wj9d8MYY2ea5R2Viode2pOw8jvhuRjrtWKgWy=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn10A0Q_IKIBZH90p1pye1nagsTRr7qqLfIYsFELcIqoeYAfPjIQZPKodNxA1qBfK99jfKkBl_BI0bnS3qOYZa7U5Et2BqS0ALU3l0ubOat4i-ivIhpO2qlHOhJAGBn9po7ka2qNqMvrAlWn=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1XsYdBcLP_S5q_KwCbovVAaKDwRV48mtQXAroNIwBJ7NxLWj-hQeve6be4fZKjckYevHuN65tIxrIHzoytLxDtHpC6oc8UZjJn4dDIlsUAzaQ5rkkYVRL-u6wyBGRXdumX5NEEKCsWpXMX=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1Xr6L9h0fdlzQqZI0bC4TngesdEpmiD2iuAU6eqW-16pPjIknuNv27nbWa1jMH9nvYKSd6uHUCortp7PLCGMxoGj-g2Qhh0pHfj6j49CI2Fn_IQwP9gIoPY193j2lrTs8Az4mxrchGWrov=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3A4gbQvIRfG1i6ZiSB7Z59qpfiGKtOnmkWe0ayLdWIs9T6QPP7zCA0srOBNGxrUjYXbid11sbtg-qSb4Bd6KUD_hO5kvMjyAqkzOTSrTt-YnmfYSVdegTOEME0g6EHFrMnIKmdOo-LCb8=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3Hemt5xH8GcmGFDBXWSq-EgGGj3KmCRImMwUe1kGL9QMjACr0SCZblcvKba0daXU4AkzRY5tO2Ra21b5uytrjIlNAwHNegvwPdlbUKnwEd7ddSdZaDGv9CVY3HjeLVS2usgakcPT8E-XqN=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0WOp5zMcy14TTC3-4Q6yWbV4DzKQob8mVRkG6D1CAK2il2PkTdj4uoqOgyl4zKg3PZyeFthj194GsASPK-PLzONp5KJa5_NHt2jPJtAwlHLasmVgEiOEnQ6crRhF2X905znc04maOWXP4=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0VswN-Bd2mM4iy0P6L0DX-kdpELpq0NycDm2VVCI1idcfYPrIu2FVN7Oxw_Aig7CH40YvmfmwHHJAr6qWkHZXH54ejY9O4Goonyqn-JtX35I_JkK6Rg07sgDJhXpLxobXx3nMrfXqnXNnw=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn17DGI6GcvSDh6NtmuKdeaSwvHZCmHUHFmLXPrAUziGbU6xrW7914LUs0g2CQzAFCGJc4uamvrn2_x5amLJORqHduJBx6M0E4k28fmyxzl1YzByDHz8-_SPoikKqWJ1i-06ynWEceWv_yO5=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1EzerXpEfh_L7pl3WWTQXP-tXlk7FolwxPhqi3xLEoKJxecGPSmPuBauMYucmHAdeh_TurWsAw1TfqeGH-D6z6H3sHopZzAcB0MqFgMT6XcsSBegjmsLmu0EzGMCxp_mFjWr9hLbK8NOtR=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0A_jD8H4WWFaNDJYyWbcWV9ITAOQeIhAtP5R1tMvD360s3OQZ2S99iIqg8hmup56FrsCquygRv3Iu2ODyDfAN5jCA5K7ZJ813_-Xv0oXNiILVQxGIYvY-k3rZITVKzefvuL-pcTaZ1MHZl=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0HMBIEGO--XBrQybLXmBvlfKgnETXr375QmzB6bW6aJExEbDZO3Pl7l-jQpfNr2L0JV33S4u5ckojffXptmZAkxFUtUotdvKSqU-jKF8rGDWZvsVDJfHlzSztxP9BUYNyBqvIdx8RrKEg=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3Gy3B6TerTj-ISTDqBqbJZMiIg2UeTOwcc664UnZmI8hEOFXmko6EOqEjYewVxoYtyuDQX4OX8XZ0qUALK5UKrckiSTgDR_TRvsSbJFc5tZLXxPCmMb0F7cCjD7gsNqT-AXAaoErygcCs8=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0JvwkNaWRUo_1MIOr_tFxtZQNnujJSLDV4kVl5cZG2vKqP8th8eIYArDWGcAwOpGb6YbDRMw8n4a27ezeGxCs9XmUMgpY39SO42bs0EMRD0YyZWOJ1Mm0eTbOJ6ttKqb8O8-Oh1Z3_oviD=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2CbXVMsdy8Mv97dzN2yTLg5u_ZtSpqAX8tPOvhskQ8dm3Z5m0CNJWjV_Ew4r04rqbVzJMCcC42gEOwb17uWzu1rAvnLqkqhnrVt5riUZ-rWF94rzvCS1E5zw7ujtchr27QfkPgNUCRz0nu=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn069IbPUe1I9AbHHUupWECpOm073G8ob3l19j4gstGQRFDKAe4oJJSCRIJsqTp9VbRdeCQShhLWyfQNWZXw5dnEpsDviXb3fo6Sar87s1sY_3kb-vPiozibSKAc9g5Es3YLHgLG0WMQ-4QS=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1N7M9vzzD-Xxio-xZEWqWybHU42gZA9erdcdQpPF7w6YgxBAdHHSis9eujbthAEDCN04vNjv-dZ1bGKRtUwLDQUNdHl1iIMmFSGgW0w58yFaqEy8YS477vXH8fnnZIRu31xf4FPr53JIw=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0ilWyw_XkMmGy41aIPCaLJAonAIK0fzyk_cWzsjnBWIjXkw2DP4mck67Dy65d5OjJVzzfGF143rQCMHuiuV7V1y4bfkIpJ9ZMXrT78vRfVjooDilAVRkL_dIpoQU7RBfCf1Re0flIL0lj8=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn10r6fJqJpEb0ol2IBNr8yIj9QfqXP-O0A-nEtTJTHvDGhUKm5DzFAf4sdHjlI89FmvbLQ4Oc6wXUsMaBDkapri4TBwbfHy-aZvcsS9eEc_UHTONvPj3QIIL7Gb_RfP7TkpOT0ktD3ZvgE=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn12ycNavjMagQtoimxjHapmqJGTEDqPlD-ePh6-AHpl6_kmqiG39Df-rU1S4URWw5aBGtrBgcNO7miLnuMgXmZ1h8qpFa5FrHC8LIFwzx5mtloierMQHSLdu-hzhW0lwkTLpWGl-F5ERLXp=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3l4wAE1-SecRwzUaaP8UpSu4sbO2F0MbPd5FL45iXLf1OCT46VNVybjUAQk6YQyZUUbuCuiqgEBStdZ8-oIugegeqr_OLTj6LF1DNEj5nA1XyEma2_88uY5SRFhYG6TTwUiCcDIweMLZUq=k-no"
-            ],
-            "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT204NGFIUlNURXhyV0ZKWmJGRlZZV3B4VVRKdVowRRAB",
-            "user": {
-                "name": "Bông Bông",
-                "link": "https://www.google.com/maps/contrib/106308778444608554670?hl=vi",
-                "contributor_id": "106308778444608554670",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjUSt696EPts50FDXvyO0rKAl3TS_7VFQKAU3sbkJfS1YzOVxACZ=s120-c-rp-mo-ba3-br100",
-                "local_guide": true,
-                "reviews": 16,
-                "photos": 165
-            },
-            "snippet": "Đáng lẽ mình chỉ cho 3 sao vì dù phòng đầy đủ tiện nghi nhưng có 1 điều là nếu đã setup bếp thì tại sao ko để 1 nồi 1 chảo với bát đũa cho khách tiện dùng, và cả đồ dùng rửa bát nữa. Phòng có bếp nhưng ko hề có đồ, phải chạy xuống lấy và bạn lễ tân tên Huy đã hỗ trợ lấy đồ dùng nhà bếp cho mình mượn. Các bạn có thể làm list đồ dùng bếp nếu khách làm vỡ hay có bị lấy cắp thì khi check out nhân viên buồng phòng sẽ đếm đủ số lượng đồ thì mới cho khách đi đc cơ mà ? Đồ ăn sáng hơi ít món, mình để ý hình như bếp chỉ có 1 cô nấu cũg có tuổi phải chạy ra chạy vào. Chi phí phòng mình đặt nâng hạnh phòng là tầm 800k/đêm thì mình hy vọng buffet sáng phải chất lượng và ngon hơn thế ! Khách sạn nên cân đối lại và xem thuê thêm người hỗ trợ cô chứ ạ !\nMình đánh giá 5 sao vì do :\n+ 1 là cô nấu bếp bữa ăn sáng rất chu đáo, lần ăn sáng mình xuống lấy đồ cô hỗ trợ mình rất nhiệt tình, cô tinh tế nhìn thấy mình lấy 1 cốc đậu nành và 2 hũ sữa chua cho mình và bé, thì ngày hôm sau khi mình nhờ mag bữa sáng lên phòng cô đã mang thêm cho mình y hệt. Mình hơi tiếc vì ngày về mình ko kịp chào và cảm ơn cô 💝\n+ 2 là vì 2 bạn nhân viên lễ tân nam hỗ trợ mình rất nhiệt tình ! Ngày t2 mình đổi phòng thì bạn tên Huy thì phải đã chạy lên hỗ trợ mình bê đồ bê vali lên phòng giúp đỡ 2 mẹ con.\nKhách sạn đẹp, phòng ốc sạch sẽ, mình chụp đc rất nhiều ảnh. 2 mẹ con đi chơi 1 tuần thì 3 đêm cuối ở đây mình và bé chỉ ở trong phòng và xuống bể bơi chơi vì quá thích ko muốn đi đâu ! Chỉ thấy nếu khách sạn cải thiện thêm được những điều mình góp ý bên trên thì dịch vụ sẽ ok hơn nữa ❣️",
-            "extracted_snippet": {
-                "original": "Đáng lẽ mình chỉ cho 3 sao vì dù phòng đầy đủ tiện nghi nhưng có 1 điều là nếu đã setup bếp thì tại sao ko để 1 nồi 1 chảo với bát đũa cho khách tiện dùng, và cả đồ dùng rửa bát nữa. Phòng có bếp nhưng ko hề có đồ, phải chạy xuống lấy và bạn lễ tân tên Huy đã hỗ trợ lấy đồ dùng nhà bếp cho mình mượn. Các bạn có thể làm list đồ dùng bếp nếu khách làm vỡ hay có bị lấy cắp thì khi check out nhân viên buồng phòng sẽ đếm đủ số lượng đồ thì mới cho khách đi đc cơ mà ? Đồ ăn sáng hơi ít món, mình để ý hình như bếp chỉ có 1 cô nấu cũg có tuổi phải chạy ra chạy vào. Chi phí phòng mình đặt nâng hạnh phòng là tầm 800k/đêm thì mình hy vọng buffet sáng phải chất lượng và ngon hơn thế ! Khách sạn nên cân đối lại và xem thuê thêm người hỗ trợ cô chứ ạ !\nMình đánh giá 5 sao vì do :\n+ 1 là cô nấu bếp bữa ăn sáng rất chu đáo, lần ăn sáng mình xuống lấy đồ cô hỗ trợ mình rất nhiệt tình, cô tinh tế nhìn thấy mình lấy 1 cốc đậu nành và 2 hũ sữa chua cho mình và bé, thì ngày hôm sau khi mình nhờ mag bữa sáng lên phòng cô đã mang thêm cho mình y hệt. Mình hơi tiếc vì ngày về mình ko kịp chào và cảm ơn cô 💝\n+ 2 là vì 2 bạn nhân viên lễ tân nam hỗ trợ mình rất nhiệt tình ! Ngày t2 mình đổi phòng thì bạn tên Huy thì phải đã chạy lên hỗ trợ mình bê đồ bê vali lên phòng giúp đỡ 2 mẹ con.\nKhách sạn đẹp, phòng ốc sạch sẽ, mình chụp đc rất nhiều ảnh. 2 mẹ con đi chơi 1 tuần thì 3 đêm cuối ở đây mình và bé chỉ ở trong phòng và xuống bể bơi chơi vì quá thích ko muốn đi đâu ! Chỉ thấy nếu khách sạn cải thiện thêm được những điều mình góp ý bên trên thì dịch vụ sẽ ok hơn nữa ❣️"
+                "original": "Temple Đà Nẵng có lợi thế rất lớn về vị trí biển và mức giá hợp lý so với vị trí. Nếu bạn chủ yếu cần chỗ lưu trú gần biển để đi chơi, nghỉ ngơi và không quá khắt khe với nội thất, tiện nghi cao cấp — thì đây có thể là lựa chọn chấp nhận được.\nTuy nhiên, nếu bạn mong muốn trải nghiệm “resort 4 sao” thật sự, phòng đẹp mới, dịch vụ hoàn hảo, thì có thể nên cân nhắc các khách sạn hoặc resort mới hơn, được đánh giá cao hơn ở Đà Nẵng.\nNếu bạn muốn, mình có thể so sánh Temple với vài khách sạn/resort tốt trong khu vực để bạn chọn được chỗ nghỉ"
             },
             "details": {
                 "loại_chuyến_đi": "Chuyến nghỉ mát",
                 "nhóm_khách_du_lịch": "Gia đình",
                 "phòng": 5,
-                "dịch_vụ": 3,
+                "dịch_vụ": 5,
                 "vị_trí": 5,
-                "điểm_nổi_bật_của_khách_sạn": "Lãng mạn, Yên tĩnh, Phù hợp với trẻ em"
+                "điểm_nổi_bật_của_khách_sạn": "Sang trọng, Cảnh đẹp, Lãng mạn"
+            },
+            "likes": 0
+        },
+        {
+            "position": 8,
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2t0U2FtRTVZMEpzWkZvMGMxTXRRMVpFVEU5ZmRsRRAB!2m1!1s0x0:0x6e3dad20d34f42fb!3m1!1s2@1:CAIQACodChtycF9oOktSamE5Y0JsZFo0c1MtQ1ZETE9fdlE%7C%7C?hl=vi",
+            "rating": 5.0,
+            "date": "7 tháng trước",
+            "iso_date": "2025-10-15T05:38:39Z",
+            "iso_date_of_last_edit": "2025-10-15T05:38:39Z",
+            "source": "Google",
+            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2t0U2FtRTVZMEpzWkZvMGMxTXRRMVpFVEU5ZmRsRRAB",
+            "user": {
+                "name": "Hồng Phúc",
+                "link": "https://www.google.com/maps/contrib/100479742280032916609?hl=vi",
+                "contributor_id": "100479742280032916609",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjV4ubFUvbrFAb-uO3xwPUBqBsn5x6IuURgYj6kRaecPivGcBBP1=s120-c-rp-mo-br100",
+                "local_guide": true,
+                "reviews": 2,
+                "photos": 0
+            },
+            "snippet": "Tôi có chuyến du lịch tại khách sạn Pariat, tôi rất hài lòng về dịch vụ phòng được làm sạch mỗi ngày, nhân viên vô cùng thân thiện, nhà hàng ăn sáng rộng thức ăn nhiều món và rất ngon.\nTôi sẽ quay lại và giới thiệu bạn bè biêt đến khách sạn.",
+            "extracted_snippet": {
+                "original": "Tôi có chuyến du lịch tại khách sạn Pariat, tôi rất hài lòng về dịch vụ phòng được làm sạch mỗi ngày, nhân viên vô cùng thân thiện, nhà hàng ăn sáng rộng thức ăn nhiều món và rất ngon.\nTôi sẽ quay lại và giới thiệu bạn bè biêt đến khách sạn."
+            },
+            "details": {
+                "phòng": 5,
+                "dịch_vụ": 5,
+                "vị_trí": 5
             },
             "likes": 0
         }
     ],
     "serpapi_pagination": {
-        "next": "https://serpapi.com/search.json?data_id=0x314217003fe6a1b9%3A0x4ae0ba54862c4bd0&engine=google_maps_reviews&hl=vi&next_page_token=CAQSRENqRUlBUklwQ2dvQVA3X0xBSk1pX19fX0VoQ0tVSDVXREFrT0l1dlVNazBBQUFBQUdnbjkyUnNDWkxpNTBEY1lBQ0lB%3A8",
-        "next_page_token": "CAQSRENqRUlBUklwQ2dvQVA3X0xBSk1pX19fX0VoQ0tVSDVXREFrT0l1dlVNazBBQUFBQUdnbjkyUnNDWkxpNTBEY1lBQ0lB:8"
+        "next": "https://serpapi.com/search.json?data_id=0x314217dab097e1c3%3A0x6e3dad20d34f42fb&engine=google_maps_reviews&hl=vi&next_page_token=CjEIARIpCgoAP7_LAZah____EhCKpG1Dh_80-w32DfIAAAAAGgn92ZkCZhmfUVEYACIA%3A8",
+        "next_page_token": "CjEIARIpCgoAP7_LAZah____EhCKpG1Dh_80-w32DfIAAAAAGgn92ZkCZhmfUVEYACIA:8"
     }
 }
