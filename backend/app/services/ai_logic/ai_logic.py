@@ -91,7 +91,8 @@ Bước 1: Tính toán số tag khớp và Cập nhật AIScore cho từng chỗ
 
 Bước 2: Xây dựng Lịch trình Tối ưu
     1. Dựa vào lo_trinh_toi_uu, và thoi_gian, hãy xây dựng một lịch trình chi tiết theo từng ngày.
-        - Sắp xếp thời gian hợp lý (có thời gian di chuyển, thời gian tham quan).
+        - Lịch trình phải đảm bảo đủ số lượng so_ngay, kéo dài từ ngay_bat_dau_du_lich đến ngay_ket_thuc, đảm bảo thứ tự theo đúng như lo_trinh_toi_uu.
+        - Sắp xếp thời gian hợp lý (có thời gian di chuyển, thời gian tham quan, đi chơi từ 8h sáng đến 21h tối).
         - Viết lời giới thiệu ngắn gọn, hấp dẫn cho từng địa điểm.
         - Gợi ý  phương tiện di chuyển phù hợp với khoảng cách giữa các điểm.
         - Nếu có khoảng thời gian ăn uống (ăn trưa, ăn sáng, ăn tối) trong lịch trình, thêm lời kêu gọi người dùng sử dụng chatbot của TopGo để nhận được gợi ý các quán ăn.
@@ -102,7 +103,9 @@ Bước 2: Xây dựng Lịch trình Tối ưu
         - Nếu là các phương tiện công cộng (máy bay, xe khách, ...) thì không cần gợi ý thời gian di chuyển chi tiết mà chỉ cần gợi ý thời gian đặt vé, bắt đầu khởi hành.
 
     YÊU CẦU ĐẦU RA: CHỈ trả về ĐÚNG cấu trúc JSON được cung cấp, không bọc trong markdown code block, không thêm bất kỳ văn bản giải thích nào khác. Thay thế các giá trị giả định bằng dữ liệu nhận được từ JSON và đã xử lý ở Bước 1 và Bước 2.
-    LƯU Ý: Các dữ liệu khách sạn không được thay đổi, chỉ thêm 1 trường điểm AIScore_Moi”
+    LƯU Ý: 
+        - Các dữ liệu khách sạn không được thay đổi, chỉ thêm 1 trường điểm AIScore_Moi.
+        - Các giá trị của biến tiền tệ viết theo kiểu float
 """
 
 TEMPLATE_AI2 = """
@@ -143,7 +146,7 @@ TEMPLATE_AI2 = """
                         "Du_kien_den_luc": "hh:mm"
                     }
                 }...
-            ],...
+            ],Các ngày khác ...
         ],
         "Khach_san_goi_y": [
             {

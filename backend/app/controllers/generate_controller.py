@@ -24,6 +24,7 @@ async def generate_itinerary_stream(payload: dict):
             json.dump(payload, f, ensure_ascii=False, indent=2)
 
         yield json.dumps({"step": 1}) + "\n"
+        # await asyncio.sleep(1)
 
         city_id = payload.get("city_id")
         city_name = payload.get("city_name")
@@ -32,6 +33,7 @@ async def generate_itinerary_stream(payload: dict):
         pax = payload.get("pax", 1)
         notes = payload.get("notes", "")
         transport_type = payload.get("transport", "")
+        accommodation = payload.get("accommodation", "")
 
         date_start = payload.get("date_start")
         date_end = payload.get("date_end")
@@ -140,10 +142,11 @@ async def generate_itinerary_stream(payload: dict):
         os.makedirs(ai_logic_logs_dir, exist_ok=True)
         with open(os.path.join(ai_logic_logs_dir, f"output_ai1_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(ai1_output, f, ensure_ascii=False, indent=2)
-        
+
         print("\nXong Ai1\n")
 
         yield json.dumps({"step": 2}) + "\n"
+        # await asyncio.sleep(1)
         print("\nĐang Routing...\n")
 
         # Routing (Bước 4.2)
@@ -192,10 +195,11 @@ async def generate_itinerary_stream(payload: dict):
         # Lưu log Routing
         with open(os.path.join(routing_logs_dir, f"output_routing_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(routing_output, f, ensure_ascii=False, indent=2)
-        
+
         print("\nXong Routing\n")
 
         yield json.dumps({"step": 3}) + "\n"
+        # await asyncio.sleep(1)
 
         print("\nĐang tìm Khách sạn...")
         # Lọc kết quả cho AI 2 (Bước 4.3)
@@ -208,10 +212,9 @@ async def generate_itinerary_stream(payload: dict):
                 new_dr.pop("places", None)
                 new_dr.pop("route_geometry", None)
                 filtered_daily_routes.append(new_dr)
-        
 
         hotel_output = quet_khach_san_quanh_trung_vi(otm_coordinate.get(
-            "lat", 0), otm_coordinate.get("lon", 0), ngan_sach_luu_tru, "khách sạn", w)
+            "lat", 0), otm_coordinate.get("lon", 0), ngan_sach_luu_tru, accommodation, w)
         danh_sach_goi_y = []
         if hotel_output.get("status") == "success":
             danh_sach_goi_y = hotel_output.get("danh_sach_goi_y")
@@ -229,7 +232,8 @@ async def generate_itinerary_stream(payload: dict):
         print("\nXong tìm khách sạn\n")
 
         yield json.dumps({"step": 4}) + "\n"
-    
+        # await asyncio.sleep(1)
+
         print("\nĐang AI 2...")
         # AI 2
         ai2_output = call_ai_2(ai1_output, db_data_dict)
@@ -238,7 +242,24 @@ async def generate_itinerary_stream(payload: dict):
         with open(os.path.join(ai_logic_logs_dir, f"output_ai2_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(ai2_output, f, ensure_ascii=False, indent=2)
 
+        # ai2_log_file = os.path.join(
+        #     BASE_DIR, "app", "services", "ai_logic", "logs", "output_ai2_20260521_213525.json")
+        # routing_log_file = os.path.join(
+        #     BASE_DIR, "app", "services", "routing_service", "logs", "output_routing_20260521_213525.json")
+
+        # ai2_output = {}
+        # routing_output = {}
+        # if os.path.exists(ai2_log_file):
+        #     with open(ai2_log_file, "r", encoding="utf-8") as f:
+        #         ai2_output = json.load(f)
+        # if os.path.exists(routing_log_file):
+        #     with open(routing_log_file, "r", encoding="utf-8") as f:
+        #         routing_output = json.load(f)
+
+        itinerary_details = ai2_output.get("output", ai2_output)
+
         yield json.dumps({"step": 5}) + "\n"
+        # await asyncio.sleep(1)
 
         # Gửi dữ liệu xuống client
 
@@ -264,11 +285,8 @@ async def generate_itinerary_stream(payload: dict):
             "output": data_output
         }
         print("\nXong AI 2\n")
-        
 
         yield json.dumps({"step": "done", "result": final_output}) + "\n"
-
-        
 
     except Exception as e:
         yield json.dumps({"step": "done", "result": {"status": "error", "errors": [str(e)]}}) + "\n"
