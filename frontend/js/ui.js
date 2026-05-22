@@ -456,10 +456,21 @@ export function renderItinerary(data) {
     if (pc) pc.textContent = ttc.total_places || '';
 
     const rd = document.getElementById('res-dist');
-    if (rd) rd.textContent = ttc.total_distance || '';
+    if (rd) {
+        const dist = parseFloat(ttc.total_distance);
+        rd.textContent = !isNaN(dist) ? dist.toFixed(2) + ' km' : '';
+    }
 
     const bpp = document.getElementById('res-budget-pp');
-    if (bpp) bpp.textContent = (ttc.Tong_ngan_sach / ttc.So_nguoi) || '--';
+    if (bpp) {
+        const totalBudget = parseFloat(ttc.Tong_ngan_sach);
+        const paxCount = parseInt(ttc.So_nguoi);
+        if (!isNaN(totalBudget) && paxCount > 0) {
+            bpp.textContent = '~' + new Intl.NumberFormat('vi-VN').format(Math.round(totalBudget / paxCount)) + ' ₫';
+        } else {
+            bpp.textContent = '--';
+        }
+    }
 
 
 
@@ -509,31 +520,85 @@ export function renderItinerary(data) {
         html += `</div><!-- /timeline-day-group -->`;
     });
 
-    // 3. Render Khách sạn — appended after itinerary inside .split-right
-    const khachSan = aiOut.Khach_san_goi_y || [];
-    if (khachSan.length > 0) {
-        html += `<section class="res-accom-section">
-            <div class="section-label">
-                <span class="section-label-text">Gợi Ý Lưu Trú</span>
-            </div>
-            <div class="bionic-accom-grid">`;
-
-        khachSan.forEach(ks => {
-            html += `<div class="bionic-accom-card">
-                <div class="rac-name">${ks.Ten}</div>
-                <div class="rac-meta">
-                    <div class="rac-rate"><span class="glow-text">${ks.rate || 'N/A'}</span> / 5.0</div>
-                    <div class="rac-ai">Phù hợp <strong class="glow-text">${ks.AIScore || 'N/A'}</strong></div>
-                </div>
-                <div class="rac-price-wrap">
-                    <div class="rac-price">${ks.Gia_tien || ''}</div>
-                </div>
-            </div>`;
-        });
-        html += `</div></section>`;
-    }
-
     container.innerHTML = window.DOMPurify ? DOMPurify.sanitize(html, { ADD_ATTR: ['target', 'style'] }) : html;
+
+    // 3. Render Khách sạn into #hotels-grid-container
+    const hotelsContainer = document.getElementById('hotels-grid-container');
+    const khachSan = aiOut.Khach_san_goi_y || [];
+
+    if (hotelsContainer) {
+        if (khachSan.length > 0) {
+            let htmlHotels = '';
+            // Display only top 3 hotels
+            const top3Hotels = khachSan.slice(0, 3);
+            top3Hotels.forEach(ks => {
+                const hotelName = ks.ten || ks.Ten || 'Khách sạn gợi ý';
+                const ratingVal = ks.rating || ks.rate || '4.5';
+                const aiScoreVal = ks.AIScore || 'N/A';
+                const priceVal = ks.gia_tien || ks.Gia_tien || '';
+                const websiteUrl = ks.website || '';
+                const imageUrl = ks.url_img || '';
+                const addressVal = ks.address || '';
+
+                let formattedPrice = '';
+                if (priceVal) {
+                    if (!isNaN(priceVal)) {
+                        formattedPrice = `~${parseFloat(priceVal).toLocaleString('vi-VN')} ₫/đêm`;
+                    } else {
+                        formattedPrice = `~${priceVal}/đêm`;
+                    }
+                } else {
+                    formattedPrice = 'Liên hệ để có giá tốt';
+                }
+
+                // Default coordinates if not provided
+                let latVal = parseFloat(ks.lat);
+                let lngVal = parseFloat(ks.lng);
+                if (isNaN(latVal) || isNaN(lngVal)) {
+                    latVal = 16.059;
+                    lngVal = 108.244;
+                }
+
+                const hotelDataJson = JSON.stringify({
+                    name: hotelName,
+                    lat: latVal,
+                    lng: lngVal,
+                    color: '#3674B5',
+                    address: addressVal,
+                    rating: ratingVal,
+                    price: formattedPrice
+                });
+
+                htmlHotels += `
+                <div class="bionic-accom-card" data-hotel='${hotelDataJson.replace(/'/g, "&apos;")}' style="cursor: pointer; display: flex; flex-direction: column; overflow: hidden; border-radius: var(--r-l); padding: 0;">
+                    <div class="rac-image" style="height: 180px; width: 100%; position: relative; background: linear-gradient(135deg, rgba(0,169,255,0.3), rgba(0,169,255,0.15)), url('./assets/img/accomodation.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+                        ${imageUrl ? `<img src="${imageUrl}" alt="${hotelName}" style="width:100%;height:100%;object-fit:cover;display:block;" onload="this.style.opacity='1'" onerror="this.style.display='none';const overlay=document.createElement('div');overlay.style.cssText='position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(0,169,255,0.4),rgba(0,169,255,0.2));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.8);font-size:14px;font-weight:500';overlay.textContent='Dữ liệu đang được cập nhật';this.parentElement.appendChild(overlay)" style="opacity: 0; transition: opacity 0.3s;" />` : '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(255,255,255,0.8);font-size:14px;font-weight:500;white-space:nowrap">Dữ liệu đang được cập nhật</div>'}
+                    </div>
+                    <div class="rac-content" style="padding: 20px; padding-top: 0; display: flex; flex-direction: column; gap: 8px; flex: 1; justify-content: space-between;">
+                        <div>
+                            <div class="rac-name" style="margin-bottom: 4px; font-size: 25px; font-weight: 700; line-height: 1.3;">${hotelName}</div>
+                            <div class="rac-meta" style="margin-bottom: 12px; display: flex; flex-direction: row; gap: 12px; align-items: center;">
+                                <div class="rac-ai" style="font-size: 15px; font-weight: 700; color: var(--p1);">✓ Phù hợp <strong class="glow-text" style="font-size: 16px;">${aiScoreVal}</strong></div>
+                                <div class="rac-rate" style="font-size: 14px;"><span class="glow-text" style="font-weight: 700; font-size: 15px;">★ ${ratingVal}</span> / 5.0</div>
+                            </div>
+                            <div class="rac-address" style="font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; display: flex; align-items: flex-start; gap: 6px;">
+                                <img src="./assets/img/location_icon.png" alt="Location" style="width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px;" onerror="this.style.display='none'" />
+                                <span>${addressVal || 'Chưa cập nhật địa chỉ'}</span>
+                            </div>
+                        </div>
+                        <div class="rac-footer" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed rgba(0, 169, 255, 0.2); padding-top: 12px; margin-top: auto;">
+                            <div class="rac-price" style="font-weight: 800; font-size: 15px; color: var(--p1);">${formattedPrice}</div>
+                            ${websiteUrl ? `<a href="${websiteUrl}" target="_blank" class="glass-btn btn-outline" style="padding: 6px 14px; font-size: 11px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-radius: 100px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; border: 1.5px solid rgba(0,169,255,0.45); color: var(--p1); transition: all 0.2s;" onclick="event.stopPropagation();">Website ↗</a>` : ''}
+                        </div>
+                    </div>
+                </div>`;
+            });
+            hotelsContainer.innerHTML = window.DOMPurify ? DOMPurify.sanitize(htmlHotels, { ADD_ATTR: ['target', 'style'] }) : htmlHotels;
+            attachHotelClickEvents();
+        } else {
+            hotelsContainer.innerHTML = '<div style="grid-column: span 3; padding:20px;text-align:center;color:var(--sub);">Không có gợi ý khách sạn nào phù hợp.</div>';
+        }
+    }
 
     // 4. Vẽ Lộ trình lên bản đồ nếu có dữ liệu map
     if (data.routing && typeof window.drawItinerary === 'function') {
