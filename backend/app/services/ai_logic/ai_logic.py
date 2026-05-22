@@ -94,7 +94,12 @@ Bước 2: Xây dựng Lịch trình Tối ưu
         - Sắp xếp thời gian hợp lý (có thời gian di chuyển, thời gian tham quan).
         - Viết lời giới thiệu ngắn gọn, hấp dẫn cho từng địa điểm.
         - Gợi ý  phương tiện di chuyển phù hợp với khoảng cách giữa các điểm.
-    2. Dựa vào dia_diem_xuat_phat, dia_diem_den, ngay_khoi_hanh, phuong_tien_di_chuyen, hãy gợi ý thời gian đặt vé/ bắt đầu khởi hành để có thể kịp lịch trình du lịch đã tạo.
+        - Nếu có khoảng thời gian ăn uống (ăn trưa, ăn sáng, ăn tối) trong lịch trình, thêm lời kêu gọi người dùng sử dụng chatbot của TopGo để nhận được gợi ý các quán ăn.
+    2. Dựa vào dia_diem_xuat_phat, dia_diem_den, ngay_bat_dau_du_lich, phuong_tien_di_chuyen, hãy gợi ý thời gian đặt vé, bắt đầu khởi hành để có thể kịp lịch trình du lịch đã tạo. Ví dụ:
+        - Với phương tiện x đi từ A tới B, khoảng thời gian ước tính là t, vì vậy bạn cần bắt đầu di chuyển vào ngày ... để có thể nghỉ ngơi và kịp lịch trình đã được biên soạn. (ví dụ lịch trình biên soạn bắt đầu 9/4 => ngày bắt đầu di chuyển phải sớm hơn)
+        - Nếu là máy bay/ xe khách/ các phương tiện cần đặt vé, hãy gợi ý thời gian đặt vé sớm hơn.
+        - Nếu quảng đường đi quá xa mà đi bằng xe máy hoặc ô tô riêng (các loại phương tiện cá nhân, đi phượt), gợi ý thêm các tỉnh thành nên dừng chân nghỉ ngơi, tham quan trong chuyến đi. 
+        - Nếu là các phương tiện công cộng (máy bay, xe khách, ...) thì không cần gợi ý thời gian di chuyển chi tiết mà chỉ cần gợi ý thời gian đặt vé, bắt đầu khởi hành.
 
     YÊU CẦU ĐẦU RA: CHỈ trả về ĐÚNG cấu trúc JSON được cung cấp, không bọc trong markdown code block, không thêm bất kỳ văn bản giải thích nào khác. Thay thế các giá trị giả định bằng dữ liệu nhận được từ JSON và đã xử lý ở Bước 1 và Bước 2.
     LƯU Ý: Các dữ liệu khách sạn không được thay đổi, chỉ thêm 1 trường điểm AIScore_Moi”
@@ -107,7 +112,7 @@ TEMPLATE_AI2 = """
             "Ten_hanh_trinh": "[Tạo một tên hành trình hấp dẫn]",
             "So_nguoi": "[Lấy từ so_luong_hanh_khach]",
             "Tong_ngan_sach": "[Lấy từ ngan_sach_tong_k, format VNĐ]",
-            "Goi_y_khoi_hanh": [lời gợi ý về thời điểm đặt vé/ khỏi hành để kịp lịch trình],
+            "Goi_y_khoi_hanh": [lời gợi ý về thời điểm đặt vé/ khởi hành để kịp lịch trình],
             "AIScore_Hanh_trinh": "[Điểm đánh giá chung độ phù hợp, VD: 98% Phù hợp]"
         },
         "Lich_trinh": [

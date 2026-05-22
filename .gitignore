@@ -16,6 +16,9 @@ build/
 # Logs
 logs/
 
+#result 
+result_test/
+
 # Node.js / Frontend
 node_modules/
 npm-debug.log

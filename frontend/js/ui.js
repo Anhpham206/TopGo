@@ -17,23 +17,23 @@ import { initLeafletMap } from './map.js';
 
 // ── Screen ────────────────────────────────────────────────────
 export function showScreen(name) {
-    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-    document.getElementById('screen-'+name)?.classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-    if (name==='result') { setTimeout(initLeafletMap,150); attachHotelClickEvents(); }
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + name)?.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (name === 'result') { setTimeout(initLeafletMap, 150); attachHotelClickEvents(); }
 }
 
 // ── Hotel map ─────────────────────────────────────────────────
 function attachHotelClickEvents() {
-    document.querySelectorAll('.bionic-accom-card').forEach(card=>{
-        card.addEventListener('click', function() {
-            const h=JSON.parse(this.getAttribute('data-hotel'));
-            if (!h||!state.leafletMapInstance) return;
+    document.querySelectorAll('.bionic-accom-card').forEach(card => {
+        card.addEventListener('click', function () {
+            const h = JSON.parse(this.getAttribute('data-hotel'));
+            if (!h || !state.leafletMapInstance) return;
             if (state.currentHotelMarker) state.leafletMapInstance.removeLayer(state.currentHotelMarker);
-            const icon=L.divIcon({className:'',html:`<div style="background:${h.color};color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:16px;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)">🏨</div>`,iconSize:[32,32],iconAnchor:[16,16],popupAnchor:[0,-16]});
-            state.currentHotelMarker=L.marker([h.lat,h.lng],{icon}).addTo(state.leafletMapInstance).bindPopup(`<strong>${h.name}</strong><br>📍 Đã chọn`).openPopup();
-            state.leafletMapInstance.setView([h.lat,h.lng],15);
-            showToast(`Đã định vị ${h.name} trên bản đồ`,'success');
+            const icon = L.divIcon({ className: '', html: `<div style="background:${h.color};color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:16px;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)">🏨</div>`, iconSize: [32, 32], iconAnchor: [16, 16], popupAnchor: [0, -16] });
+            state.currentHotelMarker = L.marker([h.lat, h.lng], { icon }).addTo(state.leafletMapInstance).bindPopup(`<strong>${h.name}</strong><br>📍 Đã chọn`).openPopup();
+            state.leafletMapInstance.setView([h.lat, h.lng], 15);
+            showToast(`Đã định vị ${h.name} trên bản đồ`, 'success');
         });
     });
 }
@@ -48,15 +48,15 @@ let _lastPlaceCityId = null;
 let _lastSelectedPlacesIds = null;
 
 export function invalidateCityCache() { _lastCityFilter = null; }
-export function invalidateDepCache()  { _lastDepFilter = null; }
+export function invalidateDepCache() { _lastDepFilter = null; }
 
 function openDrop(id) {
     document.getElementById(id)?.classList.add('open');
-    if (id === 'dd-city')  renderCityList('');
-    if (id === 'dd-dep')   renderDepList('');
+    if (id === 'dd-city') renderCityList('');
+    if (id === 'dd-dep') renderDepList('');
     if (id === 'dd-place') renderPlaceList('');
 }
-function closeDrop(id)  { document.getElementById(id)?.classList.remove('open'); }
+function closeDrop(id) { document.getElementById(id)?.classList.remove('open'); }
 function toggleDrop(id) { document.getElementById(id)?.classList.contains('open') ? closeDrop(id) : openDrop(id); }
 
 // ── City dropdown ─────────────────────────────────────────────
@@ -103,14 +103,14 @@ export function renderDepList(filter) {
             ${state.selectedDepCity?.id === c.id ? '<span class="di-check">✓</span>' : ''}
           </div>`).join('');
     list.innerHTML = html;
-    
+
     _lastDepFilter = q;
     _lastSelectedDepId = selId;
 }
 
 export function filterCities(val) {
     if (state.citySearchDebounceTimer) clearTimeout(state.citySearchDebounceTimer);
-    state.citySearchDebounceTimer=setTimeout(()=>renderCityList(val),200);
+    state.citySearchDebounceTimer = setTimeout(() => renderCityList(val), 200);
 }
 
 export function selectCity(id) {
@@ -146,67 +146,67 @@ export function selectDepCity(id) {
 function getAbbr(city) {
     if (city.abbr) return city.abbr;
     if (!city.name) return '—';
-    
+
     // Xóa phần trong ngoặc đơn (VD: (Đà Lạt)) và các ký tự không phải chữ/khoảng trắng
     const cleanName = city.name.replace(/\(.*?\)/g, '').replace(/[^\p{L}\s]/gu, '').trim();
     const words = cleanName.split(/\s+/).filter(Boolean);
-    
+
     // Nếu có tiền tố "TP", bỏ qua để lấy tên chính xác (VD: TP Hồ Chí Minh -> HCM)
     if (words.length > 0 && words[0].toUpperCase() === 'TP') {
         words.shift();
     }
-    
+
     return words.map(w => w[0]).join('').toUpperCase().substring(0, 3);
 }
 
 export function updateFromToDisplay() {
-    const toEl=document.getElementById('ft-to-city'), toSub=document.getElementById('ft-to-sub');
-    if (state.selectedCity) { if(toEl) toEl.textContent=getAbbr(state.selectedCity); if(toSub) toSub.textContent=state.selectedCity.name; }
-    else { if(toEl) toEl.textContent='—'; if(toSub) toSub.textContent='Chọn thành phố bên dưới'; }
+    const toEl = document.getElementById('ft-to-city'), toSub = document.getElementById('ft-to-sub');
+    if (state.selectedCity) { if (toEl) toEl.textContent = getAbbr(state.selectedCity); if (toSub) toSub.textContent = state.selectedCity.name; }
+    else { if (toEl) toEl.textContent = '—'; if (toSub) toSub.textContent = 'Chọn thành phố bên dưới'; }
 }
 
 export function updateDeparture() {
-    const fromEl=document.getElementById('ft-from-city'), fromSub=document.getElementById('ft-from-sub');
+    const fromEl = document.getElementById('ft-from-city'), fromSub = document.getElementById('ft-from-sub');
     if (!fromEl) return;
     if (state.selectedDepCity) {
-        fromEl.textContent=getAbbr(state.selectedDepCity);
-        if(fromSub) fromSub.textContent=state.selectedDepCity.name;
-    } else { 
-        fromEl.textContent='—'; 
-        if(fromSub) fromSub.textContent='Chọn điểm xuất phát bên dưới'; 
+        fromEl.textContent = getAbbr(state.selectedDepCity);
+        if (fromSub) fromSub.textContent = state.selectedDepCity.name;
+    } else {
+        fromEl.textContent = '—';
+        if (fromSub) fromSub.textContent = 'Chọn điểm xuất phát bên dưới';
     }
 }
 
 // ── Places dropdown ───────────────────────────────────────────
 export function renderPlaceList(filter) {
-    const list=document.getElementById('place-list'); if (!list) return;
-    if (!state.selectedCity) { list.innerHTML='<div class="dd-empty">Chọn thành phố trước</div>'; return; }
-    const q=(filter||'').toLowerCase(), cityData=state.PLACES_BY_CITY[state.selectedCity.id];
-    
-    const selIds=state.selectedPlaces.map(p=>typeof p==='string'?p:p.id);
+    const list = document.getElementById('place-list'); if (!list) return;
+    if (!state.selectedCity) { list.innerHTML = '<div class="dd-empty">Chọn thành phố trước</div>'; return; }
+    const q = (filter || '').toLowerCase(), cityData = state.PLACES_BY_CITY[state.selectedCity.id];
+
+    const selIds = state.selectedPlaces.map(p => typeof p === 'string' ? p : p.id);
     const selIdsStr = selIds.join(',');
 
     if (_lastPlaceFilter === q && _lastPlaceCityId === state.selectedCity.id && _lastSelectedPlacesIds === selIdsStr && list.innerHTML.trim() !== '' && !list.querySelector('.dd-empty')) {
         return;
     }
 
-    let dtqItems=[], qaItems=[];
+    let dtqItems = [], qaItems = [];
     if (Array.isArray(cityData)) {
-        dtqItems=cityData.map(item=>typeof item==='string'?{id:item,ten:item,tags:[],_loai:'diem_tham_quan'}:{id:item.id||item.name,ten:item.name||item.ten,tags:item.tags||[],_loai:item.category||item.loai||'diem_tham_quan'});
+        dtqItems = cityData.map(item => typeof item === 'string' ? { id: item, ten: item, tags: [], _loai: 'diem_tham_quan' } : { id: item.id || item.name, ten: item.name || item.ten, tags: item.tags || [], _loai: item.category || item.loai || 'diem_tham_quan' });
     } else if (cityData) {
-        dtqItems=(cityData.diem_tham_quan||[]).map(d=>({...d,_loai:'diem_tham_quan'}));
-        qaItems=(cityData.quan_an||[]).map(q=>({...q,ten:q.ten_quan||q.ten,_loai:'quan_an'}));
+        dtqItems = (cityData.diem_tham_quan || []).map(d => ({ ...d, _loai: 'diem_tham_quan' }));
+        qaItems = (cityData.quan_an || []).map(q => ({ ...q, ten: q.ten_quan || q.ten, _loai: 'quan_an' }));
     }
-    
-    const ff=item=>{
-        const t=(item.ten||'').trim();
+
+    const ff = item => {
+        const t = (item.ten || '').trim();
         return t && t.toLowerCase().includes(q) && !selIds.includes(item.id);
     };
-    const fDTQ=dtqItems.filter(ff), fQA=qaItems.filter(ff);
-    if (!fDTQ.length&&!fQA.length) { list.innerHTML='<div class="dd-empty">Không tìm thấy địa điểm</div>'; return; }
-    let html='';
-    if (fDTQ.length) html+='<div class="dd-section-label">Điểm tham quan</div>'+fDTQ.map(renderPlaceItem).join('');
-    if (fQA.length)  html+='<div class="dd-section-label">Quán ăn</div>'+fQA.map(renderPlaceItem).join('');
+    const fDTQ = dtqItems.filter(ff), fQA = qaItems.filter(ff);
+    if (!fDTQ.length && !fQA.length) { list.innerHTML = '<div class="dd-empty">Không tìm thấy địa điểm</div>'; return; }
+    let html = '';
+    if (fDTQ.length) html += '<div class="dd-section-label">Điểm tham quan</div>' + fDTQ.map(renderPlaceItem).join('');
+    if (fQA.length) html += '<div class="dd-section-label">Quán ăn</div>' + fQA.map(renderPlaceItem).join('');
     list.innerHTML = html;
 
     _lastPlaceFilter = q;
@@ -215,164 +215,164 @@ export function renderPlaceList(filter) {
 }
 
 function renderPlaceItem(item) {
-    const name=item.name||item.ten||item.ten_dia_diem||item.ten_quan||'';
-    return `<div class="dd-item" data-place-id="${item.id}" data-place-name="${name}" data-place-loai="${item._loai||'diem_tham_quan'}">
-      <div class="di-info"><div class="di-name">${name||'<Không tên>'}</div><div class="di-sub">${state.selectedCity?.name||''}</div></div>
+    const name = item.name || item.ten || item.ten_dia_diem || item.ten_quan || '';
+    return `<div class="dd-item" data-place-id="${item.id}" data-place-name="${name}" data-place-loai="${item._loai || 'diem_tham_quan'}">
+      <div class="di-info"><div class="di-name">${name || '<Không tên>'}</div><div class="di-sub">${state.selectedCity?.name || ''}</div></div>
     </div>`;
 }
 
 export function filterPlaces(val) {
     if (state.placeSearchDebounceTimer) clearTimeout(state.placeSearchDebounceTimer);
-    state.placeSearchDebounceTimer=setTimeout(()=>renderPlaceList(val),200);
+    state.placeSearchDebounceTimer = setTimeout(() => renderPlaceList(val), 200);
 }
 
 export function addPlace(id, name, loai) {
-    if (!state.selectedCity) { showToast('Vui lòng chọn thành phố trước','error'); return; }
-    if (state.selectedPlaces.length>=10) { showToast('Chỉ được chọn tối đa 10 địa điểm','error'); return; }
-    if (!state.selectedPlaces.some(p=>(typeof p==='string'?p:p.id)===id)) {
-        state.selectedPlaces.push({id,ten:name,loai:loai||'diem_tham_quan'});
+    if (!state.selectedCity) { showToast('Vui lòng chọn thành phố trước', 'error'); return; }
+    if (state.selectedPlaces.length >= 10) { showToast('Chỉ được chọn tối đa 10 địa điểm', 'error'); return; }
+    if (!state.selectedPlaces.some(p => (typeof p === 'string' ? p : p.id) === id)) {
+        state.selectedPlaces.push({ id, ten: name, loai: loai || 'diem_tham_quan' });
         renderPlaceTags(); renderPlaceList('');
-        const si=document.getElementById('place-search'); if(si) { si.value=''; si.focus(); }
+        const si = document.getElementById('place-search'); if (si) { si.value = ''; si.focus(); }
     }
 }
 
 export function removePlace(id) {
-    state.selectedPlaces=state.selectedPlaces.filter(p=>(typeof p==='string'?p:p.id)!==id);
+    state.selectedPlaces = state.selectedPlaces.filter(p => (typeof p === 'string' ? p : p.id) !== id);
     renderPlaceTags(); renderPlaceList('');
 }
 
 export function renderPlaceTags() {
-    const box=document.getElementById('places-box'); if (!box) return;
-    box.querySelectorAll('.tag').forEach(t=>t.remove());
-    const si=document.getElementById('place-search'); if (!si) return;
-    state.selectedPlaces.forEach(p=>{
-        const displayName=typeof p==='string'?p:p.ten, placeId=typeof p==='string'?p:p.id;
-        const tag=document.createElement('div'); tag.className='tag'; tag.textContent=displayName+' ';
-        const btn=document.createElement('button'); btn.className='tag-rm'; btn.textContent='×';
-        btn.addEventListener('click', e=>{ e.stopPropagation(); removePlace(placeId); });
-        tag.appendChild(btn); box.insertBefore(tag,si);
+    const box = document.getElementById('places-box'); if (!box) return;
+    box.querySelectorAll('.tag').forEach(t => t.remove());
+    const si = document.getElementById('place-search'); if (!si) return;
+    state.selectedPlaces.forEach(p => {
+        const displayName = typeof p === 'string' ? p : p.ten, placeId = typeof p === 'string' ? p : p.id;
+        const tag = document.createElement('div'); tag.className = 'tag'; tag.textContent = displayName + ' ';
+        const btn = document.createElement('button'); btn.className = 'tag-rm'; btn.textContent = '×';
+        btn.addEventListener('click', e => { e.stopPropagation(); removePlace(placeId); });
+        tag.appendChild(btn); box.insertBefore(tag, si);
     });
 }
 
 // ── Pax stepper ───────────────────────────────────────────────
 export function adjustPax(delta) {
-    const inp=document.getElementById('pax-val'); if (!inp) return;
-    const v=Math.max(1,Math.min(50,parseInt(inp.value)+delta)); inp.value=v;
-    const minus=document.getElementById('pax-minus'), plus=document.getElementById('pax-plus');
-    if(minus) minus.disabled=v<=1; if(plus) plus.disabled=v>=50;
+    const inp = document.getElementById('pax-val'); if (!inp) return;
+    const v = Math.max(1, Math.min(50, parseInt(inp.value) + delta)); inp.value = v;
+    const minus = document.getElementById('pax-minus'), plus = document.getElementById('pax-plus');
+    if (minus) minus.disabled = v <= 1; if (plus) plus.disabled = v >= 50;
     updateBudgetPP();
 }
 
 // ── Dates ─────────────────────────────────────────────────────
 export function validateDates() {
-    const s=document.getElementById('date-start'),e=document.getElementById('date-end');
-    const errS=document.getElementById('err-date-s'),errE=document.getElementById('err-date-e'),dur=document.getElementById('date-dur');
-    if (!s||!e) return;
-    [errS,errE].forEach(el=>el?.classList.remove('show')); [s,e].forEach(el=>el.classList.remove('err'));
-    if(dur) dur.textContent='';
-    if (!s.value||!e.value) return;
-    const today=new Date(); today.setHours(0,0,0,0);
-    const ds=new Date(s.value),de=new Date(e.value); e.min=s.value;
-    if (ds<today) { errS?.classList.add('show'); if(errS) errS.textContent='Ngày khởi hành không được ở quá khứ'; s.classList.add('err'); return; }
-    const diff=Math.round((de-ds)/864e5);
-    if (diff<0) { errE?.classList.add('show'); if(errE) errE.textContent='Ngày về phải sau hoặc bằng ngày đi'; e.classList.add('err'); return; }
-    if (diff>7) { errE?.classList.add('show'); if(errE) errE.textContent=`Tối đa 7 ngày (hiện tại: ${diff} ngày)`; e.classList.add('err'); return; }
-    if(dur) dur.textContent=diff===0?`${diff+1} ngày (trong ngày)`:`${diff+1} ngày ${diff} đêm`;
+    const s = document.getElementById('date-start'), e = document.getElementById('date-end');
+    const errS = document.getElementById('err-date-s'), errE = document.getElementById('err-date-e'), dur = document.getElementById('date-dur');
+    if (!s || !e) return;
+    [errS, errE].forEach(el => el?.classList.remove('show'));[s, e].forEach(el => el.classList.remove('err'));
+    if (dur) dur.textContent = '';
+    if (!s.value || !e.value) return;
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const ds = new Date(s.value), de = new Date(e.value); e.min = s.value;
+    if (ds < today) { errS?.classList.add('show'); if (errS) errS.textContent = 'Ngày khởi hành không được ở quá khứ'; s.classList.add('err'); return; }
+    const diff = Math.round((de - ds) / 864e5);
+    if (diff < 0) { errE?.classList.add('show'); if (errE) errE.textContent = 'Ngày về phải sau hoặc bằng ngày đi'; e.classList.add('err'); return; }
+    if (diff > 7) { errE?.classList.add('show'); if (errE) errE.textContent = `Tối đa 7 ngày (hiện tại: ${diff} ngày)`; e.classList.add('err'); return; }
+    if (dur) dur.textContent = diff === 0 ? `${diff + 1} ngày (trong ngày)` : `${diff + 1} ngày ${diff} đêm`;
     updateBudgetPP();
 }
 
 export function getTripDays() {
-    const ds=document.getElementById('date-start')?.value, de=document.getElementById('date-end')?.value;
-    if (!ds||!de) return 1; return Math.max(1,Math.round((new Date(de)-new Date(ds))/864e5));
+    const ds = document.getElementById('date-start')?.value, de = document.getElementById('date-end')?.value;
+    if (!ds || !de) return 1; return Math.max(1, Math.round((new Date(de) - new Date(ds)) / 864e5));
 }
 
 // ── Budget ────────────────────────────────────────────────────
 export function formatBudget(inp) {
-    const raw=inp.value.replace(/\D/g,''); inp.value=raw?parseInt(raw).toLocaleString('vi-VN'):'';
-    document.querySelectorAll('.b-chip').forEach(c=>c.classList.remove('on'));
+    const raw = inp.value.replace(/\D/g, ''); inp.value = raw ? parseInt(raw).toLocaleString('vi-VN') : '';
+    document.querySelectorAll('.b-chip').forEach(c => c.classList.remove('on'));
     validateBudget(); updateBudgetPP();
 }
 
 export function setBudget(val, el) {
-    document.querySelectorAll('.b-chip').forEach(c=>c.classList.remove('on'));
+    document.querySelectorAll('.b-chip').forEach(c => c.classList.remove('on'));
     el.classList.add('on');
-    const bi=document.getElementById('budget-input'); if(bi) bi.value=parseInt(val).toLocaleString('vi-VN');
+    const bi = document.getElementById('budget-input'); if (bi) bi.value = parseInt(val).toLocaleString('vi-VN');
     validateBudget(); updateBudgetPP();
 }
 
 export function getRawBudget() {
-    return parseInt((document.getElementById('budget-input')?.value||'0').replace(/\D/g,''))||0;
+    return parseInt((document.getElementById('budget-input')?.value || '0').replace(/\D/g, '')) || 0;
 }
 
 export function validateBudget() {
-    const v=getRawBudget(), err=document.getElementById('err-budget'), inp=document.getElementById('budget-input');
-    const pax=parseInt(document.getElementById('pax-val')?.value)||1;
-    const days=getTripDays();
+    const v = getRawBudget(), err = document.getElementById('err-budget'), inp = document.getElementById('budget-input');
+    const pax = parseInt(document.getElementById('pax-val')?.value) || 1;
+    const days = getTripDays();
     const minBudget = pax * days * 50_000;
     const lowBudget = pax * days * 200_000;
     const medBudget = pax * days * 500_000;
-    
-    if (v>0) {
+
+    if (v > 0) {
         err?.classList.add('show');
-        if (v < minBudget) { 
-            if(err) { err.textContent=`Ngân sách quá thấp. Tối thiểu ${minBudget.toLocaleString('vi-VN')} ₫.`; err.style.color='var(--error)'; }
-            inp?.classList.add('err'); 
+        if (v < minBudget) {
+            if (err) { err.textContent = `Ngân sách quá thấp. Tối thiểu ${minBudget.toLocaleString('vi-VN')} ₫.`; err.style.color = 'var(--error)'; }
+            inp?.classList.add('err');
         } else if (v < lowBudget) {
-            if(err) { err.textContent=`Ngân sách thấp. Phù hợp du lịch tiết kiệm.`; err.style.color='#f39c12'; }
+            if (err) { err.textContent = `Ngân sách thấp. Phù hợp du lịch tiết kiệm.`; err.style.color = '#f39c12'; }
             inp?.classList.remove('err');
         } else if (v < medBudget) {
-            if(err) { err.textContent=`Ngân sách trung bình. Đáp ứng tốt các dịch vụ tiêu chuẩn.`; err.style.color='#3498db'; }
+            if (err) { err.textContent = `Ngân sách trung bình. Đáp ứng tốt các dịch vụ tiêu chuẩn.`; err.style.color = '#3498db'; }
             inp?.classList.remove('err');
         } else {
             err?.classList.remove('show');
             inp?.classList.remove('err');
         }
-    } else { 
-        err?.classList.remove('show'); 
-        inp?.classList.remove('err'); 
+    } else {
+        err?.classList.remove('show');
+        inp?.classList.remove('err');
     }
 }
 
 export function updateBudgetPP() {
-    const pax=parseInt(document.getElementById('pax-val')?.value)||1, budget=getRawBudget(), el=document.getElementById('budget-pp');
+    const pax = parseInt(document.getElementById('pax-val')?.value) || 1, budget = getRawBudget(), el = document.getElementById('budget-pp');
     if (!el) return;
-    if (budget&&pax) { const pp=Math.round(budget/pax), days=getTripDays(), ppd=days>1?` · ~${Math.round(pp/days).toLocaleString('vi-VN')} ₫/người/ngày`:''; el.textContent=`≈ ${pp.toLocaleString('vi-VN')} ₫/người${ppd}`; }
-    else el.textContent='';
+    if (budget && pax) { const pp = Math.round(budget / pax), days = getTripDays(), ppd = days > 1 ? ` · ~${Math.round(pp / days).toLocaleString('vi-VN')} ₫/người/ngày` : ''; el.textContent = `≈ ${pp.toLocaleString('vi-VN')} ₫/người${ppd}`; }
+    else el.textContent = '';
 }
 
 // ── Preferences & notes ───────────────────────────────────────
 export function togglePref(el, text) {
     el.classList.toggle('on');
-    const active=Array.from(document.querySelectorAll('.p-chip.on')).map(c=>c.dataset.pref||c.textContent.trim()).join(', ');
-    const ta=document.getElementById('notes-input'); if (!ta) return;
-    const filtered=ta.value.split('\n').filter(l=>!l.startsWith('Sở thích:')).join('\n').trim();
-    ta.value=active?('Sở thích: '+active+(filtered?'\n'+filtered:'')):filtered;
-    updateCharCount(ta,'notes-count');
+    const active = Array.from(document.querySelectorAll('.p-chip.on')).map(c => c.dataset.pref || c.textContent.trim()).join(', ');
+    const ta = document.getElementById('notes-input'); if (!ta) return;
+    const filtered = ta.value.split('\n').filter(l => !l.startsWith('Sở thích:')).join('\n').trim();
+    ta.value = active ? ('Sở thích: ' + active + (filtered ? '\n' + filtered : '')) : filtered;
+    updateCharCount(ta, 'notes-count');
 }
 
 export function updateCharCount(el, id) {
-    const len=el.value.length, max=parseInt(el.maxLength), c=document.getElementById(id); if (!c) return;
-    c.textContent=`${len} / ${max}`; c.className='char-c'+(len>=max?' over':len>max*.9?' warn':'');
+    const len = el.value.length, max = parseInt(el.maxLength), c = document.getElementById(id); if (!c) return;
+    c.textContent = `${len} / ${max}`; c.className = 'char-c' + (len >= max ? ' over' : len > max * .9 ? ' warn' : '');
 }
 
 // ── Reset ─────────────────────────────────────────────────────
 export function doReset() {
-    state.selectedCity=null; state.selectedPlaces=[];
-    const cs=document.getElementById('city-search'); if(cs) cs.value='';
+    state.selectedCity = null; state.selectedPlaces = [];
+    const cs = document.getElementById('city-search'); if (cs) cs.value = '';
     renderPlaceTags();
-    ['dep-input','budget-input','notes-input'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-    const pv=document.getElementById('pax-val'); if(pv) pv.value='1';
-    const pm=document.getElementById('pax-minus'); if(pm) pm.disabled=true;
-    document.querySelectorAll('.p-chip.on,.b-chip.on').forEach(c=>c.classList.remove('on'));
-    document.querySelectorAll('.f-err.show').forEach(e=>e.classList.remove('show'));
-    document.querySelectorAll('.err').forEach(e=>e.classList.remove('err'));
-    ['notes-count','feedback-count'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='0 / 500';});
-    ['date-dur','budget-pp'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='';});
-    ['ft-from-city','ft-to-city'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='—';});
-    const fsub=document.getElementById('ft-from-sub'); if(fsub) fsub.textContent='Nhập điểm xuất phát bên dưới';
-    const tsub=document.getElementById('ft-to-sub');   if(tsub) tsub.textContent='Chọn thành phố bên dưới';
+    ['dep-input', 'budget-input', 'notes-input'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    const pv = document.getElementById('pax-val'); if (pv) pv.value = '1';
+    const pm = document.getElementById('pax-minus'); if (pm) pm.disabled = true;
+    document.querySelectorAll('.p-chip.on,.b-chip.on').forEach(c => c.classList.remove('on'));
+    document.querySelectorAll('.f-err.show').forEach(e => e.classList.remove('show'));
+    document.querySelectorAll('.err').forEach(e => e.classList.remove('err'));
+    ['notes-count', 'feedback-count'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = '0 / 500'; });
+    ['date-dur', 'budget-pp'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = ''; });
+    ['ft-from-city', 'ft-to-city'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = '—'; });
+    const fsub = document.getElementById('ft-from-sub'); if (fsub) fsub.textContent = 'Nhập điểm xuất phát bên dưới';
+    const tsub = document.getElementById('ft-to-sub'); if (tsub) tsub.textContent = 'Chọn thành phố bên dưới';
     renderCityList(''); closePopup('popup-reset');
-    showToast('Đã đặt lại tất cả thông tin','success');
+    showToast('Đã đặt lại tất cả thông tin', 'success');
 }
 
 export function renderItinerary(data) {
@@ -380,7 +380,7 @@ export function renderItinerary(data) {
     const p = window._lastPayload;
 
     if (!container) return;
-    
+
     // Nếu chưa có dữ liệu hợp lệ
     if (!data || !data.output) {
         if (typeof MOCK_ITINERARY_HTML !== 'undefined') {
@@ -393,16 +393,16 @@ export function renderItinerary(data) {
 
     const aiOut = data.output;
     const ttc = aiOut.Thong_tin_chung || {};
-    
+
     // 1. Cập nhật Thông tin chung
     const titleEl = document.getElementById('res-title');
     if (titleEl) titleEl.textContent = ttc.Ten_hanh_trinh || (p ? `Hành trình ${p.city_name}` : 'Hành trình gợi ý');
-    
+
     if (p && p.date_start && p.date_end) {
         const datesEl = document.getElementById('res-dates');
         if (datesEl) datesEl.innerHTML = `<strong>${p.date_start.split('-').reverse().join('/')} – ${p.date_end.split('-').reverse().join('/')}</strong>`;
     }
-    
+
     const weatherEl = document.getElementById('res-weather');
     if (weatherEl) {
         const city = p?.city_name || '';
@@ -412,13 +412,13 @@ export function renderItinerary(data) {
         else if (city.includes('Nha Trang') || city.includes('Phú Quốc')) weather = 'Nắng đẹp, 30°C';
         weatherEl.innerHTML = `<strong>${weather}</strong>`;
     }
-    
+
     const paxEl = document.getElementById('res-pax');
     if (paxEl) paxEl.innerHTML = `<strong>${ttc.So_nguoi || (p ? p.pax + ' người' : 'N/A')}</strong>`;
-    
+
     const be = document.getElementById('res-budget');
     if (be) be.innerHTML = `<strong>~${ttc.Tong_ngan_sach || (p ? new Intl.NumberFormat('vi-VN').format(p.budget) + ' ₫' : 'N/A')}</strong>`;
-    
+
     const departureEl = document.getElementById('res-departure');
     if (departureEl) {
         const depCity = p?.dep_city_id ? state.CITIES.find(c => c.id === p.dep_city_id) : state.selectedDepCity;
@@ -448,16 +448,27 @@ export function renderItinerary(data) {
         }
         bestTimeEl.innerHTML = `<strong>${bestTime}</strong>`;
     }
-    
+
     const tb = document.getElementById('res-total-budget');
     if (tb) tb.textContent = ttc.Tong_ngan_sach || '';
 
+    const pc = document.getElementById('res-places-count');
+    if (pc) pc.textContent = ttc.total_places || '';
+
+    const rd = document.getElementById('res-dist');
+    if (rd) rd.textContent = ttc.total_distance || '';
+
+    const bpp = document.getElementById('res-budget-pp');
+    if (bpp) bpp.textContent = (ttc.Tong_ngan_sach / ttc.So_nguoi) || '--';
+
+
+
     // Cập nhật AIScore (không chèn inline vào title nữa, design mới hiển thị score trong .mag-score-row ở ngoài HTML)
-    
+
     // 2. Render Lịch trình
     let html = '';
     const lichTrinh = aiOut.Lich_trinh || [];
-    
+
     lichTrinh.forEach((dayData, dayIndex) => {
         const ds = p && p.date_start ? new Date(p.date_start) : new Date();
         ds.setDate(ds.getDate() + dayIndex);
@@ -488,7 +499,7 @@ export function renderItinerary(data) {
                     </div>
                 </div>
             </div>`;
-            
+
             if (stop.Di_chuyen && !isLast) {
                 html += `<div class="timeline-transport">
                     <span class="glow-text">DI CHUYỂN:</span> ${stop.Di_chuyen.Phuong_tien || ''} · ${stop.Di_chuyen.Khoang_cach || ''} · ~${stop.Di_chuyen.Thoi_gian_di_chuyen || ''}
@@ -506,7 +517,7 @@ export function renderItinerary(data) {
                 <span class="section-label-text">Gợi Ý Lưu Trú</span>
             </div>
             <div class="bionic-accom-grid">`;
-        
+
         khachSan.forEach(ks => {
             html += `<div class="bionic-accom-card">
                 <div class="rac-name">${ks.Ten}</div>
@@ -534,18 +545,18 @@ export function renderItinerary(data) {
 
 export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }) {
     // City dropdown
-    const cityTrigger=document.getElementById('city-trigger');
-    if (cityTrigger) cityTrigger.addEventListener('click',()=>toggleDrop('dd-city'));
-    const citySearch=document.getElementById('city-search');
+    const cityTrigger = document.getElementById('city-trigger');
+    if (cityTrigger) cityTrigger.addEventListener('click', () => toggleDrop('dd-city'));
+    const citySearch = document.getElementById('city-search');
     if (citySearch) {
         citySearch.addEventListener('click', e => e.stopPropagation());
-        citySearch.addEventListener('input', e=>filterCities(e.target.value));
-        citySearch.addEventListener('focus', ()=>openDrop('dd-city'));
-        citySearch.addEventListener('blur',  ()=>setTimeout(()=>closeDrop('dd-city'),200));
+        citySearch.addEventListener('input', e => filterCities(e.target.value));
+        citySearch.addEventListener('focus', () => openDrop('dd-city'));
+        citySearch.addEventListener('blur', () => setTimeout(() => closeDrop('dd-city'), 200));
     }
     // City list: event delegation for selectCity
-    document.getElementById('city-list')?.addEventListener('mousedown', e=>{
-        const item=e.target.closest('[data-city-id]');
+    document.getElementById('city-list')?.addEventListener('mousedown', e => {
+        const item = e.target.closest('[data-city-id]');
         if (item) {
             e.preventDefault(); // Prevent input blur
             selectCity(item.dataset.cityId);
@@ -553,17 +564,17 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
     });
 
     // Places dropdown
-    const placesBox=document.getElementById('places-box');
-    if (placesBox) placesBox.addEventListener('click',()=>document.getElementById('place-search')?.focus());
-    const placeSearch=document.getElementById('place-search');
+    const placesBox = document.getElementById('places-box');
+    if (placesBox) placesBox.addEventListener('click', () => document.getElementById('place-search')?.focus());
+    const placeSearch = document.getElementById('place-search');
     if (placeSearch) {
-        placeSearch.addEventListener('input', e=>filterPlaces(e.target.value));
-        placeSearch.addEventListener('focus', ()=>openDrop('dd-place'));
-        placeSearch.addEventListener('blur',  ()=>setTimeout(()=>closeDrop('dd-place'),200));
+        placeSearch.addEventListener('input', e => filterPlaces(e.target.value));
+        placeSearch.addEventListener('focus', () => openDrop('dd-place'));
+        placeSearch.addEventListener('blur', () => setTimeout(() => closeDrop('dd-place'), 200));
     }
     // Place list: event delegation for addPlace
-    document.getElementById('place-list')?.addEventListener('mousedown', e=>{
-        const item=e.target.closest('[data-place-id]');
+    document.getElementById('place-list')?.addEventListener('mousedown', e => {
+        const item = e.target.closest('[data-place-id]');
         if (item) {
             e.preventDefault(); // Prevent input blur
             addPlace(item.dataset.placeId, item.dataset.placeName, item.dataset.placeLoai);
@@ -571,17 +582,17 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
     });
 
     // Dep dropdown
-    const depTrigger=document.getElementById('dep-trigger');
-    if (depTrigger) depTrigger.addEventListener('click',()=>toggleDrop('dd-dep'));
-    const depSearch=document.getElementById('dep-search');
+    const depTrigger = document.getElementById('dep-trigger');
+    if (depTrigger) depTrigger.addEventListener('click', () => toggleDrop('dd-dep'));
+    const depSearch = document.getElementById('dep-search');
     if (depSearch) {
         depSearch.addEventListener('click', e => e.stopPropagation());
-        depSearch.addEventListener('input', e=>filterDepCities(e.target.value));
-        depSearch.addEventListener('focus', ()=>openDrop('dd-dep'));
-        depSearch.addEventListener('blur',  ()=>setTimeout(()=>closeDrop('dd-dep'),200));
+        depSearch.addEventListener('input', e => filterDepCities(e.target.value));
+        depSearch.addEventListener('focus', () => openDrop('dd-dep'));
+        depSearch.addEventListener('blur', () => setTimeout(() => closeDrop('dd-dep'), 200));
     }
-    document.getElementById('dep-list')?.addEventListener('mousedown', e=>{
-        const item=e.target.closest('[data-dep-id]');
+    document.getElementById('dep-list')?.addEventListener('mousedown', e => {
+        const item = e.target.closest('[data-dep-id]');
         if (item) {
             e.preventDefault();
             selectDepCity(item.dataset.depId);
@@ -589,8 +600,8 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
     });
 
     // Pax
-    document.getElementById('pax-minus')?.addEventListener('click',()=>adjustPax(-1));
-    document.getElementById('pax-plus')?.addEventListener('click', ()=>adjustPax(1));
+    document.getElementById('pax-minus')?.addEventListener('click', () => adjustPax(-1));
+    document.getElementById('pax-plus')?.addEventListener('click', () => adjustPax(1));
 
     // Custom dropdown logic (Transport & Accom)
     const setupCustomDropdown = (wrapId, triggerId, inputId, listId) => {
@@ -622,40 +633,40 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
         });
 
         // Close when clicking outside
-        input.addEventListener('blur', () => setTimeout(()=>wrap.classList.remove('open'), 200));
+        input.addEventListener('blur', () => setTimeout(() => wrap.classList.remove('open'), 200));
     };
 
     setupCustomDropdown('dd-transport', 'transport-trigger', 'transport-type', 'transport-list');
     setupCustomDropdown('dd-accom', 'accom-trigger', 'accommodation-type', 'accom-list');
 
     // Dates
-    ['date-start','date-end','time-start','time-end'].forEach(id=>document.getElementById(id)?.addEventListener('change',validateDates));
+    ['date-start', 'date-end', 'time-start', 'time-end'].forEach(id => document.getElementById(id)?.addEventListener('change', validateDates));
 
     // Budget chips: event delegation on .budget-chips
-    document.querySelector('.budget-chips')?.addEventListener('click', e=>{
-        const chip=e.target.closest('[data-budget]'); if(chip) setBudget(chip.dataset.budget, chip);
+    document.querySelector('.budget-chips')?.addEventListener('click', e => {
+        const chip = e.target.closest('[data-budget]'); if (chip) setBudget(chip.dataset.budget, chip);
     });
-    const budgetInput=document.getElementById('budget-input');
-    if (budgetInput) { budgetInput.addEventListener('input', ()=>formatBudget(budgetInput)); budgetInput.addEventListener('blur',validateBudget); }
-    
+    const budgetInput = document.getElementById('budget-input');
+    if (budgetInput) { budgetInput.addEventListener('input', () => formatBudget(budgetInput)); budgetInput.addEventListener('blur', validateBudget); }
+
     // Also revalidate budget when pax changes
     document.getElementById('pax-minus')?.addEventListener('click', validateBudget);
     document.getElementById('pax-plus')?.addEventListener('click', validateBudget);
 
     // Preference chips: event delegation on #pref-chips
-    document.getElementById('pref-chips')?.addEventListener('click', e=>{
-        const chip=e.target.closest('[data-pref]'); if(chip) togglePref(chip, chip.dataset.pref);
+    document.getElementById('pref-chips')?.addEventListener('click', e => {
+        const chip = e.target.closest('[data-pref]'); if (chip) togglePref(chip, chip.dataset.pref);
     });
 
     // Notes
-    const notesInput=document.getElementById('notes-input');
-    if (notesInput) notesInput.addEventListener('input', ()=>updateCharCount(notesInput,'notes-count'));
+    const notesInput = document.getElementById('notes-input');
+    if (notesInput) notesInput.addEventListener('input', () => updateCharCount(notesInput, 'notes-count'));
 
     // Reset button + popup
-    document.getElementById('btn-reset')?.addEventListener('click',  ()=>showPopup('popup-reset'));
+    document.getElementById('btn-reset')?.addEventListener('click', () => showPopup('popup-reset'));
     document.getElementById('btn-do-reset')?.addEventListener('click', doReset);
-    document.querySelector('#popup-reset .popup-cancel')?.addEventListener('click', ()=>closePopup('popup-reset'));
-    document.getElementById('popup-reset')?.addEventListener('click', e=>{ if(e.target===e.currentTarget) closePopup('popup-reset'); });
+    document.querySelector('#popup-reset .popup-cancel')?.addEventListener('click', () => closePopup('popup-reset'));
+    document.getElementById('popup-reset')?.addEventListener('click', e => { if (e.target === e.currentTarget) closePopup('popup-reset'); });
 
     // Generate
     document.getElementById('btn-gen')?.addEventListener('click', (e) => {
@@ -670,14 +681,14 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
     });
 
     // Result screen buttons
-    document.getElementById('btn-edit-req')?.addEventListener('click',    ()=>showScreen('form'));
-    document.getElementById('btn-save-plan')?.addEventListener('click',   ()=>showPopup('popup-login'));
-    document.getElementById('btn-back-to-form')?.addEventListener('click',()=>showScreen('form'));
+    document.getElementById('btn-edit-req')?.addEventListener('click', () => showScreen('form'));
+    document.getElementById('btn-save-plan')?.addEventListener('click', () => showPopup('popup-login'));
+    document.getElementById('btn-back-to-form')?.addEventListener('click', () => showScreen('form'));
     document.getElementById('btn-continue-error')?.addEventListener('click', onContinueFromError);
-    document.getElementById('btn-close-map')?.addEventListener('click',   ()=>closePopup('popup-map'));
+    document.getElementById('btn-close-map')?.addEventListener('click', () => closePopup('popup-map'));
 
     // Feedback
-    const feedbackInput=document.getElementById('feedback-input');
-    if (feedbackInput) feedbackInput.addEventListener('input',()=>updateCharCount(feedbackInput,'feedback-count'));
+    const feedbackInput = document.getElementById('feedback-input');
+    if (feedbackInput) feedbackInput.addEventListener('input', () => updateCharCount(feedbackInput, 'feedback-count'));
     document.getElementById('btn-feedback')?.addEventListener('click', onFeedback);
 }

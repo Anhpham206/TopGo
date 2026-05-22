@@ -99,8 +99,8 @@ async def generate_itinerary_stream(payload: dict):
             "dataset": dataset_ai1,
             "kiem_tra_diem_tham_quan": "true" if kiem_tra else "false",
             "thoi_gian": {
-                "ngay_khoi_hanh": start_dt.strftime("%d/%m/%Y"),
-                "gio_khoi_hanh": time_start,
+                "ngay_bat_dau_du_lich": start_dt.strftime("%d/%m/%Y"),
+                "gio_bat_dau_du_lich": time_start,
                 "ngay_ket_thuc": end_dt.strftime("%d/%m/%Y"),
                 "gio_ket_thuc": time_end,
                 "tong_thoi_gian": {
@@ -140,8 +140,11 @@ async def generate_itinerary_stream(payload: dict):
         os.makedirs(ai_logic_logs_dir, exist_ok=True)
         with open(os.path.join(ai_logic_logs_dir, f"output_ai1_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(ai1_output, f, ensure_ascii=False, indent=2)
+        
+        print("\nXong Ai1\n")
 
         yield json.dumps({"step": 2}) + "\n"
+        print("\nĐang Routing...\n")
 
         # Routing (Bước 4.2)
         routing_logs_dir = os.path.join(
@@ -189,9 +192,12 @@ async def generate_itinerary_stream(payload: dict):
         # Lưu log Routing
         with open(os.path.join(routing_logs_dir, f"output_routing_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(routing_output, f, ensure_ascii=False, indent=2)
+        
+        print("\nXong Routing\n")
 
         yield json.dumps({"step": 3}) + "\n"
 
+        print("\nĐang tìm Khách sạn...")
         # Lọc kết quả cho AI 2 (Bước 4.3)
         filtered_daily_routes = []
         otm_coordinate = {}
@@ -204,7 +210,7 @@ async def generate_itinerary_stream(payload: dict):
                 filtered_daily_routes.append(new_dr)
         
 
-        hotel_output = await quet_khach_san_quanh_trung_vi(otm_coordinate.get(
+        hotel_output = quet_khach_san_quanh_trung_vi(otm_coordinate.get(
             "lat", 0), otm_coordinate.get("lon", 0), ngan_sach_luu_tru, "khách sạn", w)
         danh_sach_goi_y = []
         if hotel_output.get("status") == "success":
@@ -220,8 +226,11 @@ async def generate_itinerary_stream(payload: dict):
             "danh_sach_goi_y": danh_sach_goi_y,
         }
 
-        yield json.dumps({"step": 4}) + "\n"
+        print("\nXong tìm khách sạn\n")
 
+        yield json.dumps({"step": 4}) + "\n"
+    
+        print("\nĐang AI 2...")
         # AI 2
         ai2_output = call_ai_2(ai1_output, db_data_dict)
 
@@ -232,16 +241,34 @@ async def generate_itinerary_stream(payload: dict):
         yield json.dumps({"step": 5}) + "\n"
 
         # Gửi dữ liệu xuống client
+
+        total_places = routing_output.get("total_places")
+        total_distance = 0
+
+        daily_routes = routing_output.get("daily_routes")
+        for day in daily_routes:
+            total_distance += day.get("total_distance_km")
+
+        itinerary_details = ai2_output.get("output", ai2_output)
+        ttc_tmp = itinerary_details.get("Thong_tin_chung", {})
+        ttc_tmp["total_distance"] = total_distance
+        ttc_tmp["total_places"] = total_places
+        itinerary_details["Thong_tin_chung"] = ttc_tmp
+
         data_output = {
-            "output": ai2_output.get("output", ai2_output),
+            "output": itinerary_details,
             "routing": routing_output
         }
         final_output = {
             "status": "success",
             "output": data_output
         }
+        print("\nXong AI 2\n")
+        
 
         yield json.dumps({"step": "done", "result": final_output}) + "\n"
+
+        
 
     except Exception as e:
         yield json.dumps({"step": "done", "result": {"status": "error", "errors": [str(e)]}}) + "\n"
