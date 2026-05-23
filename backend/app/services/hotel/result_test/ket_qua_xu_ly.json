@@ -1,106 +1,25 @@
 {
     "status": "success",
     "khach_san_chon": {
-        "ten": "Grand Mercure Danang",
-        "lat": 16.0483415,
-        "lng": 108.22670409999999,
-        "gia_tien": 33324,
+        "ten": "Serenity Retreat Danang",
+        "lat": 16.0732621,
+        "lng": 108.2432429,
+        "gia_tien": 810579,
         "rating": 4.7,
-        "khoang_cach_tam": 2.70377686695936,
-        "website": "https://all.accor.com/lien_externe.svlt?goto=fiche_hotel&code_hotel=7821&merchantid=seo-maps-VN-7821&sourceid=aw-cen&utm_medium=seo%20maps&utm_source=google%20Maps&utm_campaign=seo%20maps",
-        "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHtgR-DDYm85GJTDjddx11i-hgnb7Uo3y8tWLGG-bjjSEgm6EjrLPCS9NPdU1Ku5Iegwg9avUUgHB9-Amse8WUoVKX5DeNGcHLaYLyJlzntqjqls1ljYXJpBAaN0Ft-BAkIvThwGDDV4b-8=w1000-h1000-c-n",
-        "tags": [
-            "Bể bơi",
-            "Spa",
-            "Đỗ xe miễn phí",
-            "Bữa sáng miễn phí"
-        ],
-        "reviews_link": "https://serpapi.com/search.json?data_id=0x314219db392e5bb5%3A0x2a43b2cacea4567a&engine=google_maps_reviews&hl=vi",
-        "address": "Zone Of The Villas Of Green Island, Lot A1, Hòa Cường, Đà Nẵng 550000, Việt Nam",
-        "diem_tong": 0.7021451676976336
+        "khoang_cach_tam": 4.86129060842043,
+        "website": "https://www.facebook.com/SerenityRetreatDanang",
+        "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEE6Quzz_0Mqg5A9-0T2kX9FGSeIx7ImnZ4PFQyHaRhRfoWLI8y8WOuduF9t6Vf1J4JLhi_z6CtzMwqmQTZUr0AS2UrJ_5xKMSo1G4NY003l-LtlLnVfZgTqyYXN0-LzC6SAig=w1000-h1000-c-n",
+        "tags": [],
+        "reviews_link": "https://serpapi.com/search.json?data_id=0x314217003fe6a1b9%3A0x4ae0ba54862c4bd0&engine=google_maps_reviews&hl=vi",
+        "address": "129 Hồ Nghinh, An Hải, Đà Nẵng 550000, Việt Nam",
+        "diem_tong": 0.8
     },
     "danh_sach_goi_y": [
-        {
-            "ten": "Grand Mercure Danang",
-            "lat": 16.0483415,
-            "lng": 108.22670409999999,
-            "gia_tien": 33324,
-            "rating": 4.7,
-            "khoang_cach_tam": 2.70377686695936,
-            "website": "https://all.accor.com/lien_externe.svlt?goto=fiche_hotel&code_hotel=7821&merchantid=seo-maps-VN-7821&sourceid=aw-cen&utm_medium=seo%20maps&utm_source=google%20Maps&utm_campaign=seo%20maps",
-            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHtgR-DDYm85GJTDjddx11i-hgnb7Uo3y8tWLGG-bjjSEgm6EjrLPCS9NPdU1Ku5Iegwg9avUUgHB9-Amse8WUoVKX5DeNGcHLaYLyJlzntqjqls1ljYXJpBAaN0Ft-BAkIvThwGDDV4b-8=w1000-h1000-c-n",
-            "tags": [
-                "Bể bơi",
-                "Spa",
-                "Đỗ xe miễn phí",
-                "Bữa sáng miễn phí"
-            ],
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x314219db392e5bb5%3A0x2a43b2cacea4567a&engine=google_maps_reviews&hl=vi",
-            "address": "Zone Of The Villas Of Green Island, Lot A1, Hòa Cường, Đà Nẵng 550000, Việt Nam",
-            "diem_tong": 0.7021451676976336
-        },
-        {
-            "ten": "THE BLOSSOM RESORT ISLAND DA NANG - Onsen Included",
-            "lat": 16.0450402,
-            "lng": 108.2269589,
-            "gia_tien": 27929,
-            "rating": 4.6,
-            "khoang_cach_tam": 2.843098379792553,
-            "website": "https://www.theblossomhotels.com/",
-            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHzb0tbGmK1c_VS3MbdMeiw5VLaiNu_vP6NJQe0mbp0lGxOxiwoZ5DPU7xNHo1L9DVsog8kYrg7m8oDGT-E4HAn5MymxDwotVhPgw-R4ohH3pTz1kU8uHIxktxZa-j1_05bzBM=w1000-h1000-c-n",
-            "tags": [
-                "Bể bơi",
-                "Spa",
-                "Đỗ xe miễn phí",
-                "Bữa sáng miễn phí"
-            ],
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x314219dca34ae1d3%3A0x66a4d38a6e610248&engine=google_maps_reviews&hl=vi",
-            "address": "khu đảo xanh mở rộng, Hòa Cường, Đà Nẵng 23445, Việt Nam",
-            "diem_tong": 0.6726460218088137
-        },
-        {
-            "ten": "Santa Luxury Hotel",
-            "lat": 16.0517799,
-            "lng": 108.2467562,
-            "gia_tien": 30633,
-            "rating": 4.9,
-            "khoang_cach_tam": 4.770135338261386,
-            "website": "https://santaluxuryhotel.com/",
-            "url_img": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhF_uIznjhUt1AYJl13Pmtt-B1JGXr4-6zpdnp8g-CF7gmM68YeLKAZVRc0G694WY5S65L3BZu5cBXyZJDob2cz9FfmRWpanVSVzd-8s9-uarF7wBylkpsxSkUHksEKkvwEMwpdt-D5vcC3_OyMrIORTjjj4cwbWBg7hv0eVcy_j_cOcLBTxPkgH=w1000-h1000-c-n",
-            "tags": [
-                "Bể bơi",
-                "Spa",
-                "Đỗ xe miễn phí",
-                "Bữa sáng miễn phí"
-            ],
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217b4e3029189%3A0x2184d10ffbf867ec&engine=google_maps_reviews&hl=vi",
-            "address": "362W+PP6, 09 Đỗ Bá, Bắc Mỹ Phú, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
-            "diem_tong": 0.6438829140469604
-        },
-        {
-            "ten": "Khách sạn Nesta Celia",
-            "lat": 16.0610867,
-            "lng": 108.24603789999999,
-            "gia_tien": 44060,
-            "rating": 4.8,
-            "khoang_cach_tam": 4.743004936988106,
-            "website": "https://nestahotel.com.vn/accommodation/nesta-celia-danang-hotel/",
-            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFiaVXhbr_bh61MhdjnuTEgdmxzcufDqRQEknAw3kBaRSMyrOdBcJOAETFZVLlPq2CgnStysyYEswEE2AP9-VPrsTHkHlBwE3_8RlDf52xSZhOp9-0LIIKFONQi4Y-TsUjYnUbqqk3At9bH=w1000-h1000-c-n",
-            "tags": [
-                "Bể bơi",
-                "Spa",
-                "Đỗ xe miễn phí",
-                "Bữa sáng miễn phí"
-            ],
-            "reviews_link": "https://serpapi.com/search.json?data_id=0x3142170026a6348f%3A0x2ae11db5b03d5de0&engine=google_maps_reviews&hl=vi",
-            "address": "254 Võ Nguyên Giáp, An Hải, Đà Nẵng 550000, Việt Nam",
-            "diem_tong": 0.6042734227854456
-        },
         {
             "ten": "Serenity Retreat Danang",
             "lat": 16.0732621,
             "lng": 108.2432429,
-            "gia_tien": 20058,
+            "gia_tien": 810579,
             "rating": 4.7,
             "khoang_cach_tam": 4.86129060842043,
             "website": "https://www.facebook.com/SerenityRetreatDanang",
@@ -108,7 +27,45 @@
             "tags": [],
             "reviews_link": "https://serpapi.com/search.json?data_id=0x314217003fe6a1b9%3A0x4ae0ba54862c4bd0&engine=google_maps_reviews&hl=vi",
             "address": "129 Hồ Nghinh, An Hải, Đà Nẵng 550000, Việt Nam",
-            "diem_tong": 0.5951501423823379
+            "diem_tong": 0.8
+        },
+        {
+            "ten": "Furama Villas Danang",
+            "lat": 16.0370314,
+            "lng": 108.25114959999999,
+            "gia_tien": 0,
+            "rating": 4.5,
+            "khoang_cach_tam": 5.576039193752803,
+            "website": "http://furamavillasdanang.com/",
+            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGyZHeO5DqOQsH2qsKM0E392SqWnjvpaMjvEAM26i9_8NuNgjhQ8WDqNLhVyak-j34nxVWbj-XPANeEu5HtuJ5FXXeoYEW7dyNScy4DI2j-qX2ra9KoO517ctOv3bZjwdzjCLWBbA=w1000-h1000-c-n",
+            "tags": [
+                "Bể bơi",
+                "Spa",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí"
+            ],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x31421742c2fd4ea1%3A0xbe5b6da59bfb421c&engine=google_maps_reviews&hl=vi",
+            "address": "107 Võ Nguyên Giáp, St, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam",
+            "diem_tong": 0.32499999999999996
+        },
+        {
+            "ten": "Temple Beach Resort Da Nang",
+            "lat": 16.074097899999998,
+            "lng": 108.2460464,
+            "gia_tien": 867131,
+            "rating": 3.9,
+            "khoang_cach_tam": 5.171825685085401,
+            "website": "",
+            "url_img": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF7nK1bWTzBGIjObnNZ43qwbUI7P1iayO32o5hVUglzIoaGt77ac9oylxw0FnbWJzUMFH57IrG8mCmuDEOS6gDMZrLBAUFkprWWdMJeTQZK5K9AUhz7WZceQUGu5oxsfawEs8y_=w1000-h1000-c-n",
+            "tags": [
+                "Bể bơi",
+                "Đỗ xe miễn phí",
+                "Bữa sáng miễn phí",
+                "Wi-Fi miễn phí"
+            ],
+            "reviews_link": "https://serpapi.com/search.json?data_id=0x314217dab097e1c3%3A0x6e3dad20d34f42fb&engine=google_maps_reviews&hl=vi",
+            "address": "11 Võ Nguyên Giáp, An Hải, Đà Nẵng 550000, Việt Nam",
+            "diem_tong": 0.16965973083224817
         }
     ]
 }

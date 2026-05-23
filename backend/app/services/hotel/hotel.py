@@ -2,24 +2,150 @@ import requests
 import math
 import json
 import os
+import re
 from dotenv import load_dotenv
 
 load_dotenv()
 
 # Sử dụng Key SerpAPI từ file .env
-SERPAPI_KEY = os.environ.get("SERPAPI_KEY")
+SERPAPI_KEY = os.environ.get("SERP_API_KEY")
 
 # Đường dẫn thư mục log
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 RESULT_DIR = os.path.join(CURRENT_DIR, "result_test")
+
+# ==========================================================
+# XỬ LÝ QUY ĐỔI TIỀN TỆ (do SerpAPI bot IP không cố định)
+# ==========================================================
+
+# Mapping ký hiệu/viết tắt tiền tệ phổ biến → mã ISO 4217
+CURRENCY_SYMBOLS = {
+    "VND": "VND", "₫": "VND",
+    "USD": "USD", "$": "USD", "US$": "USD",
+    "MXN": "MXN", "MX$": "MXN",
+    "KZT": "KZT", "₸": "KZT",
+    "EUR": "EUR", "€": "EUR",
+    "GBP": "GBP", "£": "GBP",
+    "JPY": "JPY", "¥": "JPY", "JP¥": "JPY",
+    "KRW": "KRW", "₩": "KRW",
+    "THB": "THB", "฿": "THB",
+    "CNY": "CNY", "CN¥": "CNY",
+    "RUB": "RUB", "₽": "RUB",
+    "INR": "INR", "₹": "INR",
+    "BRL": "BRL", "R$": "BRL",
+    "AUD": "AUD", "A$": "AUD",
+    "CAD": "CAD", "C$": "CAD", "CA$": "CAD",
+    "SGD": "SGD", "S$": "SGD",
+    "TWD": "TWD", "NT$": "TWD",
+    "HKD": "HKD", "HK$": "HKD",
+    "PHP": "PHP", "₱": "PHP",
+    "MYR": "MYR", "RM": "MYR",
+    "IDR": "IDR", "Rp": "IDR",
+    "ARS": "ARS", "AR$": "ARS",
+    "CLP": "CLP", "CL$": "CLP",
+    "COP": "COP", "CO$": "COP",
+    "PEN": "PEN", "S/.": "PEN",
+    "EGP": "EGP", "E£": "EGP",
+    "TRY": "TRY", "₺": "TRY",
+    "PLN": "PLN", "zł": "PLN",
+    "CZK": "CZK", "Kč": "CZK",
+    "SEK": "SEK", "kr": "SEK",
+    "NOK": "NOK", "DKK": "DKK",
+    "CHF": "CHF", "ZAR": "ZAR",
+    "AED": "AED", "SAR": "SAR",
+    "QAR": "QAR", "KWD": "KWD",
+    "BHD": "BHD", "OMR": "OMR",
+    "UAH": "UAH", "₴": "UAH",
+    "NGN": "NGN", "₦": "NGN",
+    "GHS": "GHS", "GH₵": "GHS",
+    "KES": "KES", "KSh": "KES",
+    "PKR": "PKR", "₨": "PKR",
+    "BDT": "BDT", "৳": "BDT",
+    "LKR": "LKR", "Rs": "LKR",
+    "MMK": "MMK", "LAK": "LAK",
+    "KHR": "KHR", "៛": "KHR",
+}
+
+# Cache tỷ giá (chỉ gọi API 1 lần mỗi phiên tìm kiếm)
+_ty_gia_cache = {}
+
+
+def nhan_dien_don_vi_tien(price_str):
+    """
+    Nhận diện đơn vị tiền tệ từ chuỗi price của SerpAPI.
+    VD: "98.760 KZT" → "KZT", "275 MX$" → "MXN", "$120" → "USD"
+    """
+    if not price_str:
+        return None
+    
+    # Loại bỏ số và dấu chấm/phẩy/khoảng trắng thừa để lấy phần ký hiệu tiền
+    phan_tien = re.sub(r'[\d.,\s]', '', price_str).strip()
+    
+    if not phan_tien:
+        return None
+    
+    # Tra trong bảng mapping
+    return CURRENCY_SYMBOLS.get(phan_tien, phan_tien.upper())
+
+
+def lay_ty_gia_ve_vnd(ma_tien_goc):
+    """
+    Lấy tỷ giá quy đổi từ ma_tien_goc → VND.
+    Sử dụng API miễn phí open.er-api.com (không cần key).
+    Kết quả được cache để không gọi lại nhiều lần.
+    """
+    if not ma_tien_goc or ma_tien_goc == "VND":
+        return 1.0  # Đã là VND, không cần quy đổi
+    
+    # Kiểm tra cache trước
+    if ma_tien_goc in _ty_gia_cache:
+        return _ty_gia_cache[ma_tien_goc]
+    
+    try:
+        api_url = f"https://open.er-api.com/v6/latest/{ma_tien_goc}"
+        res = requests.get(api_url, timeout=10)
+        data = res.json()
+        
+        if data.get("result") == "success":
+            ty_gia = data["rates"].get("VND", 0)
+            _ty_gia_cache[ma_tien_goc] = ty_gia
+            print(f"[HOTEL] Ty gia {ma_tien_goc} -> VND = {ty_gia}")
+            return ty_gia
+    except Exception as e:
+        print(f"[HOTEL] Loi khi lay ty gia {ma_tien_goc}: {e}")
+    
+    return 0  # Trả về 0 nếu không lấy được tỷ giá
+
+
+def quy_doi_gia_ve_vnd(extracted_price, price_str):
+    """
+    Quy đổi giá từ đơn vị bất kỳ (do SerpAPI trả về) sang VNĐ.
+    Trả về giá đã quy đổi (int) hoặc 0 nếu không xác định được.
+    """
+    if not extracted_price or extracted_price <= 0:
+        return 0
+    
+    don_vi = nhan_dien_don_vi_tien(price_str)
+    
+    if not don_vi or don_vi == "VND":
+        return extracted_price  # Đã là VND
+    
+    ty_gia = lay_ty_gia_ve_vnd(don_vi)
+    
+    if ty_gia > 0:
+        return int(extracted_price * ty_gia)
+    
+    return 0  # Không quy đổi được → coi như ẩn giá
 
 def tinh_khoang_cach(lat1, lon1, lat2, lon2):
     """Tính khoảng cách đường chim bay bằng Haversine"""
     R = 6371.0
     dlat = math.radians(lat2 - lat1)
     dlon = math.radians(lon2 - lon1)
-    a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
-    return R * (2 * math.atan2(math.sqrt(a), math.sqrt(1-a))) 
+    a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * \
+        math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
+    return R * (2 * math.atan2(math.sqrt(a), math.sqrt(1-a)))
+
 
 def cham_diem_khach_san(danh_sach_ks, w=None):
     """
@@ -31,7 +157,8 @@ def cham_diem_khach_san(danh_sach_ks, w=None):
        - w[3]: trọng số giá phòng
     Nếu không truyền w, dùng giá trị mặc định.
     """
-    if not danh_sach_ks: return []
+    if not danh_sach_ks:
+        return []
 
     # Trọng số mặc định nếu không truyền vào
     if w is None or len(w) < 4:
@@ -43,30 +170,35 @@ def cham_diem_khach_san(danh_sach_ks, w=None):
     w_gia = w[3]
 
     # Tìm Min/Max để chuẩn hóa
-    max_rating = max(ks["rating"] for ks in danh_sach_ks) 
-    min_rating = min(ks["rating"] for ks in danh_sach_ks) 
-    max_kc = max(ks["khoang_cach_tam"] for ks in danh_sach_ks) 
-    min_kc = min(ks["khoang_cach_tam"] for ks in danh_sach_ks) 
-    
+    max_rating = max(ks["rating"] for ks in danh_sach_ks)
+    min_rating = min(ks["rating"] for ks in danh_sach_ks)
+    max_kc = max(ks["khoang_cach_tam"] for ks in danh_sach_ks)
+    min_kc = min(ks["khoang_cach_tam"] for ks in danh_sach_ks)
+
     # Bỏ qua khách sạn ẩn giá (giá = 0) khi tìm min/max
-    max_gia = max((ks["gia_tien"] for ks in danh_sach_ks if ks["gia_tien"] > 0), default=0) 
-    min_gia = min((ks["gia_tien"] for ks in danh_sach_ks if ks["gia_tien"] > 0), default=0) 
+    max_gia = max((ks["gia_tien"]
+                  for ks in danh_sach_ks if ks["gia_tien"] > 0), default=0)
+    min_gia = min((ks["gia_tien"]
+                  for ks in danh_sach_ks if ks["gia_tien"] > 0), default=0)
 
     for ks in danh_sach_ks:
         # Chuẩn hóa (Min-Max Scaling)
-        norm_rating = (ks["rating"] - min_rating) / (max_rating - min_rating) if max_rating > min_rating else 1.0 
-        norm_kc = (max_kc - ks["khoang_cach_tam"]) / (max_kc - min_kc) if max_kc > min_kc else 1.0
-        
+        norm_rating = (ks["rating"] - min_rating) / (max_rating -
+                                                     min_rating) if max_rating > min_rating else 1.0
+        norm_kc = (max_kc - ks["khoang_cach_tam"]) / \
+            (max_kc - min_kc) if max_kc > min_kc else 1.0
+
         if ks["gia_tien"] == 0 or max_gia == min_gia:
-            norm_gia = 0.5 # Mức điểm trung bình cho KS bị ẩn giá
+            norm_gia = 0.5  # Mức điểm trung bình cho KS bị ẩn giá
         else:
             norm_gia = (max_gia - ks["gia_tien"]) / (max_gia - min_gia)
 
         # Tính điểm tổng (partial score - chưa có w_tag, sẽ được AI 2 cộng thêm sau)
-        ks["diem_tong"] = (w_rating * norm_rating) + (w_kc * norm_kc) + (w_gia * norm_gia)
+        ks["diem_tong"] = (w_rating * norm_rating) + \
+            (w_kc * norm_kc) + (w_gia * norm_gia)
 
     # Sắp xếp giảm dần theo điểm tổng
-    danh_sach_ks.sort(key=lambda x: x["diem_tong"], reverse=True) #[cite: 20]
+    danh_sach_ks.sort(key=lambda x: x["diem_tong"], reverse=True)  # [cite: 20]
     return danh_sach_ks
 
 
@@ -88,12 +220,12 @@ def lay_tags_tu_reviews(reviews_link):
     """
     if not reviews_link or not SERPAPI_KEY:
         return []
-    
+
     try:
         # Thêm api_key vào reviews_link
         separator = "&" if "?" in reviews_link else "?"
         url = f"{reviews_link}{separator}api_key={SERPAPI_KEY}"
-        
+
         res = requests.get(url, timeout=15)
         data = res.json()
 
@@ -106,7 +238,7 @@ def lay_tags_tu_reviews(reviews_link):
         # Trích xuất keywords từ mảng topics
         topics = data.get("topics", [])
         keywords = [t.get("keyword", "") for t in topics if t.get("keyword")]
-        
+
         return keywords
     except Exception as e:
         print(f"[HOTEL] Loi khi lay reviews: {e}")
@@ -116,14 +248,14 @@ def lay_tags_tu_reviews(reviews_link):
 def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach, loai_hinh_luu_tru="Khách sạn", w=None):
     """
     Hàm quét API Google Maps và lọc dữ liệu thô theo loại hình lưu trú.
-    
+
     Args:
         tam_lat, tam_lng: Tọa độ trung vị (median) từ routing
         ngan_sach: Ngân sách lưu trú
         loai_hinh_luu_tru: Loại hình lưu trú từ Frontend (VD: "Khách sạn", "Resort"...)
         w: Mảng trọng số [w1, w2, w3, w4] từ AI 1
     """
-    
+
     # 1. Xử lý loại hình lưu trú (Fallback về Hotel nếu không hợp lệ)
     search_query = ACCOMMODATION_TYPES.get(loai_hinh_luu_tru, "Hotel")
 
@@ -136,11 +268,11 @@ def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach, loai_hinh_luu_tru
         "gl": "vn",
         "google_domain": "google.com.vn",
         "api_key": SERPAPI_KEY
-    } #[cite: 20]
+    }  # [cite: 20]
 
     try:
         res = requests.get(url, params=params)
-        data_ks = res.json() #[cite: 20]
+        data_ks = res.json()  # [cite: 20]
 
         # Log toàn bộ dữ liệu trả về từ SerpApi ra file để dễ quan sát cấu trúc
         os.makedirs(RESULT_DIR, exist_ok=True)
@@ -160,12 +292,19 @@ def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach, loai_hinh_luu_tru
         lat = ks.get("gps_coordinates", {}).get("latitude") #[cite: 20]
         lng = ks.get("gps_coordinates", {}).get("longitude") #[cite: 20]
         rating = ks.get("rating", 3.0) #[cite: 20]
-        gia_tien = ks.get("extracted_price", 0) #[cite: 20]
+        
+        # Quy đổi giá về VNĐ (xử lý vấn đề SerpAPI bot IP trả sai đơn vị tiền)
+        gia_goc = ks.get("extracted_price", 0)
+        price_str = ks.get("price", "")
+        gia_tien = quy_doi_gia_ve_vnd(gia_goc, price_str)
 
-        if not lat: continue
-        if gia_tien > 0 and gia_tien > ngan_sach: continue #[cite: 20]
+        if not lat:
+            continue
+        if gia_tien > 0 and gia_tien > ngan_sach:
+            continue  # [cite: 20]
 
-        khoang_cach = tinh_khoang_cach(tam_lat, tam_lng, lat, lng) #[cite: 20]
+        khoang_cach = tinh_khoang_cach(
+            tam_lat, tam_lng, lat, lng)  # [cite: 20]
 
         # 2. Trích xuất các trường dữ liệu quan trọng
         website = ks.get("website", "")
@@ -213,6 +352,7 @@ def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach, loai_hinh_luu_tru
         "danh_sach_goi_y": top_5                   # Trả về top 5 để hiển thị
     }
 
+
 # ==========================================
 # YÊU CẦU TUẦN 5: In log cấu trúc JSON ra Terminal
 # ==========================================
@@ -228,11 +368,11 @@ if __name__ == "__main__":
     ket_qua_json = quet_khach_san_quanh_trung_vi(
         test_lat, test_lng, test_ngan_sach, loai_hinh_test, test_w
     )
-    
+
     # Ghi ra file để dễ đọc (tránh lỗi font tiếng Việt trên terminal Windows)
     os.makedirs(RESULT_DIR, exist_ok=True)
     test_result_path = os.path.join(RESULT_DIR, "ket_qua_xu_ly.json")
     with open(test_result_path, "w", encoding="utf-8") as f:
         json.dump(ket_qua_json, f, indent=4, ensure_ascii=False)
-        
+
     print(f"--- DA CHAY XONG! Kiem tra file tai: {test_result_path} ---")
