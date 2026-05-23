@@ -67,7 +67,7 @@ export async function fetchPlaces() {
             { file: 'thanh_pho_ho_chi_minh.json', id: 'thanh_pho_ho_chi_minh' }
         ];
         const placesByCity = {};
-        
+
         // Chia nhỏ thành các batch (3 request/lần) để tránh sập local dev server (gây lỗi không fetch được)
         for (let i = 0; i < files.length; i += 3) {
             const batch = files.slice(i, i + 3);
@@ -131,7 +131,6 @@ export async function generateItinerary(payload, onProgress) {
                 try {
                     const data = JSON.parse(line);
                     if (data.step === 'done') {
-                        console.log("nhận được data ở api.js");
                         finalData = data.result;
                     } else if (data.step && onProgress) {
                         onProgress(data.step);
@@ -141,7 +140,6 @@ export async function generateItinerary(payload, onProgress) {
                 }
             }
         }
-
         if (buffer.trim()) {
             try {
                 const data = JSON.parse(buffer);
