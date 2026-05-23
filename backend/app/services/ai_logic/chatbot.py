@@ -16,7 +16,7 @@ if not API_KEY_AI1 or not API_KEY_AI2:
 client_ai1 = genai.Client(api_key=API_KEY_AI1)
 client_ai2 = genai.Client(api_key=API_KEY_AI2)
 
-MODEL_ID = "gemini-2.5-flash-lite"
+MODEL_ID = "gemini-3.1-flash-lite"
 
 TOPGO_INFO = """
 [THÔNG TIN VỀ TOPGO]

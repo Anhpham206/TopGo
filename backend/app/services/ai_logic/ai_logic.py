@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 # 1. Load môi trường và Client
 load_dotenv()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-API_KEY = os.getenv("GEMINI_API_KEY")
+API_KEY = os.getenv("GEMINI_API_KEY_1")
 API_KEY2 = os.getenv("GEMINI_API_KEY_2")
 
 if not API_KEY:
@@ -18,7 +18,9 @@ client = genai.Client(api_key=API_KEY)
 client2 = genai.Client(api_key=API_KEY2)
 
 # 2. Cấu hình Model & Generation Config
-MODEL_ID = "gemini-2.5-flash-lite"
+MODEL_ID_AI1 = "gemini-3.1-flash-lite" 
+MODEL_ID_AI2 = "gemini-3.5-flash"
+
 config_ai1 = types.GenerateContentConfig(
     response_mime_type="application/json",
     temperature=0.0,
@@ -76,7 +78,9 @@ Dữ liệu đầu vào: chuỗi JSON chứa các thông tin yêu cầu của ng
     1. cho_o_partialscore_tags: Danh sách các chỗ ở (gồm tên, rating, AIScore ban đầu, giá, url, và mảng các tag).
     2. tag_nguoi_dung: những yêu cầu cụ thể về chỗ ở của người dùng
     3. Giá trị trọng số w2 (đã được tính từ bước trước).
-    4. lo_trinh_toi_uu và thoi_gian: Dữ liệu để xây dựng lịch trình.
+    4. lo_trinh_toi_uu: Danh sách các địa điểm ĐÃ ĐƯỢC PHÂN CỤM SẴN THEO TỪNG NGÀY bởi Backend.
+    5. thoi_gian: Dữ liệu thời gian chuyến đi.
+
 Nhiệm vụ của bạn: Thực hiện tuần tự 2 bước sau:
 
 Bước 1: Tính toán số tag khớp và Cập nhật AIScore cho từng chỗ ở
@@ -91,10 +95,13 @@ Bước 1: Tính toán số tag khớp và Cập nhật AIScore cho từng chỗ
 
 Bước 2: Xây dựng Lịch trình Tối ưu
     1. Dựa vào lo_trinh_toi_uu, và thoi_gian, hãy xây dựng một lịch trình chi tiết theo từng ngày.
+        - LUẬT QUAN TRỌNG: TUYỆT ĐỐI TUÂN THỦ danh sách phân cụm địa điểm theo ngày của lo_trinh_toi_uu. KHÔNG ĐƯỢC tự ý chuyển địa điểm từ ngày này sang ngày khác. Bạn chỉ được phép phân bổ thời gian (giờ giấc) và phương tiện di chuyển trong nội bộ mỗi ngày đó.
         - Sắp xếp thời gian hợp lý (có thời gian di chuyển, thời gian tham quan).
+        - Thêm vào các khoảng thời gian để đi ăn sáng/ ăn trưa/ ăn tối. ĐẶC BIỆT: Tại các mục ăn uống này trong lịch trình, HÃY luôn thêm một câu gợi ý người dùng sử dụng Chatbot của hệ thống để được gợi ý quán ăn/nhà hàng phù hợp.
         - Viết lời giới thiệu ngắn gọn, hấp dẫn cho từng địa điểm.
         - Gợi ý  phương tiện di chuyển phù hợp với khoảng cách giữa các điểm.
-    2. Dựa vào dia_diem_xuat_phat, dia_diem_den, ngay_khoi_hanh,  loai_hinh_phuong_tien, hãy gợi ý thời gian đặt vé/ bắt đầu khởi hành để có thể kịp lịch trình du lịch đã tạo.
+    2. Gợi ý ăn uống: Tại trường "Goi_y_an_uong" trong JSON đầu ra, BẮT BUỘC phải tạo một câu văn kêu gọi người dùng sử dụng tính năng Chatbot của hệ thống để tìm kiếm các quán ăn ngon/đặc sản phù hợp với lịch trình.
+    3. Dựa vào dia_diem_xuat_phat, dia_diem_den, ngay_khoi_hanh,  loai_hinh_phuong_tien, hãy gợi ý thời gian đặt vé/ bắt đầu khởi hành để có thể kịp lịch trình du lịch đã tạo.
 
     YÊU CẦU ĐẦU RA: CHỈ trả về ĐÚNG cấu trúc JSON được cung cấp, không bọc trong markdown code block, không thêm bất kỳ văn bản giải thích nào khác. Thay thế các giá trị giả định bằng dữ liệu nhận được từ JSON và đã xử lý ở Bước 1 và Bước 2.”
 """
@@ -106,8 +113,8 @@ TEMPLATE_AI2 = """
             "Ten_hanh_trinh": "[Tạo một tên hành trình hấp dẫn]",
             "So_nguoi": "[Lấy từ so_luong_hanh_khach]",
             "Tong_ngan_sach": "[Lấy từ ngan_sach_tong_k, format VNĐ]",
-“Goi_y_khoi_hanh”: [lời gợi ý về thời điểm đặt vé/ khỏi hành để kịp lịch trình
-            ],
+            "Goi_y_khoi_hanh": [lời gợi ý về thời điểm đặt vé/ khỏi hành để kịp lịch trình],
+            "Goi_y_an_uong": "[Bắt buộc viết một lời kêu gọi người dùng sử dụng Chatbot của hệ thống để tìm kiếm quán ăn/nhà hàng phù hợp trên tuyến đường đi]",
             "AIScore_Hanh_trinh": "[Điểm đánh giá chung độ phù hợp, VD: 98% Phù hợp]"
         },
         "Lich_trinh": [
@@ -179,7 +186,7 @@ def call_ai_1(user_input_dict):
 
     # Gọi API
     response = client.models.generate_content(
-        model=MODEL_ID,
+        model=MODEL_ID_AI1,
         contents=full_prompt,
         config=config_ai1
     )
@@ -201,7 +208,7 @@ def call_ai_2(ai1_result_dict, db_data_dict):
 
     # Gọi API
     response = client2.models.generate_content(
-        model=MODEL_ID,
+        model=MODEL_ID_AI2,
         contents=full_prompt,
         config=config_ai2
     )
