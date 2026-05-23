@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ABOUT US</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <meta name="description" content="ĐỘI NGŨ SÁNG TẠO CỦA TOPGO">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/shared.css?v=2">
+    <style>
+        /* Override body background to match homepage */
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #dbeafe 100%) !important;
+        }
+        
+        /* Vibrant bokeh blobs for full screen */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: 0;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--p1);
+            top: -100px;
+            left: -100px;
+        }
+        
+        body::after {
+            width: 600px;
+            height: 600px;
+            background: var(--a1);
+            bottom: -150px;
+            right: -100px;
+        }
+        
+        /* ========== ABOUT US MAIN ========== */
+        .aboutus-main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem 5rem;
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== HERO ========== */
+        .aboutus-hero {
+            text-align: center;
+            margin-bottom: 0;
+            position: relative;
+            overflow: visible;
+            border-radius: 0;
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInUp 0.7s ease-out;
+            padding: 80px 20px 60px;
+            z-index: 1;
+        }
+
+        /* Animated clouds - 3D Enhanced */
+        .clouds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            perspective: 1200px;
+            z-index: 0;
+            top: 0;
+            left: 0;
+        }
+
+        .cloud {
+            position: absolute;
+            animation: driftCloud3D linear infinite;
+            will-change: transform;
+            filter: drop-shadow(0 20px 40px -10px rgba(0, 0, 0, 0.12));
+        }
+
+        /* Far cloud - smaller perspective */
+        .cloud:nth-child(1) {
+            width: 200px;
+            height: 100px;
+            top: 12%;
+            left: -200px;
+            animation: driftCloud3D 25s linear infinite;
+            animation-delay: 0s;
+            opacity: 0.55;
+            z-index: 1;
+        }
+
+        /* Mid cloud - medium scale */
+        .cloud:nth-child(2) {
+            width: 240px;
+            height: 130px;
+            top: 38%;
+            right: -230px;
+            left: auto;
+            animation: driftCloud3DReverse 30s linear infinite;
+            animation-delay: 1s;
+            opacity: 0.75;
+            z-index: 2;
+        }
+
+        /* Close cloud - largest */
+        .cloud:nth-child(3) {
+            width: 300px;
+            height: 140px;
+            top: 60%;
+            left: -360px;
+            animation: driftCloud3D 45s linear infinite;
+            animation-delay: 2s;
+            opacity: 0.88;
+            z-index: 3;
+        }
+
+        @keyframes driftCloud3D {
+            0% { 
+                left: -350px; 
+                opacity: 0;
+                transform: translateZ(0) translateY(0);
+            }
+            3% { 
+                opacity: var(--cloud-opacity, 0.8);
+            }
+            50% {
+                transform: translateZ(8px) translateY(-3px);
+            }
+            97% { 
+                opacity: var(--cloud-opacity, 0.8);
+            }
+            100% { 
+                left: 110%; 
+                opacity: 0;
+                transform: translateZ(0) translateY(0);
+            }
+        }
+
+        @keyframes driftCloud3DReverse {
+            0% { 
+                right: -350px; 
+                opacity: 0;
+                transform: translateZ(0) translateY(0);
+            }
+            3% { 
+                opacity: var(--cloud-opacity, 0.8);
+            }
+            50% {
+                transform: translateZ(8px) translateY(-3px);
+            }
+            97% { 
+                opacity: var(--cloud-opacity, 0.8);
+            }
+            100% { 
+                right: 110%; 
+                opacity: 0;
+                transform: translateZ(0) translateY(0);
+            }
+        }
+
+        .hero-glass-panel {
+            background: linear-gradient(135deg, rgba(100, 200, 255, 0.22) 0%, rgba(150, 220, 255, 0.16) 100%);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1.5px solid rgba(0, 169, 255, 0.4);
+            border-radius: 44px;
+            padding: 40px 50px 50px;
+            max-width: 1150px;
+            width: 92%;
+            margin: 0 auto;
+            animation: slideInDown 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            box-shadow: 0 25px 70px rgba(0, 169, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Premium gradient overlay */
+        .hero-glass-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 44px;
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.12) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        
+        .hero-glass-panel::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 169, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 169, 255, 0.14);
+            border: 1.5px solid rgba(0, 169, 255, 0.35);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-family: var(--font-label);
+            font-size: 13px;
+            font-weight: 700;
+            color: #0091ff;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 28px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0, 169, 255, 0.08);
+            animation: fadeInDown 0.8s ease-out 0.2s backwards;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #0091ff;
+            border-radius: 50%;
+            animation: pulseDot 2.2s infinite alternate;
+        }
+        @keyframes pulseDot {
+            0% { 
+                transform: scale(0.75); 
+                opacity: 0.3; 
+                box-shadow: 0 0 4px #0091ff;
+            }
+            100% { 
+                transform: scale(1.4); 
+                opacity: 1; 
+                box-shadow: 0 0 14px rgba(0, 145, 255, 0.6);
+            }
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            font-size: clamp(36px, 5.5vw, 58px);
+            font-weight: 900;
+            color: #0091ff;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            letter-spacing: -1.2px;
+            position: relative;
+            z-index: 2;
+            max-width: 100%;
+        }
+        .hero-title span {
+            background: linear-gradient(135deg, #0091ff 5%, #00a9ff 40%, #89cff3 95%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 4s ease infinite;
+            background-size: 200% 200%;
+            font-weight: 950;
+            letter-spacing: -2px;
+        }
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .hero-desc {
+            font-size: 18px;
+            font-weight: 500;
+            color: #4981bc;
+            max-width: 780px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 0.3px;
+            opacity: 0.50;
+        }
+        /* Code scrolling container */
+        .hero-code-container {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 32px 0 0;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+        
+        /* Marquee container for traveling comments */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.12), rgba(100, 200, 255, 0.06));
+            border-radius: 28px;
+            padding: 14px 0;
+            margin-top: 24px;
+            position: relative;
+            z-index: 2;
+            border: 1.5px solid rgba(0, 169, 255, 0.25);
+            box-shadow: 
+                inset 0 1px 2px rgba(255, 255, 255, 0.8),
+                0 4px 12px rgba(0, 0, 0, 0.04);
+            backdrop-filter: blur(12px);
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 3rem;
+            animation: marqueeScroll 28s linear infinite;
+            white-space: nowrap;
+            padding: 0 1.5rem;
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #0091ff;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            flex-shrink: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .marquee-icon {
+            font-size: 14px;
+        }
+
+        @keyframes marqueeScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee-content:hover {
+            animation-play-state: paused;
+            cursor: pointer;
+        }
+        .glass-button {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.3), rgba(0, 169, 255, 0.2));
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            border-radius: 48px;
+            padding: 16px 32px;
+            font-family: var(--font-label);
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 32px rgba(0, 169, 255, 0.2), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+        
+        .glass-button::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.7s ease;
+            pointer-events: none;
+        }
+        
+        .glass-button:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .glass-button:hover {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.5), rgba(0, 169, 255, 0.35));
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-4px);
+            box-shadow: 
+                0 16px 48px rgba(0, 169, 255, 0.4), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.9);
+            color: white;
+        }
+        
+        .glass-button-icon {
+            font-size: 18px;
+        }
+
+        /* ========== CAROUSEL TITLE – NỖI BẬT ========== */
+        .aboutus-carousel-section {
+            margin: -4vh auto 4rem;
+            position: relative;
+            max-width: 1400px;
+            width: 94%;
+            padding: 3.5rem 2rem 4rem;
+            z-index: 10;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .aboutus-carousel-section.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .carousel-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        /* Animated background for team section */
+        .carousel-header::before {
+            content: "";
+            position: absolute;
+            inset: -2rem;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 169, 255, 0.08) 0%, rgba(0, 169, 255, 0.02) 40%, transparent 100%);
+            border-radius: 60px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .carousel-header-tag {
+            background: rgba(0, 169, 255, 0.18);
+            display: inline-block;
+            padding: 0.5rem 1.6rem;
+            border-radius: 50px;
+            border: 1.5px solid rgba(0, 169, 255, 0.4);
+            font-family: var(--font-label);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #0091ff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+            backdrop-filter: blur(6px);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .carousel-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5.5vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #0091ff 0%, #00a9ff 50%, #89cff3 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 1rem 0 0;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            animation: slideInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s backwards;
+        }
+        
+        .carousel-sub {
+            color: #3a5a7c;
+            font-size: 1.05rem;
+            margin-top: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Track container – overflow ẩn, nhưng cho phép kéo */
+        .cinema-carousel {
+            position: relative;
+            width: 100%;
+            overflow-x: clip;
+            padding: 3rem 0 3rem;
+            touch-action: pan-y pinch-zoom;
+            perspective: 1800px;
+            perspective-origin: 50% 50%;
+            transform-style: preserve-3d;
+        }
+        
+        /* Blur và fade hai viền trái phải của khung ID Card */
+        .cinema-carousel::before,
+        .cinema-carousel::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: clamp(50px, 12vw, 150px);
+            z-index: 25;
+            pointer-events: none;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+        
+        .cinema-carousel::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(224, 242, 254, 0.95) 0%, rgba(224, 242, 254, 0.6) 30%, rgba(224, 242, 254, 0) 100%);
+            mask-image: linear-gradient(to right, black 25%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, black 25%, transparent 100%);
+        }
+        
+        .cinema-carousel::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(219, 234, 254, 0.95) 0%, rgba(219, 234, 254, 0.6) 30%, rgba(219, 234, 254, 0) 100%);
+            mask-image: linear-gradient(to left, black 25%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to left, black 25%, transparent 100%);
+        }
+        .carousel-track {
+            position: relative;
+            display: flex;
+            gap: 2rem;
+            justify-content: flex-start;  /* Quan trọng: không center, để tính toán offset chính xác */
+            align-items: center;
+            cursor: grab;
+            will-change: transform;
+            transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.4, 1);
+            transform-style: preserve-3d;
+            /* Prevent text selection and drag interference */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        .carousel-track:active {
+            cursor: grabbing;
+        }
+
+        /* ========== ID CARD 3D – GLASS + PLASTIC PREMIUM ========== */
+        .id-card {
+            flex: 0 0 320px;
+            height: 580px;
+            transition: all 0.55s cubic-bezier(0.2, 1, 0.3, 1);
+            transform-style: preserve-3d;
+            position: relative;
+            will-change: transform, opacity, filter;
+            /* Prevent card elements selection */
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        /* Thẻ không active ở bên trái xoay mặt hướng sang phải */
+        .id-card:not(.active).left-card {
+            opacity: 0.35;
+            filter: blur(2px);
+            transform: scale(0.78) translateY(25px) translateZ(-200px) rotateY(55deg) rotateX(5deg);
+        }
+        
+        /* Thẻ không active ở bên phải xoay mặt hướng sang trái */
+        .id-card:not(.active).right-card {
+            opacity: 0.35;
+            filter: blur(2px);
+            transform: scale(0.78) translateY(25px) translateZ(-200px) rotateY(-55deg) rotateX(5deg);
+        }
+        
+        /* Thẻ active chính diện phẳng và sáng bừng lên */
+        .id-card.active {
+            opacity: 1;
+            filter: none;
+            transform: scale(1.15) translateY(-15px) translateZ(60px) rotateY(0deg) rotateX(0deg);
+            z-index: 20;
+        }
+
+        /* Thẻ nhựa glass – sử dụng card.svg làm nền chính */
+        .plastic-card {
+            width: 100%;
+            height: 100%;
+            background: url('./assets/card.svg') no-repeat center/contain;
+            position: relative;
+            /* Tạo bóng đổ outline bám theo hình dạng vector của thẻ và dây đeo */
+            filter: drop-shadow(0 15px 35px rgba(0, 80, 200, 0.22)) drop-shadow(0 5px 15px rgba(0, 0, 0, 0.15));
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        /* Căn chỉnh chính xác phần thân thẻ nhựa để làm hiệu ứng kính */
+        .plastic-card-body {
+            position: absolute;
+            top: 24.64%;   /* Khớp với phần bắt đầu của thẻ nhựa trong SVG */
+            left: 5.4%;    /* Căn lề trái của thẻ */
+            right: 5.4%;   /* Căn lề phải của thẻ */
+            bottom: 2.5%;  /* Đáy thẻ */
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: translateZ(6px);
+        }
+        
+        /* Hiệu ứng phản chiếu bề mặt kính gương */
+        .plastic-card-body::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.45) 0%,
+                rgba(255, 255, 255, 0.15) 25%,
+                rgba(255, 255, 255, 0.02) 50%,
+                transparent 100%
+            );
+            mix-blend-mode: screen;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0.6;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .id-card.active .plastic-card-body::after {
+            opacity: 0.8;
+        }
+        
+        .id-card:not(.active) .plastic-card-body::after {
+            opacity: 0.3;
+        }
+
+        /* Lớp thông tin phủ đè lên bề mặt trắng của card.svg */
+        .card-info-overlay {
+            margin-top: auto; /* Đẩy nội dung xuống dưới phần Header của card.svg */
+            height: 72%;      /* Chiếm trọn phần diện tích màu trắng */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem 1rem;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        /* Avatar – biểu tượng con vật */
+        .card-avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 0.5rem;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ffffff, #f0f4f8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s;
+        }
+        .id-card.active .card-avatar {
+            transform: scale(1.03);
+            box-shadow: 0 0 0 3px #ffdd88;
+        }
+        .card-name {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 800;
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 0.2rem;
+        }
+        .card-role {
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: #e2e8f0;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            color: #475569;
+            font-family: var(--font-label);
+            margin: 0.3rem auto;
+        }
+        .card-details {
+            display: flex;
+            gap: 0.4rem;
+            justify-content: center;
+            margin: 0.4rem 0;
+        }
+        .detail-badge {
+            background: #f1f5f9;
+            padding: 0.15rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #64748b;
+            font-family: var(--font-label);
+            border: 1px solid #e2e8f0;
+        }
+        .card-bio {
+            font-size: 0.72rem;
+            text-align: center;
+            font-style: italic;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 0.5rem;
+            color: #64748b;
+            max-width: 90%;
+            line-height: 1.4;
+        }
+
+        /* NÚT ĐIỀU HƯỚNG */
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0 1.5rem;  /* Dịch chuyển xuống dưới để tạo khoảng cách rộng rãi, thông thoáng với profile */
+        }
+        .nav-btn {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.25), rgba(0, 169, 255, 0.15));
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1.5px solid rgba(255, 255, 255, 0.45);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1);
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 400;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 24px rgba(0, 169, 255, 0.2), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.7);
+        }
+        .nav-btn::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            pointer-events: none;
+        }
+        .nav-btn:hover::before {
+            transform: translateX(100%);
+        }
+        .nav-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.5), rgba(0, 169, 255, 0.3));
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.15) translateY(-4px);
+            box-shadow: 
+                0 14px 36px rgba(0, 169, 255, 0.4), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.9);
+            color: white;
+        }
+        .indicator-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 0.5rem;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 8px;
+            background: #b9d0f0;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .dot.active {
+            width: 28px;
+            background: #3f7eff;
+            box-shadow: 0 0 8px #6ea5ff;
+        }
+
+        /* ========== STORYTELLING – SỨ MỆNH & TẦM NHÌN ========== */
+        .storytelling-section {
+            max-width: 1200px;
+            margin: 6rem auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 4rem;
+            position: relative;
+            animation: slideInUp 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s backwards;
+        }
+        
+        @media (max-width: 768px) {
+            .storytelling-section {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+        }
+        
+        .story-card {
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.95) 100%);
+            border: 2px solid rgba(0, 169, 255, 0.3);
+            border-radius: 16px;
+            padding: 3.5rem 3rem;
+            position: relative;
+            overflow: visible;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: left;
+            box-shadow: 0 10px 35px rgba(0, 169, 255, 0.08);
+            z-index: 2;
+        }
+        
+        /* Paper bookmark mark - top left */
+        .story-card::before {
+            content: "";
+            position: absolute;
+            top: -8px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 16px solid rgba(0, 169, 255, 0.25);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Paper bookmark mark - bottom right */
+        .story-card::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            right: 30px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 16px solid rgba(0, 169, 255, 0.25);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .story-card:hover {
+            transform: translateY(-6px);
+            background: linear-gradient(135deg, #ffffff 0%, rgba(224, 242, 254, 0.5) 100%);
+            border-color: rgba(0, 169, 255, 0.5);
+            box-shadow: 0 15px 50px rgba(0, 169, 255, 0.15);
+        }
+        
+        .story-icon {
+            display: none;
+        }
+        
+        .story-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #0091ff 0%, #00a9ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .story-desc {
+            font-family: var(--font);
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: #3a5a7c;
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+        }
+
+        /* FEATURES & FUTURE */
+        .aboutus-features-section {
+            margin: 5rem 0 0 !important;
+            padding: 0 1rem;
+        }
+        
+        .features-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s backwards;
+        }
+        
+        .features-tag {
+            background: rgba(0, 169, 255, 0.12);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 169, 255, 0.25);
+            font-family: var(--font-label);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--p1);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+        }
+        
+        .features-header h2 {
+            font-family: var(--font-heading);
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 0;
+        }
+        
+        .aboutus-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            justify-content: center;
+            margin: 2.5rem 0;
+            max-width: 1300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .aboutus-feature-card {
+            background: rgba(255, 255, 255, 0.50);
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            border: 1px solid rgba(0, 169, 255, 0.15);
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            text-align: center;
+            font-family: var(--font);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            box-shadow: 0 8px 20px rgba(0, 169, 255, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+        
+        .aboutus-feature-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.08) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .aboutus-feature-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.78);
+            border-color: var(--p1);
+            box-shadow: 0 12px 40px rgba(0, 169, 255, 0.12);
+        }
+        
+        .aboutus-feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .aboutus-future-section {
+            background: rgba(255, 255, 255, 0.40);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid rgba(0, 169, 255, 0.15);
+            border-radius: 48px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s backwards;
+            box-shadow: 0 15px 50px rgba(0, 169, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        }
+        
+        .aboutus-future-section h3 {
+            font-family: var(--font-label);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--p1);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        .aboutus-future-section h2 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 0 0 1.5rem 0;
+        }
+        
+        .aboutus-future-section p {
+            font-size: 1.05rem;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .aboutus-cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .aboutus-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: var(--font-label);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .aboutus-cta-btn.primary {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.8), rgba(0, 169, 255, 0.6));
+            color: white;
+            border: 1px solid rgba(0, 169, 255, 0.4);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 24px rgba(0, 169, 255, 0.2);
+        }
+        
+        .aboutus-cta-btn.primary:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.95), rgba(0, 169, 255, 0.75));
+            border-color: rgba(0, 169, 255, 0.6);
+            box-shadow: 0 12px 40px rgba(0, 169, 255, 0.4);
+        }
+        
+        .aboutus-cta-btn.secondary {
+            background: rgba(255, 255, 255, 0.35);
+            border: 1.5px solid rgba(0, 169, 255, 0.3);
+            color: var(--p1);
+            backdrop-filter: blur(12px);
+        }
+        
+        .aboutus-cta-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.6);
+            border-color: var(--p1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 169, 255, 0.2);
+        }
+        
+        /* ========== DYNAMIC SPECULAR LIGHTING EFFECT ========== */
+        .specular-light-tracking {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle at center, 
+                rgba(255, 255, 255, 0.7) 0%,
+                rgba(255, 255, 255, 0.4) 25%,
+                rgba(255, 255, 255, 0.15) 60%,
+                transparent 100%
+            );
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(28px);
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: none;
+            opacity: 0.85;
+            box-shadow: 0 0 80px rgba(255, 255, 255, 0.4);
+        }
+        
+        @media (max-width: 900px) {
+            .id-card { flex: 0 0 280px; height: 508px; }
+            .id-card.active { transform: scale(1.05) translateY(-5px); }
+            .specular-light-tracking { width: 100px; height: 100px; }
+        }
+
+        /* ========== MISSION & VISION 3D PUZZLE ========== */
+        .mission-vision-section {
+            text-align: center;
+            margin: 6rem auto 5rem;
+            max-width: 1200px;
+            position: relative;
+            z-index: 10;
+            padding: 0 1.5rem;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .mission-vision-section.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mv-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 169, 255, 0.1);
+            border: 1px solid rgba(0, 169, 255, 0.25);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-family: var(--font-label);
+            font-size: 12px;
+            font-weight: 700;
+            color: #0091ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            backdrop-filter: blur(8px);
+        }
+        
+        .mv-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #0091ff;
+            border-radius: 50%;
+            animation: pulseDot 2.2s infinite alternate;
+        }
+        
+        .mv-title {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            color: #0091ff;
+            margin-bottom: 3.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        /* Master 3D container */
+        .mv-container-wrapper {
+            perspective: 1500px;
+            margin: 0 auto 3rem;
+            width: 600px;
+            height: 450px;
+        }
+        
+        .mv-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        /* Puzzle pieces styling */
+        .mv-piece {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: translate(var(--scatter-x), var(--scatter-y)) rotate(var(--scatter-rot)) rotateX(var(--scatter-rotX, 0deg)) rotateY(var(--scatter-rotY, 0deg));
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            z-index: 5;
+            /* Real 3D shadow using parent container filter - static to prevent repaint storms during transitions */
+            filter: drop-shadow(0 12px 24px rgba(0, 100, 255, 0.16));
+            will-change: transform;
+        }
+        
+        .mv-piece.is-hovered {
+            transform: translate(var(--scatter-x), var(--scatter-y)) rotate(var(--scatter-rot)) rotateX(0deg) rotateY(0deg) scale(1.05) translateZ(25px);
+            z-index: 12;
+        }
+        
+        /* Cập nhật trạng thái hover cho mảnh ghép có glow tương tự button hero */
+        .mv-piece .piece-glass {
+            position: absolute;
+            inset: 0;
+            /* High-contrast multi-stop glass reflection gradient for 3D realism and excellent readability */
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.82) 0%, 
+                rgba(255, 255, 255, 0.55) 40%, 
+                rgba(255, 255, 255, 0.35) 50%, 
+                rgba(255, 255, 255, 0.55) 60%, 
+                rgba(255, 255, 255, 0.78) 100%
+            );
+            backdrop-filter: blur(10px) saturate(160%);
+            -webkit-backdrop-filter: blur(10px) saturate(160%);
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+            /* Inner highlight for glass bevel look */
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.85);
+            will-change: background;
+        }
+        
+        .mv-piece.is-hovered .piece-glass {
+            /* Adds topgo brand blue light glow to hover reflection */
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.88) 0%, 
+                rgba(0, 169, 255, 0.25) 30%, 
+                rgba(255, 255, 255, 0.35) 50%, 
+                rgba(0, 169, 255, 0.2) 70%, 
+                rgba(255, 255, 255, 0.82) 100%
+            );
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.95);
+        }
+        
+        .mv-piece .piece-border {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            /* Float border layer at a static 3D elevation to save computation */
+            transform: translateZ(8px);
+        }
+        
+        .mv-piece .piece-border path {
+            /* Define clear, sharp white outlines for the puzzle pieces by default */
+            stroke: rgba(255, 255, 255, 0.88) !important;
+            stroke-width: 2.2px !important;
+            transition: stroke 0.4s ease;
+        }
+        
+        .mv-piece.is-hovered .piece-border path {
+            stroke: #ffffff !important;
+        }
+        
+        /* Piece inner content placement */
+        .piece-content {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #0052cc; /* High-contrast rich brand blue */
+            font-family: var(--font-heading);
+            font-size: 17px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            pointer-events: none;
+            /* Float content text layer higher at a static 3D elevation to save computation */
+            transform: translate(-50%, -50%) translateZ(18px);
+            transition: color 0.4s ease, opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .mv-piece.is-hovered .piece-content {
+            color: #003db3;
+        }
+        
+        /* Specific content position coordinates - simple coordinates, transform handled in base content class */
+        .mv-piece[data-index="0"] .piece-content { left: 100px; top: 75px; }
+        .mv-piece[data-index="1"] .piece-content { left: 300px; top: 75px; }
+        .mv-piece[data-index="2"] .piece-content { left: 500px; top: 75px; }
+        .mv-piece[data-index="3"] .piece-content { left: 100px; top: 225px; }
+        .mv-piece[data-index="4"] .piece-content { left: 300px; top: 225px; }
+        .mv-piece[data-index="5"] .piece-content { left: 500px; top: 225px; }
+        .mv-piece[data-index="6"] .piece-content { left: 300px; top: 375px; }
+        
+        /* Merged active state */
+        .mv-container.merged .mv-piece {
+            transform: translate(0, 0) rotate(0) scale(1) translateZ(0) !important;
+            pointer-events: none;
+            filter: drop-shadow(0 4px 10px rgba(0, 100, 255, 0.06)) !important;
+        }
+        
+        .mv-container.merged .mv-piece .piece-border {
+            opacity: 0.15; /* fade out the borders between pieces */
+        }
+        
+        .mv-container.merged .mv-piece .piece-content {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8) !important;
+        }
+        
+        /* Unified glass panel overlay */
+        .mv-panel-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            opacity: 0;
+            transform: scale(0.95) translateZ(-50px);
+            pointer-events: none;
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        .mv-container.panel-active .mv-panel-wrapper {
+            opacity: 1;
+            transform: scale(1) translateZ(0);
+            pointer-events: all;
+        }
+        
+        .mv-glass-panel {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.12));
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1.5px solid rgba(255, 255, 255, 0.45);
+            border-radius: 24px;
+            box-shadow: 
+                0 25px 50px rgba(0, 169, 255, 0.15),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8);
+            position: relative;
+            padding: 36px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Close button inside panel */
+        .mv-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(0, 169, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #0091ff;
+            font-size: 20px;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            line-height: 1;
+            z-index: 15;
+        }
+        
+        .mv-close-btn:hover {
+            background: #0091ff;
+            color: white;
+            transform: rotate(90deg);
+        }
+        
+        /* Panel text content */
+        .mv-panel-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
+        }
+        
+        .mv-container.panel-active .mv-panel-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mv-sub-panel h3 {
+            font-family: var(--font-heading);
+            font-size: 17px;
+            font-weight: 800;
+            color: #0091ff;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .mv-sub-panel p {
+            font-family: var(--font-body);
+            font-size: 14.5px;
+            color: #2b5580;
+            line-height: 1.6;
+            margin: 0;
+            text-align: justify;
+        }
+        
+        .mv-sub-panel p strong {
+            color: #0091ff;
+            font-weight: 700;
+        }
+        
+        .mv-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 169, 255, 0.25), transparent);
+            width: 100%;
+        }
+        
+        /* Action buttons area */
+        .mv-action {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .mv-action .glass-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Responsive scaling */
+        @media (max-width: 640px) {
+            .mv-container-wrapper {
+                width: 480px;
+                height: 360px;
+                margin-bottom: 0rem;
+            }
+            .mv-container {
+                transform-origin: top center;
+            }
+            /* Scale child components using simple layout dimensions */
+            .mv-piece[data-index="0"] .piece-content { left: 80px; top: 60px; }
+            .mv-piece[data-index="1"] .piece-content { left: 240px; top: 60px; }
+            .mv-piece[data-index="2"] .piece-content { left: 400px; top: 60px; }
+            .mv-piece[data-index="3"] .piece-content { left: 80px; top: 180px; }
+            .mv-piece[data-index="4"] .piece-content { left: 240px; top: 180px; }
+            .mv-piece[data-index="5"] .piece-content { left: 400px; top: 180px; }
+            .mv-piece[data-index="6"] .piece-content { left: 240px; top: 300px; }
+            
+            .piece-content { font-size: 13.5px; letter-spacing: 1px; }
+            .mv-glass-panel { padding: 24px; }
+            .mv-sub-panel p { font-size: 13.5px; line-height: 1.5; }
+            .mv-sub-panel h3 { font-size: 15px; }
+            .mv-panel-content { gap: 16px; }
+        }
+        
+        @media (max-width: 500px) {
+            .mv-container-wrapper {
+                width: 320px;
+                height: 240px;
+            }
+            .mv-piece[data-index="0"] .piece-content { left: 53px; top: 40px; }
+            .mv-piece[data-index="1"] .piece-content { left: 160px; top: 40px; }
+            .mv-piece[data-index="2"] .piece-content { left: 266px; top: 40px; }
+            .mv-piece[data-index="3"] .piece-content { left: 53px; top: 120px; }
+            .mv-piece[data-index="4"] .piece-content { left: 160px; top: 120px; }
+            .mv-piece[data-index="5"] .piece-content { left: 266px; top: 120px; }
+            .mv-piece[data-index="6"] .piece-content { left: 160px; top: 200px; }
+            
+            .piece-content { font-size: 10px; letter-spacing: 0.5px; }
+            .mv-glass-panel { padding: 16px 20px; }
+            .mv-sub-panel p { font-size: 11.5px; line-height: 1.4; }
+            .mv-sub-panel h3 { font-size: 13px; margin-bottom: 4px; }
+            .mv-panel-content { gap: 10px; }
+            .mv-close-btn { width: 26px; height: 26px; font-size: 16px; top: 10px; right: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="site-header">
+        <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
+    </header>
+
+    <main class="aboutus-main">
+        <!-- Hero -->
+        <div class="aboutus-hero">
+            <!-- Animated clouds -->
+            <div class="clouds">
+                <img src="./assets/cloud.svg" alt="cloud" class="cloud">
+                <img src="./assets/cloud.svg" alt="cloud" class="cloud">
+                <img src="./assets/cloud.svg" alt="cloud" class="cloud">
+            </div>
+
+            <!-- Glass Panel Content -->
+            <div class="hero-glass-panel">
+                <div class="hero-eyebrow">
+                    <div class="hero-dot"></div>
+                    <span>Về chúng tôi</span>
+                </div>
+                <h1 class="hero-title">Đội ngũ <span>phát triển,</span> <br> những tâm hồn <span>sáng tạo</span></h1>
+                <p class="hero-desc"><span></span>Chúng tôi là những người tạo ra trải nghiệm du lịch cá nhân hóa. Mỗi thành viên trong đội ngũ TopGo mang theo một niềm tin rằng công nghệ sẽ tạo nên sự khác biệt.</p>
+                <div class="hero-code-container">
+                    <button class="glass-button" onclick="window.location.href='./planner.html'">
+                        <span class="glass-button-icon"></span>
+                        Lên lịch ngay
+                    </button>
+                    <button class="glass-button" onclick="window.location.href='./chatbot.html'">
+                        <span class="glass-button-icon"></span>
+                        Hỏi TopChat
+                    </button>
+                    <button class="glass-button" onclick="document.querySelector('.aboutus-carousel-section').scrollIntoView({behavior:'smooth'})">
+                        <span class="glass-button-icon"></span>
+                        Gặp gỡ đội ngũ
+                    </button>
+                </div>
+                
+                <!-- Marquee Travel Comments -->
+                <div class="marquee-container">
+                    <div class="marquee-content">
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Du lịch là sự giải phóng của tâm hồn" • </div>
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Mỗi chuyến đi là một câu chuyện mới" • </div>
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Truyền thống thay đổi khi chúng ta khám phá" • </div>
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Thế giới đang chờ đợi bạn" • </div>
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Du lịch là sự giải phóng của tâm hồn" • </div>
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Mỗi chuyến đi là một câu chuyện mới" • </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAROUSEL ID CARD 3D + LANYARD CHÉO -->
+        <section class="aboutus-carousel-section">
+            <div class="carousel-header">
+                <span class="carousel-header-tag">Đội ngũ</span>
+                <h2>Gặp gỡ đội ngũ TopGo</h2>
+            </div>
+            
+            <div class="cinema-carousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Card 1 – Sư tử -->
+                    <div class="id-card" data-index="0">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">🦁</div>
+                                    <div class="card-name">Phạm Đắc Anh</div>
+                                    <div class="card-role">Leader & backend</div>
+                                    <div class="card-bio">"Công nghệ phải lục lạc và dễ tiếp cận."</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 – Cáo -->
+                    <div class="id-card" data-index="1">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">🦊</div>
+                                    <div class="card-name">Lý Phương Toàn</div>
+                                    <div class="card-role">CTO & AI Engineer</div>
+                                    <div class="card-details"><span class="detail-badge">ML/NLP</span><span class="detail-badge">8 năm</span></div>
+                                    <div class="card-bio">"Nước mắt tôi là code, máu tôi là data."</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 – Bướm -->
+                    <div class="id-card" data-index="2">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">🦋</div>
+                                    <div class="card-name">Phí Công Tuấn</div>
+                                    <div class="card-role">Backend Developer</div>
+                                    <div class="card-details"><span class="detail-badge">UX/UI</span><span class="detail-badge">Motion</span></div>
+                                    <div class="card-bio">"Mỗi pixel phải có một mục đích."</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 – Đại bàng -->
+                    <div class="id-card" data-index="3">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">🦅</div>
+                                    <div class="card-name">Nguyễn Đình Trung Kiên</div>
+                                    <div class="card-role">Frontend Developer</div>
+                                    <div class="card-details"><span class="detail-badge">Fullstack</span><span class="detail-badge">DevOps</span></div>
+                                    <div class="card-bio">"Clean code là tâm chí."</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 5 – Cá heo -->
+                    <div class="id-card" data-index="4">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">🐬</div>
+                                    <div class="card-name">Nguyễn Thanh Hạ Uyên</div>
+                                    <div class="card-role">AI & Data logic</div>
+                                    <div class="card-details"><span class="detail-badge">Data</span><span class="detail-badge">UX</span></div>
+                                    <div class="card-bio">"Dữ liệu dẫn đường tôi."</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 6 – Gấu trúc -->
+                    <div class="id-card" data-index="5">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">🐼</div>
+                                    <div class="card-name">Lê Huỳnh Anh Thư</div>
+                                    <div class="card-role">Growth & Marketing</div>
+                                    <div class="card-details"><span class="detail-badge">Growth</span><span class="detail-badge">Strategy</span></div>
+                                    <div class="card-bio">"Mỗi campaign có linh hồn."</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 7 – Tên lửa (NEW) -->
+                    <div class="id-card" data-index="6">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">🚀</div>
+                                    <div class="card-name">Dương Thị Bích Diệp</div>
+                                    <div class="card-role">Business Development</div>
+                                    <div class="card-details"><span class="detail-badge">Partnership</span><span class="detail-badge">Innovation</span></div>
+                                    <div class="card-bio">"Tương lai được xây dựng từ hôm nay."</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button class="nav-btn prev" aria-label="Previous">←</button>
+                <button class="nav-btn next" aria-label="Next">→</button>
+            </div>
+            <div class="indicator-dots" id="indicatorDots"></div>
+        </section>
+
+        <!-- MISSION & VISION SECTION -->
+        <section class="mission-vision-section">
+            <div class="mv-eyebrow">
+                <div class="mv-dot"></div>
+                <span>Khát Vọng TopGo</span>
+            </div>
+            <h2 class="mv-title"> Sứ mệnh &amp; Tầm Nhìn</h2>
+            
+            <div class="mv-container-wrapper">
+                <div class="mv-container" id="mvContainer">
+                    <!-- Piece 0: Col 1, Row 1 (Top-Left) -->
+                    <div class="mv-piece" data-index="0" style="--scatter-x: -25px; --scatter-y: -20px; --scatter-rot: -6deg; --scatter-rotX: 12deg; --scatter-rotY: -10deg;">
+                        <div class="piece-glass" style="clip-path: url(#puzzle-clip-0); -webkit-clip-path: url(#puzzle-clip-0);"></div>
+                        <svg class="piece-border" viewBox="0 0 600 450" preserveAspectRatio="none">
+                            <path d="M 0 0 L 200 0 L 200 55 C 200 65, 218 60, 218 75 C 218 90, 200 85, 200 95 L 200 150 L 120 150 C 110 150, 115 168, 100 168 C 85 168, 90 150, 80 150 L 0 150 Z" fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1.5" />
+                        </svg>
+                        <div class="piece-content">
+                            <span class="piece-text">Sáng Tạo</span>
+                        </div>
+                    </div>
+
+                    <!-- Piece 1: Col 2, Row 1 (Top-Center) -->
+                    <div class="mv-piece" data-index="1" style="--scatter-x: 5px; --scatter-y: -35px; --scatter-rot: 4deg; --scatter-rotX: -10deg; --scatter-rotY: 8deg;">
+                        <div class="piece-glass" style="clip-path: url(#puzzle-clip-1); -webkit-clip-path: url(#puzzle-clip-1);"></div>
+                        <svg class="piece-border" viewBox="0 0 600 450" preserveAspectRatio="none">
+                            <path d="M 200 0 L 400 0 L 400 55 C 400 65, 382 60, 382 75 C 382 90, 400 85, 400 95 L 400 150 L 320 150 C 310 150, 315 168, 300 168 C 285 168, 290 150, 280 150 L 200 150 L 200 95 C 200 85, 218 90, 218 75 C 218 60, 200 65, 200 55 L 200 0 Z" fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1.5" />
+                        </svg>
+                        <div class="piece-content">
+                            <span class="piece-text">Tiết kiệm</span>
+                        </div>
+                    </div>
+
+                    <!-- Piece 2: Col 3, Row 1 (Top-Right) -->
+                    <div class="mv-piece" data-index="2" style="--scatter-x: 30px; --scatter-y: -15px; --scatter-rot: -5deg; --scatter-rotX: 8deg; --scatter-rotY: 12deg;">
+                        <div class="piece-glass" style="clip-path: url(#puzzle-clip-2); -webkit-clip-path: url(#puzzle-clip-2);"></div>
+                        <svg class="piece-border" viewBox="0 0 600 450" preserveAspectRatio="none">
+                            <path d="M 400 0 L 600 0 L 600 150 L 520 150 C 510 150, 515 168, 500 168 C 485 168, 490 150, 480 150 L 400 150 L 400 95 C 400 85, 382 90, 382 75 C 382 60, 400 65, 400 55 L 400 0 Z" fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1.5" />
+                        </svg>
+                        <div class="piece-content">
+                            <span class="piece-text">Trí Tuệ</span>
+                        </div>
+                    </div>
+
+                    <!-- Piece 3: Col 1, Row 2 (Mid-Left) -->
+                    <div class="mv-piece" data-index="3" style="--scatter-x: -40px; --scatter-y: 10px; --scatter-rot: 8deg; --scatter-rotX: -12deg; --scatter-rotY: -8deg;">
+                        <div class="piece-glass" style="clip-path: url(#puzzle-clip-3); -webkit-clip-path: url(#puzzle-clip-3);"></div>
+                        <svg class="piece-border" viewBox="0 0 600 450" preserveAspectRatio="none">
+                            <path d="M 0 150 L 80 150 C 90 150, 85 168, 100 168 C 115 168, 110 150, 120 150 L 200 150 L 200 205 C 200 215, 218 210, 218 225 C 218 240, 200 235, 200 245 L 200 300 L 120 300 C 110 300, 115 318, 100 318 C 85 318, 90 300, 80 300 L 0 300 Z" fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1.5" />
+                        </svg>
+                        <div class="piece-content">
+                            <span class="piece-text">Tốc Độ</span>
+                        </div>
+                    </div>
+
+                    <!-- Piece 4: Col 2, Row 2 (Mid-Center) -->
+                    <div class="mv-piece" data-index="4" style="--scatter-x: 0px; --scatter-y: 15px; --scatter-rot: -3deg; --scatter-rotX: 10deg; --scatter-rotY: -10deg;">
+                        <div class="piece-glass" style="clip-path: url(#puzzle-clip-4); -webkit-clip-path: url(#puzzle-clip-4);"></div>
+                        <svg class="piece-border" viewBox="0 0 600 450" preserveAspectRatio="none">
+                            <path d="M 200 150 L 280 150 C 290 150, 285 168, 300 168 C 315 168, 310 150, 320 150 L 400 150 L 400 205 C 400 215, 382 210, 382 225 C 382 240, 400 235, 400 245 L 400 300 L 320 300 C 310 300, 315 318, 300 318 C 285 318, 290 300, 280 300 L 200 300 L 200 245 C 200 235, 218 240, 218 225 C 218 210, 200 215, 200 205 L 200 150 Z" fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1.5" />
+                        </svg>
+                        <div class="piece-content">
+                            <span class="piece-text">Kết Nối</span>
+                        </div>
+                    </div>
+
+                    <!-- Piece 5: Col 3, Row 2 (Mid-Right) -->
+                    <div class="mv-piece" data-index="5" style="--scatter-x: 35px; --scatter-y: 20px; --scatter-rot: 7deg; --scatter-rotX: -8deg; --scatter-rotY: 12deg;">
+                        <div class="piece-glass" style="clip-path: url(#puzzle-clip-5); -webkit-clip-path: url(#puzzle-clip-5);"></div>
+                        <svg class="piece-border" viewBox="0 0 600 450" preserveAspectRatio="none">
+                            <path d="M 400 150 L 480 150 C 490 150, 485 168, 500 168 C 515 168, 510 150, 520 150 L 600 150 L 600 300 L 520 300 C 510 300, 515 318, 500 318 C 485 318, 490 300, 480 300 L 400 300 L 400 245 C 400 235, 382 240, 382 225 C 382 210, 400 215, 400 205 L 400 150 Z" fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1.5" />
+                        </svg>
+                        <div class="piece-content">
+                            <span class="piece-text">Tin Cậy</span>
+                        </div>
+                    </div>
+
+                    <!-- Piece 6: Col 1-3, Row 3 (Bottom-Full) -->
+                    <div class="mv-piece" data-index="6" style="--scatter-x: -10px; --scatter-y: 45px; --scatter-rot: -4deg; --scatter-rotX: 6deg; --scatter-rotY: -6deg;">
+                        <div class="piece-glass" style="clip-path: url(#puzzle-clip-6); -webkit-clip-path: url(#puzzle-clip-6);"></div>
+                        <svg class="piece-border" viewBox="0 0 600 450" preserveAspectRatio="none">
+                            <path d="M 0 300 L 80 300 C 90 300, 85 318, 100 318 C 115 318, 110 300, 120 300 L 200 300 L 280 300 C 290 300, 285 318, 300 318 C 315 318, 310 300, 320 300 L 400 300 L 480 300 C 490 300, 485 318, 500 318 C 515 318, 510 300, 520 300 L 600 300 L 600 450 L 0 450 Z" fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1.5" />
+                        </svg>
+                        <div class="piece-content">
+                            <span class="piece-text">Bứt Phá</span>
+                        </div>
+                    </div>
+
+                    <!-- Unified Glass Panel Overlay -->
+                    <div class="mv-panel-wrapper">
+                        <div class="mv-glass-panel">
+                            <button class="mv-close-btn" id="mvCloseBtn" aria-label="Đóng mảnh ghép">×</button>
+                            <div class="mv-panel-content">
+                                <div class="mv-sub-panel">
+                                    <h3>Sứ Mệnh</h3>
+                                    <p><strong>TopGo</strong> ra đời với sứ mệnh tái định nghĩa trải nghiệm du lịch thông qua sức mạnh của Trí tuệ Nhân tạo (AI). Chúng tôi cá nhân hóa tối đa mọi hành trình, biến việc lên kế hoạch chuyến đi từ phức tạp, tốn thời gian trở nên dễ dàng, hứng khởi và miễn phí cho tất cả mọi người.</p>
+                                </div>
+                                <div class="mv-divider"></div>
+                                <div class="mv-sub-panel">
+                                    <h3>Tầm Nhìn</h3>
+                                    <p>Trở thành người bạn đồng hành AI được yêu thích, dẫn đầu xu hướng du lịch thông minh thế hệ mới. <strong>TopGo</strong> khát khao kết nối cộng đồng, tạo những chuyến đi không chỉ là khám phá vùng đất mới mà còn là hành trình tìm hiểu cảm xúc và thấu hiểu chính mình.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mv-action">
+                <button class="glass-button" id="mvToggleBtn" aria-expanded="false" aria-controls="mvContainer">
+                    <span class="glass-button-icon"></span>
+                    Xem rõ sứ mệnh &amp; tầm nhìn
+                </button>
+            </div>
+        </section>
+
+        <!-- SVG ClipPath definitions (invisible but referenced by CSS clip-path) -->
+        <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" viewBox="0 0 600 450">
+            <defs>
+                <clipPath id="puzzle-clip-0">
+                    <path d="M 0 0 L 200 0 L 200 55 C 200 65, 218 60, 218 75 C 218 90, 200 85, 200 95 L 200 150 L 120 150 C 110 150, 115 168, 100 168 C 85 168, 90 150, 80 150 L 0 150 Z" />
+                </clipPath>
+                <clipPath id="puzzle-clip-1">
+                    <path d="M 200 0 L 400 0 L 400 55 C 400 65, 382 60, 382 75 C 382 90, 400 85, 400 95 L 400 150 L 320 150 C 310 150, 315 168, 300 168 C 285 168, 290 150, 280 150 L 200 150 L 200 95 C 200 85, 218 90, 218 75 C 218 60, 200 65, 200 55 L 200 0 Z" />
+                </clipPath>
+                <clipPath id="puzzle-clip-2">
+                    <path d="M 400 0 L 600 0 L 600 150 L 520 150 C 510 150, 515 168, 500 168 C 485 168, 490 150, 480 150 L 400 150 L 400 95 C 400 85, 382 90, 382 75 C 382 60, 400 65, 400 55 L 400 0 Z" />
+                </clipPath>
+                <clipPath id="puzzle-clip-3">
+                    <path d="M 0 150 L 80 150 C 90 150, 85 168, 100 168 C 115 168, 110 150, 120 150 L 200 150 L 200 205 C 200 215, 218 210, 218 225 C 218 240, 200 235, 200 245 L 200 300 L 120 300 C 110 300, 115 318, 100 318 C 85 318, 90 300, 80 300 L 0 300 Z" />
+                </clipPath>
+                <clipPath id="puzzle-clip-4">
+                    <path d="M 200 150 L 280 150 C 290 150, 285 168, 300 168 C 315 168, 310 150, 320 150 L 400 150 L 400 205 C 400 215, 382 210, 382 225 C 382 240, 400 235, 400 245 L 400 300 L 320 300 C 310 300, 315 318, 300 318 C 285 318, 290 300, 280 300 L 200 300 L 200 245 C 200 235, 218 240, 218 225 C 218 210, 200 215, 200 205 L 200 150 Z" />
+                </clipPath>
+                <clipPath id="puzzle-clip-5">
+                    <path d="M 400 150 L 480 150 C 490 150, 485 168, 500 168 C 515 168, 510 150, 520 150 L 600 150 L 600 300 L 520 300 C 510 300, 515 318, 500 318 C 485 318, 490 300, 480 300 L 400 300 L 400 245 C 400 235, 382 240, 382 225 C 382 210, 400 215, 400 205 L 400 150 Z" />
+                </clipPath>
+                <clipPath id="puzzle-clip-6">
+                    <path d="M 0 300 L 80 300 C 90 300, 85 318, 100 318 C 115 318, 110 300, 120 300 L 200 300 L 280 300 C 290 300, 285 318, 300 318 C 315 318, 310 300, 320 300 L 400 300 L 480 300 C 490 300, 485 318, 500 318 C 515 318, 510 300, 520 300 L 600 300 L 600 450 L 0 450 Z" />
+                </clipPath>
+            </defs>
+        </svg>
+
+
+    </main>
+
+    <div id="site-shared"></div>
+
+    <!-- CAROUSEL JS – CĂN GIỮA CHUẨN, MƯỢT -->
+    <script>
+        function initCarousel() {
+            const track = document.getElementById('carouselTrack');
+            if (!track) {
+                console.warn('Carousel track not found, retrying...');
+                setTimeout(initCarousel, 100);
+                return;
+            }
+            
+            // Lấy các thẻ nguyên bản
+            const originalCards = Array.from(track.querySelectorAll('.id-card'));
+            const realCount = originalCards.length;
+            if (realCount === 0) return;
+            
+            const prevBtn = document.querySelector('.nav-btn.prev');
+            const nextBtn = document.querySelector('.nav-btn.next');
+            const dotsContainer = document.getElementById('indicatorDots');
+            
+            const cloneCount = 4; // Nhân bản 4 thẻ để tạo vòng lặp vô tận hoàn hảo
+            
+            // Tiến hành nhân bản các thẻ ở 2 đầu
+            for (let i = 0; i < cloneCount; i++) {
+                const clone = originalCards[i].cloneNode(true);
+                clone.classList.add('is-clone');
+                track.appendChild(clone);
+            }
+            for (let i = 0; i < cloneCount; i++) {
+                const targetIdx = realCount - 1 - i;
+                const clone = originalCards[targetIdx].cloneNode(true);
+                clone.classList.add('is-clone');
+                track.insertBefore(clone, track.firstChild);
+            }
+            
+            // Lấy lại danh sách tất cả các thẻ bao gồm bản sao
+            const cards = Array.from(track.querySelectorAll('.id-card'));
+            
+            // Đặt thẻ hoạt động ban đầu ở vị trí giữa (thẻ thứ 2 gốc, tương ứng index = cloneCount + 2)
+            let currentIdx = cloneCount + 2; 
+            
+            let startX = 0, startTranslate = 0;
+            let isDragging = false;
+            let dragOffset = 0;
+            
+            // Bộ nhớ đệm bố cục tĩnh (Layout Dimensions Caching) để tối ưu hóa hiệu năng cực hạn
+            let cardCenters = [];
+            let containerWidth = 0;
+
+            function updateCachedDimensions() {
+                const container = track.parentElement;
+                if (!container) return;
+                containerWidth = container.offsetWidth;
+                cardCenters = cards.map(card => {
+                    return card.offsetLeft + card.offsetWidth / 2;
+                });
+            }
+
+            // Tính toán nhanh thẻ gần tâm nhất dựa trên dời dịch chuyển (không reflow)
+            function getNearestCardIndex(currentTranslate) {
+                const targetCenter = containerWidth / 2 - currentTranslate;
+                let minDist = Infinity;
+                let nearest = currentIdx;
+                for (let i = 0; i < cardCenters.length; i++) {
+                    const dist = Math.abs(cardCenters[i] - targetCenter);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        nearest = i;
+                    }
+                }
+                return nearest;
+            }
+
+            // Cập nhật tất cả thuộc tính 3D, độ mờ, tỉ lệ, blur liên tục dựa trên dời dịch chuyển hiện tại
+            function updateCardTransforms(currentTranslate, animate = true) {
+                cards.forEach((card, i) => {
+                    // Khoảng cách thực tế từ card đến tâm viewport theo đơn vị phẳng tĩnh (352px)
+                    const diff = (cardCenters[i] - (containerWidth / 2 - currentTranslate)) / 352;
+                    const absDiff = Math.abs(diff);
+                    
+                    // Tối ưu hiệu năng cực hạn (Lag-free): Chỉ hiển thị và vẽ tối đa 5 thẻ gần nhất
+                    if (absDiff > 2.2) {
+                        card.style.visibility = 'hidden';
+                        card.style.opacity = '0';
+                        card.style.pointerEvents = 'none';
+                        return;
+                    } else {
+                        card.style.visibility = 'visible';
+                        card.style.pointerEvents = 'auto';
+                    }
+                    
+                    // 1. Tính toán lượng giác xoay vòng hình trụ 3D chuẩn xác
+                    const angleStep = 22; // Bước góc xoay tinh tế cho mỗi thẻ
+                    const theta = diff * angleStep;
+                    const thetaRad = (theta * Math.PI) / 180;
+                    
+                    // Bán kính hình trụ 3D tối ưu
+                    const R = 600;
+                    
+                    // Tọa độ hình học 3D đối xứng
+                    const rotateY = -theta; 
+                    const rotateX = 2 * Math.min(1, absDiff); // Độ nghiêng nhẹ liên tục
+                    
+                    // Độ sâu Z và chiều cao đẩy thẻ chính lên trên các thẻ bên
+                    const centerZBonus = Math.max(0, 1 - absDiff) * 130; 
+                    const translateZ = R * (Math.cos(thetaRad) - 1) - 50 + centerZBonus;
+                    
+                    // Căn đối hoàn hảo translateX
+                    const flexOffset = diff * 352;
+                    const cylX = R * Math.sin(thetaRad);
+                    const translateX = cylX - flexOffset;
+                    
+                    // Tỷ lệ scale mượt mà và opacity/blur giảm dần đều
+                    const scale = Math.max(0.75, 1.15 - absDiff * 0.2);
+                    const opacity = Math.max(0, 1 - absDiff * 0.4);
+                    const blur = Math.min(2.5, absDiff * 1.25);
+                    
+                    if (animate) {
+                        card.style.transition = 'transform 0.5s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
+                    } else {
+                        card.style.transition = 'none';
+                    }
+                    
+                    card.style.transform = `scale(${scale}) translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+                    card.style.opacity = opacity;
+                    card.style.filter = blur > 0 ? `blur(${blur}px)` : 'none';
+                    card.style.zIndex = Math.round(100 - absDiff * 10);
+                    
+                    card.classList.remove('active', 'left-card', 'right-card');
+                    if (absDiff < 0.5) {
+                        card.classList.add('active');
+                    } else if (diff < 0) {
+                        card.classList.add('left-card');
+                    } else {
+                        card.classList.add('right-card');
+                    }
+                });
+                
+                // Cập nhật currentIdx dựa trên translate hiện tại
+                const nearest = getNearestCardIndex(currentTranslate);
+                if (nearest !== currentIdx) {
+                    currentIdx = nearest;
+                    
+                    // Cập nhật dấu chấm chỉ báo chỉ từ 0 đến realCount - 1
+                    const realActiveIdx = (currentIdx - cloneCount + realCount) % realCount;
+                    const dots = document.querySelectorAll('.dot');
+                    dots.forEach((dot, i) => {
+                        if (i === realActiveIdx) dot.classList.add('active');
+                        else dot.classList.remove('active');
+                    });
+                }
+            }
+
+            // Thiết lập chỉ số và căn giữa thẻ active
+            function setActiveCard(index, animate = true) {
+                if (index < 0) index = 0;
+                if (index >= cards.length) index = cards.length - 1;
+                
+                currentIdx = index;
+                
+                const container = track.parentElement;
+                if (!container) return;
+                const activeCard = cards[currentIdx];
+                if (!activeCard) return;
+                
+                const activeCenter = cardCenters[currentIdx];
+                const targetTranslate = containerWidth / 2 - activeCenter;
+                
+                if (animate) {
+                    track.style.transition = 'transform 0.5s cubic-bezier(0.2, 1, 0.3, 1)';
+                } else {
+                    track.style.transition = 'none';
+                }
+                track.style.transform = `translateX(${targetTranslate}px)`;
+                
+                updateCardTransforms(targetTranslate, animate);
+            }
+
+            // Đi tới thẻ (dùng cho dot & nút)
+            function goToCard(index) {
+                setActiveCard(index, true);
+            }
+
+            function nextCard() {
+                goToCard(currentIdx + 1);
+            }
+            
+            function prevCard() {
+                goToCard(currentIdx - 1);
+            }
+
+            // Hiệu ứng phản chiếu ánh sáng theo chuột
+            function initMouseLighting() {
+                const carousel = track.parentElement;
+                if (!carousel) return;
+                
+                carousel.addEventListener('mousemove', (e) => {
+                    cards.forEach((card) => {
+                        if (card.style.visibility === 'hidden') return;
+                        const rect = card.getBoundingClientRect();
+                        
+                        const mouseX = e.clientX - rect.left;
+                        const mouseY = e.clientY - rect.top;
+                        
+                        const xPercent = Math.max(0, Math.min(1, mouseX / rect.width));
+                        const yPercent = Math.max(0, Math.min(1, mouseY / rect.height));
+                        
+                        const isInCard = mouseX >= 0 && mouseX <= rect.width && 
+                                        mouseY >= 0 && mouseY <= rect.height;
+                        
+                        const specularLight = card.querySelector('.specular-light-tracking');
+                        if (specularLight) {
+                            if (isInCard && card.classList.contains('active')) {
+                                specularLight.style.display = 'block';
+                                specularLight.style.left = (xPercent * 100) + '%';
+                                specularLight.style.top = (yPercent * 100) + '%';
+                            } else {
+                                specularLight.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+                
+                carousel.addEventListener('mouseleave', () => {
+                    cards.forEach((card) => {
+                        const specularLight = card.querySelector('.specular-light-tracking');
+                        if (specularLight) {
+                            specularLight.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            // Lấy giá trị translateX hiện tại (px)
+            function getCurrentTranslate() {
+                const transform = track.style.transform;
+                if (!transform || transform === 'none') return 0;
+                const match = transform.match(/translateX\(([-\d.]+)px\)/);
+                return match ? parseFloat(match[1]) : 0;
+            }
+
+            // Lắng nghe sự kiện kết thúc transition để nhảy vị trí ngầm (Seamless loop)
+            track.addEventListener('transitionend', (e) => {
+                if (e.propertyName !== 'transform') return;
+                
+                if (currentIdx < cloneCount) {
+                    currentIdx += realCount;
+                    setActiveCard(currentIdx, false); // Nhảy ngầm không chuyển động
+                } else if (currentIdx >= cloneCount + realCount) {
+                    currentIdx -= realCount;
+                    setActiveCard(currentIdx, false); // Nhảy ngầm không chuyển động
+                }
+            });
+
+            // Ngăn chặn sự kiện kéo mặc định của trình duyệt để không bị cản trở custom drag
+            track.addEventListener('dragstart', (e) => e.preventDefault());
+
+            // Xử lý sự kiện kéo vuốt bằng chuột & cảm ứng hoạt động hoàn hảo
+            function onDragStart(e) {
+                if (e.type.startsWith('mouse') && e.button !== 0) return; // Chỉ nhận chuột trái
+                
+                isDragging = true;
+                startX = e.type.startsWith('mouse') ? e.clientX : e.touches[0].clientX;
+                startTranslate = getCurrentTranslate();
+                
+                // Tắt các transition khi đang drag để kéo mượt thời gian thực
+                track.style.transition = 'none';
+                cards.forEach(c => c.style.transition = 'none');
+                dragOffset = 0;
+            }
+
+            function onDragMove(e) {
+                if (!isDragging) return;
+                
+                const currentX = e.type.startsWith('mouse') ? e.clientX : e.touches[0].clientX;
+                dragOffset = currentX - startX;
+                
+                // Ngăn cản cuộn trang theo chiều dọc nếu người dùng vuốt ngang rõ rệt
+                if (Math.abs(dragOffset) > 10 && e.cancelable) {
+                    e.preventDefault();
+                }
+                
+                const currentTranslate = startTranslate + dragOffset;
+                
+                // Di chuyển track thời gian thực bám sát ngón tay/con trỏ chuột
+                track.style.transform = `translateX(${currentTranslate}px)`;
+                
+                // Cập nhật góc xoay 3D động cực mượt theo vị trí hiện tại
+                updateCardTransforms(currentTranslate, false);
+            }
+
+            function onDragEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                // Bật lại transition để thực hiện snap mượt mà
+                track.style.transition = 'transform 0.5s cubic-bezier(0.2, 1, 0.3, 1)';
+                
+                // Nếu chỉ là chạm nhẹ (click), căn giữa lại thẻ hiện tại và giữ nguyên
+                if (Math.abs(dragOffset) < 8) {
+                    setActiveCard(currentIdx, true);
+                    return;
+                }
+                
+                const currentTranslate = getCurrentTranslate();
+                const nearest = getNearestCardIndex(currentTranslate);
+                setActiveCard(nearest, true);
+            }
+
+            // Tạo các dot indicators động
+            function buildIndicators() {
+                if (!dotsContainer) return;
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < realCount; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    dot.addEventListener('click', () => goToCard(cloneCount + i));
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            // Gắn sự kiện click trực tiếp để chọn thẻ phụ
+            cards.forEach((card, idx) => {
+                card.addEventListener('click', (e) => {
+                    if (isDragging || Math.abs(dragOffset) > 8) return;
+                    if (idx !== currentIdx) {
+                        e.preventDefault();
+                        goToCard(idx);
+                    }
+                });
+            });
+
+            // Gắn các sự kiện kéo vuốt trên track
+            track.addEventListener('touchstart', onDragStart, { passive: true });
+            track.addEventListener('touchmove', onDragMove, { passive: false });
+            track.addEventListener('touchend', onDragEnd);
+            track.addEventListener('touchcancel', onDragEnd);
+            
+            track.addEventListener('mousedown', onDragStart);
+            window.addEventListener('mousemove', onDragMove);
+            window.addEventListener('mouseup', onDragEnd);
+            
+            if (prevBtn) prevBtn.addEventListener('click', prevCard);
+            if (nextBtn) nextBtn.addEventListener('click', nextCard);
+            
+            // Xử lý co giãn màn hình
+            window.addEventListener('resize', () => {
+                updateCachedDimensions();
+                setActiveCard(currentIdx, false);
+            });
+
+            // Khởi chạy
+            buildIndicators();
+            updateCachedDimensions();
+            setActiveCard(cloneCount + 2, false);
+            initMouseLighting();
+
+            // Hiệu ứng hiện dần khi lướt xuống (Scroll Reveal) của phần ID Card
+            const carouselSection = document.querySelector('.aboutus-carousel-section');
+            if (carouselSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            carouselSection.classList.add('revealed');
+                            observer.unobserve(entry.target); // Chỉ chạy một lần
+                        }
+                    });
+                }, {
+                    threshold: 0.1, // Chớm xuất hiện 10%
+                    rootMargin: "0px 0px -50px 0px"
+                });
+                observer.observe(carouselSection);
+            }
+        }
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCarousel);
+        } else {
+            // DOM already ready (e.g., script loaded async after page load)
+            setTimeout(initCarousel, 50);
+        }
+    </script>
+
+    <!-- SỨ MỆNH & TẦM NHÌN PUZZLE ANIMATION -->
+    <script src="./js/missionVision.js" type="module"></script>
+
+    <!-- Load header/footer từ shared.js -->
+    <script type="module">
+        import('./js/shared.js').catch(e => console.warn('shared.js not loaded'));
+        setTimeout(() => {
+            const headerLoading = document.querySelector('#site-header > div');
+            if (headerLoading && headerLoading.innerText.includes('Đang tải header')) {
+                headerLoading.style.display = 'none';
+            }
+        }, 1500);
+    </script>
+</body>
+</html>

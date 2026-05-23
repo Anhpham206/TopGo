@@ -84,6 +84,7 @@ export async function loadSharedComponents() {
             let activeId = 'nav-planner';
             if (currentPage === 'chatbot.html') activeId = 'nav-chatbot';
             else if (currentPage === 'index.html' || currentPage === '' || currentPage === '/') activeId = 'nav-home';
+            else if (currentPage === 'aboutus.html') activeId = 'nav-aboutus';
             else if (currentPage === 'pricing.html') activeId = 'nav-pricing';
             else if (currentPage === 'auth.html' || currentPage === 'profile.html') activeId = null;
             if (activeId) document.getElementById(activeId)?.classList.add('active');
@@ -305,3 +306,5 @@ export async function loadSharedComponents() {
 
 // Auto-run on import (both index and chatbot pages need this)
 loadSharedComponents();
+
+
