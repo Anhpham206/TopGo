@@ -72,8 +72,41 @@ async def generate_itinerary_stream(payload: dict):
 
         for p in places:
             p_id = p.get("id")
+            
+            # Khắc phục lỗi bất đồng bộ/lệch prefix ID (ví dụ BIT_ vs BTN_) giữa mockFallback và dataset thực tế
+            full_p = dataset_places.get(p_id)
+            if not full_p and isinstance(p_id, str):
+                # 1. Tìm theo hậu tố số (ví dụ: khớp _002 nếu BIT_DTQ_002 vs BTN_DTQ_002)
+                suffix = p_id.split("_")[-1] if "_" in p_id else p_id
+                for k, val in dataset_places.items():
+                    if k.endswith(f"_{suffix}"):
+                        full_p = val
+                        p_id = k
+                        break
+            
+            if not full_p:
+                # 2. Tìm theo tên địa điểm
+                p_name = p.get("name") or p.get("ten")
+                if p_name:
+                    for k, val in dataset_places.items():
+                        if val.get("ten") == p_name:
+                            full_p = val
+                            p_id = k
+                            break
+            
+            if not full_p:
+                # 3. Tạo dữ liệu mặc định fallback nếu không tồn tại trong dataset
+                full_p = {
+                    "ten": p.get("name") or p.get("ten") or "Unknown",
+                    "tags": p.get("tags", []),
+                    "gia_ve": p.get("price") or p.get("gia_ve") or 0,
+                    "toa_do": {"lat": p.get("lat", 0), "lng": p.get("lng", 0)},
+                    "gio_hoat_dong": {"mo_cua": 0.0, "dong_cua": 23.98},
+                    "rating": p.get("rating", 0.0)
+                }
+                dataset_places[p_id] = full_p
+
             selected_ids.add(p_id)
-            full_p = dataset_places[p_id]
             selected_places_formatted.append({
                 "id": p_id,
                 "ten": full_p.get("ten", "Unknown"),

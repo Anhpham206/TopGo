@@ -381,6 +381,10 @@ export function renderItinerary(data) {
 
     if (!container) return;
 
+    if (data && data.output) {
+        window._lastItineraryData = data;
+    }
+
     // Nếu chưa có dữ liệu hợp lệ
     if (!data || !data.output) {
         if (typeof MOCK_ITINERARY_HTML !== 'undefined') {
@@ -747,7 +751,39 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
 
     // Result screen buttons
     document.getElementById('btn-edit-req')?.addEventListener('click', () => showScreen('form'));
-    document.getElementById('btn-save-plan')?.addEventListener('click', () => showPopup('popup-login'));
+    document.getElementById('btn-save-plan')?.addEventListener('click', async () => {
+        if (!window._lastItineraryData) {
+            showToast('Không tìm thấy dữ liệu lịch trình để lưu', 'error');
+            return;
+        }
+
+        const trip = {
+            destination: state.selectedCity?.name || window._lastPayload?.city_name || 'Chuyến đi',
+            days: getTripDays(),
+            pax: parseInt(document.getElementById('pax-val')?.value) || window._lastPayload?.pax || 1,
+            budget: getRawBudget() || window._lastPayload?.budget || 0,
+            dateStart: document.getElementById('date-start')?.value || window._lastPayload?.date_start || '',
+            dateEnd: document.getElementById('date-end')?.value || window._lastPayload?.date_end || '',
+            itinerary: {
+                ...window._lastItineraryData,
+                payload: window._lastPayload
+            }
+        };
+
+        if (window.TopGoAuth && window.TopGoAuth.isLoggedIn()) {
+            showToast('Đang lưu lịch trình...', 'warning');
+            try {
+                await window.TopGoAuth.saveTrip(trip);
+                showToast('Đã lưu lịch trình thành công!', 'success');
+            } catch (err) {
+                showToast('Lưu lịch trình thất bại: ' + err.message, 'error');
+            }
+        } else {
+            // Chưa đăng nhập, lưu vào pending và hiển thị popup yêu cầu đăng nhập
+            window._pendingSaveTrip = trip;
+            showPopup('popup-login');
+        }
+    });
     document.getElementById('btn-back-to-form')?.addEventListener('click', () => showScreen('form'));
     document.getElementById('btn-continue-error')?.addEventListener('click', onContinueFromError);
     document.getElementById('btn-close-map')?.addEventListener('click', () => closePopup('popup-map'));
