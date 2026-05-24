@@ -1,5 +1,6 @@
 # Python
 venv/
+.venv/
 __pycache__/
 *.pyc
 *.pyo
@@ -15,6 +16,7 @@ build/
 .venv/
 # Logs
 logs/
+*.log
 
 #result 
 result_test/
@@ -23,22 +25,28 @@ result_test/
 node_modules/
 npm-debug.log
 yarn-error.log
+out/
+.cache/
+video/
 
 # IDE / Editors
 .vscode/
 .idea/
 .cursor/
 .qodo/
+.gemini/
 
 # OS
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Temporary / Backup
+# Temporary / Test / Backup
 *.bak
 *.swp
 *.tmp
+test.txt
+**/result_test/
 
 # Script cá nhân & Công cụ hỗ trợ
 tools/
@@ -55,3 +63,7 @@ firebase-service-account.json
 backend/firebase-service-account.json
 backend/app/firebase-service-account.json
 frontend/js/firebaseConfig.js
+
+# Tính năng ẩn (Dark Mode) - loại bỏ khi đưa lên GitHub
+frontend/js/darkmode.js
+

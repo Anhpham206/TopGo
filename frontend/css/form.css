@@ -1038,3 +1038,216 @@
   color: var(--p1);
   background: rgba(0, 169, 255, 0.08);
 }
+
+/* ========== DARK MODE OVERRIDES ========== */
+body.dark .hero {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(7, 10, 19, 0.9) 0%,
+      rgba(15, 22, 38, 0.8) 45%,
+      rgba(13, 18, 34, 0.7) 100%
+    ),
+    url("../assets/img/hero-bg.jpg") center/cover no-repeat;
+  -webkit-mask-image: radial-gradient(
+    60% 70px at 50% 100%,
+    transparent 99.5%,
+    black 100%
+  );
+  mask-image: radial-gradient(
+    60% 70px at 50% 100%,
+    transparent 99.5%,
+    black 100%
+  );
+}
+body.dark .hero h1 em {
+  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #00b4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+body.dark .ticket-card {
+  background: rgba(22, 32, 51, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+body.dark .ticket-bar {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 32, 67, 0.95) 0%,
+    rgba(10, 18, 38, 0.95) 100%
+  );
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+body.dark .ticket-stripe {
+  background:
+    linear-gradient(
+      -45deg,
+      #132847 0%,
+      #132847 35%,
+      transparent 35%,
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(56, 189, 248, 0.25) 0px,
+      rgba(56, 189, 248, 0.25) 12px,
+      rgba(22, 32, 51, 0.8) 12px,
+      rgba(22, 32, 51, 0.8) 28px
+    );
+}
+body.dark .ft-city-display {
+  color: var(--p1);
+}
+body.dark .ft-dashed {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.08) 0px,
+    rgba(255, 255, 255, 0.08) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+}
+body.dark .text-input,
+body.dark .dd-trigger,
+body.dark .places-box,
+body.dark .stub-date,
+body.dark .budget-input,
+body.dark .notes-area {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+body.dark .text-input:focus,
+body.dark .dd-trigger:focus-within,
+body.dark .places-box:focus-within,
+body.dark .stub-date:focus,
+body.dark .budget-input:focus,
+body.dark .notes-area:focus {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--p1);
+  box-shadow: 0 0 0 3px rgba(0, 180, 255, 0.15);
+}
+body.dark .text-input::placeholder,
+body.dark .dd-search::placeholder,
+body.dark .places-search::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+body.dark .dd-list {
+  background: rgba(19, 28, 46, 0.95);
+  backdrop-filter: blur(20px);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+body.dark .dd-item {
+  border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+body.dark .dd-item:hover,
+body.dark .dd-item.hovered {
+  background: rgba(255, 255, 255, 0.04);
+}
+body.dark .dd-item.sel {
+  background: rgba(0, 180, 255, 0.15);
+  color: var(--p1);
+}
+body.dark .dd-section-label {
+  background: rgba(13, 22, 38, 0.98);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+  color: var(--p2);
+}
+body.dark .tag {
+  background: rgba(0, 180, 255, 0.12);
+  color: var(--p1);
+}
+body.dark .tag-rm {
+  color: var(--p1);
+}
+body.dark .di-tag {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--p2);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+body.dark .ticket-perf::before {
+  border-left-color: rgba(255, 255, 255, 0.08);
+}
+body.dark .perf-notch-top,
+body.dark .perf-notch-bot {
+  background: #070a13;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+body.dark .ticket-stub {
+  background: rgba(255, 255, 255, 0.01);
+}
+body.dark .stepper {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+body.dark .step-btn {
+  color: var(--p1);
+}
+body.dark .step-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+body.dark .step-btn:disabled {
+  color: rgba(255, 255, 255, 0.1);
+}
+body.dark .step-val {
+  color: var(--text);
+}
+body.dark .b-chip,
+body.dark .p-chip {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+}
+body.dark .b-chip:hover,
+body.dark .b-chip.on {
+  border-color: var(--p1);
+  color: var(--p1);
+  background: rgba(0, 180, 255, 0.12);
+}
+body.dark .p-chip:hover {
+  border-color: var(--p2);
+  color: var(--p2);
+}
+body.dark .p-chip.on {
+  border-color: var(--p1);
+  color: var(--p1);
+  background: rgba(0, 180, 255, 0.12);
+}
+body.dark .ticket-bottom {
+  background: rgba(255, 255, 255, 0.02);
+  border-top-color: rgba(255, 255, 255, 0.04);
+}
+body.dark .section-head::after {
+  background: rgba(255, 255, 255, 0.05);
+}
+body.dark .ticket-actions {
+  border-top-color: rgba(255, 255, 255, 0.04);
+}
+body.dark .btn-reset {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+body.dark .btn-reset:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+body.dark .transport-hint.ok {
+  background: rgba(46, 125, 100, 0.12);
+  color: #34d399;
+}
+body.dark .transport-hint.warn {
+  background: rgba(180, 83, 9, 0.12);
+  color: #fbbf24;
+}
+body.dark .transport-hint.error {
+  background: rgba(214, 41, 41, 0.12);
+  color: #f87171;
+}
+body.dark .transport-hint.info {
+  background: rgba(0, 180, 255, 0.12);
+  color: #38bdf8;
+}

@@ -24,14 +24,14 @@ const chatMessages = document.getElementById('chatbot-messages');
 function renderMarkdown(text) {
     return text
         // Code inline `code`
-        .replace(/`([^`]+)`/g, '<code style="background:rgba(0,0,0,.08);padding:1px 5px;border-radius:4px;font-size:.92em">$1</code>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
         // **bold**
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
         // *italic*
         .replace(/\*(.+?)\*/g, '<em>$1</em>')
         // Bullet list: dòng bắt đầu bằng "- "
         .replace(/^- (.+)$/gm, '<li>$1</li>')
-        .replace(/(<li>[\s\S]*?<\/li>)/g, '<ul style="margin:6px 0 6px 18px;padding:0">$1</ul>')
+        .replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>')
         // Numbered list: "1. text"
         .replace(/^\d+\.\s(.+)$/gm, '<li>$1</li>')
         // Xuống dòng
@@ -207,7 +207,7 @@ function renderItineraryCard(data) {
     data.days.forEach(day=>{
         html+=`<div style="margin-bottom:24px;border-bottom:1px dashed var(--border-light);padding-bottom:12px"><div style="font-weight:800;font-size:16px;color:var(--p1);margin-bottom:10px">📅 Ngày ${day.day}: ${day.name}</div>`;
         day.stops.forEach(stop=>{
-            html+=`<div style="display:flex;gap:12px;margin-bottom:12px;background:rgba(255,255,255,.5);border-radius:var(--r);padding:10px"><div style="min-width:50px;font-weight:700;color:var(--p1)">${stop.time}</div><div style="font-size:20px;min-width:32px">${stop.icon}</div><div style="flex:1"><div style="font-weight:700">${stop.name}</div><div style="font-size:13px;color:var(--muted)">${stop.desc}</div>${stop.details?`<div style="font-size:12px;color:var(--text);margin-top:4px">📌 ${stop.details}</div>`:''}</div></div>`;
+            html+=`<div class="itinerary-stop"><div class="itinerary-time">${stop.time}</div><div class="itinerary-icon">${stop.icon}</div><div class="itinerary-body"><div class="itinerary-name">${stop.name}</div><div class="itinerary-desc">${stop.desc}</div>${stop.details?`<div class="itinerary-details">📌 ${stop.details}</div>`:''}</div></div>`;
         });
         html+=`</div>`;
     });

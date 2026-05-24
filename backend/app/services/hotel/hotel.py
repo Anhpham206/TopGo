@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Sử dụng Key SerpAPI từ file .env
-SERPAPI_KEY = os.environ.get("SERP_API_KEY")
+SERPAPI_KEY = os.environ.get("SERPAPI_KEY") or os.environ.get("SER_API_KEY")
 
 # Đường dẫn thư mục log
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -137,6 +137,7 @@ def quy_doi_gia_ve_vnd(extracted_price, price_str):
     
     return 0  # Không quy đổi được → coi như ẩn giá
 
+
 def tinh_khoang_cach(lat1, lon1, lat2, lon2):
     """Tính khoảng cách đường chim bay bằng Haversine"""
     R = 6371.0
@@ -198,7 +199,7 @@ def cham_diem_khach_san(danh_sach_ks, w=None):
             (w_kc * norm_kc) + (w_gia * norm_gia)
 
     # Sắp xếp giảm dần theo điểm tổng
-    danh_sach_ks.sort(key=lambda x: x["diem_tong"], reverse=True)  # [cite: 20]
+    danh_sach_ks.sort(key=lambda x: x["diem_tong"], reverse=True)
     return danh_sach_ks
 
 
@@ -248,14 +249,13 @@ def lay_tags_tu_reviews(reviews_link):
 def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach, loai_hinh_luu_tru="Khách sạn", w=None):
     """
     Hàm quét API Google Maps và lọc dữ liệu thô theo loại hình lưu trú.
-
+    
     Args:
         tam_lat, tam_lng: Tọa độ trung vị (median) từ routing
         ngan_sach: Ngân sách lưu trú
         loai_hinh_luu_tru: Loại hình lưu trú từ Frontend (VD: "Khách sạn", "Resort"...)
         w: Mảng trọng số [w1, w2, w3, w4] từ AI 1
     """
-
     # 1. Xử lý loại hình lưu trú (Fallback về Hotel nếu không hợp lệ)
     search_query = ACCOMMODATION_TYPES.get(loai_hinh_luu_tru, "Hotel")
 
@@ -268,11 +268,11 @@ def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach, loai_hinh_luu_tru
         "gl": "vn",
         "google_domain": "google.com.vn",
         "api_key": SERPAPI_KEY
-    }  # [cite: 20]
+    }
 
     try:
         res = requests.get(url, params=params)
-        data_ks = res.json()  # [cite: 20]
+        data_ks = res.json()
 
         # Log toàn bộ dữ liệu trả về từ SerpApi ra file để dễ quan sát cấu trúc
         os.makedirs(RESULT_DIR, exist_ok=True)
@@ -288,10 +288,10 @@ def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach, loai_hinh_luu_tru
 
     danh_sach_hop_le = []
     for ks in ks_tho:
-        ten = ks.get("title", "Không tên") #[cite: 20]
-        lat = ks.get("gps_coordinates", {}).get("latitude") #[cite: 20]
-        lng = ks.get("gps_coordinates", {}).get("longitude") #[cite: 20]
-        rating = ks.get("rating", 3.0) #[cite: 20]
+        ten = ks.get("title", "Không tên")
+        lat = ks.get("gps_coordinates", {}).get("latitude")
+        lng = ks.get("gps_coordinates", {}).get("longitude")
+        rating = ks.get("rating", 3.0)
         
         # Quy đổi giá về VNĐ (xử lý vấn đề SerpAPI bot IP trả sai đơn vị tiền)
         gia_goc = ks.get("extracted_price", 0)
@@ -301,10 +301,9 @@ def quet_khach_san_quanh_trung_vi(tam_lat, tam_lng, ngan_sach, loai_hinh_luu_tru
         if not lat:
             continue
         if gia_tien > 0 and gia_tien > ngan_sach:
-            continue  # [cite: 20]
+            continue
 
-        khoang_cach = tinh_khoang_cach(
-            tam_lat, tam_lng, lat, lng)  # [cite: 20]
+        khoang_cach = tinh_khoang_cach(tam_lat, tam_lng, lat, lng)
 
         # 2. Trích xuất các trường dữ liệu quan trọng
         website = ks.get("website", "")
@@ -368,11 +367,11 @@ if __name__ == "__main__":
     ket_qua_json = quet_khach_san_quanh_trung_vi(
         test_lat, test_lng, test_ngan_sach, loai_hinh_test, test_w
     )
-
+    
     # Ghi ra file để dễ đọc (tránh lỗi font tiếng Việt trên terminal Windows)
     os.makedirs(RESULT_DIR, exist_ok=True)
     test_result_path = os.path.join(RESULT_DIR, "ket_qua_xu_ly.json")
     with open(test_result_path, "w", encoding="utf-8") as f:
         json.dump(ket_qua_json, f, indent=4, ensure_ascii=False)
-
+        
     print(f"--- DA CHAY XONG! Kiem tra file tai: {test_result_path} ---")

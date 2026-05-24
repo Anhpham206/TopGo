@@ -51,6 +51,26 @@
   --glow: 0 0 15px rgba(0, 169, 255, 0.3);
 }
 
+/* ── Dark Mode Variable Overrides ── */
+body.dark {
+  --bg: #070a13;
+  --bg2: #0f1626;
+  --white: #131c2e;
+  --stub: #0a0f1d;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.04);
+  --text: #e2effa;
+  --muted: #8ca3b8;
+  --sh: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --sh-m: 0 10px 35px rgba(0, 0, 0, 0.45);
+  --sh-l: 0 20px 60px rgba(0, 0, 0, 0.55);
+  --glow: 0 0 15px rgba(0, 169, 255, 0.25);
+  --p1: #00b4ff;
+  --p2: #38bdf8;
+  --a1: #0ea5e9;
+  --a2: rgba(56, 189, 248, 0.15);
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -66,6 +86,9 @@ body {
   overflow-x: hidden;
   opacity: 0; /* Hide initially to prevent FOUC */
   transition: opacity 0.4s ease;
+}
+body.dark {
+  background: linear-gradient(135deg, #070a13 0%, #0d1222 100%);
 }
 body.app-ready {
   opacity: 1; /* Fade in when JS loads components */
@@ -117,6 +140,9 @@ body::before {
   left: -10%;
   animation: floatGlobal1 20s infinite alternate ease-in-out;
 }
+body.dark::before {
+  background: rgba(0, 169, 255, 0.04);
+}
 
 body::after {
   width: 45vw;
@@ -127,6 +153,9 @@ body::after {
   bottom: -10%;
   right: -5%;
   animation: floatGlobal2 25s infinite alternate ease-in-out;
+}
+body.dark::after {
+  background: rgba(56, 189, 248, 0.08);
 }
 
 @keyframes floatGlobal1 {
@@ -158,6 +187,13 @@ body::after {
     0 8px 32px rgba(0, 169, 255, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
+body.dark .glass-card {
+  background: rgba(22, 32, 51, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
 
 /* Glass button style (applies to all buttons) */
 .glass-btn {
@@ -173,10 +209,18 @@ body::after {
   color: var(--text);
   letter-spacing: 0.3px;
 }
+body.dark .glass-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
 .glass-btn:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+body.dark .glass-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 .glass-btn-primary {
   background: linear-gradient(90deg, var(--p1), var(--p2));

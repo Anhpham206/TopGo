@@ -3,12 +3,21 @@
   FILE: shared.js
   CHỨC NĂNG: 
   - Quản lý các tiện ích UI dùng chung toàn hệ thống (hiển thị Toast thông báo, bật/tắt Popup).
-  - Tự động nạp và khởi tạo các thành phần giao diện dùng chung (Header, Footer) từ thư mục \`components/\`.
+  - Tự động nạp và khởi tạo các thành phần giao diện dùng chung (Header, Footer) từ thư mục `components/`.
   - Thiết lập Event Delegation cấp cao nhất trên body/container để xử lý đóng Popup, chuyển hướng banner quảng cáo chung.
   - Tệp này được import ở hầu hết các entry points để đảm bảo các yếu tố UI cơ bản luôn hoạt động.
   ========================================================================
 */
 import { fetchHtmlFragment } from './fragmentLoader.js';
+
+// ── Immediate Dark Mode Application to prevent FOUC ───────────────────
+try {
+    import('./darkmode.js').catch(() => {
+        // Silently catch error if darkmode.js is missing or ignored by git
+    });
+} catch (e) {
+    // Safe fallback
+}
 
 // ── Shared UI utilities ───────────────────────────────────────
 
@@ -117,6 +126,55 @@ function _updateHeaderUser() {
 // Lắng nghe sự kiện thay đổi trạng thái xác thực để đồng bộ Header lập tức
 window.addEventListener('topgo-auth-change', _updateHeaderUser);
 
+
+// ── Initialize Mobile Toggle Dropdown ──────────────────────────
+function _initMobileToggle(headerEl) {
+    const toggleBtn = document.getElementById('header-mobile-toggle');
+    const dropdownMenu = document.getElementById('header-dropdown-menu');
+    if (!toggleBtn || !dropdownMenu) return;
+
+    const header = document.querySelector('.header');
+
+    // Click handler to toggle open class
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = toggleBtn.classList.toggle('open');
+        toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        dropdownMenu.classList.toggle('open', isOpen);
+        if (header) {
+            header.classList.toggle('dropdown-active', isOpen);
+        }
+    });
+
+    // Close when clicking a link
+    dropdownMenu.querySelectorAll('.mobile-nav-a').forEach(link => {
+        link.addEventListener('click', () => {
+            toggleBtn.classList.remove('open');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            dropdownMenu.classList.remove('open');
+            if (header) {
+                header.classList.remove('dropdown-active');
+            }
+        });
+    });
+
+    // Close when clicking outside header
+    document.addEventListener('click', (e) => {
+        if (toggleBtn.classList.contains('open')) {
+            const clickedInsideHeader = headerEl.contains(e.target) || dropdownMenu.contains(e.target);
+            if (!clickedInsideHeader) {
+                toggleBtn.classList.remove('open');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                dropdownMenu.classList.remove('open');
+                if (header) {
+                    header.classList.remove('dropdown-active');
+                }
+            }
+        }
+    });
+}
+
+
 // ── Load shared HTML components ───────────────────────────────
 
 export async function loadSharedComponents() {
@@ -132,15 +190,40 @@ export async function loadSharedComponents() {
             headerEl.innerHTML = headerFrag.text;
             // Active nav detection
             let activeId = 'nav-planner';
-            if (currentPage === 'chatbot.html') activeId = 'nav-chatbot';
-            else if (currentPage === 'index.html' || currentPage === '' || currentPage === '/') activeId = 'nav-home';
-            else if (currentPage === 'pricing.html') activeId = 'nav-pricing';
-            else if (currentPage === 'auth.html' || currentPage === 'profile.html') activeId = null;
+            let mobActiveId = 'mob-nav-planner';
+            if (currentPage === 'chatbot.html') {
+                activeId = 'nav-chatbot';
+                mobActiveId = 'mob-nav-chatbot';
+            } else if (currentPage === 'index.html' || currentPage === '' || currentPage === '/') {
+                activeId = 'nav-home';
+                mobActiveId = 'mob-nav-home';
+            } else if (currentPage === 'pricing.html') {
+                activeId = 'nav-pricing';
+                mobActiveId = 'mob-nav-pricing';
+            } else if (currentPage === 'auth.html' || currentPage === 'profile.html') {
+                activeId = null;
+                mobActiveId = null;
+            }
             if (activeId) document.getElementById(activeId)?.classList.add('active');
+            if (mobActiveId) document.getElementById(mobActiveId)?.classList.add('active');
 
             // User state in header
             _updateHeaderUser();
+
+            // Initialize Dark Mode Toggle if the module exists
+            try {
+                const dm = await import('./darkmode.js');
+                if (dm && typeof dm.initThemeToggle === 'function') {
+                    dm.initThemeToggle();
+                }
+            } catch (err) {
+                // Silently catch error if darkmode.js is missing or fails to load
+            }
+
+            // Initialize Mobile Toggle Dropdown
+            _initMobileToggle(headerEl);
         }
+
 
         const sharedEl = document.getElementById('site-shared');
         if (sharedEl) {
