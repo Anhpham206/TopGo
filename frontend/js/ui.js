@@ -381,6 +381,10 @@ export function renderItinerary(data) {
 
     if (!container) return;
 
+    if (data && data.output) {
+        window._lastItineraryData = data;
+    }
+
     // Nếu chưa có dữ liệu hợp lệ
     if (!data || !data.output) {
         if (typeof MOCK_ITINERARY_HTML !== 'undefined') {
@@ -417,7 +421,24 @@ export function renderItinerary(data) {
     if (paxEl) paxEl.innerHTML = `<strong>${ttc.So_nguoi || (p ? p.pax + ' người' : 'N/A')}</strong>`;
 
     const be = document.getElementById('res-budget');
-    if (be) be.innerHTML = `<strong>~${ttc.Tong_ngan_sach || (p ? new Intl.NumberFormat('vi-VN').format(p.budget) + ' ₫' : 'N/A')}</strong>`;
+    // Parse budget robustly to handle numbers, raw strings like "10.000.000 VNĐ", or input payloads
+    let totalBudget = NaN;
+    if (ttc.Tong_ngan_sach) {
+        const rawBudget = ttc.Tong_ngan_sach;
+        const cleanBudget = typeof rawBudget === 'string' ? rawBudget.replace(/\D/g, '') : rawBudget;
+        totalBudget = parseFloat(cleanBudget);
+    }
+    if (isNaN(totalBudget) && p && p.budget) {
+        totalBudget = parseFloat(p.budget);
+    }
+
+    if (be) {
+        if (!isNaN(totalBudget) && totalBudget > 0) {
+            be.innerHTML = `<strong>~${new Intl.NumberFormat('vi-VN').format(totalBudget)} ₫</strong>`;
+        } else {
+            be.innerHTML = `<strong>~${ttc.Tong_ngan_sach || (p ? new Intl.NumberFormat('vi-VN').format(p.budget) + ' ₫' : 'N/A')}</strong>`;
+        }
+    }
 
     const departureEl = document.getElementById('res-departure');
     if (departureEl) {
@@ -450,7 +471,13 @@ export function renderItinerary(data) {
     }
 
     const tb = document.getElementById('res-total-budget');
-    if (tb) tb.textContent = ttc.Tong_ngan_sach || '';
+    if (tb) {
+        if (!isNaN(totalBudget) && totalBudget > 0) {
+            tb.textContent = new Intl.NumberFormat('vi-VN').format(totalBudget) + ' ₫';
+        } else {
+            tb.textContent = ttc.Tong_ngan_sach || 'N/A';
+        }
+    }
 
     const pc = document.getElementById('res-places-count');
     if (pc) pc.textContent = ttc.total_places || '';
@@ -463,8 +490,7 @@ export function renderItinerary(data) {
 
     const bpp = document.getElementById('res-budget-pp');
     if (bpp) {
-        const totalBudget = parseFloat(ttc.Tong_ngan_sach);
-        const paxCount = parseInt(ttc.So_nguoi);
+        const paxCount = parseInt(ttc.So_nguoi) || (p ? parseInt(p.pax) : 1);
         if (!isNaN(totalBudget) && paxCount > 0) {
             bpp.textContent = '~' + new Intl.NumberFormat('vi-VN').format(Math.round(totalBudget / paxCount)) + ' ₫';
         } else {
@@ -747,7 +773,39 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
 
     // Result screen buttons
     document.getElementById('btn-edit-req')?.addEventListener('click', () => showScreen('form'));
-    document.getElementById('btn-save-plan')?.addEventListener('click', () => showPopup('popup-login'));
+    document.getElementById('btn-save-plan')?.addEventListener('click', async () => {
+        if (!window._lastItineraryData) {
+            showToast('Không tìm thấy dữ liệu lịch trình để lưu', 'error');
+            return;
+        }
+
+        const trip = {
+            destination: state.selectedCity?.name || window._lastPayload?.city_name || 'Chuyến đi',
+            days: getTripDays(),
+            pax: parseInt(document.getElementById('pax-val')?.value) || window._lastPayload?.pax || 1,
+            budget: getRawBudget() || window._lastPayload?.budget || 0,
+            dateStart: document.getElementById('date-start')?.value || window._lastPayload?.date_start || '',
+            dateEnd: document.getElementById('date-end')?.value || window._lastPayload?.date_end || '',
+            itinerary: {
+                ...window._lastItineraryData,
+                payload: window._lastPayload
+            }
+        };
+
+        if (window.TopGoAuth && window.TopGoAuth.isLoggedIn()) {
+            showToast('Đang lưu lịch trình...', 'warning');
+            try {
+                await window.TopGoAuth.saveTrip(trip);
+                showToast('Đã lưu lịch trình thành công!', 'success');
+            } catch (err) {
+                showToast('Lưu lịch trình thất bại: ' + err.message, 'error');
+            }
+        } else {
+            // Chưa đăng nhập, lưu vào pending và hiển thị popup yêu cầu đăng nhập
+            window._pendingSaveTrip = trip;
+            showPopup('popup-login');
+        }
+    });
     document.getElementById('btn-back-to-form')?.addEventListener('click', () => showScreen('form'));
     document.getElementById('btn-continue-error')?.addEventListener('click', onContinueFromError);
     document.getElementById('btn-close-map')?.addEventListener('click', () => closePopup('popup-map'));

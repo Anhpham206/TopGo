@@ -2,17 +2,103 @@
   ========================================================================
   FILE: auth.js
   CHỨC NĂNG:
-  - Quản lý auth flow giả lập bằng localStorage.
-  - Xử lý login/register form, profile page, edit profile, saved trips.
-  - Sẵn sàng tích hợp BE: tất cả logic qua AuthService object.
+  - Quản lý auth flow bằng Firebase Authentication (Google Sign-In & Email/Password).
+  - Tự động đồng bộ trạng thái đăng nhập với backend và localStorage.
+  - Quản lý lưu trữ/tải danh sách/xóa lịch trình thông qua các API FastAPI backend được bảo vệ.
+  - Hỗ trợ xem lại lịch trình cũ qua localStorage chuyển tiếp.
   ========================================================================
 */
 import { loadSharedComponents } from './shared.js';
+import { firebaseConfig } from './firebaseConfig.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// ── Auth Service (localStorage mock — thay bằng API calls khi có BE) ──
+// Khởi tạo Firebase Web SDK
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+
+const _isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
+
+let authInitialized = false;
+let authUser = null;
+
+// Lắng nghe trạng thái đăng nhập từ Firebase để đồng bộ với UI thông qua localStorage
+onAuthStateChanged(auth, (user) => {
+  authUser = user;
+  authInitialized = true;
+  if (user) {
+    const nameParts = (user.displayName || '').split(' ');
+    const firstname = nameParts.pop() || '';
+    const lastname = nameParts.join(' ') || '';
+    const cachedUser = {
+      uid: user.uid,
+      email: user.email,
+      firstname: firstname || user.email.split('@')[0],
+      lastname: lastname,
+      photoURL: user.photoURL || null,
+      nationality: 'Việt Nam',
+      sex: '',
+      dob: '',
+      pob: '',
+      createdAt: new Date().toISOString().split('T')[0],
+      id: user.uid.slice(0, 8),
+    };
+    
+    // Giữ nguyên các trường profile bổ sung nếu có trong cache trước đó
+    const existing = localStorage.getItem('topgo_user');
+    if (existing) {
+      try {
+        const parsed = JSON.parse(existing);
+        if (parsed.uid === user.uid) {
+          Object.assign(cachedUser, parsed);
+        }
+      } catch (e) {}
+    }
+    localStorage.setItem('topgo_user', JSON.stringify(cachedUser));
+
+    // Đồng bộ thông tin hồ sơ từ Firestore backend
+    user.getIdToken().then(token => {
+      fetch(`${API_BASE}/api/users/profile`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then(dbProfile => {
+        if (dbProfile && (dbProfile.firstname || dbProfile.lastname || dbProfile.nationality || dbProfile.sex || dbProfile.dob || dbProfile.pob)) {
+          // Ghi nhận các trường thay đổi từ database
+          const updatedUser = { ...cachedUser, ...dbProfile };
+          localStorage.setItem('topgo_user', JSON.stringify(updatedUser));
+          window.dispatchEvent(new Event('topgo-auth-change'));
+        }
+      })
+      .catch(err => {
+        console.warn("Chưa có cấu hình profile hoặc lỗi kết nối:", err);
+      });
+    });
+  } else {
+    localStorage.removeItem('topgo_user');
+  }
+  window.dispatchEvent(new Event('topgo-auth-change'));
+});
+
+// Chờ Firebase Auth kiểm tra trạng thái đăng nhập
+function waitForAuth() {
+  if (authInitialized) return Promise.resolve(authUser);
+  return new Promise((resolve) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      resolve(user);
+      unsubscribe();
+    });
+  });
+}
+
+// ── Auth Service (Đồng bộ qua Firebase & Backend API) ──
 const AuthService = {
   USER_KEY: 'topgo_user',
-  TRIPS_KEY: 'topgo_saved_trips',
 
   getUser() {
     try { return JSON.parse(localStorage.getItem(this.USER_KEY)); } catch { return null; }
@@ -21,69 +107,166 @@ const AuthService = {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     window.dispatchEvent(new Event('topgo-auth-change'));
   },
-  logout() {
+  async logout() {
+    await signOut(auth);
     localStorage.removeItem(this.USER_KEY);
     window.dispatchEvent(new Event('topgo-auth-change'));
   },
   isLoggedIn() { return !!this.getUser(); },
 
-  // Register mock
-  register({ firstname, lastname, email, password }) {
+  // Email Register
+  async register({ firstname, lastname, email, password }) {
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    const displayName = `${lastname} ${firstname}`.trim();
+    await updateProfile(result.user, { displayName });
     const user = {
-      id: 'TG-' + String(Date.now()).slice(-6),
-      firstname, lastname, email,
-      nationality: 'Việt Nam', sex: '', dob: '', pob: '',
+      uid: result.user.uid,
+      email: result.user.email,
+      firstname,
+      lastname,
+      photoURL: null,
+      nationality: 'Việt Nam',
+      sex: '',
+      dob: '',
+      pob: '',
       createdAt: new Date().toISOString().split('T')[0],
-      avatar: null,
+      id: result.user.uid.slice(0, 8),
     };
     this.setUser(user);
     return user;
   },
 
-  // Login mock
-  login({ email, password }) {
-    const existing = this.getUser();
-    if (existing && existing.email === email) return existing;
-    // Giả lập: tạo user mới nếu chưa có
-    return this.register({ firstname: 'Traveler', lastname: 'TopGo', email, password });
+  // Email Login
+  async login({ email, password }) {
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    return result.user;
   },
 
-  updateProfile(updates) {
+  // Google Login
+  async loginWithGoogle() {
+    const result = await signInWithPopup(auth, googleProvider);
+    return result.user;
+  },
+
+  async updateProfile(updates) {
     const user = this.getUser();
     if (!user) return null;
     Object.assign(user, updates);
     this.setUser(user);
+
+    // Lưu trữ thông tin hồ sơ lên Firestore của backend
+    const firebaseUser = await waitForAuth();
+    if (firebaseUser) {
+      try {
+        const token = await firebaseUser.getIdToken();
+        const res = await fetch(`${API_BASE}/api/users/profile`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(updates)
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      } catch (err) {
+        console.error("Lỗi khi đồng bộ profile lên server:", err);
+      }
+    }
+    
+    window.dispatchEvent(new Event('topgo-auth-change'));
     return user;
   },
 
-  // Saved Trips
-  getTrips() {
-    try { return JSON.parse(localStorage.getItem(this.TRIPS_KEY)) || []; } catch { return []; }
+
+  // Saved Trips từ Backend FastAPI + Firestore
+  async getTrips() {
+    const user = await waitForAuth();
+    if (!user) return [];
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(`${API_BASE}/api/plans/list`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    } catch (error) {
+      console.error("Lỗi khi tải danh sách lịch trình:", error);
+      return [];
+    }
   },
-  saveTrip(trip) {
-    const trips = this.getTrips();
-    trip.id = trip.id || 'trip-' + Date.now();
-    trip.savedAt = new Date().toISOString();
-    trips.unshift(trip);
-    localStorage.setItem(this.TRIPS_KEY, JSON.stringify(trips));
-    return trip;
+
+  async saveTrip(trip) {
+    const user = await waitForAuth();
+    if (!user) throw new Error("Bạn cần đăng nhập để thực hiện chức năng này.");
+    try {
+      const token = await user.getIdToken();
+      
+      let itineraryStr = null;
+      if (trip.itinerary) {
+        itineraryStr = typeof trip.itinerary === 'string' ? trip.itinerary : JSON.stringify(trip.itinerary);
+      }
+
+      const payload = {
+        id: trip.id || null,
+        destination: trip.destination || 'Chuyến đi',
+        days: parseInt(trip.days) || 1,
+        pax: parseInt(trip.pax) || 1,
+        budget: parseFloat(trip.budget) || 0.0,
+        dateStart: trip.dateStart || '',
+        dateEnd: trip.dateEnd || '',
+        itinerary: itineraryStr
+      };
+      const res = await fetch(`${API_BASE}/api/plans/save`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(errText || `HTTP ${res.status}`);
+      }
+      return await res.json();
+    } catch (error) {
+      console.error("Lỗi khi lưu lịch trình:", error);
+      throw error;
+    }
   },
-  deleteTrip(id) {
-    const trips = this.getTrips().filter(t => t.id !== id);
-    localStorage.setItem(this.TRIPS_KEY, JSON.stringify(trips));
+
+  async deleteTrip(id) {
+    const user = await waitForAuth();
+    if (!user) throw new Error("Chưa đăng nhập");
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(`${API_BASE}/api/plans/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    } catch (error) {
+      console.error("Lỗi khi xóa lịch trình:", error);
+      throw error;
+    }
   }
 };
 
-// Make available globally for other pages
+// Đưa ra phạm vi global để dùng chung giữa các trang
 window.TopGoAuth = AuthService;
 
-// ── Page Detection ──
+// ── Nhận diện trang hiện tại ──
 const currentPage = window.location.pathname.split('/').pop() || '';
 
-// ── Auth Page Logic ──
+// ── Logic trang xác thực (auth.html) ──
 if (currentPage === 'auth.html') {
   document.addEventListener('DOMContentLoaded', () => {
-    // Redirect if already logged in
+    // Chuyển hướng nếu đã đăng nhập
     if (AuthService.isLoggedIn()) {
       window.location.href = './profile.html';
       return;
@@ -92,7 +275,7 @@ if (currentPage === 'auth.html') {
     const loginForm = document.getElementById('form-login');
     const registerForm = document.getElementById('form-register');
 
-    // Toggle forms
+    // Chuyển đổi qua lại giữa form Đăng nhập / Đăng ký
     document.getElementById('switch-to-register')?.addEventListener('click', () => {
       loginForm.classList.add('hidden');
       registerForm.classList.remove('hidden');
@@ -102,7 +285,7 @@ if (currentPage === 'auth.html') {
       loginForm.classList.remove('hidden');
     });
 
-    // Password toggles
+    // Ẩn/hiện mật khẩu
     document.querySelectorAll('.pass-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
         const input = btn.parentElement.querySelector('.auth-input');
@@ -110,30 +293,62 @@ if (currentPage === 'auth.html') {
       });
     });
 
-    // Validation helpers
+    // Trợ lý thông báo lỗi
     const showErr = id => document.getElementById(id)?.classList.add('show');
     const hideErr = id => document.getElementById(id)?.classList.remove('show');
     const isEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
-    // Login
-    document.getElementById('btn-login')?.addEventListener('click', () => {
+    const getFriendlyErrorMessage = error => {
+      const msg = `${error?.code || ''} ${error?.message || ''}`.toLowerCase();
+      if (msg.includes('email-already-in-use')) {
+        return 'Email này đã được sử dụng bởi một tài khoản khác.';
+      }
+      if (msg.includes('invalid-credential') || msg.includes('wrong-password') || msg.includes('user-not-found')) {
+        return 'Email hoặc mật khẩu không chính xác.';
+      }
+      if (msg.includes('weak-password')) {
+        return 'Mật khẩu quá yếu (tối thiểu phải có 6 ký tự).';
+      }
+      if (msg.includes('invalid-email')) {
+        return 'Địa chỉ email không đúng định dạng.';
+      }
+      if (msg.includes('network-request-failed')) {
+        return 'Không thể kết nối Internet. Vui lòng kiểm tra lại mạng.';
+      }
+      return error?.message || 'Có lỗi xảy ra, vui lòng thử lại.';
+    };
+
+    const showGlobalError = (id, message) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = message;
+        el.classList.add('show');
+      }
+    };
+
+    // Đăng nhập Email
+    document.getElementById('btn-login')?.addEventListener('click', async () => {
       let valid = true;
       const email = document.getElementById('login-email').value.trim();
       const password = document.getElementById('login-password').value;
 
-      hideErr('err-login-email'); hideErr('err-login-password');
+      hideErr('err-login-email'); hideErr('err-login-password'); hideErr('err-login-global');
 
       if (!isEmail(email)) { showErr('err-login-email'); valid = false; }
       if (!password) { showErr('err-login-password'); valid = false; }
 
       if (valid) {
-        AuthService.login({ email, password });
-        window.location.href = './profile.html';
+        try {
+          await AuthService.login({ email, password });
+          window.location.href = './profile.html';
+        } catch (e) {
+          showGlobalError('err-login-global', getFriendlyErrorMessage(e));
+        }
       }
     });
 
-    // Register
-    document.getElementById('btn-register')?.addEventListener('click', () => {
+    // Đăng ký Email
+    document.getElementById('btn-register')?.addEventListener('click', async () => {
       let valid = true;
       const lastname = document.getElementById('reg-lastname').value.trim();
       const firstname = document.getElementById('reg-firstname').value.trim();
@@ -141,33 +356,51 @@ if (currentPage === 'auth.html') {
       const password = document.getElementById('reg-password').value;
       const confirm = document.getElementById('reg-confirm').value;
 
-      ['err-reg-lastname','err-reg-firstname','err-reg-email','err-reg-password','err-reg-confirm']
+      ['err-reg-lastname','err-reg-firstname','err-reg-email','err-reg-password','err-reg-confirm','err-register-global']
         .forEach(hideErr);
 
       if (!lastname) { showErr('err-reg-lastname'); valid = false; }
       if (!firstname) { showErr('err-reg-firstname'); valid = false; }
-      if (!isEmail(email)) { showErr('err-reg-email'); valid = false; }
+      if (!isEmail(email)) {
+        const emailErr = document.getElementById('err-reg-email');
+        if (emailErr) emailErr.textContent = 'Email không hợp lệ';
+        showErr('err-reg-email');
+        valid = false;
+      }
       if (password.length < 6) { showErr('err-reg-password'); valid = false; }
       if (password !== confirm) { showErr('err-reg-confirm'); valid = false; }
 
       if (valid) {
-        AuthService.register({ firstname, lastname, email, password });
-        window.location.href = './profile.html';
+        try {
+          await AuthService.register({ firstname, lastname, email, password });
+          window.location.href = './profile.html';
+        } catch (e) {
+          const msg = `${e?.code || ''} ${e?.message || ''}`.toLowerCase();
+          if (msg.includes('email-already-in-use')) {
+            const emailErr = document.getElementById('err-reg-email');
+            if (emailErr) {
+              emailErr.textContent = 'Email này đã được sử dụng bởi một tài khoản khác.';
+              showErr('err-reg-email');
+            }
+          } else {
+            showGlobalError('err-register-global', getFriendlyErrorMessage(e));
+          }
+        }
       }
     });
 
-    // Google mock
-    document.getElementById('btn-google')?.addEventListener('click', () => {
-      AuthService.register({
-        firstname: 'Traveler',
-        lastname: 'Google',
-        email: 'user@gmail.com',
-        password: ''
-      });
-      window.location.href = './profile.html';
+    // Đăng nhập Google thật
+    document.getElementById('btn-google')?.addEventListener('click', async () => {
+      hideErr('err-login-global');
+      try {
+        await AuthService.loginWithGoogle();
+        window.location.href = './profile.html';
+      } catch (e) {
+        showGlobalError('err-login-global', getFriendlyErrorMessage(e));
+      }
     });
 
-    // Enter key support
+    // Hỗ trợ phím Enter để submit nhanh
     document.querySelectorAll('.auth-input').forEach(input => {
       input.addEventListener('keypress', e => {
         if (e.key === 'Enter') {
@@ -180,55 +413,136 @@ if (currentPage === 'auth.html') {
   });
 }
 
-// ── Profile Page Logic ──
+// ── Logic trang Hồ sơ cá nhân (profile.html) ──
 if (currentPage === 'profile.html') {
-  document.addEventListener('DOMContentLoaded', () => {
-    // Redirect if not logged in
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Chuyển hướng nếu chưa đăng nhập
     if (!AuthService.isLoggedIn()) {
       window.location.href = './auth.html';
       return;
     }
 
-    const user = AuthService.getUser();
-
-    // Populate profile
     const setText = (id, val) => {
       const el = document.getElementById(id);
       if (el) el.textContent = val || '—';
     };
-    setText('pp-fullname', `${user.lastname || ''} ${user.firstname || ''}`.trim());
-    setText('pp-nationality', user.nationality);
-    setText('pp-sex', user.sex);
-    setText('pp-dob', user.dob);
-    setText('pp-pob', user.pob);
-    setText('pp-email', user.email);
-    setText('pp-doi', user.createdAt);
-    setText('pp-passport-no', user.id);
 
-    // Trips count
-    const trips = AuthService.getTrips();
+    const updateProfileUI = () => {
+      const user = AuthService.getUser();
+      if (!user) return;
+      setText('pp-fullname', `${user.lastname || ''} ${user.firstname || ''}`.trim());
+      setText('pp-nationality', user.nationality);
+      setText('pp-sex', user.sex);
+      setText('pp-dob', user.dob);
+      setText('pp-pob', user.pob);
+      setText('pp-email', user.email);
+      setText('pp-doi', user.createdAt);
+      setText('pp-passport-no', user.id);
+
+      // Render ảnh đại diện nếu có
+      const photoEl = document.getElementById('pp-photo');
+      if (photoEl) {
+        if (user.photoURL) {
+          photoEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">`;
+        } else {
+          photoEl.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pp-photo-placeholder">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>`;
+        }
+      }
+
+      // Điền thông tin MRZ giả lập dạng hộ chiếu
+      const mrzEl = document.getElementById('pp-mrz');
+      if (mrzEl) {
+        const lastname = (user.lastname || 'TOPGO').toUpperCase().replace(/\s/g, '<');
+        const firstname = (user.firstname || 'TRAVELER').toUpperCase().replace(/\s/g, '<');
+        const line1 = `P<VNM<${lastname}<<${firstname}`.padEnd(44, '<').replace(/</g, '&lt;');
+        
+        const dobStr = (user.dob || '000000').replace(/-/g, '').slice(-6); // Định dạng YYMMDD
+        const sexStr = (user.sex === 'Nam' ? 'M' : (user.sex === 'Nữ' ? 'F' : '<'));
+        const idStr = (user.id || 'TG000000');
+        const line2 = `${idStr.padEnd(9, '<')}0VNM${dobStr.padEnd(6, '<')}0${sexStr}${'<'.repeat(7)}`.padEnd(44, '<').replace(/</g, '&lt;');
+        
+        mrzEl.innerHTML = `${line1}<br>${line2}`;
+      }
+    };
+
+    // Render giao diện ban đầu từ cache
+    updateProfileUI();
+
+    // Lắng nghe sự kiện để tự động làm mới giao diện khi tải xong profile từ server
+    window.addEventListener('topgo-auth-change', updateProfileUI);
+
+    // Xử lý chọn/chụp ảnh đại diện từ camera hoặc thư viện
+    const photoEditBtn = document.getElementById('pp-photo-edit');
+    const avatarInput = document.getElementById('pp-avatar-input');
+    
+    photoEditBtn?.addEventListener('click', () => {
+      avatarInput?.click();
+    });
+    
+    avatarInput?.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = async () => {
+          const canvas = document.createElement('canvas');
+          const max_size = 150; // Kích thước nén avatar hợp lý để lưu Firestore
+          let width = img.width;
+          let height = img.height;
+          
+          if (width > height) {
+            if (width > max_size) {
+              height *= max_size / width;
+              width = max_size;
+            }
+          } else {
+            if (height > max_size) {
+              width *= max_size / height;
+              height = max_size;
+            }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          const base64Str = canvas.toDataURL('image/jpeg', 0.85);
+          
+          try {
+            await AuthService.updateProfile({ photoURL: base64Str });
+            window.location.reload();
+          } catch (err) {
+            console.error("Lỗi cập nhật ảnh đại diện:", err);
+            alert("Không thể cập nhật ảnh đại diện: " + err.message);
+          }
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Tải danh sách lịch trình từ database
+    let trips = [];
+    try {
+      trips = await AuthService.getTrips();
+    } catch (e) {
+      console.warn("Không thể tải chuyến đi từ API, thử dùng demo.");
+    }
+
+    // Hiển thị số lượng
     setText('pp-trips', String(trips.length));
     setText('stamps-count', `${trips.length} chuyến`);
 
-    // Render saved trips
+    // Render danh sách chuyến đi ra giao diện
     renderTrips(trips);
 
-    // MRZ update
-    const mrzEl = document.getElementById('pp-mrz');
-    if (mrzEl) {
-      const lastname = (user.lastname || 'TOPGO').toUpperCase().replace(/\s/g, '<');
-      const firstname = (user.firstname || 'TRAVELER').toUpperCase().replace(/\s/g, '<');
-      const line1 = `P<VNM<${lastname}<<${firstname}`.padEnd(44, '<').replace(/</g, '&lt;');
-      
-      const dobStr = (user.dob || '000000').replace(/-/g, '').slice(-6); // usually YYMMDD
-      const sexStr = (user.sex === 'Nam' ? 'M' : (user.sex === 'Nữ' ? 'F' : '<'));
-      const idStr = (user.id || 'TG000000');
-      const line2 = `${idStr.padEnd(9, '<')}0VNM${dobStr.padEnd(6, '<')}0${sexStr}${'<'.repeat(7)}`.padEnd(44, '<').replace(/</g, '&lt;');
-      
-      mrzEl.innerHTML = `${line1}<br>${line2}`;
-    }
-
-    // View Toggle for Stamps
+    // Chuyển đổi hiển thị dạng lưới hoặc danh sách
     const toggleBtns = document.querySelectorAll('.view-btn');
     const stampsGrid = document.getElementById('stamps-grid');
     toggleBtns.forEach(btn => {
@@ -243,9 +557,10 @@ if (currentPage === 'profile.html') {
       });
     });
 
-    // Edit Profile
+    // Chỉnh sửa hồ sơ
     const overlay = document.getElementById('pp-edit-overlay');
     document.getElementById('btn-edit-profile')?.addEventListener('click', () => {
+      const user = AuthService.getUser() || {};
       document.getElementById('edit-lastname').value = user.lastname || '';
       document.getElementById('edit-firstname').value = user.firstname || '';
       document.getElementById('edit-dob').value = user.dob || '';
@@ -258,8 +573,8 @@ if (currentPage === 'profile.html') {
     document.getElementById('btn-edit-cancel')?.addEventListener('click', () => overlay.classList.add('hidden'));
     overlay?.addEventListener('click', e => { if (e.target === overlay) overlay.classList.add('hidden'); });
 
-    document.getElementById('btn-edit-save')?.addEventListener('click', () => {
-      const updated = AuthService.updateProfile({
+    document.getElementById('btn-edit-save')?.addEventListener('click', async () => {
+      const updated = await AuthService.updateProfile({
         lastname: document.getElementById('edit-lastname').value.trim(),
         firstname: document.getElementById('edit-firstname').value.trim(),
         dob: document.getElementById('edit-dob').value,
@@ -270,13 +585,13 @@ if (currentPage === 'profile.html') {
       if (updated) window.location.reload();
     });
 
-    // Logout
-    document.getElementById('btn-logout')?.addEventListener('click', () => {
-      AuthService.logout();
+    // Đăng xuất
+    document.getElementById('btn-logout')?.addEventListener('click', async () => {
+      await AuthService.logout();
       window.location.href = './auth.html';
     });
 
-    // Filter Event Listeners
+    // Lọc tìm kiếm chuyến đi
     const filterDest = document.getElementById('filter-dest');
     const filterDateFrom = document.getElementById('filter-date-from');
     const filterDateTo = document.getElementById('filter-date-to');
@@ -309,9 +624,9 @@ if (currentPage === 'profile.html') {
     filterDateTo?.addEventListener('change', applyFilters);
     filterBudget?.addEventListener('input', applyFilters);
 
-    // Seed demo trips if empty
+    // Tự động seed một vài chuyến đi mẫu nếu danh sách trống hoàn toàn để hỗ trợ test nhanh
     if (trips.length === 0) {
-      seedDemoTrips();
+      await seedDemoTrips();
       window.location.reload();
     }
   });
@@ -322,7 +637,7 @@ function renderTrips(trips) {
   const empty = document.getElementById('stamps-empty');
   if (!grid) return;
 
-  // Clear existing cards
+  // Xóa các card cũ ngoại trừ card rỗng
   grid.querySelectorAll('.stamp-card').forEach(card => card.remove());
 
   if (trips.length === 0) {
@@ -343,31 +658,55 @@ function renderTrips(trips) {
       </div>
       <div class="stamp-date">${trip.dateStart || ''} → ${trip.dateEnd || ''}</div>
       <div class="stamp-actions">
-        <button class="stamp-btn" onclick="window.location.href='./planner.html'">Xem lại</button>
+        <button class="stamp-btn" data-review="${trip.id}">Xem lại</button>
         <button class="stamp-btn danger" data-delete="${trip.id}">Xóa</button>
       </div>
     `;
     grid.appendChild(card);
   });
 
-  // Delete handlers
-  grid.querySelectorAll('[data-delete]').forEach(btn => {
+  // Gán sự kiện xem lại
+  grid.querySelectorAll('[data-review]').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
+      const id = btn.dataset.review;
+      const trip = trips.find(t => t.id === id);
+      if (trip) {
+        localStorage.setItem('topgo_review_plan', JSON.stringify(trip));
+        window.location.href = './planner.html';
+      }
+    });
+  });
+
+  // Gán sự kiện xóa
+  grid.querySelectorAll('[data-delete]').forEach(btn => {
+    btn.addEventListener('click', async e => {
+      e.stopPropagation();
       const id = btn.dataset.delete;
-      if (confirm('Xóa lịch trình này?')) {
-        AuthService.deleteTrip(id);
-        window.location.reload();
+      if (confirm('Bạn chắc chắn muốn xóa lịch trình này?')) {
+        try {
+          await AuthService.deleteTrip(id);
+          window.location.reload();
+        } catch (error) {
+          alert('Không thể xóa lịch trình: ' + error.message);
+        }
       }
     });
   });
 }
 
-function seedDemoTrips() {
+async function seedDemoTrips() {
   const demos = [
     { destination: 'Đà Nẵng', days: 3, pax: 2, budget: 5000000, dateStart: '2026-06-15', dateEnd: '2026-06-17' },
     { destination: 'Phú Quốc', days: 4, pax: 4, budget: 12000000, dateStart: '2026-07-01', dateEnd: '2026-07-04' },
     { destination: 'Sapa', days: 2, pax: 3, budget: 3000000, dateStart: '2026-08-10', dateEnd: '2026-08-11' },
   ];
-  demos.forEach(d => AuthService.saveTrip(d));
+  for (const d of demos) {
+    try {
+      await AuthService.saveTrip(d);
+    } catch (e) {
+      console.warn("Failed to seed demo trip:", e);
+    }
+  }
 }
+

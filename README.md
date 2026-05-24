@@ -115,4 +115,3 @@ Sau đó truy cập `http://localhost:3000` trên trình duyệt.
 2. **Lấy ma trận khoảng cách**: Gửi yêu cầu đến OSRM Table API
 3. **Gom nhóm theo ngày**: Thuật toán Nearest Neighbor, mỗi ngày 3 địa điểm, bắt đầu từ tọa độ tối ưu
 4. **Tìm đường đi**: OSRM Route API cho từng ngày (tọa độ tối ưu → điểm 1 → điểm 2 → điểm 3)
-

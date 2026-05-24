@@ -52,6 +52,38 @@ function initSharedEvents(container) {
             window.location.href = nav==='chatbot' ? './chatbot.html' : './planner.html';
         }
     });
+
+    // Google Sign-In inside popup-login
+    const popupLoginGoogleBtn = container.querySelector('#popup-login-google-btn');
+    if (popupLoginGoogleBtn) {
+        popupLoginGoogleBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            closePopup('popup-login');
+            try {
+                if (window.TopGoAuth) {
+                    await window.TopGoAuth.loginWithGoogle();
+                    showToast('Đăng nhập thành công!', 'success');
+                    
+                    // Tự động lưu lịch trình đang chờ sau khi đăng nhập thành công
+                    if (window._pendingSaveTrip) {
+                        showToast('Đang tự động lưu lịch trình...', 'warning');
+                        try {
+                            await window.TopGoAuth.saveTrip(window._pendingSaveTrip);
+                            delete window._pendingSaveTrip;
+                            showToast('Lịch trình đã được lưu vào hồ sơ cá nhân!', 'success');
+                        } catch (err) {
+                            showToast('Lưu lịch trình thất bại: ' + err.message, 'error');
+                        }
+                    }
+                } else {
+                    console.warn("AuthService (TopGoAuth) chưa được nạp");
+                }
+            } catch (err) {
+                console.error("Popup login error:", err);
+                showToast('Đăng nhập thất bại hoặc bị hủy', 'error');
+            }
+        });
+    }
 }
 
 // ── Update header user state from localStorage ──────────────
@@ -60,12 +92,30 @@ function _updateHeaderUser() {
         const user = JSON.parse(localStorage.getItem('topgo_user'));
         const nameEl = document.getElementById('user-name-display');
         const linkEl = document.getElementById('user-info-btn');
-        if (user && nameEl && linkEl) {
-            nameEl.textContent = user.firstname || user.email || 'Tài khoản';
-            linkEl.href = './profile.html';
+        const iconEl = document.getElementById('user-icon');
+        if (user) {
+            if (nameEl) nameEl.textContent = user.firstname || user.email || 'Tài khoản';
+            if (linkEl) linkEl.href = './profile.html';
+            if (iconEl && user.photoURL) {
+                iconEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+            }
+        } else {
+            if (nameEl) nameEl.textContent = 'Đăng nhập';
+            if (linkEl) linkEl.href = './auth.html';
+            if (iconEl) {
+                iconEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>`;
+            }
         }
-    } catch {}
+    } catch (e) {
+        console.error("Lỗi đồng bộ header:", e);
+    }
 }
+
+// Lắng nghe sự kiện thay đổi trạng thái xác thực để đồng bộ Header lập tức
+window.addEventListener('topgo-auth-change', _updateHeaderUser);
 
 // ── Load shared HTML components ───────────────────────────────
 

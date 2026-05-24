@@ -532,6 +532,71 @@ async function initApp() {
         });
 
         await loadData();
+
+        // Kiểm tra xem có lịch trình xem lại trong localStorage hay không
+        const reviewPlanStr = localStorage.getItem('topgo_review_plan');
+        if (reviewPlanStr) {
+            try {
+                const reviewPlan = JSON.parse(reviewPlanStr);
+                if (reviewPlan && reviewPlan.itinerary) {
+                    if (typeof reviewPlan.itinerary === 'string') {
+                        try {
+                            reviewPlan.itinerary = JSON.parse(reviewPlan.itinerary);
+                        } catch (err) {
+                            console.error("Lỗi khi parse itinerary string:", err);
+                        }
+                    }
+                    window._lastPayload = reviewPlan.itinerary.payload || {
+                        city_name: reviewPlan.destination,
+                        pax: reviewPlan.pax,
+                        budget: reviewPlan.budget,
+                        date_start: reviewPlan.dateStart,
+                        date_end: reviewPlan.dateEnd,
+                    };
+                    
+                    renderItinerary(reviewPlan.itinerary);
+                    showScreen('result');
+
+                    // Điền lại dữ liệu vào Form
+                    if (reviewPlan.destination) {
+                        const cityObj = state.CITIES.find(c => c.name === reviewPlan.destination || c.id === reviewPlan.itinerary.payload?.city_id);
+                        if (cityObj) {
+                            state.selectedCity = cityObj;
+                            const cs = document.getElementById('city-search');
+                            if (cs) cs.value = cityObj.name;
+                            updateFromToDisplay();
+                        }
+                    }
+                    if (reviewPlan.pax) {
+                        const pv = document.getElementById('pax-val');
+                        if (pv) pv.value = String(reviewPlan.pax);
+                        const pm = document.getElementById('pax-minus');
+                        const pp = document.getElementById('pax-plus');
+                        if (pm) pm.disabled = reviewPlan.pax <= 1;
+                        if (pp) pp.disabled = reviewPlan.pax >= 50;
+                    }
+                    if (reviewPlan.budget) {
+                        const bi = document.getElementById('budget-input');
+                        if (bi) bi.value = parseInt(reviewPlan.budget).toLocaleString('vi-VN');
+                    }
+                    if (reviewPlan.dateStart) {
+                        const ds = document.getElementById('date-start');
+                        if (ds) ds.value = reviewPlan.dateStart;
+                    }
+                    if (reviewPlan.dateEnd) {
+                        const de = document.getElementById('date-end');
+                        if (de) de.value = reviewPlan.dateEnd;
+                    }
+                    validateDates();
+
+                    showToast('Đã tải lịch trình xem lại từ hồ sơ!', 'success');
+                }
+            } catch (e) {
+                console.error("Lỗi khi khôi phục lịch trình xem lại:", e);
+            } finally {
+                localStorage.removeItem('topgo_review_plan');
+            }
+        }
     } catch (err) {
         console.error('[TopGo] initApp failed:', err);
         showToast('Lỗi khởi tạo ứng dụng: ' + err.message, 'error');
