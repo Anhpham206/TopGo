@@ -48,3 +48,10 @@ docs/
 
 # Shortcuts
 *.bat
+
+# Firebase credentials
+*firebase-service-account.json
+firebase-service-account.json
+backend/firebase-service-account.json
+backend/app/firebase-service-account.json
+frontend/js/firebaseConfig.js
