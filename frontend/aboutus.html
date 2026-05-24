@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ABOUT US</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <meta name="description" content="ĐỘI NGŨ SÁNG TẠO CỦA TOPGO">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/shared.css?v=2">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+        /* Override body background to match homepage */
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #dbeafe 100%) !important;
+        }
+        
+        /* Vibrant bokeh blobs for full screen */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: 0;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: var(--p1);
+            top: -100px;
+            left: -100px;
+        }
+        
+        body::after {
+            width: 600px;
+            height: 600px;
+            background: var(--a1);
+            bottom: -150px;
+            right: -100px;
+        }
+        
+        /* ========== ABOUT US MAIN ========== */
+        .aboutus-main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem 5rem;
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== HERO ========== */
+        .aboutus-hero {
+            text-align: center;
+            margin-bottom: 0;
+            position: relative;
+            overflow: visible;
+            border-radius: 0;
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInUp 0.7s ease-out;
+            padding: 80px 20px 60px;
+            z-index: 1;
+        }
+
+        /* Animated clouds - 3D Enhanced */
+        .clouds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            perspective: 1200px;
+            z-index: 0;
+            top: 0;
+            left: 0;
+        }
+
+        .cloud {
+            position: absolute;
+            animation: driftCloud3D linear infinite;
+            will-change: transform;
+            filter: drop-shadow(0 20px 40px -10px rgba(0, 0, 0, 0.12));
+        }
+
+        /* Far cloud - smaller perspective */
+        .cloud:nth-child(1) {
+            width: 200px;
+            height: 100px;
+            top: 12%;
+            left: -200px;
+            animation: driftCloud3D 25s linear infinite;
+            animation-delay: 0s;
+            opacity: 0.55;
+            z-index: 1;
+        }
+
+        /* Mid cloud - medium scale */
+        .cloud:nth-child(2) {
+            width: 240px;
+            height: 130px;
+            top: 38%;
+            right: -230px;
+            left: auto;
+            animation: driftCloud3DReverse 30s linear infinite;
+            animation-delay: 1s;
+            opacity: 0.75;
+            z-index: 2;
+        }
+
+        /* Close cloud - largest */
+        .cloud:nth-child(3) {
+            width: 300px;
+            height: 140px;
+            top: 60%;
+            left: -360px;
+            animation: driftCloud3D 45s linear infinite;
+            animation-delay: 2s;
+            opacity: 0.88;
+            z-index: 3;
+        }
+
+        @keyframes driftCloud3D {
+            0% { 
+                left: -350px; 
+                opacity: 0;
+                transform: translateZ(0) translateY(0);
+            }
+            3% { 
+                opacity: var(--cloud-opacity, 0.8);
+            }
+            50% {
+                transform: translateZ(8px) translateY(-3px);
+            }
+            97% { 
+                opacity: var(--cloud-opacity, 0.8);
+            }
+            100% { 
+                left: 110%; 
+                opacity: 0;
+                transform: translateZ(0) translateY(0);
+            }
+        }
+
+        @keyframes driftCloud3DReverse {
+            0% { 
+                right: -350px; 
+                opacity: 0;
+                transform: translateZ(0) translateY(0);
+            }
+            3% { 
+                opacity: var(--cloud-opacity, 0.8);
+            }
+            50% {
+                transform: translateZ(8px) translateY(-3px);
+            }
+            97% { 
+                opacity: var(--cloud-opacity, 0.8);
+            }
+            100% { 
+                right: 110%; 
+                opacity: 0;
+                transform: translateZ(0) translateY(0);
+            }
+        }
+
+        .hero-glass-panel {
+            background: linear-gradient(135deg, rgba(100, 200, 255, 0.22) 0%, rgba(150, 220, 255, 0.16) 100%);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1.5px solid rgba(0, 169, 255, 0.4);
+            border-radius: 44px;
+            padding: 40px 50px 50px;
+            max-width: 1150px;
+            width: 92%;
+            margin: 0 auto;
+            animation: slideInDown 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            box-shadow: 0 25px 70px rgba(0, 169, 255, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Premium gradient overlay */
+        .hero-glass-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 44px;
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.12) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        
+        .hero-glass-panel::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 169, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 169, 255, 0.14);
+            border: 1.5px solid rgba(0, 169, 255, 0.35);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-family: var(--font-label);
+            font-size: 13px;
+            font-weight: 700;
+            color: #0091ff;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 28px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0, 169, 255, 0.08);
+            animation: fadeInDown 0.8s ease-out 0.2s backwards;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #0091ff;
+            border-radius: 50%;
+            animation: pulseDot 2.2s infinite alternate;
+        }
+        @keyframes pulseDot {
+            0% { 
+                transform: scale(0.75); 
+                opacity: 0.3; 
+                box-shadow: 0 0 4px #0091ff;
+            }
+            100% { 
+                transform: scale(1.4); 
+                opacity: 1; 
+                box-shadow: 0 0 14px rgba(0, 145, 255, 0.6);
+            }
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            font-size: clamp(36px, 5.5vw, 58px);
+            font-weight: 900;
+            color: #0091ff;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            letter-spacing: -1.2px;
+            position: relative;
+            z-index: 2;
+            max-width: 100%;
+        }
+        .hero-title span {
+            background: linear-gradient(135deg, #0091ff 5%, #00a9ff 40%, #89cff3 95%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 4s ease infinite;
+            background-size: 200% 200%;
+            font-weight: 950;
+            letter-spacing: -2px;
+        }
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .hero-desc {
+            font-size: 18px;
+            font-weight: 500;
+            color: #4981bc;
+            max-width: 780px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 0.3px;
+            opacity: 0.50;
+        }
+        /* Code scrolling container */
+        .hero-code-container {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 32px 0 0;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+        
+        /* Marquee container for traveling comments */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.12), rgba(100, 200, 255, 0.06));
+            border-radius: 28px;
+            padding: 14px 0;
+            margin-top: 24px;
+            position: relative;
+            z-index: 2;
+            border: 1.5px solid rgba(0, 169, 255, 0.25);
+            box-shadow: 
+                inset 0 1px 2px rgba(255, 255, 255, 0.8),
+                0 4px 12px rgba(0, 0, 0, 0.04);
+            backdrop-filter: blur(12px);
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 3rem;
+            animation: marqueeScroll 28s linear infinite;
+            white-space: nowrap;
+            padding: 0 1.5rem;
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #0091ff;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            flex-shrink: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .marquee-icon {
+            font-size: 14px;
+        }
+
+        @keyframes marqueeScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee-content:hover {
+            animation-play-state: paused;
+            cursor: pointer;
+        }
+        .glass-button {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.3), rgba(0, 169, 255, 0.2));
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            border-radius: 48px;
+            padding: 16px 32px;
+            font-family: var(--font-label);
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 32px rgba(0, 169, 255, 0.2), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+        
+        .glass-button::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.7s ease;
+            pointer-events: none;
+        }
+        
+        .glass-button:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .glass-button:hover {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.5), rgba(0, 169, 255, 0.35));
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-4px);
+            box-shadow: 
+                0 16px 48px rgba(0, 169, 255, 0.4), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.9);
+            color: white;
+        }
+        
+        .glass-button-icon {
+            font-size: 18px;
+        }
+
+        /* ========== CAROUSEL TITLE – NỖI BẬT ========== */
+        .aboutus-carousel-section {
+            margin: -4vh auto 4rem;
+            position: relative;
+            max-width: 1400px;
+            width: 94%;
+            padding: 3.5rem 2rem 4rem;
+            z-index: 10;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .aboutus-carousel-section.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .carousel-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        /* Animated background for team section */
+        .carousel-header::before {
+            content: "";
+            position: absolute;
+            inset: -2rem;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 169, 255, 0.08) 0%, rgba(0, 169, 255, 0.02) 40%, transparent 100%);
+            border-radius: 60px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .carousel-header-tag {
+            background: rgba(0, 169, 255, 0.18);
+            display: inline-block;
+            padding: 0.5rem 1.6rem;
+            border-radius: 50px;
+            border: 1.5px solid rgba(0, 169, 255, 0.4);
+            font-family: var(--font-label);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #0091ff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+            backdrop-filter: blur(6px);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .carousel-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5.5vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #0091ff 0%, #00a9ff 50%, #89cff3 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 1rem 0 0;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            animation: slideInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s backwards;
+        }
+        
+        .carousel-sub {
+            color: #3a5a7c;
+            font-size: 1.05rem;
+            margin-top: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Track container – overflow ẩn, nhưng cho phép kéo */
+        .cinema-carousel {
+            position: relative;
+            width: 100%;
+            overflow-x: clip;
+            padding: 3rem 0 3rem;
+            touch-action: pan-y pinch-zoom;
+            perspective: 1800px;
+            perspective-origin: 50% 50%;
+            transform-style: preserve-3d;
+        }
+        
+        /* Blur và fade hai viền trái phải của khung ID Card */
+        .cinema-carousel::before,
+        .cinema-carousel::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: clamp(50px, 12vw, 150px);
+            z-index: 25;
+            pointer-events: none;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+        
+        .cinema-carousel::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(224, 242, 254, 0.95) 0%, rgba(224, 242, 254, 0.6) 30%, rgba(224, 242, 254, 0) 100%);
+            mask-image: linear-gradient(to right, black 25%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, black 25%, transparent 100%);
+        }
+        
+        .cinema-carousel::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(219, 234, 254, 0.95) 0%, rgba(219, 234, 254, 0.6) 30%, rgba(219, 234, 254, 0) 100%);
+            mask-image: linear-gradient(to left, black 25%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to left, black 25%, transparent 100%);
+        }
+        .carousel-track {
+            position: relative;
+            display: flex;
+            gap: 2rem;
+            justify-content: flex-start;  /* Quan trọng: không center, để tính toán offset chính xác */
+            align-items: center;
+            cursor: grab;
+            will-change: transform;
+            transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.4, 1);
+            transform-style: preserve-3d;
+            /* Prevent text selection and drag interference */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        .carousel-track:active {
+            cursor: grabbing;
+        }
+
+        /* ========== ID CARD 3D – GLASS + PLASTIC PREMIUM ========== */
+        /* ========== ID CARD 3D – GLASS + PLASTIC PREMIUM ========== */
+        .id-card {
+            --card-accent: #1e40af; /* TopGo Blue */
+            --card-accent-rgb: 30, 64, 175;
+            --card-avatar-bg: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+
+            flex: 0 0 320px;
+            height: 580px;
+            transition: all 0.55s cubic-bezier(0.2, 1, 0.3, 1);
+            transform-style: preserve-3d;
+            position: relative;
+            will-change: transform, opacity, filter;
+            /* Prevent card elements selection */
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        /* Thẻ không active ở bên trái xoay mặt hướng sang phải */
+        .id-card:not(.active).left-card {
+            opacity: 0.35;
+            filter: blur(2px);
+            transform: scale(0.78) translateY(25px) translateZ(-200px) rotateY(55deg) rotateX(5deg);
+        }
+        
+        /* Thẻ không active ở bên phải xoay mặt hướng sang trái */
+        .id-card:not(.active).right-card {
+            opacity: 0.35;
+            filter: blur(2px);
+            transform: scale(0.78) translateY(25px) translateZ(-200px) rotateY(-55deg) rotateX(5deg);
+        }
+        
+        /* Thẻ active chính diện phẳng và sáng bừng lên */
+        .id-card.active {
+            opacity: 1;
+            filter: none;
+            transform: scale(1.15) translateY(-15px) translateZ(60px) rotateY(0deg) rotateX(0deg);
+            z-index: 20;
+        }
+
+        /* Thẻ nhựa glass – sử dụng card.svg làm nền chính */
+        .plastic-card {
+            width: 100%;
+            height: 100%;
+            background: url('./assets/card.svg') no-repeat center/contain;
+            position: relative;
+            /* Tạo bóng đổ outline bám theo hình dạng vector của thẻ và dây đeo */
+            filter: drop-shadow(0 15px 35px rgba(0, 80, 200, 0.22)) drop-shadow(0 5px 15px rgba(0, 0, 0, 0.15));
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        /* Căn chỉnh chính xác phần thân thẻ nhựa để làm hiệu ứng kính */
+        .plastic-card-body {
+            position: absolute;
+            top: 24.64%;   /* Khớp với phần bắt đầu của thẻ nhựa trong SVG */
+            left: 5.4%;    /* Căn lề trái của thẻ */
+            right: 5.4%;   /* Căn lề phải của thẻ */
+            bottom: 2.5%;  /* Đáy thẻ */
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: translateZ(6px);
+        }
+        
+        /* Hiệu ứng phản chiếu bề mặt kính gương */
+        .plastic-card-body::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.45) 0%,
+                rgba(255, 255, 255, 0.15) 25%,
+                rgba(255, 255, 255, 0.02) 50%,
+                transparent 100%
+            );
+            mix-blend-mode: screen;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0.6;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .id-card.active .plastic-card-body::after {
+            opacity: 0.8;
+        }
+        
+        .id-card:not(.active) .plastic-card-body::after {
+            opacity: 0.3;
+        }
+
+        /* Lớp thông tin phủ đè lên bề mặt trắng của card.svg */
+        .card-info-overlay {
+            margin-top: auto; /* Đẩy nội dung xuống dưới phần Header của card.svg */
+            height: 72%;      /* Chiếm trọn phần diện tích màu trắng */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem 1rem;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        /* Avatar – biểu tượng con vật */
+        .card-avatar {
+            width: 78px;
+            height: 78px;
+            margin: 0 auto 0.5rem;
+            border-radius: 50%;
+            background: var(--card-avatar-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            color: var(--card-accent);
+            box-shadow: 0 4px 10px rgba(var(--card-accent-rgb), 0.1);
+            border: 2px solid rgba(var(--card-accent-rgb), 0.2);
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .id-card.active .card-avatar {
+            transform: scale(1.04);
+            border-color: var(--card-accent);
+            box-shadow: 0 0 0 3px rgba(var(--card-accent-rgb), 0.15), 0 6px 14px rgba(var(--card-accent-rgb), 0.15);
+        }
+        .card-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-align: center;
+            color: #1e3a6b; /* Standard TopGo Dark Blue */
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.2px;
+        }
+        .card-main {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1e40af; /* Soft blue text */
+            background: #dbeafe; /* Soft blue pastel bg */
+            padding: 0.15rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.25rem;
+            border: 1px solid #bfdbfe;
+            display: inline-block;
+        }
+        .card-role {
+            text-align: center;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(var(--card-accent-rgb), 0.06); /* 6% opacity background - extremely pastel */
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            color: var(--card-accent);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0.35rem auto;
+            max-width: 90%;
+            line-height: 1.35;
+            border: 1px solid rgba(var(--card-accent-rgb), 0.15);
+            transition: all 0.3s ease;
+        }
+        .id-card.active .card-role {
+            background: rgba(var(--card-accent-rgb), 0.1); /* Slightly richer on active */
+            border-color: rgba(var(--card-accent-rgb), 0.25);
+        }
+        .card-details {
+            display: flex;
+            gap: 0.4rem;
+            justify-content: center;
+            margin: 0.4rem 0;
+        }
+        .detail-badge {
+            background: #f1f5f9;
+            padding: 0.15rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #64748b;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            border: 1px solid #e2e8f0;
+        }
+        .card-bio {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            text-align: center;
+            font-style: normal;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 0.5rem;
+            color: #64748b;
+            max-width: 90%;
+            line-height: 1.4;
+            letter-spacing: -0.1px;
+        }
+
+        /* NÚT ĐIỀU HƯỚNG */
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0 1.5rem;  /* Dịch chuyển xuống dưới để tạo khoảng cách rộng rãi, thông thoáng với profile */
+        }
+        .nav-btn {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.25), rgba(0, 169, 255, 0.15));
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1.5px solid rgba(255, 255, 255, 0.45);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1);
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 400;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 24px rgba(0, 169, 255, 0.2), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.7);
+        }
+        .nav-btn::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            pointer-events: none;
+        }
+        .nav-btn:hover::before {
+            transform: translateX(100%);
+        }
+        .nav-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.5), rgba(0, 169, 255, 0.3));
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.15) translateY(-4px);
+            box-shadow: 
+                0 14px 36px rgba(0, 169, 255, 0.4), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.9);
+            color: white;
+        }
+        .indicator-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 0.5rem;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 8px;
+            background: #b9d0f0;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .dot.active {
+            width: 28px;
+            background: #3f7eff;
+            box-shadow: 0 0 8px #6ea5ff;
+        }
+
+        /* ========== STORYTELLING – SỨ MỆNH & TẦM NHÌN ========== */
+        .storytelling-section {
+            max-width: 1200px;
+            margin: 6rem auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 4rem;
+            position: relative;
+            animation: slideInUp 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s backwards;
+        }
+        
+        @media (max-width: 768px) {
+            .storytelling-section {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+        }
+        
+        .story-card {
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.95) 100%);
+            border: 2px solid rgba(0, 169, 255, 0.3);
+            border-radius: 16px;
+            padding: 3.5rem 3rem;
+            position: relative;
+            overflow: visible;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: left;
+            box-shadow: 0 10px 35px rgba(0, 169, 255, 0.08);
+            z-index: 2;
+        }
+        
+        /* Paper bookmark mark - top left */
+        .story-card::before {
+            content: "";
+            position: absolute;
+            top: -8px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 16px solid rgba(0, 169, 255, 0.25);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Paper bookmark mark - bottom right */
+        .story-card::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            right: 30px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 16px solid rgba(0, 169, 255, 0.25);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .story-card:hover {
+            transform: translateY(-6px);
+            background: linear-gradient(135deg, #ffffff 0%, rgba(224, 242, 254, 0.5) 100%);
+            border-color: rgba(0, 169, 255, 0.5);
+            box-shadow: 0 15px 50px rgba(0, 169, 255, 0.15);
+        }
+        
+        .story-icon {
+            display: none;
+        }
+        
+        .story-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #0091ff 0%, #00a9ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .story-desc {
+            font-family: var(--font);
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: #3a5a7c;
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+        }
+
+        /* FEATURES & FUTURE */
+        .aboutus-features-section {
+            margin: 5rem 0 0 !important;
+            padding: 0 1rem;
+        }
+        
+        .features-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s backwards;
+        }
+        
+        .features-tag {
+            background: rgba(0, 169, 255, 0.12);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 169, 255, 0.25);
+            font-family: var(--font-label);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--p1);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+        }
+        
+        .features-header h2 {
+            font-family: var(--font-heading);
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 0;
+        }
+        
+        .aboutus-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            justify-content: center;
+            margin: 2.5rem 0;
+            max-width: 1300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .aboutus-feature-card {
+            background: rgba(255, 255, 255, 0.50);
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            border: 1px solid rgba(0, 169, 255, 0.15);
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            text-align: center;
+            font-family: var(--font);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            box-shadow: 0 8px 20px rgba(0, 169, 255, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+        
+        .aboutus-feature-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.08) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .aboutus-feature-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.78);
+            border-color: var(--p1);
+            box-shadow: 0 12px 40px rgba(0, 169, 255, 0.12);
+        }
+        
+        .aboutus-feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .aboutus-future-section {
+            background: rgba(255, 255, 255, 0.40);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid rgba(0, 169, 255, 0.15);
+            border-radius: 48px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s backwards;
+            box-shadow: 0 15px 50px rgba(0, 169, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        }
+        
+        .aboutus-future-section h3 {
+            font-family: var(--font-label);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--p1);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        .aboutus-future-section h2 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 0 0 1.5rem 0;
+        }
+        
+        .aboutus-future-section p {
+            font-size: 1.05rem;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .aboutus-cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .aboutus-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: var(--font-label);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .aboutus-cta-btn.primary {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.8), rgba(0, 169, 255, 0.6));
+            color: white;
+            border: 1px solid rgba(0, 169, 255, 0.4);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 24px rgba(0, 169, 255, 0.2);
+        }
+        
+        .aboutus-cta-btn.primary:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.95), rgba(0, 169, 255, 0.75));
+            border-color: rgba(0, 169, 255, 0.6);
+            box-shadow: 0 12px 40px rgba(0, 169, 255, 0.4);
+        }
+        
+        .aboutus-cta-btn.secondary {
+            background: rgba(255, 255, 255, 0.35);
+            border: 1.5px solid rgba(0, 169, 255, 0.3);
+            color: var(--p1);
+            backdrop-filter: blur(12px);
+        }
+        
+        .aboutus-cta-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.6);
+            border-color: var(--p1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 169, 255, 0.2);
+        }
+        
+        /* ========== DYNAMIC SPECULAR LIGHTING EFFECT ========== */
+        .specular-light-tracking {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle at center, 
+                rgba(255, 255, 255, 0.7) 0%,
+                rgba(255, 255, 255, 0.4) 25%,
+                rgba(255, 255, 255, 0.15) 60%,
+                transparent 100%
+            );
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(28px);
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: none;
+            opacity: 0.85;
+            box-shadow: 0 0 80px rgba(255, 255, 255, 0.4);
+        }
+        
+        @media (max-width: 900px) {
+            .id-card { flex: 0 0 280px; height: 508px; }
+            .id-card.active { transform: scale(1.05) translateY(-5px); }
+            .specular-light-tracking { width: 100px; height: 100px; }
+        }
+
+
+    </style>
+</head>
+<body>
+    <header class="header" id="site-header">
+        <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
+    </header>
+
+    <main class="aboutus-main">
+        <!-- Hero -->
+        <div class="aboutus-hero">
+            <!-- Animated clouds -->
+            <div class="clouds">
+                <img src="./assets/cloud.svg" alt="cloud" class="cloud">
+                <img src="./assets/cloud.svg" alt="cloud" class="cloud">
+                <img src="./assets/cloud.svg" alt="cloud" class="cloud">
+            </div>
+
+            <!-- Glass Panel Content -->
+            <div class="hero-glass-panel">
+                <div class="hero-eyebrow">
+                    <div class="hero-dot"></div>
+                    <span>Về chúng tôi</span>
+                </div>
+                <h1 class="hero-title">Đội ngũ <span>phát triển,</span> <br> những tâm hồn <span>sáng tạo</span></h1>
+                <p class="hero-desc"><span></span>Chúng tôi là những người tạo ra trải nghiệm du lịch cá nhân hóa. Mỗi thành viên trong đội ngũ TopGo mang theo một niềm tin rằng công nghệ sẽ tạo nên sự khác biệt.</p>
+                <div class="hero-code-container">
+                    <button class="glass-button" onclick="window.location.href='./planner.html'">
+                        <span class="glass-button-icon"></span>
+                        Lên lịch ngay
+                    </button>
+                    <button class="glass-button" onclick="window.location.href='./chatbot.html'">
+                        <span class="glass-button-icon"></span>
+                        Hỏi TopChat
+                    </button>
+                    <button class="glass-button" onclick="document.querySelector('.aboutus-carousel-section').scrollIntoView({behavior:'smooth'})">
+                        <span class="glass-button-icon"></span>
+                        Gặp gỡ đội ngũ
+                    </button>
+                </div>
+                
+                <!-- Marquee Travel Comments -->
+                <div class="marquee-container">
+                    <div class="marquee-content">
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Du lịch là sự giải phóng của tâm hồn" • </div>
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Mỗi chuyến đi là một câu chuyện mới" • </div>
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Truyền thống thay đổi khi chúng ta khám phá" • </div>
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Thế giới đang chờ đợi bạn" • </div>
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Du lịch là sự giải phóng của tâm hồn" • </div>
+                        <div class="marquee-item"><span class="marquee-icon"></span> "Mỗi chuyến đi là một câu chuyện mới" • </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAROUSEL ID CARD 3D + LANYARD CHÉO -->
+        <section class="aboutus-carousel-section">
+            <div class="carousel-header">
+                <span class="carousel-header-tag">Đội ngũ</span>
+                <h2>Gặp gỡ đội ngũ TopGo</h2>
+            </div>
+            
+            <div class="cinema-carousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Card 2 -->
+                    <div class="id-card" data-index="1">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">PT</div>
+                                    <div class="card-name">Lý Phương Toàn</div>
+                                    <div class="card-role">System designer & Documenter</div>
+                                    <div class="card-bio">24120231@student.hcmus.edu.vn</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="id-card" data-index="2">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">CT</div>
+                                    <div class="card-name">Phí Công Tuấn</div>
+                                    <div class="card-role">Backend Developer</div>
+                                    <div class="card-bio">24120239@student.hcmus.edu.vn</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                             <!-- Card 1 -->
+                    <div class="id-card" data-index="0">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">DA</div>
+                                    <div class="card-name">Phạm Đắc Anh</div>
+                                    <div class="card-main">Leader</div>
+                                    <div class="card-role">Backend & Presenter</div>
+                                    <div class="card-bio">24120259@student.hcmus.edu.vn</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="id-card" data-index="3">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">TK</div>
+                                    <div class="card-name">Nguyễn Đình Trung Kiên</div>
+                                    <div class="card-role">Frontend/Web Simulation</div>
+                                    <div class="card-bio">24120195@student.hcmus.edu.vn</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="id-card" data-index="4">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">HU</div>
+                                    <div class="card-name">Nguyễn Thanh Hạ Uyên</div>
+                                    <div class="card-role">AI & Data logic</div>
+                                    <div class="card-bio">24120243@student.hcmus.edu.vn</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="id-card" data-index="5">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">AT</div>
+                                    <div class="card-name">Lê Huỳnh Anh Thư</div>
+                                    <div class="card-role">QA tester & Slide Creator</div>
+                                    <div class="card-bio">24120226@student.hcmus.edu.vn</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 7 -->
+                    <div class="id-card" data-index="6">
+                        <div class="plastic-card">
+                            <div class="plastic-card-body">
+                                <div class="specular-light-tracking"></div>
+                                <div class="card-info-overlay">
+                                    <div class="card-avatar">BD</div>
+                                    <div class="card-name">Dương Thị Bích Diệp</div>
+                                    <div class="card-role">Project Manager</div>
+                                    <div class="card-bio">24120247@student.hcmus.edu.vn</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button class="nav-btn prev" aria-label="Previous">←</button>
+                <button class="nav-btn next" aria-label="Next">→</button>
+            </div>
+            <div class="indicator-dots" id="indicatorDots"></div>
+        </section>
+
+
+
+
+    </main>
+
+    <div id="site-shared"></div>
+
+    <!-- CAROUSEL JS – CĂN GIỮA CHUẨN, MƯỢT -->
+    <script>
+        function init_carousel() {
+            const track = document.getElementById('carouselTrack');
+            if (!track) {
+                console.warn('Carousel track not found, retrying...');
+                setTimeout(init_carousel, 100);
+                return;
+            }
+            
+            // Lấy các thẻ nguyên bản
+            const originalCards = Array.from(track.querySelectorAll('.id-card'));
+            const realCount = originalCards.length;
+            if (realCount === 0) return;
+            
+            const prevBtn = document.querySelector('.nav-btn.prev');
+            const nextBtn = document.querySelector('.nav-btn.next');
+            const dotsContainer = document.getElementById('indicatorDots');
+            
+            const cloneCount = 4; // Nhân bản 4 thẻ để tạo vòng lặp vô tận hoàn hảo
+            
+            // Tiến hành nhân bản các thẻ ở 2 đầu
+            for (let i = 0; i < cloneCount; i++) {
+                const clone = originalCards[i].cloneNode(true);
+                clone.classList.add('is-clone');
+                track.appendChild(clone);
+            }
+            for (let i = 0; i < cloneCount; i++) {
+                const targetIdx = realCount - 1 - i;
+                const clone = originalCards[targetIdx].cloneNode(true);
+                clone.classList.add('is-clone');
+                track.insertBefore(clone, track.firstChild);
+            }
+            
+            // Lấy lại danh sách tất cả các thẻ bao gồm bản sao
+            const cards = Array.from(track.querySelectorAll('.id-card'));
+            
+            // Đặt thẻ hoạt động ban đầu ở vị trí giữa (thẻ thứ 2 gốc, tương ứng index = cloneCount + 2)
+            let currentIdx = cloneCount + 2; 
+            
+            let startX = 0, startTranslate = 0;
+            let isDragging = false;
+            let dragOffset = 0;
+            
+            // Bộ nhớ đệm bố cục tĩnh (Layout Dimensions Caching) để tối ưu hóa hiệu năng cực hạn
+            let cardCenters = [];
+            let containerWidth = 0;
+
+            function update_cached_dimensions() {
+                const container = track.parentElement;
+                if (!container) return;
+                containerWidth = container.offsetWidth;
+                cardCenters = cards.map(card => {
+                    return card.offsetLeft + card.offsetWidth / 2;
+                });
+            }
+
+            // Tính toán nhanh thẻ gần tâm nhất dựa trên dời dịch chuyển (không reflow)
+            function get_nearest_card_index(currentTranslate) {
+                const targetCenter = containerWidth / 2 - currentTranslate;
+                let minDist = Infinity;
+                let nearest = currentIdx;
+                for (let i = 0; i < cardCenters.length; i++) {
+                    const dist = Math.abs(cardCenters[i] - targetCenter);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        nearest = i;
+                    }
+                }
+                return nearest;
+            }
+
+            // Cập nhật tất cả thuộc tính 3D, độ mờ, tỉ lệ, blur liên tục dựa trên dời dịch chuyển hiện tại
+            function update_card_transforms(currentTranslate, animate = true) {
+                cards.forEach((card, i) => {
+                    // Khoảng cách thực tế từ card đến tâm viewport theo đơn vị phẳng tĩnh (352px)
+                    const diff = (cardCenters[i] - (containerWidth / 2 - currentTranslate)) / 352;
+                    const absDiff = Math.abs(diff);
+                    
+                    // Tối ưu hiệu năng cực hạn (Lag-free): Chỉ hiển thị và vẽ tối đa 5 thẻ gần nhất
+                    if (absDiff > 2.2) {
+                        card.style.visibility = 'hidden';
+                        card.style.opacity = '0';
+                        card.style.pointerEvents = 'none';
+                        return;
+                    } else {
+                        card.style.visibility = 'visible';
+                        card.style.pointerEvents = 'auto';
+                    }
+                    
+                    // 1. Tính toán lượng giác xoay vòng hình trụ 3D chuẩn xác
+                    const angleStep = 22; // Bước góc xoay tinh tế cho mỗi thẻ
+                    const theta = diff * angleStep;
+                    const thetaRad = (theta * Math.PI) / 180;
+                    
+                    // Bán kính hình trụ 3D tối ưu
+                    const R = 600;
+                    
+                    // Tọa độ hình học 3D đối xứng
+                    const rotateY = -theta; 
+                    const rotateX = 2 * Math.min(1, absDiff); // Độ nghiêng nhẹ liên tục
+                    
+                    // Độ sâu Z và chiều cao đẩy thẻ chính lên trên các thẻ bên
+                    const centerZBonus = Math.max(0, 1 - absDiff) * 130; 
+                    const translateZ = R * (Math.cos(thetaRad) - 1) - 50 + centerZBonus;
+                    
+                    // Căn đối hoàn hảo translateX
+                    const flexOffset = diff * 352;
+                    const cylX = R * Math.sin(thetaRad);
+                    const translateX = cylX - flexOffset;
+                    
+                    // Tỷ lệ scale mượt mà và opacity/blur giảm dần đều
+                    const scale = Math.max(0.75, 1.15 - absDiff * 0.2);
+                    const opacity = Math.max(0, 1 - absDiff * 0.4);
+                    const blur = Math.min(2.5, absDiff * 1.25);
+                    
+                    if (animate) {
+                        card.style.transition = 'transform 0.5s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
+                    } else {
+                        card.style.transition = 'none';
+                    }
+                    
+                    card.style.transform = `scale(${scale}) translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+                    card.style.opacity = opacity;
+                    card.style.filter = blur > 0 ? `blur(${blur}px)` : 'none';
+                    card.style.zIndex = Math.round(100 - absDiff * 10);
+                    
+                    card.classList.remove('active', 'left-card', 'right-card');
+                    if (absDiff < 0.5) {
+                        card.classList.add('active');
+                    } else if (diff < 0) {
+                        card.classList.add('left-card');
+                    } else {
+                        card.classList.add('right-card');
+                    }
+                });
+                
+                // Cập nhật currentIdx dựa trên translate hiện tại
+                const nearest = get_nearest_card_index(currentTranslate);
+                if (nearest !== currentIdx) {
+                    currentIdx = nearest;
+                    
+                    // Cập nhật dấu chấm chỉ báo chỉ từ 0 đến realCount - 1
+                    const realActiveIdx = (currentIdx - cloneCount + realCount) % realCount;
+                    const dots = document.querySelectorAll('.dot');
+                    dots.forEach((dot, i) => {
+                        if (i === realActiveIdx) dot.classList.add('active');
+                        else dot.classList.remove('active');
+                    });
+                }
+            }
+
+            // Thiết lập chỉ số và căn giữa thẻ active
+            function set_active_card(index, animate = true) {
+                if (index < 0) index = 0;
+                if (index >= cards.length) index = cards.length - 1;
+                
+                currentIdx = index;
+                
+                const container = track.parentElement;
+                if (!container) return;
+                const activeCard = cards[currentIdx];
+                if (!activeCard) return;
+                
+                const activeCenter = cardCenters[currentIdx];
+                const targetTranslate = containerWidth / 2 - activeCenter;
+                
+                if (animate) {
+                    track.style.transition = 'transform 0.5s cubic-bezier(0.2, 1, 0.3, 1)';
+                } else {
+                    track.style.transition = 'none';
+                }
+                track.style.transform = `translateX(${targetTranslate}px)`;
+                
+                update_card_transforms(targetTranslate, animate);
+            }
+
+            // Đi tới thẻ (dùng cho dot & nút)
+            function go_to_card(index) {
+                set_active_card(index, true);
+            }
+
+            function next_card() {
+                go_to_card(currentIdx + 1);
+            }
+            
+            function prev_card() {
+                go_to_card(currentIdx - 1);
+            }
+
+            // Hiệu ứng phản chiếu ánh sáng theo chuột
+            function init_mouse_lighting() {
+                const carousel = track.parentElement;
+                if (!carousel) return;
+                
+                carousel.addEventListener('mousemove', (e) => {
+                    cards.forEach((card) => {
+                        if (card.style.visibility === 'hidden') return;
+                        const rect = card.getBoundingClientRect();
+                        
+                        const mouseX = e.clientX - rect.left;
+                        const mouseY = e.clientY - rect.top;
+                        
+                        const xPercent = Math.max(0, Math.min(1, mouseX / rect.width));
+                        const yPercent = Math.max(0, Math.min(1, mouseY / rect.height));
+                        
+                        const isInCard = mouseX >= 0 && mouseX <= rect.width && 
+                                         mouseY >= 0 && mouseY <= rect.height;
+                        
+                        const specularLight = card.querySelector('.specular-light-tracking');
+                        if (specularLight) {
+                            if (isInCard && card.classList.contains('active')) {
+                                specularLight.style.display = 'block';
+                                specularLight.style.left = (xPercent * 100) + '%';
+                                specularLight.style.top = (yPercent * 100) + '%';
+                            } else {
+                                specularLight.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+                
+                carousel.addEventListener('mouseleave', () => {
+                    cards.forEach((card) => {
+                        const specularLight = card.querySelector('.specular-light-tracking');
+                        if (specularLight) {
+                            specularLight.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            // Lấy giá trị translateX hiện tại (px)
+            function get_current_translate() {
+                const transform = track.style.transform;
+                if (!transform || transform === 'none') return 0;
+                const match = transform.match(/translateX\(([-\d.]+)px\)/);
+                return match ? parseFloat(match[1]) : 0;
+            }
+
+            // Lắng nghe sự kiện kết thúc transition để nhảy vị trí ngầm (Seamless loop)
+            track.addEventListener('transitionend', (e) => {
+                if (e.propertyName !== 'transform') return;
+                
+                if (currentIdx < cloneCount) {
+                    currentIdx += realCount;
+                    set_active_card(currentIdx, false); // Nhảy ngầm không chuyển động
+                } else if (currentIdx >= cloneCount + realCount) {
+                    currentIdx -= realCount;
+                    set_active_card(currentIdx, false); // Nhảy ngầm không chuyển động
+                }
+            });
+
+            // Ngăn chặn sự kiện kéo mặc định của trình duyệt để không bị cản trở custom drag
+            track.addEventListener('dragstart', (e) => e.preventDefault());
+
+            // Xử lý sự kiện kéo vuốt bằng chuột & cảm ứng hoạt động hoàn hảo
+            function on_drag_start(e) {
+                if (e.type.startsWith('mouse') && e.button !== 0) return; // Chỉ nhận chuột trái
+                
+                isDragging = true;
+                startX = e.type.startsWith('mouse') ? e.clientX : e.touches[0].clientX;
+                startTranslate = get_current_translate();
+                
+                // Tắt các transition khi đang drag để kéo mượt thời gian thực
+                track.style.transition = 'none';
+                cards.forEach(c => c.style.transition = 'none');
+                dragOffset = 0;
+            }
+
+            function on_drag_move(e) {
+                if (!isDragging) return;
+                
+                const currentX = e.type.startsWith('mouse') ? e.clientX : e.touches[0].clientX;
+                dragOffset = currentX - startX;
+                
+                // Ngăn cản cuộn trang theo chiều dọc nếu người dùng vuốt ngang rõ rệt
+                if (Math.abs(dragOffset) > 10 && e.cancelable) {
+                    e.preventDefault();
+                }
+                
+                const currentTranslate = startTranslate + dragOffset;
+                
+                // Di chuyển track thời gian thực bám sát ngón tay/con trỏ chuột
+                track.style.transform = `translateX(${currentTranslate}px)`;
+                
+                // Cập nhật góc xoay 3D động cực mượt theo vị trí hiện tại
+                update_card_transforms(currentTranslate, false);
+            }
+
+            function on_drag_end() {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                // Bật lại transition để thực hiện snap mượt mà
+                track.style.transition = 'transform 0.5s cubic-bezier(0.2, 1, 0.3, 1)';
+                
+                // Nếu chỉ là chạm nhẹ (click), căn giữa lại thẻ hiện tại và giữ nguyên
+                if (Math.abs(dragOffset) < 8) {
+                    set_active_card(currentIdx, true);
+                    return;
+                }
+                
+                const currentTranslate = get_current_translate();
+                const nearest = get_nearest_card_index(currentTranslate);
+                set_active_card(nearest, true);
+            }
+
+            // Tạo các dot indicators động
+            function build_indicators() {
+                if (!dotsContainer) return;
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < realCount; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    dot.addEventListener('click', () => go_to_card(cloneCount + i));
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            // Gắn sự kiện click trực tiếp để chọn thẻ phụ
+            cards.forEach((card, idx) => {
+                card.addEventListener('click', (e) => {
+                    if (isDragging || Math.abs(dragOffset) > 8) return;
+                    if (idx !== currentIdx) {
+                        e.preventDefault();
+                        go_to_card(idx);
+                    }
+                });
+            });
+
+            // Gắn các sự kiện kéo vuốt trên track
+            track.addEventListener('touchstart', on_drag_start, { passive: true });
+            track.addEventListener('touchmove', on_drag_move, { passive: false });
+            track.addEventListener('touchend', on_drag_end);
+            track.addEventListener('touchcancel', on_drag_end);
+            
+            track.addEventListener('mousedown', on_drag_start);
+            window.addEventListener('mousemove', on_drag_move);
+            window.addEventListener('mouseup', on_drag_end);
+            
+            if (prevBtn) prevBtn.addEventListener('click', prev_card);
+            if (nextBtn) nextBtn.addEventListener('click', next_card);
+            
+            // Xử lý co giãn màn hình
+            window.addEventListener('resize', () => {
+                update_cached_dimensions();
+                set_active_card(currentIdx, false);
+            });
+
+            // Khởi chạy
+            build_indicators();
+            update_cached_dimensions();
+            set_active_card(cloneCount + 2, false);
+            init_mouse_lighting();
+
+            // Hiệu ứng hiện dần khi lướt xuống (Scroll Reveal) của phần ID Card
+            const carouselSection = document.querySelector('.aboutus-carousel-section');
+            if (carouselSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            carouselSection.classList.add('revealed');
+                            observer.unobserve(entry.target); // Chỉ chạy một lần
+                        }
+                    });
+                }, {
+                    threshold: 0.1, // Chớm xuất hiện 10%
+                    rootMargin: "0px 0px -50px 0px"
+                });
+                observer.observe(carouselSection);
+            }
+        }
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init_carousel);
+        } else {
+            // DOM already ready (e.g., script loaded async after page load)
+            setTimeout(init_carousel, 50);
+        }
+    </script>
+
+
+
+    <!-- Load header/footer từ shared.js -->
+    <script type="module">
+        import('./js/shared.js').catch(e => console.warn('shared.js not loaded'));
+        setTimeout(() => {
+            const headerLoading = document.querySelector('#site-header > div');
+            if (headerLoading && headerLoading.innerText.includes('Đang tải header')) {
+                headerLoading.style.display = 'none';
+            }
+        }, 1500);
+    </script>
+</body>
+</html>
