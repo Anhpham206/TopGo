@@ -421,7 +421,24 @@ export function renderItinerary(data) {
     if (paxEl) paxEl.innerHTML = `<strong>${ttc.So_nguoi || (p ? p.pax + ' người' : 'N/A')}</strong>`;
 
     const be = document.getElementById('res-budget');
-    if (be) be.innerHTML = `<strong>~${ttc.Tong_ngan_sach || (p ? new Intl.NumberFormat('vi-VN').format(p.budget) + ' ₫' : 'N/A')}</strong>`;
+    // Parse budget robustly to handle numbers, raw strings like "10.000.000 VNĐ", or input payloads
+    let totalBudget = NaN;
+    if (ttc.Tong_ngan_sach) {
+        const rawBudget = ttc.Tong_ngan_sach;
+        const cleanBudget = typeof rawBudget === 'string' ? rawBudget.replace(/\D/g, '') : rawBudget;
+        totalBudget = parseFloat(cleanBudget);
+    }
+    if (isNaN(totalBudget) && p && p.budget) {
+        totalBudget = parseFloat(p.budget);
+    }
+
+    if (be) {
+        if (!isNaN(totalBudget) && totalBudget > 0) {
+            be.innerHTML = `<strong>~${new Intl.NumberFormat('vi-VN').format(totalBudget)} ₫</strong>`;
+        } else {
+            be.innerHTML = `<strong>~${ttc.Tong_ngan_sach || (p ? new Intl.NumberFormat('vi-VN').format(p.budget) + ' ₫' : 'N/A')}</strong>`;
+        }
+    }
 
     const departureEl = document.getElementById('res-departure');
     if (departureEl) {
@@ -454,7 +471,13 @@ export function renderItinerary(data) {
     }
 
     const tb = document.getElementById('res-total-budget');
-    if (tb) tb.textContent = ttc.Tong_ngan_sach || '';
+    if (tb) {
+        if (!isNaN(totalBudget) && totalBudget > 0) {
+            tb.textContent = new Intl.NumberFormat('vi-VN').format(totalBudget) + ' ₫';
+        } else {
+            tb.textContent = ttc.Tong_ngan_sach || 'N/A';
+        }
+    }
 
     const pc = document.getElementById('res-places-count');
     if (pc) pc.textContent = ttc.total_places || '';
@@ -467,8 +490,7 @@ export function renderItinerary(data) {
 
     const bpp = document.getElementById('res-budget-pp');
     if (bpp) {
-        const totalBudget = parseFloat(ttc.Tong_ngan_sach);
-        const paxCount = parseInt(ttc.So_nguoi);
+        const paxCount = parseInt(ttc.So_nguoi) || (p ? parseInt(p.pax) : 1);
         if (!isNaN(totalBudget) && paxCount > 0) {
             bpp.textContent = '~' + new Intl.NumberFormat('vi-VN').format(Math.round(totalBudget / paxCount)) + ' ₫';
         } else {
