@@ -307,6 +307,7 @@ async def generate_itinerary_stream(payload: dict):
         ttc_tmp = itinerary_details.get("Thong_tin_chung", {})
         ttc_tmp["total_distance"] = total_distance
         ttc_tmp["total_places"] = total_places
+        ttc_tmp["Tong_ngan_sach"] = budget
         itinerary_details["Thong_tin_chung"] = ttc_tmp
 
         data_output = {

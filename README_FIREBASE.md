@@ -46,12 +46,12 @@ Tài liệu này ghi nhận chi tiết tất cả các chức năng, cấu trúc
 1. Truy cập vào [Firebase Console](https://console.firebase.google.com/) và đăng nhập bằng tài khoản Google.
 2. Click **Add project**, đặt tên dự án và nhấn tiếp tục để tạo dự án.
 3. **Kích hoạt Google Authentication**:
-   * Vào mục **Build** > **Authentication** > nhấp chọn **Get Started**.
+   * Vào mục **Security** > **Authentication** > nhấp chọn **Get Started**.
    * Tại tab **Sign-in method**, chọn nhà cung cấp **Google** > Bật nút **Enable** > Chọn Email hỗ trợ dự án và nhấn **Save**.
-   * Chọn thêm nhà cung cấp **Email/Password** > Bật nút **Enable** > nhấn **Save**.
+   * Chọn thêm nhà cung cấp **Email/Password** > Bật nút **Enable** (chỉ click 1 email/password) > nhấn **Save**.
 4. **Kích hoạt Cloud Firestore**:
-   * Vào mục **Build** > **Firestore Database** > chọn **Create database**.
-   * Chọn chế độ bảo mật **Start in test mode** > chọn khu vực lưu trữ gần Việt Nam (ví dụ: `asia-southeast1`) > nhấn **Create**.
+   * Vào mục **Databases and storage** > **Firestore** > chọn **Create database**.
+   * Chọn **standard** > chọn khu vực lưu trữ gần Việt Nam (ví dụ: `asia-southeast1`) > chọn chế độ bảo mật **Start in test mode** nhấn **Create**.
 
 ### Bước 2.2: Lấy file Private Key JSON cho Backend (Service Account)
 1. Trên giao diện dự án Firebase Console, nhấp vào biểu tượng bánh răng cưa ⚙️ (**Project settings**).
@@ -59,10 +59,15 @@ Tài liệu này ghi nhận chi tiết tất cả các chức năng, cấu trúc
 3. Nhấp vào nút **Generate new private key** > Chọn **Generate key** ở hộp thoại cảnh báo để tải file `.json` về máy.
 4. Đổi tên tệp này thành `firebase-service-account.json` và di chuyển tệp vào thư mục chứa Backend:
    `TopGo/backend/firebase-service-account.json`
+  
+**Lưu Ý !**: bật venv và tải thư viện trong requirement.txt bằng lệnh:
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 ### Bước 2.3: Cấu hình Firebase Web SDK cho Frontend
-1. Tại trang **Project settings** trên Firebase Console, cuộn xuống phần **Your apps** > chọn biểu tượng Web (`</>`) để đăng ký ứng dụng.
-2. Sao chép các thuộc tính cấu hình trong đối tượng `firebaseConfig` được hiển thị:
+1. Tại trang **Project settings/General** trên Firebase Console, cuộn xuống phần **Your apps** > chọn biểu tượng Web (`</>`) để đăng ký ứng dụng.
+2. Tạo file firebaseConfig.js, sao chép nội dung firebaseConfig_example.js vào, điền các thuộc tính cấu hình trong đối tượng `firebaseConfig` được hiển thị:
    ```javascript
    const firebaseConfig = {
      apiKey: "YOUR_API_KEY",
@@ -73,7 +78,7 @@ Tài liệu này ghi nhận chi tiết tất cả các chức năng, cấu trúc
      appId: "YOUR_APP_ID"
    };
    ```
-3. Mở file [firebaseConfig.js](file:///d:/HCMUS/25-26%20HK2/TDTT/TopGo_Project_v3/TopGo/frontend/js/firebaseConfig.js) trên mã nguồn của bạn và dán đè đối tượng cấu hình của bạn vào.
+3. Mở file [firebaseConfig.js] trên mã nguồn của bạn và dán đè đối tượng cấu hình của bạn vào.
 
 ---
 

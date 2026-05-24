@@ -113,7 +113,6 @@ async def get_distance_matrix(places: list, optimal_coord: dict) -> dict:
             "durations": durations
         }
 
-
 def group_places_by_day(places: list, distance_matrix: dict, optimal_coord: dict, days: int, max_places_per_day: int) -> list:
     distances = distance_matrix["distances"]
     durations = distance_matrix.get("durations")
@@ -126,20 +125,24 @@ def group_places_by_day(places: list, distance_matrix: dict, optimal_coord: dict
     VISIT_DURATION = 3.0
     SPEED_KMH = 30.0
 
-    print(
-        f"[GROUPING] Bat dau gom nhom {n_places} dia diem vao {days} ngay, toi da {max_places_per_day} dia diem/ngay")
+    print(f"[GROUPING] Bat dau gom nhom {n_places} dia diem vao {days} ngay, toi da {max_places_per_day} dia diem/ngay")
 
     for day in range(days):
         if all(visited):
             break
 
         current_day = []
-        current_index = 0  # Bắt đầu mỗi ngày từ tọa độ trung vị (index 0)
+        current_index = 0  # Bắt đầu mỗi ngày từ tọa độ trung vị (Hub)
         current_time = START_TIME_OF_DAY
 
-        for _ in range(max_places_per_day):
-            best_score = float('inf')
-            nearest_index = -1
+        for step in range(max_places_per_day):
+            # Cài đặt biến so sánh: Điểm đầu tiên tìm MAX (xa nhất), các điểm sau tìm MIN (gần nhất)
+            if step == 0:
+                best_score = -1.0
+            else:
+                best_score = float('inf')
+                
+            best_index = -1
             best_start_visit_time = 0
 
             for j in range(n_places):
@@ -166,38 +169,55 @@ def group_places_by_day(places: list, distance_matrix: dict, optimal_coord: dict
                     start_visit_time = max(arrival_time, open_time)
                     wait_time = start_visit_time - arrival_time
 
-                    # Hàm tính điểm (score) ưu tiên khoảng cách gần và thời gian chờ ít
-                    score = dist_meters + (wait_time * 4000)
+                    # =========================================================
+                    # LOGIC VRPTW LÕI MỚI (TỐI ƯU HÓA ĐƯỜNG ĐI)
+                    # =========================================================
+                    if step == 0:
+                        # 1. FAR-FIRST SEED: Điểm đầu tiên của ngày PHẢI LÀ ĐIỂM XA HUB NHẤT.
+                        # Điều này ép thuật toán "diệt" các điểm ngoại ô ngay từ những ngày đầu tiên.
+                        score = dist_meters
+                        if score > best_score:
+                            best_score = score
+                            best_index = j
+                            best_start_visit_time = start_visit_time
+                    else:
+                        # 2. SAVINGS HEURISTIC: Các điểm tiếp theo ưu tiên gần điểm hiện tại, 
+                        # nhưng cộng thêm một phần "khoảng cách quay về Hub" để chống đi lạc.
+                        dist_back_to_hub = distances[matrix_index][0]
+                        
+                        # Điểm số = Đường đi tiếp + Phạt thời gian chờ + (Đường về Hub * Trọng số)
+                        score = dist_meters + (wait_time * 4000) + (dist_back_to_hub * 0.2)
 
-                    if score < best_score:
-                        best_score = score
-                        nearest_index = j
-                        best_start_visit_time = start_visit_time
+                        if score < best_score:
+                            best_score = score
+                            best_index = j
+                            best_start_visit_time = start_visit_time
 
-            if nearest_index == -1:
+            # Nếu không tìm được điểm nào thỏa mãn thời gian đóng/mở cửa thì kết thúc ngày
+            if best_index == -1:
                 break
 
-            visited[nearest_index] = True
+            visited[best_index] = True
             
-            # Chỉ trả ra thông tin gốc và thứ tự (không kèm các trường chi tiết tính toán)
-            place_copy = places[nearest_index].copy()
+            # Giữ nguyên cấu trúc trả về
+            place_copy = places[best_index].copy()
             place_copy["order"] = len(current_day) + 1
             current_day.append(place_copy)
 
-            current_index = nearest_index + 1
+            # Cập nhật thông tin cho điểm tiếp theo
+            current_index = best_index + 1
             current_time = best_start_visit_time + VISIT_DURATION
 
         if current_day:
             day_groups.append(current_day)
-            print(
-                f"[GROUPING] Ngay {len(day_groups)}: {[p.get('name', 'N/A') for p in current_day]}")
+            print(f"[GROUPING] Ngay {len(day_groups)}: {[p.get('name', 'N/A') for p in current_day]}")
         else:
             print("[GROUPING] Khong the tim them dia diem phu hop thoi gian")
             break
 
     return day_groups
 
-
+    
 async def get_daily_routes(day_groups: list, optimal_coord: dict) -> list:
     """
     Gọi OSRM Route API để tìm đường đi cho từng ngày.
