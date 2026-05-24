@@ -7,15 +7,42 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initCinematicParticles();
-    initCinematicSpotlights();
-    initMouseParallax();
+    init_cinematic_particles();
+    init_cinematic_spotlights();
+    init_mouse_parallax();
+    init_scroll_reveal();
 });
+
+/**
+ * Khởi tạo hiệu ứng Scroll Reveal cho các phần tử có class .reveal-on-scroll.
+ * Sử dụng IntersectionObserver để thêm class .visible khi phần tử lọt vào viewport.
+ */
+function init_scroll_reveal() {
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    if (revealElements.length === 0) return;
+
+    const observerOptions = {
+        root: null,           // viewport
+        rootMargin: '0px',
+        threshold: 0.15       // Kích hoạt khi 15% phần tử hiện ra
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Chỉ kích hoạt 1 lần
+            }
+        });
+    }, observerOptions);
+
+    revealElements.forEach(el => observer.observe(el));
+}
 
 /**
  * Khởi tạo hạt sáng lơ lửng ngẫu nhiên trong tầm nhìn
  */
-function initCinematicParticles() {
+function init_cinematic_particles() {
     const container = document.getElementById('particles-container');
     if (!container) return;
     
@@ -46,7 +73,7 @@ function initCinematicParticles() {
 /**
  * Điều khiển ánh đèn Spotlight chiếu sáng di chuyển theo chuột
  */
-function initCinematicSpotlights() {
+function init_cinematic_spotlights() {
     const sections = document.querySelectorAll('.cinematic-section');
     sections.forEach(section => {
         const spotlight = section.querySelector('.section-spotlight');
@@ -81,7 +108,7 @@ function initCinematicSpotlights() {
 /**
  * Xử lý hiệu ứng Parallax mượt mà cho máy bay theo vị trí chuột (Bản gốc siêu mượt)
  */
-function initMouseParallax() {
+function init_mouse_parallax() {
     const parallaxItems = document.querySelectorAll('[data-parallax-speed]');
     if (parallaxItems.length === 0) return;
 
@@ -103,7 +130,7 @@ function initMouseParallax() {
         }
     });
 
-    function updateParallaxFrame() {
+    function update_parallax_frame() {
         currentX += (mouseX - currentX) * ease;
         currentY += (mouseY - currentY) * ease;
 
@@ -122,8 +149,8 @@ function initMouseParallax() {
             item.style.setProperty('--parallax-rot', `${rotOffset}deg`);
         });
 
-        requestAnimationFrame(updateParallaxFrame);
+        requestAnimationFrame(update_parallax_frame);
     }
 
-    requestAnimationFrame(updateParallaxFrame);
+    requestAnimationFrame(update_parallax_frame);
 }

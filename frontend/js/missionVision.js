@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * Mission & Vision Puzzle Interaction
  */
-function initMissionVision() {
+function init_mission_vision() {
     const container = document.getElementById('mvContainer');
     const toggleBtn = document.getElementById('mvToggleBtn');
     const closeBtn = document.getElementById('mvCloseBtn');
@@ -29,7 +29,7 @@ function initMissionVision() {
         { x: 300, y: 375 }   // Piece 6
     ];
 
-    function mergePuzzle() {
+    function merge_puzzle() {
         if (isMerged) return;
         isMerged = true;
         
@@ -50,7 +50,7 @@ function initMissionVision() {
         }, 750);
     }
 
-    function scatterPuzzle() {
+    function scatter_puzzle() {
         if (!isMerged) return;
         isMerged = false;
         
@@ -69,21 +69,21 @@ function initMissionVision() {
     }
 
     // Toggle button clicks
-    toggleBtn.addEventListener('click', mergePuzzle);
-    closeBtn.addEventListener('click', scatterPuzzle);
+    toggleBtn.addEventListener('click', merge_puzzle);
+    closeBtn.addEventListener('click', scatter_puzzle);
 
     // Also support keyboard triggers
     toggleBtn.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            mergePuzzle();
+            merge_puzzle();
         }
     });
 
     closeBtn.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            scatterPuzzle();
+            scatter_puzzle();
         }
     });
 
@@ -149,7 +149,7 @@ function initMissionVision() {
     pieces.forEach(piece => {
         piece.addEventListener('click', () => {
             if (!isMerged && piece.classList.contains('is-hovered')) {
-                mergePuzzle();
+                merge_puzzle();
             }
         });
 
@@ -159,7 +159,7 @@ function initMissionVision() {
         piece.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                if (!isMerged) mergePuzzle();
+                if (!isMerged) merge_puzzle();
             }
         });
 
@@ -196,7 +196,7 @@ function initMissionVision() {
 
 // Initialize reliably
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMissionVision);
+    document.addEventListener('DOMContentLoaded', init_mission_vision);
 } else {
-    initMissionVision();
+    init_mission_vision();
 }

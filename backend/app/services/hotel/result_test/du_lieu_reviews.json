@@ -1,315 +1,213 @@
 {
     "search_metadata": {
-        "id": "6a1066af17bdbf8adc85b031",
+        "id": "6a119d3b054e5f0fe0010015",
         "status": "Success",
-        "json_endpoint": "https://serpapi.com/searches/n-PTL-k-PH9kaA7js6On-w/6a1066af17bdbf8adc85b031.json",
-        "created_at": "2026-05-22 14:22:39 UTC",
-        "processed_at": "2026-05-22 14:22:39 UTC",
-        "google_maps_reviews_url": "https://www.google.com/maps/place/data=!4m7!3m6!1s0x3170678c8f9f9f57:0x281835c15a315159!5m2!4m1!1i2!9m1!1b1?hl=vi",
-        "raw_html_file": "https://serpapi.com/searches/n-PTL-k-PH9kaA7js6On-w/6a1066af17bdbf8adc85b031.html",
-        "prettify_html_file": "https://serpapi.com/searches/n-PTL-k-PH9kaA7js6On-w/6a1066af17bdbf8adc85b031.prettify",
-        "total_time_taken": 0.8
+        "json_endpoint": "https://serpapi.com/searches/3UBILRblQQ_s9vByPJ5lzw/6a119d3b054e5f0fe0010015.json",
+        "created_at": "2026-05-23 12:27:39 UTC",
+        "processed_at": "2026-05-23 12:27:39 UTC",
+        "google_maps_reviews_url": "https://www.google.com/maps/place/data=!4m7!3m6!1s0x31752f271d2d14c5:0x6145e02c90fedcdf!5m2!4m1!1i2!9m1!1b1?hl=vi",
+        "raw_html_file": "https://serpapi.com/searches/3UBILRblQQ_s9vByPJ5lzw/6a119d3b054e5f0fe0010015.html",
+        "prettify_html_file": "https://serpapi.com/searches/3UBILRblQQ_s9vByPJ5lzw/6a119d3b054e5f0fe0010015.prettify",
+        "total_time_taken": 1.1
     },
     "search_parameters": {
         "engine": "google_maps_reviews",
-        "data_id": "0x3170678c8f9f9f57:0x281835c15a315159",
+        "data_id": "0x31752f271d2d14c5:0x6145e02c90fedcdf",
         "hl": "vi"
     },
     "place_info": {
-        "title": "Mercure Nha Trang Beach",
-        "address": "88A Trần Phú, Nha Trang, Khánh Hòa 57100, Việt Nam",
+        "title": "Saigon April Homestay",
+        "address": "212B/D96 Nguyễn Trãi, Cầu Ông Lãnh, Hồ Chí Minh 700000, Việt Nam",
         "rating": 4.8,
-        "reviews": 1318,
-        "type": "Khách sạn"
+        "reviews": 76,
+        "type": "Nhà khách"
     },
     "reviews": [
         {
             "position": 1,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pWT1REVTVSbXRzTmpSUWIwNW9hRzF4YzFneU9HYxAB!2m1!1s0x0:0x281835c15a315159!3m1!1s2@1:CAIQACodChtycF9oOjVOTDU5RmtsNjRQb05oaG1xc1gyOGc%7C%7C?hl=vi",
-            "rating": 4.0,
-            "date": "2 tháng trước",
-            "iso_date": "2026-02-24T23:41:45Z",
-            "iso_date_of_last_edit": "2026-02-24T23:41:45Z",
-            "images": [
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2rpOMbTWPGbxmx7Wi7Th4wttOMA57c-asrMoYS1hCQCglwaAPcohiyZAAjWahRAeNLsifgQZ1_AOHrcWUyDlqFzLf_zuIx5Q_KR5gNRgSjqhvsgVy6Uz3DykNpu5to4-neO59SDRC-A1nM=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn39VcMJD3SXj6UedA_SJQ86fWkKQhBT57dRKYHDFCETr7EbvoaHYRORucJZxXP3UPFfrLBrBbwtPGOAG3F6jyPyJTI6No9_8rcMB8NVxa95FAZaEZaavHM1Aktwf1vu4ebskn_2olg0Tic=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3NDMxCenIpBeGh0UcHz4c_Vu2c5BCzcxXkiFjB96GuOKUOJzJKTSSyXNcpUimrDZhMniYl0Ve3DRIwth6zBy1I_xqJUc8rOSTXdsrrtddCmVqmAS4FIRP8uqEx3wn-3hihIOKDiNedvaU=k-no"
-            ],
-            "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2pWT1REVTVSbXRzTmpSUWIwNW9hRzF4YzFneU9HYxAB",
+            "link": "https://www.tripadvisor.com.vn/ShowUserReviews-g293925-d14937060-r602284055?m=68573&staydates=2026_06_07_2026_06_08&uguests=1_2_0&supdv=unknown&supuc=US&supul=vi",
+            "rating": 5.0,
+            "date": "7 năm trước",
+            "iso_date": "2018-08-03T23:59:59Z",
+            "iso_date_of_last_edit": "2018-08-03T23:59:59Z",
+            "source": "Tripadvisor",
+            "review_id": "ChdDSUhNMG9nS0VJQ0FnTURvdjRTcmlnRRAB",
             "user": {
-                "name": "Lucas Nguyen",
-                "link": "https://www.google.com/maps/contrib/107564752675814219814?hl=vi",
-                "contributor_id": "107564752675814219814",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjUklISu17HIYg_iDawXTP3WEqDoUMMMVLchqJ0guHuvLS6MU8stzA=s120-c-rp-mo-ba7-br100",
-                "local_guide": true,
-                "reviews": 475,
-                "photos": 6626
+                "name": "Pioneer794845",
+                "link": "https://www.tripadvisor.com.vn/ShowUserReviews-g293925-d14937060-r602284055?m=68573&staydates=2026_06_07_2026_06_08&uguests=1_2_0&supdv=unknown&supuc=US&supul=vi",
+                "thumbnail": "https://lh3.googleusercontent.com/local-reviews/AJMZ0Qd0Gzx7-o-W0qn7F-oHhorx-ann6UFYRniBmE7Ar1MhRFtO-x6vY7U2LNCPC1lcQidkpw=s120-c-br100"
             },
-            "snippet": "Khách sạn mới, diện tích khá nhỏ, sạch sẽ, gọn gàng, phòng thoáng sáng sủa, tuy nhiên diện tích ks nhỏ phải đậu xe ở bãi bên cạnh, hành lang- thang máy có mùi khó chịu, tiện ích hồ bơi gym rất nhỏ.",
+            "snippet": "phòng ốc rộng rãi, thoáng mát, view đẹp, đi lại cũng tiện nữa. cô chủ cũng thân thiện, đồ ăn sáng thịnh soạn, chỉn chu. ở đây là có thể đi tới rất nhiều chỗ ăn chơi, ra Bùi Viện cũng rất gần nữa. ngay hẻm bên cạnh còn có ốc Đào ngon nổi tiếng",
             "extracted_snippet": {
-                "original": "Khách sạn mới, diện tích khá nhỏ, sạch sẽ, gọn gàng, phòng thoáng sáng sủa, tuy nhiên diện tích ks nhỏ phải đậu xe ở bãi bên cạnh, hành lang- thang máy có mùi khó chịu, tiện ích hồ bơi gym rất nhỏ."
-            },
-            "likes": 0
+                "original": "phòng ốc rộng rãi, thoáng mát, view đẹp, đi lại cũng tiện nữa. cô chủ cũng thân thiện, đồ ăn sáng thịnh soạn, chỉn chu. ở đây là có thể đi tới rất nhiều chỗ ăn chơi, ra Bùi Viện cũng rất gần nữa. ngay hẻm bên cạnh còn có ốc Đào ngon nổi tiếng"
+            }
         },
         {
             "position": 2,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2xSSFZWZFBNaTFQWVhkTWRWaDVSREZZTjE5NVpuYxAB!2m1!1s0x0:0x281835c15a315159!3m1!1s2@1:CAIQACodChtycF9oOlRHVVdPMi1PYXdMdVh5RDFYN195Znc%7C%7C?hl=vi",
-            "rating": 4.0,
-            "date": "2 tháng trước",
-            "iso_date": "2026-02-26T03:48:59Z",
-            "iso_date_of_last_edit": "2026-02-26T03:48:59Z",
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnSURnOE5yakxBEAE!2m1!1s0x0:0x6145e02c90fedcdf!3m1!1s2@1:CIHM0ogKEICAgIDg8NrjLA%7C%7C?hl=vi",
+            "rating": 5.0,
+            "date": "7 năm trước",
+            "iso_date": "2018-07-13T07:10:12Z",
+            "iso_date_of_last_edit": "2018-07-13T07:10:12Z",
             "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2xSSFZWZFBNaTFQWVhkTWRWaDVSREZZTjE5NVpuYxAB",
+            "review_id": "ChZDSUhNMG9nS0VJQ0FnSURnOE5yakxBEAE",
             "user": {
-                "name": "hai nguyen",
-                "link": "https://www.google.com/maps/contrib/109908537089167852804?hl=vi",
-                "contributor_id": "109908537089167852804",
-                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocLzUO5SRy9K59cjVrD5ZsVZ43aRJ51iHzCIVAUT3jWXv5cB3w=s120-c-rp-mo-br100",
+                "name": "Lê Hồng Vân",
+                "link": "https://www.google.com/maps/contrib/102332446108287862411?hl=vi",
+                "contributor_id": "102332446108287862411",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXG0tx7Gyphryp6nXIK8P4BvYyqIdPooauN8YHJ9fVeC4I3w8dh=s120-c-rp-mo-br100",
+                "local_guide": true,
+                "reviews": 6,
+                "photos": 0
+            },
+            "snippet": "Phòng rộng rãi, view đẹp, gần nhiều chỗ ăn ngon. cô chủ xinh và nhiệt tình, sẽ quay lại vào lần tới!",
+            "extracted_snippet": {
+                "original": "Phòng rộng rãi, view đẹp, gần nhiều chỗ ăn ngon. cô chủ xinh và nhiệt tình, sẽ quay lại vào lần tới!"
+            },
+            "likes": 1
+        },
+        {
+            "position": 3,
+            "link": "https://www.tripadvisor.com.vn/ShowUserReviews-g293925-d14937060-r600935516?m=68573&staydates=2026_06_07_2026_06_08&uguests=1_2_0&supdv=unknown&supuc=US&supul=vi",
+            "rating": 5.0,
+            "date": "7 năm trước",
+            "iso_date": "2018-07-29T23:59:59Z",
+            "iso_date_of_last_edit": "2018-07-29T23:59:59Z",
+            "source": "Tripadvisor",
+            "review_id": "ChZDSUhNMG9nS0VJQ0FnTURvX19ucFJ3EAE",
+            "user": {
+                "name": "134th_yn",
+                "link": "https://www.tripadvisor.com.vn/ShowUserReviews-g293925-d14937060-r600935516?m=68573&staydates=2026_06_07_2026_06_08&uguests=1_2_0&supdv=unknown&supuc=US&supul=vi",
+                "thumbnail": "https://lh3.googleusercontent.com/local-reviews/AJMZ0QeWB0GIG9gGd6g9zDFXwjE9TRuKRtAO6HvwA5jEdK_CrOJXcVxp8esjQRYTFMjay2JK=s120-c-br100"
+            },
+            "snippet": "điều đầu tiên thu hút là cô chủ rất dễ thương ... hihi||nơi ở thì thuận tiện cho việc đi lại các khu vui chơi ở Sài Gòn nữa...||phòng ốc sạch sẽ, thoáng mát, thức ăn sáng được chuẩn bị chu đáo, và cũng rất ngon nữa...||vote 5* ...",
+            "extracted_snippet": {
+                "original": "điều đầu tiên thu hút là cô chủ rất dễ thương ... hihi||nơi ở thì thuận tiện cho việc đi lại các khu vui chơi ở Sài Gòn nữa...||phòng ốc sạch sẽ, thoáng mát, thức ăn sáng được chuẩn bị chu đáo, và cũng rất ngon nữa...||vote 5* ..."
+            }
+        },
+        {
+            "position": 4,
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnSURXNy1mUEVnEAE!2m1!1s0x0:0x6145e02c90fedcdf!3m1!1s2@1:CIHM0ogKEICAgIDW7-fPEg%7C%7C?hl=vi",
+            "rating": 5.0,
+            "date": "4 năm trước",
+            "iso_date": "2022-04-08T05:55:09Z",
+            "iso_date_of_last_edit": "2022-04-08T05:55:11Z",
+            "source": "Google",
+            "review_id": "ChZDSUhNMG9nS0VJQ0FnSURXNy1mUEVnEAE",
+            "user": {
+                "name": "Dinh Nguyễn",
+                "link": "https://www.google.com/maps/contrib/112150456830151014198?hl=vi",
+                "contributor_id": "112150456830151014198",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXYGpJQ0GUsE-1y1Z5uJigEqjfdRQsthrDcFWSFMYsqGL3vh_pj=s120-c-rp-mo-br100",
                 "local_guide": true,
                 "reviews": 1,
                 "photos": 0
             },
-            "snippet": "Lần đầu tiên nghỉ tại Mecure Nha Trang, khách sạn ở ngay đường Trần Phú, view rất đẹp . Nhà mình ở phòng family nên  phòng hơi nhỏ mà đẹp, sạch sẽ và  rất ấm cúng, đầy đủ tiện nghi. Ăn sáng không nhiều món nhưng chất lượng khá tốt. Nhân viên rất chu đáo, lịch sự. Giá khá tốt. Thêm điểm cộng là có thêm món phụ.  Sẽ quay lại khi có dịp về Nha Trang.",
+            "snippet": "Phòng rộng, sạch sẽ, yên tĩnh, mát, thuận tiện đi lại, giá rất rẻ, cô chú thân thiện, sẽ quay lại.",
             "extracted_snippet": {
-                "original": "Lần đầu tiên nghỉ tại Mecure Nha Trang, khách sạn ở ngay đường Trần Phú, view rất đẹp . Nhà mình ở phòng family nên  phòng hơi nhỏ mà đẹp, sạch sẽ và  rất ấm cúng, đầy đủ tiện nghi. Ăn sáng không nhiều món nhưng chất lượng khá tốt. Nhân viên rất chu đáo, lịch sự. Giá khá tốt. Thêm điểm cộng là có thêm món phụ.  Sẽ quay lại khi có dịp về Nha Trang."
-            },
-            "details": {
-                "loại_chuyến_đi": "Chuyến nghỉ mát",
-                "nhóm_khách_du_lịch": "Gia đình",
-                "phòng": 5,
-                "dịch_vụ": 5,
-                "vị_trí": 5
-            },
-            "likes": 0
-        },
-        {
-            "position": 3,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT21adFNXaDBhMmMyUlU5QmRIUnVUV1JVTms1cmFGRRAB!2m1!1s0x0:0x281835c15a315159!3m1!1s2@1:CAIQACodChtycF9oOmZtSWh0a2c2RU9BdHRuTWRUNk5raFE%7C%7C?hl=vi",
-            "rating": 5.0,
-            "date": "2 tháng trước",
-            "iso_date": "2026-02-28T17:38:09Z",
-            "iso_date_of_last_edit": "2026-02-28T17:38:09Z",
-            "images": [
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1oa5-cvlenhCUllB_6McBQ8ylJTOm3Rl-UmAZzG8fAbJbcd3cwcpSW8CJYUdM5XjtYmmqAJCA2x6zIZYEUiUPA0pi4WD3VT3mArFgNxcxNsl5brHapsu1tMs6GDCln_zLbJl04rfkbTug=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2DwUfj_0X8nF6IJ7kD9UQBtuDQitsEc5jhzBN6nNzTyfgRdwNjHIPmPmrKNi4VWsY3GxNcqVphZ04yGAdgqYS3U4wEWKojFTUVJFAJg-J5AuBWddscNMZOtX8wzQWIXzk-iYTL2B6wiEJt=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3xT5ARvS6fGeluSVEnuM8lyY8K_cJBP799NHFi7mF2mCxB0WKHxfRKevqho_7c9efOsC98PyLpS8YnqCi2e4HLVGMtagKVVONr07kU3Aj6iAc7tJV3KBo_NuA5ZW5e02NLBDuXhI-QYubM=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1_CTKiQ7p2Bathj47reKNBxgDfHMA0-sdQ4cEy0XhicAMtr6Xna2qzlXWMvL45eTDzAg0IIGMeB9TjAz7VbRZyMn5gKzGi_t9enj2RbabCsz4HaV-qSQVQ0ss1LAOOoXOxu4psJ7wZH6lH=k-no"
-            ],
-            "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT21adFNXaDBhMmMyUlU5QmRIUnVUV1JVTms1cmFGRRAB",
-            "user": {
-                "name": "Thảo Nguyễn Thị Thu",
-                "link": "https://www.google.com/maps/contrib/101729813340727389658?hl=vi",
-                "contributor_id": "101729813340727389658",
-                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocLVohtGwiN9-nnCtw4Na-EsasOlBBX4cZg88TIs0qc5BQ9hlA=s120-c-rp-mo-br100",
-                "local_guide": true,
-                "reviews": 4,
-                "photos": 8
-            },
-            "snippet": "Điểm trừ  là hồ bơi hơi bé + nước khá lạnh, ko có welcome drink, tối đến cách âm ko tốt nghe tiếng xe hơi ồn 1 tí…\nPhòng hơi hẹp tuy nhiên rất sạch sẽ, nhân viên vô cùng thân thiện điểm cộng lớn vs gđ m\nBuffer sáng khá đa dạng.\nNói chung trải nghiệm m khá hài lòng, có dịp m sẽ quay lại mong ks sẽ cải thiện hơn ❤️",
-            "extracted_snippet": {
-                "original": "Điểm trừ  là hồ bơi hơi bé + nước khá lạnh, ko có welcome drink, tối đến cách âm ko tốt nghe tiếng xe hơi ồn 1 tí…\nPhòng hơi hẹp tuy nhiên rất sạch sẽ, nhân viên vô cùng thân thiện điểm cộng lớn vs gđ m\nBuffer sáng khá đa dạng.\nNói chung trải nghiệm m khá hài lòng, có dịp m sẽ quay lại mong ks sẽ cải thiện hơn ❤️"
-            },
-            "details": {
-                "loại_chuyến_đi": "Chuyến nghỉ mát",
-                "nhóm_khách_du_lịch": "Gia đình",
-                "phòng": 5,
-                "dịch_vụ": 5,
-                "vị_trí": 5,
-                "điểm_nổi_bật_của_khách_sạn": "Sang trọng, Phù hợp với trẻ em"
-            },
-            "likes": 0
-        },
-        {
-            "position": 4,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pOVk1IYzFSbGhWU0ZCbFZXOUxWakpIWldJMFNVRRAB!2m1!1s0x0:0x281835c15a315159!3m1!1s2@1:CAIQACodChtycF9oOjNVMHc1RlhVSFBlVW9LVjJHZWI0SUE%7C%7C?hl=vi",
-            "rating": 4.0,
-            "date": "3 tháng trước",
-            "iso_date": "2026-02-17T14:32:45Z",
-            "iso_date_of_last_edit": "2026-02-17T14:32:45Z",
-            "images": [
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3pgMF7VYiOEncGAiUhgU_LDnkwZUPiBifrnh4kBgb4fPEaE7AvPfWtmlwbNUREmRGIRSz9PGeqIvLxF01Sz9gVbzoeDeR18GzGLcOkRFUTKBe2gpmC6wHxYqvzWHz-g62LLBdSCjy3Q9g=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2pg20n6jDkFJV73150AA8Qj6yLZ4l4UGJd3wLWuwXIE6LS3h2MkqUBohx8Ii5QdMpvqGyl1lVjZwUbI7l3iZmKaQ2GFmijkEe7Q3K6B4tPWC4waVDCXSORBxoA6ZtJKMc4cECE3-CM04kz=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3hIAxQBqfc-Qm5iC6kfaRh0qT6FF8hPrpBXIWAhQXGGmBlSgjZuOPKLkWGNT-gWUPi-ntIMsL99mf_qLHuGGRYA7bSeE0pOjik7bgMO6lGhS07FP-qj36DPixsbv6DyW1iOLSRq0_xijMv=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3_eTXMNfLLZRXBM0dr-m6mqzthZxfjlF9AtXXxNv7I9IJff0rAKTNLiQ80iNVupwyuHbo_OE-zLIr0HDL7eSxRm8u1qhdcGvIk9UdIbYx8sMpq7aFc_WieKwbXFcXsdoRJwnZqpqluSLIs=k-no"
-            ],
-            "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2pOVk1IYzFSbGhWU0ZCbFZXOUxWakpIWldJMFNVRRAB",
-            "user": {
-                "name": "Hang Dinh",
-                "link": "https://www.google.com/maps/contrib/116882802147535455559?hl=vi",
-                "contributor_id": "116882802147535455559",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjW4Ln9WlnDDEtV9ArxO00UfqngNxLexOCl0Z-P8wuxBMpjGtYZFnw=s120-c-rp-mo-ba6-br100",
-                "local_guide": true,
-                "reviews": 125,
-                "photos": 1988
-            },
-            "snippet": "Phòng ốc sạch sẽ và khá tiện nghi.\nBữa sáng khá phong phú.\nVị trí trung tâm sát biển phù hợp di chuyển các địa điểm thăm quan\nTuy nhiên mình có book ở phòng suite view biển nhưng lại không có trái cây welcome và có lần khoá thẻ từ của phòng bị lỗi (lễ tân giải thích là lâu lâu thẻ bị lỗi như vậy).\nP/S hình trong bài là phòng delux view thành phố mình ở đêm đầu, còn video là phòng suite view biển nhé.",
-            "extracted_snippet": {
-                "original": "Phòng ốc sạch sẽ và khá tiện nghi.\nBữa sáng khá phong phú.\nVị trí trung tâm sát biển phù hợp di chuyển các địa điểm thăm quan\nTuy nhiên mình có book ở phòng suite view biển nhưng lại không có trái cây welcome và có lần khoá thẻ từ của phòng bị lỗi (lễ tân giải thích là lâu lâu thẻ bị lỗi như vậy).\nP/S hình trong bài là phòng delux view thành phố mình ở đêm đầu, còn video là phòng suite view biển nhé."
-            },
-            "details": {
-                "loại_chuyến_đi": "Chuyến nghỉ mát",
-                "nhóm_khách_du_lịch": "Bạn bè",
-                "phòng": 4,
-                "dịch_vụ": 4,
-                "vị_trí": 5,
-                "điểm_nổi_bật_của_khách_sạn": "Cảnh đẹp, Yên tĩnh, Giá tốt, Công nghệ cao"
+                "original": "Phòng rộng, sạch sẽ, yên tĩnh, mát, thuận tiện đi lại, giá rất rẻ, cô chú thân thiện, sẽ quay lại."
             },
             "likes": 0
         },
         {
             "position": 5,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pkdFgzaHZZMnhNUnpReFNYSlhhV0oxU25OR1kyYxAB!2m1!1s0x0:0x281835c15a315159!3m1!1s2@1:CAIQACodChtycF9oOjdtX3hvY2xMRzQxSXJXaWJ1SnNGY2c%7C%7C?hl=vi",
-            "rating": 3.0,
-            "date": "4 tháng trước",
-            "iso_date": "2026-01-08T16:04:47Z",
-            "iso_date_of_last_edit": "2026-01-08T16:11:04Z",
-            "images": [
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2C1h4CBNac_C14xJjfQzZSdGbUj_AN56JNwmB-F6_JTBSRnscqmI8Oz2MpsLgsnzhBmPene3CKRsDX2gro9YUWMSc5JodBarGWKaf2alLaKQfyKMJF68NciaWTXmUGja0dLT4WiiEr9iY=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2ou1fLKFhWfqz1QfPWqSOID7U9PI5MHzI3gf-0eW2xvtz7lw4ackTTm5xV-2uwmKCKQXgET20kt9It9wYhwD2nGPZ5D6RMzgQh_1FpJeK-EHZG5uKKhAZvYp1vfiliikZhkel6WcE13Qxy=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0SB7iamc2gpXXygBvkGw0DbbfCHrE9cksDVa_4f71FT6lMFEMigZv1jyNNUpHLRkCq87Ye5Q-nqpY_A0_fiPGgFe89Fg0Ms3U0OIIaPop9rBDjMky3ZAVM6N1XLa02c9nZb1MluXqr38aV=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1X8hSMn4lOjMGnECRTPBO3csZ01eOjAO-KhU1Yd-TBQdhI6cpeDWsGWXjgHC30nvyQ1u7yJSZSQgpBIF7Wh-WywOAeWCqTgnx46D8qNcWgiN0nzoERqQbdCVc9Sr7bl52KuOdMYLLVyRq5=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2ef5rKEqaE8k0ptNSBSKjaWYHfzgWC61YT7nXuiTMgVEBQR-n_VtlaxPUTT_-KUagS0sASU9zdhP7kcMnToEBHmh77LH2bLj0S_WESIMp2J_ajnoqyhTJOU5M-cSO5mgsOQe1zrHAPU2fl=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0qcqO7CcKwc32g2zIsFLisik-k0-P7DrxKZkqECCXyttEUZCtV4ar_y3JWxmEd1lYA5p7y_c82afLpjST0ggkfH2nUs0lume6tEKvupf-5eNhnH6Eqw0j6MUDu8gK82I4U30qBID5nREE=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2JVj3Iwl8IstRvKTSLhxLZd7cfmS7D86184GMslpZm1hvzoxQHQp7TMMl7m1hKN7538iWf38Iw1oesul3IJ86WbrcyjSh_-Qzg3oQBhCsPlsORt1Q6ffGFcCQOWP1TkAyVLQ4Fvs-KPuI=k-no"
-            ],
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnSUNnbjhxTklREAE!2m1!1s0x0:0x6145e02c90fedcdf!3m1!1s2@1:CIHM0ogKEICAgICgn8qNIQ%7C%7C?hl=vi",
+            "rating": 5.0,
+            "date": "7 năm trước",
+            "iso_date": "2018-07-30T02:58:15Z",
+            "iso_date_of_last_edit": "2018-07-30T02:58:15Z",
             "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2pkdFgzaHZZMnhNUnpReFNYSlhhV0oxU25OR1kyYxAB",
+            "review_id": "ChZDSUhNMG9nS0VJQ0FnSUNnbjhxTklREAE",
             "user": {
-                "name": "Lil Trịnh",
-                "link": "https://www.google.com/maps/contrib/115487001301318760878?hl=vi",
-                "contributor_id": "115487001301318760878",
-                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocJqh53AKG9Wh1VpcvbY56cIdQFwfjqpRHT9m7ETeuj7hw_3zBM=s120-c-rp-mo-ba6-br100",
+                "name": "xuan quang",
+                "link": "https://www.google.com/maps/contrib/105311889941454882053?hl=vi",
+                "contributor_id": "105311889941454882053",
+                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocIx_klVWJ5pmpiSgMYJjkACKC3yGMAbMg5YxAJ-9i1YCT5yqA=s120-c-rp-mo-br100",
                 "local_guide": true,
-                "reviews": 599,
-                "photos": 4014
+                "reviews": 8,
+                "photos": 2
             },
-            "snippet": "Vị trí đẹp, ngay trung tâm, bài trí đẹp. Menu ăn sáng hơi ít đồ và chất lượng bình thường. Nhân viên ko nhiệt tình lắm nhưng nv buồng phòng thì rất thân thiện. Phòng khá nhỏ và hiện đại, tươm tất. View phòng mình ở khá xấu, nhìn xuống cái nhà bị đập ngổn ngang dù tui thành viên vàng (Gold Member) mà cũng ko được nâng cấp. Tui ở 2 đêm với gia đình nhưng cảm giác chất lượng ko tương xứng như các Mercure khác. Toà nhà cũng ko có chỗ đậu xe hơi, phải đậu bãi ngoài nắng chang chang. Thiết nghĩ nên thuê nguyên 1 khu có dù hoặc bạt cho khách Mercure chứ nhỉ. Phòng giá khá rẻ, ko biết định vị vậy luôn hay do chưa mở lâu cần thu hút khách. facade toà nhà bên ngoài đẹp, cổ điển.",
+            "snippet": "Phòng đẹp. Nhân viên nhiệt tình, chu đáo và dễ thương. Vị trí trung tâm thành phố thuận tiện đi lại. Sẽ ghé lại nếu có cơ hội",
             "extracted_snippet": {
-                "original": "Vị trí đẹp, ngay trung tâm, bài trí đẹp. Menu ăn sáng hơi ít đồ và chất lượng bình thường. Nhân viên ko nhiệt tình lắm nhưng nv buồng phòng thì rất thân thiện. Phòng khá nhỏ và hiện đại, tươm tất. View phòng mình ở khá xấu, nhìn xuống cái nhà bị đập ngổn ngang dù tui thành viên vàng (Gold Member) mà cũng ko được nâng cấp. Tui ở 2 đêm với gia đình nhưng cảm giác chất lượng ko tương xứng như các Mercure khác. Toà nhà cũng ko có chỗ đậu xe hơi, phải đậu bãi ngoài nắng chang chang. Thiết nghĩ nên thuê nguyên 1 khu có dù hoặc bạt cho khách Mercure chứ nhỉ. Phòng giá khá rẻ, ko biết định vị vậy luôn hay do chưa mở lâu cần thu hút khách. facade toà nhà bên ngoài đẹp, cổ điển."
+                "original": "Phòng đẹp. Nhân viên nhiệt tình, chu đáo và dễ thương. Vị trí trung tâm thành phố thuận tiện đi lại. Sẽ ghé lại nếu có cơ hội"
             },
-            "details": {
-                "loại_chuyến_đi": "Chuyến nghỉ mát",
-                "nhóm_khách_du_lịch": "Gia đình",
-                "phòng": 4,
-                "dịch_vụ": 3,
-                "vị_trí": 4,
-                "điểm_nổi_bật_của_khách_sạn": "Yên tĩnh"
-            },
-            "likes": 0
+            "likes": 1
         },
         {
             "position": 6,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT21VeGIxUlNVR2hxY0RrNFFsQnFNVTQwWkhGMFVGRRAB!2m1!1s0x0:0x281835c15a315159!3m1!1s2@1:CAIQACodChtycF9oOmUxb1RSUGhqcDk4QlBqMU40ZHF0UFE%7C%7C?hl=vi",
-            "rating": 4.0,
-            "date": "5 tháng trước",
-            "iso_date": "2025-12-19T14:19:21Z",
-            "iso_date_of_last_edit": "2025-12-19T14:19:21Z",
-            "images": [
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0KSOV6ymiVhUbB89DL9AVWTUj8-8IThnwE3vqKv2Po4XuwB8zUkvG-qBoP7LpKUvdqhdsS3XfmWfW-c3eZ8bdeXiqpD7vdqJm3WOrhlSsrOXR3JC7FXzI4oHnw3H12cQCWcJASh15wTTY=k-no"
-            ],
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnSURRNzVicmFREAE!2m1!1s0x0:0x6145e02c90fedcdf!3m1!1s2@1:CIHM0ogKEICAgIDQ75braQ%7C%7C?hl=vi",
+            "rating": 5.0,
+            "date": "7 năm trước",
+            "iso_date": "2018-07-30T02:49:26Z",
+            "iso_date_of_last_edit": "2018-07-30T02:49:26Z",
             "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT21VeGIxUlNVR2hxY0RrNFFsQnFNVTQwWkhGMFVGRRAB",
+            "review_id": "ChZDSUhNMG9nS0VJQ0FnSURRNzVicmFREAE",
             "user": {
-                "name": "Thái Thái",
-                "link": "https://www.google.com/maps/contrib/110837523461122556129?hl=vi",
-                "contributor_id": "110837523461122556129",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjVVBHMrNa-jpFS4uosOnu-JjWmWDbcSKuQK25vRaNi24qmZr14Rgg=s120-c-rp-mo-ba8-br100",
+                "name": "Ý Lùn #thietkexaydung",
+                "link": "https://www.google.com/maps/contrib/114607699977881015416?hl=vi",
+                "contributor_id": "114607699977881015416",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjV1BVDNfcEogKY6VeYgwBtrfdVkfwmOyr1eZtCsVhrZc3rrPnQ7=s120-c-rp-mo-br100",
                 "local_guide": true,
-                "reviews": 760,
-                "photos": 10529
+                "reviews": 3,
+                "photos": 10
             },
-            "snippet": "Phòng nhỏ và ồn. Giữa khuya mình mới được đổi sang phòng khác sau rất nhiều lần khiếu nại là nhạc từ hàng quán gần đó quá ồn không thể ngủ được. Có bạn nhân viên nữ không hề hỗ trợ mà giọng điệu không phù hợp. Tới khi mình gọi gặp bạn nam mới được xử lý đổi phòng. Ăn ở khách sạn ok nhưng nước pha chế không ngon. Không có chỗ gửi xe mà phải gửi ở bãi gần đó. Hành lan khách sạn buổi tối tắt đèn (chắc để tiết kiệm điện) khá là kỳ lạ và kinh dị.",
+            "snippet": "Đơn giản mà ấm cúng! Hiếm gặp được chỗ nào ở q1 lại thân thiện với khách như ở đây! Like mạnh! Lần sau lại ủng hộ nhé!",
             "extracted_snippet": {
-                "original": "Phòng nhỏ và ồn. Giữa khuya mình mới được đổi sang phòng khác sau rất nhiều lần khiếu nại là nhạc từ hàng quán gần đó quá ồn không thể ngủ được. Có bạn nhân viên nữ không hề hỗ trợ mà giọng điệu không phù hợp. Tới khi mình gọi gặp bạn nam mới được xử lý đổi phòng. Ăn ở khách sạn ok nhưng nước pha chế không ngon. Không có chỗ gửi xe mà phải gửi ở bãi gần đó. Hành lan khách sạn buổi tối tắt đèn (chắc để tiết kiệm điện) khá là kỳ lạ và kinh dị."
-            },
-            "details": {
-                "loại_chuyến_đi": "Chuyến nghỉ mát",
-                "phòng": 3,
-                "dịch_vụ": 4,
-                "vị_trí": 4
+                "original": "Đơn giản mà ấm cúng! Hiếm gặp được chỗ nào ở q1 lại thân thiện với khách như ở đây! Like mạnh! Lần sau lại ủng hộ nhé!"
             },
             "likes": 0
         },
         {
             "position": 7,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pORFRHNTBTbE5KZVRrM1QzUlpOMVIzTkhCbE9HYxAB!2m1!1s0x0:0x281835c15a315159!3m1!1s2@1:CAIQACodChtycF9oOjNDTG50SlNJeTk3T3RZN1R3NHBlOGc%7C%7C?hl=vi",
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSURNX3BYMzVnRRAB!2m1!1s0x0:0x6145e02c90fedcdf!3m1!1s2@1:CIHM0ogKEICAgIDM_pX35gE%7C%7C?hl=vi",
             "rating": 5.0,
-            "date": "4 tháng trước",
-            "iso_date": "2025-12-25T09:09:56Z",
-            "iso_date_of_last_edit": "2025-12-25T09:09:56Z",
-            "images": [
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1Cwt8ZwXfM_5Pth6fpbm-wQKwz6fiZGwGKxnuNY-B8Zch6y51bC0IrLSuJWYhkQBCf545wHi-J-bONeZmHcg7i8TMmcqNshHIsS4OA5zJVpcqnTE7Efxzy2baacS8aF2ECdW1UFahE45I=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1K3r5YBknQGcjBKIIuAuXwPyLaVrLzbWfAiaerhMOe5pz1mr-LmJ91y8rJyfwc5QNIhGuLH4SN8rGOupp8HAXdtiGm5NRUV4uaK6kflHQwKmL-Yjm_2jqQG1SvuHIt7mjtJZvfNrwc2pM=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3w6c2Em2ZpKdSICAuE4yH7IbyhD2ZbiqXUxZGKn-SUm3oFuYkNioajeuTvfQyPQAzvzlVoe8Hpc53wnAZ-deFlI73hLuhh0VZR-gjkUhvx_2HDzhc3QQ7OF8AUl9lM9iYdtY_KXcK8qNKd=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3gbnQupTKlWratEPkZjzP8t07-1mhXV3oEvXbtKEkG8toO88OVjK72yIyamzMftJ82ayO7XYaxYmW8YhY8ToyUXG8nsi5DFrYZNFIg6Vkq5I2wvl5pOHnWcVVEMSE7U8QoQ5xUvM3jUjAQ=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn2XMx3jgDXUthj6IXN8gOhQ-kZrAFFP89-LoLqVEDi6lmWiux6z7ZtJBBvW3yiAV8Ulh6zyXh6bTx1TDFkpq1ELnSqhR6-0Kd76D3FggNSSYGfO8j-TWGgKpfqtPpYgnSXCaqEBosCopdY=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn3mBrR5KfaYeVIU6kNE80-zDdLx3MyzyRanRz2osnBR0Ac6m59g5E0QJlInsZpZzzoJPetGeFhkiEgIuTsSIQ5EMMPfsJGVqAAFRpxKfix4vk36962Fdsy6oQFTkUT5TSlZTp-pKPnYWdpO=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn38b67PvDm661oJdLNOv_5I9d3BsLaVQ3IOWXmJHUGhxkNt4NnUdKsdaxAezHK22mZbWIW2FNebfpTEbUj4vw8nxba91MwzUtwgyklHFkkMsDsPp8wJsd5iebFx282ZEF4W8--0_ayd9u9w=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0UjDvI3SWqyHaOmYt782HQ7PRJUX65bvlH-JA1IENpDjOMjjuO_fLdGwmlvAPv_dVmHro3LIk_MaTyPq6TS3fzrSBBbG5UOdAoDrsdsEbJKXxSKBQvhziif2-T3cr59wc4gw0iFxf2s_PB=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn1FbPDtcuaIlJPEYyM77ADWPnTLKFOBAuNZFYLwrqyhvb60LieaKlnF6bYtDLOgIrDDgiMEuCPGTwy6RUMbEzaj8KvO-loXKXcN8PY99VHplvF9losmKYZCAkmBqevaEwLc5wTo-wFhvjM=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn27z7oOeyS2VEKX1edQl-4Crj0pvdWDxWX6nrdnU8whrg-oWlycQcfOaIH0vPONsXwPmP9FkEbh_SaAGJBf-jf0ZzZGBzydkyPSczFHtJwB9xxBE2NSUUieEArjsBcEdJm1YdQbqhVHAGc0=k-no",
-                "https://lh3.googleusercontent.com/grass-cs/ANxoTn0a34TYOqvVQ7_1tzMxzPCtfrniSdGIIVZ44I6PZLoKhJGmefiSx_5oz908qUJsfEbzBPETevJjUDGrjGv3FuCCLSwI74zrrKhKr-mazhKSmPrp248qB8I1iGAql3-qzk-YAK7Zf8EjH9QH=k-no"
-            ],
+            "date": "6 năm trước",
+            "iso_date": "2020-01-01T01:20:20Z",
+            "iso_date_of_last_edit": "2020-01-01T01:20:20Z",
             "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2pORFRHNTBTbE5KZVRrM1QzUlpOMVIzTkhCbE9HYxAB",
+            "review_id": "ChdDSUhNMG9nS0VJQ0FnSURNX3BYMzVnRRAB",
             "user": {
-                "name": "Louis Nguyen",
-                "link": "https://www.google.com/maps/contrib/114673648458824233244?hl=vi",
-                "contributor_id": "114673648458824233244",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXb1S5Nxd2eMIU4y761jtlj2vAIKif22my-HmoSIm80LUUUTWUf=s120-c-rp-mo-ba4-br100",
+                "name": "thu hao vo ngoc",
+                "link": "https://www.google.com/maps/contrib/116024919542629829060?hl=vi",
+                "contributor_id": "116024919542629829060",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXlHi_YNQDEUofbmrH8M6MQCwEwgIqrvqTgDUwlY4m2w1JSNh0=s120-c-rp-mo-ba4-br100",
                 "local_guide": true,
-                "reviews": 71,
-                "photos": 254
+                "reviews": 112,
+                "photos": 166
             },
-            "snippet": "Khách sạn mới, đẹp, thiết kế phong cách bán cổ điển sang trọng. Phòng ở trực diện biển, view rất thoáng và thư giãn. Bữa sáng đa dạng món ăn\n\nĐiểm trừ nhỏ duy nhất là ban đêm có chút tạp âm từ một beach club gần đó vọng lên. Tuy nhiên điều này không ảnh hưởng nhiều đến trải nghiệm tổng thể.\n\nTôi rất hài lòng và chắc chắn sẽ quay lại trong khoảng 2 tháng tới.",
+            "snippet": "Homestay bé xinh, giường êm, phòng xinh xắn sạch sẽ, chủ rất dễ chịu và thân thiện, giá tốt!",
             "extracted_snippet": {
-                "original": "Khách sạn mới, đẹp, thiết kế phong cách bán cổ điển sang trọng. Phòng ở trực diện biển, view rất thoáng và thư giãn. Bữa sáng đa dạng món ăn\n\nĐiểm trừ nhỏ duy nhất là ban đêm có chút tạp âm từ một beach club gần đó vọng lên. Tuy nhiên điều này không ảnh hưởng nhiều đến trải nghiệm tổng thể.\n\nTôi rất hài lòng và chắc chắn sẽ quay lại trong khoảng 2 tháng tới."
-            },
-            "details": {
-                "phòng": 5,
-                "dịch_vụ": 5,
-                "vị_trí": 5
+                "original": "Homestay bé xinh, giường êm, phòng xinh xắn sạch sẽ, chủ rất dễ chịu và thân thiện, giá tốt!"
             },
             "likes": 0
         },
         {
             "position": 8,
-            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2t4dVJqRmpOMlJ4VWpOcVJURmxTa28wY1ZFNE1VRRAB!2m1!1s0x0:0x281835c15a315159!3m1!1s2@1:CAIQACodChtycF9oOkxuRjFjN2RxUjNqRTFlSko0cVE4MUE%7C%7C?hl=vi",
+            "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnSUMwX0tTTWZnEAE!2m1!1s0x0:0x6145e02c90fedcdf!3m1!1s2@1:CIHM0ogKEICAgIC0_KSMfg%7C%7C?hl=vi",
             "rating": 5.0,
-            "date": "Thời gian chỉnh sửa: 2 tháng trước",
-            "iso_date": "2026-02-26T05:05:59Z",
-            "iso_date_of_last_edit": "2026-03-05T13:19:27Z",
+            "date": "6 năm trước",
+            "iso_date": "2019-09-19T00:36:38Z",
+            "iso_date_of_last_edit": "2019-09-19T00:36:38Z",
             "source": "Google",
-            "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2t4dVJqRmpOMlJ4VWpOcVJURmxTa28wY1ZFNE1VRRAB",
+            "review_id": "ChZDSUhNMG9nS0VJQ0FnSUMwX0tTTWZnEAE",
             "user": {
-                "name": "Chi Wu",
-                "link": "https://www.google.com/maps/contrib/115879036663216902405?hl=vi",
-                "contributor_id": "115879036663216902405",
-                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocKVvjsQpXZA6k0GQhquimUtkqTCSS2voeLTJORfTdO8Vc_W4w=s120-c-rp-mo-br100",
+                "name": "Quochuy Tran Nguyen",
+                "link": "https://www.google.com/maps/contrib/107727151924061870190?hl=vi",
+                "contributor_id": "107727151924061870190",
+                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocKMn1YyluEM9um7qI0tsElJf25lphBQUojgSYT5J15py72Ipg=s120-c-rp-mo-br100",
                 "local_guide": true,
-                "reviews": 3,
-                "photos": 1
+                "reviews": 2,
+                "photos": 0
             },
-            "snippet": "Khách sạn sạch sẽ, nhân viên nhiệt tình, cho mình lên xem phòng trước khi nhận phòng luôn. quá đỉnh",
+            "snippet": "Phòng sạch sẽ. Cô chủ dễ thương.\nCòn chở giúp mình ra bệnh viện nữa",
             "extracted_snippet": {
-                "original": "Khách sạn sạch sẽ, nhân viên nhiệt tình, cho mình lên xem phòng trước khi nhận phòng luôn. quá đỉnh"
-            },
-            "details": {
-                "loại_chuyến_đi": "Chuyến nghỉ mát",
-                "nhóm_khách_du_lịch": "Gia đình",
-                "phòng": 5,
-                "dịch_vụ": 5,
-                "vị_trí": 5,
-                "điểm_nổi_bật_của_khách_sạn": "Yên tĩnh, Phù hợp với trẻ em, Giá tốt"
+                "original": "Phòng sạch sẽ. Cô chủ dễ thương.\nCòn chở giúp mình ra bệnh viện nữa"
             },
             "likes": 0
         }
     ],
     "serpapi_pagination": {
-        "next": "https://serpapi.com/search.json?data_id=0x3170678c8f9f9f57%3A0x281835c15a315159&engine=google_maps_reviews&hl=vi&next_page_token=CjEIARIpCgoAP7_LANtz____EhDrHyWpzGeet0Vb79kAAAAAGgn92TMCY0HYxvAYACIA%3A8",
-        "next_page_token": "CjEIARIpCgoAP7_LANtz____EhDrHyWpzGeet0Vb79kAAAAAGgn92TMCY0HYxvAYACIA:8"
+        "next": "https://serpapi.com/search.json?data_id=0x31752f271d2d14c5%3A0x6145e02c90fedcdf&engine=google_maps_reviews&hl=vi&next_page_token=CjEIARIpCgoAP7_LWhtU____EhDDCFCQvuNGgi1epS0AAAAAGgn97XMCkrkM6ooYACIA%3A8",
+        "next_page_token": "CjEIARIpCgoAP7_LWhtU____EhDDCFCQvuNGgi1epS0AAAAAGgn97XMCkrkM6ooYACIA:8"
     }
 }
