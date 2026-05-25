@@ -36,6 +36,11 @@
   padding: 6px 10px;
   height: auto;
 }
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .logo {
   display: flex;
   align-items: center;
@@ -1027,7 +1032,7 @@
   display: none; /* Hidden by default - enabled dynamically by darkmode.js */
   align-items: center;
   justify-content: center;
-  margin: 0 10px;
+  margin: 0;
 }
 .toggle-track {
   width: 52px;
@@ -1303,7 +1308,6 @@ body.dark .mc-invite-bubble::after {
   cursor: pointer;
   z-index: 310;
   transition: all var(--t);
-  margin-left: 8px;
 }
 .header-mobile-toggle:hover {
   background: rgba(0, 169, 255, 0.15);

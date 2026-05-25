@@ -10,7 +10,7 @@ API_KEY_AI1 = os.getenv("GEMINI_API_KEY_FOR_CHATBOT")
 API_KEY_AI2 = os.getenv("GEMINI_API_KEY_FOR_CHATBOT_RCM")
 
 if not API_KEY_AI1 or not API_KEY_AI2:
-    raise ValueError("❌ Không tìm thấy GEMINI_API_KEY! Hãy kiểm tra lại file .env")
+    raise ValueError("[ERROR] Khong tim thay GEMINI_API_KEY! Hay kiem tra lai file .env")
 
 # Khởi tạo client
 client_ai1 = genai.Client(api_key=API_KEY_AI1)
@@ -107,7 +107,7 @@ class TopGoChatbot:
             )
             return response.text.strip()
         except Exception as e:
-            print(f"❌ Lỗi trích xuất địa điểm: {e}")
+            print(f"[ERROR] Loi trich xuat dia diem: {e}")
             return "none"
         
     def get_top_5_restaurants(self, user_message: str, location_slug: str) -> str:
@@ -157,14 +157,14 @@ class TopGoChatbot:
                 return "FIND_FOOD"
             return "GENERAL_CHAT"
         except Exception as e:
-            print(f"❌ Lỗi phân loại ý định: {e}")
+            print(f"[ERROR] Loi phan loai y dinh: {e}")
             return "GENERAL_CHAT" # Fallback an toàn: Có lỗi thì cứ cho chat bình thường
         
     def send_message(self, message: str) -> str:
         """Hàm chính xử lý tin nhắn người dùng gửi tới"""
         # 1. Phân loại ý định bằng AI thay vì dùng từ khóa cứng
         intent = self.classify_intent(message)
-        print(f"🔍 [System Log] Intent detected: {intent}")
+        print(f"[System Log] Intent detected: {intent}")
 
         if intent == "FIND_FOOD":
             # AI 1 phân tích tên thành phố

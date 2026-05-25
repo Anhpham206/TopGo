@@ -459,7 +459,7 @@ async function handleFeedback() {
     if (!val) { showToast('Vui lòng nhập phản hồi', 'error'); return; }
     if (val.length > 500) { showToast('Phản hồi tối đa 500 ký tự', 'error'); return; }
     val = sanitizeText(val);
-    if (isNonsensicalText(val)) showToast('Nội dung phản hồi không rõ ràng. AI có thể không hiểu đúng.', 'warning');
+    if (isNonsensicalText(val)) { showToast('Phản hồi không rõ ràng. Vui lòng mô tả cụ thể hơn để hệ thống cập nhật chính xác.', 'error'); return; }
     const btn = document.querySelector('.btn-feedback');
     if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang cập nhật...'; }
     try {

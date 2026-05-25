@@ -323,4 +323,7 @@ async def generate_itinerary_stream(payload: dict):
         yield json.dumps({"step": "done", "result": final_output}) + "\n"
 
     except Exception as e:
+        import traceback
+        with open("error_traceback.txt", "w", encoding="utf-8") as f:
+            f.write(traceback.format_exc())
         yield json.dumps({"step": "done", "result": {"status": "error", "errors": [str(e)]}}) + "\n"
