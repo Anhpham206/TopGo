@@ -197,6 +197,9 @@ export async function loadSharedComponents() {
             } else if (currentPage === 'index.html' || currentPage === '' || currentPage === '/') {
                 activeId = 'nav-home';
                 mobActiveId = 'mob-nav-home';
+            } else if (currentPage === 'aboutus.html') {
+                activeId = 'nav-aboutus';
+                mobActiveId = 'mob-nav-aboutus';
             } else if (currentPage === 'pricing.html') {
                 activeId = 'nav-pricing';
                 mobActiveId = 'mob-nav-pricing';
@@ -438,3 +441,5 @@ export async function loadSharedComponents() {
 
 // Auto-run on import (both index and chatbot pages need this)
 loadSharedComponents();
+
+

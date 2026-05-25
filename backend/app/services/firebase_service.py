@@ -8,6 +8,8 @@ import json
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("google_genai").setLevel(logging.WARNING)
 logger = logging.getLogger("app.firebase_service")
 
 firebase_app = None

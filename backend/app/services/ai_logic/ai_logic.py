@@ -14,7 +14,7 @@ API_KEY2 = os.getenv("GEMINI_API_KEY_2")
 
 if not API_KEY:
     raise ValueError(
-        "[ERROR] Khong tim thay GEMINI_API_KEY! Hay kiem tra lai file .env"
+        "[ERROR] Không tìm thấy GEMINI_API_KEY! Hãy kiểm tra lại file .env"
     )
 
 client = genai.Client(api_key=API_KEY)
@@ -186,7 +186,7 @@ def call_ai_1(user_input_dict):
     """
     Trả về Dictionary kết quả.
     """
-    print("[AI 1] Dang phan tich logic...")
+    print("[AI 1] Đang phân tích logic...")
     user_data_str = json.dumps(user_input_dict, ensure_ascii=False)
     full_prompt = f"{user_data_str}\n{PROMPT_AI1}"
 
@@ -200,7 +200,7 @@ def call_ai_1(user_input_dict):
 
 def call_ai_2(ai1_result_dict, db_data_dict):
     """Nhận kết quả từ AI1"""
-    print("[AI 2] Dang tong hop lich trinh va tinh diem theo mau...")
+    print("[AI 2] Đang tổng hợp lịch trình và tính điểm theo mẫu...")
 
     combined_data = {**ai1_result_dict, **db_data_dict}
 
@@ -214,6 +214,6 @@ def call_ai_2(ai1_result_dict, db_data_dict):
     response = client2.models.generate_content(
         model=MODEL_ID_AI2, contents=full_prompt, config=config_ai2
     )
-    print("AI 2 đã soạn xong nội dung lịch trình\n")
+    print("AI 2 đã soạn xong nội dung lịch trình")
 
     return json.loads(response.text)

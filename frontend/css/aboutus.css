@@ -1,0 +1,519 @@
+/* ========================================================================
+   FILE: aboutus.css
+   MÔ TẢ: Stylesheet cho trang About Us – Carousel 3D, lanyard, glassmorphism.
+   ======================================================================== */
+
+/* ========== GLOBAL & RESET ========== */
+.aboutus-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem 5rem;
+}
+
+/* ========== HERO SECTION ========== */
+.aboutus-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.hero-glass-panel {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 30px 60px rgba(0, 169, 255, 0.1), inset 0 1px 0 #fff;
+  border-radius: 36px;
+  padding: 60px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 169, 255, 0.08);
+  border: 1px solid rgba(0, 169, 255, 0.2);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--p1);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--p1);
+  border-radius: 50%;
+  animation: pulseDot 1.8s infinite alternate;
+}
+@keyframes pulseDot {
+  0% { transform: scale(0.85); opacity: 0.5; box-shadow: 0 0 4px var(--p1); }
+  100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px var(--p1); }
+}
+.hero-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(28px, 4.2vw, 48px);
+  font-weight: 800;
+  color: #0091ff;
+  line-height: 1.25;
+  margin-bottom: 20px;
+}
+.hero-title span {
+  background: linear-gradient(135deg, var(--p1) 20%, var(--p2) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-desc {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 750px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ========== CAROUSEL SECTION ========== */
+.aboutus-carousel-section {
+  margin: 4rem 0 2rem;
+}
+.carousel-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.carousel-header-tag {
+  background: rgba(0, 169, 255, 0.1);
+  display: inline-block;
+  padding: 0.3rem 1.2rem;
+  border-radius: 40px;
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--p1);
+}
+.carousel-header h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin: 0.8rem 0 0.2rem;
+  color: var(--text);
+}
+.carousel-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* TRACK & CONTAINER */
+.cinema-carousel {
+  position: relative;
+  width: 100%;
+  overflow-x: clip;
+  padding: 3rem 0;
+  touch-action: pan-y pinch-zoom;
+}
+.carousel-track {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: grab;
+  will-change: transform;
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.4, 1);
+}
+.carousel-track:active {
+  cursor: grabbing;
+}
+
+/* ========== ID CARD 3D ========== */
+.id-card {
+  flex: 0 0 320px;
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  position: relative;
+}
+/* Default (inactive) */
+.id-card:not(.active) {
+  opacity: 0.35;
+  transform: scale(0.78) translateY(30px) rotateY(8deg) rotateX(5deg);
+  filter: blur(2px); /* giảm blur để mượt hơn */
+}
+/* Active */
+.id-card.active {
+  opacity: 1;
+  transform: scale(1.15) translateY(-15px) rotateY(0deg) rotateX(0deg);
+  z-index: 20;
+  filter: blur(0);
+}
+/* Adjacent – kế bên (tuỳ chọn, nếu cần) */
+.id-card.adjacent {
+  opacity: 0.7;
+  transform: scale(0.92) translateY(5px) rotateY(4deg) rotateX(2deg);
+  filter: blur(0.8px);
+  z-index: 10;
+}
+
+/* THẺ NHỰA GLASS */
+.plastic-card {
+  background: linear-gradient(135deg,
+    rgba(66,135,245,0.9) 0%, rgba(79,155,255,0.85) 20%,
+    rgba(100,180,255,0.8) 50%, rgba(120,200,255,0.75) 100%);
+  border-radius: 28px;
+  padding: 1.8rem 1.4rem 2rem;
+  position: relative;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.25);
+  transform: translateZ(6px);
+  overflow: hidden;
+  box-shadow: 0 50px 120px rgba(65,105,225,0.3),
+              0 20px 50px rgba(65,105,225,0.15),
+              inset 0 1px 2px rgba(255,255,255,0.4),
+              0 25px 45px rgba(0,0,0,0.15);
+  transition: all 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+.id-card.active .plastic-card {
+  box-shadow: 0 60px 150px rgba(65,105,225,0.45),
+              0 25px 60px rgba(65,105,225,0.25),
+              inset 0 1px 3px rgba(255,255,255,0.5),
+              0 30px 50px rgba(0,0,0,0.2);
+}
+/* Hiệu ứng quét sáng */
+.plastic-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  transform: skewX(-15deg);
+  transition: left 0.6s cubic-bezier(0.16,1,0.3,1);
+  pointer-events: none;
+  z-index: 5;
+}
+.id-card.active .plastic-card::before {
+  left: 150%;
+}
+/* Lớp phản quang */
+.plastic-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 25%,
+    rgba(255,255,255,0.05) 50%, transparent 100%);
+  border-radius: 28px;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.6;
+  transition: opacity 0.4s;
+}
+.id-card.active .plastic-card::after { opacity: 0.8; }
+.id-card:not(.active) .plastic-card::after { opacity: 0.3; }
+
+/* Lỗ treo dây */
+.card-holes {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 25px;
+  pointer-events: none;
+  z-index: 12;
+}
+.hole {
+  width: 12px;
+  height: 12px;
+  background: #2c3e66;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.3), 0 1px 1px rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+/* LANYARD – Dây đeo & móc kim loại */
+.lanyard-hook {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  z-index: 10;
+  pointer-events: none;
+}
+.metal-clip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 32px;
+  background: radial-gradient(circle at 35% 35%, #e8ecf5, #9aa9c2);
+  border-radius: 16px 16px 10px 10px;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.8), 0 3px 6px rgba(0,0,0,0.2);
+}
+.metal-clip::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 14px;
+  background: #7a879c;
+  border-radius: 0 0 4px 4px;
+}
+/* Dây chéo */
+.strap-cross-1, .strap-cross-2 {
+  position: absolute;
+  top: 28px;
+  width: 56px;
+  height: 6px;
+  background: repeating-linear-gradient(45deg, #2c6e9e, #2c6e9e 4px, #3a86b8 4px, #3a86b8 8px);
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.strap-cross-1 { left: 12px; transform: rotate(25deg); transform-origin: left center; }
+.strap-cross-2 { right: 12px; transform: rotate(-25deg); transform-origin: right center; }
+.fabric-ring {
+  position: absolute;
+  top: 66px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  background: #c0c8d6;
+  border-radius: 50%;
+  border: 2px solid #ffffffcc;
+  box-shadow: inset 0 0 2px #00000033, 0 2px 3px #00000022;
+  pointer-events: none;
+}
+
+/* NỘI DUNG THẺ */
+.card-avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 0.8rem;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #f0f4fa, #e0e9f5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  box-shadow: 0 12px 20px -8px rgba(0,0,0,0.15), inset 0 1px 2px rgba(255,255,255,0.8);
+  border: 2px solid rgba(255,255,240,0.9);
+  transition: transform 0.3s;
+}
+.id-card.active .card-avatar {
+  transform: scale(1.03);
+  box-shadow: 0 0 0 4px #ffdd88;
+}
+.card-name {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1e3a6b;
+}
+.card-role {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: #dfe8f5cc;
+  display: inline-block;
+  width: auto;
+  margin: 0.5rem auto;
+  padding: 0.2rem 1rem;
+  border-radius: 40px;
+  color: #2c5a9e;
+  font-family: var(--font-label);
+  backdrop-filter: blur(2px);
+}
+.card-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 0.6rem 0;
+}
+.detail-badge {
+  background: #eef2fddd;
+  padding: 0.2rem 0.7rem;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #254e7a;
+  font-family: var(--font-label);
+}
+.card-bio {
+  font-size: 0.75rem;
+  text-align: center;
+  font-style: italic;
+  border-top: 1px solid #cbdbe0;
+  padding-top: 0.6rem;
+  color: #3a5a7c;
+}
+
+/* NÚT ĐIỀU HƯỚNG & DOTS */
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+.nav-btn {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,169,255,0.5);
+  width: 54px;
+  height: 54px;
+  border-radius: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2,0.9,0.4,1);
+  color: var(--p1);
+  font-size: 1.8rem;
+  font-weight: 300;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.nav-btn:hover {
+  background: rgba(0,169,255,0.85);
+  border-color: #fff;
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,169,255,0.5);
+  color: white;
+}
+.indicator-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 0.5rem;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  background: #b9d0f0;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.dot.active {
+  width: 28px;
+  background: #3f7eff;
+  box-shadow: 0 0 8px #6ea5ff;
+}
+
+/* ========== STORYTELLING ========== */
+.storytelling-section {
+  max-width: 1000px;
+  margin: 4rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+.story-card {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(16px);
+  border-radius: 40px;
+  padding: 2rem;
+  flex: 1;
+  min-width: 260px;
+  border: 1px solid rgba(0,169,255,0.3);
+  transition: all 0.3s;
+  text-align: center;
+}
+.story-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,0.8);
+  border-color: var(--p1);
+  box-shadow: 0 20px 35px rgba(0,169,255,0.1);
+}
+.story-icon { font-size: 3rem; margin-bottom: 1rem; }
+.story-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--p1);
+  margin-bottom: 0.8rem;
+}
+.story-desc {
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* ========== FEATURES GRID ========== */
+.aboutus-features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.aboutus-feature-card {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  border-radius: 32px;
+  padding: 1.2rem 1.5rem;
+  flex: 1 1 200px;
+  text-align: center;
+  border: 1px solid rgba(0,169,255,0.2);
+  font-family: var(--font);
+}
+.aboutus-future-section {
+  background: radial-gradient(ellipse at 50% 0%, rgba(0,169,255,0.1), transparent);
+  border-radius: 48px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+.aboutus-cta-btn {
+  display: inline-block;
+  background: linear-gradient(95deg, var(--p1), var(--p2));
+  padding: 0.7rem 1.8rem;
+  border-radius: 60px;
+  margin: 0.4rem;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-family: var(--font-label);
+}
+
+/* ========== SPECULAR LIGHT (HIỆU ỨNG CHUỘT) ========== */
+.specular-light-tracking {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle at center,
+    rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 25%,
+    rgba(255,255,255,0.15) 60%, transparent 100%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(28px);
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: none;
+  opacity: 0.85;
+  box-shadow: 0 0 80px rgba(255,255,255,0.4);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+  .id-card { flex: 0 0 280px; }
+  .id-card.active { transform: scale(1.05) translateY(-5px); }
+  .strap-cross-1, .strap-cross-2 { width: 45px; }
+  .specular-light-tracking { width: 100px; height: 100px; }
+}
+@media (max-width: 768px) {
+  .hero-glass-panel { padding: 40px 20px; }
+  .card-name { font-size: 1.2rem; }
+}

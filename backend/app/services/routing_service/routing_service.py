@@ -169,12 +169,8 @@ def group_places_by_day(places: list, distance_matrix: dict, optimal_coord: dict
                     start_visit_time = max(arrival_time, open_time)
                     wait_time = start_visit_time - arrival_time
 
-                    # =========================================================
-                    # LOGIC VRPTW LÕI MỚI (TỐI ƯU HÓA ĐƯỜNG ĐI)
-                    # =========================================================
                     if step == 0:
                         # 1. FAR-FIRST SEED: Điểm đầu tiên của ngày PHẢI LÀ ĐIỂM XA HUB NHẤT.
-                        # Điều này ép thuật toán "diệt" các điểm ngoại ô ngay từ những ngày đầu tiên.
                         score = dist_meters
                         if score > best_score:
                             best_score = score
@@ -182,7 +178,6 @@ def group_places_by_day(places: list, distance_matrix: dict, optimal_coord: dict
                             best_start_visit_time = start_visit_time
                     else:
                         # 2. SAVINGS HEURISTIC: Các điểm tiếp theo ưu tiên gần điểm hiện tại, 
-                        # nhưng cộng thêm một phần "khoảng cách quay về Hub" để chống đi lạc.
                         dist_back_to_hub = distances[matrix_index][0]
                         
                         # Điểm số = Đường đi tiếp + Phạt thời gian chờ + (Đường về Hub * Trọng số)
@@ -234,7 +229,6 @@ async def get_daily_routes(day_groups: list, optimal_coord: dict) -> list:
     daily_routes = []
 
     async with httpx.AsyncClient(timeout=30.0) as client:
-        for day_idx, day_places in enumerate(day_groups):
             for day_idx, day_places in enumerate(day_groups):
                 # Xây dựng tọa độ chu trình: optimal → place1 → place2 → ... → optimal
                 coords_list = [f"{optimal_coord['lon']},{optimal_coord['lat']}"]

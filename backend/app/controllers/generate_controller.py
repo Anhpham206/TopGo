@@ -14,8 +14,6 @@ FRONTEND_LOGS_DIR = os.path.abspath(os.path.join(BASE_DIR, "../frontend/logs"))
 
 async def generate_itinerary_stream(payload: dict):
     try:
-        # Step 0: Lưu log yêu cầu
-        # code tao lich trinh
 
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         os.makedirs(FRONTEND_LOGS_DIR, exist_ok=True)
@@ -24,7 +22,6 @@ async def generate_itinerary_stream(payload: dict):
             json.dump(payload, f, ensure_ascii=False, indent=2)
 
         yield json.dumps({"step": 1}) + "\n"
-        # await asyncio.sleep(1)
 
         city_id = payload.get("city_id")
         city_name = payload.get("city_name")
@@ -166,6 +163,8 @@ async def generate_itinerary_stream(payload: dict):
             }
         }
 
+        print("\nGỌi AI1, tìm kiếm địa điểm phù hợp ...")
+
         # AI 1
         ai1_output = call_ai_1(ai1_input)
 
@@ -176,11 +175,11 @@ async def generate_itinerary_stream(payload: dict):
         with open(os.path.join(ai_logic_logs_dir, f"output_ai1_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(ai1_output, f, ensure_ascii=False, indent=2)
 
-        print("\nXong Ai1\n")
+        print("AI1 đã xong \n")
 
         yield json.dumps({"step": 2}) + "\n"
-        # await asyncio.sleep(1)
-        print("\nĐang Routing...\n")
+
+        print("Bắt đầu gom nhóm địa điểm, tối ưu lộ trình...\n")
 
         # Routing (Bước 4.2)
         routing_logs_dir = os.path.join(
@@ -229,12 +228,11 @@ async def generate_itinerary_stream(payload: dict):
         with open(os.path.join(routing_logs_dir, f"output_routing_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(routing_output, f, ensure_ascii=False, indent=2)
 
-        print("\nXong Routing\n")
+        print("\nĐã xong gom nhóm địa điểm và tối ưu lộ trình\n")
 
         yield json.dumps({"step": 3}) + "\n"
-        # await asyncio.sleep(1)
 
-        print("\nĐang tìm Khách sạn...")
+        print("Đang tìm Khách sạn...")
         # Lọc kết quả cho AI 2 (Bước 4.3)
         filtered_daily_routes = []
         otm_coordinate = {}
@@ -262,12 +260,11 @@ async def generate_itinerary_stream(payload: dict):
             "danh_sach_goi_y": danh_sach_goi_y,
         }
 
-        print("\nXong tìm khách sạn\n")
+        print("Đã xong tìm khách sạn\n")
 
         yield json.dumps({"step": 4}) + "\n"
-        # await asyncio.sleep(1)
 
-        print("\nĐang AI 2...")
+        print("Đang gọi AI2 để soạn lịch trình...")
         # AI 2
         ai2_output = call_ai_2(ai1_output, db_data_dict)
 
@@ -275,26 +272,12 @@ async def generate_itinerary_stream(payload: dict):
         with open(os.path.join(ai_logic_logs_dir, f"output_ai2_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(ai2_output, f, ensure_ascii=False, indent=2)
 
-        # ai2_log_file = os.path.join(
-        #     BASE_DIR, "app", "services", "ai_logic", "logs", "output_ai2_20260521_213525.json")
-        # routing_log_file = os.path.join(
-        #     BASE_DIR, "app", "services", "routing_service", "logs", "output_routing_20260521_213525.json")
-
-        # ai2_output = {}
-        # routing_output = {}
-        # if os.path.exists(ai2_log_file):
-        #     with open(ai2_log_file, "r", encoding="utf-8") as f:
-        #         ai2_output = json.load(f)
-        # if os.path.exists(routing_log_file):
-        #     with open(routing_log_file, "r", encoding="utf-8") as f:
-        #         routing_output = json.load(f)
+    
 
         itinerary_details = ai2_output.get("output", ai2_output)
 
         yield json.dumps({"step": 5}) + "\n"
-        # await asyncio.sleep(1)
 
-        # Gửi dữ liệu xuống client
 
         total_places = routing_output.get("total_places")
         total_distance = 0
@@ -318,7 +301,7 @@ async def generate_itinerary_stream(payload: dict):
             "status": "success",
             "output": data_output
         }
-        print("\nXong AI 2\n")
+        print("\nĐã tạo xong lịch trình\n")
 
         yield json.dumps({"step": "done", "result": final_output}) + "\n"
 

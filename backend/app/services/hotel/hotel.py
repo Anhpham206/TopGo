@@ -109,7 +109,6 @@ def lay_ty_gia_ve_vnd(ma_tien_goc):
         if data.get("result") == "success":
             ty_gia = data["rates"].get("VND", 0)
             _ty_gia_cache[ma_tien_goc] = ty_gia
-            print(f"[HOTEL] Ty gia {ma_tien_goc} -> VND = {ty_gia}")
             return ty_gia
     except Exception as e:
         print(f"[HOTEL] Loi khi lay ty gia {ma_tien_goc}: {e}")
