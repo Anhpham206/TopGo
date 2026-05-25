@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Sử dụng Key SerpAPI từ file .env
-SERPAPI_KEY = os.environ.get("SERPAPI_KEY") or os.environ.get("SER_API_KEY")
+SERPAPI_KEY = os.environ.get("SERP_API_KEY") or os.environ.get("SERPAPI_KEY") or os.environ.get("SER_API_KEY")
 
 # Đường dẫn thư mục log
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
