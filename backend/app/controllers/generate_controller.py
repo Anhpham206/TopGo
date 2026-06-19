@@ -1,3 +1,4 @@
+from asyncio import sleep
 import json
 import os
 import datetime
@@ -5,11 +6,99 @@ import asyncio
 from app.services.ai_logic.ai_logic import call_ai_1, call_ai_2
 from app.services.routing_service.routing_service import generate_itinerary
 from app.services.hotel.hotel import quet_khach_san_quanh_trung_vi
+from app.services.validation_service import validate_payload_l3
 
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))  # backend/
 DATASET_DIR = os.path.abspath(os.path.join(BASE_DIR, "../dataset"))
 FRONTEND_LOGS_DIR = os.path.abspath(os.path.join(BASE_DIR, "../frontend/logs"))
+
+# async def generate_itinerary_stream(payload: dict):
+#     try:
+
+
+#         yield json.dumps({"step": 1}) + "\n"
+
+
+#         print("\nGỌi AI1, tìm kiếm địa điểm phù hợp ...")
+#         await sleep(1)
+
+#         print("AI1 đã xong \n")
+
+#         yield json.dumps({"step": 2}) + "\n"
+
+#         print("Bắt đầu gom nhóm địa điểm, tối ưu lộ trình...\n")
+#         await sleep(1)
+#         # Routing (Bước 4.2)
+#         routing_logs_dir = os.path.join(
+#             BASE_DIR, "app", "services", "routing_service", "logs")
+       
+#         routing_output = {}
+
+#         # Lưu log Routing
+#         with open(os.path.join(routing_logs_dir, f"output_routing_20260529_134446.json"), "r", encoding="utf-8") as f:
+#             routing_output = json.load (f)
+
+#         print("\nĐã xong gom nhóm địa điểm và tối ưu lộ trình\n")
+
+#         yield json.dumps({"step": 3}) + "\n"
+
+#         print("Đang tìm Khách sạn...")
+        
+#         await sleep(1)
+        
+#         print("Đã xong tìm khách sạn\n")
+
+#         yield json.dumps({"step": 4}) + "\n"
+
+#         print("Đang gọi AI2 để soạn lịch trình...")
+#         await sleep(1)
+
+
+#         # Lưu log AI 2
+#         ai2_output = {}
+#         ai_logic_logs_dir = os.path.join(
+#             BASE_DIR, "app", "services", "ai_logic", "logs")
+#         with open(os.path.join(ai_logic_logs_dir, f"output_ai2_20260529_134446.json"), "r", encoding="utf-8") as f:
+#             ai2_output = json.load(f)
+
+    
+
+#         itinerary_details = ai2_output.get("output", ai2_output)
+
+#         yield json.dumps({"step": 5}) + "\n"
+#         await sleep(1)
+
+
+#         total_places = routing_output.get("total_places")
+#         total_distance = 0
+
+#         daily_routes = routing_output.get("daily_routes")
+#         for day in daily_routes:
+#             total_distance += day.get("total_distance_km")
+
+#         itinerary_details = ai2_output.get("output", ai2_output)
+#         ttc_tmp = itinerary_details.get("Thong_tin_chung", {})
+#         ttc_tmp["total_distance"] = total_distance
+#         ttc_tmp["total_places"] = total_places
+#         ttc_tmp["Tong_ngan_sach"] = 10000000
+#         itinerary_details["Thong_tin_chung"] = ttc_tmp
+
+#         data_output = {
+#             "output": itinerary_details,
+#             "routing": routing_output
+#         }
+#         final_output = {
+#             "status": "success",
+#             "output": data_output
+#         }
+#         print("\nĐã tạo xong lịch trình\n")
+
+#         yield json.dumps({"step": "done", "result": final_output}) + "\n"
+
+#     except Exception as e:
+#         yield json.dumps({"step": "done", "result": {"status": "error", "errors": [str(e)]}}) + "\n"
+
 
 
 async def generate_itinerary_stream(payload: dict):
@@ -20,6 +109,12 @@ async def generate_itinerary_stream(payload: dict):
         log_file = os.path.join(FRONTEND_LOGS_DIR, f"payload_{timestamp}.json")
         with open(log_file, "w", encoding="utf-8") as f:
             json.dump(payload, f, ensure_ascii=False, indent=2)
+
+        # Kiểm lỗi Lớp 3 cơ bản ở Backend
+        l3_errors = validate_payload_l3(payload)
+        if l3_errors:
+            yield json.dumps({"step": "done", "result": {"status": "error", "errors": l3_errors}}) + "\n"
+            return
 
         yield json.dumps({"step": 1}) + "\n"
 
@@ -175,6 +270,15 @@ async def generate_itinerary_stream(payload: dict):
         with open(os.path.join(ai_logic_logs_dir, f"output_ai1_{timestamp}.json"), "w", encoding="utf-8") as f:
             json.dump(ai1_output, f, ensure_ascii=False, indent=2)
 
+        # Kiểm tra xác thực ngữ nghĩa ghi chú từ AI1
+        ghi_chu_loi = ai1_output.get("ghi_chu_loi_ngu_nghia")
+        if isinstance(ghi_chu_loi, str):
+            ghi_chu_loi = (ghi_chu_loi.lower() == "true")
+        if ghi_chu_loi:
+            err_msg = "Ghi chú không chứa thông tin hữu ích. Vui lòng mô tả cụ thể hơn hoặc để trống hoàn toàn."
+            yield json.dumps({"step": "done", "result": {"status": "error", "errors": [err_msg]}}) + "\n"
+            return
+
         print("AI1 đã xong \n")
 
         yield json.dumps({"step": 2}) + "\n"
@@ -190,6 +294,22 @@ async def generate_itinerary_stream(payload: dict):
         so_luong_diem_tham_quan = ai1_output.get("so_luong_diem_tham_quan", 3)
         w = ai1_output.get("trong_so_danh_gia", [0.25, 0.25, 0.25, 0.25])
         ngan_sach_luu_tru = ai1_output.get("ngan_sach_luu_tru", 0)
+        ngan_sach_luu_tru_1_ngay = ai1_output.get("ngan_sach_luu_tru_1_ngay", 0)
+        
+        try:
+            ngan_sach_luu_tru_1_ngay = float(ngan_sach_luu_tru_1_ngay)
+        except (ValueError, TypeError):
+            ngan_sach_luu_tru_1_ngay = 0.0
+
+        try:
+            ngan_sach_luu_tru = float(ngan_sach_luu_tru)
+        except (ValueError, TypeError):
+            ngan_sach_luu_tru = 0.0
+
+        if ngan_sach_luu_tru_1_ngay == 0:
+            so_dem = max(1, days - 1)
+            ngan_sach_luu_tru_1_ngay = ngan_sach_luu_tru / so_dem
+            
         tag_nguoi_dung = ai1_output.get("tag_nguoi_dung", [])
 
         routing_input_places = []
@@ -245,7 +365,7 @@ async def generate_itinerary_stream(payload: dict):
                 filtered_daily_routes.append(new_dr)
 
         hotel_output = quet_khach_san_quanh_trung_vi(otm_coordinate.get(
-            "lat", 0), otm_coordinate.get("lon", 0), ngan_sach_luu_tru, accommodation, w)
+            "lat", 0), otm_coordinate.get("lon", 0), ngan_sach_luu_tru_1_ngay, accommodation, w)
         danh_sach_goi_y = []
         if hotel_output.get("status") == "success":
             danh_sach_goi_y = hotel_output.get("danh_sach_goi_y")
