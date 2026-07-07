@@ -174,15 +174,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const dateStr = review.timestamp ? new Date(review.timestamp.toDate()).toLocaleDateString('vi-VN') : 'Vừa xong';
                 const starsHtml = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
 
+                const avatarLetter = review.user_name ? review.user_name.charAt(0).toUpperCase() : 'U';
                 const reviewEl = document.createElement('div');
                 reviewEl.className = 'review-item';
                 reviewEl.innerHTML = `
                     <div class="review-header">
-                        <span class="review-author">${review.user_name}</span>
-                        <span style="color: #888; font-size: 0.85rem;">${dateStr}</span>
+                        <div class="review-author-info">
+                            <div class="review-author-avatar">${avatarLetter}</div>
+                            <div class="review-author-details">
+                                <span class="review-author">${review.user_name}</span>
+                                <span class="review-date">${dateStr}</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">${starsHtml}</div>
                     </div>
-                    <div class="review-stars">${starsHtml}</div>
-                    <div class="review-text" style="margin-top: 10px;">${escapeHtml(review.comment)}</div>
+                    <div class="review-text">${escapeHtml(review.comment)}</div>
                     ${isOwner ? `<div class="review-actions"><button class="btn-delete-review" data-id="${reviewId}">Xoá</button></div>` : ''}
                 `;
                 reviewsList.appendChild(reviewEl);
