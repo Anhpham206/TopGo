@@ -427,19 +427,106 @@ if (currentPage === 'profile.html') {
       if (el) el.textContent = val || '—';
     };
 
+    // Tabs Logic
+    const tabs = document.querySelectorAll('.pv2-tab');
+    const tabContents = document.querySelectorAll('.pv2-tab-content');
+    const tabIndicator = document.querySelector('.pv2-tab-indicator');
+    
+    function updateTabIndicator(activeTab) {
+      if (!tabIndicator || !activeTab) return;
+      tabIndicator.style.display = 'block';
+      tabIndicator.style.width = `${activeTab.offsetWidth}px`;
+      tabIndicator.style.left = `${activeTab.offsetLeft}px`;
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        tab.classList.add('active');
+        const targetId = tab.dataset.tab;
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) targetContent.classList.add('active');
+        
+        updateTabIndicator(tab);
+      });
+    });
+
+    // Initialize tab indicator on load (give DOM time to render)
+    setTimeout(() => {
+      const activeTab = document.querySelector('.pv2-tab.active');
+      if (activeTab) updateTabIndicator(activeTab);
+    }, 100);
+
+
     const updateProfileUI = () => {
-      const user = AuthService.getUser();
+      const urlParams = new URLSearchParams(window.location.search);
+      const viewUserId = urlParams.get('userId');
+      let user = AuthService.getUser();
+      
+      const isViewingOther = viewUserId && user && user.id !== viewUserId && user.uid !== viewUserId;
+      
+      if (isViewingOther) {
+          user = {
+              id: viewUserId.substring(0, 8),
+              firstname: '',
+              lastname: 'Thành viên ' + viewUserId.substring(0, 4),
+              nationality: 'Việt Nam',
+              sex: 'Khác',
+              dob: '—',
+              pob: '—',
+              email: 'Bảo mật',
+              createdAt: '—',
+              photoURL: null
+          };
+          
+          // Ẩn nút chỉnh sửa, đăng xuất, edit avatar
+          const actionsEl = document.getElementById('pv2-actions');
+          if (actionsEl) actionsEl.style.display = 'none';
+          const photoEditBtn = document.getElementById('pp-photo-edit');
+          if (photoEditBtn) photoEditBtn.style.display = 'none';
+      }
+
       if (!user) return;
-      setText('pp-fullname', `${user.lastname || ''} ${user.firstname || ''}`.trim());
+      const fullname = `${user.lastname || ''} ${user.firstname || ''}`.trim() || '—';
+      
+      // ── Populate V2 Header ──
+      setText('pv2-name', fullname);
+      const handleEl = document.getElementById('pv2-handle');
+      if (handleEl) handleEl.textContent = `@${user.id || 'TG-000000'} · ${user.nationality || 'Việt Nam'}`;
+      const emailEl = document.getElementById('pv2-email');
+      if (emailEl && !isViewingOther) emailEl.textContent = user.email || '';
+      
+      // V2 Avatar
+      const v2AvatarEl = document.getElementById('pv2-avatar');
+      if (v2AvatarEl) {
+        if (user.photoURL) {
+          v2AvatarEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar">`;
+        } else {
+          v2AvatarEl.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pv2-avatar-placeholder">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>`;
+        }
+      }
+
+      // V2 Stats
+      const statNationEl = document.getElementById('pv2-stat-nation-label');
+      if (statNationEl) statNationEl.textContent = user.nationality || 'Việt Nam';
+
+      // ── Populate Passport (Tab 3) ──
+      setText('pp-fullname', fullname);
       setText('pp-nationality', user.nationality);
       setText('pp-sex', user.sex);
       setText('pp-dob', user.dob);
       setText('pp-pob', user.pob);
-      setText('pp-email', user.email);
+      setText('pp-email-passport', user.email);
       setText('pp-doi', user.createdAt);
       setText('pp-passport-no', user.id);
 
-      // Render ảnh đại diện nếu có
+      // Passport photo
       const photoEl = document.getElementById('pp-photo');
       if (photoEl) {
         if (user.photoURL) {
@@ -453,18 +540,16 @@ if (currentPage === 'profile.html') {
         }
       }
 
-      // Điền thông tin MRZ giả lập dạng hộ chiếu
+      // MRZ
       const mrzEl = document.getElementById('pp-mrz');
       if (mrzEl) {
         const lastname = (user.lastname || 'TOPGO').toUpperCase().replace(/\s/g, '<');
         const firstname = (user.firstname || 'TRAVELER').toUpperCase().replace(/\s/g, '<');
         const line1 = `P<VNM<${lastname}<<${firstname}`.padEnd(44, '<').replace(/</g, '&lt;');
-        
-        const dobStr = (user.dob || '000000').replace(/-/g, '').slice(-6); // Định dạng YYMMDD
+        const dobStr = (user.dob || '000000').replace(/-/g, '').slice(-6);
         const sexStr = (user.sex === 'Nam' ? 'M' : (user.sex === 'Nữ' ? 'F' : '<'));
         const idStr = (user.id || 'TG000000');
         const line2 = `${idStr.padEnd(9, '<')}0VNM${dobStr.padEnd(6, '<')}0${sexStr}${'<'.repeat(7)}`.padEnd(44, '<').replace(/</g, '&lt;');
-        
         mrzEl.innerHTML = `${line1}<br>${line2}`;
       }
     };
@@ -529,15 +614,26 @@ if (currentPage === 'profile.html') {
 
     // Tải danh sách lịch trình từ database
     let trips = [];
-    try {
-      trips = await AuthService.getTrips();
-    } catch (e) {
-      console.warn("Không thể tải chuyến đi từ API, thử dùng demo.");
+    const urlParamsTrips = new URLSearchParams(window.location.search);
+    const viewUserIdTrips = urlParamsTrips.get('userId');
+    const isViewingOtherTrips = viewUserIdTrips && AuthService.getUser() && AuthService.getUser().id !== viewUserIdTrips && AuthService.getUser().uid !== viewUserIdTrips;
+
+    if (!isViewingOtherTrips) {
+        try {
+          trips = await AuthService.getTrips();
+        } catch (e) {
+          console.warn("Không thể tải chuyến đi từ API, thử dùng demo.");
+        }
+    } else {
+        // Ẩn phần lịch trình nếu đang xem profile người khác (vì chưa có API lấy lịch trình public)
+        const stampsEl = document.querySelector('.passport-stamps');
+        if (stampsEl) stampsEl.style.display = 'none';
     }
 
     // Hiển thị số lượng
     setText('pp-trips', String(trips.length));
     setText('stamps-count', `${trips.length} chuyến`);
+    setText('pv2-stat-trips', String(trips.length));
 
     // Render danh sách chuyến đi ra giao diện
     renderTrips(trips);
@@ -545,14 +641,26 @@ if (currentPage === 'profile.html') {
     // Chuyển đổi hiển thị dạng lưới hoặc danh sách
     const toggleBtns = document.querySelectorAll('.view-btn');
     const stampsGrid = document.getElementById('stamps-grid');
+
+    // Restore saved view mode
+    const savedView = localStorage.getItem('topgo_trips_view_mode') || 'grid';
+    if (savedView === 'list' && stampsGrid) {
+        stampsGrid.classList.add('list-view');
+        toggleBtns.forEach(b => {
+            b.classList.toggle('active', b.dataset.view === 'list');
+        });
+    }
+
     toggleBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         toggleBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         if (btn.dataset.view === 'list') {
           stampsGrid.classList.add('list-view');
+          localStorage.setItem('topgo_trips_view_mode', 'list');
         } else {
           stampsGrid.classList.remove('list-view');
+          localStorage.setItem('topgo_trips_view_mode', 'grid');
         }
       });
     });
@@ -624,11 +732,41 @@ if (currentPage === 'profile.html') {
     filterDateTo?.addEventListener('change', applyFilters);
     filterBudget?.addEventListener('input', applyFilters);
 
-    // Tự động seed một vài chuyến đi mẫu nếu danh sách trống hoàn toàn để hỗ trợ test nhanh
-    if (trips.length === 0) {
-      await seedDemoTrips();
-      window.location.reload();
+    // ── V2 Tab Switching with Indicator ──
+    const pv2Tabs = document.querySelectorAll('.pv2-tab');
+    const pv2Indicator = document.querySelector('.pv2-tab-indicator');
+    
+    function updateTabIndicator(activeTab) {
+        if (!pv2Indicator || !activeTab) return;
+        pv2Indicator.style.left = activeTab.offsetLeft + 'px';
+        pv2Indicator.style.width = activeTab.offsetWidth + 'px';
     }
+    
+    // Set initial indicator position
+    const initialActive = document.querySelector('.pv2-tab.active');
+    if (initialActive) {
+        requestAnimationFrame(() => updateTabIndicator(initialActive));
+    }
+    
+    pv2Tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            pv2Tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            updateTabIndicator(tab);
+            
+            const targetId = tab.dataset.tab;
+            document.querySelectorAll('.pv2-tab-content').forEach(content => {
+                content.classList.toggle('active', content.id === targetId);
+            });
+        });
+    });
+    
+    // Recalculate on resize
+    window.addEventListener('resize', () => {
+        const activeTab = document.querySelector('.pv2-tab.active');
+        if (activeTab) updateTabIndicator(activeTab);
+    });
+
   });
 }
 
@@ -646,11 +784,39 @@ function renderTrips(trips) {
   }
   if (empty) empty.style.display = 'none';
 
-  trips.forEach(trip => {
+  // Lọc trùng lặp dựa vào id để tránh bị hiển thị lặp
+  const uniqueTrips = [];
+  const seenIds = new Set();
+  trips.forEach(t => {
+      if (!seenIds.has(t.id)) {
+          seenIds.add(t.id);
+          uniqueTrips.push(t);
+      }
+  });
+
+  // Kiểm tra xem có đang xem profile người khác không
+  const urlParamsTrips = new URLSearchParams(window.location.search);
+  const viewUserIdTrips = urlParamsTrips.get('userId');
+  let user = null;
+  try { user = AuthService.getUser(); } catch(e){}
+  const isViewingOtherTrips = viewUserIdTrips && user && user.id !== viewUserIdTrips && user.uid !== viewUserIdTrips;
+
+  uniqueTrips.forEach(trip => {
+    const isPublic = trip.isPublic || false;
+    const publicToggleHtml = !isViewingOtherTrips ? `
+      <label style="display:flex; align-items:center; gap:4px; font-size:12px; cursor:pointer; color:var(--sub);">
+          <input type="checkbox" ${isPublic ? 'checked' : ''} onchange="alert('Tính năng Public/Private đang chờ Backend kết nối API');"> 
+          ${isPublic ? 'Public' : 'Private'}
+      </label>
+    ` : '';
+
     const card = document.createElement('div');
     card.className = 'stamp-card';
     card.innerHTML = `
-      <div class="stamp-dest">${trip.destination || 'Chuyến đi'}</div>
+      <div class="stamp-dest">
+        ${trip.destination || 'Chuyến đi'}
+        <div style="float:right; margin-top:4px;">${publicToggleHtml}</div>
+      </div>
       <div class="stamp-meta">
         <span class="stamp-tag">${trip.days || '?'} ngày</span>
         <span class="stamp-tag">${trip.pax || '?'} người</span>
@@ -695,18 +861,5 @@ function renderTrips(trips) {
   });
 }
 
-async function seedDemoTrips() {
-  const demos = [
-    { destination: 'Đà Nẵng', days: 3, pax: 2, budget: 5000000, dateStart: '2026-06-15', dateEnd: '2026-06-17' },
-    { destination: 'Phú Quốc', days: 4, pax: 4, budget: 12000000, dateStart: '2026-07-01', dateEnd: '2026-07-04' },
-    { destination: 'Sapa', days: 2, pax: 3, budget: 3000000, dateStart: '2026-08-10', dateEnd: '2026-08-11' },
-  ];
-  for (const d of demos) {
-    try {
-      await AuthService.saveTrip(d);
-    } catch (e) {
-      console.warn("Failed to seed demo trip:", e);
-    }
-  }
-}
+
 

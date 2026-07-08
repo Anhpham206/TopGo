@@ -189,14 +189,20 @@ export async function loadSharedComponents() {
         if (headerEl) {
             headerEl.innerHTML = headerFrag.text;
             // Active nav detection
-            let activeId = 'nav-planner';
-            let mobActiveId = 'mob-nav-planner';
-            if (currentPage === 'chatbot.html') {
+            let activeId = null;
+            let mobActiveId = null;
+            if (currentPage === 'planner.html') {
+                activeId = 'nav-planner';
+                mobActiveId = 'mob-nav-planner';
+            } else if (currentPage === 'chatbot.html') {
                 activeId = 'nav-chatbot';
                 mobActiveId = 'mob-nav-chatbot';
             } else if (currentPage === 'index.html' || currentPage === '' || currentPage === '/') {
                 activeId = 'nav-home';
                 mobActiveId = 'mob-nav-home';
+            } else if (currentPage === 'newsfeed.html') {
+                activeId = 'nav-newsfeed';
+                mobActiveId = 'mob-nav-newsfeed';
             } else if (currentPage === 'aboutus.html') {
                 activeId = 'nav-aboutus';
                 mobActiveId = 'mob-nav-aboutus';
