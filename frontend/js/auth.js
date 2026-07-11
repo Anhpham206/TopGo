@@ -254,6 +254,11 @@ const AuthService = {
       console.error("Lỗi khi xóa lịch trình:", error);
       throw error;
     }
+  },
+  async getIdToken() {
+    const user = await waitForAuth();
+    if (!user) return null;
+    return await user.getIdToken();
   }
 };
 
@@ -430,23 +435,32 @@ if (currentPage === 'profile.html') {
     const updateProfileUI = () => {
       const user = AuthService.getUser();
       if (!user) return;
-      setText('pp-fullname', `${user.lastname || ''} ${user.firstname || ''}`.trim());
+      
+      const fullname = `${user.lastname || ''} ${user.firstname || ''}`.trim();
+      const fullnameDisplay = user.is_vip ? `${fullname} 👑 (VIP)` : fullname;
+      
+      const fullnameEl = document.getElementById('pp-fullname');
+      if (fullnameEl) fullnameEl.innerHTML = fullnameDisplay;
+      
       setText('pp-nationality', user.nationality);
       setText('pp-sex', user.sex);
       setText('pp-dob', user.dob);
       setText('pp-pob', user.pob);
       setText('pp-email', user.email);
       setText('pp-doi', user.createdAt);
-      setText('pp-passport-no', user.id);
+      
+      const passportNo = user.is_vip ? `${user.id} (VIP)` : user.id;
+      setText('pp-passport-no', passportNo);
 
       // Render ảnh đại diện nếu có
       const photoEl = document.getElementById('pp-photo');
       if (photoEl) {
+        const borderStyle = user.is_vip ? 'border: 3px solid #ffb347; box-shadow: 0 0 10px rgba(255,179,71,0.5);' : '';
         if (user.photoURL) {
-          photoEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">`;
+          photoEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; ${borderStyle}">`;
         } else {
           photoEl.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pp-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pp-photo-placeholder" style="${borderStyle}">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                 <circle cx="12" cy="7" r="4"/>
             </svg>`;
