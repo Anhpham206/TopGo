@@ -63,6 +63,23 @@ async def update_profile(profileData: UserProfileModel, decodedToken: dict = Dep
     uid = decodedToken["uid"]
     return await update_user_profile(uid, profileData)
 
+from app.controllers.payment_controller import CreatePaymentRequest, create_payment_url, handle_payment_return, handle_payment_ipn
+
+@router.post("/payment/vnpay_create")
+async def vnpay_create(req: CreatePaymentRequest, decoded_token: dict = Depends(verify_firebase_token), request: Request = None):
+    """Tạo liên kết thanh toán VNPay."""
+    return await create_payment_url(req, decoded_token, request)
+
+@router.get("/payment/vnpay_return")
+async def vnpay_return(request: Request):
+    """Nhận kết quả thanh toán từ VNPay và cập nhật VIP."""
+    return await handle_payment_return(request)
+
+@router.get("/payment/vnpay_ipn")
+async def vnpay_ipn(request: Request):
+    """Webhook IPN tự động từ VNPay server."""
+    return await handle_payment_ipn(request)
+
 
 # --- Feed, Posts, Hot Search ---
 from app.controllers.post_controller import CreatePostRequest, create_post, get_user_posts, update_post, delete_post, get_posts_by_location
