@@ -141,6 +141,30 @@ cd TopGo
      appId: "YOUR_APP_ID"
    };
    ```
+### 4. Hướng dẫn Thiết lập & Tích hợp Thanh toán VNPay (Sandbox)
+
+Để tích hợp và kiểm thử tính năng mua gói VIP Premium thông qua VNPay Sandbox, thực hiện các bước sau:
+
+### 1. Luồng Hoạt Động (Đa Cổng / Port-matching)
+Do ứng dụng chạy trên hai cổng độc lập (Frontend chạy cổng `3000` và Backend chạy cổng `8000`), hệ thống sử dụng phương án xác thực chữ ký (Signature) tại Frontend thông qua AJAX:
+1. Người dùng bấm **Mua gói VIP** tại trang `pricing.html`.
+2. Frontend gửi yêu cầu tạo liên kết thanh toán sang Backend kèm `return_url` chỉ tới cổng `3000` (trùng khớp tên miền website đăng ký).
+3. Backend tạo chữ ký số `HMAC-SHA512` theo tiêu chuẩn VNPay và trả lại link thanh toán.
+4. Người dùng hoàn tất thanh toán trên VNPay Sandbox và được VNPay chuyển hướng ngược lại Frontend (`http://localhost:3000/pricing.html?...`).
+5. Frontend trích xuất query parameters và gọi ngầm API Backend `/api/payment/vnpay_return` để kiểm tra chữ ký, cập nhật trạng thái VIP trong Firestore và hiển thị thông báo thành công.
+
+### 2. Các Bước Thiết Lập
+1. **Đăng ký tài khoản Sandbox**: Truy cập [https://sandbox.vnpayment.vn/devreg/](https://sandbox.vnpayment.vn/devreg/) để đăng ký một tài khoản Sandbox thử nghiệm miễn phí.
+2. **Lấy thông tin cấu hình**: Nhận email từ VNPay chứa `vnp_TmnCode` (Mã website) và `vnp_HashSecret` (Chuỗi bí mật băm).
+3. **Cấu hình Backend**: Điền các giá trị nhận được vào file `backend/.env` (tham khảo thêm mẫu tại [backend/.env.example](file:///d:/Tài liệu CNTT-HCMUS K24/HK4/Tư duy TT/ĐỒ_ÁN/TopGo/backend/.env.example)):
+   ```env
+   VNPAY_TMN_CODE=MÃ_TMN_CODE_CỦA_BẠN
+   VNPAY_HASH_SECRET=CHUỖI_HASH_SECRET_CỦA_BẠN
+   VNPAY_URL=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+   VNPAY_RETURN_URL=http://localhost:8000/api/payment/vnpay_return
+   VNPAY_FRONTEND_REDIRECT=http://localhost:3000/pricing.html
+   ```
+
 
 ---
 
@@ -169,4 +193,8 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 3. **Lập lịch trình thông minh**: Truy cập planner, điền thông tin du lịch và chọn địa điểm. Nhấn **Tạo lịch trình** để quan sát luồng streaming 5 bước vẽ đường đi. Bấm **Lưu lịch trình**, hệ thống hiển thị thông báo Toast thành công.
 4. **Hộ chiếu thành viên**: Vào trang `profile.html` kiểm tra Hộ chiếu cá nhân và danh sách chuyến đi đã lưu. Tại đây bạn có thể cập nhật thông tin cá nhân, cập nhật avatar (chụp camera hoặc tải file ảnh nén canvas). Bấm nút **Xem lại** tại một chuyến đi đã lưu, hệ thống tự động chuyển hướng và vẽ lại nguyên vẹn lộ trình cũ mà không cần gọi lại AI Gemini.
 5. **Chatbot tư vấn**: Mở khung chat, gõ *"Tôi muốn ăn phở ở Hà Nội"*. Hệ thống tự nhận diện Intent ẩm thực, trích xuất slug `ha_noi`, truy xuất dataset món ăn địa phương và dùng AI hiển thị danh sách 5 quán ăn nổi tiếng nhất Hà Nội đầy nhí nhảnh.
+
+---
+
+
 

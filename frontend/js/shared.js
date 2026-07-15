@@ -103,14 +103,23 @@ function _updateHeaderUser() {
         const linkEl = document.getElementById('user-info-btn');
         const iconEl = document.getElementById('user-icon');
         if (user) {
-            if (nameEl) nameEl.textContent = user.firstname || user.email || 'Tài khoản';
+            let displayName = user.firstname || user.email || 'Tài khoản';
+            if (nameEl) {
+                if (user.is_vip) {
+                    nameEl.innerHTML = `${displayName} <span style="color:#ffb347;margin-left:2px;font-size:14px;" title="Thành viên VIP">👑</span>`;
+                } else {
+                    nameEl.textContent = displayName;
+                }
+            }
             if (linkEl) linkEl.href = './profile.html';
+
             if (iconEl && user.photoURL && user.photoURL !== 'undefined' && user.photoURL !== 'null') {
-                iconEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+                const borderStyle = user.is_vip ? 'border: 2px solid #ffb347;' : '';
+                iconEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
             } else if (iconEl) {
                 const initial = (user.firstname || user.email || 'T').charAt(0).toUpperCase();
                 iconEl.innerHTML = `<span style="font-weight: 700; color: var(--p1); font-size: 14px;">${initial}</span>`;
-            }
+                }
         } else {
             if (nameEl) nameEl.textContent = 'Đăng nhập';
             if (linkEl) linkEl.href = './auth.html';

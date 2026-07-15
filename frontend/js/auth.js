@@ -304,6 +304,11 @@ const AuthService = {
       console.error("Lỗi khi xóa lịch trình:", error);
       throw error;
     }
+  },
+  async getIdToken() {
+    const user = await waitForAuth();
+    if (!user) return null;
+    return await user.getIdToken();
   }
 };
 

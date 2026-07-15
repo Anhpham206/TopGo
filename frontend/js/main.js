@@ -459,16 +459,73 @@ async function handleFeedback() {
     if (!val) { showToast('Vui lòng nhập phản hồi', 'error'); return; }
     if (val.length > 500) { showToast('Phản hồi tối đa 500 ký tự', 'error'); return; }
     val = sanitizeText(val);
-    if (isNonsensicalText(val)) { showToast('Phản hồi không rõ ràng. Vui lòng mô tả cụ thể hơn để hệ thống cập nhật chính xác.', 'error'); return; }
-    const btn = document.querySelector('.btn-feedback');
-    if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang cập nhật...'; }
+
+    if (isNonsensicalText(val)) { 
+        showToast('Phản hồi không rõ ràng. Vui lòng mô tả cụ thể hơn để hệ thống cập nhật chính xác.', 'error'); 
+        return; 
+    }
+    
+    if (!window._lastPayload) {
+        showToast('Không tìm thấy dữ liệu yêu cầu lịch trình ban đầu.', 'error');
+        return;
+    }
+
+    const btn = document.querySelector('.btn-feedback') || document.getElementById('btn-feedback');
+        if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang cập nhật...'; }
+
     try {
-        await sendFeedback(val);
-        showToast('Lịch trình đã được cập nhật theo phản hồi', 'success');
-    } catch {
-        showToast('Không thể kết nối máy chủ. Phản hồi đã được ghi lại cục bộ.', 'warning');
+        const originalNotes = window._lastPayload.notes || '';
+        const combinedNotes = originalNotes ? `${originalNotes}\n${val}` : val;
+        window._lastPayload.notes = combinedNotes;
+
+        const notesInput = document.getElementById('notes-input');
+        if (notesInput) {
+            notesInput.value = combinedNotes;
+        }
+
+        showScreen('loading');
+        resetLoadingSteps();
+
+        const payload = window._lastPayload;
+        const data = await generateItinerary(payload, (stepIdx) => {
+            const ids = ['ls-1', 'ls-2', 'ls-3', 'ls-4', 'ls-5', 'ls-6'];
+            for (let i = 0; i < stepIdx; i++) {
+                const el = document.getElementById(ids[i]);
+                if (el) {
+                    const sp = el.querySelector('.ls-spin') || el.querySelector('.ls-ico');
+                    if (sp) sp.outerHTML = '<span class="ls-ico">✓</span>';
+                    el.classList.remove('active');
+                    el.classList.add('done');
+                }
+            }
+            if (stepIdx < 6) {
+                const current = document.getElementById(ids[stepIdx]);
+                if (current) {
+                    const ico = current.querySelector('.ls-ico');
+                    if (ico) ico.outerHTML = '<div class="ls-spin"></div>';
+                    current.classList.add('active');
+                }
+            }
+        });
+
+        if (data.status === 'error') {
+            _showBackendError(data, payload);
+        } else {
+            if (data.status === 'success') {
+                console.log("đã nhận data ở main.js");
+            }
+            renderItinerary(data.status === 'success' ? data.output : null);
+            document.querySelectorAll('.ls-spin').forEach(s => s.outerHTML = '<span class="ls-ico">✓</span>');
+            document.querySelectorAll('.ls').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
+            setTimeout(() => showScreen('result'), 450);
+            showToast('Lịch trình đã được cập nhật!', 'success');
+        }
+    } catch (err) {
+        console.error(err);
+        _showBackendError({ errors: [err?.message || String(err)] }, window._lastPayload);
     } finally {
-        if (inp) inp.value = ''; if (btn) { btn.disabled = false; btn.textContent = 'Cập nhật lịch trình'; }
+        if (inp) inp.value = '';
+        if (btn) { btn.disabled = false; btn.textContent = 'Cập nhật lịch trình'; }
         document.getElementById('feedback-count').textContent = '0 / 500';
     }
 }
