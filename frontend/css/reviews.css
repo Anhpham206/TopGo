@@ -134,14 +134,26 @@
     resize: vertical;
 }
 .btn-submit-review {
-    background: var(--primary);
+    background: linear-gradient(90deg, var(--p1), var(--p2));
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
     width: 100%;
+    display: block;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 169, 255, 0.25);
+}
+.btn-submit-review:hover:not(:disabled) {
+    opacity: 0.9;
+}
+.btn-submit-review:disabled {
+    background: #b0b0b0;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 .empty-reviews {
     text-align: center;

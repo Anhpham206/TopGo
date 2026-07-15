@@ -23,10 +23,10 @@ try:
     if not firebase_admin._apps:
         firebase_admin.initialize_app(cred)
     db = firestore.client()
-    print("Khởi tạo Firebase Admin thành công.")
+    print("Khoi tao Firebase Admin thanh cong.")
 except Exception as e:
-    print(f"Lỗi khởi tạo Firebase: {e}")
-    print("Vui lòng đảm bảo file firebase-service-account.json tồn tại và hợp lệ.")
+    print(f"Loi khoi tao Firebase: {e}")
+    print("Vui long dam bao file firebase-service-account.json ton tai va hop le.")
     exit(1)
 
 # Danh sách các file dataset cần seed
@@ -36,7 +36,7 @@ DATASET_FILES = [
     'thanh_pho_ho_chi_minh.json'
 ]
 
-GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
+SERP_API_KEY = os.getenv("SERP_API_KEY")
 
 # Dữ liệu mẫu fallback nếu không có API hoặc API hết quota
 SAMPLE_USERS = [
@@ -69,58 +69,98 @@ def generate_random_date(days_back=365):
     """Tạo ngày ngẫu nhiên trong khoảng thời gian (mặc định 1 năm trở lại)"""
     return datetime.now() - timedelta(days=random.randint(0, days_back), hours=random.randint(0, 23))
 
-def search_place_google_maps(place_name, city_name):
-    """Tìm kiếm Place ID trên Google Maps dựa vào tên và thành phố"""
-    if not GOOGLE_MAPS_API_KEY:
+def search_place_serpapi(place_name, city_name):
+    """
+    Tìm kiếm địa điểm trên Google Maps qua SerpAPI.
+    SerpAPI google_maps engine trả về:
+      - place_results (khi tìm thấy chính xác 1 địa điểm)
+      - local_results (khi trả về nhiều kết quả)
+    Trả về data_id để dùng cho google_maps_reviews engine.
+    """
+    if not SERP_API_KEY:
         return None
-        
-    url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
+    
+    url = "https://serpapi.com/search.json"
     params = {
-        "input": f"{place_name} {city_name}",
-        "inputtype": "textquery",
-        "fields": "place_id",
-        "key": GOOGLE_MAPS_API_KEY
+        "engine": "google_maps",
+        "q": f"{place_name} {city_name}",
+        "api_key": SERP_API_KEY,
+        "hl": "vi"
     }
     try:
-        response = requests.get(url, params=params)
+        response = requests.get(url, params=params, timeout=20)
         data = response.json()
-        if data.get("status") == "OK" and len(data.get("candidates", [])) > 0:
-            return data["candidates"][0]["place_id"]
+        
+        # Trường hợp 1: Kết quả trực tiếp (place_results) — SerpAPI tìm thấy đúng 1 địa điểm
+        place_results = data.get("place_results", {})
+        if place_results and place_results.get("data_id"):
+            title = place_results.get("title", "N/A")
+            data_id = place_results.get("data_id")
+            print(f"    Tim thay (place_results): {title} (data_id={data_id})")
+            return data_id
+        
+        # Trường hợp 2: Nhiều kết quả (local_results) — lấy kết quả đầu tiên
+        local_results = data.get("local_results", [])
+        if local_results:
+            result = local_results[0]
+            data_id = result.get("data_id")
+            title = result.get("title", "N/A")
+            print(f"    Tim thay (local_results): {title} (data_id={data_id})")
+            return data_id
+            
     except Exception as e:
-        print(f"Lỗi khi tìm Place ID cho {place_name}: {e}")
+        print(f"    Loi khi tim kiem SerpAPI cho {place_name}: {e}")
     return None
 
-def get_place_reviews(place_id):
-    """Lấy danh sách reviews từ Google Maps Place Details"""
-    if not GOOGLE_MAPS_API_KEY or not place_id:
+def get_reviews_serpapi(data_id):
+    """Lấy 5 reviews từ Google Maps qua SerpAPI google_maps_reviews engine"""
+    if not SERP_API_KEY or not data_id:
         return []
-        
-    url = "https://maps.googleapis.com/maps/api/place/details/json"
+    
+    url = "https://serpapi.com/search.json"
     params = {
-        "place_id": place_id,
-        "fields": "reviews",
-        "language": "vi",
-        "key": GOOGLE_MAPS_API_KEY
+        "engine": "google_maps_reviews",
+        "data_id": data_id,
+        "api_key": SERP_API_KEY,
+        "hl": "vi",
+        "sort_by": "qualityScore",  # Lấy review chất lượng cao nhất
     }
     try:
-        response = requests.get(url, params=params)
+        response = requests.get(url, params=params, timeout=20)
         data = response.json()
-        if data.get("status") == "OK" and "reviews" in data.get("result", {}):
-            return data["result"]["reviews"]
+        reviews = data.get("reviews", [])
+        
+        # Lọc chỉ lấy reviews có nội dung (snippet)
+        valid_reviews = []
+        for r in reviews:
+            snippet = (r.get("snippet") or r.get("extract") or "").strip()
+            if snippet:
+                valid_reviews.append(r)
+            if len(valid_reviews) >= 5:
+                break
+        
+        return valid_reviews
     except Exception as e:
-        print(f"Lỗi khi lấy reviews cho Place ID {place_id}: {e}")
+        print(f"    Loi khi lay reviews tu SerpAPI: {e}")
     return []
 
 def seed_reviews():
-    # Thư mục dataset ở d:\TDTT\TopGo\dataset
+    # Thư mục dataset
     dataset_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'dataset'))
     
     total_reviews_added = 0
+    total_real_reviews = 0
+    total_mock_reviews = 0
+    
+    if not SERP_API_KEY:
+        print("[WARN] Khong tim thay SERP_API_KEY trong .env — se dung du lieu mock.")
+    else:
+        print("[OK] Da tim thay SERP_API_KEY, se lay reviews that tu Google Maps qua SerpAPI.")
     
     for file_name in DATASET_FILES:
         file_path = os.path.join(dataset_dir, file_name)
         if not os.path.exists(file_path):
-            print(f"Bỏ qua {file_name}: Không tìm thấy file tại {file_path}")
+            print(f"Bo qua {file_name}: Khong tim thay file tai {file_path}")
             continue
             
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -129,49 +169,69 @@ def seed_reviews():
             city_name = list(data.keys())[0]
             places = data[city_name].get('diem_tham_quan', [])
             
-            print(f"Đang xử lý {len(places)} địa điểm tại {city_name}...")
+            print(f"\n{'='*60}")
+            print(f"Dang xu ly {len(places)} dia diem tai {city_name}...")
+            print(f"{'='*60}")
             
-            # Chỉ seed cho 5 địa điểm ngẫu nhiên mỗi thành phố để tiết kiệm thời gian
-            # Trong thực tế có thể bỏ random.sample để seed hết
+            # Chỉ seed cho 5 địa điểm ngẫu nhiên mỗi thành phố để tiết kiệm quota SerpAPI
             selected_places = random.sample(places, min(5, len(places)))
             
             for place in selected_places:
                 place_id = place['id']
                 place_name = place['ten']
                 
-                print(f"\n=> Đang xử lý địa điểm: {place_name} ({place_id})")
+                print(f"\n=> Dang xu ly: {place_name} ({place_id})")
                 
                 real_reviews = []
-                if GOOGLE_MAPS_API_KEY:
-                    gmap_place_id = search_place_google_maps(place_name, city_name)
-                    if gmap_place_id:
-                        print(f"  + Tìm thấy Google Maps Place ID: {gmap_place_id}")
-                        real_reviews = get_place_reviews(gmap_place_id)
-                        print(f"  + Lấy được {len(real_reviews)} nhận xét thực từ Google Maps.")
+                if SERP_API_KEY:
+                    # Bước 1: Tìm data_id của địa điểm qua SerpAPI Google Maps Search
+                    data_id = search_place_serpapi(place_name, city_name)
+                    
+                    if data_id:
+                        # Bước 2: Lấy reviews dùng google_maps_reviews engine
+                        real_reviews = get_reviews_serpapi(data_id)
+                        print(f"    Lay duoc {len(real_reviews)} reviews that tu Google Maps.")
+                        # Tránh rate limit SerpAPI
+                        time.sleep(1.5)
                     else:
-                        print("  - Không tìm thấy địa điểm trên Google Maps.")
-                else:
-                    print("  - Chưa có GOOGLE_MAPS_API_KEY, sẽ dùng dữ liệu mock.")
+                        print(f"    Khong tim thay dia diem tren Google Maps.")
                 
                 if real_reviews:
                     num_added = 0
                     for review in real_reviews:
-                        # Google Maps review có các trường: author_name, rating, text, time (timestamp)
-                        comment_text = review.get("text", "").strip()
+                        # SerpAPI google_maps_reviews format:
+                        # - user.name, user.link
+                        # - rating (float)
+                        # - snippet (text content)
+                        # - date (relative date string like "2 tháng trước")
+                        # - iso_date (ISO format)
+                        
+                        comment_text = (review.get("snippet") or review.get("extract") or "").strip()
                         if not comment_text:
-                            continue # Bỏ qua review chỉ có rating mà ko có text
-                            
-                        # Format lại timestamp
+                            continue
+                        
+                        # Lấy thông tin user
+                        user_info = review.get("user", {})
+                        author_name = user_info.get("name", "An danh")
+                        
+                        # Lấy rating
+                        rating = int(review.get("rating", 5))
+                        
+                        # Lấy thời gian
+                        iso_date = review.get("iso_date")
                         try:
-                            review_time = datetime.fromtimestamp(review.get("time", time.time()))
+                            if iso_date:
+                                review_time = datetime.fromisoformat(iso_date.replace("Z", "+00:00")).replace(tzinfo=None)
+                            else:
+                                review_time = generate_random_date(180)
                         except:
-                            review_time = generate_random_date()
-                            
+                            review_time = generate_random_date(180)
+                        
                         review_data = {
                             "location_id": place_id,
-                            "user_id": f"gmap_{review.get('author_url', '1').split('/')[-1]}_{random.randint(1000,9999)}",
-                            "user_name": review.get("author_name", "Ẩn danh"),
-                            "rating": review.get("rating", 5),
+                            "user_id": f"gmap_{abs(hash(author_name)) % 100000}_{random.randint(1000,9999)}",
+                            "user_name": author_name,
+                            "rating": rating,
                             "comment": comment_text,
                             "timestamp": review_time,
                             "source": "google_maps"
@@ -180,7 +240,11 @@ def seed_reviews():
                         db.collection("Reviews").add(review_data)
                         num_added += 1
                         total_reviews_added += 1
-                    print(f"  + Đã lưu {num_added} reviews từ Google Maps.")
+                        total_real_reviews += 1
+                        # In preview ngắn (ASCII-safe)
+                        preview = comment_text[:50].encode('ascii', 'replace').decode()
+                        print(f"      + [{rating}*] {author_name.encode('ascii','replace').decode()}: {preview}...")
+                    print(f"    => Da luu {num_added} reviews tu Google Maps.")
                 else:
                     # Fallback to mock data
                     num_reviews = random.randint(2, 4)
@@ -205,10 +269,16 @@ def seed_reviews():
                         
                         db.collection("Reviews").add(review_data)
                         total_reviews_added += 1
+                        total_mock_reviews += 1
                     
-                    print(f"  + Đã seed {num_reviews} reviews giả lập.")
+                    print(f"    => Da seed {num_reviews} reviews gia lap (fallback).")
 
-    print(f"\nHoàn tất! Đã thêm thành công tổng cộng {total_reviews_added} reviews vào Firestore.")
+    print(f"\n{'='*60}")
+    print(f"[DONE] Hoan tat!")
+    print(f"  - Reviews that (Google Maps): {total_real_reviews}")
+    print(f"  - Reviews mock (fallback):    {total_mock_reviews}")
+    print(f"  - Tong cong:                  {total_reviews_added}")
+    print(f"{'='*60}")
 
 if __name__ == "__main__":
     seed_reviews()
