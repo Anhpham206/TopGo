@@ -617,6 +617,31 @@
   font-family: var(--font-label); font-size: 11px; font-weight: 700;
   letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase;
 }
+/* Global Trips Privacy Toggle */
+.trips-privacy-toggle {
+  display: flex; align-items: center; gap: 8px; cursor: pointer;
+  background: var(--bg); padding: 4px 10px 4px 6px;
+  border-radius: 100px; border: 1px solid var(--border-light);
+  transition: all var(--t); user-select: none;
+}
+.trips-privacy-toggle:hover { background: var(--white); border-color: var(--border); box-shadow: var(--sh-s); }
+.tpt-switch { position: relative; width: 32px; height: 18px; flex-shrink: 0; }
+.tpt-switch input { opacity: 0; width: 0; height: 0; margin: 0; }
+.tpt-slider {
+  position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: var(--border); transition: .3s; border-radius: 18px;
+}
+.tpt-slider:before {
+  position: absolute; content: ""; height: 14px; width: 14px; left: 2px; bottom: 2px;
+  background-color: white; transition: .3s; border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.tpt-switch input:checked + .tpt-slider { background-color: var(--p1); }
+.tpt-switch input:checked + .tpt-slider:before { transform: translateX(14px); }
+.tpt-label { font-family: var(--font-label); font-size: 11px; font-weight: 700; text-transform: uppercase; transition: color .3s; letter-spacing: 0.5px; }
+.tpt-label.public { color: var(--p1); }
+.tpt-label.private { color: var(--sub); }
+
 .view-toggle {
   display: flex; background: var(--bg);
   border: 1px solid var(--border-light); border-radius: var(--r-s); padding: 4px;
@@ -672,39 +697,64 @@
 }
 
 .stamps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; transition: all var(--t); }
-.stamps-grid.list-view { grid-template-columns: 1fr; }
-.stamps-grid.list-view .stamp-card {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 24px; gap: 20px;
-}
-.stamps-grid.list-view .stamp-dest { margin-bottom: 0; min-width: 120px; }
-.stamps-grid.list-view .stamp-meta { margin-bottom: 0; flex: 1; }
-.stamps-grid.list-view .stamp-actions { margin-top: 0; }
+.stamps-grid.list-view { grid-template-columns: 1fr; gap: 12px; }
+
+/* ── TRIP CARD HIỆN ĐẠI ── */
 .stamp-card {
-  border: 1.5px solid var(--border-light); border-radius: var(--r-l);
-  padding: 18px; transition: all var(--t); position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border-light); border-radius: var(--r-l);
+  padding: 24px 20px; transition: all var(--t); position: relative; overflow: hidden;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
 }
 .stamp-card::before {
   content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: linear-gradient(90deg, var(--p1), var(--p2));
+  background: #0ea5e9; /* Xanh dương đậm ở viền trên */
 }
-.stamp-card:hover { border-color: var(--p2); box-shadow: 0 8px 24px rgba(0,169,255,0.12); transform: translateY(-2px); }
-.stamp-dest { font-family: var(--font-expanded); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-.stamp-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.stamp-card:hover { border-color: var(--p2); box-shadow: 0 4px 16px rgba(0,169,255,0.08); transform: translateY(-2px); }
+
+/* Bố cục Grid View Fallback */
+.stamp-main-info {
+  display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; flex: 1;
+}
+.stamp-dest-wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.stamp-dest { font-family: var(--font-expanded); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 0; }
+.stamp-privacy {
+  display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--sub); cursor: pointer; margin-bottom: 0;
+}
+.stamp-privacy input { margin: 0; cursor: pointer; }
+.stamp-meta { display: flex; flex-wrap: wrap; gap: 8px; }
 .stamp-tag {
-  font-family: var(--font-label); font-size: 10px; font-weight: 600;
-  letter-spacing: 1px; padding: 3px 8px; border-radius: 100px;
-  background: rgba(0,169,255,0.08); color: var(--p1);
+  font-family: var(--font); font-size: 12px; font-weight: 600;
+  padding: 4px 12px; border-radius: 100px;
+  background: #e0f2fe; color: #0ea5e9;
 }
-.stamp-date { font-size: 12px; color: var(--muted); }
-.stamp-actions { display: flex; gap: 8px; margin-top: 12px; }
+.stamp-date { font-size: 13px; font-weight: 500; color: #64748b; margin-bottom: 16px; }
+.stamp-actions { display: flex; gap: 8px; }
 .stamp-btn {
-  padding: 6px 14px; border: 1.5px solid var(--border); border-radius: var(--r-s);
+  padding: 6px 16px; border: 1.5px solid var(--border-light); border-radius: var(--r-s);
   background: var(--white); font-size: 12px; font-weight: 600; color: var(--muted);
   cursor: pointer; transition: all var(--t);
 }
 .stamp-btn:hover { color: var(--p1); border-color: var(--p1); }
 .stamp-btn.danger:hover { color: var(--error); border-color: var(--error); }
+
+/* Bố cục List View theo thiết kế ngang */
+.stamps-grid.list-view .stamp-card {
+  flex-direction: row; align-items: center; padding: 20px 24px; gap: 20px; min-height: 84px;
+}
+.stamps-grid.list-view .stamp-main-info {
+  flex-direction: row; align-items: center; margin-bottom: 0; gap: 24px; flex: unset;
+}
+.stamps-grid.list-view .stamp-dest-wrap {
+  justify-content: flex-start;
+}
+.stamps-grid.list-view .stamp-date {
+  margin-bottom: 0; margin-left: auto; margin-right: 16px; text-align: right;
+}
+
 .stamps-empty { grid-column: 1/-1; text-align: center; padding: 48px 20px; }
 .stamps-empty-icon { color: var(--border); margin-bottom: 16px; }
 .stamps-empty-text { font-size: 15px; color: var(--muted); margin-bottom: 12px; }
@@ -1114,20 +1164,20 @@ body.dark .btn-reset:hover {
 }
 
 /* ========================================================================
-   PROFILE V2 — 2-Column Layout + Dramatic Hero
+   PROFILE V2 — 2-Column Layout + Identity Panel
    ======================================================================== */
 
 .profile-main-v2 {
   padding: 0 0 60px;
   margin-top: 110px;
 }
-/* ── 2-Column Layout (No Banner) ── */
+/* ── 2-Column Layout ── */
 .pv2-layout {
   max-width: 1200px;
   margin: 32px auto 0;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: 32px;
   align-items: start;
   position: relative;
@@ -1231,14 +1281,14 @@ body.dark .pv2-sidebar-card {
 
 /* Actions */
 .pv2-actions {
-  display: flex; flex-direction: column; gap: 8px; width: 100%;
+  display: flex; gap: 8px; width: 100%;
 }
 .pv2-btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  flex: 1; display: inline-flex; align-items: center; justify-content: center;
   padding: 10px 16px; border-radius: 12px;
   font-family: var(--font-label); font-size: 13px; font-weight: 600;
   cursor: pointer; transition: all var(--t); border: 1.5px solid var(--border);
-  width: 100%;
+  white-space: nowrap;
 }
 .pv2-btn-edit {
   background: var(--white); color: var(--text);
@@ -1252,6 +1302,46 @@ body.dark .pv2-sidebar-card {
 .pv2-btn-logout:hover {
   background: var(--error); color: #fff; border-color: var(--error);
 }
+
+/* ── Integrated Details Panel ── */
+.pv2-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 20px 0 24px;
+  text-align: left;
+  border-top: 1px solid var(--border-light);
+  padding-top: 20px;
+}
+.pv2-detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.pv2-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 10px;
+  border-left: 2px solid rgba(0, 169, 255, 0.25);
+}
+.pv2-detail-label {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.pv2-detail-value {
+  font-family: var(--font-label);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-word;
+}
+
 
 /* Quick Links */
 .pv2-quick-links {
@@ -1273,7 +1363,7 @@ body.dark .pv2-sidebar-card {
   min-width: 0;
 }
 
-/* Tabs — pill style */
+/* Tabs — pill style, no icons */
 .pv2-tabs-bar {
   display: flex; position: relative;
   background: rgba(255,255,255,0.55);
@@ -1282,7 +1372,7 @@ body.dark .pv2-sidebar-card {
   border: 1px solid rgba(255,255,255,0.45);
   border-radius: var(--r-l);
   padding: 4px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   box-shadow: 0 4px 16px rgba(0,169,255,0.05);
 }
 body.dark .pv2-tabs-bar {
@@ -1290,23 +1380,22 @@ body.dark .pv2-tabs-bar {
   border: 1px solid rgba(255,255,255,0.06);
 }
 .pv2-tab {
-  flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 12px 0; background: none; border: none;
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 11px 0; background: none; border: none;
   border-radius: 14px;
   font-family: var(--font-label); font-size: 14px; font-weight: 600;
   color: var(--muted); cursor: pointer; transition: all var(--t);
-  position: relative; z-index: 1;
+  position: relative; z-index: 1; letter-spacing: 0.2px;
 }
 .pv2-tab:hover { color: var(--text); }
 .pv2-tab.active {
   color: var(--p1);
   background: var(--white);
-  box-shadow: 0 2px 8px rgba(0,169,255,0.08);
+  box-shadow: 0 2px 10px rgba(0,169,255,0.12);
 }
 body.dark .pv2-tab.active {
   background: rgba(0,169,255,0.1);
 }
-.pv2-tab svg { flex-shrink: 0; }
 .pv2-tab-indicator { display: none; }
 
 /* Tab Content */
@@ -1316,8 +1405,30 @@ body.dark .pv2-tab.active {
 }
 .pv2-tab-content.active { display: block; }
 @keyframes pv2FadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Stamps / Tab Header ── */
+.stamps-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.stamps-title {
+  font-family: var(--font-expanded); font-size: 17px; font-weight: 800;
+  color: var(--text);
+}
+.stamps-count {
+  font-family: var(--font-label); font-size: 13px; font-weight: 600;
+  color: var(--muted);
+}
+
+/* Post cards in profile — full width, not constrained */
+.profile-posts-feed-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
 }
 
 /* Filters toggle */
@@ -1336,45 +1447,29 @@ body.dark .pv2-tab.active {
 .stamps-filters-toggle[open] summary { color: var(--p1); border-color: var(--p1); }
 .stamps-filters-toggle .stamps-filters { margin-top: 12px; }
 
-/* Passport in tab 3 */
-.passport-book-v2 { max-width: 100%; margin: 0 auto; }
-.passport-book-v2 .passport-page {
-  min-width: unset; min-height: unset;
-  border-radius: var(--r-xl);
-  box-shadow: 0 8px 32px rgba(0,169,255,0.1);
+
+/* Profile posts empty state — standalone (not inside stamps-grid) */
+#profile-posts-empty.stamps-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-column: unset;
+  padding: 56px 20px;
 }
 
 /* ── Responsive ── */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .pv2-layout {
     grid-template-columns: 1fr;
-    margin-top: -40px;
   }
   .pv2-sidebar { position: static; }
-  .pv2-sidebar-card {
-    flex-direction: row; flex-wrap: wrap; text-align: left; padding: 20px; gap: 12px;
-  }
-  .pv2-avatar-wrap { margin-bottom: 0; }
-  .pv2-avatar { width: 72px; height: 72px; }
-  .pv2-avatar-placeholder { width: 32px; height: 32px; }
-  .pv2-name { font-size: 20px; }
-  .pv2-stats { margin-top: 12px; }
-  .pv2-actions { flex-direction: row; }
-  .pv2-btn { flex: 1; }
-  .pv2-cover { height: 180px; }
 }
 @media (max-width: 640px) {
-  .pv2-cover { height: 140px; }
-  .pv2-layout { padding: 0 12px; margin-top: -32px; gap: 12px; }
-  .pv2-sidebar-card { flex-direction: column; text-align: center; padding: 20px 16px; }
-  .pv2-avatar { width: 72px; height: 72px; }
-  .pv2-tab { font-size: 12.5px; gap: 5px; padding: 10px 0; }
-  .pv2-tab svg { width: 15px; height: 15px; }
-  .passport-book-v2 .pp-body { grid-template-columns: 1fr; gap: 20px; }
-  .passport-book-v2 .pp-photo { width: 100px; height: 130px; }
-  .passport-book-v2 .pp-field-row { grid-template-columns: 1fr; }
-  .pv2-cover-text { bottom: 12px; left: 16px; }
-  .pv2-cover-brand { font-size: 28px; }
+  .pv2-layout { padding: 0 12px; gap: 12px; }
+  .pv2-sidebar-card { padding: 20px 16px; }
+  .pv2-avatar { width: 80px; height: 80px; }
+  .pv2-tab { font-size: 13px; padding: 10px 0; }
+  .pv2-detail-row { grid-template-columns: 1fr; gap: 14px; }
 }
 
 /* ── Dark Mode ── */
@@ -1386,8 +1481,5 @@ body.dark .pv2-btn-logout { background: rgba(214,41,41,0.08); border-color: rgba
 body.dark .pv2-btn-logout:hover { background: var(--error); color: #fff; }
 body.dark .pv2-qlink:hover { background: rgba(0,169,255,0.08); }
 body.dark .stamps-filters-toggle summary { border-color: rgba(255,255,255,0.08); }
-body.dark .passport-book-v2 .passport-page {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-}
-
+body.dark .pv2-detail-item { border-left-color: rgba(0, 169, 255, 0.4); }
 

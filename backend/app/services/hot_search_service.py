@@ -23,35 +23,38 @@ def calculate_hot_score(likeCount: int, commentCount: int, createdAt: str) -> fl
     """
     Tính điểm hotScore cho bài viết dựa trên tương tác và thời gian.
     
-    Công thức: score = (likeCount * 1.0 + commentCount * 1.5) / (age_hours + 2)^1.5
+    Công thức: score = (likeCount * 1.0 + commentCount * 1.5) / (ageHours + 2)^1.5
     
     - Bài viết mới với nhiều tương tác sẽ có điểm cao.
     - Điểm giảm dần theo thời gian (Time Decay).
     - Hệ số +2 tránh chia cho 0 và làm mượt đường cong.
     """
     try:
-        # Parse createdAt — hỗ trợ cả ISO string lẫn timestamp
-        if isinstance(createdAt, (int, float)):
-            post_time = datetime.datetime.fromtimestamp(createdAt, tz=datetime.timezone.utc)
+        # Parse createdAt — hỗ trợ cả ISO string, timestamp số, và datetime object (Firebase Timestamp)
+        if isinstance(createdAt, datetime.datetime):
+            postTime = createdAt
+        elif isinstance(createdAt, (int, float)):
+            postTime = datetime.datetime.fromtimestamp(createdAt, tz=datetime.timezone.utc)
         elif isinstance(createdAt, str):
             # Loại bỏ timezone info nếu có để parse đơn giản
-            clean_time = createdAt.replace("Z", "+00:00")
+            cleanTime = createdAt.replace("Z", "+00:00")
             try:
-                post_time = datetime.datetime.fromisoformat(clean_time)
+                postTime = datetime.datetime.fromisoformat(cleanTime)
             except ValueError:
-                post_time = datetime.datetime.now(datetime.timezone.utc)
+                postTime = datetime.datetime.now(datetime.timezone.utc)
         else:
-            post_time = datetime.datetime.now(datetime.timezone.utc)
+            postTime = datetime.datetime.now(datetime.timezone.utc)
 
         # Đảm bảo timezone-aware
-        if post_time.tzinfo is None:
-            post_time = post_time.replace(tzinfo=datetime.timezone.utc)
+        if postTime.tzinfo is None:
+            postTime = postTime.replace(tzinfo=datetime.timezone.utc)
 
         now = datetime.datetime.now(datetime.timezone.utc)
-        age_hours = max((now - post_time).total_seconds() / 3600, 0)
+        ageHours = max((now - postTime).total_seconds() / 3600, 0)
 
-        interactions = (likeCount * 1.0) + (commentCount * 1.5)
-        score = interactions / ((age_hours + 2) ** 1.5)
+        # Base interaction = 1.0 (so a post itself has value even without likes)
+        interactions = 1.0 + (likeCount * 1.0) + (commentCount * 1.5)
+        score = interactions / ((ageHours + 2) ** 1.5)
 
         return round(score, 4)
 
@@ -73,74 +76,101 @@ def run_hot_score_update():
         logger.info("🔄 [Hot Search] Bắt đầu cập nhật hotScore...")
 
         # Lấy tất cả posts
-        posts_ref = db.collection("posts")
-        all_posts = posts_ref.stream()
+        postsRef = db.collection("posts")
+        allPosts = postsRef.stream()
 
         now = datetime.datetime.now(datetime.timezone.utc)
-        cutoff_72h = now - datetime.timedelta(hours=72)
+        cutoff72h = now - datetime.timedelta(hours=72)
         
-        updated_count = 0
-        topic_scores = {}  # {location_tag: total_score}
+        updatedCount = 0
+        topicScores = {}  # {location_tag: total_score}
+        topicPostCounts = {}  # {location_tag: count} — đếm inline, tránh stream lần 2
+        itin_cache = {}
 
-        for doc in all_posts:
-            post_data = doc.to_dict()
-            if not post_data:
+        for doc in allPosts:
+            postData = doc.to_dict()
+            if not postData:
                 continue
 
-            created_at = post_data.get("createdAt", "")
+            createdAt = postData.get("createdAt", "")
             
             # Kiểm tra post trong 72h
             try:
-                if isinstance(created_at, str):
-                    clean_time = created_at.replace("Z", "+00:00")
+                if isinstance(createdAt, datetime.datetime):
+                    postTime = createdAt
+                elif isinstance(createdAt, str):
+                    cleanTime = createdAt.replace("Z", "+00:00")
                     try:
-                        post_time = datetime.datetime.fromisoformat(clean_time)
+                        postTime = datetime.datetime.fromisoformat(cleanTime)
                     except ValueError:
-                        post_time = now
-                elif isinstance(created_at, (int, float)):
-                    post_time = datetime.datetime.fromtimestamp(created_at, tz=datetime.timezone.utc)
+                        postTime = now
+                elif isinstance(createdAt, (int, float)):
+                    postTime = datetime.datetime.fromtimestamp(createdAt, tz=datetime.timezone.utc)
                 else:
-                    post_time = now
+                    postTime = now
 
-                if post_time.tzinfo is None:
-                    post_time = post_time.replace(tzinfo=datetime.timezone.utc)
+                if postTime.tzinfo is None:
+                    postTime = postTime.replace(tzinfo=datetime.timezone.utc)
 
-                if post_time < cutoff_72h:
+                if postTime < cutoff72h:
                     continue  # Bỏ qua bài cũ hơn 72h
             except Exception:
                 continue
 
             # Tính hotScore mới
-            like_count = post_data.get("likeCount", 0)
-            comment_count = post_data.get("commentCount", 0)
-            new_score = calculate_hot_score(like_count, comment_count, created_at)
+            likeCount = postData.get("likeCount", 0)
+            commentCount = postData.get("commentCount", 0)
+            newScore = calculate_hot_score(likeCount, commentCount, createdAt)
 
             # Cập nhật hotScore vào Firestore
-            post_ref = db.collection("posts").document(doc.id)
-            post_ref.set({"hotScore": new_score}, merge=True)
-            updated_count += 1
+            postRef = db.collection("posts").document(doc.id)
+            postRef.set({"hotScore": newScore}, merge=True)
+            updatedCount += 1
 
-            # Tổng hợp taggedLocations
-            tagged_locations = post_data.get("taggedLocations", [])
-            for location in tagged_locations:
+            # Tổng hợp taggedLocations — đếm inline để tránh stream lần 2
+            taggedLocations = postData.get("taggedLocations", [])
+            if not isinstance(taggedLocations, list):
+                taggedLocations = []
+            else:
+                taggedLocations = list(taggedLocations)
+            
+            # Khai thác location từ lịch trình đính kèm
+            itineraryId = postData.get("itineraryId")
+            if itineraryId:
+                if itineraryId not in itin_cache:
+                    try:
+                        itinDoc = db.collection("itineraries").document(itineraryId).get()
+                        if itinDoc.exists:
+                            itinData = itinDoc.to_dict()
+                            itin_cache[itineraryId] = itinData.get("destination")
+                        else:
+                            itin_cache[itineraryId] = None
+                    except Exception as e:
+                        logger.warning(f"Lỗi truy xuất itinerary {itineraryId}: {e}")
+                        itin_cache[itineraryId] = None
+                
+                itinDest = itin_cache.get(itineraryId)
+                if itinDest and itinDest not in taggedLocations:
+                    taggedLocations.append(itinDest)
+
+            for location in taggedLocations:
                 if location:
-                    topic_scores[location] = topic_scores.get(location, 0) + new_score
+                    topicScores[location] = topicScores.get(location, 0) + newScore
+                    topicPostCounts[location] = topicPostCounts.get(location, 0) + 1
 
-        # Ghi hot_topics vào Firestore
-        for topic, score in topic_scores.items():
-            topic_id = topic.lower().replace(" ", "_").replace("-", "_")
-            topic_ref = db.collection("hot_topics").document(topic_id)
-            topic_ref.set({
+        # Ghi hot_topics vào Firestore (dùng postCount đã đếm inline)
+        for topic, score in topicScores.items():
+            topicId = topic.lower().replace(" ", "_").replace("-", "_")
+            topicRef = db.collection("hot_topics").document(topicId)
+            topicRef.set({
                 "name": topic,
                 "score": round(score, 4),
-                "postCount": sum(
-                    1 for doc in db.collection("posts").stream()
-                    if topic in (doc.to_dict() or {}).get("taggedLocations", [])
-                ),
+                "postCount": topicPostCounts.get(topic, 0),
                 "updatedAt": datetime.datetime.now(datetime.timezone.utc).isoformat()
             })
 
-        logger.info(f"✅ [Hot Search] Đã cập nhật {updated_count} bài viết, {len(topic_scores)} chủ đề hot.")
+        logger.info(f"✅ [Hot Search] Đã cập nhật {updatedCount} bài viết, {len(topicScores)} chủ đề hot.")
+
 
     except Exception as e:
         logger.error(f"❌ [Hot Search] Lỗi cập nhật hotScore: {e}")
@@ -155,11 +185,11 @@ def get_hot_topics(limit: int = 10) -> list:
     Lấy danh sách chủ đề hot, sắp xếp theo score giảm dần.
     """
     try:
-        topics_ref = db.collection("hot_topics")
-        all_topics = topics_ref.stream()
+        topicsRef = db.collection("hot_topics")
+        allTopics = topicsRef.stream()
 
         topics = []
-        for doc in all_topics:
+        for doc in allTopics:
             data = doc.to_dict()
             if data:
                 data["id"] = doc.id

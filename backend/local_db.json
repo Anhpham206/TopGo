@@ -42,5 +42,16 @@
     "commentCount": 0,
     "hotScore": 0.0,
     "createdAt": "2026-07-07T14:29:17.425905+00:00"
+  },
+  "posts/932a8b25-f2bc-4134-bb80-1ce2a72ca37a": {
+    "authorId": "local_offline_user",
+    "content": "ĐƯỢC ĐĂNG CHƯA",
+    "mediaUrls": [],
+    "taggedLocations": [],
+    "itineraryId": null,
+    "likeCount": 0,
+    "commentCount": 0,
+    "hotScore": 0,
+    "createdAt": "2026-07-08T06:15:16.750770+00:00"
   }
 }

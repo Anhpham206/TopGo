@@ -10,11 +10,11 @@
 */
 import { loadSharedComponents } from './shared.js';
 import { firebaseConfig } from './firebaseConfig.js';
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 // Khởi tạo Firebase Web SDK
-const app = initializeApp(firebaseConfig);
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
@@ -60,6 +60,7 @@ onAuthStateChanged(auth, (user) => {
 
     // Đồng bộ thông tin hồ sơ từ Firestore backend
     user.getIdToken().then(token => {
+      localStorage.setItem('topgo_token', token);
       fetch(`${API_BASE}/api/users/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -68,19 +69,63 @@ onAuthStateChanged(auth, (user) => {
         return res.json();
       })
       .then(dbProfile => {
-        if (dbProfile && (dbProfile.firstname || dbProfile.lastname || dbProfile.nationality || dbProfile.sex || dbProfile.dob || dbProfile.pob)) {
+        if (dbProfile && Object.keys(dbProfile).length > 0) {
           // Ghi nhận các trường thay đổi từ database
           const updatedUser = { ...cachedUser, ...dbProfile };
           localStorage.setItem('topgo_user', JSON.stringify(updatedUser));
           window.dispatchEvent(new Event('topgo-auth-change'));
         }
+
+        // ── SYNC photoURL và thông tin cơ bản lên BE nếu chưa có ──
+        // Điều này đảm bảo feed_controller có thể lấy avatar khi enrich post
+        const needsSync = !dbProfile?.photoURL && user.photoURL
+          || !dbProfile?.firstname && cachedUser.firstname
+          || !dbProfile?.email && user.email;
+
+        if (needsSync) {
+          const profileToSync = {
+            firstname: cachedUser.firstname || '',
+            lastname: cachedUser.lastname || '',
+            email: user.email || '',
+            photoURL: user.photoURL || null,
+            nationality: dbProfile?.nationality || 'Việt Nam',
+          };
+          fetch(`${API_BASE}/api/users/profile`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(profileToSync)
+          }).catch(err => {
+            console.warn('[TopGo] Không thể đồng bộ profile lên BE:', err);
+          });
+        }
       })
       .catch(err => {
+        // Nếu GET profile lỗi, vẫn thử sync thông tin cơ bản lên BE
         console.warn("Chưa có cấu hình profile hoặc lỗi kết nối:", err);
+        if (user.photoURL || cachedUser.firstname) {
+          fetch(`${API_BASE}/api/users/profile`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              firstname: cachedUser.firstname || '',
+              lastname: cachedUser.lastname || '',
+              email: user.email || '',
+              photoURL: user.photoURL || null,
+              nationality: 'Việt Nam',
+            })
+          }).catch(() => {});
+        }
       });
     });
   } else {
     localStorage.removeItem('topgo_user');
+    localStorage.removeItem('topgo_token');
   }
   window.dispatchEvent(new Event('topgo-auth-change'));
 });
@@ -151,10 +196,8 @@ const AuthService = {
   async updateProfile(updates) {
     const user = this.getUser();
     if (!user) return null;
-    Object.assign(user, updates);
-    this.setUser(user);
 
-    // Lưu trữ thông tin hồ sơ lên Firestore của backend
+    // Lưu trữ thông tin hồ sơ lên Firestore của backend trước
     const firebaseUser = await waitForAuth();
     if (firebaseUser) {
       try {
@@ -167,12 +210,19 @@ const AuthService = {
           },
           body: JSON.stringify(updates)
         });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        if (!res.ok) {
+           const errData = await res.json().catch(()=>({}));
+           throw new Error(errData.detail || "Cập nhật hồ sơ thất bại");
+        }
       } catch (err) {
         console.error("Lỗi khi đồng bộ profile lên server:", err);
+        throw err; // Ném lỗi ra ngoài để UI xử lý
       }
     }
     
+    // Cập nhật local sau khi backend thành công
+    Object.assign(user, updates);
+    this.setUser(user);
     window.dispatchEvent(new Event('topgo-auth-change'));
     return user;
   },
@@ -260,12 +310,21 @@ const AuthService = {
 // Đưa ra phạm vi global để dùng chung giữa các trang
 window.TopGoAuth = AuthService;
 
+// ── Helper cho DOM Ready (tránh miss DOMContentLoaded trong script module) ──
+function onDOMReady(fn) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fn);
+  } else {
+    fn();
+  }
+}
+
 // ── Nhận diện trang hiện tại ──
 const currentPage = window.location.pathname.split('/').pop() || '';
 
 // ── Logic trang xác thực (auth.html) ──
 if (currentPage === 'auth.html') {
-  document.addEventListener('DOMContentLoaded', () => {
+  onDOMReady(() => {
     // Chuyển hướng nếu đã đăng nhập
     if (AuthService.isLoggedIn()) {
       window.location.href = './profile.html';
@@ -415,7 +474,7 @@ if (currentPage === 'auth.html') {
 
 // ── Logic trang Hồ sơ cá nhân (profile.html) ──
 if (currentPage === 'profile.html') {
-  document.addEventListener('DOMContentLoaded', async () => {
+  onDOMReady(async () => {
     // Chuyển hướng nếu chưa đăng nhập
     if (!AuthService.isLoggedIn()) {
       window.location.href = './auth.html';
@@ -460,32 +519,44 @@ if (currentPage === 'profile.html') {
     }, 100);
 
 
-    const updateProfileUI = () => {
+    const updateProfileUI = async () => {
       const urlParams = new URLSearchParams(window.location.search);
       const viewUserId = urlParams.get('userId');
       let user = AuthService.getUser();
       
-      const isViewingOther = viewUserId && user && user.id !== viewUserId && user.uid !== viewUserId;
+      const isViewingOther = viewUserId && (!user || (user.id !== viewUserId && user.uid !== viewUserId));
       
       if (isViewingOther) {
-          user = {
-              id: viewUserId.substring(0, 8),
-              firstname: '',
-              lastname: 'Thành viên ' + viewUserId.substring(0, 4),
-              nationality: 'Việt Nam',
-              sex: 'Khác',
-              dob: '—',
-              pob: '—',
-              email: 'Bảo mật',
-              createdAt: '—',
-              photoURL: null
-          };
-          
           // Ẩn nút chỉnh sửa, đăng xuất, edit avatar
           const actionsEl = document.getElementById('pv2-actions');
           if (actionsEl) actionsEl.style.display = 'none';
           const photoEditBtn = document.getElementById('pp-photo-edit');
           if (photoEditBtn) photoEditBtn.style.display = 'none';
+          
+          setText('pv2-name', 'Đang tải...');
+          
+          try {
+              const res = await fetch(`${API_BASE}/api/users/${viewUserId}/profile`);
+              if (res.ok) {
+                  user = await res.json();
+              } else {
+                  throw new Error('User not found');
+              }
+          } catch (e) {
+              console.warn("Không thể tải public profile:", e);
+              user = {
+                  id: viewUserId.substring(0, 8),
+                  firstname: '',
+                  lastname: 'Thành viên ' + viewUserId.substring(0, 4),
+                  nationality: 'Việt Nam',
+                  sex: 'Khác',
+                  dob: '—',
+                  pob: '—',
+                  email: 'Bảo mật',
+                  createdAt: '—',
+                  photoURL: null
+              };
+          }
       }
 
       if (!user) return;
@@ -494,21 +565,21 @@ if (currentPage === 'profile.html') {
       // ── Populate V2 Header ──
       setText('pv2-name', fullname);
       const handleEl = document.getElementById('pv2-handle');
-      if (handleEl) handleEl.textContent = `@${user.id || 'TG-000000'} · ${user.nationality || 'Việt Nam'}`;
+      if (handleEl) {
+          const username = user.username ? user.username : (user.id || 'TG-000000');
+          handleEl.textContent = `@${username} · ${user.nationality || 'Việt Nam'}`;
+      }
       const emailEl = document.getElementById('pv2-email');
       if (emailEl && !isViewingOther) emailEl.textContent = user.email || '';
       
       // V2 Avatar
       const v2AvatarEl = document.getElementById('pv2-avatar');
       if (v2AvatarEl) {
-        if (user.photoURL) {
+        if (user.photoURL && user.photoURL !== 'undefined' && user.photoURL !== 'null') {
           v2AvatarEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar">`;
         } else {
-          v2AvatarEl.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pv2-avatar-placeholder">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-            </svg>`;
+          const initial = (user.firstname || user.lastname || user.email || 'T').charAt(0).toUpperCase();
+          v2AvatarEl.innerHTML = `<span style="font-size: 40px; font-weight: 600; color: var(--p1); display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">${initial}</span>`;
         }
       }
 
@@ -516,41 +587,17 @@ if (currentPage === 'profile.html') {
       const statNationEl = document.getElementById('pv2-stat-nation-label');
       if (statNationEl) statNationEl.textContent = user.nationality || 'Việt Nam';
 
-      // ── Populate Passport (Tab 3) ──
-      setText('pp-fullname', fullname);
-      setText('pp-nationality', user.nationality);
-      setText('pp-sex', user.sex);
-      setText('pp-dob', user.dob);
-      setText('pp-pob', user.pob);
-      setText('pp-email-passport', user.email);
-      setText('pp-doi', user.createdAt);
-      setText('pp-passport-no', user.id);
-
-      // Passport photo
-      const photoEl = document.getElementById('pp-photo');
-      if (photoEl) {
-        if (user.photoURL) {
-          photoEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">`;
-        } else {
-          photoEl.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pp-photo-placeholder">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-            </svg>`;
-        }
-      }
-
-      // MRZ
-      const mrzEl = document.getElementById('pp-mrz');
-      if (mrzEl) {
-        const lastname = (user.lastname || 'TOPGO').toUpperCase().replace(/\s/g, '<');
-        const firstname = (user.firstname || 'TRAVELER').toUpperCase().replace(/\s/g, '<');
-        const line1 = `P<VNM<${lastname}<<${firstname}`.padEnd(44, '<').replace(/</g, '&lt;');
-        const dobStr = (user.dob || '000000').replace(/-/g, '').slice(-6);
-        const sexStr = (user.sex === 'Nam' ? 'M' : (user.sex === 'Nữ' ? 'F' : '<'));
-        const idStr = (user.id || 'TG000000');
-        const line2 = `${idStr.padEnd(9, '<')}0VNM${dobStr.padEnd(6, '<')}0${sexStr}${'<'.repeat(7)}`.padEnd(44, '<').replace(/</g, '&lt;');
-        mrzEl.innerHTML = `${line1}<br>${line2}`;
+      // ── Populate Identity Panel (Sidebar) ──
+      setText('pip-fullname', fullname);
+      setText('pip-nationality', user.nationality || 'Việt Nam');
+      setText('pip-sex', user.sex || '—');
+      setText('pip-dob', user.dob || '—');
+      setText('pip-pob', user.pob || '—');
+      const pipEmailEl = document.getElementById('pip-email');
+      if (pipEmailEl) pipEmailEl.textContent = isViewingOther ? 'Bảo mật' : (user.email || '—');
+      const pipJoinedEl = document.getElementById('pip-joined');
+      if (pipJoinedEl) {
+        pipJoinedEl.textContent = user.createdAt || '—';
       }
     };
 
@@ -671,6 +718,8 @@ if (currentPage === 'profile.html') {
       const user = AuthService.getUser() || {};
       document.getElementById('edit-lastname').value = user.lastname || '';
       document.getElementById('edit-firstname').value = user.firstname || '';
+      const usernameInput = document.getElementById('edit-username');
+      if (usernameInput) usernameInput.value = user.username || '';
       document.getElementById('edit-dob').value = user.dob || '';
       document.getElementById('edit-sex').value = user.sex || '';
       document.getElementById('edit-pob').value = user.pob || '';
@@ -681,16 +730,70 @@ if (currentPage === 'profile.html') {
     document.getElementById('btn-edit-cancel')?.addEventListener('click', () => overlay.classList.add('hidden'));
     overlay?.addEventListener('click', e => { if (e.target === overlay) overlay.classList.add('hidden'); });
 
+    // Username validation logic
+    const usernameInput = document.getElementById('edit-username');
+    const usernameStatus = document.getElementById('username-status');
+    let usernameTimeout;
+    if (usernameInput) {
+        usernameInput.addEventListener('input', (e) => {
+            const val = e.target.value.trim();
+            if (usernameStatus) {
+                usernameStatus.textContent = '';
+                usernameStatus.style.color = '';
+            }
+            if (!val) return;
+            
+            clearTimeout(usernameTimeout);
+            usernameTimeout = setTimeout(async () => {
+                const user = AuthService.getUser();
+                if (user && user.username === val) {
+                    if (usernameStatus) {
+                        usernameStatus.textContent = 'Username hiện tại';
+                        usernameStatus.style.color = 'var(--sub)';
+                    }
+                    return;
+                }
+                if (usernameStatus) {
+                    usernameStatus.textContent = 'Đang kiểm tra...';
+                    usernameStatus.style.color = 'var(--sub)';
+                }
+                try {
+                    const _isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+                    const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
+                    
+                    const fetchRes = await fetch(`${API_BASE}/api/users/check-username?username=${val}`);
+                    const res = await fetchRes.json();
+                    if (res && res.available !== undefined) {
+                        usernameStatus.textContent = res.message;
+                        usernameStatus.style.color = res.available ? 'var(--success)' : 'var(--error)';
+                    }
+                } catch (err) {
+                    if (usernameStatus) {
+                        usernameStatus.textContent = 'Username không hợp lệ hoặc trùng';
+                        usernameStatus.style.color = 'var(--error)';
+                    }
+                }
+            }, 500);
+        });
+    }
+
     document.getElementById('btn-edit-save')?.addEventListener('click', async () => {
-      const updated = await AuthService.updateProfile({
-        lastname: document.getElementById('edit-lastname').value.trim(),
-        firstname: document.getElementById('edit-firstname').value.trim(),
-        dob: document.getElementById('edit-dob').value,
-        sex: document.getElementById('edit-sex').value,
-        pob: document.getElementById('edit-pob').value.trim(),
-        nationality: document.getElementById('edit-nationality').value.trim(),
-      });
-      if (updated) window.location.reload();
+      try {
+          const updated = await AuthService.updateProfile({
+            lastname: document.getElementById('edit-lastname').value.trim(),
+            firstname: document.getElementById('edit-firstname').value.trim(),
+            username: document.getElementById('edit-username')?.value.trim(),
+            dob: document.getElementById('edit-dob').value,
+            sex: document.getElementById('edit-sex').value,
+            pob: document.getElementById('edit-pob').value.trim(),
+            nationality: document.getElementById('edit-nationality').value.trim(),
+          });
+          if (updated) window.location.reload();
+      } catch (err) {
+          import('./shared.js').then(module => {
+              module.showToast(err.message, 'error');
+          });
+      }
     });
 
     // Đăng xuất
@@ -801,26 +904,25 @@ function renderTrips(trips) {
   try { user = AuthService.getUser(); } catch(e){}
   const isViewingOtherTrips = viewUserIdTrips && user && user.id !== viewUserIdTrips && user.uid !== viewUserIdTrips;
 
-  uniqueTrips.forEach(trip => {
-    const isPublic = trip.isPublic || false;
-    const publicToggleHtml = !isViewingOtherTrips ? `
-      <label style="display:flex; align-items:center; gap:4px; font-size:12px; cursor:pointer; color:var(--sub);">
-          <input type="checkbox" ${isPublic ? 'checked' : ''} onchange="alert('Tính năng Public/Private đang chờ Backend kết nối API');"> 
-          ${isPublic ? 'Public' : 'Private'}
-      </label>
-    ` : '';
+  // Show global privacy toggle only if viewing own profile
+  const globalPrivacyToggle = document.getElementById('trips-privacy-toggle');
+  if (globalPrivacyToggle) {
+    globalPrivacyToggle.style.display = !isViewingOtherTrips ? 'flex' : 'none';
+  }
 
+  uniqueTrips.forEach(trip => {
     const card = document.createElement('div');
     card.className = 'stamp-card';
     card.innerHTML = `
-      <div class="stamp-dest">
-        ${trip.destination || 'Chuyến đi'}
-        <div style="float:right; margin-top:4px;">${publicToggleHtml}</div>
-      </div>
-      <div class="stamp-meta">
-        <span class="stamp-tag">${trip.days || '?'} ngày</span>
-        <span class="stamp-tag">${trip.pax || '?'} người</span>
-        ${trip.budget ? `<span class="stamp-tag">${Number(trip.budget).toLocaleString('vi-VN')}₫</span>` : ''}
+      <div class="stamp-main-info">
+        <div class="stamp-dest-wrap">
+          <span class="stamp-dest">${trip.destination || 'Chuyến đi'}</span>
+        </div>
+        <div class="stamp-meta">
+          <span class="stamp-tag">${trip.days || '?'} ngày</span>
+          <span class="stamp-tag">${trip.pax || '?'} người</span>
+          ${trip.budget ? `<span class="stamp-tag">${Number(trip.budget).toLocaleString('vi-VN')}₫</span>` : ''}
+        </div>
       </div>
       <div class="stamp-date">${trip.dateStart || ''} → ${trip.dateEnd || ''}</div>
       <div class="stamp-actions">

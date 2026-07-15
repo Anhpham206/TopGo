@@ -529,7 +529,7 @@ export function renderItinerary(data) {
                     <div class="timeline-node"></div>
                 </div>
                 <div class="timeline-stop-card">
-                    <h3 class="tsc-name"><a href="https://www.google.com/search?q=${encodeURIComponent(stop.Dia_diem)}" target="_blank">${stop.Dia_diem}</a></h3>
+                    <h3 class="tsc-name"><a href="./location.html?name=${encodeURIComponent(stop.Dia_diem)}" target="_blank">${stop.Dia_diem}</a></h3>
                     <p class="tsc-desc">${stop.Gioi_thieu || ''}</p>
                     <div class="tsc-tags">
                         <span class="tsc-tag"><span class="glow-text">THỜI GIAN:</span> ${stop.Thoi_luong || ''}</span>

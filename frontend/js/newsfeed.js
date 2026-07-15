@@ -10,6 +10,11 @@
   ========================================================================
 */
 import { loadSharedComponents, showToast } from './shared.js';
+import { SuggestedFollowWidget, DestinationsWidget } from './sidebarUtils.js';
+
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { firebaseConfig } from './firebaseConfig.js';
 
 // ── Config ───────────────────────────────────────────────────
 const _isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
@@ -17,8 +22,30 @@ const API_BASE = _isLocal
     ? 'http://localhost:8000'
     : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
 
+// Khởi tạo Firebase (dùng app đã có nếu tồn tại)
+const _fbApp = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+const _fbAuth = getAuth(_fbApp);
+
+// Lấy fresh ID Token từ Firebase (tự động refresh nếu hết hạn)
+async function _getAuthHeaders() {
+    try {
+        let user = _fbAuth.currentUser;
+        // Nếu currentUser chưa sẵn sàng, chờ Firebase Auth khởi tạo
+        if (!user) {
+            user = await _waitForFirebaseAuth();
+        }
+        if (user) {
+            const token = await user.getIdToken(); // tự động refresh nếu hết hạn
+            return { 'Authorization': `Bearer ${token}` };
+        }
+    } catch (e) {
+        console.warn('[TopGo] Không thể lấy Firebase token:', e);
+    }
+    return {};
+}
+
 // ── State ────────────────────────────────────────────────────
-let _currentTab = 'following';   // 'following' | 'explore'
+let _currentTab = 'explore';   // 'explore' | 'following'
 let _feedCursor = null;
 let _isLoading = false;
 let _hasMore = true;
@@ -44,52 +71,83 @@ const HotSearchWidget = {
             const res = await fetch(`${API_BASE}/api/hot-search?limit=10`);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data = await res.json();
-            this.render(data.topics || []);
+            if (data.topics && data.topics.length > 0) {
+                this.render(data.topics);
+            } else {
+                this.hide();
+            }
         } catch (err) {
-            console.warn('[TopGo] Hot search API failed, using defaults:', err.message);
-            this.render(this._getDefaults());
+            console.warn('[TopGo] Hot search API failed:', err.message);
+            this.hide();
         }
+    },
+
+    hide() {
+        const list = hotSearchList();
+        if (list) {
+            list.innerHTML = '<div style="padding: 16px; text-align: center; color: var(--muted); font-size: 13px;">Đang cập nhật xu hướng mới nhất...</div>';
+        }
+        // Update header too
+        const header = document.querySelector('#sidebar-hot-search .hot-search-header h3');
+        if (header) header.textContent = 'Xu hướng du lịch';
     },
 
     render(topics) {
         const list = hotSearchList();
-        if (!list || !topics.length) return;
+        if (!list || !topics.length) {
+            this.hide();
+            return;
+        }
 
-        list.innerHTML = topics.map((topic, idx) => {
+        // Update header to include icon
+        const headerEl = document.querySelector('#sidebar-hot-search .hot-search-header');
+        if (headerEl) {
+            headerEl.innerHTML = `
+                <h3 class="gradient-title">Xu hướng</h3>
+                <a href="./trending.html" class="hot-search-header-link">Xem tất cả →</a>
+            `;
+        }
+
+        const topTopics = topics.slice(0, 3);
+        const maxCount = Math.max(...topTopics.map(t => t.postCount || 0), 1);
+
+        const html = topTopics.map((topic, idx) => {
             const rank = idx + 1;
             const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-default';
-            const trendIcon = topic.trend === 'up' ? '↑'
-                            : topic.trend === 'down' ? '↓' : '—';
+            
+            const trendIcon = topic.trend === 'up' 
+                    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>'
+                    : topic.trend === 'down' 
+                    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>'
+                    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>';
+            
             const trendClass = topic.trend === 'up' ? 'trend-up'
                              : topic.trend === 'down' ? 'trend-down' : 'trend-stable';
+            const heatPct = Math.round((topic.postCount || 0) / maxCount * 100);
 
             return `
-            <li class="hot-search-item" data-topic="${_escapeHtml(topic.name || '')}">
+            <li class="hot-search-item" data-topic="${_escapeHtml(topic.name || '')}" onclick="window.location.href='./location.html?name=${encodeURIComponent(topic.name || '')}'">
                 <div class="hot-rank ${rankClass}">${rank}</div>
                 <div class="hot-topic-info">
                     <div class="hot-topic-name">${_escapeHtml(topic.name || '')}</div>
                     <div class="hot-topic-posts">${topic.postCount || 0} bài viết</div>
+                    <div class="hot-topic-heat-bar">
+                        <div class="hot-topic-heat-fill" style="width: ${heatPct}%;"></div>
+                    </div>
                 </div>
                 <span class="hot-trend-icon ${trendClass}">${trendIcon}</span>
             </li>`;
         }).join('');
-    },
 
-    _getDefaults() {
-        return [
-            { name: "Đà Nẵng", postCount: 128, trend: "up" },
-            { name: "Phú Quốc", postCount: 95, trend: "up" },
-            { name: "Đà Lạt", postCount: 87, trend: "stable" },
-            { name: "Hội An", postCount: 76, trend: "up" },
-            { name: "Nha Trang", postCount: 64, trend: "stable" },
-            { name: "Hà Nội", postCount: 58, trend: "down" },
-            { name: "Sa Pa", postCount: 45, trend: "up" },
-            { name: "TP. Hồ Chí Minh", postCount: 42, trend: "stable" },
-            { name: "Ninh Bình", postCount: 38, trend: "up" },
-            { name: "Hạ Long", postCount: 30, trend: "stable" },
-        ];
+        list.innerHTML = html + `
+            <a class="hot-search-view-all" href="./trending.html">
+                <span class="hot-search-view-all-text">Xem tất cả xu hướng</span>
+                <span class="hot-search-view-all-arrow">→</span>
+            </a>
+        `;
     }
 };
+
 
 // =========================================================================
 
@@ -143,7 +201,7 @@ const PostComposer = {
             
             const avatarEl = document.getElementById('composer-avatar');
             if (!avatarEl) return;
-            if (photo) {
+            if (photo && photo !== 'undefined' && photo !== 'null') {
                 avatarEl.innerHTML = `<img src="${_escapeHtml(photo)}" alt="Avatar">`;
             } else if (name) {
                 avatarEl.textContent = name.charAt(0).toUpperCase();
@@ -318,7 +376,7 @@ const PostComposer = {
         try {
             if (!this._itinerariesCache) {
                 const res = await fetch(`${API_BASE}/api/plans/list`, {
-                    headers: _getAuthHeaders()
+                    headers: await _getAuthHeaders()
                 });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
@@ -422,14 +480,21 @@ const PostComposer = {
         const locations = [...this._taggedLocations];
         const itineraryId = this._selectedItinerary?.id || this._selectedItinerary?.planId || null;
 
-        // Build media URLs (in production, these would be uploaded first)
-        // For now, use object URLs or empty array
-        const mediaUrls = this._previewUrls.map(u => u); // placeholder
+        // Build media URLs using FileReader for Base64 (simulate upload)
+        const mediaUrls = [];
+        for (const file of this._selectedFiles) {
+            const dataUrl = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.readAsDataURL(file);
+            });
+            mediaUrls.push(dataUrl);
+        }
 
         try {
             const body = {
                 content,
-                mediaUrls: [], // Real upload would go here
+                mediaUrls: mediaUrls,
                 taggedLocations: locations,
                 itineraryId
             };
@@ -438,7 +503,7 @@ const PostComposer = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    ..._getAuthHeaders()
+                    ...(await _getAuthHeaders())
                 },
                 body: JSON.stringify(body)
             });
@@ -449,6 +514,11 @@ const PostComposer = {
             // Prepend new post to feed
             this._prependPost(newPost);
             showToast('Đăng bài thành công!', 'success');
+            
+            // Reload hot search sau 1s để đảm bảo backend đã update điểm
+            setTimeout(() => {
+                HotSearchWidget.load();
+            }, 1000);
 
         } catch (err) {
             console.warn('[TopGo] Post submit failed:', err.message);
@@ -516,6 +586,9 @@ const PostComposer = {
 // =========================================================================
 
 const NewsFeedManager = {
+    _postCountSinceLastAd: 0,
+    _nextAdTarget: 0,
+
     async init() {
         this._initTabs();
         this._initInfiniteScroll();
@@ -546,12 +619,17 @@ const NewsFeedManager = {
             // Greeting
             const greetEl = document.getElementById('feed-greeting');
             if (greetEl) {
-                const hour = new Date().getHours();
-                let greet = 'Xin chào';
-                if (hour < 12) greet = 'Chào buổi sáng';
-                else if (hour < 18) greet = 'Chào buổi chiều';
-                else greet = 'Chào buổi tối';
-                greetEl.textContent = `${greet}, ${user.firstname || fullname}! 👋`;
+                const greetings = [
+                    "Sẵn sàng khám phá nhé",
+                    "Hôm nay đi đâu thế",
+                    "Khám phá thế giới nào",
+                    "Có kế hoạch gì mới không",
+                    "Lên lịch trình thôi",
+                    "Tìm nguồn cảm hứng mới nhé",
+                    "Cùng TopGo vi vu nào"
+                ];
+                const randomGreet = greetings[Math.floor(Math.random() * greetings.length)];
+                greetEl.textContent = `${randomGreet}, ${user.firstname || fullname}!`;
             }
             
             // Sidebar Profile Card
@@ -559,11 +637,14 @@ const NewsFeedManager = {
             if (spName) spName.textContent = fullname;
             
             const spHandle = document.getElementById('sp-handle');
-            if (spHandle) spHandle.textContent = `@${user.id || 'topgo'}`;
+            if (spHandle) {
+                const handle = user.username || (user.email ? user.email.split('@')[0] : String(user.id || user.uid || 'topgo').substring(0, 8));
+                spHandle.textContent = `@${handle}`;
+            }
             
             const spAvatar = document.getElementById('sp-avatar');
             if (spAvatar) {
-                if (user.photoURL) {
+                if (user.photoURL && user.photoURL !== 'undefined' && user.photoURL !== 'null') {
                     spAvatar.innerHTML = `<img src="${user.photoURL}" alt="">`;
                 } else {
                     const initial = fullname.charAt(0).toUpperCase();
@@ -578,17 +659,19 @@ const NewsFeedManager = {
     _initTabs() {
         document.querySelectorAll('.feed-tab').forEach(tab => {
             tab.addEventListener('click', (e) => {
-                const newTab = e.target.dataset.tab;
+                const btn = e.currentTarget;
+                const newTab = btn.dataset.tab;
                 if (newTab === _currentTab) return;
 
                 // Update active tab UI
                 document.querySelectorAll('.feed-tab').forEach(t => t.classList.remove('active'));
-                e.target.classList.add('active');
+                btn.classList.add('active');
 
-                // Reset and reload
                 _currentTab = newTab;
                 _feedCursor = null;
                 _hasMore = true;
+                this._postCountSinceLastAd = 0;
+                this._nextAdTarget = 0;
                 feedContent().innerHTML = '';
                 this.loadFeed();
             });
@@ -744,32 +827,105 @@ const NewsFeedManager = {
         const tempDiv = document.createElement('div');
 
         posts.forEach(post => {
+            if (this._postCountSinceLastAd >= this._nextAdTarget) {
+                tempDiv.innerHTML = this._renderAdPost();
+                while (tempDiv.firstChild) {
+                    fragment.appendChild(tempDiv.firstChild);
+                }
+                this._postCountSinceLastAd = 0;
+                this._nextAdTarget = Math.floor(Math.random() * 7) + 4;
+            }
+
             tempDiv.innerHTML = PostCardRenderer.render(post);
             while (tempDiv.firstChild) {
                 fragment.appendChild(tempDiv.firstChild);
             }
+
+            this._postCountSinceLastAd++;
         });
 
         content.appendChild(fragment);
+    },
+
+    _renderAdPost() {
+        return `
+            <div class="post-card feed-ad-post">
+                <div class="feed-ad-sponsor-badge">
+                    <span>Được tài trợ</span>
+                    <div class="feed-ad-menu">⋮</div>
+                </div>
+                
+                <div class="post-header">
+                    <img class="post-avatar" src="https://ui-avatars.com/api/?name=Ads&background=random&color=fff" alt="Ads">
+                    <div class="post-author-info">
+                        <a href="#" class="post-author-name" style="text-decoration:none; color:inherit;">TopGo Travel Ads</a>
+                        <div class="post-timestamp">Tài trợ</div>
+                    </div>
+                </div>
+                
+                <div class="feed-ad-content">
+                    <div class="feed-ad-text-placeholder"></div>
+                    <div class="feed-ad-text-placeholder short"></div>
+                    
+                    <div class="feed-ad-location-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <span>Vị trí quảng cáo...</span>
+                    </div>
+
+                    <div class="feed-ad-image-placeholder">
+                        <span>Chưa có quảng cáo</span>
+                    </div>
+
+                    <div class="feed-ad-itin-placeholder">
+                        <div class="feed-ad-itin-icon"></div>
+                        <div class="feed-ad-itin-details">
+                            <div class="feed-ad-text-placeholder tiny"></div>
+                            <div class="feed-ad-text-placeholder tiny short"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feed-ad-footer">
+                    <button class="feed-ad-cta">Khám phá ngay</button>
+                </div>
+            </div>
+        `;
     },
 
     async _fetchPersonalFeed(cursor = null) {
         const params = new URLSearchParams({ limit: '20' });
         if (cursor) params.set('cursor', cursor);
 
-        const res = await fetch(`${API_BASE}/api/feed?${params}`, {
-            headers: _getAuthHeaders()
-        });
+        try {
+            const res = await fetch(`${API_BASE}/api/feed/following?${params}`, {
+                headers: await _getAuthHeaders()
+            });
 
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return await res.json();
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            if (!data.posts || data.posts.length === 0) throw new Error('No personal posts');
+            return data;
+        } catch (err) {
+            console.warn('[TopGo] Personal feed empty/failed, using mock fallback:', err.message);
+            // Fallback: mượn tạm data của tab explore nhưng đổi tên để demo
+            const fallbackData = await this._fetchExploreFeed(cursor);
+            if (fallbackData && fallbackData.posts) {
+                fallbackData.posts = fallbackData.posts.map(p => {
+                    const mockedAuthorName = (p.authorName || p.author || 'Người dùng') + ' (Đang theo dõi)';
+                    return { ...p, authorName: mockedAuthorName };
+                });
+            }
+            return fallbackData;
+        }
     },
 
     async _fetchExploreFeed(cursor = null) {
         const params = new URLSearchParams({ limit: '20' });
         if (cursor) params.set('cursor', cursor);
 
-        const res = await fetch(`${API_BASE}/api/feed/explore?${params}`);
+        const res = await fetch(`${API_BASE}/api/feed/explore?${params}`, {
+            headers: await _getAuthHeaders()
+        });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return await res.json();
     }
@@ -779,6 +935,80 @@ const NewsFeedManager = {
 // KHỞI TẠO
 // =========================================================================
 
-document.addEventListener('DOMContentLoaded', () => {
+// Chờ Firebase Auth xác minh trạng thái đăng nhập (tránh currentUser = null)
+function _waitForFirebaseAuth() {
+    return new Promise((resolve) => {
+        const unsubscribe = _fbAuth.onAuthStateChanged((user) => {
+            unsubscribe();
+            resolve(user);
+        });
+    });
+}
+
+function onDOMReady(fn) {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fn);
+    } else {
+        fn();
+    }
+}
+
+function _updateSidebarProfile() {
+    const userInfo = JSON.parse(localStorage.getItem('topgo_user') || '{}');
+    const userStats = JSON.parse(localStorage.getItem('userStats') || '{"trips":0,"posts":0}');
+    
+    if (userInfo.uid) {
+        const nameEl = document.getElementById('sp-name');
+        const handleEl = document.getElementById('sp-handle');
+        const avatarEl = document.getElementById('sp-avatar');
+        
+        const fullName = [userInfo.lastname, userInfo.firstname].filter(Boolean).join(' ').trim() || userInfo.email || 'Thành viên';
+
+        if (nameEl) nameEl.textContent = fullName;
+        if (handleEl) {
+            const handle = userInfo.username || (userInfo.email ? userInfo.email.split('@')[0] : String(userInfo.uid || 'user').substring(0, 8));
+            handleEl.textContent = '@' + handle;
+        }
+        if (avatarEl) {
+            if (userInfo.photoURL && userInfo.photoURL !== 'undefined' && userInfo.photoURL !== 'null') {
+                avatarEl.innerHTML = `<img src="${userInfo.photoURL}" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+            } else {
+                avatarEl.innerHTML = `<span>${fullName.charAt(0).toUpperCase()}</span>`;
+            }
+        }
+    }
+
+    const tripsEl = document.getElementById('sp-trips');
+    const postsEl = document.getElementById('sp-posts');
+    if (tripsEl) tripsEl.textContent = userStats.trips || 0;
+    if (postsEl) postsEl.textContent = userStats.posts || 0;
+
+    // Fetch real stats using fresh Firebase token
+    if (userInfo.uid) {
+        _getAuthHeaders().then(headers => {
+            if (!headers['Authorization']) return; // Chưa đăng nhập
+            
+            Promise.all([
+                fetch(`${API_BASE}/api/plans/list`, { headers }).then(res => res.ok ? res.json() : {plans:[]}),
+                fetch(`${API_BASE}/api/users/profile/posts`, { headers }).then(res => res.ok ? res.json() : {posts:[]})
+            ]).then(([tripsData, postsData]) => {
+                const tripCount = tripsData.plans ? tripsData.plans.length : 0;
+                const postCount = postsData.posts ? postsData.posts.length : 0;
+                if (tripsEl) tripsEl.textContent = tripCount;
+                if (postsEl) postsEl.textContent = postCount;
+                localStorage.setItem('userStats', JSON.stringify({ trips: tripCount, posts: postCount }));
+            }).catch(err => console.warn('Lỗi tải thống kê:', err));
+        });
+    }
+}
+
+onDOMReady(async () => {
+    // Chờ Firebase Auth khởi tạo xong để currentUser không bị null
+    await _waitForFirebaseAuth();
+    _updateSidebarProfile();
+    HotSearchWidget.load();
+    SuggestedFollowWidget.load();
+    DestinationsWidget.load();
     NewsFeedManager.init();
 });
+

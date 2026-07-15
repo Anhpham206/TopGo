@@ -21,19 +21,15 @@ async def get_hot_search(limit: int = 10) -> dict:
     try:
         topics = get_hot_topics(limit=limit)
 
-        # Nếu chưa có hot topics (chưa có posts), trả về default
-        if not topics:
-            topics = _get_default_hot_topics()
-
         return {
-            "topics": topics,
-            "total": len(topics)
+            "topics": topics or [],
+            "total": len(topics) if topics else 0
         }
 
     except Exception as e:
         logger.error(f"Lỗi lấy hot search: {e}")
         return {
-            "topics": _get_default_hot_topics(),
+            "topics": [],
             "total": 0
         }
 

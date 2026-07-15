@@ -1,3 +1,10 @@
+/**
+ * ========================================================================
+ * FILE: missionVision.js
+ * CHỨC NĂNG:
+ * - Điều khiển hiệu ứng UI (scroll trigger, animation) cho section Mission/Vision.
+ * ========================================================================
+ */
 document.addEventListener('DOMContentLoaded', () => {
     // Left for backwards compatibility if needed, but we delegate to the robust initialization below
 });

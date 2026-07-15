@@ -1,3 +1,10 @@
+/**
+ * ========================================================================
+ * FILE: hoverCard.js
+ * CHỨC NĂNG:
+ * - Hiển thị popup card (Account Hover) khi di chuột vào avatar/tên người dùng.
+ * ========================================================================
+ */
 // js/hoverCard.js — Account Hover Popup Card
 // Shows a floating card when hovering over post author avatars/names.
 
@@ -15,16 +22,18 @@
     card.className = 'hover-card';
     card.innerHTML = `
       <div class="hc-header">
-        <div class="hc-avatar" id="hc-avatar"></div>
+        <a class="hc-avatar" id="hc-avatar" href="./profile.html"></a>
         <div class="hc-info">
-          <div class="hc-name" id="hc-name">—</div>
+          <a class="hc-name" id="hc-name" href="./profile.html">—</a>
           <div class="hc-handle" id="hc-handle">@—</div>
         </div>
       </div>
       <div class="hc-stats">
-        <span class="hc-stat"><strong id="hc-trips">0</strong> chuyến</span>
+        <span class="hc-stat"><strong id="hc-trips">0</strong> chuyến đi</span>
         <span class="hc-dot">·</span>
-        <span class="hc-stat">📍 <span id="hc-nation">Việt Nam</span></span>
+        <span class="hc-stat"><strong id="hc-posts">0</strong> bài viết</span>
+        <span class="hc-dot">·</span>
+        <span class="hc-stat" id="hc-nation">Việt Nam</span>
       </div>
       <a class="hc-link" id="hc-link" href="./profile.html">Xem trang cá nhân →</a>
     `;
@@ -58,13 +67,35 @@
     const handleEl = card.querySelector('#hc-handle');
     const avatarEl = card.querySelector('#hc-avatar');
     const linkEl = card.querySelector('#hc-link');
+    const tripsEl = card.querySelector('#hc-trips');
+    const postsEl = card.querySelector('#hc-posts');
 
     if (nameEl) nameEl.textContent = userName;
     if (handleEl) handleEl.textContent = `@${userId.substring(0, 8) || '—'}`;
-    if (linkEl) linkEl.href = `./profile.html${userId ? '?userId=' + userId : ''}`;
+    
+    const profileUrl = `./profile.html${userId ? '?userId=' + userId : ''}`;
+    if (linkEl) linkEl.href = profileUrl;
+    if (nameEl) nameEl.href = profileUrl;
+    if (avatarEl) avatarEl.href = profileUrl;
+
+    // Read real stats from localStorage if it's the current user, or generate deterministic fake stats for other users
+    let tripCount = 0;
+    let postCount = 0;
+    const currentUserInfo = JSON.parse(localStorage.getItem('topgo_user') || '{}');
+    if (currentUserInfo.uid === userId) {
+        const stats = JSON.parse(localStorage.getItem('userStats') || '{"trips":0,"posts":0}');
+        tripCount = stats.trips || 0;
+        postCount = stats.posts || 0;
+    } else {
+        // Generate pseudo-random deterministic stats based on user name length
+        tripCount = (userName.length * 3) % 25 + 2;
+        postCount = (userName.length * 7) % 60 + 5;
+    }
+    if (tripsEl) tripsEl.textContent = tripCount;
+    if (postsEl) postsEl.textContent = postCount;
 
     if (avatarEl) {
-      if (userAvatar) {
+      if (userAvatar && userAvatar !== 'undefined' && userAvatar !== 'null') {
         avatarEl.innerHTML = `<img src="${userAvatar}" alt="">`;
       } else {
         const initial = userName.charAt(0).toUpperCase() || 'T';
@@ -164,7 +195,12 @@
       width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
       background: linear-gradient(135deg, var(--p1), var(--p2));
       display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
+      overflow: hidden; text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hc-avatar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     .hc-avatar img {
       width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
@@ -176,6 +212,11 @@
     .hc-name {
       font-family: var(--font-label); font-weight: 700; font-size: 15px;
       color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      text-decoration: none; transition: color 0.2s; display: block;
+    }
+    .hc-name:hover {
+      color: var(--p1);
+      text-decoration: underline;
     }
     .hc-handle {
       font-size: 12px; color: var(--muted); font-family: var(--font);

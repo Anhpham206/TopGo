@@ -1,0 +1,727 @@
+<!--
+  ========================================================================
+  FILE: trending.html
+  CHỨC NĂNG:
+  - Trang Thịnh hành hiển thị các chủ đề/địa điểm nổi bật kiểu tạp chí.
+  ========================================================================
+-->
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xu hướng du lịch — TopGo</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <meta name="description"
+        content="Khám phá các điểm đến, chủ đề du lịch đang thịnh hành trên TopGo.">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/shared.css?v=10">
+    <link rel="stylesheet" href="./css/newsfeed.css?v=3">
+    <style>
+        /* ═══════════════════════════════════════════════════════
+           TRENDING PAGE — DEDICATED STYLES
+           ═══════════════════════════════════════════════════════ */
+
+        .trending-page {
+            max-width: 860px;
+            margin: 110px auto 60px;
+            padding: 0 20px;
+        }
+
+        /* ── Editorial Hero ── */
+        .editorial-hero {
+            position: relative;
+            padding: 60px 20px 40px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border-bottom: 4px solid var(--text);
+        }
+        body.dark .editorial-hero {
+            border-color: var(--white);
+        }
+
+        .editorial-tagline {
+            font-family: var(--font-label);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--p1);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .editorial-tagline::before {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--p1);
+        }
+
+        .editorial-title {
+            font-family: var(--font-accent);
+            font-size: 110px;
+            line-height: 1.3;
+            text-transform: uppercase;
+            /* Gradient for main text */
+            background: linear-gradient(90deg, var(--text), var(--p1), var(--p2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0;
+            letter-spacing: -2px;
+            word-wrap: break-word;
+            width: 100%;
+            /* Glow nhẹ cho toàn bộ 2 dòng */
+            filter: drop-shadow(0 0 16px rgba(0, 169, 255, 0.3));
+        }
+        body.dark .editorial-title {
+            background: linear-gradient(90deg, #fff, var(--p1), var(--p2));
+            -webkit-background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(0, 169, 255, 0.4));
+        }
+        
+        /* Chữ kế thừa hiệu ứng gradient của toàn bộ khối */
+
+        .editorial-desc-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+            margin-top: 24px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .editorial-desc {
+            font-family: var(--font);
+            font-size: 18px;
+            color: var(--muted);
+            max-width: 400px;
+            line-height: 1.5;
+            border-left: 2px solid var(--p1);
+            padding-left: 16px;
+        }
+
+        .trending-hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .trending-meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--text);
+            color: var(--bg);
+            border-radius: 0; /* brutalist/editorial */
+            font-family: var(--font-label);
+            font-size: 12.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        body.dark .trending-meta-badge {
+            background: var(--white);
+            color: var(--bg);
+        }
+
+        /* ── Section Header ── */
+        .trending-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .trending-section-title {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 700;
+            color: transparent;
+            background: linear-gradient(90deg, var(--p1), var(--p2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.2px;
+        }
+        .trending-section-title span {
+            font-size: 22px;
+        }
+        .trending-refresh-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.4);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: var(--font-label);
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--muted);
+            transition: all var(--t);
+        }
+        .trending-refresh-btn:hover {
+            color: var(--p1);
+            border-color: var(--p1);
+            background: rgba(0,169,255,0.06);
+        }
+        body.dark .trending-refresh-btn {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        /* ── Trending List ── */
+        @keyframes textShine {
+            0% { background-position: -200% center; }
+            20% { background-position: 200% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes sweepShineContinuous {
+            0% { transform: translateX(-150%) skewX(-45deg); opacity: 0; }
+            2% { opacity: 1; }
+            15% { transform: translateX(300%) skewX(-45deg); opacity: 1; }
+            16% { opacity: 0; }
+            100% { transform: translateX(300%) skewX(-45deg); opacity: 0; }
+        }
+
+        .trending-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .trending-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 22px;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(32px) saturate(200%);
+            -webkit-backdrop-filter: blur(32px) saturate(200%);
+            border: 1px solid rgba(255,255,255,0.6);
+            border-radius: 18px;
+            box-shadow:
+                0 8px 32px rgba(0,169,255,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition:
+                transform 0.25s cubic-bezier(0.4,0,0.2,1),
+                box-shadow 0.25s cubic-bezier(0.4,0,0.2,1),
+                background 0.25s ease,
+                border-color 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            animation: itemSlideIn 0.4s ease both;
+        }
+        .trending-item::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 0; width: 60%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transform: translateX(-150%) skewX(-45deg);
+            pointer-events: none;
+            z-index: 10;
+        }
+        .trending-item:nth-child(-n+3)::after {
+            animation: sweepShineContinuous 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .trending-item:nth-child(1) { animation-delay: 0.04s; }
+        .trending-item:nth-child(2) { animation-delay: 0.08s; }
+        .trending-item:nth-child(3) { animation-delay: 0.12s; }
+        .trending-item:nth-child(4) { animation-delay: 0.16s; }
+        .trending-item:nth-child(5) { animation-delay: 0.20s; }
+        .trending-item:nth-child(n+6) { animation-delay: 0.24s; }
+
+        @keyframes itemSlideIn {
+            from { opacity: 0; transform: translateX(-14px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        body.dark .trending-item {
+            background: rgba(15,22,40,0.3);
+            border-color: rgba(255,255,255,0.1);
+            box-shadow: 
+                0 8px 32px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+        body.dark .trending-item::after {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+        }
+
+        .trending-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.45);
+            box-shadow: 
+                0 12px 32px rgba(0,169,255,0.15), 
+                inset 0 1px 0 rgba(255,255,255,1);
+            border-color: rgba(255,255,255,0.9);
+        }
+        body.dark .trending-item:hover {
+            background: rgba(15,22,40,0.5);
+            box-shadow: 
+                0 12px 32px rgba(0,0,0,0.5), 
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+        }
+        /* Tactile Feedback */
+        .trending-item:active {
+            transform: scale(0.98);
+        }
+
+        /* Top 3 special glow (Subtle, luxury blue theme) */
+        .trending-item.top-1 {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.08) 0%, rgba(255, 255, 255, 0.35) 100%);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-left: 5px solid #00f0ff;
+            box-shadow: 0 10px 40px rgba(0, 169, 255, 0.12), inset 0 1px 0 rgba(255,255,255,0.8);
+        }
+        body.dark .trending-item.top-1 {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.15) 0%, rgba(15, 22, 40, 0.4) 100%);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-left: 5px solid #00f0ff;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+        .trending-item.top-1:hover {
+            border-color: rgba(0, 240, 255, 0.5);
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.12) 0%, rgba(255, 255, 255, 0.4) 100%);
+            box-shadow: 0 15px 45px rgba(0, 240, 255, 0.2), inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+        body.dark .trending-item.top-1:hover {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.22) 0%, rgba(15, 22, 40, 0.5) 100%);
+            border-color: rgba(0, 240, 255, 0.35);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+
+        .trending-item.top-2 {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.04) 0%, rgba(255, 255, 255, 0.35) 100%);
+            border: 1px solid rgba(0, 188, 255, 0.25);
+            border-left: 5px solid rgba(0, 188, 255, 0.75);
+            box-shadow: 0 8px 32px rgba(0, 169, 255, 0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+        }
+        body.dark .trending-item.top-2 {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.08) 0%, rgba(15, 22, 40, 0.4) 100%);
+            border: 1px solid rgba(0, 188, 255, 0.15);
+            border-left: 5px solid rgba(0, 188, 255, 0.75);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+        .trending-item.top-2:hover {
+            border-color: rgba(0, 188, 255, 0.4);
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.08) 0%, rgba(255, 255, 255, 0.4) 100%);
+            box-shadow: 0 12px 36px rgba(0, 188, 255, 0.15), inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+        body.dark .trending-item.top-2:hover {
+            background: linear-gradient(135deg, rgba(0, 169, 255, 0.15) 0%, rgba(15, 22, 40, 0.5) 100%);
+            border-color: rgba(0, 188, 255, 0.25);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+        }
+
+        .trending-item.top-3 {
+            border-left: 5px solid rgba(56, 189, 248, 0.45);
+        }
+        .trending-item.top-3:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            background: rgba(255,255,255,0.4);
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.12);
+        }
+        body.dark .trending-item.top-3:hover {
+            border-color: rgba(56, 189, 248, 0.2);
+            background: rgba(15,22,40,0.45);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ── Rank Badge ── */
+        .trending-rank {
+            width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-accent);
+            font-weight: 400; /* Anton SC usually doesn't need 900 */
+            font-size: 36px;
+            flex-shrink: 0;
+            position: relative;
+            line-height: 1;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
+        }
+        .trending-item:hover .trending-rank {
+            transform: scale(1.18);
+        }
+        
+        .trending-rank.rank-1 {
+            background: linear-gradient(to right, #00f0ff 20%, #ffffff 50%, #00f0ff 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 48px;
+            filter: drop-shadow(0 4px 12px rgba(0, 145, 255, 0.4));
+            animation: textShine 6s linear infinite;
+        }
+        
+        .trending-rank.rank-2 {
+            background: linear-gradient(to right, #00bcff 20%, #ffffff 50%, #00bcff 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 42px;
+            filter: drop-shadow(0 4px 12px rgba(0, 169, 255, 0.3));
+            animation: textShine 6s linear infinite;
+        }
+        
+        .trending-rank.rank-3 {
+            background: linear-gradient(to right, #38bdf8 20%, #ffffff 50%, #38bdf8 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 38px;
+            filter: drop-shadow(0 4px 12px rgba(137, 207, 243, 0.3));
+            animation: textShine 6s linear infinite;
+        }
+        
+        .trending-rank.rank-default {
+            color: var(--border-light);
+            font-size: 24px;
+            -webkit-text-stroke: 1px var(--muted);
+            color: transparent;
+        }
+        body.dark .trending-rank.rank-default {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+        }
+
+        /* ── Topic Info ── */
+        .trending-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .trending-name {
+            font-family: var(--font-heading);
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 6px;
+        }
+        .trending-stats {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .trending-post-count {
+            font-size: 12.5px;
+            color: var(--muted);
+            font-family: var(--font-label);
+            font-weight: 600;
+        }
+
+        /* ── Heat Bar ── */
+        .trending-heat-bar {
+            width: 100%;
+            max-width: 180px;
+            height: 5px;
+            background: var(--border-light);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 2px;
+        }
+        body.dark .trending-heat-bar {
+            background: rgba(255,255,255,0.08);
+        }
+        .trending-heat-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+        }
+        .rank-1 ~ .trending-info .trending-heat-fill,
+        .top-1 .trending-heat-fill { background: var(--text); }
+        .top-2 .trending-heat-fill { background: var(--p1); }
+        .top-3 .trending-heat-fill { background: rgba(0,169,255,0.6); }
+        .trending-heat-fill.heat-default { background: rgba(0,169,255,0.3); }
+
+        /* ── Trend Indicator ── */
+        .trending-trend {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            flex-shrink: 0;
+            min-width: 40px;
+        }
+        .trend-arrow {
+            font-size: 24px;
+            line-height: 1;
+            font-weight: 700;
+        }
+        .trend-label {
+            font-size: 10px;
+            font-family: var(--font-label);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .trend-up .trend-arrow   { color: var(--p1); }
+        .trend-up .trend-label   { color: var(--p1); }
+        .trend-down .trend-arrow { color: var(--muted); }
+        .trend-down .trend-label { color: var(--muted); }
+        .trend-stable .trend-arrow { color: var(--muted); }
+        .trend-stable .trend-label { color: var(--muted); }
+
+        /* ── Loading State ── */
+        .trending-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 60px 20px;
+            color: var(--muted);
+        }
+        .trending-loading-spinner {
+            width: 44px; height: 44px;
+            border: 3px solid var(--border);
+            border-top-color: var(--p1);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Skeleton loading ── */
+        .trending-skeleton {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .trending-skeleton-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 22px;
+            background: rgba(255,255,255,0.55);
+            border: 1px solid rgba(255,255,255,0.45);
+            border-radius: 18px;
+        }
+        body.dark .trending-skeleton-item {
+            background: rgba(15,22,40,0.65);
+            border-color: rgba(255,255,255,0.07);
+        }
+        .skel-circle {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(90deg, var(--border-light) 25%, rgba(0,169,255,0.08) 50%, var(--border-light) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        .skel-lines { flex: 1; }
+        .skel-line {
+            height: 12px; border-radius: 6px;
+            background: linear-gradient(90deg, var(--border-light) 25%, rgba(0,169,255,0.08) 50%, var(--border-light) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+            margin-bottom: 8px;
+        }
+        .skel-line.w-50 { width: 50%; }
+        .skel-line.w-30 { width: 30%; height: 8px; }
+        @keyframes shimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .trending-page { margin-top: 90px; }
+            .editorial-hero { padding: 40px 16px 24px; }
+            .editorial-title { font-size: 64px; letter-spacing: -1px; }
+            .editorial-desc { font-size: 15px; border-left-width: 1px; padding-left: 12px; }
+            .editorial-tagline { font-size: 12px; }
+            
+            .trending-item { padding: 14px 16px; gap: 12px; }
+            .trending-rank { width: 38px; height: 38px; font-size: 15px; }
+            .trending-name { font-size: 15px; }
+            .trending-heat-bar { max-width: 120px; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header" id="site-header">
+        <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
+    </header>
+
+    <main>
+        <div class="trending-page">
+
+            <!-- ── Hero Section ── -->
+            <div class="editorial-hero anim-slide-up">
+                <div class="editorial-tagline anim-slide-up delay-1">
+                    Xu hướng
+                </div>
+                <h1 class="editorial-title anim-slide-up delay-2">
+                    Cộng đồng <br> <span class="stroke-text">Quan tâm</span>
+                </h1>
+                
+                <div class="editorial-desc-wrapper anim-slide-up delay-3">
+                    <p class="editorial-desc">Khám phá những điểm đến và chủ đề đang được thảo luận nhiều nhất bởi cộng đồng TopGo trong 24 giờ qua.</p>
+                    
+                    <div class="trending-hero-meta">
+                        <span class="trending-meta-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            Live
+                        </span>
+                        <span class="trending-meta-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Data
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Trending List Section ── -->
+            <div class="trending-section-header">
+                <div class="trending-section-title">
+                    Top xu hướng hôm nay
+                </div>
+                <button class="trending-refresh-btn" id="trending-refresh-btn">
+                    ↻ Làm mới
+                </button>
+            </div>
+
+            <!-- Skeleton loading -->
+            <div class="trending-skeleton" id="trending-skeleton">
+                <div class="trending-skeleton-item"><div class="skel-circle"></div><div class="skel-lines"><div class="skel-line w-50"></div><div class="skel-line w-30"></div></div></div>
+                <div class="trending-skeleton-item"><div class="skel-circle"></div><div class="skel-lines"><div class="skel-line w-50"></div><div class="skel-line w-30"></div></div></div>
+                <div class="trending-skeleton-item"><div class="skel-circle"></div><div class="skel-lines"><div class="skel-line w-50"></div><div class="skel-line w-30"></div></div></div>
+                <div class="trending-skeleton-item"><div class="skel-circle"></div><div class="skel-lines"><div class="skel-line w-50"></div><div class="skel-line w-30"></div></div></div>
+                <div class="trending-skeleton-item"><div class="skel-circle"></div><div class="skel-lines"><div class="skel-line w-50"></div><div class="skel-line w-30"></div></div></div>
+            </div>
+
+            <!-- Actual list (hidden until loaded) -->
+            <ul class="trending-list" id="trending-list" style="display:none;"></ul>
+
+        </div>
+    </main>
+
+    <div id="site-shared"></div>
+
+    <script type="module">
+        import { loadSharedComponents } from './js/shared.js';
+
+        const API_BASE = ['localhost', '127.0.0.1', ''].includes(window.location.hostname)
+            ? 'http://localhost:8000'
+            : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
+
+        const DEFAULT_TOPICS = [
+            { name: "Đà Nẵng",           postCount: 128, trend: "up" },
+            { name: "Phú Quốc",           postCount: 95,  trend: "up" },
+            { name: "Đà Lạt",             postCount: 87,  trend: "stable" },
+            { name: "Hội An",             postCount: 76,  trend: "up" },
+            { name: "Nha Trang",          postCount: 64,  trend: "stable" },
+            { name: "Hà Nội",             postCount: 58,  trend: "down" },
+            { name: "Sa Pa",              postCount: 45,  trend: "up" },
+            { name: "TP. Hồ Chí Minh",   postCount: 42,  trend: "stable" },
+            { name: "Ninh Bình",          postCount: 38,  trend: "up" },
+            { name: "Hạ Long",            postCount: 30,  trend: "stable" },
+        ];
+
+        function renderTopics(topics) {
+            const skeleton = document.getElementById('trending-skeleton');
+            const list = document.getElementById('trending-list');
+
+            const maxCount = Math.max(...topics.map(t => t.postCount || 0), 1);
+
+            list.innerHTML = topics.map((topic, idx) => {
+                const rank = idx + 1;
+                const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-default';
+                const topClass  = rank <= 3 ? `top-${rank}` : '';
+
+                const trendDir   = topic.trend === 'up' ? 'up' : topic.trend === 'down' ? 'down' : 'stable';
+                const trendIcon = trendDir === 'up' 
+                    ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>' 
+                    : trendDir === 'down' 
+                    ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>' 
+                    : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>';
+                const trendText  = trendDir === 'up' ? 'Tăng' : trendDir === 'down' ? 'Giảm' : 'Ổn định';
+
+                const heatPct   = Math.round((topic.postCount || 0) / maxCount * 100);
+                const heatClass = rank <= 3 ? '' : 'heat-default';
+
+                const safeName = (topic.name || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+                return `
+                <li class="trending-item ${topClass}" onclick="window.location.href='./feed.html'">
+                    <div class="trending-rank ${rankClass}">${rank}</div>
+
+                    <div class="trending-info">
+                        <div class="trending-name">${safeName}</div>
+                        <div class="trending-stats">
+                            <span class="trending-post-count">${(topic.postCount || 0).toLocaleString('vi-VN')} bài viết</span>
+                        </div>
+                        <div class="trending-heat-bar" style="margin-top:6px;">
+                            <div class="trending-heat-fill ${heatClass}" style="width: ${heatPct}%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="trending-trend trend-${trendDir}">
+                        <span class="trend-arrow">${trendIcon}</span>
+                        <span class="trend-label">${trendText}</span>
+                    </div>
+                </li>`;
+            }).join('');
+
+            skeleton.style.display = 'none';
+            list.style.display = '';
+        }
+
+        async function loadTrending() {
+            const skeleton = document.getElementById('trending-skeleton');
+            const list = document.getElementById('trending-list');
+            skeleton.style.display = '';
+            list.style.display = 'none';
+
+            try {
+                const res = await fetch(`${API_BASE}/api/hot-search?limit=50`);
+                let topics = [];
+                if (res.ok) {
+                    const data = await res.json();
+                    topics = data.topics || [];
+                }
+                renderTopics(topics.length ? topics : DEFAULT_TOPICS);
+            } catch (err) {
+                console.error(err);
+                renderTopics(DEFAULT_TOPICS);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            loadSharedComponents();
+            await loadTrending();
+
+            document.getElementById('trending-refresh-btn').addEventListener('click', async () => {
+                const btn = document.getElementById('trending-refresh-btn');
+                btn.textContent = '↻ Đang tải...';
+                btn.disabled = true;
+                await loadTrending();
+                btn.textContent = '↻ Làm mới';
+                btn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>

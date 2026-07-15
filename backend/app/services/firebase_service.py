@@ -71,23 +71,34 @@ class MockCollectionReference:
 class MockFirestore:
     def __init__(self, filepath):
         self.filepath = filepath
+        self._cache = None  # In-memory cache — loaded once, stays in RAM
         self._init_db()
 
     def _init_db(self):
         if not os.path.exists(self.filepath):
             with open(self.filepath, "w", encoding="utf-8") as f:
                 json.dump({}, f)
+        # Eagerly warm cache on startup
+        self._cache = None
+        self._load_data()
 
     def _load_data(self):
+        # Return from in-memory cache if available (avoid repeated disk reads)
+        if self._cache is not None:
+            return self._cache
         try:
             if os.path.exists(self.filepath):
                 with open(self.filepath, "r", encoding="utf-8") as f:
-                    return json.load(f)
+                    self._cache = json.load(f)
+                    return self._cache
         except Exception as e:
             logger.error(f"Lỗi khi đọc file local_db.json: {e}")
-        return {}
+        self._cache = {}
+        return self._cache
 
     def _save_data(self, data):
+        # Update in-memory cache first so subsequent reads see the new data immediately
+        self._cache = data
         try:
             with open(self.filepath, "w", encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
@@ -157,10 +168,11 @@ if os.path.exists(credentials_path):
 if is_offline_mode:
     local_db_path = os.path.join(backend_dir, "local_db.json")
     db = MockFirestore(local_db_path)
-    logger.warning(
-        "--- CHẾ ĐỘ OFFLINE LOCAL ĐÃ ĐƯỢC KÍCH HOẠT ---"
-        f"\nSử dụng Mock DB cục bộ tại: {local_db_path}."
-        "\nMọi dữ liệu sẽ đọc/ghi offline mà không cần Firebase credentials."
+    logger.error(
+        "!!! LỖI NGHIÊM TRỌNG: KHÔNG TÌM THẤY TỆP FIREBASE-SERVICE-ACCOUNT.JSON !!!\n"
+        "Hệ thống KHÔNG THỂ kết nối đến máy chủ Firebase thật.\n"
+        f"Để tránh sập ứng dụng, hệ thống tạm thời lưu dữ liệu vào: {local_db_path}\n"
+        "Nếu bạn muốn up bài lên server thật, BẮT BUỘC phải cung cấp tệp cấu hình JSON."
     )
 
 # =========================================================================
@@ -267,3 +279,43 @@ async def verify_firebase_token(authorization: str = Header(None)) -> dict:
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Xác thực token thất bại: {str(e)}"
         )
+
+async def verify_firebase_token_optional(authorization: str = Header(None)) -> dict:
+    """
+    FastAPI Dependency dùng để xác thực token tùy chọn.
+    Nếu không có token hoặc token sai, trả về một dict trống (uid = None)
+    thay vì văng lỗi 401, cho phép các API public vẫn hoạt động.
+    """
+    if is_offline_mode:
+        if not authorization:
+            return {}
+        try:
+            parts = authorization.split()
+            if len(parts) == 2 and parts[0].lower() == "bearer":
+                token = parts[1]
+                decoded = decode_jwt_unverified(token)
+                if decoded:
+                    uid = decoded.get("sub") or decoded.get("user_id") or decoded.get("uid")
+                    if uid:
+                        return {
+                            "uid": uid,
+                            "email": decoded.get("email", ""),
+                            "name": decoded.get("name", "")
+                        }
+        except Exception:
+            pass
+        return {}
+
+    if not authorization:
+        return {}
+
+    try:
+        parts = authorization.split()
+        if len(parts) == 2 and parts[0].lower() == "bearer":
+            token = parts[1]
+            decoded_token = auth.verify_id_token(token)
+            return decoded_token
+    except Exception:
+        return {}
+    return {}
+

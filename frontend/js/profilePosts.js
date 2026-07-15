@@ -1,23 +1,60 @@
+/**
+ * ========================================================================
+ * FILE: profilePosts.js
+ * CHỨC NĂNG:
+ * - Tải và render danh sách bài viết/lịch trình của người dùng trên trang cá nhân.
+ * ========================================================================
+ */
 // js/profilePosts.js
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { firebaseConfig } from './firebaseConfig.js';
+
 const _isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Inject basic feed styling
-    const style = document.createElement('style');
-    style.textContent = `
-        .profile-posts-feed {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 24px;
-            max-width: 680px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    `;
-    document.head.appendChild(style);
+// Khởi tạo Firebase Auth (dùng app đã có nếu tồn tại)
+const _fbApp = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+const _fbAuth = getAuth(_fbApp);
 
+// Chờ Firebase Auth xác minh trạng thái đăng nhập
+function _waitForFirebaseAuth() {
+    return new Promise((resolve) => {
+        if (_fbAuth.currentUser) {
+            resolve(_fbAuth.currentUser);
+            return;
+        }
+        const unsubscribe = onAuthStateChanged(_fbAuth, (user) => {
+            unsubscribe();
+            resolve(user);
+        });
+    });
+}
+
+// Lấy fresh token từ Firebase Auth (tự động refresh nếu hết hạn)
+async function _getFreshToken() {
+    try {
+        const user = _fbAuth.currentUser || await _waitForFirebaseAuth();
+        if (user) {
+            return await user.getIdToken(); // tự động refresh token hết hạn
+        }
+    } catch (e) {
+        console.warn('[TopGo] Không thể lấy Firebase token:', e);
+    }
+    return null;
+}
+
+function onDOMReady(fn) {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fn);
+    } else {
+        fn();
+    }
+}
+
+onDOMReady(async () => {
+    // Chờ Firebase Auth khởi tạo xong trước khi gọi API
+    await _waitForFirebaseAuth();
     initProfilePosts();
 });
 
@@ -29,8 +66,6 @@ async function initProfilePosts() {
     if (!feedContainer || !emptyState) return;
 
     try {
-        const token = localStorage.getItem('topgo_token');
-        
         const urlParams = new URLSearchParams(window.location.search);
         const userId = urlParams.get('userId');
         
@@ -38,11 +73,13 @@ async function initProfilePosts() {
         let fetchHeaders = {};
         
         if (userId) {
-            // Fetch for a specific user
+            // Fetch for a specific user (public endpoint)
             fetchUrl = `${API_BASE}/api/users/${userId}/posts`;
+            const token = await _getFreshToken();
             if (token) fetchHeaders['Authorization'] = `Bearer ${token}`;
         } else {
-            // Fetch for the logged in user
+            // Fetch for the logged in user (requires auth)
+            const token = await _getFreshToken();
             if (!token) return;
             fetchHeaders['Authorization'] = `Bearer ${token}`;
         }
