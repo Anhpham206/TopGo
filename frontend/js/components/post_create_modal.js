@@ -522,6 +522,12 @@ export function openPostModal(trip = null) {
     `;
   }
 
+  // Ẩn/hiện nút chọn lịch trình tùy ngữ cảnh (Từ Public Share -> Ẩn, Từ Đầu trang -> Hiện)
+  const btnAttach = get('pm-btn-attach-itin');
+  if (btnAttach) {
+    btnAttach.style.display = trip ? 'none' : 'flex';
+  }
+
   updateMediaCount();
 
   /* ── Hàm load gợi ý địa điểm từ lịch trình ── */

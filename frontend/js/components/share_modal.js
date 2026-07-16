@@ -294,7 +294,7 @@ export function openShareModal(trip) {
         showToast('Đã chuyển Public! Hãy thêm caption và đăng bài.', 'success');
         closeModal();
         setTimeout(() => {
-          if (window.openPostModal) window.openPostModal(null); // Không đính kèm thẻ lịch trình theo yêu cầu
+          if (window.openPostModal) window.openPostModal(trip); // Tự động đính kèm lịch trình
         }, 300); // nhỏ delay để share modal close trước
       }
 
