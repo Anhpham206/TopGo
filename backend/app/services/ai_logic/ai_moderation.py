@@ -29,13 +29,11 @@ async def check_content_safety(text: str) -> dict:
         prompt = f"""
 Bạn là một hệ thống AI kiểm duyệt nội dung (Content Moderator) nghiêm ngặt cho một mạng xã hội, áp dụng tiêu chuẩn cộng đồng tương tự Facebook và TikTok.
 Hãy phân tích đoạn văn sau và xác định xem nó có vi phạm bất kỳ tiêu chuẩn nào dưới đây không:
-1. Tự tử và tự gây thương tích (bao gồm cả các từ lóng như reset cuộc đời, đăng xuất, tự t*ử...).
-2. Bạo lực, máu me, kinh dị, và xúi giục bạo lực.
+1. Tự tử và tự gây thương tích (tự tử, muốn chết, rạch tay, tự hủy hoại bản thân...).
+2. Bạo lực, máu me, kinh dị, và xúi giục bạo lực (giết người, chém giết, đẫm máu...).
 3. Ngôn từ đả kích, thù địch, phân biệt đối xử, quấy rối, chửi thề hoặc bắt nạt.
-4. Đồi trụy, tình dục, hoặc quấy rối tình dục (bao gồm các từ lóng: sếch, sẽ gầy, jav, pỏn...).
-5. Lừa đảo, spam, mua bán hàng cấm (mai thúy, kẹo ke, xào ke...), hoặc nội dung chống phá, vi phạm pháp luật.
-
-ĐẶC BIỆT LƯU Ý: Người dùng mạng xã hội thường dùng Teencode, từ viết tắt, từ lóng, hoặc dùng ký tự đặc biệt để lách luật (ví dụ: vcl, đm, đcm, đjt, lol, cax, ml, xl, đ*t, t* tử, dkm, l0z, v.v.). Bạn CẦN PHẢI hiểu ý nghĩa ẩn sau các teencode/từ lách luật này. Nếu teencode đó dịch ra mang nghĩa chửi thề, tục tĩu hoặc vi phạm các tiêu chuẩn trên, hãy đánh dấu là vi phạm ngay lập tức.
+4. Đồi trụy, tình dục, hoặc quấy rối tình dục.
+5. Lừa đảo, spam, mua bán hàng cấm, hoặc nội dung chống phá, vi phạm pháp luật.
 
 Đoạn văn cần kiểm duyệt:
 "{text}"
@@ -89,28 +87,22 @@ hoặc nếu an toàn:
         logger.error(f"AI Moderation Error: {e}")
         
         # --- CƠ CHẾ DỰ PHÒNG (FALLBACK) KHI AI BỊ LỖI HOẶC QUÁ TẢI (LIMIT) ---
-        # Danh sách các từ khóa nhạy cảm / cấm (Phiên bản siêu mở rộng)
+        # Danh sách các từ khóa nhạy cảm / cấm (Bao gồm cả Teencode và lách luật)
         BANNED_KEYWORDS = [
             # Tự tử / Gây thương tích
-            "tự tử", "chết đi", "rạch tay", "tự sát", "tự kỷ", "trầm cảm", "reset cuộc đời", "muốn chết", "đăng xuất khỏi", "treo cổ", "nhảy cầu", "uống thuốc diệt chuột", "tự t*ử", "cắt mạch máu", "quyên sinh", "thuốc ngủ", "nhảy lầu", "thắt cổ", "uống thuốc sâu",
-            
+            "tự tử", "chết đi", "rạch tay", "tự sát", "tự kỷ", "trầm cảm", "muốn chết", "đăng xuất khỏi", "treo cổ", "nhảy cầu", "uống thuốc diệt chuột", "tự t*ử",
             # Bạo lực / Kinh dị
-            "giết", "chém", "đâm", "máu me", "đẫm máu", "bạo lực", "cắt cổ", "múc nó", "đánh chết", "xử nó", "thanh toán", "xiên", "phanh thây", "bắn bỏ", "xẻo thịt", "rạch mặt", "bóp cổ", "chôn sống", "thiến", "lụi", "phang", "táng", "nã đạn", "giết chóc",
-            
-            # Tục tĩu / Chửi thề / Xúc phạm
-            "đụ", "địt", "cặc", "lồn", "đĩ", "điếm", "phò", "đụ má", "đéo", "đĩ mẹ", "bitch", "mặt l", "cái l", "đĩ chó", "đĩ ngựa", "con đĩ", "thằng chó", "súc vật", "con cặc", "cái lồn", "đầu cặc", "đầu buồi", "buồi", "cứt", "địt cụ", "địt tổ", "địt bà", "địt con mẹ", "tổ sư", "tiên sư", "thằng lol", "con lol", "hãm l", "cẩu trĩ", "chó đẻ", "khốn nạn",
-            
+            "giết", "chém", "đâm", "máu me", "đẫm máu", "bạo lực", "cắt cổ", "múc nó", "đánh chết", "xử nó", "xiên", "phanh thây",
+            # Tục tĩu / Chửi thề
+            "đụ", "địt", "cặc", "lồn", "đĩ", "điếm", "phò", "đụ má", "đéo", "đĩ mẹ", "bitch", "mặt l", "cái l",
             # Teencode tục tĩu / Lách luật
-            "đm", "đmm", "đcm", "vcl", "vl", "vkl", "vlon", "vloz", "đcmm", "đjt", "dkm", "đkm", "đkmm", "cax", "cak", "cạk", "lol", "loz", "lòn", "đũy", "đỉ", "ml", "xạo lồn", "xl", "đ*t", "đ*", "l*n", "vklm", "sml", "vãil", "vãi c", "vãi l", "lon", "kak", "kặk",
-            
+            "đm", "đmm", "đcm", "vcl", "vl", "vkl", "vlon", "vloz", "đcmm", "đjt", "dkm", "đkm", "đkmm", "cax", "cak", "cạk", "lol", "loz", "lòn", "đũy", "đỉ", "ml", "xạo lồn", "xl", "đ*t", "đ*", "l*n",
             # Đồi trụy / Tình dục
-            "nứng", "sex", "clip nóng", "nude", "khoe hàng", "dâm", "hiếp dâm", "ấu dâm", "sếch", "sẽ gầy", "phim heo", "jav", "xnxx", "xvideos", "hãm hiếp", "híp dâm", "cưỡng hiếp", "mua dâm", "bán dâm", "mại dâm", "làm phò", "bao nuôi", "gái gọi", "đường dây", "swing", "threesome", "gangbang", "bạo dâm", "khổ dâm", "bdsm", "chịch", "xoạc", "nện", "xuất tinh", "dâm ô", "phá đò", "đá phò", "bóc bánh", "sugar baby", "sugar daddy",
-            
+            "nứng", "sex", "clip nóng", "nude", "khoe hàng", "dâm", "hiếp dâm", "ấu dâm", "sếch", "sẽ gầy", "phim heo", "jav", "jav", "xnxx", "xvideos",
             # Chất cấm / Tệ nạn
-            "ma túy", "thuốc lắc", "cỏ mỹ", "hàng đá", "đập đá", "phê cần", "hít ke", "kẹo ke", "bay phòng", "xào ke", "chơi đồ", "tài xỉu", "đánh bạc", "cá độ", "lô đề", "phê thuốc", "ngáo đá", "ke ga", "xả đồ", "nghiện", "chích ma túy", "hút chích", "bóng cười", "bơm kim tiêm", "tiêm chích",
-            
-            # Lừa đảo / Phản động / Đánh bạc
-            "lừa đảo", "đa cấp", "phản động", "chống phá", "khủng bố", "lùa gà", "úp sọt", "cướp giật", "bán số", "kéo tài xỉu", "đọc lệnh", "chuyên gia", "đặt cược", "rút tiền", "bet", "game bài", "nổ hũ", "đánh sập", "lật đổ", "biểu tình", "bạo động", "việt tân", "đu càng", "ba que", "3 que", "bò đỏ", "dlv"
+            "ma túy", "thuốc lắc", "cỏ mỹ", "hàng đá", "đập đá", "phê cần", "hít ke", "kẹo ke", "bay phòng", "xào ke", "chơi đồ", "tài xỉu", "đánh bạc", "cá độ", "lô đề",
+            # Lừa đảo / Chống phá
+            "lừa đảo", "đa cấp", "phản động", "chống phá", "khủng bố", "lùa gà", "úp sọt", "cướp giật"
         ]
         
         text_lower = text.lower()
