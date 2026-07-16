@@ -58,3 +58,230 @@ async def update_user_profile(uid: str, profile_data: UserProfileModel) -> dict:
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Cập nhật hồ sơ thất bại: {str(e)}"
         )
+
+import datetime
+
+def resolve_uid(uid: str) -> str:
+    """Giải mã UID nếu người dùng truyền vào mã hộ chiếu rút gọn dạng 'TG-XXXXXX'."""
+    if uid and isinstance(uid, str) and uid.upper().startswith("TG-") and len(uid) == 11:
+        short_id = uid[3:].upper()
+        # 1. Thử tìm trong Firestore users
+        try:
+            users_ref = db.collection("users")
+            for doc in users_ref.stream():
+                if doc.id.upper().startswith(short_id):
+                    return doc.id
+        except Exception:
+            pass
+        
+        # 2. Thử tìm trong Firebase Authentication
+        try:
+            from firebase_admin import auth as firebase_auth
+            page = firebase_auth.list_users()
+            for user in page.users:
+                if user.uid.upper().startswith(short_id):
+                    return user.uid
+        except Exception:
+            pass
+            
+    return uid
+
+async def follow_user(follower_uid: str, following_uid: str) -> dict:
+    follower_uid = resolve_uid(follower_uid)
+    following_uid = resolve_uid(following_uid)
+    
+    if follower_uid == following_uid:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Bạn không thể tự theo dõi chính mình."
+        )
+    
+    try:
+        # Kiểm tra xem user được follow có tồn tại không
+        # Nếu chưa có doc trong Firestore nhưng có trong Auth thì tự động tạo profile rỗng cho họ để giữ quan hệ
+        target_ref = db.collection("users").document(following_uid)
+        if not target_ref.get().exists:
+            try:
+                from firebase_admin import auth as firebase_auth
+                firebase_auth.get_user(following_uid)
+                # Tạo doc rỗng
+                target_ref.set({"nationality": "Việt Nam", "createdAt": datetime.datetime.now().strftime("%Y-%m-%d")})
+            except Exception:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="Không tìm thấy người dùng mục tiêu."
+                )
+            
+        doc_id = f"{follower_uid}_{following_uid}"
+        doc_ref = db.collection("follows").document(doc_id)
+        
+        doc_ref.set({
+            "follower_uid": follower_uid,
+            "following_uid": following_uid,
+            "createdAt": datetime.datetime.now().isoformat()
+        })
+        
+        logger.info(f"User {follower_uid} đã follow {following_uid}")
+        return {"status": "success", "message": "Đã theo dõi thành công."}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Lỗi khi follow user: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Theo dõi người dùng thất bại: {str(e)}"
+        )
+
+async def unfollow_user(follower_uid: str, following_uid: str) -> dict:
+    follower_uid = resolve_uid(follower_uid)
+    following_uid = resolve_uid(following_uid)
+    try:
+        doc_id = f"{follower_uid}_{following_uid}"
+        doc_ref = db.collection("follows").document(doc_id)
+        
+        # Xóa document
+        doc_ref.delete()
+        
+        logger.info(f"User {follower_uid} đã unfollow {following_uid}")
+        return {"status": "success", "message": "Đã hủy theo dõi thành công."}
+    except Exception as e:
+        logger.error(f"Lỗi khi unfollow user: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Hủy theo dõi người dùng thất bại: {str(e)}"
+        )
+
+async def check_follow_status(follower_uid: str, following_uid: str) -> bool:
+    follower_uid = resolve_uid(follower_uid)
+    following_uid = resolve_uid(following_uid)
+    try:
+        doc_id = f"{follower_uid}_{following_uid}"
+        doc_ref = db.collection("follows").document(doc_id)
+        return doc_ref.get().exists
+    except Exception as e:
+        logger.error(f"Lỗi khi kiểm tra trạng thái follow: {e}")
+        return False
+
+async def get_follow_counts(uid: str) -> dict:
+    uid = resolve_uid(uid)
+    try:
+        # Đếm số người follow uid này (followers)
+        followers_query = db.collection("follows").where("following_uid", "==", uid).count()
+        followers_res = followers_query.get()
+        try:
+            followers_count = followers_res[0].value
+        except Exception:
+            try:
+                followers_count = followers_res[0][0].value
+            except Exception:
+                followers_count = len(list(db.collection("follows").where("following_uid", "==", uid).stream()))
+
+        # Đếm số người mà uid này đang follow (following)
+        following_query = db.collection("follows").where("follower_uid", "==", uid).count()
+        following_res = following_query.get()
+        try:
+            following_count = following_res[0].value
+        except Exception:
+            try:
+                following_count = following_res[0][0].value
+            except Exception:
+                following_count = len(list(db.collection("follows").where("follower_uid", "==", uid).stream()))
+
+        return {
+            "followers_count": followers_count,
+            "following_count": following_count
+        }
+    except Exception as e:
+        logger.error(f"Lỗi khi đếm followers/following: {e}")
+        return {"followers_count": 0, "following_count": 0}
+
+async def get_public_profile(uid: str, current_user_uid: Optional[str] = None) -> dict:
+    uid = resolve_uid(uid)
+    if current_user_uid:
+        current_user_uid = resolve_uid(current_user_uid)
+    try:
+        doc_ref = db.collection("users").document(uid)
+        doc = doc_ref.get()
+        
+        user_data = {}
+        if doc.exists:
+            user_data = doc.to_dict()
+        else:
+            # Fallback: Lấy thông tin từ Firebase Authentication nếu chưa tạo profile trong Firestore
+            try:
+                from firebase_admin import auth as firebase_auth
+                fb_user = firebase_auth.get_user(uid)
+                display_name = fb_user.display_name or ""
+                name_parts = display_name.split()
+                firstname = name_parts[-1] if name_parts else ""
+                lastname = " ".join(name_parts[:-1]) if len(name_parts) > 1 else ""
+                user_data = {
+                    "firstname": firstname or (fb_user.email.split('@')[0] if fb_user.email else "User"),
+                    "lastname": lastname,
+                    "photoURL": fb_user.photo_url,
+                    "email": fb_user.email,
+                    "nationality": "Việt Nam",
+                    "createdAt": datetime.datetime.now().strftime("%Y-%m-%d")
+                }
+            except Exception:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="Không tìm thấy người dùng."
+                )
+        
+        # Đếm follow
+        counts = await get_follow_counts(uid)
+        
+        # Kiểm tra trạng thái follow của người dùng hiện tại đối với uid này
+        is_following = False
+        if current_user_uid and current_user_uid != uid:
+            is_following = await check_follow_status(current_user_uid, uid)
+            
+        # Lọc thông tin công khai
+        public_data = {
+            "uid": uid,
+            "firstname": user_data.get("firstname", ""),
+            "lastname": user_data.get("lastname", ""),
+            "photoURL": user_data.get("photoURL", None),
+            "nationality": user_data.get("nationality", "Việt Nam"),
+            "sex": user_data.get("sex", ""),
+            "followers_count": counts["followers_count"],
+            "following_count": counts["following_count"],
+            "is_following": is_following
+        }
+        
+        return public_data
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Lỗi khi lấy thông tin public profile: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Lấy thông tin trang cá nhân thất bại: {str(e)}"
+        )
+
+async def get_user_posts_stub(uid: str) -> list:
+    uid = resolve_uid(uid)
+    """Trả về danh sách bài đăng stub (giả lập) của user"""
+    # Tạo dữ liệu giả lập cho bài đăng của người dùng
+    return [
+        {
+            "id": f"post-mock-1-{uid}",
+            "author_id": uid,
+            "content": "Hành trình khám phá Tây Bắc tuyệt vời! Núi non trùng điệp, con người hiền hòa mến khách. Cảm ơn TopGo đã lên lịch trình cực kỳ chi tiết.",
+            "media": ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e"],
+            "createdAt": "2026-07-15T08:30:00Z",
+            "likes_count": 15,
+            "comments_count": 3
+        },
+        {
+            "id": f"post-mock-2-{uid}",
+            "author_id": uid,
+            "content": "Ăn sập Đà Nẵng cùng nhóm bạn thân! Món bánh tráng cuốn thịt heo ở đây đúng là đỉnh của chóp.",
+            "media": [],
+            "createdAt": "2026-07-10T19:45:00Z",
+            "likes_count": 32,
+            "comments_count": 8
+        }
+    ]
+
