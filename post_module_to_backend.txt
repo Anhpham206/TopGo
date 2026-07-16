@@ -1,0 +1,135 @@
+================================================================================
+FILE: post_module_to_backend.txt
+MÔ TẢ: Cấu trúc JSON mà Frontend Post Module (post.js) gửi lên Backend API.
+NGƯỜI PHỤ TRÁCH: Lê Huỳnh Anh Thư
+================================================================================
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[1] TẠO BÀI ĐĂNG MỚI
+    Endpoint : POST /api/posts
+    Auth     : Bắt buộc — Header: Authorization: Bearer <firebase_id_token>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Biến thể A — Bài chỉ có chữ (text-only):
+  {
+    "content"         : "Hôm nay mình đi Đà Nẵng thật vui!",
+    "type"            : "text",
+    "mediaUrls"       : [],
+    "taggedLocations" : [],
+    "itineraryId"     : null,
+    "visibility"      : "public"
+  }
+
+  Biến thể B — Bài có kèm ảnh (image):
+  {
+    "content"         : "Ảnh check-in Bà Nà Hills!",
+    "type"            : "image",
+    "mediaUrls"       : [
+                          "https://firebasestorage.googleapis.com/.../photo1.jpg",
+                          "https://firebasestorage.googleapis.com/.../photo2.jpg"
+                        ],
+    "taggedLocations" : ["Bà Nà Hills", "Đà Nẵng"],
+    "itineraryId"     : null,
+    "visibility"      : "public"
+  }
+
+  Biến thể C — Bài kèm Thẻ Lộ Trình (itinerary — Share Public):
+  {
+    "content"         : "Lịch trình 3 ngày Cà Mau siêu tiết kiệm!",
+    "type"            : "itinerary",
+    "mediaUrls"       : [],
+    "taggedLocations" : ["Cà Mau"],
+    "itineraryId"     : "plan-1720000000000",
+    "visibility"      : "public"
+  }
+
+  Ghi chú:
+  - "type"         : Chỉ nhận 3 giá trị: "text" | "image" | "itinerary"
+  - "mediaUrls"    : Mảng URL ảnh đã upload lên Firebase Storage trước đó
+  - "itineraryId"  : ID lịch trình từ collection `itineraries` (null nếu không kèm)
+  - "visibility"   : Chỉ nhận "public" | "private"
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2] TOGGLE LIKE / UNLIKE BÀI ĐĂNG
+    Endpoint : POST /api/posts/{postId}/like
+    Auth     : Bắt buộc — Header: Authorization: Bearer <firebase_id_token>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Body: (không cần body — postId lấy từ URL path, userId lấy từ token)
+  {}
+
+  Ghi chú:
+  - Backend tự xác định userId từ Firebase token trong header
+  - Nếu đã like → tự động bỏ like (toggle)
+  - Document ID trong collection `likes` = "{postId}_{userId}"
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[3] GỬI BÌNH LUẬN
+    Endpoint : POST /api/posts/{postId}/comments
+    Auth     : Bắt buộc — Header: Authorization: Bearer <firebase_id_token>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  {
+    "content" : "Lịch trình này hay quá, mình sẽ thử ngay!"
+  }
+
+  Ghi chú:
+  - "content" : Bắt buộc, tối đa 500 ký tự (giới hạn tại UI)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[4] CHIA SẺ LẠI BÀI ĐĂNG (REPOST — trích dẫn kiểu Twitter)
+    Endpoint : POST /api/posts/{postId}/repost
+    Auth     : Bắt buộc — Header: Authorization: Bearer <firebase_id_token>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  {
+    "content" : "Quá đỉnh! Mình cũng muốn đi chuyến này."
+  }
+
+  Ghi chú:
+  - "content" : Caption mà người repost thêm vào (có thể để trống "")
+  - postId trong URL là ID của bài gốc được trích dẫn
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[5] NHÂN BẢN LỊCH TRÌNH (CLONE ITINERARY)
+    Endpoint : POST /api/itineraries/{itineraryId}/clone
+    Auth     : Bắt buộc — Header: Authorization: Bearer <firebase_id_token>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Body: (không cần body — itineraryId lấy từ URL path)
+  {}
+
+  Ghi chú:
+  - Chỉ clone được lịch trình "public" hoặc "unlisted"
+  - Lịch trình "private" của người khác → Backend trả về 403
+  - Lịch trình mới tạo sẽ tự động có visibility = "private"
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[6] XEM TRẠNG THÁI LIKE CỦA USER (khi tải trang)
+    Endpoint : GET /api/posts/{postId}/like-status
+    Auth     : Bắt buộc — Header: Authorization: Bearer <firebase_id_token>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Body: không có (GET request)
+
+  Ghi chú:
+  - Gọi khi render card để biết user đã like hay chưa (tô màu nút tim)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+QUY TẮC CHUNG (áp dụng mọi request)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Content-Type  : application/json
+  Authorization : Bearer <firebase_id_token>   (bỏ qua nếu GET public)
+  Tên biến      : camelCase toàn bộ
+  Timestamp     : ISO 8601 (ví dụ: "2026-07-16T09:00:00Z") — frontend tự tạo
+                  Server dùng Firebase SERVER_TIMESTAMP để lưu Firestore
+
+================================================================================

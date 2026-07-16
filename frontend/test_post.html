@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Post Component</title>
+
+    <!-- Link CSS của Component Bài Post -->
+    <link rel="stylesheet" href="./css/post.css">
+
+    <!-- BẮT BUỘC: Thư viện CSS và JS của Leaflet (OpenStreetMap) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+    <h2 style="text-align: center;">Khu vực Test Bài Post</h2>
+
+    <!-- Khối chứa bài post -->
+    <div id="feed-slot" style="max-width: 600px; margin: 0 auto;"></div>
+
+    <!-- Script gọi hàm render -->
+    <script type="module">
+        import { renderPostCard } from './js/post.js';
+
+        // Render thử một bài post. Nếu chưa có dữ liệu thật, hãy sửa 
+        // hàm renderPostCard trong file post.js để nó nhận dữ liệu mock (giả) nhé.
+        await renderPostCard('test-post-123', document.getElementById('feed-slot'));
+    </script>
+</body>
+
+</html>
