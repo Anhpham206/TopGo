@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopGo — Đánh giá & Bình luận</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/shared.css?v=2">
+    <link rel="stylesheet" href="./css/reviews.css?v=3">
+</head>
+<body>
+    <header class="header header-solid" id="site-header">
+        <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
+    </header>
+
+    <main id="app-main">
+        <div class="reviews-container glass-card">
+            <h2>Đánh giá Địa điểm</h2>
+            <p style="margin-bottom: 20px; color: var(--sub);">Chọn một địa điểm để xem và thêm bình luận</p>
+            
+            <div class="reviews-selectors">
+                <div class="selector-group">
+                    <label class="label-sm">Tỉnh / Thành phố</label>
+                    <select id="city-selector" class="selector-select">
+                        <option value="">-- Chọn Tỉnh/Thành --</option>
+                    </select>
+                </div>
+                <div class="selector-group">
+                    <label class="label-sm">Địa điểm</label>
+                    <select id="place-selector" class="selector-select" disabled>
+                        <option value="">-- Chọn Địa điểm --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="reviews-section" style="display: none;">
+                <div class="reviews-list" id="reviews-list">
+                    <!-- Reviews will be loaded here -->
+                </div>
+
+                <div class="review-form" id="review-form-container">
+                    <h3>Viết đánh giá của bạn</h3>
+                    <div id="auth-warning" style="display: none; color: #ff4d4f; margin-bottom: 10px;">
+                        Bạn cần <a href="./auth.html" style="color: var(--p1); text-decoration: underline;">đăng nhập</a> để viết đánh giá.
+                    </div>
+                    <div class="star-rating" id="star-rating">
+                        <span data-val="1">★</span>
+                        <span data-val="2">★</span>
+                        <span data-val="3">★</span>
+                        <span data-val="4">★</span>
+                        <span data-val="5">★</span>
+                    </div>
+                    <textarea class="review-input" id="review-text" placeholder="Chia sẻ trải nghiệm của bạn về địa điểm này..."></textarea>
+                    <button class="btn-submit-review" id="btn-submit-review">Gửi Đánh giá</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-shared"></div>
+
+    <script type="module" src="./js/auth.js"></script>
+    <script type="module" src="./js/shared.js"></script>
+    <script type="module" src="./js/reviews.js?v=4"></script>
+</body>
+</html>

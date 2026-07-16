@@ -82,6 +82,7 @@ async def update_profile(profile_data: UserProfileModel, decoded_token: dict = D
     uid = decoded_token["uid"]
     return await update_user_profile(uid, profile_data)
 
+from app.controllers.reviews_controller import get_google_reviews
 
 # ════════════════════════════════════════════════════════════════════
 # PAYMENT — VNPay
@@ -104,6 +105,10 @@ async def vnpay_ipn(request: Request):
     return await handle_payment_ipn(request)
 
 
+@router.get("/google-reviews")
+async def google_reviews(place_name: str, city_name: str = ""):
+    """Lấy reviews từ Google Maps qua SerpAPI (lazy-load, có cache)."""
+    return await get_google_reviews(place_name, city_name)
 # ════════════════════════════════════════════════════════════════════
 # POSTS — Hệ thống bài đăng mạng xã hội
 # ════════════════════════════════════════════════════════════════════
