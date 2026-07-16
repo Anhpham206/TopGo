@@ -61,38 +61,6 @@ def _comment_id() -> str:
 
 # ─── Posts CRUD ─────────────────────────────────────────────────────────────
 
-async def create_post(uid: str, author_info: dict, data: PostCreateRequest) -> dict:
-    """
-    Tạo bài đăng mới vào collection `posts`.
-    author_info: dict chứa authorName, authorAvatar từ Firebase token / profile.
-    """
-    try:
-        post_id = _post_id()
-        doc = {
-            "id": post_id,
-            "authorId": uid,                                     # camelCase bắt buộc
-            "authorName": author_info.get("authorName", "Ẩn danh"),
-            "authorAvatar": author_info.get("authorAvatar", ""),
-            "content": data.content,
-            "type": data.type,
-            "mediaUrls": data.mediaUrls or [],                   # Array ảnh (schema mới)
-            "taggedLocations": data.taggedLocations or [],        # Array tag địa điểm (schema mới)
-            "itineraryId": data.itineraryId,
-            "repostOf": None,
-            "likeCount": 0,
-            "commentCount": 0,
-            "hotScore": 0,                                        # Điểm Time Decay (schema mới)
-            "visibility": data.visibility,
-            "createdAt": fb_firestore.SERVER_TIMESTAMP,           # Firebase Timestamp (schema mới)
-            "updatedAt": fb_firestore.SERVER_TIMESTAMP,
-        }
-        db.collection("posts").document(post_id).set(doc)
-        logger.info(f"[Posts] Tạo bài post {post_id} bởi user {uid}")
-        return {"status": "success", "id": post_id}
-    except Exception as e:
-        logger.error(f"[Posts] Lỗi tạo post: {e}")
-        raise HTTPException(status_code=500, detail=f"Tạo bài post thất bại: {e}")
-
 
 async def get_post(post_id: str) -> dict:
     """Lấy một bài post theo ID. Không kiểm tra privacy ở đây (để route tự xử lý)."""
@@ -276,64 +244,3 @@ async def create_repost(uid: str, author_info: dict, post_id: str, data: RepostC
         logger.error(f"[Repost] Lỗi tạo repost: {e}")
         raise HTTPException(status_code=500, detail=f"Repost thất bại: {e}")
 
-
-# ─ Clone Itinerary ──────────────────────────────────────────────────────────────────────────
-
-async def clone_itinerary(uid: str, original_plan_id: str) -> dict:
-    """
-    Nhân bản (Clone) một lịch trình public/unlisted về tài khoản của người dùng.
-
-    Quy tắc:
-    - Chỉ clone được lịch trình có visibility = 'public' hoặc 'unlisted'.
-    - Không thể clone lịch trình 'private' của người khác.
-    - Lịch trình mới mặc định là 'private' (chỉ user thấy).
-    - Field `clonedFrom` trỏ về ID lịch trình gốc (đo độ hot, trích nguồn).
-    """
-    try:
-        # ── Bước 1: Lấy lịch trình gốc ──────────────────────────────────────────
-        original_ref = db.collection("itineraries").document(original_plan_id)
-        original_doc = original_ref.get()
-
-        if not original_doc.exists:
-            raise HTTPException(
-                status_code=404,
-                detail=f"Không tìm thấy lịch trình '{original_plan_id}'."
-            )
-
-        original_data = original_doc.to_dict()
-        visibility = original_data.get("visibility", "private").lower()
-
-        # ── Bước 2: Kiểm tra quyền clone ───────────────────────────────────────
-        if visibility == "private":
-            # Chỉ chủ sở hữu mới có thể clone lịch trình private của chính mình
-            if original_data.get("ownerId") != uid:
-                raise HTTPException(
-                    status_code=403,
-                    detail="Không thể nhân bản lịch trình đang ở chế độ riêng tư."
-                )
-
-        # ── Bước 3: Tạo document mới trong collection `itineraries` ─────────────
-        new_plan_id = f"plan-{int(datetime.datetime.utcnow().timestamp() * 1000)}"
-        new_doc = {
-            **original_data,                              # Sao chép nội dung gốc
-            "id": new_plan_id,
-            "ownerId": uid,                              # Chủ sở hữu mới
-            "visibility": "private",                     # Mặc định private sau khi clone
-            "clonedFrom": original_plan_id,              # Trích nguồn (schema chính thức)
-            "createdAt": fb_firestore.SERVER_TIMESTAMP,
-            "updatedAt": fb_firestore.SERVER_TIMESTAMP,
-        }
-        db.collection("itineraries").document(new_plan_id).set(new_doc)
-        logger.info(f"[Clone] User {uid} clone lịch trình {original_plan_id} → {new_plan_id}")
-
-        return {
-            "status": "success",
-            "id": new_plan_id,
-            "message": "Đã lưu lịch trình vào tài khoản của bạn.",
-        }
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"[Clone] Lỗi nhân bản lịch trình: {e}")
-        raise HTTPException(status_code=500, detail=f"Nhân bản lịch trình thất bại: {e}")

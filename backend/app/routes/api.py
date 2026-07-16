@@ -82,10 +82,7 @@ async def update_profile(profile_data: UserProfileModel, decoded_token: dict = D
     uid = decoded_token["uid"]
     return await update_user_profile(uid, profile_data)
 
-
-# ════════════════════════════════════════════════════════════════════
-# PAYMENT — VNPay
-# ════════════════════════════════════════════════════════════════════
+from app.controllers.reviews_controller import get_google_reviews
 from app.controllers.payment_controller import CreatePaymentRequest, create_payment_url, handle_payment_return, handle_payment_ipn
 
 @router.post("/payment/vnpay_create")
@@ -104,106 +101,7 @@ async def vnpay_ipn(request: Request):
     return await handle_payment_ipn(request)
 
 
-# ════════════════════════════════════════════════════════════════════
-# POSTS — Hệ thống bài đăng mạng xã hội
-# ════════════════════════════════════════════════════════════════════
-from app.controllers.post_controller import (
-    PostCreateRequest, CommentCreateRequest, RepostCreateRequest,
-    create_post, get_post, list_posts, list_user_posts,
-    toggle_like, get_user_like_status, add_comment, list_comments,
-    create_repost, clone_itinerary,
-)
-
-def _build_author_info(decoded_token: dict) -> dict:
-    """Trích xuất thông tin tác giả từ Firebase token."""
-    return {
-        "authorName": decoded_token.get("name") or decoded_token.get("email", "Ẩn danh"),
-        "authorAvatar": decoded_token.get("picture", ""),
-    }
-
-@router.get("/posts")
-async def get_feed():
-    """Lấy danh sách bài đăng công khai (feed)."""
-    return await list_posts()
-
-@router.get("/posts/me")
-async def get_my_posts(decoded_token: dict = Depends(verify_firebase_token)):
-    """Lấy tất cả bài đăng của người dùng hiện tại."""
-    uid = decoded_token["uid"]
-    return await list_user_posts(uid)
-
-@router.get("/posts/{post_id}")
-async def get_single_post(post_id: str):
-    """Lấy thông tin một bài đăng theo ID."""
-    return await get_post(post_id)
-
-@router.post("/posts")
-async def create_new_post(data: PostCreateRequest, decoded_token: dict = Depends(verify_firebase_token)):
-    """Tạo bài đăng mới (text / image / itinerary)."""
-    uid = decoded_token["uid"]
-    return await create_post(uid, _build_author_info(decoded_token), data)
-
-@router.post("/posts/{post_id}/like")
-async def like_post(post_id: str, decoded_token: dict = Depends(verify_firebase_token)):
-    """Toggle like/unlike bài đăng. Like lưu vào collection `likes` với ID = {postId}_{userId}."""
-    uid = decoded_token["uid"]
-    return await toggle_like(uid, post_id)
-
-@router.get("/posts/{post_id}/like-status")
-async def check_like_status(post_id: str, decoded_token: dict = Depends(verify_firebase_token)):
-    """Kiểm tra user hiện tại đã like bài đăng này chưa."""
-    uid = decoded_token["uid"]
-    liked = await get_user_like_status(uid, post_id)
-    return {"liked": liked, "postId": post_id}
-
-@router.get("/posts/{post_id}/comments")
-async def get_post_comments(post_id: str):
-    """Lấy danh sách bình luận của bài đăng (từ top-level collection `comments`)."""
-    return await list_comments(post_id)
-
-@router.post("/posts/{post_id}/comments")
-async def add_post_comment(post_id: str, data: CommentCreateRequest, decoded_token: dict = Depends(verify_firebase_token)):
-    """Thêm bình luận vào bài đăng. Yêu cầu đăng nhập."""
-    uid = decoded_token["uid"]
-    return await add_comment(uid, _build_author_info(decoded_token), post_id, data)
-
-@router.post("/posts/{post_id}/repost")
-async def repost_post(post_id: str, data: RepostCreateRequest, decoded_token: dict = Depends(verify_firebase_token)):
-    """Chia sẻ lại bài đăng (trích dẫn kiểu Twitter). Yêu cầu đăng nhập."""
-    uid = decoded_token["uid"]
-    return await create_repost(uid, _build_author_info(decoded_token), post_id, data)
-
-
-# ════════════════════════════════════════════════════════════════════
-# ITINERARIES — Alias URL + Clone (IDOR protected)
-# ════════════════════════════════════════════════════════════════════
-
-@router.get("/itineraries/{plan_id}")
-async def get_itinerary_public(
-    plan_id: str,
-    itinerary: dict = Depends(verify_itinerary_access),
-):
-    """
-    [Alias] Lấy thông tin lịch trình theo ID — bảo vệ bởi IDOR Middleware.
-    (Route chính tương đương: GET /api/plans/{plan_id})
-    - visibility == 'public'  → 200 cho tất cả
-    - visibility == 'private' + không có token hợp lệ → 401
-    - visibility == 'private' + uid không khớp ownerId → 403
-    - visibility == 'private' + uid khớp ownerId → 200
-    """
-    return itinerary
-
-
-@router.post("/itineraries/{plan_id}/clone")
-async def clone_itinerary_route(
-    plan_id: str,
-    decoded_token: dict = Depends(verify_firebase_token),
-):
-    """
-    Nhân bản (Clone) một lịch trình về tài khoản của người dùng hiện tại.
-    - Lịch trình gốc phải có visibility = 'public' hoặc 'unlisted'.
-    - Lịch trình mới được tạo với visibility = 'private' và có field `clonedFrom`.
-    - Yêu cầu đăng nhập.
-    """
-    uid = decoded_token["uid"]
-    return await clone_itinerary(uid, plan_id)
+@router.get("/google-reviews")
+async def google_reviews(place_name: str, city_name: str = ""):
+    """Lấy reviews từ Google Maps qua SerpAPI (lazy-load, có cache)."""
+    return await get_google_reviews(place_name, city_name)
