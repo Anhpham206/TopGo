@@ -61,6 +61,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         const cityId = e.target.value;
         placeSelector.innerHTML = '<option value="">-- Chọn Địa điểm --</option>';
 
+        // Luôn reset trạng thái reviews khi đổi thành phố
+        // 1. Ẩn phần reviews
+        reviewsSection.style.display = 'none';
+        // 2. Xóa nội dung reviews cũ
+        document.getElementById('reviews-list').innerHTML = '';
+        // 3. Hủy listener Firestore (nếu có) để tránh nhận data cũ
+        if (unsubscribeReviews) {
+            unsubscribeReviews();
+            unsubscribeReviews = null;
+        }
+        // 4. Reset ID địa điểm hiện tại
+        currentPlaceId = null;
+
         if (cityId && allPlaces[cityId]) {
             allPlaces[cityId].forEach(place => {
                 const option = document.createElement('option');
@@ -71,7 +84,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             placeSelector.disabled = false;
         } else {
             placeSelector.disabled = true;
-            reviewsSection.style.display = 'none';
         }
     });
 
