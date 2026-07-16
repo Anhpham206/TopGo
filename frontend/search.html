@@ -421,10 +421,29 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     <span class="nav-text">Tìm kiếm</span>
                 </a>
-                <a href="profile.html" class="left-nav-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    <span class="nav-text">Hồ sơ</span>
-                </a>
+                <!-- Nav Add (+) Button -->
+                <div class="nav-add-wrapper">
+                    <button class="nav-add-btn" aria-label="Tạo mới">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <span class="nav-text">Tạo mới</span>
+                    </button>
+                    <div class="nav-add-popup">
+                        <a href="./feed.html#post-composer-mount" class="nav-popup-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            Đăng bài viết
+                        </a>
+                        <div class="nav-popup-divider"></div>
+                        <a href="./planner.html" class="nav-popup-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            Tạo lịch trình
+                        </a>
+                        <div class="nav-popup-divider"></div>
+                        <a href="./chatbot.html" class="nav-popup-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            TopChat
+                        </a>
+                    </div>
+                </div>
                 
                 <!-- Ad Widget -->
                 <div class="sidebar-ad-widget">
@@ -480,13 +499,7 @@
             ? 'http://localhost:8000'
             : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
 
-        const DEFAULT_TOPICS = [
-            { name: "Đà Nẵng",           postCount: 128 },
-            { name: "Phú Quốc",           postCount: 95 },
-            { name: "Đà Lạt",             postCount: 87 },
-            { name: "Hội An",             postCount: 76 },
-            { name: "Nha Trang",          postCount: 64 },
-        ];
+
 
         function _escapeHtml(unsafe) {
             return (unsafe || '').toString()
@@ -506,7 +519,10 @@
                     const data = await res.json();
                     topics = data.topics || [];
                 }
-                if (!topics.length) topics = DEFAULT_TOPICS;
+                if (!topics.length) {
+                    list.innerHTML = '<div style="text-align: center; padding: 40px 20px; color: var(--muted); font-size: 15px;">Chưa có chủ đề nổi bật.</div>';
+                    return;
+                }
 
                 // Chỉ lấy 5 mục đầu tiên
                 topics = topics.slice(0, 5);

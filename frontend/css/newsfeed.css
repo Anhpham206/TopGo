@@ -211,8 +211,172 @@ body.dark .left-sidebar.profile-collapsed .left-nav-item.active {
 }
 
 
+
+/* ── Nav Add Button (+) with Hover Popup ── */
+.nav-add-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.nav-add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 13px;
+  padding: 11px 16px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, var(--p1), var(--p2));
+  color: white;
+  font-family: var(--font-label);
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: box-shadow 0.3s, transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  box-shadow: 0 4px 16px rgba(0,169,255,0.28);
+}
+
+.nav-add-btn:hover {
+  box-shadow: 0 6px 24px rgba(0,169,255,0.4);
+  transform: translateX(3px);
+}
+
+.nav-add-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  stroke-width: 2.2;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+
+.nav-add-btn:hover svg {
+  transform: rotate(45deg) scale(1.12);
+}
+
+.left-sidebar.profile-collapsed .nav-add-btn {
+  width: calc(76px - 28px);
+  padding: 12px;
+  border-radius: 14px;
+  justify-content: center;
+}
+
+.left-sidebar.profile-collapsed:hover .nav-add-btn {
+  width: 100%;
+  padding: 11px 16px;
+  justify-content: flex-start;
+}
+
+.nav-add-popup {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.92);
+  background: var(--card, white);
+  border: 1px solid var(--border, rgba(0,169,255,0.15));
+  border-radius: 16px;
+  padding: 8px;
+  min-width: 190px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12), 0 4px 16px rgba(0,169,255,0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.25s cubic-bezier(0.22,1,0.36,1);
+  z-index: 200;
+}
+
+body.dark .nav-add-popup {
+  background: #0f172a;
+  border-color: rgba(0,169,255,0.18);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45), 0 4px 16px rgba(0,169,255,0.12);
+}
+
+.nav-add-wrapper:hover .nav-add-popup {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) scale(1);
+}
+
+/* Arrow pointing left toward the button */
+.nav-add-popup::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right-color: var(--border, rgba(0,169,255,0.15));
+}
+
+.nav-add-popup::after {
+  content: '';
+  position: absolute;
+  right: calc(100% - 1px);
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right-color: var(--card, white);
+}
+
+body.dark .nav-add-popup::after {
+  border-right-color: #0f172a;
+}
+
+.nav-popup-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: var(--text, #1a202c);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-label);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.18s, color 0.18s, transform 0.18s;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-popup-item:hover {
+  background: rgba(0,169,255,0.08);
+  color: var(--p1);
+  transform: translateX(3px);
+}
+
+body.dark .nav-popup-item {
+  color: #e2e8f0;
+}
+
+body.dark .nav-popup-item:hover {
+  background: rgba(0,169,255,0.12);
+  color: #60c8ff;
+}
+
+.nav-popup-item svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  stroke-width: 1.8;
+  opacity: 0.75;
+}
+
+.nav-popup-item:hover svg {
+  opacity: 1;
+}
+
+.nav-popup-divider {
+  height: 1px;
+  background: var(--border, rgba(0,0,0,0.07));
+  margin: 4px 8px;
+}
+
 /* ── Left Nav Item — Double-Bezel Island Architecture ── */
 .left-nav-item {
+
   display: flex;
   align-items: center;
   justify-content: flex-start;

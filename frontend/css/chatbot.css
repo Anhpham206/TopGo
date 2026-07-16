@@ -8,6 +8,14 @@
 body {
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
+  /* Footer sticky bottom */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body > main {
+  flex: 1;
 }
 body::-webkit-scrollbar {
   width: 5px;

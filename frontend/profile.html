@@ -3,7 +3,8 @@
   FILE: profile.html
   CHỨC NĂNG:
   - Trang profile cá nhân người dùng TopGo.
-  - Layout 2 cột: Sidebar (info + identity) + Main (2 tabs: Lịch trình / Bài viết).
+  - Thiết kế theo concept "Passport Pages" — trang bên trong hộ chiếu.
+  - Hiển thị thông tin cá nhân + danh sách lịch trình đã lưu.
   ========================================================================
 -->
 <!DOCTYPE html>
@@ -12,13 +13,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TopGo — Trang cá nhân</title>
+    <title>TopGo — Hộ chiếu du lịch</title>
     <link rel="icon" type="image/png" href="./assets/logo.png">
-    <meta name="description" content="Trang cá nhân TopGo — Xem thông tin, lịch trình và bài viết.">
+    <meta name="description" content="Hộ chiếu du lịch TopGo — Xem thông tin cá nhân và các lịch trình đã lưu.">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/shared.css?v=2">
-    <link rel="stylesheet" href="./css/auth.css?v=5">
-    <link rel="stylesheet" href="./css/newsfeed.css?v=22">
+    <link rel="stylesheet" href="./css/auth.css">
 </head>
 
 <body>
@@ -27,342 +27,231 @@
         <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
     </header>
 
-    <main class="profile-main-v2">
-
-        <!-- ── COLLAPSED LEFT SIDEBAR ────────────────────────────── -->
-        <div class="left-sidebar profile-collapsed">
-            <!-- TopGo Mini Widget (header space filler) -->
-            <div class="sidebar-topgo-widget">
-                <div class="stw-globe">
-                    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="18" cy="18" r="17" stroke="url(#g1)" stroke-width="1.5" opacity="0.6"/>
-                        <ellipse cx="18" cy="18" rx="8" ry="17" stroke="url(#g1)" stroke-width="1" opacity="0.4"/>
-                        <path d="M1 18h34" stroke="url(#g1)" stroke-width="1" opacity="0.4"/>
-                        <path d="M3 11h30M3 25h30" stroke="url(#g1)" stroke-width="0.8" opacity="0.25"/>
-                        <circle cx="18" cy="18" r="3.5" fill="url(#g1)" opacity="0.9"/>
-                        <defs>
-                            <linearGradient id="g1" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#00a9ff"/>
-                                <stop offset="1" stop-color="#0051ff"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-                <div class="stw-text">
-                    <span class="stw-brand">TopGo</span>
-                    <span class="stw-tagline">Du lịch · Cộng đồng</span>
-                </div>
-                <div class="stw-pulse"></div>
-            </div>
-            
-            <!-- Separator line: Metallic luxury gem feel -->
-            <div class="sidebar-separator"></div>
-
-            <a href="feed.html" class="left-nav-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                <span class="nav-text">Bảng tin</span>
-            </a>
-            <a href="search.html" class="left-nav-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <span class="nav-text">Tìm kiếm</span>
-            </a>
-            <a href="profile.html" class="left-nav-item active">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                <span class="nav-text">Hồ sơ</span>
-            </a>
-            
-            <!-- Ad Widget -->
-            <div class="sidebar-ad-widget">
-                <div class="sidebar-ad-inner">
-                    <div class="sidebar-ad-image-container empty-state">
-                        <span class="ad-empty-text">Chưa có quảng cáo</span>
-                    </div>
-                    <button class="sidebar-ad-btn group">
-                        Khám phá
-                        <div class="sidebar-ad-btn-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </div>
-                    </button>
-                </div>
-            </div>
+    <main class="profile-main">
+        <!-- Hero Banner -->
+        <div class="profile-hero">
+            <h1 class="ph-title">HỒ SƠ THÀNH VIÊN</h1>
         </div>
 
-        <!-- ══ 2-COLUMN LAYOUT ══ -->
-        <div class="pv2-layout">
+        <!-- Passport Book -->
+        <div class="passport-book">
+            <!-- Passport page: Identity -->
+            <div class="passport-page passport-identity">
+                <div class="pp-header">
+                    <div class="pp-header-left">
+                        <div class="pp-country">MẠNG LƯỚI DU LỊCH TOPGO</div>
+                        <div class="pp-type">HỘ CHIẾU THÀNH VIÊN · MEMBER PASSPORT</div>
+                    </div>
+                    <div class="pp-emblem">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/>
+                        </svg>
+                    </div>
+                </div>
 
-            <!-- LEFT: Profile Sidebar -->
-            <aside class="pv2-sidebar">
+                <div class="pp-stripe" aria-hidden="true"></div>
 
-                <!-- Card 1: Avatar + Info + Actions -->
-                <div class="pv2-sidebar-card">
-                    <!-- Avatar -->
-                    <div class="pv2-avatar-wrap">
-                        <div class="pv2-avatar" id="pv2-avatar">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pv2-avatar-placeholder">
+                <div class="pp-body">
+                    <!-- Photo + Edit -->
+                    <div class="pp-photo-section">
+                        <div class="pp-photo" id="pp-photo">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pp-photo-placeholder">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                                 <circle cx="12" cy="7" r="4"/>
                             </svg>
                         </div>
-                        <button class="pv2-avatar-edit" id="pp-photo-edit" title="Thay ảnh đại diện">
+                        <button class="pp-photo-edit" id="pp-photo-edit" title="Thay ảnh đại diện">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
                                 <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
                                 <circle cx="12" cy="13" r="4"/>
                             </svg>
                         </button>
                         <input type="file" id="pp-avatar-input" accept="image/*" style="display: none;">
+                        <div class="pp-passport-no" id="pp-passport-no">TG-000000</div>
                     </div>
 
-                    <!-- Name & Handle -->
-                    <h1 class="pv2-name" id="pv2-name">—</h1>
-                    <p class="pv2-handle" id="pv2-handle">@TG-000000</p>
-                    <p class="pv2-email" id="pv2-email"></p>
-
-                    <!-- Stats -->
-                    <div class="pv2-stats">
-                        <div class="pv2-stat">
-                            <span class="pv2-stat-num" id="pv2-stat-trips">0</span>
-                            <span class="pv2-stat-label">Chuyến đi</span>
+                    <!-- Info fields -->
+                    <div class="pp-info">
+                        <div class="pp-field">
+                            <span class="pp-label">HỌ VÀ TÊN / FULL NAME</span>
+                            <span class="pp-value" id="pp-fullname">—</span>
                         </div>
-                        <div class="pv2-stat-divider"></div>
-                        <div class="pv2-stat">
-                            <span class="pv2-stat-num" id="pv2-stat-posts">0</span>
-                            <span class="pv2-stat-label">Bài viết</span>
-                        </div>
-                        <div class="pv2-stat-divider"></div>
-                        <div class="pv2-stat">
-                            <span class="pv2-stat-num" id="pv2-stat-nation">🇻🇳</span>
-                            <span class="pv2-stat-label" id="pv2-stat-nation-label">Việt Nam</span>
-                        </div>
-                    </div>
-
-                    <!-- Info Details (Integrated from Identity Card) -->
-                    <div class="pv2-details">
-                        <div class="pv2-detail-item">
-                            <span class="pv2-detail-label">Họ và tên</span>
-                            <span class="pv2-detail-value" id="pip-fullname">—</span>
-                        </div>
-                        <div class="pv2-detail-item">
-                            <span class="pv2-detail-label">Quốc tịch</span>
-                            <span class="pv2-detail-value" id="pip-nationality">Việt Nam</span>
-                        </div>
-                        <div class="pv2-detail-row">
-                            <div class="pv2-detail-item">
-                                <span class="pv2-detail-label">Giới tính</span>
-                                <span class="pv2-detail-value" id="pip-sex">—</span>
+                        <div class="pp-field-row">
+                            <div class="pp-field">
+                                <span class="pp-label">QUỐC TỊCH / NATIONALITY</span>
+                                <span class="pp-value" id="pp-nationality">Việt Nam</span>
                             </div>
-                            <div class="pv2-detail-item">
-                                <span class="pv2-detail-label">Ngày sinh</span>
-                                <span class="pv2-detail-value" id="pip-dob">—</span>
+                            <div class="pp-field">
+                                <span class="pp-label">GIỚI TÍNH / SEX</span>
+                                <span class="pp-value" id="pp-sex">—</span>
                             </div>
                         </div>
-                        <div class="pv2-detail-item">
-                            <span class="pv2-detail-label">Nơi sinh</span>
-                            <span class="pv2-detail-value" id="pip-pob">—</span>
-                        </div>
-                        <div class="pv2-detail-item">
-                            <span class="pv2-detail-label">Email</span>
-                            <span class="pv2-detail-value" id="pip-email">—</span>
-                        </div>
-                        <div class="pv2-detail-item">
-                            <span class="pv2-detail-label">Ngày tham gia</span>
-                            <span class="pv2-detail-value" id="pip-joined">—</span>
-                        </div>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="pv2-actions" id="pv2-actions">
-                        <button class="pv2-btn pv2-btn-edit" id="btn-edit-profile">Chỉnh sửa hồ sơ</button>
-                        <button class="pv2-btn pv2-btn-logout" id="btn-logout">Đăng xuất</button>
-                    </div>
-                </div>
-
-
-                <!-- Card 3: Quick Links -->
-                <div class="pv2-sidebar-card pv2-quick-links">
-                    <a href="./planner.html" class="pv2-qlink">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg>
-                        Tạo lịch trình mới
-                    </a>
-                    <a href="./feed.html" class="pv2-qlink">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                        Bảng tin cộng đồng
-                    </a>
-                    <a href="./chatbot.html" class="pv2-qlink">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                        TopChat AI
-                    </a>
-                </div>
-            </aside>
-
-            <!-- RIGHT: Main Content -->
-            <div class="pv2-main">
-
-                <!-- Tabs Bar — chỉ 2 tab, không có icon -->
-                <div class="pv2-tabs-bar">
-                    <button class="pv2-tab active" data-tab="tab-trips">Lịch trình</button>
-                    <button class="pv2-tab" data-tab="tab-posts">Bài viết</button>
-                    <div class="pv2-tab-indicator"></div>
-                </div>
-
-                <!-- ══ TAB CONTENTS ══ -->
-
-                <!-- Tab 1: Lịch trình -->
-                <div id="tab-trips" class="pv2-tab-content active">
-                    <div class="stamps-header">
-                        <h2 class="stamps-title">Lịch trình đã lưu</h2>
-                        <div style="display: flex; align-items: center; gap: 16px;">
-                            <label class="trips-privacy-toggle" id="trips-privacy-toggle" style="display:none;" title="Chuyển đổi trạng thái chia sẻ của tất cả lịch trình">
-                                <div class="tpt-switch">
-                                    <input type="checkbox" id="trips-privacy-checkbox" onchange="
-                                        const label = this.parentElement.nextElementSibling;
-                                        if (this.checked) {
-                                            label.textContent = 'Public';
-                                            label.className = 'tpt-label public';
-                                        } else {
-                                            label.textContent = 'Private';
-                                            label.className = 'tpt-label private';
-                                        }
-                                        alert('Tính năng set Private/Public cho toàn bộ lịch trình đang chờ API');
-                                    " checked>
-                                    <span class="tpt-slider"></span>
-                                </div>
-                                <span class="tpt-label public">Public</span>
-                            </label>
-                            <span class="stamps-count" id="stamps-count">0 chuyến</span>
-                            <div class="view-toggle" id="stamps-view-toggle">
-                                <button class="view-btn active" data-view="grid" title="Dạng lưới">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                                </button>
-                                <button class="view-btn" data-view="list" title="Dạng danh sách">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-                                </button>
+                        <div class="pp-field-row">
+                            <div class="pp-field">
+                                <span class="pp-label">NGÀY SINH / DATE OF BIRTH</span>
+                                <span class="pp-value" id="pp-dob">—</span>
+                            </div>
+                            <div class="pp-field">
+                                <span class="pp-label">NƠI SINH / PLACE OF BIRTH</span>
+                                <span class="pp-value" id="pp-pob">—</span>
                             </div>
                         </div>
-                    </div>
-
-                    <details class="stamps-filters-toggle">
-                        <summary>Lọc &amp; tìm kiếm</summary>
-                        <div class="stamps-filters">
-                            <div class="filter-group">
-                                <label for="filter-dest">Điểm đến</label>
-                                <input type="text" id="filter-dest" placeholder="Tìm điểm đến...">
-                            </div>
-                            <div class="filter-group">
-                                <label for="filter-date-from">Từ ngày</label>
-                                <input type="date" id="filter-date-from">
-                            </div>
-                            <div class="filter-group">
-                                <label for="filter-date-to">Đến ngày</label>
-                                <input type="date" id="filter-date-to">
-                            </div>
-                            <div class="filter-group">
-                                <label for="filter-budget">Ngân sách tối đa</label>
-                                <input type="number" id="filter-budget" placeholder="VND">
-                            </div>
+                        <div class="pp-field">
+                            <span class="pp-label">EMAIL</span>
+                            <span class="pp-value" id="pp-email">—</span>
                         </div>
-                    </details>
-
-                    <div class="stamps-grid" id="stamps-grid">
-                        <div class="stamps-empty" id="stamps-empty">
-                            <div class="stamps-empty-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
-                                    <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
-                                </svg>
+                        <div class="pp-field-row">
+                            <div class="pp-field">
+                                <span class="pp-label">NGÀY CẤP / DATE OF ISSUE</span>
+                                <span class="pp-value" id="pp-doi">—</span>
                             </div>
-                            <p class="stamps-empty-text">Chưa có chuyến đi nào được lưu</p>
-                            <a href="./planner.html" class="stamps-empty-cta">Tạo lịch trình đầu tiên →</a>
+                            <div class="pp-field">
+                                <span class="pp-label">SỐ CHUYẾN ĐI / TRIPS</span>
+                                <span class="pp-value pp-trips-count" id="pp-trips">0</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tab 2: Bài viết -->
-                <div id="tab-posts" class="pv2-tab-content">
-                    <div class="stamps-header">
-                        <h2 class="stamps-title">Bài viết đã đăng</h2>
-                        <span id="profile-posts-count" class="stamps-count">0 bài viết</span>
-                    </div>
-                    <div id="profile-posts-feed" class="profile-posts-feed-profile"></div>
-                    <div id="profile-posts-empty" class="stamps-empty" style="display:none;">
-                        <div class="stamps-empty-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14 2 14 8 20 8"/>
-                                <line x1="16" y1="13" x2="8" y2="13"/>
-                                <line x1="16" y1="17" x2="8" y2="17"/>
-                            </svg>
-                        </div>
-                        <p class="stamps-empty-text">Chưa có bài viết nào</p>
-                        <a href="./feed.html" class="stamps-empty-cta">Đến bảng tin để đăng bài →</a>
-                    </div>
+                <!-- MRZ (Machine Readable Zone) -->
+                <div class="pp-mrz" id="pp-mrz" aria-hidden="true">
+                    P&lt;VNM&lt;TOPGO&lt;TRAVELER&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br>
+                    TG000000&lt;0VNM0000000M0000000&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;00
                 </div>
 
-            </div><!-- /pv2-main -->
-        </div><!-- /pv2-layout -->
-
-        <!-- Edit Profile Modal -->
-        <div class="pp-edit-overlay hidden" id="pp-edit-overlay">
-            <div class="pp-edit-card glass-card">
-                <div class="pp-edit-header">
-                    <h2>Chỉnh sửa hồ sơ</h2>
-                    <button class="pp-edit-close" id="pp-edit-close">&times;</button>
-                </div>
-                <div class="pp-edit-body">
-                    <div class="auth-row">
-                        <div class="field-group">
-                            <label class="label-sm" for="edit-lastname">Họ</label>
-                            <input class="auth-input" id="edit-lastname" type="text" placeholder="Nguyễn">
-                        </div>
-                        <div class="field-group">
-                            <label class="label-sm" for="edit-firstname">Tên</label>
-                            <input class="auth-input" id="edit-firstname" type="text" placeholder="Văn A">
-                        </div>
-                    </div>
-                    <div class="field-group">
-                        <label class="label-sm" for="edit-username">Tên người dùng (Username) <span id="username-status" style="font-size:11px; margin-left: 8px;"></span></label>
-                        <div style="position:relative;">
-                            <span style="position:absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub);">@</span>
-                            <input class="auth-input" id="edit-username" type="text" placeholder="traveler_123" style="padding-left: 28px;">
-                        </div>
-                    </div>
-                    <div class="auth-row">
-                        <div class="field-group">
-                            <label class="label-sm" for="edit-dob">Ngày sinh</label>
-                            <input class="auth-input" id="edit-dob" type="date">
-                        </div>
-                        <div class="field-group">
-                            <label class="label-sm" for="edit-sex">Giới tính</label>
-                            <select class="auth-input" id="edit-sex">
-                                <option value="">Chọn</option>
-                                <option value="Nam">Nam</option>
-                                <option value="Nữ">Nữ</option>
-                                <option value="Khác">Khác</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field-group">
-                        <label class="label-sm" for="edit-pob">Nơi sinh</label>
-                        <input class="auth-input" id="edit-pob" type="text" placeholder="TP. Hồ Chí Minh">
-                    </div>
-                    <div class="field-group">
-                        <label class="label-sm" for="edit-nationality">Quốc tịch</label>
-                        <input class="auth-input" id="edit-nationality" type="text" placeholder="Việt Nam">
-                    </div>
-                </div>
-                <div class="pp-edit-actions">
-                    <button class="btn-reset" id="btn-edit-cancel">Hủy</button>
-                    <button class="btn-auth-primary" id="btn-edit-save">Lưu thay đổi</button>
+                <!-- Identity Actions -->
+                <div class="pp-actions">
+                    <button class="btn-edit-profile" id="btn-edit-profile">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                        Chỉnh sửa hồ sơ
+                    </button>
+                    <button class="btn-logout" id="btn-logout">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        Đăng xuất
+                    </button>
                 </div>
             </div>
+
+            <!-- Edit Profile Modal (inline) -->
+            <div class="pp-edit-overlay hidden" id="pp-edit-overlay">
+                <div class="pp-edit-card glass-card">
+                    <div class="pp-edit-header">
+                        <h2>Chỉnh sửa hồ sơ</h2>
+                        <button class="pp-edit-close" id="pp-edit-close">&times;</button>
+                    </div>
+                    <div class="pp-edit-body">
+                        <div class="auth-row">
+                            <div class="field-group">
+                                <label class="label-sm" for="edit-lastname">Họ</label>
+                                <input class="auth-input" id="edit-lastname" type="text" placeholder="Nguyễn">
+                            </div>
+                            <div class="field-group">
+                                <label class="label-sm" for="edit-firstname">Tên</label>
+                                <input class="auth-input" id="edit-firstname" type="text" placeholder="Văn A">
+                            </div>
+                        </div>
+                        <div class="auth-row">
+                            <div class="field-group">
+                                <label class="label-sm" for="edit-dob">Ngày sinh</label>
+                                <input class="auth-input" id="edit-dob" type="date">
+                            </div>
+                            <div class="field-group">
+                                <label class="label-sm" for="edit-sex">Giới tính</label>
+                                <select class="auth-input" id="edit-sex">
+                                    <option value="">Chọn</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                    <option value="Khác">Khác</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <label class="label-sm" for="edit-pob">Nơi sinh</label>
+                            <input class="auth-input" id="edit-pob" type="text" placeholder="TP. Hồ Chí Minh">
+                        </div>
+                        <div class="field-group">
+                            <label class="label-sm" for="edit-nationality">Quốc tịch</label>
+                            <input class="auth-input" id="edit-nationality" type="text" placeholder="Việt Nam">
+                        </div>
+                    </div>
+                    <div class="pp-edit-actions">
+                        <button class="btn-reset" id="btn-edit-cancel">Hủy</button>
+                        <button class="btn-auth-primary" id="btn-edit-save">Lưu thay đổi</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saved Itineraries (Visa Stamps section) -->
+            <div class="passport-page passport-stamps">
+                <div class="stamps-header">
+                    <h2 class="stamps-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M8 21h8M12 17v4"/>
+                        </svg>
+                        Lịch trình đã lưu
+                    </h2>
+                    <div class="stamps-header-actions" style="display: flex; align-items: center; gap: 16px;">
+                        <span class="stamps-count" id="stamps-count">0 chuyến</span>
+                        <div class="view-toggle" id="stamps-view-toggle">
+                            <button class="view-btn active" data-view="grid" title="Dạng lưới">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                            </button>
+                            <button class="view-btn" data-view="list" title="Dạng danh sách">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="stamps-filters">
+                    <div class="filter-group">
+                        <label for="filter-dest">Điểm đến</label>
+                        <input type="text" id="filter-dest" placeholder="Tìm điểm đến...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-date-from">Từ ngày</label>
+                        <input type="date" id="filter-date-from">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-date-to">Đến ngày</label>
+                        <input type="date" id="filter-date-to">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-budget">Ngân sách tối đa</label>
+                        <input type="number" id="filter-budget" placeholder="VND">
+                    </div>
+                </div>
+
+                <div class="stamps-grid" id="stamps-grid">
+                    <!-- Populated by JS -->
+                    <div class="stamps-empty" id="stamps-empty">
+                        <div class="stamps-empty-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+                                <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                            </svg>
+                        </div>
+                        <p class="stamps-empty-text">Chưa có chuyến đi nào được lưu</p>
+                        <a href="./planner.html" class="stamps-empty-cta">Tạo lịch trình đầu tiên →</a>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
+    <!-- Footer — loaded dynamically -->
     <div id="site-shared"></div>
 
-    <script src="./js/postCard.js"></script>
-    <script src="./js/hoverCard.js"></script>
     <script type="module" src="./js/auth.js"></script>
-    <script type="module" src="./js/profilePosts.js"></script>
 </body>
 
 </html>
