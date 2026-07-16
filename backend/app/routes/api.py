@@ -53,6 +53,23 @@ async def update_profile(profile_data: UserProfileModel, decoded_token: dict = D
     return await update_user_profile(uid, profile_data)
 
 from app.controllers.reviews_controller import get_google_reviews
+from app.controllers.payment_controller import CreatePaymentRequest, create_payment_url, handle_payment_return, handle_payment_ipn
+
+@router.post("/payment/vnpay_create")
+async def vnpay_create(req: CreatePaymentRequest, decoded_token: dict = Depends(verify_firebase_token), request: Request = None):
+    """Tạo liên kết thanh toán VNPay."""
+    return await create_payment_url(req, decoded_token, request)
+
+@router.get("/payment/vnpay_return")
+async def vnpay_return(request: Request):
+    """Nhận kết quả thanh toán từ VNPay và cập nhật VIP."""
+    return await handle_payment_return(request)
+
+@router.get("/payment/vnpay_ipn")
+async def vnpay_ipn(request: Request):
+    """Webhook IPN tự động từ VNPay server."""
+    return await handle_payment_ipn(request)
+
 
 @router.get("/google-reviews")
 async def google_reviews(place_name: str, city_name: str = ""):
