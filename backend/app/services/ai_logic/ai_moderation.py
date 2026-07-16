@@ -1,13 +1,15 @@
 import os
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 import logging
 
 logger = logging.getLogger("app.ai_moderation")
 
 # Setup Gemini API key
 api_key = os.environ.get("GEMINI_API_KEY_FOR_MODERATION")
+client = None
 if api_key:
-    genai.configure(api_key=api_key)
+    client = genai.Client(api_key=api_key)
 else:
     logger.warning("GEMINI_API_KEY_FOR_MODERATION not found in environment. AI Moderation will fallback to safe.")
 
@@ -21,11 +23,10 @@ async def check_content_safety(text: str) -> dict:
     if not text or not text.strip():
         return {"is_safe": True, "reason": "Empty content"}
 
-    if not api_key:
+    if not client:
         return {"is_safe": True, "reason": "No API key configured for moderation."}
     
     try:
-        model = genai.GenerativeModel('gemini-flash-latest')
         prompt = f"""
 Bạn là một hệ thống AI kiểm duyệt nội dung (Content Moderator) nghiêm ngặt cho một mạng xã hội, áp dụng tiêu chuẩn cộng đồng tương tự Facebook và TikTok.
 Hãy phân tích đoạn văn sau và xác định xem nó có vi phạm bất kỳ tiêu chuẩn nào dưới đây không:
@@ -43,7 +44,15 @@ Hãy trả lời DUY NHẤT bằng định dạng JSON (chỉ JSON, không dùng
 hoặc nếu an toàn:
 {{"is_safe": true, "reason": "OK"}}
 """
-        response = await model.generate_content_async(prompt)
+        response = await client.aio.models.generate_content(
+            model='gemini-3.1-flash-lite-preview',
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                temperature=0.1,
+                max_output_tokens=100
+            )
+        )
         
         # Kiểm tra xem AI có từ chối trả lời vì lý do an toàn không
         if not response.candidates:
@@ -51,8 +60,8 @@ hoặc nếu an toàn:
             return {"is_safe": False, "reason": "Nội dung vi phạm tiêu chuẩn cộng đồng (Bạo lực/Kích động)."}
             
         candidate = response.candidates[0]
-        # finish_reason == 3 là SAFETY (Google chặn vì vi phạm)
-        if candidate.finish_reason == 3:
+        # Xử lý an toàn khi đổi phiên bản thư viện (dùng string chuyển đổi)
+        if hasattr(candidate, 'finish_reason') and str(candidate.finish_reason) in ["3", "SAFETY", "FinishReason.SAFETY"]:
             return {"is_safe": False, "reason": "Nội dung vi phạm tiêu chuẩn cộng đồng (Tự sát/Bạo lực/Kích động)."}
             
         try:
