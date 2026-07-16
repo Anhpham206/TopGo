@@ -2,6 +2,7 @@ import { firebaseConfig } from './firebaseConfig.js';
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, where, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { fetchCities, fetchPlaces } from './api.js';
+const API_BASE = 'http://localhost:8000'
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const authWarning = document.getElementById('auth-warning');
     const reviewFormContainer = document.getElementById('review-form-container');
     const starRatingSpans = document.querySelectorAll('#star-rating span');
-    
+
     // Check Auth Status
     const checkAuthStatus = () => {
         if (window.TopGoAuth && window.TopGoAuth.isLoggedIn()) {
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('btn-submit-review').disabled = true;
         }
     };
-    
+
     window.addEventListener('topgo-auth-change', checkAuthStatus);
     // Initial check
     setTimeout(checkAuthStatus, 1000); // Wait for auth.js to initialize
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const cities = await fetchCities();
         allPlaces = await fetchPlaces();
-        
+
         // Populate City Selector
         cities.forEach(city => {
             if (allPlaces[city.id] && allPlaces[city.id].length > 0) {
@@ -59,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     citySelector.addEventListener('change', (e) => {
         const cityId = e.target.value;
         placeSelector.innerHTML = '<option value="">-- Chọn Địa điểm --</option>';
-        
+
         if (cityId && allPlaces[cityId]) {
             allPlaces[cityId].forEach(place => {
                 const option = document.createElement('option');
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Submit Review
     document.getElementById('btn-submit-review').addEventListener('click', async () => {
         if (!window.TopGoAuth || !window.TopGoAuth.isLoggedIn()) return;
-        
+
         const textInput = document.getElementById('review-text');
         const text = textInput.value.trim();
         if (!text) {
@@ -135,7 +136,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             textInput.value = '';
             currentRating = 5;
             updateStarsUI();
-            
+
         } catch (error) {
             console.error("Lỗi khi gửi đánh giá:", error);
             alert("Có lỗi xảy ra: " + error.message);
@@ -173,7 +174,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Load user reviews từ Firestore
         const q = query(collection(db, "Reviews"), where("location_id", "==", placeId));
-        
+
         unsubscribeReviews = onSnapshot(q, (snapshot) => {
             // Giữ lại phần Google reviews nếu đã render
             const googleSection = reviewsList.querySelector('.google-reviews-section');
@@ -204,7 +205,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             reviewDocs.forEach(({ id: reviewId, data: review }) => {
                 const isOwner = currentUser && currentUser.uid === review.user_id;
-                
+
                 const dateStr = review.timestamp ? new Date(review.timestamp.toDate()).toLocaleDateString('vi-VN') : 'Vừa xong';
                 const starsHtml = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
 
@@ -273,7 +274,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         try {
             const apiBase = window.location.origin;
-            const resp = await fetch(`${apiBase}/api/google-reviews?place_name=${encodeURIComponent(placeName)}&city_name=${encodeURIComponent(cityName)}`);
+            const resp = await fetch(`${API_BASE}/api/google-reviews?place_name=${encodeURIComponent(placeName)}&city_name=${encodeURIComponent(cityName)}`);
             const data = await resp.json();
 
             if (data.reviews && data.reviews.length > 0) {
@@ -293,11 +294,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function renderGoogleReviews(reviews) {
         const reviewsList = document.getElementById('reviews-list');
-        
+
         // Xoá phần Google cũ nếu có
         const oldSection = reviewsList.querySelector('.google-reviews-section');
         if (oldSection) oldSection.remove();
-        
+
         // Xoá msg "đang tải" hoặc "chưa có đánh giá"
         const emptyMsg = document.getElementById('empty-reviews-msg');
         if (emptyMsg) emptyMsg.remove();
@@ -337,10 +338,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function escapeHtml(unsafe) {
         return unsafe
-             .replace(/&/g, "&amp;")
-             .replace(/</g, "&lt;")
-             .replace(/>/g, "&gt;")
-             .replace(/"/g, "&quot;")
-             .replace(/'/g, "&#039;");
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     }
 });
