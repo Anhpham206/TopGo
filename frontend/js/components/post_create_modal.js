@@ -10,6 +10,10 @@
 
 import { uploadMedia } from './media_upload.js';
 
+const _isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+const BASE_API_URL = _isLocal
+    ? 'http://localhost:8000'
+    : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
 /* ── Toast thông báo nội bộ ── */
 function showToast(msg, type = 'success') {
   const id = 'post-modal-toast';
@@ -25,7 +29,7 @@ function showToast(msg, type = 'success') {
     `;
     document.body.appendChild(t);
   }
-  const colors = { success:'#2e7d64', error:'#d62929', warning:'#ffb347', info:'#00a9ff' };
+  const colors = { success: '#2e7d64', error: '#d62929', warning: '#ffb347', info: '#00a9ff' };
   t.style.background = colors[type] || colors.info;
   t.style.color = '#fff';
   t.textContent = msg;
@@ -486,25 +490,25 @@ export function openPostModal(trip = null) {
   if (!overlay) { console.error('post-modal-container chưa được khởi tạo'); return; }
 
   /* ── Reset state ── */
-  let mediaItems  = [];   // [{url, type:'image'|'video', thumbEl}]
-  let tagList     = [];
+  let mediaItems = [];   // [{url, type:'image'|'video', thumbEl}]
+  let tagList = [];
   let isSubmitting = false;
   let tripLocations = []; // danh sách địa điểm trong lịch trình
   let isItineraryAttached = true; // Trạng thái đính kèm lịch trình
   let currentTrip = trip; // Lưu trữ lịch trình hiện tại (có thể thay đổi)
 
   const get = id => document.getElementById(id);
-  get('pm-content').value        = '';
-  get('pm-tag-input').value      = '';
-  get('pm-tag-chips').innerHTML  = '';
+  get('pm-content').value = '';
+  get('pm-tag-input').value = '';
+  get('pm-tag-chips').innerHTML = '';
   get('pm-preview-grid').innerHTML = '';
   get('pm-status-msg').textContent = '';
-  get('pm-status-msg').className   = 'pm-status';
+  get('pm-status-msg').className = 'pm-status';
   get('pm-progress-section').style.display = 'none';
   get('pm-progress-bar').style.width = '0%';
   get('pm-itin-undo-bar').classList.remove('show'); // reset undo bar
   get('pm-itin-picker-wrap').style.display = 'none'; // reset picker wrap
-  
+
   // Reset nút đăng bài
   const submitBtn = get('pm-submit-btn');
   if (submitBtn) {
@@ -525,7 +529,7 @@ export function openPostModal(trip = null) {
     const suggestedWrap = get('pm-suggested-wrap');
     const suggestedChips = get('pm-suggested-chips');
     suggestedChips.innerHTML = '';
-    
+
     if (tripData && tripData.itinerary) {
       try {
         let itin = tripData.itinerary;
@@ -535,7 +539,7 @@ export function openPostModal(trip = null) {
         const aiOut = itin.output || itin;
         const lichTrinh = aiOut.Lich_trinh || [];
         const placesSet = new Set();
-        
+
         lichTrinh.forEach(day => {
           if (Array.isArray(day)) {
             day.forEach(stop => {
@@ -543,9 +547,9 @@ export function openPostModal(trip = null) {
             });
           }
         });
-        
+
         tripLocations = Array.from(placesSet);
-        
+
         if (tripLocations.length > 0) {
           suggestedWrap.style.display = 'flex';
           tripLocations.forEach(loc => {
@@ -576,14 +580,14 @@ export function openPostModal(trip = null) {
   /* ── Hàm hiển thị lịch trình được đính kèm ── */
   function renderAttachedItinerary(tripData) {
     currentTrip = tripData;
-    const itinTag  = get('pm-itinerary-tag');
+    const itinTag = get('pm-itinerary-tag');
     if (tripData?.destination) {
       get('pm-itin-dest').textContent = `${tripData.destination}`;
       get('pm-itin-budget').textContent = tripData.budget ? `${Number(tripData.budget).toLocaleString('vi-VN')}₫` : 'TỰ TÚC';
-      
+
       const chipsContainer = get('pm-itin-chips-container');
       chipsContainer.innerHTML = '';
-      
+
       const addChip = (txt, svgPath) => {
         const div = document.createElement('div');
         div.className = 'pm-itin-chip';
@@ -595,19 +599,19 @@ export function openPostModal(trip = null) {
         `;
         chipsContainer.appendChild(div);
       };
-      
+
       // Icon ngày (clock)
       addChip(`${tripData.days || '?'} NGÀY`, `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`);
       // Icon người (user)
       addChip(`${tripData.pax || '?'} NGƯỜI`, `<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>`);
-      
+
       if (tripData.dateStart && tripData.dateEnd) {
         const formatD = (d) => d.split('-').reverse().join('/');
         get('pm-itin-dates').textContent = `${formatD(tripData.dateStart)} → ${formatD(tripData.dateEnd)}`;
       } else {
         get('pm-itin-dates').textContent = 'Chưa định ngày';
       }
-      
+
       // Thiết lập nút gỡ đính kèm + undo
       const undoBar = get('pm-itin-undo-bar');
       get('pm-itin-remove-btn').onclick = () => {
@@ -627,7 +631,7 @@ export function openPostModal(trip = null) {
 
       itinTag.style.display = 'flex';
       undoBar.classList.remove('show');
-      
+
       // Load gợi ý địa điểm
       loadSuggestedLocations(tripData);
     } else {
@@ -646,7 +650,7 @@ export function openPostModal(trip = null) {
   /* ── Sự kiện Picker chọn lịch trình đã lưu ── */
   const pickerWrap = get('pm-itin-picker-wrap');
   const pickerList = get('pm-itin-picker-list');
-  const attachBtn  = get('pm-btn-attach-itin');
+  const attachBtn = get('pm-btn-attach-itin');
   const closePickerBtn = get('pm-btn-close-picker');
 
   closePickerBtn.onclick = () => {
@@ -696,14 +700,14 @@ export function openPostModal(trip = null) {
         item.innerHTML = `
           <div style="display:flex; flex-direction:column; gap:2px; text-align:left;">
             <strong style="color:var(--text); font-size:13.5px;">${t.destination}</strong>
-            <span style="font-size:11.5px; color:var(--muted); font-weight:600;">${t.days} Ngày · ${t.pax} Người · ${t.budget ? Number(t.budget).toLocaleString('vi-VN')+'₫' : 'Tự túc'}</span>
+            <span style="font-size:11.5px; color:var(--muted); font-weight:600;">${t.days} Ngày · ${t.pax} Người · ${t.budget ? Number(t.budget).toLocaleString('vi-VN') + '₫' : 'Tự túc'}</span>
           </div>
           <button style="padding: 5px 12px; background: rgba(0, 169, 255, 0.08); color: var(--p1); border: none; border-radius: 8px; font-size: 12px; font-weight: 700; cursor:pointer;">Chọn</button>
         `;
 
         item.onmouseover = () => { item.style.borderColor = 'var(--p1)'; item.style.background = 'rgba(0, 169, 255, 0.04)'; };
         item.onmouseout = () => { item.style.borderColor = 'var(--border-light)'; item.style.background = '#fff'; };
-        
+
         item.onclick = () => {
           renderAttachedItinerary(t);
           isItineraryAttached = true;
@@ -732,9 +736,9 @@ export function openPostModal(trip = null) {
 
   /* ── Helper: cập nhật badge số lượng media ── */
   function updateMediaCount() {
-    const imgs   = mediaItems.filter(m => m.type === 'image').length;
-    const vids   = mediaItems.filter(m => m.type === 'video').length;
-    const parts  = [];
+    const imgs = mediaItems.filter(m => m.type === 'image').length;
+    const vids = mediaItems.filter(m => m.type === 'video').length;
+    const parts = [];
     if (imgs) parts.push(`${imgs}/10 ảnh`);
     if (vids) parts.push(`${vids}/2 video`);
     get('pm-media-count').textContent = parts.join(' · ');
@@ -752,16 +756,16 @@ export function openPostModal(trip = null) {
       <div class="pm-mini-bar"><div class="pm-mini-fill" style="width:0%"></div></div>
       <span class="pm-pct">0%</span>`;
     thumb.appendChild(ov);
-    thumb._overlay  = ov;
+    thumb._overlay = ov;
     thumb._miniFill = ov.querySelector('.pm-mini-fill');
-    thumb._pct      = ov.querySelector('.pm-pct');
+    thumb._pct = ov.querySelector('.pm-pct');
     return thumb;
   }
 
   /* ── Helper: hoàn tất thumb sau upload ── */
   function finalizeThumb(thumb, url, type) {
     if (thumb._overlay) thumb._overlay.remove();
-    
+
     const removeBtn = document.createElement('button');
     removeBtn.className = 'pm-remove';
     removeBtn.textContent = '×';
@@ -804,7 +808,7 @@ export function openPostModal(trip = null) {
       item.url = url;
       item._uploadPct = 100;
       finalizeThumb(thumb, url, type);
-    } catch(err) {
+    } catch (err) {
       thumb.remove();
       mediaItems = mediaItems.filter(m => m !== item);
       updateMediaCount();
@@ -819,11 +823,11 @@ export function openPostModal(trip = null) {
     const currentImgs = mediaItems.filter(m => m.type === 'image').length;
     const canAdd = 10 - currentImgs;
     if (canAdd <= 0) { setStatus('Tối đa 10 ảnh.', 'error'); return; }
-    
+
     const toUpload = files.slice(0, canAdd);
     if (files.length > canAdd) setStatus(`Chỉ thêm được ${canAdd} ảnh, phần thừa bị bỏ qua.`, 'info');
     get('pm-input-photo').value = '';
-    
+
     // Tải lên song song để tối ưu tốc độ
     toUpload.forEach(f => uploadOneFile(f, 'image'));
   };
@@ -843,7 +847,7 @@ export function openPostModal(trip = null) {
     const toUpload = files.slice(0, canAdd);
     if (files.length > canAdd) setStatus(`Chỉ thêm được ${canAdd} video, phần thừa bị bỏ qua.`, 'info');
     get('pm-input-video').value = '';
-    
+
     // Tải lên song song
     toUpload.forEach(f => uploadOneFile(f, 'video'));
   };
@@ -856,7 +860,7 @@ export function openPostModal(trip = null) {
       if (tag && !tagList.includes(tag) && tagList.length < 5) {
         tagList.push(tag);
         renderChips();
-        
+
         // Disable gợi ý tương ứng nếu người dùng tự nhập trùng
         const suggestedEl = Array.from(suggestedChips.children).find(c => c.textContent === tag);
         if (suggestedEl) suggestedEl.classList.add('disabled');
@@ -864,7 +868,7 @@ export function openPostModal(trip = null) {
       e.target.value = '';
     }
   };
-  
+
   function renderChips() {
     const chips = get('pm-tag-chips');
     chips.innerHTML = '';
@@ -872,10 +876,10 @@ export function openPostModal(trip = null) {
       const chip = document.createElement('span');
       chip.className = 'pm-chip';
       chip.innerHTML = `${t}<button title="Xóa tag">×</button>`;
-      chip.querySelector('button').onclick = () => { 
-        tagList.splice(i,1); 
+      chip.querySelector('button').onclick = () => {
+        tagList.splice(i, 1);
         renderChips();
-        
+
         // Active lại gợi ý nếu bị xóa
         const suggestedEl = Array.from(suggestedChips.children).find(c => c.textContent === t);
         if (suggestedEl) suggestedEl.classList.remove('disabled');
@@ -889,7 +893,7 @@ export function openPostModal(trip = null) {
     const el = get('pm-status-msg');
     if (el) {
       el.textContent = msg;
-      el.className   = `pm-status ${type}`;
+      el.className = `pm-status ${type}`;
     }
   }
 
@@ -922,13 +926,13 @@ export function openPostModal(trip = null) {
       const payload = {
         itineraryId: (isItineraryAttached && currentTrip) ? currentTrip.id : null,
         content,
-        mediaUrls:       mediaItems.map(m => m.url),
+        mediaUrls: mediaItems.map(m => m.url),
         taggedLocations: tagList,
       };
 
-      const res  = await fetch('/api/posts/create', {
-        method:'POST',
-        headers:{ 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` },
+      const res = await fetch(`${BASE_API_URL}/api/posts/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(payload)
       });
       const data = await res.json();
@@ -942,17 +946,17 @@ export function openPostModal(trip = null) {
 
     } catch (err) {
       setStatus(err.message, 'error');
-      btn.disabled    = false;
+      btn.disabled = false;
       btn.innerHTML = `
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:8px;">
           <line x1="22" y1="2" x2="11" y2="13"></line>
           <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
         </svg> Đăng bài
       `;
-      isSubmitting    = false;
+      isSubmitting = false;
     }
   };
 }
 
-window.initPostModal  = initPostModal;
-window.openPostModal  = openPostModal;
+window.initPostModal = initPostModal;
+window.openPostModal = openPostModal;
