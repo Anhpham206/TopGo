@@ -10,11 +10,11 @@
 */
 import { loadSharedComponents } from './shared.js';
 import { firebaseConfig } from './firebaseConfig.js';
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// Khởi tạo Firebase Web SDK
-const app = initializeApp(firebaseConfig);
+// Khởi tạo Firebase Web SDK an toàn
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
@@ -37,7 +37,7 @@ onAuthStateChanged(auth, (user) => {
       email: user.email,
       firstname: firstname || user.email.split('@')[0],
       lastname: lastname,
-      photoURL: user.photoURL || null,
+      photoUrl: user.photoURL || null,
       nationality: 'Việt Nam',
       sex: '',
       dob: '',
@@ -59,7 +59,7 @@ onAuthStateChanged(auth, (user) => {
     localStorage.setItem('topgo_user', JSON.stringify(cachedUser));
 
     // Đồng bộ thông tin hồ sơ từ Firestore backend
-    user.getIdToken().then(token => {
+    user.getIdToken(true).then(token => {
       fetch(`${API_BASE}/api/users/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -124,7 +124,7 @@ const AuthService = {
       email: result.user.email,
       firstname,
       lastname,
-      photoURL: null,
+      photoUrl: null,
       nationality: 'Việt Nam',
       sex: '',
       dob: '',
@@ -158,7 +158,7 @@ const AuthService = {
     const firebaseUser = await waitForAuth();
     if (firebaseUser) {
       try {
-        const token = await firebaseUser.getIdToken();
+        const token = await firebaseUser.getIdToken(true);
         const res = await fetch(`${API_BASE}/api/users/profile`, {
           method: 'POST',
           headers: {
@@ -183,7 +183,7 @@ const AuthService = {
     const user = await waitForAuth();
     if (!user) return [];
     try {
-      const token = await user.getIdToken();
+      const token = await user.getIdToken(true);
       const res = await fetch(`${API_BASE}/api/plans/list`, {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -201,7 +201,7 @@ const AuthService = {
     const user = await waitForAuth();
     if (!user) throw new Error("Bạn cần đăng nhập để thực hiện chức năng này.");
     try {
-      const token = await user.getIdToken();
+      const token = await user.getIdToken(true);
       
       let itineraryStr = null;
       if (trip.itinerary) {
@@ -241,7 +241,7 @@ const AuthService = {
     const user = await waitForAuth();
     if (!user) throw new Error("Chưa đăng nhập");
     try {
-      const token = await user.getIdToken();
+      const token = await user.getIdToken(true);
       const res = await fetch(`${API_BASE}/api/plans/${id}`, {
         method: 'DELETE',
         headers: {
@@ -258,7 +258,7 @@ const AuthService = {
   async getIdToken() {
     const user = await waitForAuth();
     if (!user) return null;
-    return await user.getIdToken();
+    return await user.getIdToken(true);
   }
 };
 
@@ -456,8 +456,8 @@ if (currentPage === 'profile.html') {
       const photoEl = document.getElementById('pp-photo');
       if (photoEl) {
         const borderStyle = user.is_vip ? 'border: 3px solid #ffb347; box-shadow: 0 0 10px rgba(255,179,71,0.5);' : '';
-        if (user.photoURL) {
-          photoEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; ${borderStyle}">`;
+        if (user.photoUrl) {
+          photoEl.innerHTML = `<img src="${user.photoUrl}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; ${borderStyle}">`;
         } else {
           photoEl.innerHTML = `
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pp-photo-placeholder" style="${borderStyle}">
@@ -529,7 +529,7 @@ if (currentPage === 'profile.html') {
           const base64Str = canvas.toDataURL('image/jpeg', 0.85);
           
           try {
-            await AuthService.updateProfile({ photoURL: base64Str });
+            await AuthService.updateProfile({ photoUrl: base64Str });
             window.location.reload();
           } catch (err) {
             console.error("Lỗi cập nhật ảnh đại diện:", err);
@@ -638,8 +638,9 @@ if (currentPage === 'profile.html') {
     filterDateTo?.addEventListener('change', applyFilters);
     filterBudget?.addEventListener('input', applyFilters);
 
-    // Tự động seed một vài chuyến đi mẫu nếu danh sách trống hoàn toàn để hỗ trợ test nhanh
-    if (trips.length === 0) {
+    // Tự động seed một vài chuyến đi mẫu nếu danh sách trống hoàn toàn để hỗ trợ test nhanh (chỉ thử 1 lần)
+    if (trips.length === 0 && !localStorage.getItem('demo_seeded')) {
+      localStorage.setItem('demo_seeded', 'true');
       await seedDemoTrips();
       window.location.reload();
     }
@@ -672,6 +673,7 @@ function renderTrips(trips) {
       </div>
       <div class="stamp-date">${trip.dateStart || ''} → ${trip.dateEnd || ''}</div>
       <div class="stamp-actions">
+        <button class="stamp-btn" data-share="${trip.id}" style="color: var(--gold); border-color: var(--gold);">Chia sẻ</button>
         <button class="stamp-btn" data-review="${trip.id}">Xem lại</button>
         <button class="stamp-btn danger" data-delete="${trip.id}">Xóa</button>
       </div>
@@ -688,6 +690,18 @@ function renderTrips(trips) {
       if (trip) {
         localStorage.setItem('topgo_review_plan', JSON.stringify(trip));
         window.location.href = './planner.html';
+      }
+    });
+  });
+
+  // Gán sự kiện chia sẻ
+  grid.querySelectorAll('[data-share]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const id = btn.dataset.share;
+      const trip = trips.find(t => t.id === id);
+      if (trip && window.openShareModal) {
+        window.openShareModal(trip);
       }
     });
   });
@@ -723,4 +737,8 @@ async function seedDemoTrips() {
     }
   }
 }
-
+// ── Expose Firebase auth instance (dùng bởi postUpload.js để lấy ID token) ──
+// Không ảnh hưởng bất kỳ logic nào khác.
+export function getFirebaseAuthInstance() {
+  return auth;
+}

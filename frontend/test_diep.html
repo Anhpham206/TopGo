@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TopGo — Test Newsfeed & Composer (Bích Diệp)</title>
+  <link rel="icon" type="image/png" href="./assets/logo.png">
+  
+  <!-- Global error catcher for debugging -->
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      const errDiv = document.getElementById('debug-error-console');
+      if (errDiv) {
+        errDiv.style.display = 'block';
+        errDiv.innerHTML += `<div style="margin-top:6px;">❌ <strong>Lỗi:</strong> ${message} <br><small>tại ${source}:${lineno}:${colno}</small></div>`;
+      }
+    };
+    window.onunhandledrejection = function(event) {
+      const errDiv = document.getElementById('debug-error-console');
+      if (errDiv) {
+        errDiv.style.display = 'block';
+        errDiv.innerHTML += `<div style="margin-top:6px;">❌ <strong>Promise bị từ chối:</strong> ${event.reason?.message || event.reason}</div>`;
+      }
+    };
+  </script>
+
+  <!-- CSS hệ thống thật của TopGo -->
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/shared.css?v=2">
+  
+  <style>
+    body {
+      background-color: var(--bg, #f0faff);
+      color: var(--text, #264e6b);
+    }
+    
+    .test-container {
+      max-width: 680px;
+      margin: 120px auto 100px; /* Tăng margin-top để không bị lẹm dưới header */
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Console báo lỗi debug trực tiếp -->
+  <div id="debug-error-console" style="display:none; position:fixed; top:80px; left:20px; right:20px; padding:18px; background:rgba(214,41,41,0.95); color:#fff; border-radius:16px; font-family:monospace; font-size:12.5px; z-index:99999; box-shadow:0 8px 32px rgba(0,0,0,0.25); white-space:pre-wrap; max-height:220px; overflow-y:auto; line-height:1.5; border: 1.5px solid #fff;">
+    <strong style="font-size:14px; text-decoration:underline;">⚠️ PHÁT HIỆN LỖI LẬP TRÌNH (Hãy chụp màn hình / copy lỗi này gửi cho AI):</strong>
+  </div>
+
+  <!-- Header hệ thống thật — load động qua shared.js -->
+  <header class="header" id="site-header">
+    <div style="text-align:center;padding:16px;color:var(--muted);font-size:13px;">Đang nạp thanh điều hướng TopGo...</div>
+  </header>
+
+  <!-- Layout chính -->
+  <div class="test-container">
+    
+    <!-- Hướng dẫn test -->
+    <!-- 1. Component Đăng bài ở đầu Newsfeed (Diệp làm) -->
+    <div id="post-composer-container"></div>
+
+  </div>
+
+  <!-- Footer hệ thống thật & Popups (Login, v.v.) -->
+  <div id="site-shared"></div>
+
+  <!-- Các thẻ Container cho các Modal của Bích Diệp -->
+  <div id="share-modal-container"></div>
+  <div id="post-modal-container"></div>
+
+  <!-- Nạp các module Javascript -->
+  <script type="module">
+    import { renderPostComposer } from './js/components/post_composer.js';
+    import { initPostModal }      from './js/components/post_create_modal.js';
+    import { initShareModal }     from './js/components/share_modal.js';
+
+    // 1. Khởi tạo modal
+    initPostModal();
+    initShareModal();
+
+    // 2. Render composer
+    renderPostComposer('post-composer-container');
+  </script>
+
+  <!-- Nạp Auth Service và SDK (Sử dụng Firebase thật) -->
+  <script type="module" src="./js/auth.js"></script>
+
+  <!-- Script helper mở share flow test -->
+  <script>
+    function testShareFlow() {
+      if (window.openShareModal) {
+        // Mock một trip có cấu trúc giống thật để kiểm tra modal share
+        const mockTrip = {
+          id: "trip-test-9999",
+          destination: "Nha Trang 4 ngày 3 đêm",
+          days: 4,
+          pax: 2,
+          budget: 7200000,
+          dateStart: "2026-08-15",
+          dateEnd: "2026-08-19",
+          itinerary: {
+            output: {
+              Lich_trinh: [
+                [
+                  { Dia_diem: "Tháp Bà Ponagar" },
+                  { Dia_diem: "Chợ Đầm" }
+                ],
+                [
+                  { Dia_diem: "VinWonders Nha Trang" }
+                ]
+              ]
+            }
+          }
+        };
+        window.openShareModal(mockTrip);
+      } else {
+        alert('Modal share chưa được khởi tạo!');
+      }
+    }
+  </script>
+
+</body>
+</html>

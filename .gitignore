@@ -55,6 +55,7 @@ firebase-service-account.json
 backend/firebase-service-account.json
 backend/app/firebase-service-account.json
 frontend/js/firebaseConfig.js
+frontend/js/supabaseConfig.js
 
 # Documents
 documents/

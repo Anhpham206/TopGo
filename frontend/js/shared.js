@@ -103,9 +103,9 @@ function _updateHeaderUser() {
                 }
             }
             if (linkEl) linkEl.href = './profile.html';
-            if (iconEl && user.photoURL) {
+            if (iconEl && user.photoUrl) {
                 const borderStyle = user.is_vip ? 'border: 2px solid #ffb347;' : '';
-                iconEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
+                iconEl.innerHTML = `<img src="${user.photoUrl}" alt="Avatar" referrerpolicy="no-referrer" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
             }
         } else {
             if (nameEl) nameEl.textContent = 'Đăng nhập';
@@ -144,7 +144,9 @@ export async function loadSharedComponents() {
             else if (currentPage === 'index.html' || currentPage === '' || currentPage === '/') activeId = 'nav-home';
             else if (currentPage === 'aboutus.html') activeId = 'nav-aboutus';
             else if (currentPage === 'pricing.html') activeId = 'nav-pricing';
+            else if (currentPage === 'test_diep.html') activeId = 'nav-newsfeed';
             else if (currentPage === 'auth.html' || currentPage === 'profile.html') activeId = null;
+            
             if (activeId) document.getElementById(activeId)?.classList.add('active');
 
             // User state in header

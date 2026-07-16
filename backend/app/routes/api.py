@@ -69,4 +69,23 @@ async def vnpay_ipn(request: Request):
     """Webhook IPN tự động từ VNPay server."""
     return await handle_payment_ipn(request)
 
+# ----------------- TÍNH NĂNG CỦA BÍCH DIỆP -----------------
+from app.controllers.itinerary_controller import ShareItineraryRequest, share_itinerary, get_itinerary
+from app.controllers.post_controller import CreatePostRequest, create_post
 
+@router.post("/itineraries/share")
+async def share_user_itinerary(req: ShareItineraryRequest, decoded_token: dict = Depends(verify_firebase_token)):
+    """API lưu và phân quyền chia sẻ lịch trình (Private, Unlisted, Public)."""
+    uid = decoded_token["uid"]
+    return await share_itinerary(uid, req)
+
+@router.get("/itineraries/{itinerary_id}")
+async def get_shared_itinerary(itinerary_id: str):
+    """API công khai lấy chi tiết lịch trình được chia sẻ (Public/Unlisted)."""
+    return await get_itinerary(itinerary_id)
+
+@router.post("/posts/create")
+async def create_user_post(req: CreatePostRequest, decoded_token: dict = Depends(verify_firebase_token)):
+    """API đăng bài lên News Feed (kèm ảnh và lịch trình). Chứa AI kiểm duyệt."""
+    uid = decoded_token["uid"]
+    return await create_post(uid, req)
