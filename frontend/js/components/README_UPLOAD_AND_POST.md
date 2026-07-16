@@ -22,32 +22,33 @@ Thư mục này chứa các module xử lý **upload media** và **tạo bài vi
 2. Vào **Storage → New Bucket**
 3. Đặt tên bucket: `post-images`
 4. Bật **Public bucket** để ảnh có thể truy cập công khai qua URL
-5. **Cấu hình Storage Policies (Thiết lập Public để Test):**
-   - Vẫn ở màn hình Storage, nhìn sang menu bên trái, chọn **Policies**.
-   - Kéo xuống tìm bucket `post-images`, bấm nút **New Policy**.
-   - Chọn **For Full Customization** (Tạo policy tùy chỉnh).
-   - Đặt tên Policy Name: `Public Access for Testing`
-   - **Allowed Operations**: Tích chọn **TẤT CẢ** (SELECT, INSERT, UPDATE, DELETE).
-   - Ở mục **Target Roles**: Để trống (hoặc chọn `anon`, `public`).
-   - Ở mục **USING expression**, gõ vào: `true`
-   - Ở mục **WITH CHECK expression**, gõ vào: `true`
-   - Bấm **Save policy**. 
+5. **Thiết lập Storage Policies (Cấu hình Public cho môi trường Development/Testing):**
+   - Truy cập mục **SQL Editor** trên thanh điều hướng bên trái của Supabase Dashboard.
+   - Chọn **New query**. (Hãy **XÓA SẠCH** mọi chữ có sẵn trong khung trắng trước khi làm bước tiếp theo).
+   - Sao chép và thực thi đoạn mã SQL sau để cấp quyền truy cập toàn diện (Read/Write) cho bucket `post-images`:
+     ```sql
+     CREATE POLICY "Public Access for Testing" 
+     ON storage.objects FOR ALL 
+     USING ( bucket_id = 'post-images' )
+     WITH CHECK ( bucket_id = 'post-images' );
+     ```
+   - Nhấn **Run**. Khi thông báo "Success" xuất hiện, Storage Policy đã được áp dụng thành công.
    > **Lưu ý cho Leader:** Cấu hình `true` này nhằm mục đích public toàn quyền cho DEV/TEST dễ dàng upload ảnh mà không bị lỗi 403 Forbidden. Khi lên Production, Leader cần siết lại Policy này (ví dụ: chỉ cho phép `authenticated` users được INSERT/UPDATE).
 
 ### Bước 2: Lấy thông tin API Key
 
 1. Vào **Project Settings → API**
 2. Sao chép hai giá trị:
-   - **Project URL** → điền vào trường `url`
+   - **API URL** → điền vào trường `url`. *(Mẹo: Nếu giao diện Supabase thay đổi và bạn không tìm thấy mục này, hãy nhấp vào thanh tìm kiếm (Search bar) trên cùng hoặc nhấn `Ctrl + K` / `Cmd + K` → **Copy API URL**).*
    - **anon / public** key → điền vào trường `anonKey`
 
 ### Bước 3: Tạo file cấu hình local
 
 ```bash
-# Copy file mẫu (Windows)
+# Lệnh Copy file mẫu (Windows)
 copy frontend\js\supabaseConfig_example.js frontend\js\supabaseConfig.js
 
-# Copy file mẫu (macOS / Linux)
+# Lệnh Copy file mẫu (macOS / Linux)
 cp frontend/js/supabaseConfig_example.js frontend/js/supabaseConfig.js
 ```
 
@@ -61,8 +62,6 @@ export const supabaseConfig = {
   bucket:  'post-images',                          // ← giữ nguyên nếu dùng tên mặc định
 };
 ```
-
-> ⚠️ **Quan trọng:** File `supabaseConfig.js` đã được thêm vào `.gitignore` — **tuyệt đối không commit** file này lên git. File mẫu `supabaseConfig_example.js` là file được commit để teammate tham khảo và làm theo.
 
 ---
 
@@ -187,7 +186,7 @@ const url = await compressAndUploadImage(file);
          ▼
 ⑤ Kiểm duyệt nội dung bằng AI
    check_content_safety(content)   ← ai_moderation.py
-   → Gemini 1.5 Flash phân tích văn bản
+   → Gemini 3.1 Flash Lite phân tích văn bản
    → "UNSAFE"? → Trả lỗi 400, bài không được lưu.
    → "SAFE"?   → Tiếp tục.
          │
@@ -204,7 +203,7 @@ const url = await compressAndUploadImage(file);
 
 ### 4.3 Cơ chế AI Kiểm duyệt nội dung
 
-Tính năng này sử dụng **Gemini 1.5 Flash** để tự động lọc nội dung vi phạm trước khi lưu vào cơ sở dữ liệu.
+Tính năng này sử dụng **Gemini 3.1 Flash Lite** để tự động lọc nội dung vi phạm trước khi lưu vào cơ sở dữ liệu.
 
 File xử lý: `backend/app/services/ai_logic/ai_moderation.py`
 
