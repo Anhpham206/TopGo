@@ -858,8 +858,11 @@ export function openPostModal(trip = null) {
         renderChips();
         
         // Disable gợi ý tương ứng nếu người dùng tự nhập trùng
-        const suggestedEl = Array.from(suggestedChips.children).find(c => c.textContent === tag);
-        if (suggestedEl) suggestedEl.classList.add('disabled');
+        const suggestedChips = get('pm-suggested-chips');
+        if (suggestedChips) {
+          const suggestedEl = Array.from(suggestedChips.children).find(c => c.textContent === tag);
+          if (suggestedEl) suggestedEl.classList.add('disabled');
+        }
       }
       e.target.value = '';
     }
@@ -877,8 +880,11 @@ export function openPostModal(trip = null) {
         renderChips();
         
         // Active lại gợi ý nếu bị xóa
-        const suggestedEl = Array.from(suggestedChips.children).find(c => c.textContent === t);
-        if (suggestedEl) suggestedEl.classList.remove('disabled');
+        const suggestedChips = get('pm-suggested-chips');
+        if (suggestedChips) {
+          const suggestedEl = Array.from(suggestedChips.children).find(c => c.textContent === t);
+          if (suggestedEl) suggestedEl.classList.remove('disabled');
+        }
       };
       chips.appendChild(chip);
     });
