@@ -145,6 +145,7 @@ export async function loadSharedComponents() {
             else if (currentPage === 'aboutus.html') activeId = 'nav-aboutus';
             else if (currentPage === 'pricing.html') activeId = 'nav-pricing';
             else if (currentPage === 'test_diep.html') activeId = 'nav-newsfeed';
+            else if (currentPage === 'reviews.html') activeId = 'nav-reviews';
             else if (currentPage === 'auth.html' || currentPage === 'profile.html') activeId = null;
             
             if (activeId) document.getElementById(activeId)?.classList.add('active');
