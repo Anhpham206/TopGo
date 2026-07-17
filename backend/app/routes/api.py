@@ -132,10 +132,10 @@ async def google_reviews(place_name: str, city_name: str = ""):
 # POSTS — Hệ thống bài đăng mạng xã hội
 # ════════════════════════════════════════════════════════════════════
 from app.controllers.post_controller import (
-    PostCreateRequest, CommentCreateRequest, RepostCreateRequest,
-    create_post, get_post, list_posts, list_user_posts,
+    CommentCreateRequest, RepostCreateRequest,
+    create_post,
     toggle_like, get_user_like_status, add_comment, list_comments,
-    create_repost, clone_itinerary,
+    create_repost
 )
 
 def _build_author_info(decoded_token: dict) -> dict:
@@ -145,27 +145,10 @@ def _build_author_info(decoded_token: dict) -> dict:
         "authorAvatar": decoded_token.get("picture", ""),
     }
 
-@router.get("/posts")
-async def get_feed():
-    """Lấy danh sách bài đăng công khai (feed)."""
-    return await list_posts()
 
-@router.get("/posts/me")
-async def get_my_posts(decoded_token: dict = Depends(verify_firebase_token)):
-    """Lấy tất cả bài đăng của người dùng hiện tại."""
-    uid = decoded_token["uid"]
-    return await list_user_posts(uid)
 
-@router.get("/posts/{post_id}")
-async def get_single_post(post_id: str):
-    """Lấy thông tin một bài đăng theo ID."""
-    return await get_post(post_id)
 
-@router.post("/posts")
-async def create_new_post(data: PostCreateRequest, decoded_token: dict = Depends(verify_firebase_token)):
-    """Tạo bài đăng mới (text / image / itinerary)."""
-    uid = decoded_token["uid"]
-    return await create_post(uid, _build_author_info(decoded_token), data)
+
 
 @router.post("/posts/{post_id}/like")
 async def like_post(post_id: str, decoded_token: dict = Depends(verify_firebase_token)):
@@ -218,16 +201,3 @@ async def get_itinerary_public(
     return itinerary
 
 
-@router.post("/itineraries/{plan_id}/clone")
-async def clone_itinerary_route(
-    plan_id: str,
-    decoded_token: dict = Depends(verify_firebase_token),
-):
-    """
-    Nhân bản (Clone) một lịch trình về tài khoản của người dùng hiện tại.
-    - Lịch trình gốc phải có visibility = 'public' hoặc 'unlisted'.
-    - Lịch trình mới được tạo với visibility = 'private' và có field `clonedFrom`.
-    - Yêu cầu đăng nhập.
-    """
-    uid = decoded_token["uid"]
-    return await clone_itinerary(uid, plan_id)

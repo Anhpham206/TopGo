@@ -161,7 +161,8 @@ async def create_repost(uid: str, author_info: dict, post_id: str, data: RepostC
     """
     try:
         # Kiểm tra bài gốc tồn tại
-        original = await get_post(post_id)
+        original = dict
+        # await get_post(post_id) Chõ này thay lại hàm lấy dữ liệu bài viết của Kiên
 
         repost_id = _post_id()
         doc = {
@@ -192,14 +193,15 @@ async def create_repost(uid: str, author_info: dict, post_id: str, data: RepostC
         logger.error(f"[Repost] Lỗi tạo repost: {e}")
         raise HTTPException(status_code=500, detail=f"Repost thất bại: {e}")
 
-from pydantic import BaseModel
 from typing import Optional, List
 from app.services.firebase_service import db
 from firebase_admin import firestore
-from fastapi import HTTPException, status
+
 import datetime
 import logging
 from app.services.ai_logic.ai_moderation import check_content_safety
+
+
 
 logger = logging.getLogger("app.post_controller")
 
