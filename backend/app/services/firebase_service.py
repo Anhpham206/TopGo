@@ -32,7 +32,7 @@ if os.path.exists(credentials_path):
         else:
             firebase_app = firebase_admin.get_app()
             logger.info("Sử dụng Firebase App hiện tại.")
-        db = firestore.client()
+        db = firestore.client(database_id="(default)")
         logger.info("Khởi tạo Firestore client thành công.")
     except Exception as e:
         logger.error(f"Lỗi khi khởi tạo Firebase Admin SDK: {e}")
@@ -89,3 +89,6 @@ async def verify_firebase_token(authorization: str = Header(None)) -> dict:
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Xác thực token thất bại: {str(e)}"
         )
+
+# Trigger auto-reload for Uvicorn
+
