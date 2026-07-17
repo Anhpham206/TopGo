@@ -25,30 +25,16 @@
         import { renderPostCard } from './js/post.js';
 
         /**
-         * CHẾ ĐỘ DEMO (không cần backend):
-         *   Truyền mockData vào options để render bài post giả.
-         *
-         * CHẾ ĐỘ THẬT (cần backend đang chạy):
-         *   Gọi renderPostCard('post-id-thật', slot) — không truyền mockData.
+         * CHE DO THAT: Render post that tu Firebase
+         * Post ID: test-post-itinerary-1 (vua seed vao Firestore)
+         * Can backend chay tai http://localhost:8000
          */
+        await renderPostCard('test-post-itinerary-1', document.getElementById('feed-slot'));
 
-        // ── Chế độ DEMO ────────────────────────────────────────────────────────
-        await renderPostCard('demo-post-1', document.getElementById('feed-slot'), {
-            mockData: {
-                authorName:   'Lê Huỳnh Anh Thư',
-                authorAvatar: 'https://ui-avatars.com/api/?name=Thu+Le&background=random',
-                content:      'Demo bài post có đính kèm lịch trình! Bản đồ được hiển thị từ tọa độ thực của lịch trình (routing data).',
-                type:         'itinerary',
-                itineraryId:  'plan_demo_1',  // sẽ thử fetch — nếu lỗi thì card vẫn render, chỉ không có map
-                likeCount:    68,
-                commentCount: 12,
-                createdAt:    new Date().toISOString(),
-                visibility:   'public',
-            }
-        });
-
-        // ── Chế độ THẬT (bỏ comment để dùng khi backend đang chạy) ────────────
-        // await renderPostCard('post-1752741600000', document.getElementById('feed-slot'));
+        // -- Che do DEMO (khong can backend) -----------------------------------
+        // await renderPostCard('demo-post-1', document.getElementById('feed-slot'), {
+        //     mockData: { ... }
+        // });
     </script>
 </body>
 
