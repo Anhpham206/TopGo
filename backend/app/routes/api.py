@@ -127,7 +127,7 @@ async def clone_user_plan(plan_id: str, target_uid: str, decoded_token: dict = D
     current_uid = decoded_token["uid"]
     return await clone_plan(current_uid, target_uid, plan_id)
 
-
+from app.controllers.reviews_controller import get_google_reviews
 from app.controllers.payment_controller import CreatePaymentRequest, create_payment_url, handle_payment_return, handle_payment_ipn
 
 @router.post("/payment/vnpay_create")
@@ -146,3 +146,7 @@ async def vnpay_ipn(request: Request):
     return await handle_payment_ipn(request)
 
 
+@router.get("/google-reviews")
+async def google_reviews(place_name: str, city_name: str = ""):
+    """Lấy reviews từ Google Maps qua SerpAPI (lazy-load, có cache)."""
+    return await get_google_reviews(place_name, city_name)
