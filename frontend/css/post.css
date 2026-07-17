@@ -1,0 +1,906 @@
+/*
+  ========================================================================
+  FILE: post.css
+  CHỨC NĂNG:
+  - Styles cho hệ thống component bài đăng (Post Card) của TopGo.
+  - SCOPED CSS: Tất cả styles được bọc trong .topgo-thu-post-wrapper
+    để đảm bảo không can thiệp vào CSS của các trang khác.
+  - Hỗ trợ 3 biến thể: text-only, image, itinerary (với Leaflet map).
+  - Bao gồm: Like, Comment, Repost interactions + Comments section.
+  ========================================================================
+*/
+
+/* ══════════════════════════════════════════════════════════════════════
+   SCOPE WRAPPER — Tất cả styles bắt buộc nằm trong class này
+   ══════════════════════════════════════════════════════════════════════ */
+
+.topgo-thu-post-wrapper {
+  /* CSS variables riêng của component — không xung đột với biến toàn cục */
+  --pc-primary: #00a9ff;
+  --pc-primary-2: #89cff3;
+  --pc-accent: #a0e9ff;
+  --pc-text: #264e6b;
+  --pc-muted: #6b8ca0;
+  --pc-border: #cde9f5;
+  --pc-border-light: #e5f3fa;
+  --pc-bg: #f0faff;
+  --pc-bg2: #f8fdff;
+  --pc-white: #ffffff;
+  --pc-success: #2e7d64;
+  --pc-error: #d62929;
+  --pc-gold: #ffb347;
+  --pc-like: #e0245e;
+  --pc-repost: #17bf63;
+
+  --pc-radius: 18px;
+  --pc-radius-sm: 10px;
+  --pc-radius-xs: 6px;
+  --pc-shadow: 0 4px 24px rgba(0, 169, 255, 0.08), inset 0 1px 0 rgba(255,255,255,0.6);
+  --pc-shadow-hover: 0 8px 40px rgba(0, 169, 255, 0.14);
+  --pc-transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  font-family: "Josefin Sans", "Segoe UI", sans-serif;
+  color: var(--pc-text);
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   POST CARD — Khối chính
+   ══════════════════════════════════════════════════════════════════════ */
+
+.topgo-thu-post-wrapper .post-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--pc-radius);
+  box-shadow: var(--pc-shadow);
+  overflow: hidden;
+  transition: box-shadow var(--pc-transition), transform var(--pc-transition);
+  position: relative;
+  width: 100%;
+}
+
+.topgo-thu-post-wrapper .post-card:hover {
+  box-shadow: var(--pc-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* ── Loading skeleton ────────────────────────────────────────────── */
+.topgo-thu-post-wrapper .post-card--loading {
+  pointer-events: none;
+}
+
+.topgo-thu-post-wrapper .post-skeleton-line {
+  background: linear-gradient(90deg, var(--pc-border-light) 25%, rgba(205,233,245,0.4) 50%, var(--pc-border-light) 75%);
+  background-size: 400% 100%;
+  animation: pcSkeletonShimmer 1.4s ease infinite;
+  border-radius: 6px;
+  height: 14px;
+}
+
+@keyframes pcSkeletonShimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* ── Author header ───────────────────────────────────────────────── */
+.topgo-thu-post-wrapper .post-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px 12px;
+}
+
+.topgo-thu-post-wrapper .post-author-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--pc-primary), var(--pc-primary-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.6);
+  box-shadow: 0 2px 8px rgba(0,169,255,0.18);
+}
+
+.topgo-thu-post-wrapper .post-author-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.topgo-thu-post-wrapper .post-author-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.topgo-thu-post-wrapper .post-author-name {
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--pc-text);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topgo-thu-post-wrapper .post-author-name .post-vip-badge {
+  color: var(--pc-gold);
+  font-size: 13px;
+  margin-left: 3px;
+}
+
+.topgo-thu-post-wrapper .post-timestamp {
+  font-size: 12px;
+  color: var(--pc-muted);
+  margin-top: 1px;
+}
+
+.topgo-thu-post-wrapper .post-visibility-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(0,169,255,0.1);
+  border-radius: 20px;
+  padding: 1px 7px;
+  font-size: 10.5px;
+  color: var(--pc-primary);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-left: 6px;
+}
+
+.topgo-thu-post-wrapper .post-more-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pc-muted);
+  transition: background var(--pc-transition), color var(--pc-transition);
+  flex-shrink: 0;
+}
+
+.topgo-thu-post-wrapper .post-more-btn:hover {
+  background: rgba(0,169,255,0.08);
+  color: var(--pc-primary);
+}
+
+/* ── Content body ────────────────────────────────────────────────── */
+.topgo-thu-post-wrapper .post-body {
+  padding: 0 18px 14px;
+}
+
+.topgo-thu-post-wrapper .post-content-text {
+  font-size: 15px;
+  color: var(--pc-text);
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Variant: text-only — chỉ text, không có media đi kèm */
+.topgo-thu-post-wrapper .post-card--text .post-body {
+  padding-bottom: 18px;
+}
+
+.topgo-thu-post-wrapper .post-card--text .post-content-text {
+  font-size: 15.5px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   VARIANT: IMAGE — Ảnh full-width phía trên body
+   ══════════════════════════════════════════════════════════════════════ */
+
+.topgo-thu-post-wrapper .post-image-wrap {
+  width: 100%;
+  overflow: hidden;
+  background: var(--pc-border-light);
+  position: relative;
+}
+
+.topgo-thu-post-wrapper .post-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  max-height: 340px;
+  transition: transform 0.4s ease;
+}
+
+.topgo-thu-post-wrapper .post-card--image .post-image-wrap {
+  max-height: 340px;
+}
+
+.topgo-thu-post-wrapper .post-card--image:hover .post-image-wrap img {
+  transform: scale(1.02);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   VARIANT: ITINERARY CARD — Thẻ lộ trình đính kèm
+   ══════════════════════════════════════════════════════════════════════ */
+
+.topgo-thu-post-wrapper .itinerary-card {
+  margin: 12px 18px 14px;
+  border-radius: var(--pc-radius-sm);
+  border: 1.5px solid var(--pc-border);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--pc-transition), box-shadow var(--pc-transition), transform var(--pc-transition);
+  background: rgba(240, 250, 255, 0.8);
+  position: relative;
+  text-decoration: none;
+  display: block;
+}
+
+.topgo-thu-post-wrapper .itinerary-card:hover {
+  border-color: var(--pc-primary);
+  box-shadow: 0 4px 20px rgba(0,169,255,0.14);
+  transform: translateY(-2px);
+}
+
+/* Map container — OpenStreetMap / Leaflet */
+.topgo-thu-post-wrapper .itinerary-map-preview {
+  width: 100%;
+  height: 170px;
+  position: relative;
+  background: var(--pc-border-light);
+  overflow: hidden;
+}
+
+.topgo-thu-post-wrapper .itinerary-map-preview .leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0;
+  z-index: 1;
+}
+
+/* Overlay gradient tạo chiều sâu */
+.topgo-thu-post-wrapper .itinerary-map-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(240,250,255,0.85) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Map loading placeholder */
+.topgo-thu-post-wrapper .itinerary-map-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--pc-muted);
+  font-size: 13px;
+  gap: 8px;
+  background: linear-gradient(135deg, #f0faff 0%, #cdf5fd 100%);
+}
+
+.topgo-thu-post-wrapper .itinerary-map-placeholder svg {
+  opacity: 0.45;
+}
+
+/* Itinerary card info section */
+.topgo-thu-post-wrapper .itinerary-card-info {
+  padding: 12px 14px 14px;
+  position: relative;
+  z-index: 3;
+}
+
+.topgo-thu-post-wrapper .itinerary-card-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--pc-primary);
+  background: rgba(0,169,255,0.1);
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-bottom: 6px;
+}
+
+.topgo-thu-post-wrapper .itinerary-card-destination {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--pc-text);
+  letter-spacing: 0.2px;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.topgo-thu-post-wrapper .itinerary-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.topgo-thu-post-wrapper .itinerary-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--pc-muted);
+  font-weight: 600;
+}
+
+.topgo-thu-post-wrapper .itinerary-meta-chip svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* Day stamps (thumbnail) */
+.topgo-thu-post-wrapper .itinerary-day-stamps {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.topgo-thu-post-wrapper .day-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(0,169,255,0.08);
+  border: 1px solid rgba(0,169,255,0.15);
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 11px;
+  color: var(--pc-primary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.topgo-thu-post-wrapper .day-stamp-more {
+  background: rgba(107,140,160,0.1);
+  color: var(--pc-muted);
+  border-color: rgba(107,140,160,0.2);
+}
+
+.topgo-thu-post-wrapper .itinerary-card-cta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pc-primary);
+  margin-top: 10px;
+  letter-spacing: 0.3px;
+  transition: gap var(--pc-transition);
+}
+
+.topgo-thu-post-wrapper .itinerary-card:hover .itinerary-card-cta {
+  gap: 8px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   REPOST QUOTE — Khung trích dẫn bài gốc (kiểu Twitter)
+   ══════════════════════════════════════════════════════════════════════ */
+
+.topgo-thu-post-wrapper .post-quote-block {
+  margin: 10px 18px 14px;
+  border-left: 3px solid var(--pc-primary);
+  border-radius: 0 var(--pc-radius-sm) var(--pc-radius-sm) 0;
+  background: rgba(0,169,255,0.04);
+  border-top: 1px solid var(--pc-border-light);
+  border-right: 1px solid var(--pc-border-light);
+  border-bottom: 1px solid var(--pc-border-light);
+  padding: 12px 14px;
+  transition: background var(--pc-transition);
+  cursor: pointer;
+}
+
+.topgo-thu-post-wrapper .post-quote-block:hover {
+  background: rgba(0,169,255,0.08);
+}
+
+.topgo-thu-post-wrapper .quote-author-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 6px;
+}
+
+.topgo-thu-post-wrapper .quote-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--pc-primary), var(--pc-primary-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.topgo-thu-post-wrapper .quote-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.topgo-thu-post-wrapper .quote-author-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--pc-text);
+}
+
+.topgo-thu-post-wrapper .quote-content {
+  font-size: 13.5px;
+  color: var(--pc-muted);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   INTERACTIONS — Like / Comment / Repost
+   ══════════════════════════════════════════════════════════════════════ */
+
+.topgo-thu-post-wrapper .post-interactions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 12px 12px;
+  border-top: 1px solid var(--pc-border-light);
+  margin-top: 4px;
+}
+
+.topgo-thu-post-wrapper .post-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: none;
+  border-radius: 20px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pc-muted);
+  cursor: pointer;
+  transition: color var(--pc-transition), background var(--pc-transition), transform 0.15s ease;
+  font-family: inherit;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.topgo-thu-post-wrapper .post-action-btn:hover {
+  background: rgba(107,140,160,0.08);
+}
+
+.topgo-thu-post-wrapper .post-action-btn:active {
+  transform: scale(0.93);
+}
+
+/* Like button */
+.topgo-thu-post-wrapper .post-action-btn--like:hover {
+  color: var(--pc-like);
+  background: rgba(224,36,94,0.07);
+}
+
+.topgo-thu-post-wrapper .post-action-btn--like.is-liked {
+  color: var(--pc-like);
+}
+
+.topgo-thu-post-wrapper .post-action-btn--like.is-liked svg {
+  fill: var(--pc-like);
+}
+
+@keyframes pcHeartPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.35); }
+  70%  { transform: scale(0.88); }
+  100% { transform: scale(1); }
+}
+
+.topgo-thu-post-wrapper .post-action-btn--like.is-liked svg {
+  animation: pcHeartPop 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+/* Comment button */
+.topgo-thu-post-wrapper .post-action-btn--comment:hover {
+  color: var(--pc-primary);
+  background: rgba(0,169,255,0.07);
+}
+
+/* Repost button */
+.topgo-thu-post-wrapper .post-action-btn--repost:hover {
+  color: var(--pc-repost);
+  background: rgba(23,191,99,0.07);
+}
+
+.topgo-thu-post-wrapper .post-action-btn--repost.is-reposting {
+  color: var(--pc-repost);
+}
+
+/* Action icon */
+.topgo-thu-post-wrapper .post-action-btn svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  transition: transform var(--pc-transition);
+}
+
+.topgo-thu-post-wrapper .post-action-btn--repost:hover svg {
+  transform: rotate(180deg);
+}
+
+.topgo-thu-post-wrapper .post-action-count {
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 14px;
+  text-align: center;
+}
+
+/* ── Repost confirm panel ───────────────────────────────────────── */
+.topgo-thu-post-wrapper .post-repost-panel {
+  display: none;
+  border-top: 1px solid var(--pc-border-light);
+  padding: 14px 18px;
+  background: rgba(23,191,99,0.04);
+  gap: 10px;
+  flex-direction: column;
+}
+
+.topgo-thu-post-wrapper .post-repost-panel.is-open {
+  display: flex;
+}
+
+.topgo-thu-post-wrapper .post-repost-textarea {
+  width: 100%;
+  border: 1.5px solid var(--pc-border);
+  border-radius: var(--pc-radius-sm);
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--pc-text);
+  background: rgba(255,255,255,0.85);
+  resize: none;
+  min-height: 70px;
+  transition: border-color var(--pc-transition);
+  box-sizing: border-box;
+}
+
+.topgo-thu-post-wrapper .post-repost-textarea:focus {
+  outline: none;
+  border-color: var(--pc-primary);
+  box-shadow: 0 0 0 3px rgba(0,169,255,0.1);
+}
+
+.topgo-thu-post-wrapper .post-repost-panel-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.topgo-thu-post-wrapper .post-repost-cancel-btn,
+.topgo-thu-post-wrapper .post-repost-confirm-btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--pc-transition);
+}
+
+.topgo-thu-post-wrapper .post-repost-cancel-btn {
+  background: rgba(107,140,160,0.1);
+  color: var(--pc-muted);
+}
+
+.topgo-thu-post-wrapper .post-repost-cancel-btn:hover {
+  background: rgba(107,140,160,0.18);
+}
+
+.topgo-thu-post-wrapper .post-repost-confirm-btn {
+  background: var(--pc-repost);
+  color: #fff;
+  letter-spacing: 0.2px;
+}
+
+.topgo-thu-post-wrapper .post-repost-confirm-btn:hover {
+  background: #14a853;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(23,191,99,0.3);
+}
+
+.topgo-thu-post-wrapper .post-repost-confirm-btn:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   COMMENTS SECTION
+   ══════════════════════════════════════════════════════════════════════ */
+
+.topgo-thu-post-wrapper .post-comments-section {
+  border-top: 1px solid var(--pc-border-light);
+  background: rgba(240,250,255,0.5);
+}
+
+/* Comment input row */
+.topgo-thu-post-wrapper .post-comment-input-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--pc-border-light);
+}
+
+.topgo-thu-post-wrapper .comment-input-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pc-primary), var(--pc-primary-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.topgo-thu-post-wrapper .comment-input-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.topgo-thu-post-wrapper .comment-input-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.topgo-thu-post-wrapper .post-comment-input {
+  width: 100%;
+  border: 1.5px solid var(--pc-border);
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--pc-text);
+  background: rgba(255,255,255,0.9);
+  resize: none;
+  min-height: 38px;
+  max-height: 120px;
+  transition: border-color var(--pc-transition), box-shadow var(--pc-transition);
+  box-sizing: border-box;
+  overflow-y: auto;
+  field-sizing: content;
+}
+
+.topgo-thu-post-wrapper .post-comment-input:focus {
+  outline: none;
+  border-color: var(--pc-primary);
+  box-shadow: 0 0 0 3px rgba(0,169,255,0.1);
+}
+
+.topgo-thu-post-wrapper .post-comment-input::placeholder {
+  color: var(--pc-muted);
+}
+
+.topgo-thu-post-wrapper .comment-submit-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.topgo-thu-post-wrapper .post-comment-submit-btn {
+  background: linear-gradient(90deg, var(--pc-primary), var(--pc-primary-2));
+  border: none;
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 12.5px;
+  color: #fff;
+  cursor: pointer;
+  transition: all var(--pc-transition);
+  letter-spacing: 0.3px;
+}
+
+.topgo-thu-post-wrapper .post-comment-submit-btn:hover {
+  background: linear-gradient(90deg, var(--pc-primary-2), var(--pc-primary));
+  box-shadow: 0 4px 12px rgba(0,169,255,0.3);
+  transform: translateY(-1px);
+}
+
+.topgo-thu-post-wrapper .post-comment-submit-btn:disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Comment list */
+.topgo-thu-post-wrapper .post-comments-list {
+  padding: 6px 0;
+}
+
+.topgo-thu-post-wrapper .comment-item {
+  display: flex;
+  gap: 9px;
+  padding: 8px 14px;
+  transition: background var(--pc-transition);
+}
+
+.topgo-thu-post-wrapper .comment-item:hover {
+  background: rgba(0,169,255,0.03);
+}
+
+.topgo-thu-post-wrapper .comment-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pc-primary), var(--pc-primary-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.topgo-thu-post-wrapper .comment-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.topgo-thu-post-wrapper .comment-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.topgo-thu-post-wrapper .comment-bubble {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--pc-border-light);
+  border-radius: 0 var(--pc-radius-sm) var(--pc-radius-sm) var(--pc-radius-sm);
+  padding: 8px 12px;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.topgo-thu-post-wrapper .comment-author {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--pc-text);
+  margin-bottom: 2px;
+}
+
+.topgo-thu-post-wrapper .comment-text {
+  font-size: 13.5px;
+  color: var(--pc-text);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.topgo-thu-post-wrapper .comment-time {
+  font-size: 11px;
+  color: var(--pc-muted);
+  margin-top: 3px;
+  padding-left: 2px;
+}
+
+/* Load more / collapse comments */
+.topgo-thu-post-wrapper .comments-load-more {
+  display: flex;
+  justify-content: center;
+  padding: 8px 14px 12px;
+}
+
+.topgo-thu-post-wrapper .comments-load-more-btn {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pc-primary);
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 20px;
+  transition: background var(--pc-transition);
+}
+
+.topgo-thu-post-wrapper .comments-load-more-btn:hover {
+  background: rgba(0,169,255,0.08);
+}
+
+/* Login prompt khi chưa đăng nhập */
+.topgo-thu-post-wrapper .comment-login-prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  color: var(--pc-muted);
+}
+
+.topgo-thu-post-wrapper .comment-login-link {
+  color: var(--pc-primary);
+  font-weight: 700;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+  padding: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   DIVIDER between stacked posts
+   ══════════════════════════════════════════════════════════════════════ */
+
+.topgo-thu-post-wrapper + .topgo-thu-post-wrapper {
+  margin-top: 14px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .topgo-thu-post-wrapper .post-card {
+    border-radius: 12px;
+  }
+
+  .topgo-thu-post-wrapper .post-header {
+    padding: 13px 14px 10px;
+  }
+
+  .topgo-thu-post-wrapper .post-body {
+    padding: 0 14px 12px;
+  }
+
+  .topgo-thu-post-wrapper .itinerary-card {
+    margin: 10px 14px 12px;
+  }
+
+  .topgo-thu-post-wrapper .post-quote-block {
+    margin: 8px 14px 12px;
+  }
+
+  .topgo-thu-post-wrapper .post-interactions {
+    padding: 5px 8px 10px;
+    gap: 0;
+  }
+
+  .topgo-thu-post-wrapper .post-action-btn {
+    padding: 7px 9px;
+    font-size: 12.5px;
+  }
+
+  .topgo-thu-post-wrapper .itinerary-map-preview {
+    height: 140px;
+  }
+}
