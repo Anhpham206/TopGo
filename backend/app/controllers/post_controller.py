@@ -1,5 +1,4 @@
 """
-========================================================================
 FILE: post_controller.py
 CHỨC NĂNG:
 - CRUD bài đăng (posts) trên Firestore.
@@ -11,7 +10,6 @@ CHỨC NĂNG:
 - Quy tắc đặt tên:
     authorId  — ID người tạo bài post (camelCase)
     ownerId   — ID chủ sở hữu lịch trình (camelCase, trong itineraries)
-========================================================================
 """
 import datetime
 import logging
@@ -27,15 +25,6 @@ logger = logging.getLogger("app.post_controller")
 
 
 # ─── Pydantic Models ────────────────────────────────────────────────────────
-
-class PostCreateRequest(BaseModel):
-    content: str
-    type: str = "text"                        # "text" | "image" | "itinerary"
-    mediaUrls: Optional[List[str]] = []       # Danh sách URL ảnh (Firebase Storage) — schema mới
-    taggedLocations: Optional[List[str]] = [] # Tag địa điểm (phân loại, tìm kiếm) — schema mới
-    itineraryId: Optional[str] = None        # ID lịch trình đính kèm (nếu type="itinerary")
-    visibility: str = "public"               # "public" | "private"
-
 
 class CommentCreateRequest(BaseModel):
     content: str
@@ -58,47 +47,6 @@ def _post_id() -> str:
 def _comment_id() -> str:
     return f"cmt-{int(datetime.datetime.utcnow().timestamp() * 1000)}"
 
-
-# ─── Posts CRUD ─────────────────────────────────────────────────────────────
-
-
-async def get_post(post_id: str) -> dict:
-    """Lấy một bài post theo ID. Không kiểm tra privacy ở đây (để route tự xử lý)."""
-    try:
-        doc = db.collection("posts").document(post_id).get()
-        if not doc.exists:
-            raise HTTPException(status_code=404, detail=f"Không tìm thấy bài post '{post_id}'.")
-        return doc.to_dict()
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Lấy bài post thất bại: {e}")
-
-
-async def list_posts(limit: int = 20) -> List[dict]:
-    """Lấy danh sách feed (public posts), sắp xếp mới nhất lên đầu."""
-    try:
-        docs = (
-            db.collection("posts")
-            .where("visibility", "==", "public")
-            .stream()
-        )
-        posts = [d.to_dict() for d in docs]
-        posts.sort(key=lambda x: x.get("createdAt", ""), reverse=True)
-        return posts[:limit]
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Lấy danh sách post thất bại: {e}")
-
-
-async def list_user_posts(uid: str) -> List[dict]:
-    """Lấy tất cả bài post của một user (dùng cho trang profile)."""
-    try:
-        docs = db.collection("posts").where("authorId", "==", uid).stream()
-        posts = [d.to_dict() for d in docs]
-        posts.sort(key=lambda x: x.get("createdAt", ""), reverse=True)
-        return posts
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Lấy bài post của user thất bại: {e}")
 
 
 # ─── Like ───────────────────────────────────────────────────────────────────
@@ -244,3 +192,56 @@ async def create_repost(uid: str, author_info: dict, post_id: str, data: RepostC
         logger.error(f"[Repost] Lỗi tạo repost: {e}")
         raise HTTPException(status_code=500, detail=f"Repost thất bại: {e}")
 
+from pydantic import BaseModel
+from typing import Optional, List
+from app.services.firebase_service import db
+from firebase_admin import firestore
+from fastapi import HTTPException, status
+import datetime
+import logging
+from app.services.ai_logic.ai_moderation import check_content_safety
+
+logger = logging.getLogger("app.post_controller")
+
+class CreatePostRequest(BaseModel):
+    itineraryId: Optional[str] = None
+    content: str
+    mediaUrls: List[str] = []
+    taggedLocations: List[str] = []
+    visibility: str = "public"
+
+async def create_post(uid: str, req: CreatePostRequest) -> dict:
+    try:
+        # 1. Kiểm duyệt nội dung bằng AI Gemini
+        safety_check = await check_content_safety(req.content)
+        if not safety_check["is_safe"]:
+            logger.warning(f"User {uid} attempted to post unsafe content.")
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=safety_check["reason"]
+            )
+        
+        # 2. Chuẩn bị dữ liệu Post
+        post_id = f"post-{int(datetime.datetime.now().timestamp() * 1000)}"
+        doc_data = req.dict()
+        doc_data["id"] = post_id
+        doc_data["authorId"] = uid
+        doc_data["likeCount"] = 0
+        doc_data["commentCount"] = 0
+        doc_data["hotScore"] = 0
+        doc_data["createdAt"] = firestore.SERVER_TIMESTAMP
+        
+        # 3. Lưu vào root collection "posts"
+        db.collection("posts").document(post_id).set(doc_data)
+        
+        logger.info(f"User {uid} đã đăng bài post {post_id} thành công.")
+        return {"status": "success", "id": post_id, "message": "Đăng bài thành công!"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Lỗi tạo post: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Tạo bài viết thất bại: {str(e)}"
+        )
