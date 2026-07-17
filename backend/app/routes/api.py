@@ -63,6 +63,7 @@ async def update_profile(profileData: UserProfileModel, decodedToken: dict = Dep
     uid = decodedToken["uid"]
     return await update_user_profile(uid, profileData)
 
+from app.controllers.reviews_controller import get_google_reviews
 from app.controllers.payment_controller import CreatePaymentRequest, create_payment_url, handle_payment_return, handle_payment_ipn
 
 @router.post("/payment/vnpay_create")
@@ -80,20 +81,15 @@ async def vnpay_ipn(request: Request):
     """Webhook IPN tự động từ VNPay server."""
     return await handle_payment_ipn(request)
 
+# ----------------- TÍNH NĂNG CỦA BÍCH DIỆP -----------------
+from app.controllers.itinerary_controller import ShareItineraryRequest, share_itinerary, get_itinerary
+from app.controllers.post_controller import CreatePostRequest, create_post
 
 # --- Feed, Posts, Hot Search ---
-from app.controllers.post_controller import CreatePostRequest, create_post, get_user_posts, update_post, delete_post, get_posts_by_location
+from app.controllers.post_controller import  get_user_posts, update_post, delete_post, get_posts_by_location
 from app.controllers.feed_controller import get_personal_feed, get_explore_feed
 from app.controllers.hot_search_controller import get_hot_search
 
-@router.post("/posts")
-async def api_create_post(postData: CreatePostRequest, decodedToken: dict = Depends(verify_firebase_token)):
-    uid = decodedToken["uid"]
-    result = await create_post(uid, postData, authorInfo=decodedToken)
-    if "error" in result:
-        from fastapi import HTTPException
-        raise HTTPException(status_code=result.get("status", 500), detail=result["error"])
-    return result
 
 @router.put("/posts/{postId}")
 async def api_update_post(postId: str, postData: CreatePostRequest, decodedToken: dict = Depends(verify_firebase_token)):
@@ -150,3 +146,23 @@ from app.controllers.search_controller import perform_search
 @router.get("/search")
 async def api_search(q: str, limit: int = 10):
     return await perform_search(q, limit)
+@router.post("/itineraries/share")
+async def share_user_itinerary(req: ShareItineraryRequest, decoded_token: dict = Depends(verify_firebase_token)):
+    """API lưu và phân quyền chia sẻ lịch trình (Private, Unlisted, Public)."""
+    uid = decoded_token["uid"]
+    return await share_itinerary(uid, req)
+
+@router.get("/itineraries/{itinerary_id}")
+async def get_shared_itinerary(itinerary_id: str):
+    """API công khai lấy chi tiết lịch trình được chia sẻ (Public/Unlisted)."""
+    return await get_itinerary(itinerary_id)
+
+@router.post("/posts/create")
+async def create_user_post(req: CreatePostRequest, decoded_token: dict = Depends(verify_firebase_token)):
+    """API đăng bài lên News Feed (kèm ảnh và lịch trình). Chứa AI kiểm duyệt."""
+    uid = decoded_token["uid"]
+    return await create_post(uid, req)
+@router.get("/google-reviews")
+async def google_reviews(place_name: str, city_name: str = ""):
+    """Lấy reviews từ Google Maps qua SerpAPI (lazy-load, có cache)."""
+    return await get_google_reviews(place_name, city_name)

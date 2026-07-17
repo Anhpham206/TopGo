@@ -13,7 +13,7 @@ class UserProfileModel(BaseModel):
     sex: Optional[str] = ""
     pob: Optional[str] = ""
     nationality: Optional[str] = ""
-    photoURL: Optional[str] = None
+    photoUrl: Optional[str] = None
     email: Optional[str] = None
     username: Optional[str] = None
 

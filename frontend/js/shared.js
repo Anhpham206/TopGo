@@ -120,6 +120,10 @@ function _updateHeaderUser() {
                 const initial = (user.firstname || user.email || 'T').charAt(0).toUpperCase();
                 iconEl.innerHTML = `<span style="font-weight: 700; color: var(--p1); font-size: 14px;">${initial}</span>`;
                 }
+            if (iconEl && user.photoUrl) {
+                const borderStyle = user.is_vip ? 'border: 2px solid #ffb347;' : '';
+                iconEl.innerHTML = `<img src="${user.photoUrl}" alt="Avatar" referrerpolicy="no-referrer" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
+            }
         } else {
             if (nameEl) nameEl.textContent = 'Đăng nhập';
             if (linkEl) linkEl.href = './auth.html';

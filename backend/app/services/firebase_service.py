@@ -318,4 +318,5 @@ async def verify_firebase_token_optional(authorization: str = Header(None)) -> d
     except Exception:
         return {}
     return {}
+# Trigger auto-reload for Uvicorn
 

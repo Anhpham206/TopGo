@@ -590,6 +590,79 @@ async function initApp() {
 
         await loadData();
 
+        // Kiểm tra xem có tham số shareId trên URL hay không (truy cập link chia sẻ)
+        const urlParams = new URLSearchParams(window.location.search);
+        const shareId = urlParams.get('shareId');
+        if (shareId) {
+            try {
+                showScreen('loading');
+                const _isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+                const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
+                
+                const res = await fetch(`${API_BASE}/api/itineraries/${shareId}`);
+                if (!res.ok) throw new Error('Không tìm thấy lịch trình hoặc lịch trình riêng tư.');
+                
+                const sharedPlan = await res.json();
+                if (sharedPlan && sharedPlan.itinerary) {
+                    if (typeof sharedPlan.itinerary === 'string') {
+                        try {
+                            sharedPlan.itinerary = JSON.parse(sharedPlan.itinerary);
+                        } catch (err) {
+                            console.error("Lỗi khi parse shared itinerary string:", err);
+                        }
+                    }
+                    window._lastPayload = sharedPlan.itinerary.payload || {
+                        city_name: sharedPlan.destination,
+                        pax: sharedPlan.pax,
+                        budget: sharedPlan.budget,
+                        date_start: sharedPlan.dateStart,
+                        date_end: sharedPlan.dateEnd,
+                    };
+                    
+                    renderItinerary(sharedPlan.itinerary);
+                    showScreen('result');
+
+                    // Điền lại dữ liệu vào Form
+                    if (sharedPlan.destination) {
+                        const cityObj = state.CITIES.find(c => c.name === sharedPlan.destination || c.id === sharedPlan.itinerary.payload?.city_id);
+                        if (cityObj) {
+                            state.selectedCity = cityObj;
+                            const cs = document.getElementById('city-search');
+                            if (cs) cs.value = cityObj.name;
+                            updateFromToDisplay();
+                        }
+                    }
+                    if (sharedPlan.pax) {
+                        const pv = document.getElementById('pax-val');
+                        if (pv) pv.value = String(sharedPlan.pax);
+                        const pm = document.getElementById('pax-minus');
+                        const pp = document.getElementById('pax-plus');
+                        if (pm) pm.disabled = sharedPlan.pax <= 1;
+                        if (pp) pp.disabled = sharedPlan.pax >= 50;
+                    }
+                    if (sharedPlan.budget) {
+                        const bi = document.getElementById('budget-input');
+                        if (bi) bi.value = parseInt(sharedPlan.budget).toLocaleString('vi-VN');
+                    }
+                    if (sharedPlan.dateStart) {
+                        const ds = document.getElementById('date-start');
+                        if (ds) ds.value = sharedPlan.dateStart;
+                    }
+                    if (sharedPlan.dateEnd) {
+                        const de = document.getElementById('date-end');
+                        if (de) de.value = sharedPlan.dateEnd;
+                    }
+                    validateDates();
+
+                    showToast('Đã tải lịch trình chia sẻ từ liên kết!', 'success');
+                }
+            } catch (e) {
+                console.error("Lỗi khi tải lịch trình chia sẻ:", e);
+                showToast('Không thể tải lịch trình: ' + e.message, 'error');
+                showScreen('form');
+            }
+        }
+
         // Kiểm tra xem có lịch trình xem lại trong localStorage hay không
         const reviewPlanStr = localStorage.getItem('topgo_review_plan');
         if (reviewPlanStr) {

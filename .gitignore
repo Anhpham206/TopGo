@@ -111,6 +111,7 @@ tools/
 
 # Documentation
 docs/
+frontend/js/supabaseConfig.js
 
 # Documents
 documents/

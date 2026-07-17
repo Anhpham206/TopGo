@@ -2,16 +2,21 @@
 ========================================================================
 FILE: post_controller.py
 CHỨC NĂNG:
-- API endpoint tạo bài viết mới trên bảng tin.
-- Validate input, lưu vào Firestore, enrich với author info.
+- API endpoint quản lý bài viết trên bảng tin.
+- Kiểm duyệt nội dung bằng AI (Gemini), lưu Firestore.
 ========================================================================
 """
 
 import logging
-from datetime import datetime, timezone
+import datetime
+from datetime import timezone
 from typing import Optional, List
 from pydantic import BaseModel, Field
+
+from fastapi import HTTPException, status
+from firebase_admin import firestore
 from app.services.firebase_service import db
+from app.services.ai_logic.ai_moderation import check_content_safety
 
 logger = logging.getLogger("app.post_controller")
 
@@ -21,105 +26,46 @@ logger = logging.getLogger("app.post_controller")
 # =========================================================================
 
 class CreatePostRequest(BaseModel):
-    """Schema cho request tạo bài viết mới."""
-    content: str = Field(default="", max_length=2000)
+    """Schema cho request tạo & cập nhật bài viết."""
+    itineraryId: Optional[str] = None
+    content: str = Field(default="")
     mediaUrls: List[str] = Field(default_factory=list)
     taggedLocations: List[str] = Field(default_factory=list)
-    itineraryId: Optional[str] = None
+    visibility: str = "public"
 
 
 # =========================================================================
-# API: TẠO BÀI VIẾT MỚI
+# API: TẠO BÀI VIẾT MỚI (Code phê duyệt từ main)
 # =========================================================================
 
-async def create_post(uid: str, postData: CreatePostRequest, authorInfo: dict = None) -> dict:
+async def create_post(uid: str, req: CreatePostRequest) -> dict:
     """
-    Tạo bài viết mới và lưu vào Firestore.
-    
-    Args:
-        uid: Firebase UID của người dùng
-        postData: Dữ liệu bài viết từ request
-        authorInfo: Decoded Firebase token (chứa name, picture, email)
-    
-    Returns:
-        dict: Post data đầy đủ (bao gồm author info và itinerary nếu có)
+    Tạo bài viết mới, kiểm duyệt nội dung qua AI Gemini và lưu vào Firestore.
     """
-    content = postData.content.strip()
-    mediaUrls = postData.mediaUrls[:4]  # Max 4 ảnh
-    taggedLocations = postData.taggedLocations[:5]  # Max 5 địa điểm
-    itineraryId = postData.itineraryId
-
-    # Validate: cần ít nhất content hoặc media
-    if not content and not mediaUrls:
-        return {"error": "Bài viết cần có nội dung hoặc ảnh", "status": 400}
-
     try:
-        # Tạo document data
-        now = datetime.now(timezone.utc)
-        postDoc = {
-            "authorId": uid,
-            "content": content,
-            "mediaUrls": mediaUrls,
-            "taggedLocations": taggedLocations,
-            "itineraryId": itineraryId,
-            "likeCount": 0,
-            "commentCount": 0,
-            "hotScore": 0,
-            "createdAt": now.isoformat(),
-        }
-
-        # Enrich với author info — ưu tiên từ Firebase token, sau đó tra Firestore
-        tokenPhoto = (authorInfo or {}).get("picture") or (authorInfo or {}).get("photoURL") or ""
-        tokenName = (authorInfo or {}).get("name") or (authorInfo or {}).get("displayName") or ""
-
-        try:
-            userDoc = db.collection("users").document(uid).get()
-            if userDoc.exists:
-                userData = userDoc.to_dict()
-                dbName = userData.get("firstname") or userData.get("displayName") or ""
-                if userData.get("lastname"):
-                    dbName = f"{userData['lastname']} {dbName}".strip()
-                postDoc["authorName"] = dbName or tokenName or "Người dùng TopGo"
-                postDoc["authorPhotoUrl"] = (
-                    userData.get("photoURL") or userData.get("photoUrl") or
-                    tokenPhoto or ""
-                )
-            else:
-                postDoc["authorName"] = tokenName or "Người dùng TopGo"
-                postDoc["authorPhotoUrl"] = tokenPhoto or ""
-        except Exception as e:
-            logger.warning(f"Không thể lấy author info cho {uid}: {e}")
-            postDoc["authorName"] = tokenName or "Người dùng TopGo"
-            postDoc["authorPhotoUrl"] = tokenPhoto or ""
-
-        # Enrich với itinerary info nếu có
-        if itineraryId:
-            try:
-                itinDoc = db.collection("users").document(uid).collection("saved_plans").document(itineraryId).get()
-                if itinDoc.exists:
-                    itinData = itinDoc.to_dict()
-                    postDoc["itinerary"] = {
-                        "id": itineraryId,
-                        "destination": itinData.get("destination", ""),
-                        "days": itinData.get("days", 0),
-                        "budget": itinData.get("budget", 0),
-                        "visibility": itinData.get("visibility", "private"),
-                    }
-                else:
-                    postDoc["itinerary"] = None
-            except Exception as e:
-                logger.warning(f"Không thể lấy itinerary {itineraryId}: {e}")
-                postDoc["itinerary"] = None
-        else:
-            postDoc["itinerary"] = None
-
-        # Lưu vào Firestore sau khi đã enrich đầy đủ thông tin
-        import uuid
-        postId = str(uuid.uuid4())
-        postDoc["id"] = postId
-        db.collection("posts").document(postId).set(postDoc)
-
-        # Kích hoạt cập nhật Hot Search ngay lập tức trong background
+        # 1. Kiểm duyệt nội dung bằng AI Gemini
+        safety_check = await check_content_safety(req.content)
+        if not safety_check["is_safe"]:
+            logger.warning(f"User {uid} attempted to post unsafe content.")
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=safety_check["reason"]
+            )
+        
+        # 2. Chuẩn bị dữ liệu Post
+        post_id = f"post-{int(datetime.datetime.now().timestamp() * 1000)}"
+        doc_data = req.dict()
+        doc_data["id"] = post_id
+        doc_data["authorId"] = uid
+        doc_data["likeCount"] = 0
+        doc_data["commentCount"] = 0
+        doc_data["hotScore"] = 0
+        doc_data["createdAt"] = firestore.SERVER_TIMESTAMP
+        
+        # 3. Lưu vào root collection "posts"
+        db.collection("posts").document(post_id).set(doc_data)
+        
+        # 4. Kích hoạt cập nhật Hot Search trong background (nếu có)
         try:
             from app.services.hot_search_service import run_hot_score_update
             import threading
@@ -127,12 +73,18 @@ async def create_post(uid: str, postData: CreatePostRequest, authorInfo: dict = 
         except Exception as e:
             logger.warning(f"Không thể chạy background hot_score_update: {e}")
 
-        logger.info(f"Tạo post thành công: {postId} bởi user {uid}")
-        return postDoc
-
+        logger.info(f"User {uid} đã đăng bài post {post_id} thành công.")
+        return {"status": "success", "id": post_id, "message": "Đăng bài thành công!"}
+        
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"Lỗi tạo post cho user {uid}: {e}")
-        return {"error": "Không thể tạo bài viết. Vui lòng thử lại.", "status": 500}
+        logger.error(f"Lỗi tạo post: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Tạo bài viết thất bại: {str(e)}"
+        )
+
 
 # =========================================================================
 # API: LẤY BÀI VIẾT CỦA USER (PROFILE)
@@ -158,9 +110,9 @@ async def get_user_posts(uid: str) -> dict:
                 userPosts.append(postData)
 
         # Sắp xếp theo ngày tạo mới nhất
-        userPosts.sort(key=lambda x: x.get("createdAt", ""), reverse=True)
+        userPosts.sort(key=lambda x: str(x.get("createdAt", "")), reverse=True)
 
-        # Enrich posts (chỉ lấy thông tin user 1 lần, nhưng dùng hàm sẵn cho nhanh)
+        # Enrich posts với author và itinerary
         enriched = []
         for post in userPosts:
             post = _enrich_post_with_author(post)
@@ -186,18 +138,29 @@ async def delete_post(uid: str, postId: str) -> dict:
         postRef = db.collection("posts").document(postId)
         postDoc = postRef.get()
         if not postDoc.exists:
-            return {"error": "Không tìm thấy bài viết", "status": 404}
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Không tìm thấy bài viết"
+            )
         
         postData = postDoc.to_dict()
         if postData.get("authorId") != uid:
-            return {"error": "Bạn không có quyền xóa bài viết này", "status": 403}
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Bạn không có quyền xóa bài viết này"
+            )
         
         postRef.delete()
         logger.info(f"Xóa post thành công: {postId} bởi user {uid}")
         return {"success": True, "message": "Xóa bài viết thành công"}
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Lỗi khi xóa post {postId} của user {uid}: {e}")
-        return {"error": "Không thể xóa bài viết. Vui lòng thử lại.", "status": 500}
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Không thể xóa bài viết. Vui lòng thử lại."
+        )
 
 
 # =========================================================================
@@ -206,70 +169,61 @@ async def delete_post(uid: str, postId: str) -> dict:
 
 async def update_post(uid: str, postId: str, postData: CreatePostRequest) -> dict:
     """
-    Cập nhật bài viết của người dùng sau khi xác minh quyền sở hữu.
+    Cập nhật bài viết của người dùng (có kiểm duyệt lại nội dung bằng AI).
     """
-    content = postData.content.strip()
-    mediaUrls = postData.mediaUrls[:4]
-    taggedLocations = postData.taggedLocations[:5]
-    itineraryId = postData.itineraryId
-
-    if not content and not mediaUrls:
-        return {"error": "Bài viết cần có nội dung hoặc ảnh", "status": 400}
+    # Kiểm duyệt lại nội dung bài viết mới
+    safety_check = await check_content_safety(postData.content)
+    if not safety_check["is_safe"]:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=safety_check["reason"]
+        )
 
     try:
         postRef = db.collection("posts").document(postId)
         postDoc = postRef.get()
         if not postDoc.exists:
-            return {"error": "Không tìm thấy bài viết", "status": 404}
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Không tìm thấy bài viết"
+            )
         
         existingData = postDoc.to_dict()
         if existingData.get("authorId") != uid:
-            return {"error": "Bạn không có quyền sửa bài viết này", "status": 403}
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Bạn không có quyền sửa bài viết này"
+            )
         
-        now = datetime.now(timezone.utc)
+        now = datetime.datetime.now(timezone.utc)
         updateDict = {
-            "content": content,
-            "mediaUrls": mediaUrls,
-            "taggedLocations": taggedLocations,
-            "itineraryId": itineraryId,
+            "content": postData.content.strip(),
+            "mediaUrls": postData.mediaUrls[:4],
+            "taggedLocations": postData.taggedLocations[:5],
+            "itineraryId": postData.itineraryId,
+            "visibility": postData.visibility,
             "updatedAt": now.isoformat()
         }
-
-        # Enrich với itinerary info nếu có thay đổi
-        if itineraryId:
-            try:
-                itinDoc = db.collection("itineraries").document(itineraryId).get()
-                if itinDoc.exists:
-                    itinData = itinDoc.to_dict()
-                    updateDict["itinerary"] = {
-                        "id": itineraryId,
-                        "destination": itinData.get("destination", ""),
-                        "days": itinData.get("days", 0),
-                        "budget": itinData.get("budget", 0),
-                        "visibility": itinData.get("visibility", "private"),
-                    }
-                else:
-                    updateDict["itinerary"] = None
-            except Exception as e:
-                logger.warning(f"Không thể lấy itinerary {itineraryId}: {e}")
-                updateDict["itinerary"] = None
-        else:
-            updateDict["itinerary"] = None
 
         # Cập nhật Firestore
         postRef.set(updateDict, merge=True)
 
-        # Lấy lại document mới đầy đủ để trả về kèm tác giả
         from app.controllers.feed_controller import _enrich_post_with_author, _enrich_post_with_itinerary
         updatedDoc = postRef.get().to_dict()
+        updatedDoc["id"] = postId
         updatedDoc = _enrich_post_with_author(updatedDoc)
         updatedDoc = _enrich_post_with_itinerary(updatedDoc)
 
         logger.info(f"Cập nhật post thành công: {postId} bởi user {uid}")
         return updatedDoc
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Lỗi khi sửa post {postId} của user {uid}: {e}")
-        return {"error": "Không thể cập nhật bài viết. Vui lòng thử lại.", "status": 500}
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Không thể cập nhật bài viết. Vui lòng thử lại."
+        )
 
 
 # =========================================================================
@@ -293,24 +247,19 @@ async def get_posts_by_location(location_name: str) -> dict:
         matched_posts = []
         for doc in allPostsDocs:
             data = doc.to_dict()
+            if not data:
+                continue
             data["id"] = doc.id
             
-            # Kiểm tra taggedLocations
             tagged_locations = data.get("taggedLocations", [])
-            is_match = False
-            for loc in tagged_locations:
-                if loc_lower in loc.lower():
-                    is_match = True
-                    break
+            is_match = any(loc_lower in str(loc).lower() for loc in tagged_locations)
                     
             if is_match:
-                # Bổ sung thông tin tác giả và hành trình
                 data = _enrich_post_with_author(data)
                 data = _enrich_post_with_itinerary(data)
                 matched_posts.append(data)
 
-        # Sắp xếp theo ngày mới nhất
-        matched_posts.sort(key=lambda x: x.get("createdAt", ""), reverse=True)
+        matched_posts.sort(key=lambda x: str(x.get("createdAt", "")), reverse=True)
 
         return {
             "posts": matched_posts,
@@ -318,4 +267,7 @@ async def get_posts_by_location(location_name: str) -> dict:
         }
     except Exception as e:
         logger.error(f"Lỗi tải bài viết theo địa điểm {location_name}: {e}")
-        return {"error": "Không thể lấy bài viết theo địa điểm.", "status": 500}
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Không thể lấy bài viết theo địa điểm."
+        )
