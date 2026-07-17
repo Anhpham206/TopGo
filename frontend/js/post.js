@@ -406,11 +406,15 @@ function _buildCommentsSection(post, currentUser) {
 
 /**
  * Khởi tạo Leaflet map trong container itinerary card.
- * Geocode destination qua Nominatim (OpenStreetMap).
+ * Ưu tiên dùng tọa độ thực từ lịch trình (lat/lng);
+ * chỉ fallback sang geocode Nominatim khi không có tọa độ.
+ *
  * @param {string} mapContainerId — ID của div chứa map
- * @param {string} destination — Tên địa điểm cần hiển thị
+ * @param {string} destination    — Tên địa điểm (dùng để geocode / hiển thị label)
+ * @param {object|null} [coords]  — Tọa độ thực: { lat: number, lng: number } hoặc null
+ * @param {Array}  [places]       — Mảng điểm lịch trình: [{ lat, lon, name }]
  */
-async function _initLeafletMap(mapContainerId, destination) {
+async function _initLeafletMap(mapContainerId, destination, coords = null, places = []) {
     const container = document.getElementById(mapContainerId);
     if (!container) return;
 
@@ -423,17 +427,34 @@ async function _initLeafletMap(mapContainerId, destination) {
     }
 
     try {
-        // Geocode qua Nominatim (OpenStreetMap — hoàn toàn miễn phí)
-        const geoRes = await fetch(
-            `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(destination)}&format=json&limit=1`,
-            { headers: { 'Accept-Language': 'vi', 'User-Agent': 'TopGo-App/1.0' } }
-        );
-        const geoData = await geoRes.json();
+        let lat, lng, zoom = 12;
 
-        let lat = 16.047079, lng = 108.206230, zoom = 10; // Default: Đà Nẵng
-        if (geoData && geoData[0]) {
-            lat = parseFloat(geoData[0].lat);
-            lng = parseFloat(geoData[0].lon);
+        // ── Ưu tiên 1: tọa độ thực từ lịch trình ────────────────────────────
+        if (coords && typeof coords.lat === 'number' && typeof coords.lng === 'number') {
+            lat = coords.lat;
+            lng = coords.lng;
+        }
+        // ── Ưu tiên 2: tọa độ trung bình của các điểm lịch trình ────────────
+        else if (places && places.length > 0) {
+            const validPlaces = places.filter(p => p.lat && p.lon && p.lat !== 0 && p.lon !== 0);
+            if (validPlaces.length > 0) {
+                lat = validPlaces.reduce((s, p) => s + p.lat, 0) / validPlaces.length;
+                lng = validPlaces.reduce((s, p) => s + p.lon, 0) / validPlaces.length;
+                zoom = validPlaces.length === 1 ? 14 : 11;
+            }
+        }
+        // ── Ưu tiên 3: geocode qua Nominatim (fallback khi không có tọa độ) ─
+        if (lat == null || lng == null) {
+            const geoRes = await fetch(
+                `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(destination)}&format=json&limit=1`,
+                { headers: { 'Accept-Language': 'vi', 'User-Agent': 'TopGo-App/1.0' } }
+            );
+            const geoData = await geoRes.json();
+            lat = 16.047079; lng = 108.206230; zoom = 10; // Default: Đà Nẵng
+            if (geoData && geoData[0]) {
+                lat = parseFloat(geoData[0].lat);
+                lng = parseFloat(geoData[0].lon);
+            }
         }
 
         // Tạo Leaflet map
@@ -468,7 +489,32 @@ async function _initLeafletMap(mapContainerId, destination) {
             iconAnchor: [14, 28],
         });
 
-        window.L.marker([lat, lng], { icon: pinIcon }).addTo(map);
+        // ── Vẽ marker: ưu tiên nhiều điểm từ lịch trình ─────────────────────
+        const validPlaces = (places || []).filter(p => p.lat && p.lon && p.lat !== 0 && p.lon !== 0);
+        if (validPlaces.length > 1) {
+            // Nhiều điểm: vẽ tất cả marker nhỏ
+            const smallPin = window.L.divIcon({
+                className: '',
+                html: `<div style="
+                    width:10px;height:10px;
+                    background:#00a9ff;
+                    border-radius:50%;
+                    border:2px solid #fff;
+                    box-shadow:0 1px 4px rgba(0,169,255,0.5);
+                "></div>`,
+                iconSize: [10, 10],
+                iconAnchor: [5, 5],
+            });
+            validPlaces.forEach(p => {
+                window.L.marker([p.lat, p.lon], { icon: smallPin }).addTo(map);
+            });
+            // Fit bounds để hiển thị tất cả điểm
+            const bounds = window.L.latLngBounds(validPlaces.map(p => [p.lat, p.lon]));
+            map.fitBounds(bounds, { padding: [20, 20], maxZoom: 13 });
+        } else {
+            // Một điểm: vẽ marker chính
+            window.L.marker([lat, lng], { icon: pinIcon }).addTo(map);
+        }
 
     } catch (err) {
         // Fallback nếu geocoding thất bại
@@ -704,6 +750,81 @@ function _attachPostEvents(wrapperEl, postId, isLiked) {
     });
 }
 
+// ─── Itinerary Coordinate Helpers ────────────────────────────────────────────
+
+/**
+ * Trích xuất tọa độ trung tâm (optimal_coordinate) từ dữ liệu itinerary raw.
+ * API trả về field `itinerary` là chuỗi JSON chứa cấu trúc đầy đủ.
+ *
+ * Thứ tự ưu tiên:
+ *  1. routing.optimal_coordinate.lat/lon  (từ routing output của backend)
+ *  2. Tọa độ trung bình của tất cả places trong routing.daily_routes
+ *
+ * @param {object} raw — Dữ liệu itinerary thô từ API
+ * @returns {{ lat: number, lng: number }|null}
+ */
+function _extractItineraryCoords(raw) {
+    try {
+        // Thử parse field `itinerary` (JSON string) nếu có
+        let parsed = null;
+        if (raw.itinerary) {
+            parsed = typeof raw.itinerary === 'string' ? JSON.parse(raw.itinerary) : raw.itinerary;
+        }
+
+        // Ưu tiên 1: optimal_coordinate trong routing
+        const routing = parsed?.routing || raw.routing;
+        if (routing?.optimal_coordinate) {
+            const oc = routing.optimal_coordinate;
+            const lat = parseFloat(oc.lat ?? oc.latitude ?? 0);
+            const lon = parseFloat(oc.lon ?? oc.lng ?? oc.longitude ?? 0);
+            if (lat !== 0 && lon !== 0) return { lat, lng: lon };
+        }
+
+        // Ưu tiên 2: trung bình tất cả places trong daily_routes
+        const places = _extractItineraryPlaces(raw);
+        const valid = places.filter(p => p.lat !== 0 && p.lon !== 0);
+        if (valid.length > 0) {
+            const lat = valid.reduce((s, p) => s + p.lat, 0) / valid.length;
+            const lon = valid.reduce((s, p) => s + p.lon, 0) / valid.length;
+            return { lat, lng: lon };
+        }
+    } catch { /* bỏ qua lỗi parse — sẽ fallback geocode */ }
+    return null;
+}
+
+/**
+ * Trích xuất mảng các điểm tham quan (có tọa độ) từ dữ liệu itinerary raw.
+ * Dùng để vẽ nhiều marker trên bản đồ.
+ *
+ * @param {object} raw — Dữ liệu itinerary thô từ API
+ * @returns {Array<{ lat: number, lon: number, name: string }>}
+ */
+function _extractItineraryPlaces(raw) {
+    try {
+        let parsed = null;
+        if (raw.itinerary) {
+            parsed = typeof raw.itinerary === 'string' ? JSON.parse(raw.itinerary) : raw.itinerary;
+        }
+
+        const routing = parsed?.routing || raw.routing;
+        const dailyRoutes = routing?.daily_routes || [];
+        const places = [];
+
+        for (const day of dailyRoutes) {
+            // daily_routes[].places[] — mảng điểm trong ngày
+            for (const place of (day.places || day.route_places || [])) {
+                const lat = parseFloat(place.lat ?? place.latitude ?? 0);
+                const lon = parseFloat(place.lon ?? place.lng ?? place.longitude ?? 0);
+                if (lat !== 0 && lon !== 0) {
+                    places.push({ lat, lon, name: place.name || place.ten || '' });
+                }
+            }
+            // daily_routes[].route_geometry — polyline points (tuỳ chọn)
+        }
+        return places;
+    } catch { return []; }
+}
+
 // ─── SKELETON LOADER ─────────────────────────────────────────────────────────
 
 function _buildSkeletonHTML() {
@@ -760,34 +881,53 @@ export async function renderPostCard(postId, containerEl, options = {}) {
     const wrapperEl = containerEl.lastElementChild;
 
     try {
-        // ── Bước 2: Fetch dữ liệu bài post ───────────────────────────────────
+        // ── Bước 2: Fetch dữ liệu bài post từ Firebase backend ───────────────
         let isLiked = false;
 
-        let post = {
-            id: postId,
-            authorId: "thu-123",
-            authorName: "Lê Huỳnh Anh Thư",
-            authorAvatar: "https://ui-avatars.com/api/?name=Thu+Le&background=random",
-            content: "Chào mọi người, đây là bản demo Component Bài Post mình vừa code xong! Dưới đây là thẻ lộ trình tự động quét bản đồ OpenStreetMap. Mọi người xem thử giao diện ổn chưa nhé!",
-            type: "itinerary", // Hiển thị biến thể có bản đồ
-            itineraryId: "plan_demo_1",
-            likeCount: 68,
-            commentCount: 12,
-            createdAt: new Date().toISOString(),
-            visibility: "public"
-        };
+        // Nếu có mockData trong options thì dùng (chế độ demo/test)
+        let post, itineraryData = null;
 
-        let itineraryData = {
-            destination: "Thành phố Cà Mau, Việt Nam", // Leaflet sẽ tự tìm tọa độ theo tên này
-            days: 3,
-            pax: 4,
-            budget: 2500000,
-            dateStart: "20/07/2026",
-            dateEnd: "22/07/2026"
-        };
+        if (options.mockData) {
+            post = { id: postId, ...options.mockData };
+        } else {
+            // Gọi API thực — GET /api/posts/{postId}
+            post = await _apiFetch(`/posts/${postId}`);
+        }
 
-        // BẠN ĐÃ CÓ BIẾN CURRENTUSER RỒI NÈ 👇
+        // ── Bước 3: Lấy like status (chỉ khi user đã đăng nhập) ──────────────
         const currentUser = _getCurrentUser();
+        if (currentUser) {
+            try {
+                const likeStatus = await _apiFetch(`/posts/${postId}/like-status`);
+                isLiked = likeStatus?.liked === true;
+            } catch {
+                // Không lấy được like status — bỏ qua, không block render
+                isLiked = false;
+            }
+        }
+
+        // ── Bước 4: Lấy dữ liệu lịch trình đính kèm (nếu có) ────────────────
+        if (post.type === 'itinerary' && post.itineraryId) {
+            try {
+                const raw = await _apiFetch(`/itineraries/${post.itineraryId}`);
+                // Chuẩn hoá: API trả về PlanSaveRequest schema
+                itineraryData = {
+                    destination: raw.destination || '',
+                    days:        parseInt(raw.days)   || null,
+                    pax:         parseInt(raw.pax)    || null,
+                    budget:      parseFloat(raw.budget) || null,
+                    dateStart:   raw.dateStart || null,
+                    dateEnd:     raw.dateEnd   || null,
+                    // Tọa độ: lấy từ routing nếu có
+                    _coords: _extractItineraryCoords(raw),
+                    _places: _extractItineraryPlaces(raw),
+                };
+            } catch (err) {
+                // Lịch trình private hoặc không tồn tại — render card không có map
+                console.warn(`[TopGo Post] Itinerary ${post.itineraryId} không lấy được:`, err.message);
+                itineraryData = null;
+            }
+        }
 
         // ── Bước 5: Xác định variant CSS class ───────────────────────────────
         const variantClass = {
@@ -822,9 +962,11 @@ export async function renderPostCard(postId, containerEl, options = {}) {
         // ── Bước 9: Khởi tạo Leaflet map (nếu là variant itinerary) ──────────
         if (post.type === 'itinerary' && post.itineraryId) {
             const destination = itineraryData?.destination || post.content?.substring(0, 50) || 'Việt Nam';
+            const coords  = itineraryData?._coords  || null;
+            const places  = itineraryData?._places  || [];
             // Delay nhỏ để đảm bảo DOM đã render xong
             setTimeout(() => {
-                _initLeafletMap(`itinerary-map-${postId}`, destination);
+                _initLeafletMap(`itinerary-map-${postId}`, destination, coords, places);
             }, 100);
         }
 
