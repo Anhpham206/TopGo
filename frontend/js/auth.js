@@ -418,7 +418,14 @@ if (currentPage === 'auth.html') {
   });
 }
 
-
+// ── Logic trang Hồ sơ cá nhân (profile.html) ──
+if (currentPage === 'profile.html') {
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Chuyển hướng nếu chưa đăng nhập
+    if (!AuthService.isLoggedIn()) {
+      window.location.href = './auth.html';
+      return;
+    }
 
     const setText = (id, val) => {
       const el = document.getElementById(id);
