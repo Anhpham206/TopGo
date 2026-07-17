@@ -417,6 +417,16 @@
             checkHeader();
         });
     </script>
+    <!-- Modal Containers -->
+    <div id="share-modal-container"></div>
+    <div id="post-modal-container"></div>
+
+    <script type="module" src="./js/components/share_modal.js"></script>
+    <script type="module" src="./js/components/post_create_modal.js"></script>
+    <script type="module">
+        import('./js/components/share_modal.js').then(m => m.initShareModal());
+        import('./js/components/post_create_modal.js').then(m => m.initPostModal());
+    </script>
 </body>
 
 </html>

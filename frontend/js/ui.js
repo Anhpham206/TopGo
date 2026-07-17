@@ -824,19 +824,21 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
         }
 
         const shareData = {
-            plan_id: planId,
+            id: planId,
             destination: state.selectedCity?.name || window._lastPayload?.city_name || 'Chuyến đi',
             days: getTripDays(),
-            budget: getRawBudget() || window._lastPayload?.budget || 0,
+            pax: parseInt(document.getElementById('pax-val')?.value || window._lastPayload?.pax || '1'),
+            budget: parseFloat(getRawBudget() || window._lastPayload?.budget || 0),
             dateStart: document.getElementById('date-start')?.value || window._lastPayload?.date_start || '',
-            dateEnd: document.getElementById('date-end')?.value || window._lastPayload?.date_end || ''
+            dateEnd: document.getElementById('date-end')?.value || window._lastPayload?.date_end || '',
+            itinerary: window._lastItineraryData || ''
         };
 
         window._pendingShareData = shareData;
         console.log("Đã đóng gói dữ liệu share từ Planner:", shareData);
 
-        if (window.TopGoShare && typeof window.TopGoShare.openShareModal === 'function') {
-            window.TopGoShare.openShareModal(shareData);
+        if (typeof window.openShareModal === 'function') {
+            window.openShareModal(shareData);
         } else {
             showToast(`[Mock Share] Đã sao chép liên kết ẩn (unlisted) của lịch trình: ${window.location.origin}/itinerary.html?uid=${loggedInUser.uid}&planId=${planId}`, 'success');
         }

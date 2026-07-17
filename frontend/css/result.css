@@ -347,20 +347,27 @@
 }
 .res-actions {
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
   z-index: 1;
+  width: 100%;
+  margin-top: 8px;
 }
 .res-actions .glass-btn {
-  padding: 10px 22px;
-  font-size: 12px;
+  padding: 10px 20px;
+  font-size: 12.5px;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   border-radius: 100px;
+  white-space: nowrap;
+  text-align: center;
+  flex: 0 1 auto; /* Khung vừa khít chữ, không bị kéo dãn 100% khi xuống hàng */
 }
 .res-actions .btn-outline {
   border: 1.5px solid rgba(0, 169, 255, 0.45);
   color: var(--p1);
+  background: rgba(255, 255, 255, 0.6);
 }
 .res-actions .btn-outline:hover {
   border-color: var(--p1);

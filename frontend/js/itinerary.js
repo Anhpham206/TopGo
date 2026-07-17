@@ -9,6 +9,7 @@
   ========================================================================
 */
 import { showToast } from './shared.js';
+import { openFullMapModal } from './map.js';
 
 const _isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
 const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
@@ -60,6 +61,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Hiển thị thông tin
     renderItineraryDetails(plan, isOwnPlan, ownerUid);
+
+    // Đăng ký sự kiện đóng modal bản đồ
+    document.getElementById('btn-close-map')?.addEventListener('click', () => {
+        document.getElementById('popup-map')?.classList.remove('open');
+    });
+    const popupMap = document.getElementById('popup-map');
+    if (popupMap) {
+        popupMap.addEventListener('click', (e) => {
+            if (e.target === popupMap) {
+                popupMap.classList.remove('open');
+            }
+        });
+    }
 });
 
 // Render thông tin
@@ -360,6 +374,13 @@ async function initItineraryMap(stops, coords, allRoutePolylines) {
     if (coords.length > 0) {
         map.fitBounds(coords, { padding: [40, 40] });
     }
+
+    const clickOverlay = document.getElementById('map-click-overlay');
+    if (clickOverlay) {
+        clickOverlay.addEventListener('click', () => {
+            openFullMapModal(stops, allRoutePolylines);
+        });
+    }
 }
 
 // Tính khoảng cách tọa độ (đơn giản)
@@ -403,67 +424,42 @@ function setupActionButtons(plan, isOwnPlan, ownerUid) {
             }
 
             cloneBtn.disabled = true;
-            cloneBtn.textContent = "Đang nhân bản...";
+            cloneBtn.textContent = "Đang chuyển hướng...";
 
-            try {
-                const token = await window.TopGoAuth.getIdToken();
-                const res = await fetch(`${API_BASE}/api/plans/${plan.id}/clone?target_uid=${ownerUid}`, {
-                    method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const result = await res.json();
-                
-                showToast("Nhân bản thành công! Đang chuyển hướng về Planner của bạn...", "success");
-                setTimeout(() => {
-                    // Chuyển hướng người dùng về trang hiển thị có thể chỉnh sửa của họ
-                    localStorage.setItem('topgo_review_plan', JSON.stringify({
-                        id: result.id,
-                        destination: plan.destination,
-                        days: plan.days,
-                        pax: plan.pax,
-                        budget: plan.budget,
-                        dateStart: plan.dateStart,
-                        dateEnd: plan.dateEnd,
-                        itinerary: plan.itinerary
-                    }));
-                    window.location.href = './planner.html';
-                }, 2000);
-
-            } catch (err) {
-                showToast("Nhân bản thất bại: " + err.message, "error");
-                cloneBtn.disabled = false;
-                cloneBtn.textContent = "Nhân bản lộ trình";
-            }
+            showToast("Đang chuẩn bị lộ trình. Đang chuyển hướng về Planner của bạn...", "success");
+            setTimeout(() => {
+                // Chỉ chuyển hướng dữ liệu sang Planner để người dùng xem lại chứ không lưu tự động
+                localStorage.setItem('topgo_review_plan', JSON.stringify({
+                    id: null, // Đặt null để Planner hiểu đây là lịch trình mới chưa được lưu
+                    destination: plan.destination,
+                    days: plan.days,
+                    pax: plan.pax,
+                    budget: plan.budget,
+                    dateStart: plan.dateStart,
+                    dateEnd: plan.dateEnd,
+                    itinerary: plan.itinerary
+                }));
+                window.location.href = './planner.html';
+            }, 1000);
         });
     }
 
-    // Xử lý nút Share (Gọi component popup của Diệp - stub)
+    // Xử lý nút Share
     shareBtn?.addEventListener('click', () => {
-        // Đóng gói thông tin lịch trình
-        const shareData = {
-            plan_id: plan.id,
-            destination: plan.destination,
-            days: plan.days,
-            budget: plan.budget,
-            dateStart: plan.dateStart,
-            dateEnd: plan.dateEnd
-        };
-
-        // Lưu trữ vào window để Diệp có thể đọc
-        window._pendingShareData = shareData;
-
-        // Stub/mock thông báo cho Diệp
-        console.log("Đã đóng gói dữ liệu share:", shareData);
-        
-        // Gọi modal popup phân quyền của Diệp nếu đã được tích hợp
-        if (window.TopGoShare && typeof window.TopGoShare.openShareModal === 'function') {
-            window.TopGoShare.openShareModal(shareData);
+        if (isOwnPlan) {
+            // Nếu là chủ sở hữu: mở modal đổi quyền riêng tư (Private/Unlisted/Public)
+            if (typeof window.openShareModal === 'function') {
+                window.openShareModal(plan);
+            } else {
+                showToast("Tính năng chia sẻ chưa sẵn sàng. Vui lòng tải lại trang.", "warning");
+            }
         } else {
-            // Hiển thị alert/toast thông tin tạm thời nếu chưa tích hợp
-            showToast(`[Mock Share] Đã sao chép liên kết ẩn (unlisted) của lịch trình: ${window.location.origin}/itinerary.html?uid=${ownerUid}&planId=${plan.id}`, 'success');
-            console.log(`[Stub Modal] Diệp's Share Modal component is not integrated yet. Saved share data to window._pendingShareData.`);
+            // Nếu là người khác: mở thẳng modal viết bài đăng chia sẻ lên News Feed
+            if (typeof window.openPostModal === 'function') {
+                window.openPostModal(plan);
+            } else {
+                showToast("Tính năng chia sẻ bài đăng chưa sẵn sàng. Vui lòng tải lại trang.", "warning");
+            }
         }
     });
 }

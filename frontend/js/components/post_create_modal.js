@@ -736,7 +736,12 @@ export function openPostModal(trip = null) {
   overlay.classList.add('open');
 
   /* ── Close ── */
-  const closeModal = () => overlay.classList.remove('open');
+  const closeModal = () => {
+    overlay.classList.remove('open');
+    if (currentTrip) {
+      window.location.reload();
+    }
+  };
   get('pm-close-btn').onclick = closeModal;
   overlay.onclick = e => { if (e.target === overlay) closeModal(); };
 
@@ -953,8 +958,10 @@ export function openPostModal(trip = null) {
       // Thành công
       setStatus('Đã đăng bài thành công!', 'success');
       showToast('Bài viết của bạn đã được đăng tải', 'success');
-      btn.innerHTML = 'Đã đăng!';
-      setTimeout(() => closeModal(), 1800);
+      setTimeout(() => {
+        closeModal();
+        window.location.reload();
+      }, 1800);
 
     } catch (err) {
       setStatus(err.message, 'error');

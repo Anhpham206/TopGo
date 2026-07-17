@@ -19,7 +19,7 @@ import { initLeafletMap } from './map.js';
 import {
     showScreen, renderCityList, renderDepList, renderItinerary,
     updateDeparture, getRawBudget, validateDates, updateBudgetPP,
-    initFormUIEvents, getTripDays
+    initFormUIEvents, getTripDays, updateFromToDisplay
 } from './ui.js';
 import { showToast, showPopup, closePopup } from './shared.js';
 import { fetchHtmlFragment } from './fragmentLoader.js';

@@ -230,7 +230,7 @@ async function initProfile(uid, isOwnProfile, loggedInUser) {
 // Cập nhật các thông tin cơ bản lên Passport UI
 function updateUI(user) {
     if (!user) return;
-    const fullname = `${user.lastname || ''} ${user.firstname || ''}`.trim() || 'Thành viên TopGo';
+    const fullname = `${user.lastname || ''} ${user.firstname || ''}`.trim() || user.displayName || user.username || 'Thành viên TopGo';
     const fullnameDisplay = user.is_vip ? `${fullname} 👑 (VIP)` : fullname;
     
     const fullnameEl = document.getElementById('pp-fullname');
@@ -376,7 +376,7 @@ function renderTrips(trips, profileOwnerUid, isOwn) {
         const card = document.createElement('div');
         card.className = 'stamp-card';
         // Hiển thị trạng thái visibility nếu là chủ sở hữu
-        const visibilityTag = isOwn ? `<span class="stamp-tag visibility">${trip.visibility === 'private' ? '🔒 Riêng tư' : trip.visibility === 'unlisted' ? '🔗 Ẩn' : '🌐 Công khai'}</span>` : '';
+        const visibilityTag = isOwn ? `<span class="stamp-tag visibility">${trip.visibility === 'private' ? 'Riêng tư' : trip.visibility === 'unlisted' ? 'Ẩn' : 'Công khai'}</span>` : '';
         
         card.innerHTML = `
             <div class="stamp-dest">${trip.destination || 'Chuyến đi'}</div>
@@ -388,20 +388,40 @@ function renderTrips(trips, profileOwnerUid, isOwn) {
             </div>
             <div class="stamp-date">${trip.dateStart || ''} → ${trip.dateEnd || ''}</div>
             <div class="stamp-actions">
-                <button class="stamp-btn" data-review="${trip.id}">Chi tiết</button>
+                ${isOwn ? `<button class="stamp-btn" data-share="${trip.id}" style="color: var(--gold); border-color: var(--gold);">Chia sẻ</button>` : ''}
+                <button class="stamp-btn" data-review="${trip.id}">${isOwn ? 'Xem lại' : 'Chi tiết'}</button>
                 ${isOwn ? `<button class="stamp-btn danger" data-delete="${trip.id}">Xóa</button>` : ''}
             </div>
         `;
         grid.appendChild(card);
     });
 
-    // Sự kiện click Xem chi tiết
+    // Sự kiện click Xem lại / Chi tiết
     grid.querySelectorAll('[data-review]').forEach(btn => {
         btn.addEventListener('click', e => {
             e.stopPropagation();
             const planId = btn.dataset.review;
-            // Dẫn tới trang itinerary chi tiết chỉ đọc (read-only)
-            window.location.href = `./itinerary.html?uid=${profileOwnerUid}&planId=${planId}`;
+            const trip = trips.find(t => t.id === planId);
+            if (trip) {
+                if (isOwn) {
+                    localStorage.setItem('topgo_review_plan', JSON.stringify(trip));
+                    window.location.href = './planner.html';
+                } else {
+                    window.location.href = `./itinerary.html?uid=${profileOwnerUid}&planId=${planId}`;
+                }
+            }
+        });
+    });
+
+    // Sự kiện click Chia sẻ
+    grid.querySelectorAll('[data-share]').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+            const planId = btn.dataset.share;
+            const trip = trips.find(t => t.id === planId);
+            if (trip && typeof window.openShareModal === 'function') {
+                window.openShareModal(trip);
+            }
         });
     });
 

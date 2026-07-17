@@ -262,26 +262,38 @@ async def get_public_profile(uid: str, current_user_uid: Optional[str] = None) -
 
 async def get_user_posts_stub(uid: str) -> list:
     uid = resolve_uid(uid)
-    """Trả về danh sách bài đăng stub (giả lập) của user"""
-    # Tạo dữ liệu giả lập cho bài đăng của người dùng
-    return [
-        {
-            "id": f"post-mock-1-{uid}",
-            "author_id": uid,
-            "content": "Hành trình khám phá Tây Bắc tuyệt vời! Núi non trùng điệp, con người hiền hòa mến khách. Cảm ơn TopGo đã lên lịch trình cực kỳ chi tiết.",
-            "media": ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e"],
-            "createdAt": "2026-07-15T08:30:00Z",
-            "likes_count": 15,
-            "comments_count": 3
-        },
-        {
-            "id": f"post-mock-2-{uid}",
-            "author_id": uid,
-            "content": "Ăn sập Đà Nẵng cùng nhóm bạn thân! Món bánh tráng cuốn thịt heo ở đây đúng là đỉnh của chóp.",
-            "media": [],
-            "createdAt": "2026-07-10T19:45:00Z",
-            "likes_count": 32,
-            "comments_count": 8
-        }
-    ]
+    """Truy vấn danh sách bài đăng thực tế của user từ Firestore"""
+    try:
+        posts_ref = db.collection("posts").where("authorId", "==", uid)
+        docs = posts_ref.stream()
+        result = []
+        for doc in docs:
+            d = doc.to_dict()
+            
+            # Chuyển đổi timestamp của Firestore thành chuỗi ISO format
+            created_at_str = ""
+            if "createdAt" in d and d["createdAt"]:
+                if hasattr(d["createdAt"], "isoformat"):
+                    created_at_str = d["createdAt"].isoformat()
+                else:
+                    created_at_str = str(d["createdAt"])
+            
+            # Map dữ liệu Firestore sang cấu trúc Frontend yêu cầu
+            mapped = {
+                "id": d.get("id"),
+                "author_id": d.get("authorId", uid),
+                "content": d.get("content", ""),
+                "media": d.get("mediaUrls", []),
+                "createdAt": created_at_str,
+                "likes_count": d.get("likeCount", 0),
+                "comments_count": d.get("commentCount", 0)
+            }
+            result.append(mapped)
+        
+        # Sắp xếp bài đăng theo thời gian mới nhất
+        result.sort(key=lambda x: x.get("createdAt", ""), reverse=True)
+        return result
+    except Exception as e:
+        logger.error(f"Lỗi truy vấn bài đăng của user {uid}: {e}")
+        return []
 

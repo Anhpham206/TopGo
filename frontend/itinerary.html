@@ -50,7 +50,7 @@
                             CHI TIẾT HÀNH TRÌNH
                         </div>
                         <h1 class="res-title-massive" id="res-title">Đang tải lịch trình...</h1>
-                        <div class="res-actions" style="margin-top: 16px; display: flex; gap: 12px;">
+                        <div class="res-actions">
                             <button class="glass-btn glass-btn-primary glow hidden" id="btn-clone-plan" style="letter-spacing: 0.5px; text-transform: none; font-size: 13px;">
                                 Nhân bản lộ trình
                             </button>
@@ -105,14 +105,14 @@
             </div>
 
             <!-- 2 + 3. TWO-COLUMN: MAP (left) + TIMELINE (right) -->
-            <section class="wow-section split-section" style="display: flex; gap: 24px; margin-bottom: 24px;">
-                <div class="split-left glass-panel" style="flex: 1.2; min-width: 0;">
+            <section class="wow-section split-section" style="margin-bottom: 24px;">
+                <div class="split-left glass-panel">
                     <div class="section-label">
                         <span class="section-label-text">Lộ Trình Bản Đồ</span>
                     </div>
 
                     <div class="immersive-map-container glow-container" style="border-radius: var(--r-xl); overflow: hidden; position: relative;">
-                        <div id="leaflet-map" class="bionic-map" style="height: 480px; width: 100%;"></div>
+                        <div id="leaflet-map" class="bionic-map"></div>
                         <div id="map-click-overlay" style="position: absolute; inset: 0; z-index: 9; cursor: pointer;"></div>
                         
                         <!-- Floating Stats Overlay -->
@@ -137,7 +137,7 @@
                     </div>
                 </div>
 
-                <div class="split-right glass-panel" style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+                <div class="split-right glass-panel">
                     <div class="section-label">
                         <span class="section-label-text">Lịch Trình Chi Tiết</span>
                     </div>
@@ -162,6 +162,28 @@
     <!-- Footer + Toast + Popups -->
     <div id="site-shared"></div>
 
+    <!-- MODAL MAP -->
+    <div class="popup-ov" id="popup-map">
+        <div class="popup-card" style="max-width:95vw;width:95vw;height:80vh;max-height:90vh;padding:16px;display:flex;flex-direction:column;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <div class="popup-title" style="font-size:20px;font-weight:700;">Bản đồ hành trình chi tiết</div>
+                <button id="btn-close-map" data-popup-close="popup-map"
+                    style="background:none;border:none;font-size:28px;cursor:pointer;line-height:1;">&times;</button>
+            </div>
+            <div class="map-modal-split" style="display:flex;gap:16px;flex:1;height:100%;min-height:0;">
+                <div class="map-modal-left" style="flex:1;height:100%;min-height:0;position:relative;border-radius:var(--r-l);overflow:hidden;">
+                    <div id="leaflet-modal-map" style="height:100%;width:100%;border-radius:var(--r-l);"></div>
+                </div>
+                <div class="map-modal-right" style="width:260px;height:100%;min-height:0;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,0.5);padding:16px;border-radius:var(--r-l);border:1px solid rgba(0,169,255,0.15);backdrop-filter:blur(10px);overflow-y:auto;box-sizing:border-box;">
+                    <div style="font-size:14px;font-weight:700;color:var(--text);border-bottom:1px dashed rgba(0,169,255,0.2);padding-bottom:8px;margin-bottom:4px;">Chọn Ngày Hiển Thị</div>
+                    <div id="map-day-selector" style="display:flex;flex-direction:column;gap:8px;">
+                        <!-- Rendered dynamically by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <!-- DOMPurify -->
@@ -171,6 +193,17 @@
     <!-- App Scripts -->
     <script type="module" src="./js/auth.js"></script>
     <script type="module" src="./js/itinerary.js"></script>
+
+    <!-- Modal Containers -->
+    <div id="share-modal-container"></div>
+    <div id="post-modal-container"></div>
+
+    <script type="module" src="./js/components/share_modal.js"></script>
+    <script type="module" src="./js/components/post_create_modal.js"></script>
+    <script type="module">
+        import('./js/components/share_modal.js').then(m => m.initShareModal());
+        import('./js/components/post_create_modal.js').then(m => m.initPostModal());
+    </script>
 </body>
 
 </html>
