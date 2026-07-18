@@ -14,6 +14,7 @@ class UserProfileModel(BaseModel):
     pob: Optional[str] = ""
     nationality: Optional[str] = ""
     photoUrl: Optional[str] = None
+    photoURL: Optional[str] = None
     email: Optional[str] = None
 
 async def get_user_profile(uid: str) -> dict:
@@ -23,6 +24,9 @@ async def get_user_profile(uid: str) -> dict:
         if doc.exists:
             # Lọc và trả về dữ liệu của document
             data = doc.to_dict()
+            url = data.get("photoURL") or data.get("photoUrl")
+            data["photoURL"] = url
+            data["photoUrl"] = url
             # Loại bỏ các trường không cần thiết cho client nếu có
             return data
         return {}
@@ -238,11 +242,13 @@ async def get_public_profile(uid: str, current_user_uid: Optional[str] = None) -
             is_following = await check_follow_status(current_user_uid, uid)
             
         # Lọc thông tin công khai
+        url = user_data.get("photoURL") or user_data.get("photoUrl", None)
         public_data = {
             "uid": uid,
             "firstname": user_data.get("firstname", ""),
             "lastname": user_data.get("lastname", ""),
-            "photoURL": user_data.get("photoURL", None),
+            "photoURL": url,
+            "photoUrl": url,
             "nationality": user_data.get("nationality", "Việt Nam"),
             "sex": user_data.get("sex", ""),
             "followers_count": counts["followers_count"],
@@ -264,6 +270,14 @@ async def get_user_posts_stub(uid: str) -> list:
     uid = resolve_uid(uid)
     """Truy vấn danh sách bài đăng thực tế của user từ Firestore"""
     try:
+        # Lấy thông tin user profile để điền thông tin tác giả cho các bài đăng
+        user_doc = db.collection("users").document(uid).get()
+        user_data = user_doc.to_dict() if user_doc.exists else {}
+        author_name = user_data.get("firstname") or user_data.get("username") or "Ẩn danh"
+        if user_data.get("lastname"):
+            author_name = f"{user_data.get('lastname')} {author_name}".strip()
+        author_avatar = user_data.get("photoURL") or user_data.get("photoUrl") or ""
+
         posts_ref = db.collection("posts").where("authorId", "==", uid)
         docs = posts_ref.stream()
         result = []
@@ -278,15 +292,37 @@ async def get_user_posts_stub(uid: str) -> list:
                 else:
                     created_at_str = str(d["createdAt"])
             
-            # Map dữ liệu Firestore sang cấu trúc Frontend yêu cầu
+            repost_original = d.get("repostOriginal")
+            if repost_original and isinstance(repost_original, dict):
+                orig_author_id = repost_original.get("authorId") or repost_original.get("author_id")
+                if orig_author_id:
+                    orig_user_doc = db.collection("users").document(orig_author_id).get()
+                    if orig_user_doc.exists:
+                        orig_user_data = orig_user_doc.to_dict()
+                        orig_name = orig_user_data.get("firstname") or orig_user_data.get("username") or "Ẩn danh"
+                        if orig_user_data.get("lastname"):
+                            orig_name = f"{orig_user_data.get('lastname')} {orig_name}".strip()
+                        repost_original["authorName"] = orig_name
+                        repost_original["authorAvatar"] = orig_user_data.get("photoURL") or orig_user_data.get("photoUrl") or ""
+
+            # Map dữ liệu Firestore sang cấu trúc Frontend yêu cầu (hỗ trợ cả camelCase của Thư và snake_case)
             mapped = {
                 "id": d.get("id"),
+                "authorId": d.get("authorId", uid),
                 "author_id": d.get("authorId", uid),
+                "authorName": d.get("authorName") or author_name,
+                "authorAvatar": d.get("authorAvatar") or author_avatar,
                 "content": d.get("content", ""),
+                "mediaUrls": d.get("mediaUrls", []),
                 "media": d.get("mediaUrls", []),
                 "createdAt": created_at_str,
+                "likeCount": d.get("likeCount", 0),
                 "likes_count": d.get("likeCount", 0),
-                "comments_count": d.get("commentCount", 0)
+                "commentCount": d.get("commentCount", 0),
+                "comments_count": d.get("commentCount", 0),
+                "type": d.get("type", "text"),
+                "repostOf": d.get("repostOf"),
+                "repostOriginal": repost_original
             }
             result.append(mapped)
         

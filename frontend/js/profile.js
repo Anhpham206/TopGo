@@ -9,6 +9,7 @@
   ========================================================================
 */
 import { showToast, showPopup, closePopup } from './shared.js';
+import { renderPostCard } from './post.js';
 
 const _isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
 const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
@@ -51,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Khởi động giao diện & tải dữ liệu
     await initProfile(uid, isOwnProfile, loggedInUser);
-    setupTabs(uid);
+    setupTabs(uid, isOwnProfile);
 });
 
 // Khởi tạo trang cá nhân
@@ -222,8 +223,7 @@ async function initProfile(uid, isOwnProfile, loggedInUser) {
             }
         });
 
-        // Tải lịch trình công khai
-        loadUserPlans(uid, false);
+        // Bỏ tải lịch trình công khai ở chế độ khách (bảo mật)
     }
 }
 
@@ -250,8 +250,9 @@ function updateUI(user) {
     const photoEl = document.getElementById('pp-photo');
     if (photoEl) {
         const borderStyle = user.is_vip ? 'border: 3px solid #ffb347; box-shadow: 0 0 10px rgba(255,179,71,0.5);' : '';
-        if (user.photoURL) {
-            photoEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; ${borderStyle}">`;
+        const url = user.photoURL || user.photoUrl;
+        if (url) {
+            photoEl.innerHTML = `<img src="${url}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; ${borderStyle}">`;
         } else {
             photoEl.innerHTML = `
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pp-photo-placeholder" style="${borderStyle}">
@@ -477,14 +478,40 @@ function setupFilters(trips, uid, isOwn) {
     filterBudget?.addEventListener('input', applyFilters);
 }
 
-// Thiết lập Tab điều khiển Lộ trình / Bài đăng
-function setupTabs(uid) {
+// Thiết lập Tab điều khiển Lộ trình / Bài đăng (Ẩn lộ trình đối với khách xem profile người khác)
+function setupTabs(uid, isOwnProfile) {
     const tabs = document.querySelectorAll('.profile-tab');
     const tripsGrid = document.getElementById('stamps-grid');
     const stampsEmpty = document.getElementById('stamps-empty');
     const filters = document.querySelector('.stamps-filters');
     const postsGrid = document.getElementById('posts-grid');
     const viewToggle = document.getElementById('stamps-view-toggle');
+
+    if (!isOwnProfile) {
+        // Ẩn nút tab Lộ trình du lịch
+        const tripsTabBtn = document.querySelector('.profile-tab[data-tab="trips"]');
+        if (tripsTabBtn) tripsTabBtn.style.display = 'none';
+
+        // Thiết lập tab Bài đăng cá nhân là active duy nhất
+        const postsTabBtn = document.querySelector('.profile-tab[data-tab="posts"]');
+        if (postsTabBtn) {
+            postsTabBtn.classList.add('active');
+            postsTabBtn.style.color = '#00a9ff';
+            postsTabBtn.style.borderBottom = '2px solid #00a9ff';
+        }
+
+        // Hiện vùng danh sách bài viết, ẩn vùng lộ trình
+        tripsGrid.classList.add('hidden');
+        tripsGrid.style.display = 'none';
+        if (stampsEmpty) stampsEmpty.style.display = 'none';
+        if (filters) filters.style.display = 'none';
+        if (viewToggle) viewToggle.style.display = 'none';
+
+        postsGrid.classList.remove('hidden');
+        postsGrid.style.display = 'flex';
+        loadUserPosts(uid);
+        return; // Không cần lắng nghe sự kiện chuyển tab ở chế độ khách
+    }
 
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -536,13 +563,13 @@ async function loadUserPosts(uid) {
     }
 }
 
-// Vẽ danh sách bài đăng stub (Placeholder cho code của Thư)
-function renderUserPosts(posts) {
+// Vẽ danh sách bài đăng bằng component của Thư
+async function renderUserPosts(posts) {
     const container = document.getElementById('posts-grid');
     if (!container) return;
 
     // Xóa các card bài viết cũ ngoại trừ posts-empty
-    container.querySelectorAll('.mock-post-card').forEach(card => card.remove());
+    container.querySelectorAll('.mock-post-card, .topgo-post-card-container').forEach(card => card.remove());
     const emptyEl = document.getElementById('posts-empty');
 
     if (posts.length === 0) {
@@ -551,48 +578,15 @@ function renderUserPosts(posts) {
     }
     if (emptyEl) emptyEl.style.display = 'none';
 
-    posts.forEach(post => {
-        const card = document.createElement('div');
-        card.className = 'mock-post-card';
-        card.style.cssText = `
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(0, 169, 255, 0.15);
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-            backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            text-align: left;
-        `;
-        
-        let mediaHtml = '';
-        if (post.media && post.media.length > 0) {
-            mediaHtml = `<img src="${post.media[0]}" alt="Post attachment" style="width:100%; max-height: 250px; object-fit: cover; border-radius: 8px; margin-top: 8px;">`;
+    // Gọi hàm renderPostCard cho mỗi bài viết để vẽ và khởi tạo bản đồ/like/comment
+    for (const post of posts) {
+        const postWrapper = document.createElement('div');
+        postWrapper.className = 'topgo-post-card-container';
+        container.appendChild(postWrapper);
+        try {
+            await renderPostCard(post.id, postWrapper, { mockData: post });
+        } catch (err) {
+            console.error("Lỗi khi render post card:", err);
         }
-
-        // NOTE: Đây là placeholder. Thư sẽ thay thế component renderPostCard(postID) sau này.
-        card.innerHTML = `
-            <div class="mock-post-header" style="display: flex; align-items: center; gap: 10px;">
-                <div class="mph-avatar" style="width: 38px; height: 38px; border-radius: 50%; background: #00a9ff; display:flex; align-items:center; justify-content:center; color: white; font-weight: bold;">
-                    ${post.author_id.slice(0, 2).toUpperCase()}
-                </div>
-                <div>
-                    <div style="font-weight: 700; color: var(--text);">Tác giả (${post.author_id.slice(0, 8)})</div>
-                    <div style="font-size: 11px; color: #888;">${new Date(post.createdAt).toLocaleDateString('vi-VN')}</div>
-                </div>
-            </div>
-            <div class="mock-post-content" style="font-size: 14px; color: var(--text); line-height: 1.5; margin-top: 4px;">
-                ${post.content}
-                ${mediaHtml}
-            </div>
-            <div class="mock-post-footer" style="display: flex; gap: 16px; font-size: 13px; color: #666; border-top: 1px dashed rgba(0,0,0,0.06); padding-top: 10px; margin-top: 4px;">
-                <span>❤️ ${post.likes_count} lượt thích</span>
-                <span>💬 ${post.comments_count} bình luận</span>
-                <span style="margin-left: auto; color: #00a9ff; font-size: 11px; font-style: italic;">* Placeholder (Chờ component Post của Thư)</span>
-            </div>
-        `;
-        container.appendChild(card);
-    });
+    }
 }

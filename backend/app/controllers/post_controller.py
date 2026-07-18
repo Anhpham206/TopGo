@@ -49,6 +49,26 @@ def _comment_id() -> str:
 
 
 
+async def get_post(post_id: str) -> dict:
+    """Lấy chi tiết một bài đăng từ Firestore."""
+    try:
+        doc = db.collection("posts").document(post_id).get()
+        if not doc.exists:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Không tìm thấy bài viết với mã {post_id}."
+            )
+        return doc.to_dict()
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Lỗi lấy bài viết {post_id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Lỗi khi lấy thông tin bài viết: {str(e)}"
+        )
+
+
 # ─── Like ───────────────────────────────────────────────────────────────────
 
 async def toggle_like(uid: str, post_id: str) -> dict:
@@ -161,8 +181,7 @@ async def create_repost(uid: str, author_info: dict, post_id: str, data: RepostC
     """
     try:
         # Kiểm tra bài gốc tồn tại
-        original = dict
-        # await get_post(post_id) Chõ này thay lại hàm lấy dữ liệu bài viết của Kiên
+        original = await get_post(post_id)
 
         repost_id = _post_id()
         doc = {

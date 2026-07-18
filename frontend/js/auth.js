@@ -38,6 +38,7 @@ onAuthStateChanged(auth, (user) => {
       firstname: firstname || user.email.split('@')[0],
       lastname: lastname,
       photoUrl: user.photoURL || null,
+      photoURL: user.photoURL || null,
       nationality: 'Việt Nam',
       sex: '',
       dob: '',
@@ -69,8 +70,22 @@ onAuthStateChanged(auth, (user) => {
         })
         .then(dbProfile => {
           if (dbProfile && (dbProfile.firstname || dbProfile.lastname || dbProfile.nationality || dbProfile.sex || dbProfile.dob || dbProfile.pob)) {
-            // Ghi nhận các trường thay đổi từ database
+            // Ghi nhận các trường thay đổi từ database, giữ lại photoURL từ Google Auth làm dự phòng nếu DB trống
             const updatedUser = { ...cachedUser, ...dbProfile };
+            if (!updatedUser.photoURL && user.photoURL) {
+              updatedUser.photoURL = user.photoURL;
+              updatedUser.photoUrl = user.photoURL;
+              
+              // Tự động đồng bộ ảnh đại diện Google lên Firestore để lưu trữ lâu dài
+              fetch(`${API_BASE}/api/users/profile`, {
+                method: 'POST',
+                headers: { 
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ photoURL: user.photoURL, photoUrl: user.photoURL })
+              }).catch(e => console.error("Lỗi tự động đồng bộ ảnh Google:", e));
+            }
             localStorage.setItem('topgo_user', JSON.stringify(updatedUser));
             window.dispatchEvent(new Event('topgo-auth-change'));
           } else {
@@ -82,6 +97,7 @@ onAuthStateChanged(auth, (user) => {
               firstname: cachedUser.firstname || firstname || 'Thành viên',
               lastname: cachedUser.lastname || lastname || 'TopGo',
               email: user.email || '',
+              photoURL: user.photoURL || '',
               nationality: 'Việt Nam',
               sex: '',
               dob: '',
@@ -182,6 +198,11 @@ const AuthService = {
     const user = this.getUser();
     if (!user) return null;
     Object.assign(user, updates);
+    const url = updates.photoURL || updates.photoUrl;
+    if (url) {
+      user.photoURL = url;
+      user.photoUrl = url;
+    }
     this.setUser(user);
 
     // Lưu trữ thông tin hồ sơ lên Firestore của backend

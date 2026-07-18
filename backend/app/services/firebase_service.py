@@ -32,7 +32,7 @@ if os.path.exists(credentials_path):
         else:
             firebase_app = firebase_admin.get_app()
             logger.info("Sử dụng Firebase App hiện tại.")
-        db = firestore.client(database_id="(default)")
+        db = firestore.client()
         logger.info("Khởi tạo Firestore client thành công.")
     except Exception as e:
         logger.error(f"Lỗi khi khởi tạo Firebase Admin SDK: {e}")

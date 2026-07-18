@@ -207,7 +207,7 @@ async def google_reviews(place_name: str, city_name: str = ""):
 # ════════════════════════════════════════════════════════════════════
 from app.controllers.post_controller import (
     CommentCreateRequest, RepostCreateRequest,
-    create_post,
+    create_post, get_post,
     toggle_like, get_user_like_status, add_comment, list_comments,
     create_repost
 )
@@ -218,6 +218,11 @@ def _build_author_info(decoded_token: dict) -> dict:
         "authorName": decoded_token.get("name") or decoded_token.get("email", "Ẩn danh"),
         "authorAvatar": decoded_token.get("picture", ""),
     }
+
+@router.get("/posts/{post_id}")
+async def get_post_detail(post_id: str):
+    """Lấy chi tiết một bài viết."""
+    return await get_post(post_id)
 
 
 

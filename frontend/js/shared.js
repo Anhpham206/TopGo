@@ -103,9 +103,10 @@ function _updateHeaderUser() {
                 }
             }
             if (linkEl) linkEl.href = './profile.html';
-            if (iconEl && user.photoUrl) {
+            if (iconEl && (user.photoUrl || user.photoURL)) {
+                const url = user.photoUrl || user.photoURL;
                 const borderStyle = user.is_vip ? 'border: 2px solid #ffb347;' : '';
-                iconEl.innerHTML = `<img src="${user.photoUrl}" alt="Avatar" referrerpolicy="no-referrer" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
+                iconEl.innerHTML = `<img src="${url}" alt="Avatar" referrerpolicy="no-referrer" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
             }
         } else {
             if (nameEl) nameEl.textContent = 'Đăng nhập';

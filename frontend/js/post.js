@@ -681,6 +681,10 @@ function _attachPostEvents(wrapperEl, postId, isLiked) {
                 method: 'POST',
                 body: JSON.stringify({ content }),
             });
+            // Xóa thông báo "Chưa có bình luận nào" nếu đây là bình luận đầu tiên
+            if (commentsList && !commentsList.querySelector('.comment-item')) {
+                commentsList.innerHTML = '';
+            }
             // Thêm comment mới vào cuối danh sách
             commentsList?.insertAdjacentHTML('beforeend', _buildCommentHTML(result.comment));
             commentsList?.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
