@@ -588,7 +588,7 @@ if (currentPage === 'profile.html') {
           photoEl.innerHTML = `<img src="${user.photoUrl}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; ${borderStyle}">`;
         } else {
           const initial = (user.firstname || user.lastname || user.email || 'T').charAt(0).toUpperCase();
-          v2AvatarEl.innerHTML = `<span style="font-size: 40px; font-weight: 600; color: var(--p1); display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">${initial}</span>`;
+          photoEl.innerHTML = `<span style="font-size: 40px; font-weight: 600; color: var(--p1); display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">${initial}</span>`;
         }
       }
 
@@ -852,6 +852,8 @@ if (currentPage === 'profile.html') {
         if (!pv2Indicator || !activeTab) return;
         pv2Indicator.style.left = activeTab.offsetLeft + 'px';
         pv2Indicator.style.width = activeTab.offsetWidth + 'px';
+    }
+    
     // Tự động seed một vài chuyến đi mẫu nếu danh sách trống hoàn toàn để hỗ trợ test nhanh (chỉ thử 1 lần)
     if (trips.length === 0 && !localStorage.getItem('demo_seeded')) {
       localStorage.setItem('demo_seeded', 'true');

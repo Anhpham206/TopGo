@@ -38,8 +38,6 @@ const API_BASE = _IS_LOCAL
     link.id = cssId;
     link.rel = 'stylesheet';
     link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-    link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
-    link.crossOrigin = '';
     document.head.appendChild(link);
 })();
 
@@ -55,9 +53,8 @@ async function _getAuthToken() {
         if (window.TopGoAuth?.getIdToken) {
             return await window.TopGoAuth.getIdToken();
         }
-        // Fallback: lấy từ localStorage (chỉ dùng cho dev/test)
-        const user = JSON.parse(localStorage.getItem('topgo_user') || 'null');
-        return user?._idToken || null;
+        // Fallback: lấy từ localStorage (chỉ dùng cho dev/test hoặc khi auth.js chưa load xong)
+        return localStorage.getItem('topgo_token') || null;
     } catch {
         return null;
     }
@@ -158,23 +155,24 @@ function _buildAvatar(name, photoURL, size = 44) {
  * Tạo HTML cho phần header tác giả.
  */
 function _buildPostHeader(post) {
-    const avatar = _buildAvatar(post.authorName, post.authorAvatar, 44);
+    const avatarUrl = post.authorAvatar || post.authorPhotoUrl || post.authorPhoto || '';
+    const avatar = _buildAvatar(post.authorName, avatarUrl, 44);
     const visIcon = post.visibility === 'private'
         ? `<span class="post-visibility-badge">
              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
              Riêng tư
            </span>`
         : '';
-    const typeLabel = post.type === 'repost'
-        ? `<span class="post-visibility-badge" style="background:rgba(23,191,99,0.1);color:#17bf63;">🔁 Đã chia sẻ lại</span>`
-        : '';
 
     return `
-    <div class="post-header">
+    <div class="post-header" 
+         data-user-id="${_esc(post.authorId || '')}" 
+         data-user-name="${_esc(post.authorName || '')}" 
+         data-user-avatar="${_esc(avatarUrl)}">
         ${avatar}
         <div class="post-author-meta">
             <div class="post-author-name">
-                ${_esc(post.authorName)}${visIcon}${typeLabel}
+                ${_esc(post.authorName)}${visIcon}
             </div>
             <div class="post-timestamp">${_relativeTime(post.createdAt)}</div>
         </div>
@@ -185,6 +183,28 @@ function _buildPostHeader(post) {
         </button>
     </div>`;
 }
+
+/**
+ * Tạo HTML cho danh sách địa điểm được gắn thẻ (tagged locations).
+ */
+function _buildLocationsBlock(locations) {
+    if (!locations || !Array.isArray(locations) || locations.length === 0) return '';
+    const tags = locations.map(loc => {
+        if (!loc) return '';
+        return `
+        <span class="post-location-tag">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:2px; flex-shrink:0;">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </svg>
+            ${_esc(loc)}
+        </span>`;
+    }).filter(Boolean).join('');
+
+    if (!tags) return '';
+    return `<div class="post-locations">${tags}</div>`;
+}
+
 
 /**
  * Tạo HTML cho ảnh đính kèm (variant: image).
@@ -236,7 +256,7 @@ function _buildItineraryCard(itineraryId, itineraryData, postId) {
         ? `${dateStart} → ${dateEnd}`
         : (days ? `${days} ngày` : null);
 
-    const itineraryUrl = `./planner.html?itinerary=${_esc(itineraryId)}`;
+    const itineraryUrl = `./planner.html?shareId=${_esc(itineraryId)}`;
 
     return `
     <a class="itinerary-card" href="${itineraryUrl}" data-itinerary-id="${_esc(itineraryId)}" target="_blank" rel="noopener">
@@ -296,20 +316,66 @@ function _buildItineraryCard(itineraryId, itineraryData, postId) {
  */
 function _buildQuoteBlock(original) {
     if (!original) return '';
-    const avatar = _buildAvatar(original.authorName, original.authorAvatar, 22);
-    const smallAvatar = `<div class="quote-avatar">${original.authorAvatar
-        ? `<img src="${_esc(original.authorAvatar)}" alt="${_esc(original.authorName)}">`
+    const quotePhoto = original.authorAvatar || original.authorPhotoUrl || original.authorPhoto;
+    const smallAvatar = `<div class="quote-avatar">${quotePhoto
+        ? `<img src="${_esc(quotePhoto)}" alt="${_esc(original.authorName)}">`
         : _esc(_initials(original.authorName))}</div>`;
 
     const preview = (original.content || '').substring(0, 160) + (original.content?.length > 160 ? '…' : '');
+    
+    let attachmentSummary = '';
+    if (original.type === 'repost' && original.repostOriginal) {
+        const orig = original.repostOriginal;
+        let attachmentText = '';
+        if (orig.type === 'itinerary') {
+            const dest = orig.itinerary?.destination || orig.content?.substring(0, 30) || 'Lịch trình';
+            const days = orig.itinerary?.days || 0;
+            attachmentText = `Lịch trình: ${dest} ${days ? `(${days} ngày)` : ''}`;
+        } else if (orig.type === 'image' || (orig.mediaUrls && orig.mediaUrls.length > 0)) {
+            attachmentText = `[Hình ảnh]`;
+        } else if (orig.type === 'video') {
+            attachmentText = `[Video]`;
+        } else {
+            const cap = orig.content ? orig.content.substring(0, 50) + (orig.content.length > 50 ? '…' : '') : 'Bài đăng';
+            attachmentText = `${cap}`;
+        }
+        
+        attachmentSummary = `
+        <div class="quote-attachment-summary" style="display:flex; align-items:center; gap:6px; margin-top:8px; padding:8px 12px; background:rgba(0,169,255,0.04); border:1px dashed var(--pc-border-light,#e5f3fa); border-radius:10px; font-family: Georgia, serif; font-style: italic; font-size:13px; color:var(--pc-muted);">
+            <span>Chia sẻ lại từ @${_esc(orig.authorName || 'user')}: ${attachmentText}</span>
+        </div>`;
+    } else {
+        let attachmentText = '';
+        if (original.type === 'itinerary') {
+            const dest = original.itinerary?.destination || original.content?.substring(0, 30) || 'Lịch trình';
+            const days = original.itinerary?.days || 0;
+            attachmentText = `Lịch trình: ${dest} ${days ? `(${days} ngày)` : ''}`;
+        } else if (original.type === 'image' || (original.mediaUrls && original.mediaUrls.length > 0)) {
+            attachmentText = `[Hình ảnh]`;
+        } else if (original.type === 'video') {
+            attachmentText = `[Video]`;
+        }
+
+        if (attachmentText) {
+            attachmentSummary = `
+            <div class="quote-attachment-summary" style="display:flex; align-items:center; gap:6px; margin-top:8px; padding:8px 12px; background:rgba(0,169,255,0.04); border:1px dashed var(--pc-border-light,#e5f3fa); border-radius:10px; font-family: Georgia, serif; font-style: italic; font-size:13px; color:var(--pc-muted);">
+                <span>Đính kèm: ${attachmentText}</span>
+            </div>`;
+        }
+    }
+
     return `
     <div class="post-quote-block" role="blockquote">
-        <div class="quote-author-row">
+        <div class="quote-author-row"
+             data-user-id="${_esc(original.authorId || '')}"
+             data-user-name="${_esc(original.authorName || '')}"
+             data-user-avatar="${_esc(quotePhoto || '')}">
             ${smallAvatar}
             <span class="quote-author-name">${_esc(original.authorName)}</span>
             <span class="post-timestamp" style="margin-left:4px;">${_relativeTime(original.createdAt)}</span>
         </div>
         <div class="quote-content">${_esc(preview)}</div>
+        ${attachmentSummary}
     </div>`;
 }
 
@@ -347,19 +413,6 @@ function _buildInteractions(post, isLiked) {
             </svg>
             <span class="post-action-count" style="display:none;"></span>
         </button>
-    </div>
-
-    <!-- Repost confirm panel -->
-    <div class="post-repost-panel" data-repost-panel="${_esc(post.id)}">
-        <textarea class="post-repost-textarea"
-                  placeholder="Thêm bình luận của bạn về bài đăng này…"
-                  rows="2" maxlength="500"></textarea>
-        <div class="post-repost-panel-actions">
-            <button class="post-repost-cancel-btn">Hủy</button>
-            <button class="post-repost-confirm-btn" data-post-id="${_esc(post.id)}">
-                🔁 Chia sẻ lại
-            </button>
-        </div>
     </div>`;
 }
 
@@ -535,8 +588,6 @@ function _loadLeafletScript() {
         if (window.L) { resolve(); return; }
         const script = document.createElement('script');
         script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-        script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WPaA=';
-        script.crossOrigin = '';
         script.onload = resolve;
         script.onerror = reject;
         document.head.appendChild(script);
@@ -593,7 +644,7 @@ async function _loadComments(postId, listEl) {
 /**
  * Gắn tất cả event listeners vào wrapper element của một post card.
  */
-function _attachPostEvents(wrapperEl, postId, isLiked) {
+function _attachPostEvents(wrapperEl, postId, isLiked, post) {
     // ── Like button ──────────────────────────────────────────────────────────
     const likeBtn = wrapperEl.querySelector(`.post-action-btn--like[data-post-id="${postId}"]`);
     const likeCountEl = wrapperEl.querySelector(`[data-like-count="${postId}"]`);
@@ -682,6 +733,9 @@ function _attachPostEvents(wrapperEl, postId, isLiked) {
                 body: JSON.stringify({ content }),
             });
             // Thêm comment mới vào cuối danh sách
+            if (commentsList && (commentsList.innerHTML.includes('Chưa có bình luận nào') || commentsList.children.length === 0)) {
+                commentsList.innerHTML = '';
+            }
             commentsList?.insertAdjacentHTML('beforeend', _buildCommentHTML(result.comment));
             commentsList?.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             if (commentInput) commentInput.value = '';
@@ -702,12 +756,8 @@ function _attachPostEvents(wrapperEl, postId, isLiked) {
         }
     });
 
-    // ── Repost button (toggle panel) ─────────────────────────────────────────
+    // ── Repost button (trigger modal) ─────────────────────────────────────────
     const repostBtn = wrapperEl.querySelector(`.post-action-btn--repost[data-post-id="${postId}"]`);
-    const repostPanel = wrapperEl.querySelector(`[data-repost-panel="${postId}"]`);
-    const repostCancel = repostPanel?.querySelector('.post-repost-cancel-btn');
-    const repostConfirm = repostPanel?.querySelector('.post-repost-confirm-btn');
-    const repostTextarea = repostPanel?.querySelector('.post-repost-textarea');
 
     repostBtn?.addEventListener('click', async () => {
         const token = await _getAuthToken();
@@ -716,37 +766,7 @@ function _attachPostEvents(wrapperEl, postId, isLiked) {
             else if (window.showToast) window.showToast('Vui lòng đăng nhập để chia sẻ lại.', 'warning');
             return;
         }
-        const isOpen = repostPanel?.classList.contains('is-open');
-        repostPanel?.classList.toggle('is-open', !isOpen);
-        if (!isOpen) repostTextarea?.focus();
-    });
-
-    repostCancel?.addEventListener('click', () => {
-        repostPanel?.classList.remove('is-open');
-        if (repostTextarea) repostTextarea.value = '';
-    });
-
-    repostConfirm?.addEventListener('click', async () => {
-        if (!repostConfirm) return;
-        repostConfirm.disabled = true;
-        repostConfirm.textContent = '…';
-
-        try {
-            await _apiFetch(`/posts/${postId}/repost`, {
-                method: 'POST',
-                body: JSON.stringify({ content: repostTextarea?.value?.trim() || '' }),
-            });
-            repostPanel?.classList.remove('is-open');
-            if (repostTextarea) repostTextarea.value = '';
-            repostBtn?.classList.add('is-reposting');
-            if (window.showToast) window.showToast('Đã chia sẻ lại bài đăng!', 'success');
-        } catch (err) {
-            console.error('[TopGo Post] Repost failed:', err);
-            if (window.showToast) window.showToast('Chia sẻ lại thất bại. Vui lòng thử lại.', 'error');
-        } finally {
-            repostConfirm.disabled = false;
-            repostConfirm.textContent = '🔁 Chia sẻ lại';
-        }
+        _showRepostModal(postId, repostBtn, post);
     });
 }
 
@@ -894,6 +914,14 @@ export async function renderPostCard(postId, containerEl, options = {}) {
             post = await _apiFetch(`/posts/${postId}`);
         }
 
+        // Cache post data for edit/delete functions in postCard.js
+        if (post && post.id) {
+            if (!window._renderedPostsCache) {
+                window._renderedPostsCache = new Map();
+            }
+            window._renderedPostsCache.set(post.id, post);
+        }
+
         // ── Bước 3: Lấy like status (chỉ khi user đã đăng nhập) ──────────────
         const currentUser = _getCurrentUser();
         if (currentUser) {
@@ -939,14 +967,15 @@ export async function renderPostCard(postId, containerEl, options = {}) {
         // ── Bước 6: Dựng HTML hoàn chỉnh ─────────────────────────────────────
         const html = `
         <div class="topgo-thu-post-wrapper">
-            <div class="post-card ${variantClass}">
+            <div class="post-card ${variantClass}" data-post-id="${_esc(postId)}">
                 ${_buildPostHeader(post)}
-                ${post.type === 'image' ? _buildImageBlock(post.imageUrl) : ''}
+                ${post.type === 'image' ? _buildImageBlock(post.mediaUrls?.[0] || post.imageUrl) : ''}
                 <div class="post-body">
                     <div class="post-content-text">${_esc(post.content)}</div>
                 </div>
                 ${post.type === 'itinerary' ? _buildItineraryCard(post.itineraryId, itineraryData, postId) : ''}
                 ${post.type === 'repost' && post.repostOriginal ? _buildQuoteBlock(post.repostOriginal) : ''}
+                ${_buildLocationsBlock(post.taggedLocations)}
                 ${_buildInteractions(post, isLiked)}
                 ${_buildCommentsSection(post, currentUser)}
             </div>
@@ -957,7 +986,7 @@ export async function renderPostCard(postId, containerEl, options = {}) {
         const finalWrapper = containerEl.lastElementChild;
 
         // ── Bước 8: Gắn events ────────────────────────────────────────────────
-        _attachPostEvents(finalWrapper, postId, isLiked);
+        _attachPostEvents(finalWrapper, postId, isLiked, post);
 
         // ── Bước 9: Khởi tạo Leaflet map (nếu là variant itinerary) ──────────
         if (post.type === 'itinerary' && post.itineraryId) {
@@ -1059,5 +1088,82 @@ export async function cloneItinerary(originalItineraryId) {
             window.showToast('Không thể lưu lịch trình. Có thể lịch trình này đang ở chế độ Riêng tư.', 'error');
         }
         throw err;
+    }
+}
+
+// ─── Global Repost Modal ───────────────────────────────────────────────────
+
+function _showRepostModal(postId, repostBtn, post) {
+    let modal = document.getElementById('global-repost-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'global-repost-modal';
+        modal.className = 'repost-modal-overlay topgo-thu-post-wrapper';
+        modal.innerHTML = `
+            <div class="repost-modal-content">
+                <div class="repost-modal-header">
+                    <h3>Chia sẻ lại bài viết</h3>
+                    <button class="repost-modal-close" aria-label="Đóng">✕</button>
+                </div>
+                <div class="repost-modal-body">
+                    <textarea class="repost-modal-textarea" placeholder="Thêm bình luận của bạn về bài đăng này…" rows="3" maxlength="500"></textarea>
+                    <div class="repost-modal-quote-container" style="margin-top: 16px;"></div>
+                </div>
+                <div class="repost-modal-footer">
+                    <button class="repost-modal-cancel">Hủy</button>
+                    <button class="repost-modal-submit">Đăng lại</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        modal.querySelector('.repost-modal-close').addEventListener('click', () => _closeRepostModal(modal));
+        modal.querySelector('.repost-modal-cancel').addEventListener('click', () => _closeRepostModal(modal));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) _closeRepostModal(modal);
+        });
+    }
+
+    const quoteContainer = modal.querySelector('.repost-modal-quote-container');
+    const originalToQuote = post;
+    if (quoteContainer) {
+        quoteContainer.innerHTML = originalToQuote ? _buildQuoteBlock(originalToQuote) : '';
+    }
+
+    const textarea = modal.querySelector('.repost-modal-textarea');
+    textarea.value = '';
+    
+    const submitBtn = modal.querySelector('.repost-modal-submit');
+    // Remove old event listeners by replacing the button
+    const newSubmitBtn = submitBtn.cloneNode(true);
+    submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
+    
+    newSubmitBtn.addEventListener('click', async () => {
+        newSubmitBtn.disabled = true;
+        newSubmitBtn.textContent = 'Đang xử lý…';
+        try {
+            await _apiFetch(`/posts/${postId}/repost`, {
+                method: 'POST',
+                body: JSON.stringify({ content: textarea.value.trim() }),
+            });
+            _closeRepostModal(modal);
+            repostBtn?.classList.add('is-reposting');
+            if (window.showToast) window.showToast('Đã chia sẻ lại bài đăng!', 'success');
+        } catch (err) {
+            console.error('[TopGo Post] Repost failed:', err);
+            if (window.showToast) window.showToast('Chia sẻ lại thất bại. Vui lòng thử lại.', 'error');
+        } finally {
+            newSubmitBtn.disabled = false;
+            newSubmitBtn.textContent = 'Đăng lại';
+        }
+    });
+
+    modal.classList.add('active');
+    setTimeout(() => textarea.focus(), 50);
+}
+
+function _closeRepostModal(modal) {
+    if (modal) {
+        modal.classList.remove('active');
     }
 }

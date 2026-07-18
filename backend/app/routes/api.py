@@ -208,7 +208,7 @@ async def google_reviews(place_name: str, city_name: str = ""):
 # ════════════════════════════════════════════════════════════════════
 from app.controllers.post_controller import (
     CommentCreateRequest, RepostCreateRequest,
-    create_post,
+    create_post, get_post,
     toggle_like, get_user_like_status, add_comment, list_comments,
     create_repost
 )
@@ -220,6 +220,10 @@ def _build_author_info(decoded_token: dict) -> dict:
         "authorAvatar": decoded_token.get("picture", ""),
     }
 
+@router.get("/posts/{post_id}")
+async def get_single_post(post_id: str):
+    """Lấy chi tiết một bài viết."""
+    return await get_post(post_id)
 
 @router.post("/posts/{post_id}/like")
 async def like_post(post_id: str, decoded_token: dict = Depends(verify_firebase_token)):

@@ -11,6 +11,7 @@
 */
 import { loadSharedComponents, showToast } from './shared.js';
 import { SuggestedFollowWidget, DestinationsWidget } from './sidebarUtils.js';
+import { renderPostCard } from './post.js';
 
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -536,13 +537,12 @@ const PostComposer = {
         const empty = feedEmpty();
         if (empty) empty.style.display = 'none';
 
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = PostCardRenderer.render(postData);
-        const newCard = tempDiv.firstElementChild;
-        if (newCard) {
-            newCard.style.animation = 'composerPostIn 0.4s ease';
-            content.insertBefore(newCard, content.firstChild);
-        }
+        const postPlaceholder = document.createElement('div');
+        postPlaceholder.className = "post-container-placeholder";
+        postPlaceholder.style.animation = 'composerPostIn 0.4s ease';
+        content.insertBefore(postPlaceholder, content.firstChild);
+
+        renderPostCard(postData.id, postPlaceholder, { mockData: postData });
     },
 
     _resetComposer() {
@@ -692,57 +692,12 @@ const NewsFeedManager = {
     },
 
     _initEventDelegation() {
-        const content = feedContent();
-        if (!content) return;
-
-        content.addEventListener('click', (e) => {
-            // Like button
-            const likeBtn = e.target.closest('[data-action="like"]');
-            if (likeBtn) {
-                this._handleLike(likeBtn);
-                return;
-            }
-
-            // Comment button
-            const commentBtn = e.target.closest('[data-action="comment"]');
-            if (commentBtn) {
-                showToast('Tính năng bình luận đang được phát triển!', 'warning');
-                return;
-            }
-
-            // Share button
-            const shareBtn = e.target.closest('[data-action="share"]');
-            if (shareBtn) {
-                showToast('Tính năng chia sẻ đang được phát triển!', 'warning');
-                return;
-            }
-
-            // Itinerary card click
-            const itinCard = e.target.closest('.post-itinerary');
-            if (itinCard) {
-                const itinId = itinCard.dataset.itineraryId;
-                if (itinId) {
-                    showToast('Xem lịch trình chi tiết — đang phát triển!', 'warning');
-                }
-                return;
-            }
-        });
+        // Event delegation cũ của feed (like, comment tĩnh) đã được gỡ bỏ.
+        // Component post.js sẽ tự động quản lý các event của nó.
     },
 
     _handleLike(btn) {
-        const isLiked = btn.classList.toggle('liked');
-        const iconEl = btn.querySelector('.action-icon');
-        const countEl = btn.querySelector('.action-count');
-        
-        if (iconEl) iconEl.textContent = isLiked ? '♥' : '♡';
-        
-        if (countEl) {
-            let count = parseInt(countEl.textContent) || 0;
-            count = isLiked ? count + 1 : Math.max(0, count - 1);
-            countEl.textContent = _formatNumber(count);
-        }
-
-        // API call sẽ được tích hợp khi phần Like API (của Thư) sẵn sàng
+        // Hàm này không còn dùng vì post.js tự xử lý.
     },
 
     async loadFeed() {
@@ -819,32 +774,34 @@ const NewsFeedManager = {
         _isLoading = false;
     },
 
-    _renderPosts(posts) {
+    async _renderPosts(posts) {
         const content = feedContent();
         if (!content) return;
 
-        const fragment = document.createDocumentFragment();
-        const tempDiv = document.createElement('div');
+        // Chạy song song renderPostCard vào các container để giữ thứ tự DOM
+        const renderTasks = [];
 
         posts.forEach(post => {
             if (this._postCountSinceLastAd >= this._nextAdTarget) {
-                tempDiv.innerHTML = this._renderAdPost();
-                while (tempDiv.firstChild) {
-                    fragment.appendChild(tempDiv.firstChild);
-                }
+                const adDiv = document.createElement('div');
+                adDiv.innerHTML = this._renderAdPost();
+                content.appendChild(adDiv.firstElementChild);
                 this._postCountSinceLastAd = 0;
                 this._nextAdTarget = Math.floor(Math.random() * 7) + 4;
             }
 
-            tempDiv.innerHTML = PostCardRenderer.render(post);
-            while (tempDiv.firstChild) {
-                fragment.appendChild(tempDiv.firstChild);
-            }
+            const postPlaceholder = document.createElement('div');
+            postPlaceholder.className = "post-container-placeholder";
+            content.appendChild(postPlaceholder);
+
+            // Truyền mockData = post để dùng luôn data từ API newsfeed, tránh gọi lại API lẻ
+            renderTasks.push(renderPostCard(post.id, postPlaceholder, { mockData: post }));
 
             this._postCountSinceLastAd++;
         });
 
-        content.appendChild(fragment);
+        // Đợi tất cả bài post render xong (Leaflet map + Comments + UI hoàn tất)
+        await Promise.all(renderTasks);
     },
 
     _renderAdPost() {
@@ -988,16 +945,18 @@ function _updateSidebarProfile() {
         _getAuthHeaders().then(headers => {
             if (!headers['Authorization']) return; // Chưa đăng nhập
             
-            Promise.all([
-                fetch(`${API_BASE}/api/plans/list`, { headers }).then(res => res.ok ? res.json() : {plans:[]}),
-                fetch(`${API_BASE}/api/users/profile/posts`, { headers }).then(res => res.ok ? res.json() : {posts:[]})
-            ]).then(([tripsData, postsData]) => {
-                const tripCount = tripsData.plans ? tripsData.plans.length : 0;
-                const postCount = postsData.posts ? postsData.posts.length : 0;
-                if (tripsEl) tripsEl.textContent = tripCount;
-                if (postsEl) postsEl.textContent = postCount;
-                localStorage.setItem('userStats', JSON.stringify({ trips: tripCount, posts: postCount }));
-            }).catch(err => console.warn('Lỗi tải thống kê:', err));
+            fetch(`${API_BASE}/api/users/profile`, { headers })
+                .then(res => res.ok ? res.json() : null)
+                .then(data => {
+                    if (data) {
+                        const tripCount = data.tripsCount ?? 0;
+                        const postCount = data.postsCount ?? 0;
+                        if (tripsEl) tripsEl.textContent = tripCount;
+                        if (postsEl) postsEl.textContent = postCount;
+                        localStorage.setItem('userStats', JSON.stringify({ trips: tripCount, posts: postCount }));
+                    }
+                })
+                .catch(err => console.warn('Lỗi tải thống kê:', err));
         });
     }
 }
@@ -1005,6 +964,15 @@ function _updateSidebarProfile() {
 onDOMReady(async () => {
     // Chờ Firebase Auth khởi tạo xong để currentUser không bị null
     await _waitForFirebaseAuth();
+    
+    // Đăng ký Bridge để nhận bài viết mới từ Modal của Diệp
+    window.NewsFeedBridge = {
+        onPostCreated(postData) {
+            PostComposer._prependPost(postData);
+            _updateSidebarProfile();
+        }
+    };
+
     _updateSidebarProfile();
     HotSearchWidget.load();
     SuggestedFollowWidget.load();

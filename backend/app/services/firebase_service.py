@@ -262,19 +262,22 @@ async def verify_firebase_token(authorization: str = Header(None)) -> dict:
         )
 
     try:
-        decoded_token = auth.verify_id_token(token)
+        decoded_token = auth.verify_id_token(token, clock_skew_seconds=60)
         return decoded_token
     except auth.ExpiredIdTokenError:
+        logger.warning(f"Token expired. First 20 chars: {token[:20]}...")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Firebase ID Token đã hết hạn."
         )
-    except auth.InvalidIdTokenError:
+    except auth.InvalidIdTokenError as e:
+        logger.error(f"Invalid token error detail: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Firebase ID Token không hợp lệ."
+            detail=f"Firebase ID Token không hợp lệ. Chi tiết: {str(e)}"
         )
     except Exception as e:
+        logger.error(f"Token verification failed: {e}. Token: {token[:20]}...")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Xác thực token thất bại: {str(e)}"
@@ -313,7 +316,7 @@ async def verify_firebase_token_optional(authorization: str = Header(None)) -> d
         parts = authorization.split()
         if len(parts) == 2 and parts[0].lower() == "bearer":
             token = parts[1]
-            decoded_token = auth.verify_id_token(token)
+            decoded_token = auth.verify_id_token(token, clock_skew_seconds=60)
             return decoded_token
     except Exception:
         return {}

@@ -54,13 +54,13 @@
   function showCard(target) {
     const card = createHoverCard();
     
-    // Read data from the closest post-header
-    const postHeader = target.closest('.post-header');
-    if (!postHeader) return;
+    // Read data from the closest post-header or quote-author-row
+    const sourceEl = target.closest('.post-header, .quote-author-row');
+    if (!sourceEl) return;
 
-    const userId = postHeader.dataset.userId || '';
-    const userName = postHeader.dataset.userName || 'Thành viên';
-    const userAvatar = postHeader.dataset.userAvatar || '';
+    const userId = sourceEl.dataset.userId || '';
+    const userName = sourceEl.dataset.userName || 'Thành viên';
+    const userAvatar = sourceEl.dataset.userAvatar || '';
 
     // Populate card
     const nameEl = card.querySelector('#hc-name');
@@ -78,21 +78,31 @@
     if (nameEl) nameEl.href = profileUrl;
     if (avatarEl) avatarEl.href = profileUrl;
 
-    // Read real stats from localStorage if it's the current user, or generate deterministic fake stats for other users
-    let tripCount = 0;
-    let postCount = 0;
-    const currentUserInfo = JSON.parse(localStorage.getItem('topgo_user') || '{}');
-    if (currentUserInfo.uid === userId) {
-        const stats = JSON.parse(localStorage.getItem('userStats') || '{"trips":0,"posts":0}');
-        tripCount = stats.trips || 0;
-        postCount = stats.posts || 0;
-    } else {
-        // Generate pseudo-random deterministic stats based on user name length
-        tripCount = (userName.length * 3) % 25 + 2;
-        postCount = (userName.length * 7) % 60 + 5;
+    // Set loading / default states
+    if (tripsEl) tripsEl.textContent = '...';
+    if (postsEl) postsEl.textContent = '...';
+
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const apiBase = isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
+
+    if (userId) {
+        fetch(`${apiBase}/api/users/${userId}/profile`)
+            .then(res => res.ok ? res.json() : null)
+            .then(data => {
+                if (data && _currentTarget === target) {
+                    if (tripsEl) tripsEl.textContent = data.tripsCount ?? 0;
+                    if (postsEl) postsEl.textContent = data.postsCount ?? 0;
+                    if (data.nationality && card.querySelector('#hc-nation')) {
+                        card.querySelector('#hc-nation').textContent = data.nationality;
+                    }
+                }
+            })
+            .catch(err => {
+                console.warn('Lỗi tải hover profile:', err);
+                if (tripsEl) tripsEl.textContent = '0';
+                if (postsEl) tripsEl.textContent = '0';
+            });
     }
-    if (tripsEl) tripsEl.textContent = tripCount;
-    if (postsEl) postsEl.textContent = postCount;
 
     if (avatarEl) {
       if (userAvatar && userAvatar !== 'undefined' && userAvatar !== 'null') {
@@ -136,7 +146,7 @@
   }
 
   function handleMouseEnter(e) {
-    const target = e.target.closest('.post-avatar, .post-avatar-placeholder, .post-author-name');
+    const target = e.target.closest('.post-author-avatar, .post-author-name, .quote-avatar, .quote-author-name');
     if (!target) return;
 
     clearTimeout(_hideTimeout);
@@ -148,7 +158,7 @@
   }
 
   function handleMouseLeave(e) {
-    const target = e.target.closest('.post-avatar, .post-avatar-placeholder, .post-author-name');
+    const target = e.target.closest('.post-author-avatar, .post-author-name, .quote-avatar, .quote-author-name');
     if (!target) return;
 
     clearTimeout(_showTimeout);

@@ -94,6 +94,7 @@ export function initPostModal() {
       position: relative; overflow: hidden; transition: all var(--t);
       box-shadow: 0 8px 24px rgba(0, 169, 255, 0.12), 0 2px 8px rgba(38, 78, 107, 0.06);
       box-sizing: border-box; min-height: 158px;
+      margin-bottom: 20px;
     }
 
     /* Gradient top bar */
@@ -121,7 +122,7 @@ export function initPostModal() {
 
     /* Bottom content area */
     .pm-itin-bottom {
-      padding: 12px 20px 14px;
+      padding: 16px 20px 20px;
       display: flex; flex-direction: column; gap: 8px; flex: 1;
     }
     .pm-itin-meta-chips { display: flex; gap: 7px; flex-wrap: wrap; }
@@ -470,10 +471,6 @@ export function initPostModal() {
       <div class="pm-footer">
         <div class="pm-status" id="pm-status-msg"></div>
         <button class="pm-submit" id="pm-submit-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-          </svg>
           <span>Đăng bài</span>
         </button>
       </div>
@@ -514,10 +511,6 @@ export function openPostModal(trip = null) {
   if (submitBtn) {
     submitBtn.disabled = false;
     submitBtn.innerHTML = `
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <line x1="22" y1="2" x2="11" y2="13"></line>
-        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-      </svg>
       <span>Đăng bài</span>
     `;
   }
@@ -549,7 +542,13 @@ export function openPostModal(trip = null) {
         lichTrinh.forEach(day => {
           if (Array.isArray(day)) {
             day.forEach(stop => {
-              if (stop.Dia_diem) placesSet.add(stop.Dia_diem);
+              if (stop.Dia_diem) {
+                const loc = stop.Dia_diem.trim();
+                const isActivity = /ăn sáng|ăn trưa|ăn tối|nghỉ ngơi|di chuyển|khởi hành|nhận phòng|trả phòng|kết thúc|tự do/i.test(loc);
+                if (!isActivity && loc.length < 35) {
+                  placesSet.add(loc);
+                }
+              }
             });
           }
         });
@@ -669,7 +668,8 @@ export function openPostModal(trip = null) {
       return;
     }
 
-    pickerList.innerHTML = `<div style="font-size:12px;color:var(--muted);text-align:center;padding:12px;">⏳ Đang tải lịch trình đã lưu...</div>`;
+    const pickerList = get('pm-itin-picker-list');
+    pickerList.innerHTML = `<div style="font-size:12px;color:var(--muted);text-align:center;padding:12px;">Đang tải lịch trình đã lưu...</div>`;
     pickerWrap.style.display = 'flex';
 
     try {
@@ -932,7 +932,12 @@ export function openPostModal(trip = null) {
     setStatus('Đang kiểm duyệt nội dung bằng AI...', 'info');
 
     try {
-      const token = await window.TopGoAuth?.getIdToken();
+      let token = null;
+      if (window.TopGoAuth?.getIdToken) {
+        token = await window.TopGoAuth.getIdToken();
+      } else {
+        token = localStorage.getItem('topgo_token');
+      }
       if (!token) throw new Error('Bạn cần đăng nhập để thực hiện tính năng này.');
 
       const payload = {
@@ -953,18 +958,19 @@ export function openPostModal(trip = null) {
       // Thành công
       setStatus('Đã đăng bài thành công!', 'success');
       showToast('Bài viết của bạn đã được đăng tải', 'success');
+      
+      // Gửi bài viết mới về Newsfeed để hiển thị ngay lập tức
+      if (typeof window.NewsFeedBridge?.onPostCreated === 'function') {
+        window.NewsFeedBridge.onPostCreated(data);
+      }
+      
       btn.innerHTML = 'Đã đăng!';
-      setTimeout(() => closeModal(), 1800);
+      closeModal();
 
     } catch (err) {
       setStatus(err.message, 'error');
       btn.disabled = false;
-      btn.innerHTML = `
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:8px;">
-          <line x1="22" y1="2" x2="11" y2="13"></line>
-          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-        </svg> Đăng bài
-      `;
+      btn.innerHTML = `Đăng bài`;
       isSubmitting = false;
     }
   };

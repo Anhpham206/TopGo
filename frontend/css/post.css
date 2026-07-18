@@ -42,6 +42,7 @@
   font-family: "Josefin Sans", "Segoe UI", sans-serif;
   color: var(--pc-text);
   line-height: 1.6;
+  margin-bottom: 24px;
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -684,7 +685,7 @@
 .topgo-thu-post-wrapper .post-comment-input {
   width: 100%;
   border: 1.5px solid var(--pc-border);
-  border-radius: 20px;
+  border-radius: 24px;
   padding: 8px 14px;
   font-family: inherit;
   font-size: 13.5px;
@@ -903,4 +904,197 @@
   .topgo-thu-post-wrapper .itinerary-map-preview {
     height: 140px;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   GLOBAL REPOST MODAL
+   ═══════════════════════════════════════════════════════════════════════ */
+.repost-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.repost-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.repost-modal-content {
+  background: #ffffff;
+  width: 90%;
+  max-width: 640px;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.repost-modal-overlay.active .repost-modal-content {
+  transform: translateY(0) scale(1);
+}
+
+.repost-modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--pc-border-light, #eaf4fb);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.repost-modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--pc-text, #264e6b);
+}
+
+.repost-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: var(--pc-muted, #6b8ca0);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.repost-modal-close:hover {
+  color: var(--pc-text, #264e6b);
+}
+
+.repost-modal-body {
+  padding: 20px;
+}
+
+.repost-modal-textarea {
+  width: 100%;
+  border: 1.5px solid var(--pc-border, #cde9f5);
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 14.5px;
+  color: var(--pc-text, #264e6b);
+  resize: none;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.repost-modal-textarea:focus {
+  border-color: var(--pc-primary, #00a9ff);
+  box-shadow: 0 0 0 3px rgba(0, 169, 255, 0.1);
+}
+
+.repost-modal-footer {
+  padding: 16px 20px;
+  background: var(--pc-bg-soft, #f8fbfe);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.repost-modal-cancel {
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pc-muted, #6b8ca0);
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background 0.2s;
+}
+
+.repost-modal-cancel:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.repost-modal-submit {
+  background: linear-gradient(90deg, var(--pc-primary, #00a9ff), var(--pc-primary-2, #0051ff));
+  border: none;
+  padding: 8px 24px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.repost-modal-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 169, 255, 0.3);
+}
+
+.repost-modal-submit:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+body.dark .repost-modal-content {
+  background: var(--pc-bg-dark, #162033);
+}
+
+body.dark .repost-modal-header {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .repost-modal-header h3 {
+  color: #fff;
+}
+
+body.dark .repost-modal-textarea {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+body.dark .repost-modal-footer {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Scoped Tagged Locations inside post card */
+.topgo-thu-post-wrapper .post-locations {
+  padding: 0 18px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.topgo-thu-post-wrapper .post-location-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: rgba(0, 169, 255, 0.08);
+  border: 1px solid rgba(0, 169, 255, 0.15);
+  border-radius: 20px;
+  font-size: 11.5px;
+  color: var(--pc-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--pc-transition, 0.2s);
+}
+.topgo-thu-post-wrapper .post-location-tag:hover {
+  background: rgba(0, 169, 255, 0.15);
+}
+body.dark .topgo-thu-post-wrapper .post-location-tag {
+  background: rgba(0, 169, 255, 0.1);
+  border-color: rgba(0, 169, 255, 0.2);
 }

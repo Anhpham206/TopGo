@@ -47,16 +47,19 @@ def _enrich_post_with_author(postData: dict, authorCache: dict = None) -> dict:
         if userData.get("lastname"):
             name = f"{userData['lastname']} {name}".strip()
         postData["authorName"] = name or "Người dùng TopGo"
-        postData["authorPhotoUrl"] = (
+        photo_url = (
             userData.get("photoURL") or
             userData.get("photoUrl") or
             userData.get("photo_url") or
             postData.get("authorPhotoUrl") or
             ""
         )
+        postData["authorPhotoUrl"] = photo_url
+        postData["authorAvatar"] = photo_url
     else:
         postData.setdefault("authorName", "Người dùng TopGo")
         postData.setdefault("authorPhotoUrl", "")
+        postData.setdefault("authorAvatar", "")
 
     return postData
 

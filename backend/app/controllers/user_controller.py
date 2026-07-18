@@ -22,9 +22,18 @@ async def get_user_profile(uid: str) -> dict:
         doc_ref = db.collection("users").document(uid)
         doc = doc_ref.get()
         if doc.exists:
-            # Lọc và trả về dữ liệu của document
             data = doc.to_dict()
-            # Loại bỏ các trường không cần thiết cho client nếu có
+            
+            # Đếm số bài viết thực tế
+            posts_query = db.collection("posts").where("authorId", "==", uid).stream()
+            posts_count = sum(1 for _ in posts_query)
+            
+            # Đếm số chuyến đi thực tế
+            plans_query = db.collection("users").document(uid).collection("saved_plans").stream()
+            plans_count = sum(1 for _ in plans_query)
+            
+            data["postsCount"] = posts_count
+            data["tripsCount"] = plans_count
             return data
         return {}
     except Exception as e:
@@ -49,6 +58,17 @@ async def get_public_user_profile(user_id: str) -> dict:
             # Thêm id vào response (để cho đồng nhất)
             if 'id' not in data:
                 data['id'] = user_id
+
+            # Đếm số bài viết thực tế
+            posts_query = db.collection("posts").where("authorId", "==", user_id).stream()
+            posts_count = sum(1 for _ in posts_query)
+            
+            # Đếm số chuyến đi thực tế
+            plans_query = db.collection("users").document(user_id).collection("saved_plans").stream()
+            plans_count = sum(1 for _ in plans_query)
+            
+            data["postsCount"] = posts_count
+            data["tripsCount"] = plans_count
                 
             return data
         

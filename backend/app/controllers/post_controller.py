@@ -63,6 +63,74 @@ def _comment_id() -> str:
     return f"cmt-{int(datetime.datetime.utcnow().timestamp() * 1000)}"
 
 
+def _sync_post_itinerary(uid: str, itinerary_id: Optional[str]):
+    if not itinerary_id:
+        return
+    try:
+        itin_ref = db.collection("itineraries").document(itinerary_id)
+        if itin_ref.get().exists:
+            return
+
+        # Nếu là mock preview, tạo nhanh mock data trong collection itineraries
+        if itinerary_id == "trip-preview-1":
+            mock_data = {
+                "id": "trip-preview-1",
+                "destination": "Phú Quốc Hè 2026",
+                "days": 4,
+                "pax": 2,
+                "budget": 8500000.0,
+                "dateStart": "2026-07-20",
+                "dateEnd": "2026-07-24",
+                "itinerary": '{"output":{"Lich_trinh":[[{"Dia_diem":"Bãi Sao"},{"Dia_diem":"Chợ Đêm"}]]}}',
+                "visibility": "public",
+                "ownerId": "mock-admin",
+                "createdAt": firestore.SERVER_TIMESTAMP
+            }
+            itin_ref.set(mock_data)
+            logger.info("Đã seed mock trip-preview-1")
+            return
+        elif itinerary_id == "trip-preview-2":
+            mock_data = {
+                "id": "trip-preview-2",
+                "destination": "Sapa Sương Mù",
+                "days": 3,
+                "pax": 4,
+                "budget": 4500000.0,
+                "dateStart": "2026-11-15",
+                "dateEnd": "2026-11-18",
+                "itinerary": '{"output":{"Lich_trinh":[[{"Dia_diem":"Bản Cát Cát"},{"Dia_diem":"Fansipan"}]]}}',
+                "visibility": "public",
+                "ownerId": "mock-admin",
+                "createdAt": firestore.SERVER_TIMESTAMP
+            }
+            itin_ref.set(mock_data)
+            logger.info("Đã seed mock trip-preview-2")
+            return
+
+        # Nếu là lịch trình của user lưu trong saved_plans, copy sang itineraries để share
+        user_plan_ref = db.collection("users").document(uid).collection("saved_plans").document(itinerary_id)
+        user_plan_doc = user_plan_ref.get()
+        if user_plan_doc.exists:
+            plan_data = user_plan_doc.to_dict()
+            shared_data = {
+                "id": itinerary_id,
+                "destination": plan_data.get("destination", "Lịch trình"),
+                "days": int(plan_data.get("days", 1)),
+                "pax": int(plan_data.get("pax", 1)),
+                "budget": float(plan_data.get("budget", 0.0)),
+                "dateStart": plan_data.get("dateStart", ""),
+                "dateEnd": plan_data.get("dateEnd", ""),
+                "itinerary": plan_data.get("itinerary", ""),
+                "visibility": "public",
+                "ownerId": uid,
+                "createdAt": firestore.SERVER_TIMESTAMP
+            }
+            itin_ref.set(shared_data)
+            logger.info(f"Đã tự động share saved_plan {itinerary_id} sang itineraries cho user {uid}")
+    except Exception as e:
+        logger.warning(f"Lỗi khi đồng bộ itinerary {itinerary_id}: {e}")
+
+
 # ─── Like ───────────────────────────────────────────────────────────────────
 
 async def toggle_like(uid: str, post_id: str) -> dict:
@@ -166,6 +234,29 @@ async def list_comments(post_id: str) -> List[dict]:
         raise HTTPException(status_code=500, detail=f"Lấy bình luận thất bại: {e}")
 
 
+# ─── Get Single Post ──────────────────────────────────────────────────────────
+
+async def get_post(post_id: str) -> dict:
+    """Lấy chi tiết một bài viết."""
+    try:
+        doc_ref = db.collection("posts").document(post_id).get()
+        if not doc_ref.exists:
+            raise HTTPException(status_code=404, detail="Không tìm thấy bài viết")
+        post_data = doc_ref.to_dict()
+        post_data["id"] = post_id
+        
+        # Enrich posts với author và itinerary
+        from app.controllers.feed_controller import _enrich_post_with_author, _enrich_post_with_itinerary
+        post_data = _enrich_post_with_author(post_data)
+        post_data = _enrich_post_with_itinerary(post_data)
+        
+        return post_data
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Lỗi lấy bài viết: {e}")
+
+
 # ─── Repost ─────────────────────────────────────────────────────────────────
 
 async def create_repost(uid: str, author_info: dict, post_id: str, data: RepostCreateRequest) -> dict:
@@ -174,9 +265,8 @@ async def create_repost(uid: str, author_info: dict, post_id: str, data: RepostC
     Bài mới có `repostOf` = post_id của bài gốc.
     """
     try:
-        # Kiểm tra bài gốc tồn tại
-        original = dict
-        # await get_post(post_id) Chỗ này thay lại hàm lấy dữ liệu bài viết của Kiên
+        # Lấy dữ liệu bài gốc để lưu snapshot
+        original = await get_post(post_id)
 
         repost_id = _post_id()
         doc = {
@@ -207,7 +297,6 @@ async def create_repost(uid: str, author_info: dict, post_id: str, data: RepostC
         logger.error(f"[Repost] Lỗi tạo repost: {e}")
         raise HTTPException(status_code=500, detail=f"Repost thất bại: {e}")
 
-
 # =========================================================================
 # API: TẠO BÀI VIẾT MỚI (Code phê duyệt từ main)
 # =========================================================================
@@ -229,12 +318,23 @@ async def create_post(uid: str, req: CreatePostRequest) -> dict:
         # 2. Chuẩn bị dữ liệu Post
         post_id = f"post-{int(datetime.datetime.now().timestamp() * 1000)}"
         doc_data = req.dict()
+        # Đồng bộ lịch trình từ saved_plans sang itineraries (hoặc seed preview mock)
+        _sync_post_itinerary(uid, req.itineraryId)
+        
         doc_data["id"] = post_id
         doc_data["authorId"] = uid
         doc_data["likeCount"] = 0
         doc_data["commentCount"] = 0
         doc_data["hotScore"] = 0
         doc_data["createdAt"] = firestore.SERVER_TIMESTAMP
+
+        # Determine type based on provided data
+        if doc_data.get("itineraryId"):
+            doc_data["type"] = "itinerary"
+        elif doc_data.get("mediaUrls") and len(doc_data["mediaUrls"]) > 0:
+            doc_data["type"] = "image"
+        else:
+            doc_data["type"] = "text"
         
         # 3. Lưu vào root collection "posts"
         db.collection("posts").document(post_id).set(doc_data)
@@ -247,8 +347,17 @@ async def create_post(uid: str, req: CreatePostRequest) -> dict:
         except Exception as e:
             logger.warning(f"Không thể chạy background hot_score_update: {e}")
 
+        # 5. Trả về đối tượng Post hoàn chỉnh đã được làm giàu thông tin tác giả và lộ trình để frontend hiển thị ngay
+        from app.controllers.feed_controller import _enrich_post_with_author, _enrich_post_with_itinerary
+        
+        response_data = doc_data.copy()
+        # Thay thế SERVER_TIMESTAMP (không serialize được sang JSON) bằng thời gian hiện tại dưới dạng chuỗi ISO
+        response_data["createdAt"] = datetime.datetime.now().isoformat()
+        response_data = _enrich_post_with_author(response_data)
+        response_data = _enrich_post_with_itinerary(response_data)
+
         logger.info(f"User {uid} đã đăng bài post {post_id} thành công.")
-        return {"status": "success", "id": post_id, "message": "Đăng bài thành công!"}
+        return response_data
         
     except HTTPException:
         raise
@@ -370,6 +479,9 @@ async def update_post(uid: str, postId: str, postData: CreatePostRequest) -> dic
             )
         
         now = datetime.datetime.now(timezone.utc)
+        # Đồng bộ lịch trình sang itineraries
+        _sync_post_itinerary(uid, postData.itineraryId)
+        
         updateDict = {
             "content": postData.content.strip(),
             "mediaUrls": postData.mediaUrls[:4],
@@ -378,6 +490,14 @@ async def update_post(uid: str, postId: str, postData: CreatePostRequest) -> dic
             "visibility": postData.visibility,
             "updatedAt": now.isoformat()
         }
+
+        # Determine type based on provided data
+        if updateDict.get("itineraryId"):
+            updateDict["type"] = "itinerary"
+        elif updateDict.get("mediaUrls") and len(updateDict["mediaUrls"]) > 0:
+            updateDict["type"] = "image"
+        else:
+            updateDict["type"] = "text"
 
         # Cập nhật Firestore
         postRef.set(updateDict, merge=True)
