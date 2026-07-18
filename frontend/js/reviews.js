@@ -58,15 +58,16 @@ async function initReviews() {
     // ── Load cities & places ──────────────────────────────────
     try {
         const cities = await fetchCities();
-        allPlaces = await fetchPlaces();
+        
+        // Populate City Selector immediately to ensure cities list is always shown
         cities.forEach(city => {
-            if (allPlaces[city.id] && allPlaces[city.id].length > 0) {
-                const option = document.createElement('option');
-                option.value = city.id;
-                option.textContent = city.name;
-                citySelector.appendChild(option);
-            }
+            const option = document.createElement('option');
+            option.value = city.id;
+            option.textContent = city.name;
+            citySelector.appendChild(option);
         });
+
+        allPlaces = await fetchPlaces();
     } catch (error) {
         console.error("Lỗi tải dữ liệu địa điểm:", error);
     }
