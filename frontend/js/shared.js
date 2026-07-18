@@ -3,12 +3,21 @@
   FILE: shared.js
   CHỨC NĂNG: 
   - Quản lý các tiện ích UI dùng chung toàn hệ thống (hiển thị Toast thông báo, bật/tắt Popup).
-  - Tự động nạp và khởi tạo các thành phần giao diện dùng chung (Header, Footer) từ thư mục \`components/\`.
+  - Tự động nạp và khởi tạo các thành phần giao diện dùng chung (Header, Footer) từ thư mục `components/`.
   - Thiết lập Event Delegation cấp cao nhất trên body/container để xử lý đóng Popup, chuyển hướng banner quảng cáo chung.
   - Tệp này được import ở hầu hết các entry points để đảm bảo các yếu tố UI cơ bản luôn hoạt động.
   ========================================================================
 */
 import { fetchHtmlFragment } from './fragmentLoader.js';
+
+// ── Immediate Dark Mode Application to prevent FOUC ───────────────────
+try {
+    import('./darkmode.js').catch(() => {
+        // Silently catch error if darkmode.js is missing or ignored by git
+    });
+} catch (e) {
+    // Safe fallback
+}
 
 // ── Shared UI utilities ───────────────────────────────────────
 
@@ -103,6 +112,14 @@ function _updateHeaderUser() {
                 }
             }
             if (linkEl) linkEl.href = './profile.html';
+
+            if (iconEl && user.photoURL && user.photoURL !== 'undefined' && user.photoURL !== 'null') {
+                const borderStyle = user.is_vip ? 'border: 2px solid #ffb347;' : '';
+                iconEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
+            } else if (iconEl) {
+                const initial = (user.firstname || user.email || 'T').charAt(0).toUpperCase();
+                iconEl.innerHTML = `<span style="font-weight: 700; color: var(--p1); font-size: 14px;">${initial}</span>`;
+                }
             if (iconEl && user.photoUrl) {
                 const borderStyle = user.is_vip ? 'border: 2px solid #ffb347;' : '';
                 iconEl.innerHTML = `<img src="${user.photoUrl}" alt="Avatar" referrerpolicy="no-referrer" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
@@ -125,6 +142,161 @@ function _updateHeaderUser() {
 // Lắng nghe sự kiện thay đổi trạng thái xác thực để đồng bộ Header lập tức
 window.addEventListener('topgo-auth-change', _updateHeaderUser);
 
+
+// ── Initialize Mobile Toggle Dropdown ──────────────────────────
+function _initMobileToggle(headerEl) {
+    const toggleBtn = document.getElementById('header-mobile-toggle');
+    const dropdownMenu = document.getElementById('header-dropdown-menu');
+    if (!toggleBtn || !dropdownMenu) return;
+
+    const header = document.querySelector('.header');
+
+    // Click handler to toggle open class
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = toggleBtn.classList.toggle('open');
+        toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        dropdownMenu.classList.toggle('open', isOpen);
+        if (header) {
+            header.classList.toggle('dropdown-active', isOpen);
+        }
+    });
+
+    // Close when clicking a link
+    dropdownMenu.querySelectorAll('.mobile-nav-a').forEach(link => {
+        link.addEventListener('click', () => {
+            toggleBtn.classList.remove('open');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            dropdownMenu.classList.remove('open');
+            if (header) {
+                header.classList.remove('dropdown-active');
+            }
+        });
+    });
+
+    // Close when clicking outside header
+    document.addEventListener('click', (e) => {
+        if (toggleBtn.classList.contains('open')) {
+            const clickedInsideHeader = headerEl.contains(e.target) || dropdownMenu.contains(e.target);
+            if (!clickedInsideHeader) {
+                toggleBtn.classList.remove('open');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                dropdownMenu.classList.remove('open');
+                if (header) {
+                    header.classList.remove('dropdown-active');
+                }
+            }
+        }
+    });
+}
+
+function _initGlobalSearch(headerEl) {
+    const searchInput = document.getElementById('global-search-input');
+    const searchDropdown = document.getElementById('search-dropdown');
+    const searchDropdownContent = document.getElementById('search-dropdown-content');
+    if (!searchInput || !searchDropdown || !searchDropdownContent) return;
+
+    let debounceTimer;
+
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+        if (!query) {
+            searchDropdown.classList.add('hidden');
+            searchDropdownContent.innerHTML = '';
+            return;
+        }
+
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(async () => {
+            searchDropdownContent.innerHTML = '<div class="search-empty">Đang tìm kiếm...</div>';
+            searchDropdown.classList.remove('hidden');
+
+            try {
+                const _isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+                const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
+                const res = await fetch(`${API_BASE}/api/search?q=${encodeURIComponent(query)}`);
+                const data = await res.json();
+                
+                let html = '';
+                
+                if (data.users && data.users.length > 0) {
+                    html += '<div class="search-section-title">Người dùng</div>';
+                    data.users.forEach(u => {
+                        const avatar = u.photoURL || 'https://i.pravatar.cc/150?u=' + u.id;
+                        const name = u.fullname ? u.fullname.trim() : 'Người dùng';
+                        const handle = u.username ? '@' + u.username.trim() : '@' + u.id;
+                        html += `
+                        <a href="./profile.html?userId=${u.id}" class="search-item">
+                            <div class="search-item-icon"><img src="${avatar}" alt="${name}"></div>
+                            <div class="search-item-info">
+                                <span class="search-item-title" style="text-transform: capitalize;">${name || 'Người dùng'}</span>
+                                <span class="search-item-sub">${handle}</span>
+                            </div>
+                        </a>
+                        `;
+                    });
+                }
+                
+                if (data.locations && data.locations.length > 0) {
+                    html += '<div class="search-section-title">Địa điểm</div>';
+                    data.locations.forEach(loc => {
+                        html += `
+                        <a href="./location.html?name=${encodeURIComponent(loc)}" class="search-item">
+                            <div class="search-item-icon">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </div>
+                            <div class="search-item-info">
+                                <span class="search-item-title">${loc}</span>
+                                <span class="search-item-sub">Khám phá địa điểm</span>
+                            </div>
+                        </a>
+                        `;
+                    });
+                }
+
+                if (data.posts && data.posts.length > 0) {
+                    html += '<div class="search-section-title">Bài viết</div>';
+                    data.posts.forEach(p => {
+                        const contentPreview = p.content ? p.content.substring(0, 30) + '...' : 'Bài viết';
+                        html += `
+                        <a href="./feed.html?post=${p.id}" class="search-item">
+                            <div class="search-item-icon">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            </div>
+                            <div class="search-item-info">
+                                <span class="search-item-title">${contentPreview}</span>
+                                <span class="search-item-sub">Bởi @${p.author_id}</span>
+                            </div>
+                        </a>
+                        `;
+                    });
+                }
+                
+                if (!html) {
+                    html = '<div class="search-empty">Không tìm thấy kết quả nào.</div>';
+                }
+                
+                searchDropdownContent.innerHTML = html;
+            } catch (err) {
+                console.error('[Search] Error:', err);
+                searchDropdownContent.innerHTML = '<div class="search-empty">Lỗi khi tìm kiếm.</div>';
+            }
+        }, 400);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+            searchDropdown.classList.add('hidden');
+        }
+    });
+
+    searchInput.addEventListener('focus', () => {
+        if (searchInput.value.trim() && searchDropdownContent.innerHTML !== '') {
+            searchDropdown.classList.remove('hidden');
+        }
+    });
+}
+
 // ── Load shared HTML components ───────────────────────────────
 
 export async function loadSharedComponents() {
@@ -139,20 +311,55 @@ export async function loadSharedComponents() {
         if (headerEl) {
             headerEl.innerHTML = headerFrag.text;
             // Active nav detection
-            let activeId = 'nav-planner';
-            if (currentPage === 'chatbot.html') activeId = 'nav-chatbot';
-            else if (currentPage === 'index.html' || currentPage === '' || currentPage === '/') activeId = 'nav-home';
-            else if (currentPage === 'aboutus.html') activeId = 'nav-aboutus';
-            else if (currentPage === 'pricing.html') activeId = 'nav-pricing';
-            else if (currentPage === 'test_diep.html') activeId = 'nav-newsfeed';
-            else if (currentPage === 'reviews.html') activeId = 'nav-reviews';
-            else if (currentPage === 'auth.html' || currentPage === 'profile.html') activeId = null;
-            
+            let activeId = null;
+            let mobActiveId = null;
+            if (currentPage === 'planner.html') {
+                activeId = 'nav-planner';
+                mobActiveId = 'mob-nav-planner';
+            } else if (currentPage === 'chatbot.html') {
+                activeId = 'nav-chatbot';
+                mobActiveId = 'mob-nav-chatbot';
+            } else if (currentPage === 'index.html' || currentPage === '' || currentPage === '/') {
+                activeId = 'nav-home';
+                mobActiveId = 'mob-nav-home';
+            } else if (currentPage === 'feed.html') {
+                activeId = 'nav-newsfeed';
+                mobActiveId = 'mob-nav-newsfeed';
+            } else if (currentPage === 'aboutus.html') {
+                activeId = 'nav-aboutus';
+                mobActiveId = 'mob-nav-aboutus';
+            } else if (currentPage === 'pricing.html') {
+                activeId = 'nav-pricing';
+                mobActiveId = 'mob-nav-pricing';
+            } else if (currentPage === 'auth.html' || currentPage === 'profile.html') {
+                activeId = null;
+                mobActiveId = null;
+            }
             if (activeId) document.getElementById(activeId)?.classList.add('active');
+            if (mobActiveId) document.getElementById(mobActiveId)?.classList.add('active');
 
             // User state in header
             _updateHeaderUser();
+
+            // Initialize Dark Mode Toggle if the module exists
+            try {
+                const dm = await import('./darkmode.js');
+                if (dm && typeof dm.initThemeToggle === 'function') {
+                    dm.initThemeToggle();
+                }
+            } catch (err) {
+                // Silently catch error if darkmode.js is missing or fails to load
+            }
+
+            // Initialize Mobile Toggle Dropdown
+            _initMobileToggle(headerEl);
+
+            // Initialize Global Search only on search.html
+            if (currentPage === 'search.html') {
+                _initGlobalSearch(headerEl);
+            }
         }
+
 
         const sharedEl = document.getElementById('site-shared');
         if (sharedEl) {

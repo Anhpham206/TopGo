@@ -205,7 +205,8 @@ def group_places_by_day(places: list, distance_matrix: dict, optimal_coord: dict
 
         if current_day:
             day_groups.append(current_day)
-            print(f"[GROUPING] Ngay {len(day_groups)}: {[p.get('name', 'N/A') for p in current_day]}")
+            safe_names = [str(p.get('name', 'N/A')).encode('ascii', 'replace').decode('ascii') for p in current_day]
+            print(f"[GROUPING] Ngay {len(day_groups)}: {safe_names}")
         else:
             print("[GROUPING] Khong the tim them dia diem phu hop thoi gian")
             break

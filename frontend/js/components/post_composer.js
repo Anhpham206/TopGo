@@ -57,6 +57,7 @@ export function renderPostComposer(containerId = 'post-composer-container', trip
       border: 1px solid var(--border, #cde9f5);
       border-radius: 20px;
       padding: 16px 20px;
+      margin-bottom: 24px;
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -128,40 +129,55 @@ export function renderPostComposer(containerId = 'post-composer-container', trip
     /* ── Bottom action buttons ── */
     .pc-actions {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 8px;
-      justify-content: space-around;
+    }
+    .pc-actions-left {
+      display: flex;
+      gap: 8px;
+    }
+    .pc-icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(0, 169, 255, 0.04);
+      color: var(--p1, #00a9ff);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pc-icon-btn:hover {
+      background: rgba(0, 169, 255, 0.12);
+      transform: scale(1.05);
     }
     .pc-action-btn {
-      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 7px;
-      padding: 9px 12px;
+      padding: 9px 18px;
       border: none;
-      border-radius: 12px;
+      border-radius: 20px;
       background: transparent;
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 600;
       color: var(--muted, #6b8ca0);
       cursor: pointer;
       transition: all 0.18s;
       font-family: inherit;
     }
-    .pc-action-btn:hover {
-      background: rgba(0, 169, 255, 0.07);
-      color: var(--p1, #00a9ff);
-    }
-    .pc-action-btn svg {
-      flex-shrink: 0;
-    }
     .pc-action-btn.pc-btn-post {
-      color: var(--p1, #00a9ff);
-      background: rgba(0, 169, 255, 0.06);
+      color: #fff;
+      background: linear-gradient(90deg, var(--p1, #00a9ff), var(--p2, #0051ff));
+      box-shadow: 0 4px 12px rgba(0,169,255,0.2);
     }
     .pc-action-btn.pc-btn-post:hover {
-      background: var(--p1, #00a9ff);
-      color: #fff;
+      box-shadow: 0 4px 16px rgba(0,169,255,0.35);
+      transform: translateY(-1px);
     }
   </style>
 
@@ -183,31 +199,41 @@ export function renderPostComposer(containerId = 'post-composer-container', trip
 
     <!-- Action buttons -->
     <div class="pc-actions">
-      <!-- Ảnh -->
-      <button class="pc-action-btn" id="pc-btn-photo">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-          <rect x="3" y="3" width="18" height="18" rx="3"/>
-          <circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-        Ảnh / Video
-      </button>
+      <div class="pc-actions-left">
+        <!-- Ảnh -->
+        <button class="pc-icon-btn" id="pc-btn-photo" title="Thêm ảnh">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </button>
 
-      <!-- Tag địa điểm -->
-      <button class="pc-action-btn" id="pc-btn-tag">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-          <circle cx="12" cy="10" r="3"/>
-        </svg>
-        Địa điểm
-      </button>
+        <!-- Video -->
+        <button class="pc-icon-btn" id="pc-btn-video" title="Thêm video">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+            <line x1="7" y1="2" x2="7" y2="22"></line>
+            <line x1="17" y1="2" x2="17" y2="22"></line>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <line x1="2" y1="7" x2="7" y2="7"></line>
+            <line x1="2" y1="17" x2="7" y2="17"></line>
+            <line x1="17" y1="17" x2="22" y2="17"></line>
+            <line x1="17" y1="7" x2="22" y2="7"></line>
+          </svg>
+        </button>
+
+        <!-- Tag địa điểm -->
+        <button class="pc-icon-btn" id="pc-btn-tag" title="Thẻ địa điểm">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </button>
+      </div>
 
       <!-- Đăng bài -->
       <button class="pc-action-btn pc-btn-post" id="pc-btn-post">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-          <line x1="22" y1="2" x2="11" y2="13"/>
-          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-        </svg>
         Đăng bài
       </button>
     </div>
@@ -225,6 +251,7 @@ export function renderPostComposer(containerId = 'post-composer-container', trip
 
   document.getElementById('pc-trigger-input')?.addEventListener('click', openModal);
   document.getElementById('pc-btn-photo')?.addEventListener('click',   openModal);
+  document.getElementById('pc-btn-video')?.addEventListener('click',   openModal);
   document.getElementById('pc-btn-tag')?.addEventListener('click',     openModal);
   document.getElementById('pc-btn-post')?.addEventListener('click',    openModal);
 

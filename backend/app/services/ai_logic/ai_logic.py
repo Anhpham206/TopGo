@@ -1,6 +1,8 @@
 import json
 import os
 from google import genai
+
+# pyrefly: ignore [missing-import]
 from google.genai import types
 from dotenv import load_dotenv
 
@@ -12,14 +14,15 @@ API_KEY2 = os.getenv("GEMINI_API_KEY_2")
 
 if not API_KEY:
     raise ValueError(
-        " Không tìm thấy GEMINI_API_KEY! Hãy kiểm tra lại file .env")
+        "[ERROR] Không tìm thấy GEMINI_API_KEY! Hãy kiểm tra lại file .env"
+    )
 
 client = genai.Client(api_key=API_KEY)
 client2 = genai.Client(api_key=API_KEY2)
 
 # 2. Cấu hình Model & Generation Config
-MODEL_ID_AI1 = "gemini-3.1-flash-lite" 
-MODEL_ID_AI2 = "gemini-3.1-flash-lite"
+MODEL_ID_AI1 = "gemini-3.1-flash-lite"
+MODEL_ID_AI2 = "gemini-3.5-flash"
 
 config_ai1 = types.GenerateContentConfig(
     response_mime_type="application/json",
@@ -201,15 +204,13 @@ def call_ai_1(user_input_dict):
     """
     Trả về Dictionary kết quả.
     """
-    print("AI 1 đang phân tích logic...")
+    print("[AI 1] Đang phân tích logic...")
     user_data_str = json.dumps(user_input_dict, ensure_ascii=False)
     full_prompt = f"{user_data_str}\n{PROMPT_AI1}"
 
     # Gọi API
     response = client.models.generate_content(
-        model=MODEL_ID_AI1,
-        contents=full_prompt,
-        config=config_ai1
+        model=MODEL_ID_AI1, contents=full_prompt, config=config_ai1
     )
 
     return json.loads(response.text)
@@ -217,7 +218,7 @@ def call_ai_1(user_input_dict):
 
 def call_ai_2(ai1_result_dict, db_data_dict):
     """Nhận kết quả từ AI1"""
-    print("AI 2 đang tổng hợp lịch trình và tính điểm theo mẫu...")
+    print("[AI 2] Đang tổng hợp lịch trình và tính điểm theo mẫu...")
 
     combined_data = {**ai1_result_dict, **db_data_dict}
 
@@ -229,9 +230,7 @@ def call_ai_2(ai1_result_dict, db_data_dict):
 
     # Gọi API
     response = client2.models.generate_content(
-        model=MODEL_ID_AI2,
-        contents=full_prompt,
-        config=config_ai2
+        model=MODEL_ID_AI2, contents=full_prompt, config=config_ai2
     )
     print("AI 2 đã soạn xong nội dung lịch trình")
 

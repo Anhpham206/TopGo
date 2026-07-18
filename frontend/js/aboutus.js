@@ -1,3 +1,10 @@
+/**
+ * ========================================================================
+ * FILE: aboutus.js
+ * CHỨC NĂNG:
+ * - Cập nhật trạng thái card 3D khi cuộn ngang ở trang giới thiệu.
+ * ========================================================================
+ */
 // aboutus.js – Cập nhật trạng thái card 3D khi cuộn ngang
 (function() {
     const container = document.querySelector('.aboutus-carousel-container');

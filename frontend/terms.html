@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Điều khoản & Chính sách — TopGo</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <meta name="description" content="Điều khoản dịch vụ và Chính sách bảo mật của TopGo — Nền tảng du lịch cộng đồng Việt Nam.">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/shared.css?v=10">
+    <style>
+
+        /* ── BODY LAYOUT ─────────────────────────────────── */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        body > main { flex: 1; }
+
+        /* ── HERO SECTION ─────────────────────────────────── */
+        .terms-hero {
+            position: relative;
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--bg);
+            background-image: radial-gradient(
+                ellipse at 50% 0%,
+                rgba(0, 169, 255, 0.1) 0%,
+                rgba(137, 207, 243, 0.05) 30%,
+                rgba(160, 233, 255, 0.02) 55%,
+                transparent 75%
+            );
+            padding: 100px 24px 48px;
+        }
+
+        /* Halo glow */
+        .terms-hero-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .terms-hero-halo {
+            position: absolute;
+            left: 50%;
+            top: -40%;
+            transform: translateX(-50%);
+            width: 155%;
+            height: 180%;
+            background: radial-gradient(
+                ellipse at 50% 20%,
+                rgba(0, 169, 255, 0.10) 0%,
+                rgba(137, 207, 243, 0.06) 30%,
+                rgba(160, 233, 255, 0.03) 52%,
+                transparent 72%
+            );
+        }
+
+        /* Concentric rings — same as chatbot hero */
+        .terms-ring-wrap {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1120px;
+            height: 1000px;
+            pointer-events: none;
+        }
+        .terms-ring {
+            position: absolute;
+            border-radius: 50%;
+            inset: 0;
+            transform: rotate(180deg);
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+        .terms-ring--1 {
+            border: none;
+            border-top: 1.5px solid rgba(255,255,255,0.3);
+            border-left: 1.5px solid rgba(255,255,255,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-right: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 0 30px rgba(0,169,255,0.15), inset 0 1px 0 rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(6px) saturate(140%);
+            -webkit-backdrop-filter: blur(6px) saturate(140%);
+        }
+        .terms-ring--2 {
+            inset: 22px;
+            border: none;
+            border-top: 1.2px solid rgba(255,255,255,0.22);
+            border-left: 1.2px solid rgba(255,255,255,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-right: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .terms-ring--3 {
+            inset: 44px;
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.16);
+            border-left: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-right: 1px solid rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+        }
+        .terms-ring--4 {
+            inset: 66px;
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+            border-right: 1px solid rgba(255,255,255,0.02);
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+
+        /* Hero content */
+        .terms-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 680px;
+            width: 100%;
+            animation: heroFadeDown 0.65s cubic-bezier(0.34, 1.2, 0.64, 1) both;
+        }
+
+        .terms-hero-eyebrow {
+            font-family: var(--font-label, sans-serif);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--p1);
+            margin-bottom: 16px;
+            animation: heroFadeDown 0.5s cubic-bezier(0.34,1.3,0.64,1) 0.05s both;
+        }
+
+        .terms-hero-title {
+            font-family: var(--font-expanded, var(--font-heading, sans-serif));
+            font-size: clamp(24px, 4.5vw, 46px);
+            font-weight: 700;
+            color: #3a6fa5;
+            line-height: 1.12;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 16px;
+            animation: heroFadeDown 0.6s cubic-bezier(0.34,1.2,0.64,1) 0.12s both;
+        }
+
+        .terms-hero-title .highlight {
+            background: linear-gradient(90deg, var(--p1), var(--p2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .terms-hero-sub {
+            font-family: var(--font-heading, sans-serif);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--sub);
+            letter-spacing: 0.4px;
+            line-height: 1.6;
+            margin: 0;
+            animation: heroFadeDown 0.6s ease 0.22s both;
+        }
+
+        @keyframes heroFadeDown {
+            from { opacity: 0; transform: translateY(-14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── CONTENT AREA ─────────────────────────────────── */
+        .terms-body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* Back link */
+        .terms-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--p1);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 32px;
+            opacity: 0.75;
+            transition: opacity 0.2s;
+        }
+        .terms-back:hover { opacity: 1; }
+        .terms-back svg { width: 15px; height: 15px; }
+
+        /* Tabs nav */
+        .terms-tabs-nav {
+            display: flex;
+            gap: 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .terms-tabs-nav::-webkit-scrollbar { display: none; }
+
+        .terms-tab-btn {
+            padding: 12px 20px;
+            border: none;
+            background: transparent;
+            color: var(--sub);
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            white-space: nowrap;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .terms-tab-btn:hover { color: var(--p1); }
+        .terms-tab-btn.active {
+            color: var(--p1);
+            border-bottom-color: var(--p1);
+            font-weight: 600;
+        }
+
+        /* Panels */
+        .terms-panel { display: none; }
+        .terms-panel.active { display: block; }
+
+        /* Section */
+        .terms-section {
+            margin-bottom: 44px;
+            scroll-margin-top: 80px;
+            animation: heroFadeDown 0.4s ease both;
+        }
+
+        .terms-section h2 {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--fg);
+            margin: 0 0 8px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .terms-section h3 {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: var(--fg);
+            margin: 20px 0 8px;
+        }
+
+        .terms-section p {
+            color: var(--sub);
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0 0 10px;
+        }
+
+        .terms-section ul {
+            padding-left: 18px;
+            margin: 0 0 12px;
+        }
+
+        .terms-section li {
+            color: var(--sub);
+            font-size: 14px;
+            line-height: 1.75;
+            margin-bottom: 6px;
+        }
+
+        /* Highlight callout */
+        .terms-callout {
+            background: linear-gradient(135deg,
+                rgba(0,169,255,0.06) 0%,
+                rgba(0,81,255,0.03) 100%);
+            border: 1px solid rgba(0,169,255,0.14);
+            border-left: 3px solid var(--p1);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+        }
+        .terms-callout p {
+            margin: 0;
+            color: var(--fg);
+            font-size: 13.5px;
+        }
+
+        /* Contact grid */
+        .terms-contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .terms-contact-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+        .terms-contact-card .label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--sub);
+            margin-bottom: 6px;
+        }
+        .terms-contact-card .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--p1);
+        }
+        .terms-contact-card .value a {
+            color: var(--p1);
+            text-decoration: none;
+        }
+
+        /* Footer note */
+        .terms-footer-note {
+            margin-top: 56px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--sub);
+            font-size: 13px;
+        }
+        .terms-footer-note a {
+            color: var(--p1);
+            text-decoration: none;
+        }
+
+        /* Violation table */
+        .terms-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(0,169,255,0.1);
+            color: var(--p1);
+            margin-right: 6px;
+        }
+        .terms-badge.warn { background: rgba(251,191,36,0.12); color: #b45309; }
+        .terms-badge.danger { background: rgba(239,68,68,0.1); color: #dc2626; }
+
+        .terms-row-list {
+            list-style: none;
+            padding: 0;
+        }
+        .terms-row-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .terms-row-list li:last-child { border-bottom: none; }
+
+        .terms-row-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--p1);
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="site-header">
+        <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
+    </header>
+
+    <main>
+        <!-- ── HERO ─────────────────────────────────────── -->
+        <section class="terms-hero">
+            <div class="terms-hero-bg">
+                <div class="terms-hero-halo"></div>
+                <div class="terms-ring-wrap">
+                    <div class="terms-ring terms-ring--1"></div>
+                    <div class="terms-ring terms-ring--2"></div>
+                    <div class="terms-ring terms-ring--3"></div>
+                    <div class="terms-ring terms-ring--4"></div>
+                </div>
+            </div>
+
+            <div class="terms-hero-content">
+                <div class="terms-hero-eyebrow">TopGo · Tài liệu pháp lý</div>
+                <h1 class="terms-hero-title">
+                    Điều khoản &amp; <span class="highlight">Chính sách</span>
+                </h1>
+                <p class="terms-hero-sub">Những cam kết của TopGo với cộng đồng — minh bạch, rõ ràng và công bằng.</p>
+            </div>
+        </section>
+
+        <!-- ── BODY ─────────────────────────────────────── -->
+        <div class="terms-body">
+
+            <a href="javascript:history.back()" class="terms-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Quay lại
+            </a>
+
+            <!-- Tab nav -->
+            <div class="terms-tabs-nav">
+                <button class="terms-tab-btn active" onclick="switchTab('terms', this)">Điều khoản dịch vụ</button>
+                <button class="terms-tab-btn" onclick="switchTab('privacy', this)">Chính sách bảo mật</button>
+                <button class="terms-tab-btn" onclick="switchTab('community', this)">Quy tắc cộng đồng</button>
+                <button class="terms-tab-btn" onclick="switchTab('contact', this)">Liên hệ</button>
+            </div>
+
+            <!-- Panel 1: Điều khoản dịch vụ -->
+            <div id="panel-terms" class="terms-panel active">
+
+                <div class="terms-callout">
+                    <p>Bằng cách sử dụng TopGo, bạn đồng ý với các điều khoản được nêu dưới đây. Vui lòng đọc kỹ trước khi sử dụng dịch vụ.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>1. Giới thiệu về TopGo</h2>
+                    <p>TopGo là nền tảng mạng xã hội du lịch dành cho cộng đồng Việt Nam. Chúng tôi cung cấp tính năng lập kế hoạch chuyến đi thông minh với AI, chia sẻ trải nghiệm du lịch và kết nối người yêu du lịch trên toàn quốc.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>2. Điều kiện sử dụng</h2>
+                    <ul class="terms-row-list">
+                        <li><span class="terms-row-dot"></span><span>Bạn phải đủ 13 tuổi trở lên để sử dụng TopGo.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Thông tin đăng ký phải chính xác và được cập nhật.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Mỗi người dùng chỉ được phép có một tài khoản.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Bạn chịu hoàn toàn trách nhiệm về bảo mật mật khẩu và tài khoản của mình.</span></li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>3. Quyền sở hữu nội dung</h2>
+                    <p>Nội dung bạn đăng tải (bài viết, ảnh, lịch trình) vẫn thuộc quyền sở hữu của bạn. Bằng cách đăng tải, bạn cấp cho TopGo quyền sử dụng để vận hành và quảng bá nền tảng, không có nghĩa là chuyển nhượng bản quyền.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>4. Hành vi bị cấm</h2>
+                    <ul class="terms-row-list">
+                        <li><span class="terms-row-dot"></span><span>Đăng nội dung vi phạm pháp luật Việt Nam.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Spam, lừa đảo hoặc mạo danh người dùng khác.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Sử dụng bot hoặc công cụ tự động để tương tác với hệ thống.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Thu thập dữ liệu người dùng mà không được phép.</span></li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>5. Chấm dứt tài khoản</h2>
+                    <p>TopGo có quyền tạm ngừng hoặc chấm dứt tài khoản vi phạm điều khoản mà không cần thông báo trước. Bạn có thể xóa tài khoản bất cứ lúc nào qua phần Cài đặt tài khoản.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>6. Giới hạn trách nhiệm</h2>
+                    <p>TopGo không chịu trách nhiệm về tính chính xác của thông tin do người dùng đăng tải, hoặc các thiệt hại phát sinh từ việc sử dụng những thông tin đó để lên kế hoạch du lịch.</p>
+                </div>
+            </div>
+
+            <!-- Panel 2: Chính sách bảo mật -->
+            <div id="panel-privacy" class="terms-panel">
+
+                <div class="terms-callout">
+                    <p>TopGo cam kết bảo vệ quyền riêng tư của bạn. Chúng tôi không bán dữ liệu cá nhân cho bên thứ ba.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>Dữ liệu chúng tôi thu thập</h2>
+                    <ul class="terms-row-list">
+                        <li><span class="terms-row-dot"></span><span><strong>Thông tin tài khoản:</strong> Tên, email, ảnh đại diện khi bạn đăng ký.</span></li>
+                        <li><span class="terms-row-dot"></span><span><strong>Nội dung:</strong> Bài viết, bình luận, lịch trình bạn tạo trên nền tảng.</span></li>
+                        <li><span class="terms-row-dot"></span><span><strong>Dữ liệu sử dụng:</strong> Trang bạn xem, tính năng bạn dùng (ẩn danh, không định danh cá nhân).</span></li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>Mục đích sử dụng dữ liệu</h2>
+                    <ul class="terms-row-list">
+                        <li><span class="terms-row-dot"></span><span>Cung cấp và liên tục cải thiện dịch vụ TopGo.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Cá nhân hóa nội dung và gợi ý phù hợp với sở thích.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Đảm bảo an toàn hệ thống và ngăn chặn lạm dụng.</span></li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>Chia sẻ dữ liệu</h2>
+                    <p>TopGo không bán dữ liệu cá nhân của bạn. Chúng tôi chỉ chia sẻ dữ liệu với nhà cung cấp hạ tầng (Firebase, Cloud hosting) để vận hành hệ thống, và với cơ quan pháp luật khi có yêu cầu hợp lệ.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>Quyền của bạn</h2>
+                    <ul class="terms-row-list">
+                        <li><span class="terms-row-dot"></span><span>Truy cập và tải xuống dữ liệu cá nhân của mình.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Chỉnh sửa thông tin tài khoản bất cứ lúc nào.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Yêu cầu xóa tài khoản và toàn bộ dữ liệu liên quan.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Từ chối nhận email tiếp thị.</span></li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>Bảo mật dữ liệu</h2>
+                    <p>Chúng tôi sử dụng mã hóa HTTPS, xác thực Firebase và kiểm soát truy cập theo vai trò để bảo vệ dữ liệu của bạn. Tuy nhiên, không có hệ thống nào an toàn tuyệt đối — hãy bảo vệ mật khẩu của mình.</p>
+                </div>
+            </div>
+
+            <!-- Panel 3: Quy tắc cộng đồng -->
+            <div id="panel-community" class="terms-panel">
+
+                <div class="terms-callout">
+                    <p>TopGo là không gian tích cực cho những người yêu du lịch. Hãy cùng nhau xây dựng cộng đồng văn minh và chân thực.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>Nội dung được khuyến khích</h2>
+                    <ul class="terms-row-list">
+                        <li><span class="terms-row-dot"></span><span>Chia sẻ trải nghiệm du lịch thực tế, chân thực và hữu ích.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Đánh giá trung thực về địa điểm, dịch vụ và khách sạn.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Lịch trình rõ ràng, ảnh chất lượng và ghi rõ nguồn.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Hỗ trợ và tư vấn cho các thành viên khác trong cộng đồng.</span></li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>Nội dung không được phép</h2>
+                    <ul class="terms-row-list">
+                        <li><span class="terms-row-dot"></span><span>Thông tin sai lệch, gây hiểu nhầm về địa điểm hoặc dịch vụ.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Nội dung thù ghét, phân biệt chủng tộc, giới tính hoặc tôn giáo.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Spam quảng cáo không được phép bởi TopGo.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Ảnh vi phạm bản quyền hoặc quyền riêng tư của người khác.</span></li>
+                        <li><span class="terms-row-dot"></span><span>Nội dung bạo lực, khiêu dâm hoặc có hại cho trẻ em.</span></li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>Hệ thống xử lý vi phạm</h2>
+                    <ul class="terms-row-list">
+                        <li>
+                            <span class="terms-row-dot"></span>
+                            <span><span class="terms-badge">Lần 1</span> Cảnh báo và xóa nội dung vi phạm.</span>
+                        </li>
+                        <li>
+                            <span class="terms-row-dot"></span>
+                            <span><span class="terms-badge warn">Lần 2</span> Hạn chế tính năng đăng bài trong 7 ngày.</span>
+                        </li>
+                        <li>
+                            <span class="terms-row-dot"></span>
+                            <span><span class="terms-badge danger">Lần 3</span> Khóa tài khoản vĩnh viễn và báo cáo cơ quan chức năng nếu cần.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>Báo cáo vi phạm</h2>
+                    <p>Nếu bạn thấy nội dung vi phạm, hãy dùng nút "Báo cáo" trên bài đăng, hoặc liên hệ trực tiếp qua email. Đội ngũ kiểm duyệt sẽ xem xét trong vòng 24–48 giờ.</p>
+                </div>
+            </div>
+
+            <!-- Panel 4: Liên hệ -->
+            <div id="panel-contact" class="terms-panel">
+                <div class="terms-callout">
+                    <p>Có câu hỏi về điều khoản, chính sách hoặc cần hỗ trợ? Đội ngũ TopGo luôn sẵn sàng lắng nghe.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>Thông tin liên hệ</h2>
+                    <div class="terms-contact-grid">
+                        <div class="terms-contact-card">
+                            <div class="label">Email hỗ trợ</div>
+                            <div class="value">support@topgo.vn</div>
+                        </div>
+                        <div class="terms-contact-card">
+                            <div class="label">Phản hồi trong</div>
+                            <div class="value">24–48 giờ</div>
+                        </div>
+                        <div class="terms-contact-card">
+                            <div class="label">Về chúng tôi</div>
+                            <div class="value"><a href="./aboutus.html">Tìm hiểu thêm</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="terms-footer-note">
+                Cập nhật lần cuối: Tháng 7, 2026 · Phiên bản 1.0 &nbsp;·&nbsp;
+                <a href="./feed.html">Quay lại TopGo</a>
+            </div>
+        </div>
+    </main>
+
+    <div id="site-shared"></div>
+    <script type="module" src="./js/shared.js"></script>
+    <script>
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.terms-tab-btn').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.terms-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('panel-' + tab).classList.add('active');
+            // Cập nhật hash mà không scroll
+            history.replaceState(null, '', '#' + tab);
+        }
+
+        // Tự động switch tab theo hash khi trang tải
+        (function() {
+            const hashMap = {
+                '#terms': 'terms',
+                '#privacy': 'privacy',
+                '#community': 'community',
+                '#contact': 'contact'
+            };
+            const target = hashMap[window.location.hash];
+            if (target) {
+                const btn = document.querySelector(`.terms-tab-btn[onclick*="'${target}'"]`);
+                if (btn) switchTab(target, btn);
+            }
+        })();
+    </script>
+</body>
+</html>

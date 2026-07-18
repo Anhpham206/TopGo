@@ -60,6 +60,7 @@ onAuthStateChanged(auth, (user) => {
 
     // Đồng bộ thông tin hồ sơ từ Firestore backend
     user.getIdToken(true).then(token => {
+      localStorage.setItem('topgo_token', token);
       fetch(`${API_BASE}/api/users/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -68,19 +69,63 @@ onAuthStateChanged(auth, (user) => {
         return res.json();
       })
       .then(dbProfile => {
-        if (dbProfile && (dbProfile.firstname || dbProfile.lastname || dbProfile.nationality || dbProfile.sex || dbProfile.dob || dbProfile.pob)) {
+        if (dbProfile && Object.keys(dbProfile).length > 0) {
           // Ghi nhận các trường thay đổi từ database
           const updatedUser = { ...cachedUser, ...dbProfile };
           localStorage.setItem('topgo_user', JSON.stringify(updatedUser));
           window.dispatchEvent(new Event('topgo-auth-change'));
         }
+
+        // ── SYNC photoURL và thông tin cơ bản lên BE nếu chưa có ──
+        // Điều này đảm bảo feed_controller có thể lấy avatar khi enrich post
+        const needsSync = !dbProfile?.photoURL && user.photoURL
+          || !dbProfile?.firstname && cachedUser.firstname
+          || !dbProfile?.email && user.email;
+
+        if (needsSync) {
+          const profileToSync = {
+            firstname: cachedUser.firstname || '',
+            lastname: cachedUser.lastname || '',
+            email: user.email || '',
+            photoURL: user.photoURL || null,
+            nationality: dbProfile?.nationality || 'Việt Nam',
+          };
+          fetch(`${API_BASE}/api/users/profile`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(profileToSync)
+          }).catch(err => {
+            console.warn('[TopGo] Không thể đồng bộ profile lên BE:', err);
+          });
+        }
       })
       .catch(err => {
+        // Nếu GET profile lỗi, vẫn thử sync thông tin cơ bản lên BE
         console.warn("Chưa có cấu hình profile hoặc lỗi kết nối:", err);
+        if (user.photoURL || cachedUser.firstname) {
+          fetch(`${API_BASE}/api/users/profile`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              firstname: cachedUser.firstname || '',
+              lastname: cachedUser.lastname || '',
+              email: user.email || '',
+              photoURL: user.photoURL || null,
+              nationality: 'Việt Nam',
+            })
+          }).catch(() => {});
+        }
       });
     });
   } else {
     localStorage.removeItem('topgo_user');
+    localStorage.removeItem('topgo_token');
   }
   window.dispatchEvent(new Event('topgo-auth-change'));
 });
@@ -151,10 +196,8 @@ const AuthService = {
   async updateProfile(updates) {
     const user = this.getUser();
     if (!user) return null;
-    Object.assign(user, updates);
-    this.setUser(user);
 
-    // Lưu trữ thông tin hồ sơ lên Firestore của backend
+    // Lưu trữ thông tin hồ sơ lên Firestore của backend trước
     const firebaseUser = await waitForAuth();
     if (firebaseUser) {
       try {
@@ -167,12 +210,19 @@ const AuthService = {
           },
           body: JSON.stringify(updates)
         });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        if (!res.ok) {
+           const errData = await res.json().catch(()=>({}));
+           throw new Error(errData.detail || "Cập nhật hồ sơ thất bại");
+        }
       } catch (err) {
         console.error("Lỗi khi đồng bộ profile lên server:", err);
+        throw err; // Ném lỗi ra ngoài để UI xử lý
       }
     }
     
+    // Cập nhật local sau khi backend thành công
+    Object.assign(user, updates);
+    this.setUser(user);
     window.dispatchEvent(new Event('topgo-auth-change'));
     return user;
   },
@@ -265,12 +315,21 @@ const AuthService = {
 // Đưa ra phạm vi global để dùng chung giữa các trang
 window.TopGoAuth = AuthService;
 
+// ── Helper cho DOM Ready (tránh miss DOMContentLoaded trong script module) ──
+function onDOMReady(fn) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fn);
+  } else {
+    fn();
+  }
+}
+
 // ── Nhận diện trang hiện tại ──
 const currentPage = window.location.pathname.split('/').pop() || '';
 
 // ── Logic trang xác thực (auth.html) ──
 if (currentPage === 'auth.html') {
-  document.addEventListener('DOMContentLoaded', () => {
+  onDOMReady(() => {
     // Chuyển hướng nếu đã đăng nhập
     if (AuthService.isLoggedIn()) {
       window.location.href = './profile.html';
@@ -420,7 +479,7 @@ if (currentPage === 'auth.html') {
 
 // ── Logic trang Hồ sơ cá nhân (profile.html) ──
 if (currentPage === 'profile.html') {
-  document.addEventListener('DOMContentLoaded', async () => {
+  onDOMReady(async () => {
     // Chuyển hướng nếu chưa đăng nhập
     if (!AuthService.isLoggedIn()) {
       window.location.href = './auth.html';
@@ -432,22 +491,91 @@ if (currentPage === 'profile.html') {
       if (el) el.textContent = val || '—';
     };
 
-    const updateProfileUI = () => {
-      const user = AuthService.getUser();
+    // Tabs Logic
+    const tabs = document.querySelectorAll('.pv2-tab');
+    const tabContents = document.querySelectorAll('.pv2-tab-content');
+    const tabIndicator = document.querySelector('.pv2-tab-indicator');
+    
+    function updateTabIndicator(activeTab) {
+      if (!tabIndicator || !activeTab) return;
+      tabIndicator.style.display = 'block';
+      tabIndicator.style.width = `${activeTab.offsetWidth}px`;
+      tabIndicator.style.left = `${activeTab.offsetLeft}px`;
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        tab.classList.add('active');
+        const targetId = tab.dataset.tab;
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) targetContent.classList.add('active');
+        
+        updateTabIndicator(tab);
+      });
+    });
+
+    // Initialize tab indicator on load (give DOM time to render)
+    setTimeout(() => {
+      const activeTab = document.querySelector('.pv2-tab.active');
+      if (activeTab) updateTabIndicator(activeTab);
+    }, 100);
+
+
+    const updateProfileUI = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const viewUserId = urlParams.get('userId');
+      let user = AuthService.getUser();
+      
+      const isViewingOther = viewUserId && (!user || (user.id !== viewUserId && user.uid !== viewUserId));
+      
+      if (isViewingOther) {
+          // Ẩn nút chỉnh sửa, đăng xuất, edit avatar
+          const actionsEl = document.getElementById('pv2-actions');
+          if (actionsEl) actionsEl.style.display = 'none';
+          const photoEditBtn = document.getElementById('pp-photo-edit');
+          if (photoEditBtn) photoEditBtn.style.display = 'none';
+          
+          setText('pv2-name', 'Đang tải...');
+          
+          try {
+              const res = await fetch(`${API_BASE}/api/users/${viewUserId}/profile`);
+              if (res.ok) {
+                  user = await res.json();
+              } else {
+                  throw new Error('User not found');
+              }
+          } catch (e) {
+              console.warn("Không thể tải public profile:", e);
+              user = {
+                  id: viewUserId.substring(0, 8),
+                  firstname: '',
+                  lastname: 'Thành viên ' + viewUserId.substring(0, 4),
+                  nationality: 'Việt Nam',
+                  sex: 'Khác',
+                  dob: '—',
+                  pob: '—',
+                  email: 'Bảo mật',
+                  createdAt: '—',
+                  photoURL: null
+              };
+          }
+      }
+
       if (!user) return;
+      const fullname = `${user.lastname || ''} ${user.firstname || ''}`.trim() || '—';
       
-      const fullname = `${user.lastname || ''} ${user.firstname || ''}`.trim();
-      const fullnameDisplay = user.is_vip ? `${fullname} 👑 (VIP)` : fullname;
-      
-      const fullnameEl = document.getElementById('pp-fullname');
-      if (fullnameEl) fullnameEl.innerHTML = fullnameDisplay;
-      
-      setText('pp-nationality', user.nationality);
-      setText('pp-sex', user.sex);
-      setText('pp-dob', user.dob);
-      setText('pp-pob', user.pob);
-      setText('pp-email', user.email);
-      setText('pp-doi', user.createdAt);
+      // ── Populate V2 Header ──
+      setText('pv2-name', fullname);
+      const handleEl = document.getElementById('pv2-handle');
+      if (handleEl) {
+          const username = user.username ? user.username : (user.id || 'TG-000000');
+          handleEl.textContent = `@${username} · ${user.nationality || 'Việt Nam'}`;
+      }
+      const emailEl = document.getElementById('pv2-email');
+      if (emailEl && !isViewingOther) emailEl.textContent = user.email || '';
       
       const passportNo = user.is_vip ? `${user.id} (VIP)` : user.id;
       setText('pp-passport-no', passportNo);
@@ -459,27 +587,26 @@ if (currentPage === 'profile.html') {
         if (user.photoUrl) {
           photoEl.innerHTML = `<img src="${user.photoUrl}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; ${borderStyle}">`;
         } else {
-          photoEl.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pp-photo-placeholder" style="${borderStyle}">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-            </svg>`;
+          const initial = (user.firstname || user.lastname || user.email || 'T').charAt(0).toUpperCase();
+          photoEl.innerHTML = `<span style="font-size: 40px; font-weight: 600; color: var(--p1); display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">${initial}</span>`;
         }
       }
 
-      // Điền thông tin MRZ giả lập dạng hộ chiếu
-      const mrzEl = document.getElementById('pp-mrz');
-      if (mrzEl) {
-        const lastname = (user.lastname || 'TOPGO').toUpperCase().replace(/\s/g, '<');
-        const firstname = (user.firstname || 'TRAVELER').toUpperCase().replace(/\s/g, '<');
-        const line1 = `P<VNM<${lastname}<<${firstname}`.padEnd(44, '<').replace(/</g, '&lt;');
-        
-        const dobStr = (user.dob || '000000').replace(/-/g, '').slice(-6); // Định dạng YYMMDD
-        const sexStr = (user.sex === 'Nam' ? 'M' : (user.sex === 'Nữ' ? 'F' : '<'));
-        const idStr = (user.id || 'TG000000');
-        const line2 = `${idStr.padEnd(9, '<')}0VNM${dobStr.padEnd(6, '<')}0${sexStr}${'<'.repeat(7)}`.padEnd(44, '<').replace(/</g, '&lt;');
-        
-        mrzEl.innerHTML = `${line1}<br>${line2}`;
+      // V2 Stats
+      const statNationEl = document.getElementById('pv2-stat-nation-label');
+      if (statNationEl) statNationEl.textContent = user.nationality || 'Việt Nam';
+
+      // ── Populate Identity Panel (Sidebar) ──
+      setText('pip-fullname', fullname);
+      setText('pip-nationality', user.nationality || 'Việt Nam');
+      setText('pip-sex', user.sex || '—');
+      setText('pip-dob', user.dob || '—');
+      setText('pip-pob', user.pob || '—');
+      const pipEmailEl = document.getElementById('pip-email');
+      if (pipEmailEl) pipEmailEl.textContent = isViewingOther ? 'Bảo mật' : (user.email || '—');
+      const pipJoinedEl = document.getElementById('pip-joined');
+      if (pipJoinedEl) {
+        pipJoinedEl.textContent = user.createdAt || '—';
       }
     };
 
@@ -543,15 +670,26 @@ if (currentPage === 'profile.html') {
 
     // Tải danh sách lịch trình từ database
     let trips = [];
-    try {
-      trips = await AuthService.getTrips();
-    } catch (e) {
-      console.warn("Không thể tải chuyến đi từ API, thử dùng demo.");
+    const urlParamsTrips = new URLSearchParams(window.location.search);
+    const viewUserIdTrips = urlParamsTrips.get('userId');
+    const isViewingOtherTrips = viewUserIdTrips && AuthService.getUser() && AuthService.getUser().id !== viewUserIdTrips && AuthService.getUser().uid !== viewUserIdTrips;
+
+    if (!isViewingOtherTrips) {
+        try {
+          trips = await AuthService.getTrips();
+        } catch (e) {
+          console.warn("Không thể tải chuyến đi từ API, thử dùng demo.");
+        }
+    } else {
+        // Ẩn phần lịch trình nếu đang xem profile người khác (vì chưa có API lấy lịch trình public)
+        const stampsEl = document.querySelector('.passport-stamps');
+        if (stampsEl) stampsEl.style.display = 'none';
     }
 
     // Hiển thị số lượng
     setText('pp-trips', String(trips.length));
     setText('stamps-count', `${trips.length} chuyến`);
+    setText('pv2-stat-trips', String(trips.length));
 
     // Render danh sách chuyến đi ra giao diện
     renderTrips(trips);
@@ -559,14 +697,26 @@ if (currentPage === 'profile.html') {
     // Chuyển đổi hiển thị dạng lưới hoặc danh sách
     const toggleBtns = document.querySelectorAll('.view-btn');
     const stampsGrid = document.getElementById('stamps-grid');
+
+    // Restore saved view mode
+    const savedView = localStorage.getItem('topgo_trips_view_mode') || 'grid';
+    if (savedView === 'list' && stampsGrid) {
+        stampsGrid.classList.add('list-view');
+        toggleBtns.forEach(b => {
+            b.classList.toggle('active', b.dataset.view === 'list');
+        });
+    }
+
     toggleBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         toggleBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         if (btn.dataset.view === 'list') {
           stampsGrid.classList.add('list-view');
+          localStorage.setItem('topgo_trips_view_mode', 'list');
         } else {
           stampsGrid.classList.remove('list-view');
+          localStorage.setItem('topgo_trips_view_mode', 'grid');
         }
       });
     });
@@ -577,6 +727,8 @@ if (currentPage === 'profile.html') {
       const user = AuthService.getUser() || {};
       document.getElementById('edit-lastname').value = user.lastname || '';
       document.getElementById('edit-firstname').value = user.firstname || '';
+      const usernameInput = document.getElementById('edit-username');
+      if (usernameInput) usernameInput.value = user.username || '';
       document.getElementById('edit-dob').value = user.dob || '';
       document.getElementById('edit-sex').value = user.sex || '';
       document.getElementById('edit-pob').value = user.pob || '';
@@ -587,16 +739,70 @@ if (currentPage === 'profile.html') {
     document.getElementById('btn-edit-cancel')?.addEventListener('click', () => overlay.classList.add('hidden'));
     overlay?.addEventListener('click', e => { if (e.target === overlay) overlay.classList.add('hidden'); });
 
+    // Username validation logic
+    const usernameInput = document.getElementById('edit-username');
+    const usernameStatus = document.getElementById('username-status');
+    let usernameTimeout;
+    if (usernameInput) {
+        usernameInput.addEventListener('input', (e) => {
+            const val = e.target.value.trim();
+            if (usernameStatus) {
+                usernameStatus.textContent = '';
+                usernameStatus.style.color = '';
+            }
+            if (!val) return;
+            
+            clearTimeout(usernameTimeout);
+            usernameTimeout = setTimeout(async () => {
+                const user = AuthService.getUser();
+                if (user && user.username === val) {
+                    if (usernameStatus) {
+                        usernameStatus.textContent = 'Username hiện tại';
+                        usernameStatus.style.color = 'var(--sub)';
+                    }
+                    return;
+                }
+                if (usernameStatus) {
+                    usernameStatus.textContent = 'Đang kiểm tra...';
+                    usernameStatus.style.color = 'var(--sub)';
+                }
+                try {
+                    const _isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+                    const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
+                    
+                    const fetchRes = await fetch(`${API_BASE}/api/users/check-username?username=${val}`);
+                    const res = await fetchRes.json();
+                    if (res && res.available !== undefined) {
+                        usernameStatus.textContent = res.message;
+                        usernameStatus.style.color = res.available ? 'var(--success)' : 'var(--error)';
+                    }
+                } catch (err) {
+                    if (usernameStatus) {
+                        usernameStatus.textContent = 'Username không hợp lệ hoặc trùng';
+                        usernameStatus.style.color = 'var(--error)';
+                    }
+                }
+            }, 500);
+        });
+    }
+
     document.getElementById('btn-edit-save')?.addEventListener('click', async () => {
-      const updated = await AuthService.updateProfile({
-        lastname: document.getElementById('edit-lastname').value.trim(),
-        firstname: document.getElementById('edit-firstname').value.trim(),
-        dob: document.getElementById('edit-dob').value,
-        sex: document.getElementById('edit-sex').value,
-        pob: document.getElementById('edit-pob').value.trim(),
-        nationality: document.getElementById('edit-nationality').value.trim(),
-      });
-      if (updated) window.location.reload();
+      try {
+          const updated = await AuthService.updateProfile({
+            lastname: document.getElementById('edit-lastname').value.trim(),
+            firstname: document.getElementById('edit-firstname').value.trim(),
+            username: document.getElementById('edit-username')?.value.trim(),
+            dob: document.getElementById('edit-dob').value,
+            sex: document.getElementById('edit-sex').value,
+            pob: document.getElementById('edit-pob').value.trim(),
+            nationality: document.getElementById('edit-nationality').value.trim(),
+          });
+          if (updated) window.location.reload();
+      } catch (err) {
+          import('./shared.js').then(module => {
+              module.showToast(err.message, 'error');
+          });
+      }
     });
 
     // Đăng xuất
@@ -638,12 +844,48 @@ if (currentPage === 'profile.html') {
     filterDateTo?.addEventListener('change', applyFilters);
     filterBudget?.addEventListener('input', applyFilters);
 
+    // ── V2 Tab Switching with Indicator ──
+    const pv2Tabs = document.querySelectorAll('.pv2-tab');
+    const pv2Indicator = document.querySelector('.pv2-tab-indicator');
+    
+    function updateTabIndicator(activeTab) {
+        if (!pv2Indicator || !activeTab) return;
+        pv2Indicator.style.left = activeTab.offsetLeft + 'px';
+        pv2Indicator.style.width = activeTab.offsetWidth + 'px';
+    }
+    
     // Tự động seed một vài chuyến đi mẫu nếu danh sách trống hoàn toàn để hỗ trợ test nhanh (chỉ thử 1 lần)
     if (trips.length === 0 && !localStorage.getItem('demo_seeded')) {
       localStorage.setItem('demo_seeded', 'true');
       await seedDemoTrips();
       window.location.reload();
     }
+    
+    // Set initial indicator position
+    const initialActive = document.querySelector('.pv2-tab.active');
+    if (initialActive) {
+        requestAnimationFrame(() => updateTabIndicator(initialActive));
+    }
+    
+    pv2Tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            pv2Tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            updateTabIndicator(tab);
+            
+            const targetId = tab.dataset.tab;
+            document.querySelectorAll('.pv2-tab-content').forEach(content => {
+                content.classList.toggle('active', content.id === targetId);
+            });
+        });
+    });
+    
+    // Recalculate on resize
+    window.addEventListener('resize', () => {
+        const activeTab = document.querySelector('.pv2-tab.active');
+        if (activeTab) updateTabIndicator(activeTab);
+    });
+
   });
 }
 
@@ -661,15 +903,42 @@ function renderTrips(trips) {
   }
   if (empty) empty.style.display = 'none';
 
-  trips.forEach(trip => {
+  // Lọc trùng lặp dựa vào id để tránh bị hiển thị lặp
+  const uniqueTrips = [];
+  const seenIds = new Set();
+  trips.forEach(t => {
+      if (!seenIds.has(t.id)) {
+          seenIds.add(t.id);
+          uniqueTrips.push(t);
+      }
+  });
+
+  // Kiểm tra xem có đang xem profile người khác không
+  const urlParamsTrips = new URLSearchParams(window.location.search);
+  const viewUserIdTrips = urlParamsTrips.get('userId');
+  let user = null;
+  try { user = AuthService.getUser(); } catch(e){}
+  const isViewingOtherTrips = viewUserIdTrips && user && user.id !== viewUserIdTrips && user.uid !== viewUserIdTrips;
+
+  // Show global privacy toggle only if viewing own profile
+  const globalPrivacyToggle = document.getElementById('trips-privacy-toggle');
+  if (globalPrivacyToggle) {
+    globalPrivacyToggle.style.display = !isViewingOtherTrips ? 'flex' : 'none';
+  }
+
+  uniqueTrips.forEach(trip => {
     const card = document.createElement('div');
     card.className = 'stamp-card';
     card.innerHTML = `
-      <div class="stamp-dest">${trip.destination || 'Chuyến đi'}</div>
-      <div class="stamp-meta">
-        <span class="stamp-tag">${trip.days || '?'} ngày</span>
-        <span class="stamp-tag">${trip.pax || '?'} người</span>
-        ${trip.budget ? `<span class="stamp-tag">${Number(trip.budget).toLocaleString('vi-VN')}₫</span>` : ''}
+      <div class="stamp-main-info">
+        <div class="stamp-dest-wrap">
+          <span class="stamp-dest">${trip.destination || 'Chuyến đi'}</span>
+        </div>
+        <div class="stamp-meta">
+          <span class="stamp-tag">${trip.days || '?'} ngày</span>
+          <span class="stamp-tag">${trip.pax || '?'} người</span>
+          ${trip.budget ? `<span class="stamp-tag">${Number(trip.budget).toLocaleString('vi-VN')}₫</span>` : ''}
+        </div>
       </div>
       <div class="stamp-date">${trip.dateStart || ''} → ${trip.dateEnd || ''}</div>
       <div class="stamp-actions">
@@ -722,6 +991,8 @@ function renderTrips(trips) {
     });
   });
 }
+
+
 
 async function seedDemoTrips() {
   const demos = [

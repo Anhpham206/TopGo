@@ -68,22 +68,19 @@ export async function fetchPlaces() {
         ];
         const placesByCity = {};
 
-        // Chia nhỏ thành các batch (3 request/lần) để tránh sập local dev server (gây lỗi không fetch được)
-        for (let i = 0; i < files.length; i += 3) {
-            const batch = files.slice(i, i + 3);
-            await Promise.all(batch.map(async (item) => {
-                let res = await fetch(`${API_BASE}/dataset/${item.file}`).catch(() => null);
-                if (res && res.ok) {
-                    try {
-                        const data = await res.json();
-                        const cityName = Object.keys(data)[0];
-                        placesByCity[item.id] = data[cityName].diem_tham_quan || [];
-                    } catch (e) {
-                        console.error(`[TopGo] Error parsing ${item.file}:`, e);
-                    }
+        // Fetch tất cả 12 file song song thay vì tuần tự từng batch 3
+        await Promise.all(files.map(async (item) => {
+            let res = await fetch(`${API_BASE}/dataset/${item.file}`).catch(() => null);
+            if (res && res.ok) {
+                try {
+                    const data = await res.json();
+                    const cityName = Object.keys(data)[0];
+                    placesByCity[item.id] = data[cityName].diem_tham_quan || [];
+                } catch (e) {
+                    console.error(`[TopGo] Error parsing ${item.file}:`, e);
                 }
-            }));
-        }
+            }
+        }));
 
         // Tự động load dữ liệu dự phòng (mockFallback) nếu có bất kỳ file nào tải thất bại
         if (Object.keys(placesByCity).length < files.length) {

@@ -14,6 +14,30 @@ const _isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostnam
 const BASE_API_URL = _isLocal
     ? 'http://localhost:8000'
     : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
+
+const VIETNAM_PROVINCES = [
+  "An Giang", "Bà Rịa - Vũng Tàu", "Bạc Liêu", "Bắc Giang", "Bắc Kạn", "Bắc Ninh", "Bến Tre", "Bình Dương", "Bình Định", "Bình Phước", "Bình Thuận", "Cà Mau", "Cao Bằng", "Cần Thơ", "Đà Nẵng", "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam", "Hà Nội", "Hà Tĩnh", "Hải Dương", "Hải Phòng", "Hậu Giang", "Hòa Bình", "Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lạng Sơn", "Lào Cai", "Lâm Đồng", "Long An", "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên", "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long", "Vĩnh Phúc", "Yên Bái", "TP. Hồ Chí Minh"
+];
+
+function removeVietnameseTones(str) {
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+    str = str.replace(/đ/g, "d");
+    str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+    str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+    str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+    str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+    str = str.replace(/Ù|Ú|Ụ|Ủ|U|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+    str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+    str = str.replace(/Đ/g, "D");
+    str = str.replace(/\u0300|\u0301|\u0309|\u0303|\u0323/g, "");
+    str = str.replace(/\u02C6|\u0306|\u031B/g, "");
+    return str;
+}
 /* ── Toast thông báo nội bộ ── */
 function showToast(msg, type = 'success') {
   const id = 'post-modal-toast';
@@ -94,6 +118,7 @@ export function initPostModal() {
       position: relative; overflow: hidden; transition: all var(--t);
       box-shadow: 0 8px 24px rgba(0, 169, 255, 0.12), 0 2px 8px rgba(38, 78, 107, 0.06);
       box-sizing: border-box; min-height: 158px;
+      margin-bottom: 20px;
     }
 
     /* Gradient top bar */
@@ -121,7 +146,7 @@ export function initPostModal() {
 
     /* Bottom content area */
     .pm-itin-bottom {
-      padding: 12px 20px 14px;
+      padding: 16px 20px 20px;
       display: flex; flex-direction: column; gap: 8px; flex: 1;
     }
     .pm-itin-meta-chips { display: flex; gap: 7px; flex-wrap: wrap; }
@@ -264,21 +289,23 @@ export function initPostModal() {
     .pm-chip button { background:none; border:none; color: var(--muted); cursor:pointer; font-size:15px; line-height:1; padding:0; margin-left: 2px; }
     .pm-chip button:hover { color: var(--error); }
 
-    /* ── Tag gợi ý từ lịch trình ── */
-    .pm-suggested-wrap {
-      display: flex; flex-direction: column; gap: 6px;
-      background: rgba(0, 169, 255, 0.02); border: 1px dashed var(--border);
-      padding: 12px; border-radius: 16px;
+    /* ── Tag địa điểm dropdown ── */
+    .pm-provinces-dropdown {
+      display: none; position: absolute; left: 0; right: 0;
+      background: #fff; border: 1.5px solid var(--border, #cde9f5);
+      border-radius: 14px; max-height: 180px; overflow-y: auto; z-index: 1000;
+      box-shadow: 0 8px 24px rgba(0, 169, 255, 0.08); margin-top: 4px;
     }
-    .pm-suggested-title { font-size:12px; font-weight:700; color: var(--muted); display:flex; align-items:center; gap:6px; }
-    .pm-suggested-chips { display:flex; flex-wrap:wrap; gap:6px; }
-    .pm-suggested-chip {
-      padding: 5px 10px; border-radius: 999px; font-size:11.5px; font-weight:600;
-      background: var(--white); border: 1px solid var(--border); color: var(--text);
+    .pm-province-item {
+      padding: 10px 16px; font-size: 13.5px; color: var(--text, #264e6b);
       cursor: pointer; transition: all var(--t);
     }
-    .pm-suggested-chip:hover { background: rgba(0, 169, 255, 0.08); border-color: var(--p1); }
-    .pm-suggested-chip.disabled { opacity: 0.4; cursor: not-allowed; text-decoration: line-through; }
+    .pm-province-item:hover {
+      background: rgba(0, 169, 255, 0.08); color: var(--p1, #00a9ff);
+    }
+    .pm-province-item.disabled {
+      opacity: 0.5; cursor: not-allowed; background: #fafafa;
+    }
 
     /* ── Footer ── */
     .pm-footer {
@@ -440,28 +467,17 @@ export function initPostModal() {
         <!-- Media Preview -->
         <div class="pm-preview-grid" id="pm-preview-grid"></div>
 
-        <!-- Tag gợi ý từ lịch trình -->
-        <div class="pm-suggested-wrap" id="pm-suggested-wrap" style="display:none">
-          <div class="pm-suggested-title">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            Địa điểm gợi ý từ lịch trình:
-          </div>
-          <div class="pm-suggested-chips" id="pm-suggested-chips"></div>
-        </div>
-
         <!-- Tag địa điểm -->
-        <div>
+        <div style="position: relative; width: 100%;">
           <div class="pm-tag-chips" id="pm-tag-chips"></div>
           <div class="pm-tag-input-wrap" style="margin-top:8px">
             <svg class="pm-tag-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
               <circle cx="12" cy="10" r="3"/>
             </svg>
-            <input class="pm-tag-input" id="pm-tag-input" placeholder="Nhập địa điểm khác rồi nhấn Enter...">
+            <input class="pm-tag-input" id="pm-tag-input" placeholder="Gắn thẻ tỉnh/thành phố du lịch..." autocomplete="off">
           </div>
+          <div class="pm-provinces-dropdown" id="pm-provinces-dropdown"></div>
         </div>
 
       </div><!-- /pm-body -->
@@ -470,10 +486,6 @@ export function initPostModal() {
       <div class="pm-footer">
         <div class="pm-status" id="pm-status-msg"></div>
         <button class="pm-submit" id="pm-submit-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-          </svg>
           <span>Đăng bài</span>
         </button>
       </div>
@@ -514,10 +526,6 @@ export function openPostModal(trip = null) {
   if (submitBtn) {
     submitBtn.disabled = false;
     submitBtn.innerHTML = `
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <line x1="22" y1="2" x2="11" y2="13"></line>
-        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-      </svg>
       <span>Đăng bài</span>
     `;
   }
@@ -530,59 +538,6 @@ export function openPostModal(trip = null) {
 
   updateMediaCount();
 
-  /* ── Hàm load gợi ý địa điểm từ lịch trình ── */
-  function loadSuggestedLocations(tripData) {
-    const suggestedWrap = get('pm-suggested-wrap');
-    const suggestedChips = get('pm-suggested-chips');
-    suggestedChips.innerHTML = '';
-
-    if (tripData && tripData.itinerary) {
-      try {
-        let itin = tripData.itinerary;
-        if (typeof itin === 'string') {
-          itin = JSON.parse(itin);
-        }
-        const aiOut = itin.output || itin;
-        const lichTrinh = aiOut.Lich_trinh || [];
-        const placesSet = new Set();
-
-        lichTrinh.forEach(day => {
-          if (Array.isArray(day)) {
-            day.forEach(stop => {
-              if (stop.Dia_diem) placesSet.add(stop.Dia_diem);
-            });
-          }
-        });
-
-        tripLocations = Array.from(placesSet);
-
-        if (tripLocations.length > 0) {
-          suggestedWrap.style.display = 'flex';
-          tripLocations.forEach(loc => {
-            const chip = document.createElement('div');
-            chip.className = 'pm-suggested-chip';
-            chip.textContent = loc;
-            chip.onclick = () => {
-              if (!tagList.includes(loc) && tagList.length < 5) {
-                tagList.push(loc);
-                renderChips();
-                chip.classList.add('disabled');
-              }
-            };
-            suggestedChips.appendChild(chip);
-          });
-        } else {
-          suggestedWrap.style.display = 'none';
-        }
-      } catch (e) {
-        console.error('Lỗi khi phân tích địa điểm gợi ý:', e);
-        suggestedWrap.style.display = 'none';
-      }
-    } else {
-      suggestedWrap.style.display = 'none';
-    }
-  }
-
   /* ── Hàm hiển thị lịch trình được đính kèm ── */
   function renderAttachedItinerary(tripData) {
     currentTrip = tripData;
@@ -590,10 +545,10 @@ export function openPostModal(trip = null) {
     if (tripData?.destination) {
       get('pm-itin-dest').textContent = `${tripData.destination}`;
       get('pm-itin-budget').textContent = tripData.budget ? `${Number(tripData.budget).toLocaleString('vi-VN')}₫` : 'TỰ TÚC';
-
+ 
       const chipsContainer = get('pm-itin-chips-container');
       chipsContainer.innerHTML = '';
-
+ 
       const addChip = (txt, svgPath) => {
         const div = document.createElement('div');
         div.className = 'pm-itin-chip';
@@ -605,44 +560,36 @@ export function openPostModal(trip = null) {
         `;
         chipsContainer.appendChild(div);
       };
-
+ 
       // Icon ngày (clock)
       addChip(`${tripData.days || '?'} NGÀY`, `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`);
       // Icon người (user)
       addChip(`${tripData.pax || '?'} NGƯỜI`, `<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>`);
-
+ 
       if (tripData.dateStart && tripData.dateEnd) {
         const formatD = (d) => d.split('-').reverse().join('/');
         get('pm-itin-dates').textContent = `${formatD(tripData.dateStart)} → ${formatD(tripData.dateEnd)}`;
       } else {
         get('pm-itin-dates').textContent = 'Chưa định ngày';
       }
-
+ 
       // Thiết lập nút gỡ đính kèm + undo
       const undoBar = get('pm-itin-undo-bar');
       get('pm-itin-remove-btn').onclick = () => {
         isItineraryAttached = false;
         itinTag.style.display = 'none';
         undoBar.classList.add('show');
-        get('pm-suggested-wrap').style.display = 'none';
       };
       get('pm-itin-undo-btn').onclick = () => {
         isItineraryAttached = true;
         itinTag.style.display = 'flex';
         undoBar.classList.remove('show');
-        if (tripLocations && tripLocations.length > 0) {
-          get('pm-suggested-wrap').style.display = 'block';
-        }
       };
-
+ 
       itinTag.style.display = 'flex';
       undoBar.classList.remove('show');
-
-      // Load gợi ý địa điểm
-      loadSuggestedLocations(tripData);
     } else {
       itinTag.style.display = 'none';
-      get('pm-suggested-wrap').style.display = 'none';
     }
   }
 
@@ -669,7 +616,8 @@ export function openPostModal(trip = null) {
       return;
     }
 
-    pickerList.innerHTML = `<div style="font-size:12px;color:var(--muted);text-align:center;padding:12px;">⏳ Đang tải lịch trình đã lưu...</div>`;
+    const pickerList = get('pm-itin-picker-list');
+    pickerList.innerHTML = `<div style="font-size:12px;color:var(--muted);text-align:center;padding:12px;">Đang tải lịch trình đã lưu...</div>`;
     pickerWrap.style.display = 'flex';
 
     try {
@@ -858,25 +806,76 @@ export function openPostModal(trip = null) {
     toUpload.forEach(f => uploadOneFile(f, 'video'));
   };
 
-  /* ── Tag địa điểm tự nhập ── */
-  get('pm-tag-input').onkeydown = (e) => {
-    if ((e.key === 'Enter' || e.key === ',') && e.target.value.trim()) {
-      e.preventDefault();
-      const tag = e.target.value.trim().replace(/,$/, '');
-      if (tag && !tagList.includes(tag) && tagList.length < 5) {
-        tagList.push(tag);
-        renderChips();
+  /* ── Tag địa điểm tự nhập (Chỉ chọn từ 63 tỉnh thành Việt Nam) ── */
+  const tagInput = get('pm-tag-input');
+  const provincesDropdown = get('pm-provinces-dropdown');
 
-        // Disable gợi ý tương ứng nếu người dùng tự nhập trùng
-        const suggestedChips = get('pm-suggested-chips');
-        if (suggestedChips) {
-          const suggestedEl = Array.from(suggestedChips.children).find(c => c.textContent === tag);
-          if (suggestedEl) suggestedEl.classList.add('disabled');
-        }
+  const renderDropdownList = (list) => {
+    provincesDropdown.innerHTML = '';
+    if (list.length === 0) {
+      provincesDropdown.style.display = 'none';
+      return;
+    }
+
+    list.forEach(p => {
+      const isTagged = tagList.includes(p);
+      const div = document.createElement('div');
+      div.className = `pm-province-item ${isTagged ? 'disabled' : ''}`;
+      div.textContent = p;
+      if (!isTagged) {
+        div.onclick = () => {
+          if (tagList.length < 5) {
+            tagList.push(p);
+            renderChips();
+            tagInput.value = '';
+            provincesDropdown.style.display = 'none';
+          }
+        };
       }
-      e.target.value = '';
+      provincesDropdown.appendChild(div);
+    });
+    provincesDropdown.style.display = 'block';
+  };
+
+  const showDefaultProvinces = () => {
+    const topProvinces = ["Hà Nội", "TP. Hồ Chí Minh", "Đà Nẵng", "Lâm Đồng", "Khánh Hòa", "Kiên Giang", "Quảng Nam", "Ninh Bình"];
+    renderDropdownList(topProvinces);
+  };
+
+  tagInput.onfocus = () => {
+    if (!tagInput.value.trim()) {
+      showDefaultProvinces();
     }
   };
+
+  tagInput.oninput = (e) => {
+    const val = e.target.value.trim();
+    if (!val) {
+      showDefaultProvinces();
+      return;
+    }
+
+    const query = removeVietnameseTones(val.toLowerCase());
+    const matches = VIETNAM_PROVINCES.filter(p => {
+      const pLowerClean = removeVietnameseTones(p.toLowerCase());
+      return pLowerClean.includes(query);
+    });
+
+    renderDropdownList(matches);
+  };
+
+  tagInput.onkeydown = (e) => {
+    if (e.key === 'Escape') {
+      provincesDropdown.style.display = 'none';
+    }
+  };
+
+  // Click outside to close dropdown
+  document.addEventListener('click', (e) => {
+    if (provincesDropdown && e.target !== tagInput && !provincesDropdown.contains(e.target)) {
+      provincesDropdown.style.display = 'none';
+    }
+  });
 
   function renderChips() {
     const chips = get('pm-tag-chips');
@@ -888,13 +887,6 @@ export function openPostModal(trip = null) {
       chip.querySelector('button').onclick = () => {
         tagList.splice(i, 1);
         renderChips();
-
-        // Active lại gợi ý nếu bị xóa
-        const suggestedChips = get('pm-suggested-chips');
-        if (suggestedChips) {
-          const suggestedEl = Array.from(suggestedChips.children).find(c => c.textContent === t);
-          if (suggestedEl) suggestedEl.classList.remove('disabled');
-        }
       };
       chips.appendChild(chip);
     });
@@ -932,7 +924,12 @@ export function openPostModal(trip = null) {
     setStatus('Đang kiểm duyệt nội dung bằng AI...', 'info');
 
     try {
-      const token = await window.TopGoAuth?.getIdToken();
+      let token = null;
+      if (window.TopGoAuth?.getIdToken) {
+        token = await window.TopGoAuth.getIdToken();
+      } else {
+        token = localStorage.getItem('topgo_token');
+      }
       if (!token) throw new Error('Bạn cần đăng nhập để thực hiện tính năng này.');
 
       const payload = {
@@ -953,18 +950,19 @@ export function openPostModal(trip = null) {
       // Thành công
       setStatus('Đã đăng bài thành công!', 'success');
       showToast('Bài viết của bạn đã được đăng tải', 'success');
+      
+      // Gửi bài viết mới về Newsfeed để hiển thị ngay lập tức
+      if (typeof window.NewsFeedBridge?.onPostCreated === 'function') {
+        window.NewsFeedBridge.onPostCreated(data);
+      }
+      
       btn.innerHTML = 'Đã đăng!';
-      setTimeout(() => closeModal(), 1800);
+      closeModal();
 
     } catch (err) {
       setStatus(err.message, 'error');
       btn.disabled = false;
-      btn.innerHTML = `
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:8px;">
-          <line x1="22" y1="2" x2="11" y2="13"></line>
-          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-        </svg> Đăng bài
-      `;
+      btn.innerHTML = `Đăng bài`;
       isSubmitting = false;
     }
   };

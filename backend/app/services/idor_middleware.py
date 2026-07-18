@@ -36,7 +36,7 @@ async def _resolve_uid_from_header(authorization: Optional[str]) -> Optional[str
         if len(parts) != 2 or parts[0].lower() != "bearer":
             return None
         token = parts[1]
-        decoded = auth.verify_id_token(token)
+        decoded = auth.verify_id_token(token, clock_skew_seconds=60)
         return decoded.get("uid")
     except Exception:
         return None

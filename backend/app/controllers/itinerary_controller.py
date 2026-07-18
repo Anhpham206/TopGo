@@ -62,11 +62,40 @@ async def get_itinerary(itinerary_id: str) -> dict:
         doc_ref = db.collection("itineraries").document(itinerary_id)
         doc = doc_ref.get()
         if not doc.exists:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="Không tìm thấy lịch trình này hoặc đã bị xóa."
-            )
-        data = doc.to_dict()
+            if itinerary_id == "trip-preview-1":
+                data = {
+                    "id": "trip-preview-1",
+                    "destination": "Phú Quốc",
+                    "days": 4,
+                    "pax": 2,
+                    "budget": 8500000.0,
+                    "dateStart": "2026-07-20",
+                    "dateEnd": "2026-07-24",
+                    "itinerary": '{"output":{"Lich_trinh":[[{"Dia_diem":"Bãi Sao"},{"Dia_diem":"Chợ Đêm"}]]}}',
+                    "visibility": "public",
+                    "ownerId": "mock-admin"
+                }
+            elif itinerary_id == "trip-preview-2":
+                data = {
+                    "id": "trip-preview-2",
+                    "destination": "Sapa Sương Mù",
+                    "days": 3,
+                    "pax": 4,
+                    "budget": 4500000.0,
+                    "dateStart": "2026-11-15",
+                    "dateEnd": "2026-11-18",
+                    "itinerary": '{"output":{"Lich_trinh":[[{"Dia_diem":"Bản Cát Cát"},{"Dia_diem":"Fansipan"}]]}}',
+                    "visibility": "public",
+                    "ownerId": "mock-admin"
+                }
+            else:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="Không tìm thấy lịch trình này hoặc đã bị xóa."
+                )
+        else:
+            data = doc.to_dict()
+
         if data.get("visibility") == "private":
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,

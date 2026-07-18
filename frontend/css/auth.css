@@ -617,6 +617,31 @@
   font-family: var(--font-label); font-size: 11px; font-weight: 700;
   letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase;
 }
+/* Global Trips Privacy Toggle */
+.trips-privacy-toggle {
+  display: flex; align-items: center; gap: 8px; cursor: pointer;
+  background: var(--bg); padding: 4px 10px 4px 6px;
+  border-radius: 100px; border: 1px solid var(--border-light);
+  transition: all var(--t); user-select: none;
+}
+.trips-privacy-toggle:hover { background: var(--white); border-color: var(--border); box-shadow: var(--sh-s); }
+.tpt-switch { position: relative; width: 32px; height: 18px; flex-shrink: 0; }
+.tpt-switch input { opacity: 0; width: 0; height: 0; margin: 0; }
+.tpt-slider {
+  position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: var(--border); transition: .3s; border-radius: 18px;
+}
+.tpt-slider:before {
+  position: absolute; content: ""; height: 14px; width: 14px; left: 2px; bottom: 2px;
+  background-color: white; transition: .3s; border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.tpt-switch input:checked + .tpt-slider { background-color: var(--p1); }
+.tpt-switch input:checked + .tpt-slider:before { transform: translateX(14px); }
+.tpt-label { font-family: var(--font-label); font-size: 11px; font-weight: 700; text-transform: uppercase; transition: color .3s; letter-spacing: 0.5px; }
+.tpt-label.public { color: var(--p1); }
+.tpt-label.private { color: var(--sub); }
+
 .view-toggle {
   display: flex; background: var(--bg);
   border: 1px solid var(--border-light); border-radius: var(--r-s); padding: 4px;
@@ -672,39 +697,64 @@
 }
 
 .stamps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; transition: all var(--t); }
-.stamps-grid.list-view { grid-template-columns: 1fr; }
-.stamps-grid.list-view .stamp-card {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 24px; gap: 20px;
-}
-.stamps-grid.list-view .stamp-dest { margin-bottom: 0; min-width: 120px; }
-.stamps-grid.list-view .stamp-meta { margin-bottom: 0; flex: 1; }
-.stamps-grid.list-view .stamp-actions { margin-top: 0; }
+.stamps-grid.list-view { grid-template-columns: 1fr; gap: 12px; }
+
+/* ── TRIP CARD HIỆN ĐẠI ── */
 .stamp-card {
-  border: 1.5px solid var(--border-light); border-radius: var(--r-l);
-  padding: 18px; transition: all var(--t); position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border-light); border-radius: var(--r-l);
+  padding: 24px 20px; transition: all var(--t); position: relative; overflow: hidden;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
 }
 .stamp-card::before {
   content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: linear-gradient(90deg, var(--p1), var(--p2));
+  background: #0ea5e9; /* Xanh dương đậm ở viền trên */
 }
-.stamp-card:hover { border-color: var(--p2); box-shadow: 0 8px 24px rgba(0,169,255,0.12); transform: translateY(-2px); }
-.stamp-dest { font-family: var(--font-expanded); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-.stamp-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.stamp-card:hover { border-color: var(--p2); box-shadow: 0 4px 16px rgba(0,169,255,0.08); transform: translateY(-2px); }
+
+/* Bố cục Grid View Fallback */
+.stamp-main-info {
+  display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; flex: 1;
+}
+.stamp-dest-wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.stamp-dest { font-family: var(--font-expanded); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 0; }
+.stamp-privacy {
+  display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--sub); cursor: pointer; margin-bottom: 0;
+}
+.stamp-privacy input { margin: 0; cursor: pointer; }
+.stamp-meta { display: flex; flex-wrap: wrap; gap: 8px; }
 .stamp-tag {
-  font-family: var(--font-label); font-size: 10px; font-weight: 600;
-  letter-spacing: 1px; padding: 3px 8px; border-radius: 100px;
-  background: rgba(0,169,255,0.08); color: var(--p1);
+  font-family: var(--font); font-size: 12px; font-weight: 600;
+  padding: 4px 12px; border-radius: 100px;
+  background: #e0f2fe; color: #0ea5e9;
 }
-.stamp-date { font-size: 12px; color: var(--muted); }
-.stamp-actions { display: flex; gap: 8px; margin-top: 12px; }
+.stamp-date { font-size: 13px; font-weight: 500; color: #64748b; margin-bottom: 16px; }
+.stamp-actions { display: flex; gap: 8px; }
 .stamp-btn {
-  padding: 6px 14px; border: 1.5px solid var(--border); border-radius: var(--r-s);
+  padding: 6px 16px; border: 1.5px solid var(--border-light); border-radius: var(--r-s);
   background: var(--white); font-size: 12px; font-weight: 600; color: var(--muted);
   cursor: pointer; transition: all var(--t);
 }
 .stamp-btn:hover { color: var(--p1); border-color: var(--p1); }
 .stamp-btn.danger:hover { color: var(--error); border-color: var(--error); }
+
+/* Bố cục List View theo thiết kế ngang */
+.stamps-grid.list-view .stamp-card {
+  flex-direction: row; align-items: center; padding: 20px 24px; gap: 20px; min-height: 84px;
+}
+.stamps-grid.list-view .stamp-main-info {
+  flex-direction: row; align-items: center; margin-bottom: 0; gap: 24px; flex: unset;
+}
+.stamps-grid.list-view .stamp-dest-wrap {
+  justify-content: flex-start;
+}
+.stamps-grid.list-view .stamp-date {
+  margin-bottom: 0; margin-left: auto; margin-right: 16px; text-align: right;
+}
+
 .stamps-empty { grid-column: 1/-1; text-align: center; padding: 48px 20px; }
 .stamps-empty-icon { color: var(--border); margin-bottom: 16px; }
 .stamps-empty-text { font-size: 15px; color: var(--muted); margin-bottom: 12px; }
@@ -747,3 +797,689 @@
   .pp-field-row { grid-template-columns: 1fr; }
   .stamps-grid { grid-template-columns: 1fr; }
 }
+
+/* ========================================================================
+   DARK MODE OVERRIDES (body.dark)
+   ======================================================================== */
+
+body.dark .auth-left {
+  background: #0f172a;
+  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Vertical Passport Cover in Login */
+body.dark .passport-cover {
+  background: linear-gradient(180deg, #070b13 0%, #0c1a30 50%, #112d4e 100%);
+}
+body.dark .passport-cover::before {
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+}
+
+/* Titles and labels */
+body.dark .auth-title {
+  color: #f1f5f9;
+}
+body.dark .auth-subtitle {
+  color: #94a3b8;
+}
+body.dark .label-sm {
+  color: #94a3b8;
+}
+
+/* Auth forms inputs */
+body.dark .auth-input {
+  background: #0f172a;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+}
+body.dark .auth-input:focus {
+  border-color: var(--p1);
+  background: #0f172a;
+  box-shadow: 0 0 0 3px rgba(0, 169, 255, 0.15);
+}
+body.dark .auth-input::placeholder {
+  color: #475569;
+}
+body.dark select.auth-input option {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+/* Prevent browser autofill from breaking dark mode */
+body.dark .auth-input:-webkit-autofill,
+body.dark .auth-input:-webkit-autofill:hover, 
+body.dark .auth-input:-webkit-autofill:focus, 
+body.dark .auth-input:-webkit-autofill:active,
+body.dark input:-webkit-autofill,
+body.dark input:-webkit-autofill:hover,
+body.dark input:-webkit-autofill:focus,
+body.dark input:-webkit-autofill:active,
+body.dark select:-webkit-autofill,
+body.dark select:-webkit-autofill:hover,
+body.dark select:-webkit-autofill:focus,
+body.dark select:-webkit-autofill:active {
+  -webkit-text-fill-color: #e2e8f0 !important;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 0 1000px #0f172a !important;
+  -webkit-box-shadow: inset 0 0 0 1000px #0f172a !important;
+}
+
+/* Remember me & forgot passwords links */
+body.dark .remember-me {
+  color: #94a3b8;
+}
+body.dark .forgot-link {
+  color: #38bdf8;
+}
+body.dark .forgot-link:hover {
+  color: #e2e8f0;
+}
+body.dark .auth-divider {
+  color: #475569;
+}
+body.dark .auth-divider::before,
+body.dark .auth-divider::after {
+  background: rgba(255, 255, 255, 0.08);
+}
+body.dark .btn-auth-social {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+}
+body.dark .btn-auth-social:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--p2);
+}
+body.dark .auth-switch {
+  color: #94a3b8;
+}
+body.dark .switch-btn {
+  color: #38bdf8;
+}
+body.dark .switch-btn:hover {
+  color: #e2e8f0;
+}
+
+/* Bento Cells in Auth layout */
+body.dark .bento-cell {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+body.dark .bento-cell:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  border-color: var(--p2);
+}
+body.dark .bento-overlay {
+  background: linear-gradient(
+    160deg,
+    rgba(0, 169, 255, 0.45) 0%,
+    rgba(7, 10, 19, 0.85) 100%
+  );
+}
+body.dark .bento-overlay--dark {
+  background: linear-gradient(
+    160deg,
+    rgba(0, 80, 160, 0.5) 0%,
+    rgba(3, 11, 27, 0.95) 100%
+  );
+}
+
+/* Profile page Hero */
+body.dark .profile-hero {
+  background: rgba(13, 20, 38, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.35),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.05);
+}
+body.dark .ph-title {
+  background: linear-gradient(135deg, #38bdf8 0%, #1d4ed8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #38bdf8;
+}
+
+/* Passport replica book (profile page) */
+body.dark .passport-book {
+  perspective: 1500px;
+}
+body.dark .passport-page {
+  background: #0f1422; /* Deeper space navy */
+  transition: transform var(--t), box-shadow var(--t);
+}
+body.dark .passport-page::before {
+  background-image: radial-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.6;
+}
+body.dark .passport-page::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 30' fill='none' stroke='%2338bdf8' stroke-width='0.5'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z'/%3E%3Ctext x='12' y='28' font-family='sans-serif' font-weight='800' font-size='5.5' text-anchor='middle' fill='%2338bdf8' stroke='none' letter-spacing='1'%3ETOPGO%3C/text%3E%3C/svg%3E");
+  opacity: 0.04;
+}
+body.dark .passport-identity {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid rgba(0, 0, 0, 0.45); /* dark crease shadow on left */
+  border-radius: var(--r-xl) 0 0 var(--r-xl);
+  box-shadow: -12px 16px 36px rgba(0, 0, 0, 0.45), inset 1px 1px 0 rgba(255, 255, 255, 0.05);
+}
+body.dark .pp-header {
+  background: linear-gradient(135deg, #070c18 0%, #1e3a8a 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+body.dark .pp-stripe {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(56, 189, 248, 0.1) 0px, rgba(56, 189, 248, 0.1) 5px,
+    rgba(15, 20, 35, 0.85) 5px, rgba(15, 20, 35, 0.85) 14px
+  );
+}
+body.dark .pp-photo {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(7, 12, 24, 0.6);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+body.dark .pp-photo-placeholder {
+  color: #3b4b61;
+}
+body.dark .pp-photo-edit {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+body.dark .pp-photo-edit:hover {
+  color: #38bdf8;
+  border-color: #38bdf8;
+  background: rgba(0, 169, 255, 0.15);
+}
+body.dark .pp-passport-no {
+  color: #f1f5f9;
+  letter-spacing: 2px;
+}
+body.dark .pp-label {
+  color: #4b5f7a;
+}
+body.dark .pp-value {
+  color: #e2e8f0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+body.dark .pp-trips-count {
+  color: #38bdf8;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+body.dark .pp-mrz {
+  background: rgba(7, 12, 24, 0.6);
+  color: #475a75;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+}
+body.dark .btn-edit-profile {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+body.dark .btn-edit-profile:hover {
+  color: #38bdf8;
+  border-color: #38bdf8;
+  background: rgba(0, 169, 255, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 169, 255, 0.1);
+}
+
+/* Stamps Passport page in Profile */
+body.dark .passport-stamps {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 1px solid rgba(255, 255, 255, 0.08); /* light highlight crease on right page */
+  border-radius: 0 var(--r-xl) var(--r-xl) 0;
+  box-shadow: 12px 16px 36px rgba(0, 0, 0, 0.45), inset 1px 1px 0 rgba(255, 255, 255, 0.05);
+}
+body.dark .stamps-title {
+  color: #f1f5f9;
+}
+body.dark .stamps-count {
+  color: #64748b;
+}
+body.dark .view-toggle {
+  background: rgba(7, 12, 24, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+body.dark .view-btn {
+  color: #64748b;
+}
+body.dark .view-btn.active {
+  background: #1e293b;
+  color: #38bdf8;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Filter controls */
+body.dark .stamps-filters {
+  background: rgba(7, 12, 24, 0.5);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+body.dark .filter-group label {
+  color: #64748b;
+}
+body.dark .filter-group input {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+}
+body.dark .filter-group input:focus {
+  border-color: var(--p1);
+  box-shadow: 0 0 0 3px rgba(0, 169, 255, 0.15);
+}
+body.dark .filter-group input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* Stamp cards & logs */
+body.dark .stamp-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+}
+body.dark .stamp-card:hover {
+  border-color: var(--p2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.04);
+}
+body.dark .stamp-dest {
+  color: #f1f5f9;
+}
+body.dark .stamp-tag {
+  background: rgba(0, 169, 255, 0.15);
+  color: #38bdf8;
+}
+body.dark .stamp-date {
+  color: #64748b;
+}
+body.dark .stamp-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+body.dark .stamp-btn:hover {
+  color: #38bdf8;
+  border-color: #38bdf8;
+  background: rgba(0, 169, 255, 0.1);
+}
+body.dark .stamps-empty-icon {
+  color: #3b4b61;
+}
+body.dark .stamps-empty-text {
+  color: #94a3b8;
+}
+body.dark .stamps-empty-cta {
+  color: #38bdf8;
+}
+body.dark .stamps-empty-cta:hover {
+  color: #f1f5f9;
+}
+
+/* Passport Editor Overlays */
+body.dark .pp-edit-card {
+  background: #0f1422;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+body.dark .pp-edit-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+body.dark .pp-edit-header h2 {
+  color: #f1f5f9;
+}
+body.dark .pp-edit-close {
+  color: #64748b;
+}
+body.dark .pp-edit-close:hover {
+  color: var(--error);
+}
+body.dark .pp-edit-actions {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+body.dark .btn-reset {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+body.dark .btn-reset:hover {
+  border-color: var(--error);
+  color: var(--error);
+  background: rgba(214, 41, 41, 0.1);
+}
+
+/* Responsive Passport overrides for Dark Mode */
+@media (max-width: 1000px) {
+  body.dark .passport-identity {
+    border-radius: var(--r-xl) var(--r-xl) 0 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 -15px 25px -15px rgba(0, 0, 0, 0.4), 0 15px 35px rgba(0, 0, 0, 0.3);
+  }
+  body.dark .passport-stamps {
+    border-radius: 0 0 var(--r-xl) var(--r-xl);
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 15px 25px -15px rgba(0, 0, 0, 0.4), 0 15px 35px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ========================================================================
+   PROFILE V2 — 2-Column Layout + Identity Panel
+   ======================================================================== */
+
+.profile-main-v2 {
+  padding: 0 0 60px;
+  margin-top: 110px;
+}
+/* ── 2-Column Layout ── */
+.pv2-layout {
+  max-width: 1200px;
+  margin: 32px auto 0;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 32px;
+  align-items: start;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Sidebar ── */
+.pv2-sidebar {
+  position: sticky;
+  top: 90px;
+}
+.pv2-sidebar-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: var(--r-xl);
+  box-shadow: 0 8px 32px rgba(0,169,255,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  padding: 32px 24px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+body.dark .pv2-sidebar-card {
+  background: rgba(22,32,51,0.7);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* Avatar */
+.pv2-avatar-wrap {
+  position: relative; margin-bottom: 20px;
+}
+.pv2-avatar {
+  width: 130px; height: 130px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--p1), #818cf8, var(--p2));
+  border: 4px solid var(--white);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,169,255,0.2), 0 0 0 4px rgba(0,169,255,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.pv2-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 32px rgba(0,169,255,0.3), 0 0 0 6px rgba(0,169,255,0.12);
+}
+.pv2-avatar img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+}
+.pv2-avatar-placeholder {
+  width: 64px; height: 64px; color: rgba(255,255,255,0.7);
+}
+.pv2-avatar-edit {
+  position: absolute; bottom: 8px; right: 8px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--white); border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--muted); transition: all var(--t);
+  z-index: 3; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.pv2-avatar-edit svg { width: 18px; height: 18px; }
+.pv2-avatar-edit:hover { color: var(--p1); border-color: var(--p1); background: rgba(0,169,255,0.06); }
+
+/* Name & Handle */
+.pv2-name {
+  font-family: var(--font-expanded); font-size: 26px; font-weight: 800;
+  color: var(--text); line-height: 1.2; margin-bottom: 6px;
+}
+.pv2-handle {
+  font-family: var(--font-label); font-size: 14px; font-weight: 600;
+  color: var(--muted); letter-spacing: 0.3px; margin-bottom: 4px;
+}
+.pv2-email {
+  font-size: 12px; color: var(--muted); opacity: 0.6; margin-bottom: 16px;
+}
+
+/* Stats */
+.pv2-stats {
+  display: flex; align-items: center; justify-content: center; gap: 0;
+  width: 100%; padding: 14px 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 16px;
+}
+.pv2-stat {
+  display: flex; flex-direction: column; align-items: center;
+  flex: 1; gap: 2px;
+}
+.pv2-stat-num {
+  font-family: var(--font-expanded); font-size: 20px; font-weight: 800;
+  color: var(--p1);
+}
+.pv2-stat-label {
+  font-family: var(--font-label); font-size: 10px; font-weight: 600;
+  color: var(--muted); text-transform: uppercase; letter-spacing: 1px;
+}
+.pv2-stat-divider {
+  width: 1px; height: 32px; background: var(--border-light); flex-shrink: 0;
+}
+
+/* Actions */
+.pv2-actions {
+  display: flex; gap: 8px; width: 100%;
+}
+.pv2-btn {
+  flex: 1; display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 16px; border-radius: 12px;
+  font-family: var(--font-label); font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all var(--t); border: 1.5px solid var(--border);
+  white-space: nowrap;
+}
+.pv2-btn-edit {
+  background: var(--white); color: var(--text);
+}
+.pv2-btn-edit:hover {
+  border-color: var(--p1); color: var(--p1); background: rgba(0,169,255,0.04);
+}
+.pv2-btn-logout {
+  background: rgba(255,59,48,0.04); color: var(--error); border-color: rgba(255,59,48,0.2);
+}
+.pv2-btn-logout:hover {
+  background: var(--error); color: #fff; border-color: var(--error);
+}
+
+/* ── Integrated Details Panel ── */
+.pv2-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 20px 0 24px;
+  text-align: left;
+  border-top: 1px solid var(--border-light);
+  padding-top: 20px;
+}
+.pv2-detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.pv2-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 10px;
+  border-left: 2px solid rgba(0, 169, 255, 0.25);
+}
+.pv2-detail-label {
+  font-family: var(--font-label);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.pv2-detail-value {
+  font-family: var(--font-label);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-word;
+}
+
+
+/* Quick Links */
+.pv2-quick-links {
+  padding: 8px 0 !important;
+  text-align: left;
+}
+.pv2-qlink {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 20px;
+  font-family: var(--font-label); font-size: 13px; font-weight: 600;
+  color: var(--muted); text-decoration: none;
+  transition: all var(--t);
+}
+.pv2-qlink:hover { color: var(--p1); background: rgba(0,169,255,0.04); }
+.pv2-qlink svg { flex-shrink: 0; }
+
+/* ── Main Content Area ── */
+.pv2-main {
+  min-width: 0;
+}
+
+/* Tabs — pill style, no icons */
+.pv2-tabs-bar {
+  display: flex; position: relative;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.45);
+  border-radius: var(--r-l);
+  padding: 4px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(0,169,255,0.05);
+}
+body.dark .pv2-tabs-bar {
+  background: rgba(22,32,51,0.5);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.pv2-tab {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 11px 0; background: none; border: none;
+  border-radius: 14px;
+  font-family: var(--font-label); font-size: 14px; font-weight: 600;
+  color: var(--muted); cursor: pointer; transition: all var(--t);
+  position: relative; z-index: 1; letter-spacing: 0.2px;
+}
+.pv2-tab:hover { color: var(--text); }
+.pv2-tab.active {
+  color: var(--p1);
+  background: var(--white);
+  box-shadow: 0 2px 10px rgba(0,169,255,0.12);
+}
+body.dark .pv2-tab.active {
+  background: rgba(0,169,255,0.1);
+}
+.pv2-tab-indicator { display: none; }
+
+/* Tab Content */
+.pv2-tab-content {
+  display: none;
+  animation: pv2FadeIn 0.25s ease;
+}
+.pv2-tab-content.active { display: block; }
+@keyframes pv2FadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Stamps / Tab Header ── */
+.stamps-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.stamps-title {
+  font-family: var(--font-expanded); font-size: 17px; font-weight: 800;
+  color: var(--text);
+}
+.stamps-count {
+  font-family: var(--font-label); font-size: 13px; font-weight: 600;
+  color: var(--muted);
+}
+
+/* Post cards in profile — full width, not constrained */
+.profile-posts-feed-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Filters toggle */
+.stamps-filters-toggle {
+  margin-bottom: 16px;
+}
+.stamps-filters-toggle summary {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-label); font-size: 13px; font-weight: 600;
+  color: var(--muted); cursor: pointer; padding: 6px 12px;
+  border: 1px solid var(--border-light); border-radius: var(--r-s);
+  transition: all var(--t); list-style: none; user-select: none;
+}
+.stamps-filters-toggle summary::-webkit-details-marker { display: none; }
+.stamps-filters-toggle summary:hover { color: var(--p1); border-color: var(--p1); }
+.stamps-filters-toggle[open] summary { color: var(--p1); border-color: var(--p1); }
+.stamps-filters-toggle .stamps-filters { margin-top: 12px; }
+
+
+/* Profile posts empty state — standalone (not inside stamps-grid) */
+#profile-posts-empty.stamps-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-column: unset;
+  padding: 56px 20px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .pv2-layout {
+    grid-template-columns: 1fr;
+  }
+  .pv2-sidebar { position: static; }
+}
+@media (max-width: 640px) {
+  .pv2-layout { padding: 0 12px; gap: 12px; }
+  .pv2-sidebar-card { padding: 20px 16px; }
+  .pv2-avatar { width: 80px; height: 80px; }
+  .pv2-tab { font-size: 13px; padding: 10px 0; }
+  .pv2-detail-row { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* ── Dark Mode ── */
+body.dark .pv2-avatar { border-color: #131c2e; }
+body.dark .pv2-avatar-edit { background: #131c2e; border-color: rgba(255,255,255,0.1); }
+body.dark .pv2-btn-edit { background: #131c2e; color: #e2e8f0; border-color: rgba(255,255,255,0.1); }
+body.dark .pv2-btn-edit:hover { border-color: var(--p1); color: var(--p1); }
+body.dark .pv2-btn-logout { background: rgba(214,41,41,0.08); border-color: rgba(214,41,41,0.2); }
+body.dark .pv2-btn-logout:hover { background: var(--error); color: #fff; }
+body.dark .pv2-qlink:hover { background: rgba(0,169,255,0.08); }
+body.dark .stamps-filters-toggle summary { border-color: rgba(255,255,255,0.08); }
+body.dark .pv2-detail-item { border-left-color: rgba(0, 169, 255, 0.4); }
+

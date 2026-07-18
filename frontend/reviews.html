@@ -1,29 +1,66 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TopGo — Đánh giá & Bình luận</title>
+    <meta name="description" content="Xem và chia sẻ đánh giá địa điểm du lịch từ cộng đồng TopGo và Google Maps.">
     <link rel="icon" type="image/png" href="./assets/logo.png">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/shared.css?v=2">
-    <link rel="stylesheet" href="./css/reviews.css?v=3">
+    <link rel="stylesheet" href="./css/reviews.css?v=14">
 </head>
+
 <body>
     <header class="header header-solid" id="site-header">
         <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
     </header>
 
     <main id="app-main">
-        <div class="reviews-container glass-card">
-            <h2>Đánh giá Địa điểm</h2>
-            <p style="margin-bottom: 20px; color: var(--sub);">Chọn một địa điểm để xem và thêm bình luận</p>
-            
+
+        <!-- ── Hero Banner ── -->
+        <section class="reviews-hero">
+            <div class="reviews-hero-bg"></div>
+            <div class="reviews-hero-inner">
+                <div class="reviews-hero-tagline">
+                    <span class="reviews-hero-dot"></span>
+                    Cộng đồng · Thực tế · Tin cậy
+                </div>
+                <h1 class="reviews-hero-title">Đánh giá<br><em>Địa điểm</em></h1>
+                <p class="reviews-hero-desc">
+                    Khám phá nhận xét thực tế từ cộng đồng du lịch TopGo và Google Maps.<br>
+                    Chọn địa điểm để xem đánh giá hoặc chia sẻ trải nghiệm của bạn.
+                </p>
+            </div>
+            <div class="reviews-hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </section>
+
+        <!-- ── Main Card ── -->
+        <div class="reviews-container">
+
+            <!-- Selectors Row -->
             <div class="reviews-selectors">
                 <div class="selector-group">
                     <label class="label-sm">Tỉnh / Thành phố</label>
                     <select id="city-selector" class="selector-select">
                         <option value="">-- Chọn Tỉnh/Thành --</option>
+                        <option value="ha_noi">Hà Nội</option>
+                        <option value="da_nang">Đà Nẵng</option>
+                        <option value="thanh_pho_ho_chi_minh">TP. Hồ Chí Minh</option>
+                        <option value="nha_trang">Nha Trang</option>
+                        <option value="lam_dong">Lâm Đồng (Đà Lạt)</option>
+                        <option value="phu_quoc">Phú Quốc</option>
+                        <option value="hoi_an">Hội An</option>
+                        <option value="binh_thuan">Bình Thuận</option>
+                        <option value="ca_mau">Cà Mau</option>
+                        <option value="can_tho">Cần Thơ</option>
+                        <option value="ninh_binh">Ninh Bình</option>
+                        <option value="ninh_thuan">Ninh Thuận</option>
                     </select>
                 </div>
                 <div class="selector-group">
@@ -34,34 +71,70 @@
                 </div>
             </div>
 
+            <!-- Reviews section: 2 column layout, hidden until place selected -->
             <div id="reviews-section" style="display: none;">
-                <div class="reviews-list" id="reviews-list">
-                    <!-- Reviews will be loaded here -->
+
+                <!-- 2-column grid -->
+                <div class="reviews-grid">
+                    <!-- Left: Google Maps reviews -->
+                    <div class="reviews-col reviews-col-google">
+                        <div class="col-header">
+                            <img src="https://www.google.com/favicon.ico" alt="Google" class="col-header-icon">
+                            <span>Đánh giá từ Google Maps</span>
+                        </div>
+                        <div id="col-google">
+                            <div class="reviews-loading">Đang tải đánh giá Google...</div>
+                        </div>
+                    </div>
+
+                    <!-- Right: TopGo user reviews -->
+                    <div class="reviews-col reviews-col-user">
+                        <div class="col-header">
+                            <span class="col-header-icon topgo-icon">T</span>
+                            <span>Đánh giá từ cộng đồng TopGo</span>
+                        </div>
+                        <div id="col-user">
+                            <div class="reviews-loading">Đang tải đánh giá...</div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Write review form -->
                 <div class="review-form" id="review-form-container">
                     <h3>Viết đánh giá của bạn</h3>
                     <div id="auth-warning" style="display: none; color: #ff4d4f; margin-bottom: 10px;">
-                        Bạn cần <a href="./auth.html" style="color: var(--p1); text-decoration: underline;">đăng nhập</a> để viết đánh giá.
+                        Bạn cần <a href="./auth.html" style="color: var(--p1); text-decoration: underline;">đăng
+                            nhập</a> để viết đánh giá.
                     </div>
-                    <div class="star-rating" id="star-rating">
-                        <span data-val="1">★</span>
-                        <span data-val="2">★</span>
-                        <span data-val="3">★</span>
-                        <span data-val="4">★</span>
-                        <span data-val="5">★</span>
+                    <div class="star-rating-wrap">
+                        <div class="star-rating" id="star-rating">
+                            <span data-val="1">★</span>
+                            <span data-val="2">★</span>
+                            <span data-val="3">★</span>
+                            <span data-val="4">★</span>
+                            <span data-val="5">★</span>
+                        </div>
+                        <span class="star-label" id="star-label">Chọn số sao</span>
                     </div>
-                    <textarea class="review-input" id="review-text" placeholder="Chia sẻ trải nghiệm của bạn về địa điểm này..."></textarea>
+                    <div class="review-suggestions" id="review-suggestions" style="display: none;">
+                        <span class="suggestions-label">Gợi ý nhanh:</span>
+                        <div class="suggestion-chips" id="suggestion-chips"></div>
+                    </div>
+                    <textarea class="review-input" id="review-text"
+                        placeholder="Chia sẻ trải nghiệm của bạn về địa điểm này..."></textarea>
                     <button class="btn-submit-review" id="btn-submit-review">Gửi Đánh giá</button>
                 </div>
+
             </div>
         </div>
     </main>
 
     <div id="site-shared"></div>
 
+    <script src="./js/mockFallback.js"></script>
     <script type="module" src="./js/auth.js"></script>
     <script type="module" src="./js/shared.js"></script>
-    <script type="module" src="./js/reviews.js?v=4"></script>
+    <script type="module" src="./js/reviews.js?v=18"></script>
 </body>
+
 </html>
