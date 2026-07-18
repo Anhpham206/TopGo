@@ -61,9 +61,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         reviewsSection.style.display = 'none';
         const colGoogle = document.getElementById('col-google');
-        const colUser   = document.getElementById('col-user');
+        const colUser = document.getElementById('col-user');
         if (colGoogle) colGoogle.innerHTML = '';
-        if (colUser)   colUser.innerHTML   = '';
+        if (colUser) colUser.innerHTML = '';
 
         if (unsubscribeReviews) {
             unsubscribeReviews();
@@ -113,10 +113,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         5: "Tuyệt vời!",
     };
 
-    const starLabel         = document.getElementById('star-label');
+    const starLabel = document.getElementById('star-label');
     const reviewSuggestions = document.getElementById('review-suggestions');
-    const suggestionChips   = document.getElementById('suggestion-chips');
-    const reviewText        = document.getElementById('review-text');
+    const suggestionChips = document.getElementById('suggestion-chips');
+    const reviewText = document.getElementById('review-text');
 
     starRatingSpans.forEach(span => {
         span.addEventListener('click', () => {
@@ -179,12 +179,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const textInput = document.getElementById('review-text');
         const text = textInput.value.trim();
-        
+
         if (currentRating === 0) {
             alert('Vui lòng chọn số sao đánh giá!');
             return;
         }
-        
+
         if (!text) {
             alert('Vui lòng nhập nội dung đánh giá!');
             return;
@@ -202,24 +202,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (!auth.currentUser) {
                 console.warn("Auth state hasn't propagated to Firestore yet. Trying to re-authenticate or wait.");
             }
-            const token = await auth.currentUser.getIdToken();
-            const response = await fetch(`${API_BASE}/reviews/create`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    location_id: currentPlaceId,
-                    rating: currentRating,
-                    comment: text
-                })
+
+            await addDoc(collection(db, "Reviews"), {
+                location_id: currentPlaceId,
+                user_id: user.uid,
+                user_name: userName,
+                rating: currentRating,
+                comment: text,
+                timestamp: serverTimestamp()
             });
 
-            if (!response.ok) {
-                const errData = await response.json();
-                throw new Error(errData.detail || 'Failed to submit review via API');
-            }
 
             textInput.value = '';
             currentRating = 0;
@@ -253,10 +245,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (unsubscribeReviews) unsubscribeReviews();
 
         const colGoogle = document.getElementById('col-google');
-        const colUser   = document.getElementById('col-user');
+        const colUser = document.getElementById('col-user');
 
         colGoogle.innerHTML = '<div class="reviews-loading">Đang tải Google Maps...</div>';
-        colUser.innerHTML   = '<div class="reviews-loading">Đang tải đánh giá...</div>';
+        colUser.innerHTML = '<div class="reviews-loading">Đang tải đánh giá...</div>';
 
         // Load Google reviews concurrently
         loadGoogleReviews(placeId);
@@ -268,7 +260,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             colUser.innerHTML = '';
 
             const currentUser = window.TopGoAuth ? window.TopGoAuth.getUser() : null;
-            const reviewDocs  = [];
+            const reviewDocs = [];
 
             snapshot.forEach(docSnap => {
                 reviewDocs.push({ id: docSnap.id, data: docSnap.data() });
@@ -284,9 +276,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 colUser.innerHTML = '<div class="empty-reviews">Chưa có đánh giá nào. Hãy là người đầu tiên! 🎉</div>';
             } else {
                 reviewDocs.forEach(({ id: reviewId, data: review }) => {
-                    const isOwner    = currentUser && currentUser.uid === review.user_id;
-                    const dateStr    = review.timestamp ? new Date(review.timestamp.toDate()).toLocaleDateString('vi-VN') : 'Vừa xong';
-                    const starsHtml  = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                    const isOwner = currentUser && currentUser.uid === review.user_id;
+                    const dateStr = review.timestamp ? new Date(review.timestamp.toDate()).toLocaleDateString('vi-VN') : 'Vừa xong';
+                    const starsHtml = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
                     const avatarLetter = review.user_name ? review.user_name.charAt(0).toUpperCase() : 'U';
 
                     const reviewEl = document.createElement('div');
@@ -333,7 +325,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function loadGoogleReviews(placeId) {
         const colGoogle = document.getElementById('col-google');
         const placeName = getCurrentPlaceName();
-        const cityName  = getCurrentCityName();
+        const cityName = getCurrentCityName();
 
         if (!placeName) return;
 
@@ -376,7 +368,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         reviews.forEach(review => {
-            const starsHtml    = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+            const starsHtml = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
             const avatarLetter = review.user_name ? review.user_name.charAt(0).toUpperCase() : 'G';
 
             const el = document.createElement('div');

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="./css/shared.css?v=2">
     <link rel="stylesheet" href="./css/reviews.css?v=14">
 </head>
+
 <body>
     <header class="header header-solid" id="site-header">
         <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
@@ -85,7 +87,7 @@
                         </div>
                     </div>
 
-                    <!-- Right: TopGo user reviews + write form -->
+                    <!-- Right: TopGo user reviews -->
                     <div class="reviews-col reviews-col-user">
                         <div class="col-header">
                             <span class="col-header-icon topgo-icon">T</span>
@@ -94,32 +96,35 @@
                         <div id="col-user">
                             <div class="reviews-loading">Đang tải đánh giá...</div>
                         </div>
-
-                        <!-- Write review form -->
-                        <div class="review-form" id="review-form-container">
-                            <h3>Viết đánh giá của bạn</h3>
-                            <div id="auth-warning" style="display: none; color: #ff4d4f; margin-bottom: 10px;">
-                                Bạn cần <a href="./auth.html" style="color: var(--p1); text-decoration: underline;">đăng nhập</a> để viết đánh giá.
-                            </div>
-                            <div class="star-rating-wrap">
-                                <div class="star-rating" id="star-rating">
-                                    <span data-val="1">★</span>
-                                    <span data-val="2">★</span>
-                                    <span data-val="3">★</span>
-                                    <span data-val="4">★</span>
-                                    <span data-val="5">★</span>
-                                </div>
-                                <span class="star-label" id="star-label">Chọn số sao</span>
-                            </div>
-                            <div class="review-suggestions" id="review-suggestions" style="display: none;">
-                                <span class="suggestions-label">Gợi ý nhanh:</span>
-                                <div class="suggestion-chips" id="suggestion-chips"></div>
-                            </div>
-                            <textarea class="review-input" id="review-text" placeholder="Chia sẻ trải nghiệm của bạn về địa điểm này..."></textarea>
-                            <button class="btn-submit-review" id="btn-submit-review">Gửi Đánh giá</button>
-                        </div>
                     </div>
                 </div>
+
+                <!-- Write review form -->
+                <div class="review-form" id="review-form-container">
+                    <h3>Viết đánh giá của bạn</h3>
+                    <div id="auth-warning" style="display: none; color: #ff4d4f; margin-bottom: 10px;">
+                        Bạn cần <a href="./auth.html" style="color: var(--p1); text-decoration: underline;">đăng
+                            nhập</a> để viết đánh giá.
+                    </div>
+                    <div class="star-rating-wrap">
+                        <div class="star-rating" id="star-rating">
+                            <span data-val="1">★</span>
+                            <span data-val="2">★</span>
+                            <span data-val="3">★</span>
+                            <span data-val="4">★</span>
+                            <span data-val="5">★</span>
+                        </div>
+                        <span class="star-label" id="star-label">Chọn số sao</span>
+                    </div>
+                    <div class="review-suggestions" id="review-suggestions" style="display: none;">
+                        <span class="suggestions-label">Gợi ý nhanh:</span>
+                        <div class="suggestion-chips" id="suggestion-chips"></div>
+                    </div>
+                    <textarea class="review-input" id="review-text"
+                        placeholder="Chia sẻ trải nghiệm của bạn về địa điểm này..."></textarea>
+                    <button class="btn-submit-review" id="btn-submit-review">Gửi Đánh giá</button>
+                </div>
+
             </div>
         </div>
     </main>
@@ -131,4 +136,5 @@
     <script type="module" src="./js/shared.js"></script>
     <script type="module" src="./js/reviews.js?v=18"></script>
 </body>
+
 </html>

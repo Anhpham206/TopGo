@@ -209,27 +209,6 @@ class CreateReviewRequest(BaseModel):
     rating: int
     comment: str
 
-@router.post("/reviews/create")
-async def create_user_review(req: CreateReviewRequest, decoded_token: dict = Depends(verify_firebase_token)):
-    """API lưu review qua backend, bypass Firestore Client Security Rules."""
-    uid = decoded_token["uid"]
-    author_info = _build_author_info(decoded_token)
-    
-    from app.services.firebase import db
-    from firebase_admin import firestore
-    
-    review_data = {
-        "location_id": req.location_id,
-        "user_id": uid,
-        "user_name": author_info["authorName"],
-        "rating": req.rating,
-        "comment": req.comment,
-        "timestamp": firestore.SERVER_TIMESTAMP
-    }
-    
-    db.collection("Reviews").add(review_data)
-    return {"message": "Review added successfully", "status": "success"}
-
 # ════════════════════════════════════════════════════════════════════
 # POSTS — Hệ thống bài đăng mạng xã hội
 # ════════════════════════════════════════════════════════════════════
