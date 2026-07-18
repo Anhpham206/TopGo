@@ -957,22 +957,49 @@ export async function renderPostCard(postId, containerEl, options = {}) {
             }
         }
 
-        // ── Bước 5: Xác định variant CSS class ───────────────────────────────
+        // ── Bước 5: Xác định variant CSS class và trích xuất ảnh ──────────────
+        const mediaUrls = post.mediaUrls;
+        const imageUrl = post.imageUrl;
+        let finalImageUrl = '';
+        if (Array.isArray(mediaUrls) && mediaUrls.length > 0) {
+            finalImageUrl = mediaUrls[0];
+        } else if (typeof mediaUrls === 'string' && mediaUrls.trim()) {
+            finalImageUrl = mediaUrls;
+        } else if (imageUrl && typeof imageUrl === 'string') {
+            finalImageUrl = imageUrl;
+        }
+
+        let displayType = post.type;
+        if (!displayType) {
+            if (post.itineraryId) {
+                displayType = 'itinerary';
+            } else if (finalImageUrl) {
+                displayType = 'image';
+            } else if (post.repostOriginal) {
+                displayType = 'repost';
+            } else {
+                displayType = 'text';
+            }
+        } else if (displayType === 'text' && finalImageUrl) {
+            displayType = 'image';
+        }
+
         const variantClass = {
             image: 'post-card--image',
             itinerary: 'post-card--itinerary',
             repost: 'post-card--text',
-        }[post.type] || 'post-card--text';
+        }[displayType] || 'post-card--text';
 
         // ── Bước 6: Dựng HTML hoàn chỉnh ─────────────────────────────────────
         const html = `
         <div class="topgo-thu-post-wrapper">
             <div class="post-card ${variantClass}" data-post-id="${_esc(postId)}">
                 ${_buildPostHeader(post)}
-                ${post.type === 'image' ? _buildImageBlock(post.mediaUrls?.[0] || post.imageUrl) : ''}
+                ${post.content ? `
                 <div class="post-body">
                     <div class="post-content-text">${_esc(post.content)}</div>
-                </div>
+                </div>` : ''}
+                ${finalImageUrl ? _buildImageBlock(finalImageUrl) : ''}
                 ${post.type === 'itinerary' ? _buildItineraryCard(post.itineraryId, itineraryData, postId) : ''}
                 ${post.type === 'repost' && post.repostOriginal ? _buildQuoteBlock(post.repostOriginal) : ''}
                 ${_buildLocationsBlock(post.taggedLocations)}
