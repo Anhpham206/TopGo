@@ -9,6 +9,7 @@
 
 import { loadSharedComponents } from "./shared.js";
 import { HotSearchWidget, updateSidebarProfile, SuggestedFollowWidget, DestinationsWidget } from "./sidebarUtils.js";
+import { renderPostCard } from "./post.js";
 
 const _isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
@@ -76,19 +77,20 @@ async function initLocationPosts() {
         } else {
             emptyState.style.display = 'none';
             
-            // Remove existing posts if any
-            const existingPosts = feedContainer.querySelectorAll('.post-card');
-            existingPosts.forEach(p => p.remove());
+            // Clear existing content
+            feedContainer.innerHTML = '';
 
-            // Render all posts
+            // Render all posts in parallel
+            const renderTasks = [];
             posts.forEach(post => {
-                if (typeof PostCardRenderer !== 'undefined') {
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = PostCardRenderer.render(post);
-                    const postCard = tempDiv.firstElementChild;
-                    feedContainer.appendChild(postCard);
-                }
+                const postPlaceholder = document.createElement('div');
+                postPlaceholder.className = "post-container-placeholder";
+                feedContainer.appendChild(postPlaceholder);
+                
+                renderTasks.push(renderPostCard(post.id, postPlaceholder, { mockData: post }));
             });
+            
+            await Promise.all(renderTasks);
         }
     } catch (e) {
         console.warn("Lỗi tải bài viết theo địa điểm:", e);

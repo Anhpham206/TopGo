@@ -294,7 +294,7 @@ export const DestinationsWidget = {
         if (!container) return;
 
         const html = locations.map(loc => `
-            <a href="./location.html?id=${loc.id}" class="sd-card" style="background: url('${_escapeHtml(loc.img || loc.image)}') center/cover;">
+            <a href="./location.html?name=${encodeURIComponent(loc.name || '')}" class="sd-card" style="background: url('${_escapeHtml(loc.img || loc.image)}') center/cover;">
                 <span class="sd-name">${_escapeHtml(loc.name)}</span>
             </a>
         `).join('');
