@@ -684,7 +684,12 @@ export function openPostModal(trip = null) {
   overlay.classList.add('open');
 
   /* ── Close ── */
-  const closeModal = () => overlay.classList.remove('open');
+  const closeModal = () => {
+    overlay.classList.remove('open');
+    if (currentTrip) {
+      window.location.reload();
+    }
+  };
   get('pm-close-btn').onclick = closeModal;
   overlay.onclick = e => { if (e.target === overlay) closeModal(); };
 
@@ -950,14 +955,18 @@ export function openPostModal(trip = null) {
       // Thành công
       setStatus('Đã đăng bài thành công!', 'success');
       showToast('Bài viết của bạn đã được đăng tải', 'success');
-      
-      // Gửi bài viết mới về Newsfeed để hiển thị ngay lập tức
+      btn.innerHTML = 'Đã đăng!';
       if (typeof window.NewsFeedBridge?.onPostCreated === 'function') {
         window.NewsFeedBridge.onPostCreated(data);
+        setTimeout(() => {
+          closeModal();
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          closeModal();
+          window.location.reload();
+        }, 1000);
       }
-      
-      btn.innerHTML = 'Đã đăng!';
-      closeModal();
 
     } catch (err) {
       setStatus(err.message, 'error');

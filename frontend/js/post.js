@@ -308,7 +308,8 @@ function _buildItineraryCard(itineraryId, itineraryData, postId) {
         ? `${dateStart} → ${dateEnd}`
         : (days ? `${days} ngày` : null);
 
-    const itineraryUrl = `./planner.html?shareId=${_esc(itineraryId)}`;
+    const ownerUid = itineraryData?.ownerId || '';
+    const itineraryUrl = `./itinerary.html?uid=${_esc(ownerUid)}&planId=${_esc(itineraryId)}`;
 
     return `
     <a class="itinerary-card" href="${itineraryUrl}" data-itinerary-id="${_esc(itineraryId)}" target="_blank" rel="noopener">
@@ -366,7 +367,7 @@ function _buildItineraryCard(itineraryId, itineraryData, postId) {
 /**
  * Tạo HTML cho khối trích dẫn bài gốc (repost).
  */
-function _buildQuoteBlock(original) {
+function _buildQuoteBlock(original, originalItineraryData = null, postId = '') {
     if (!original) return '';
     const quotePhoto = original.authorAvatar || original.authorPhotoUrl || original.authorPhoto;
     const smallAvatar = `<div class="quote-avatar">${quotePhoto
@@ -375,46 +376,32 @@ function _buildQuoteBlock(original) {
 
     const preview = (original.content || '').substring(0, 160) + (original.content?.length > 160 ? '…' : '');
     
-    let attachmentSummary = '';
-    if (original.type === 'repost' && original.repostOriginal) {
-        const orig = original.repostOriginal;
-        let attachmentText = '';
-        if (orig.type === 'itinerary') {
-            const dest = orig.itinerary?.destination || orig.content?.substring(0, 30) || 'Lịch trình';
-            const days = orig.itinerary?.days || 0;
-            attachmentText = `Lịch trình: ${dest} ${days ? `(${days} ngày)` : ''}`;
-        } else if (orig.type === 'image' || (orig.mediaUrls && orig.mediaUrls.length > 0)) {
-            attachmentText = `[Hình ảnh]`;
-        } else if (orig.type === 'video') {
-            attachmentText = `[Video]`;
-        } else {
-            const cap = orig.content ? orig.content.substring(0, 50) + (orig.content.length > 50 ? '…' : '') : 'Bài đăng';
-            attachmentText = `${cap}`;
-        }
-        
-        attachmentSummary = `
-        <div class="quote-attachment-summary" style="display:flex; align-items:center; gap:6px; margin-top:8px; padding:8px 12px; background:rgba(0,169,255,0.04); border:1px dashed var(--pc-border-light,#e5f3fa); border-radius:10px; font-family: Georgia, serif; font-style: italic; font-size:13px; color:var(--pc-muted);">
-            <span>Chia sẻ lại từ @${_esc(orig.authorName || 'user')}: ${attachmentText}</span>
-        </div>`;
-    } else {
-        let attachmentText = '';
-        if (original.type === 'itinerary') {
-            const dest = original.itinerary?.destination || original.content?.substring(0, 30) || 'Lịch trình';
-            const days = original.itinerary?.days || 0;
-            attachmentText = `Lịch trình: ${dest} ${days ? `(${days} ngày)` : ''}`;
-        } else if (original.type === 'image' || (original.mediaUrls && original.mediaUrls.length > 0)) {
-            attachmentText = `[Hình ảnh]`;
-        } else if (original.type === 'video') {
-            attachmentText = `[Video]`;
-        }
-
-        if (attachmentText) {
-            attachmentSummary = `
-            <div class="quote-attachment-summary" style="display:flex; align-items:center; gap:6px; margin-top:8px; padding:8px 12px; background:rgba(0,169,255,0.04); border:1px dashed var(--pc-border-light,#e5f3fa); border-radius:10px; font-family: Georgia, serif; font-style: italic; font-size:13px; color:var(--pc-muted);">
-                <span>Đính kèm: ${attachmentText}</span>
-            </div>`;
-        }
+    // Build attachments
+    let finalImageUrl = '';
+    const mediaUrls = original.mediaUrls || original.media;
+    if (Array.isArray(mediaUrls) && mediaUrls.length > 0) {
+        finalImageUrl = mediaUrls[0];
+    } else if (typeof mediaUrls === 'string' && mediaUrls.trim()) {
+        finalImageUrl = mediaUrls;
     }
+    
+    let mediaBlock = '';
+    if (finalImageUrl) {
+        mediaBlock = `
+        <div class="quote-media-wrap" style="margin-top: 10px; max-height: 250px; overflow: hidden; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); cursor: zoom-in;">
+            <img class="quote-media-img" src="${_esc(finalImageUrl)}" alt="Quoted image" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+        </div>`;
+    }
+
+    let itineraryBlock = '';
+    if (original.itineraryId && originalItineraryData) {
+        itineraryBlock = `
+        <div class="quote-itinerary-wrap" style="margin-top: 10px;">
+            ${_buildItineraryCard(original.itineraryId, originalItineraryData, `quote-${postId}`)}
+        </div>`;
+    }
+
+    const locationsBlock = _buildLocationsBlock(original.taggedLocations);
 
     return `
     <div class="post-quote-block" role="blockquote">
@@ -426,8 +413,10 @@ function _buildQuoteBlock(original) {
             <span class="quote-author-name">${_esc(original.authorName)}</span>
             <span class="post-timestamp" style="margin-left:4px;">${_relativeTime(original.createdAt)}</span>
         </div>
-        <div class="quote-content">${_esc(preview)}</div>
-        ${attachmentSummary}
+        <div class="quote-content" style="margin-top: 6px;">${_esc(preview)}</div>
+        ${mediaBlock}
+        ${itineraryBlock}
+        ${locationsBlock}
     </div>`;
 }
 
@@ -784,6 +773,10 @@ function _attachPostEvents(wrapperEl, postId, isLiked, post) {
                 method: 'POST',
                 body: JSON.stringify({ content }),
             });
+            // Xóa thông báo "Chưa có bình luận nào" nếu đây là bình luận đầu tiên
+            if (commentsList && !commentsList.querySelector('.comment-item')) {
+                commentsList.innerHTML = '';
+            }
             // Thêm comment mới vào cuối danh sách
             if (commentsList && (commentsList.innerHTML.includes('Chưa có bình luận nào') || commentsList.children.length === 0)) {
                 commentsList.innerHTML = '';
@@ -825,6 +818,11 @@ function _attachPostEvents(wrapperEl, postId, isLiked, post) {
     const postImg = wrapperEl.querySelector('.post-image-wrap img');
     postImg?.addEventListener('click', () => {
         _openImageLightbox(postImg.src);
+    });
+
+    const quoteImg = wrapperEl.querySelector('.quote-media-wrap img');
+    quoteImg?.addEventListener('click', () => {
+        _openImageLightbox(quoteImg.src);
     });
 }
 
@@ -1004,6 +1002,7 @@ export async function renderPostCard(postId, containerEl, options = {}) {
                     budget:      parseFloat(raw.budget) || null,
                     dateStart:   raw.dateStart || null,
                     dateEnd:     raw.dateEnd   || null,
+                    ownerId:     raw.ownerId || post.authorId || '',
                     // Tọa độ: lấy từ routing nếu có
                     _coords: _extractItineraryCoords(raw),
                     _places: _extractItineraryPlaces(raw),
@@ -1012,6 +1011,27 @@ export async function renderPostCard(postId, containerEl, options = {}) {
                 // Lịch trình private hoặc không tồn tại — render card không có map
                 console.warn(`[TopGo Post] Itinerary ${post.itineraryId} không lấy được:`, err.message);
                 itineraryData = null;
+            }
+        }
+
+        let originalItineraryData = null;
+        if (post.type === 'repost' && post.repostOriginal && post.repostOriginal.itineraryId) {
+            try {
+                const raw = await _apiFetch(`/itineraries/${post.repostOriginal.itineraryId}`);
+                originalItineraryData = {
+                    destination: raw.destination || '',
+                    days:        parseInt(raw.days)   || null,
+                    pax:         parseInt(raw.pax)    || null,
+                    budget:      parseFloat(raw.budget) || null,
+                    dateStart:   raw.dateStart || null,
+                    dateEnd:     raw.dateEnd   || null,
+                    ownerId:     raw.ownerId || post.repostOriginal.authorId || '',
+                    _coords: _extractItineraryCoords(raw),
+                    _places: _extractItineraryPlaces(raw),
+                };
+            } catch (err) {
+                console.warn(`[TopGo Post] Original Itinerary ${post.repostOriginal.itineraryId} failed:`, err.message);
+                originalItineraryData = null;
             }
         }
 
@@ -1059,7 +1079,7 @@ export async function renderPostCard(postId, containerEl, options = {}) {
                 </div>` : ''}
                 ${finalImageUrl ? _buildImageBlock(finalImageUrl) : ''}
                 ${post.type === 'itinerary' ? _buildItineraryCard(post.itineraryId, itineraryData, postId) : ''}
-                ${post.type === 'repost' && post.repostOriginal ? _buildQuoteBlock(post.repostOriginal) : ''}
+                ${post.type === 'repost' && post.repostOriginal ? _buildQuoteBlock(post.repostOriginal, originalItineraryData, postId) : ''}
                 ${_buildLocationsBlock(post.taggedLocations)}
                 ${_buildInteractions(post, isLiked)}
                 ${_buildCommentsSection(post, currentUser)}
@@ -1082,6 +1102,15 @@ export async function renderPostCard(postId, containerEl, options = {}) {
             setTimeout(() => {
                 _initLeafletMap(`itinerary-map-${postId}`, destination, coords, places);
             }, 100);
+        }
+
+        if (post.type === 'repost' && post.repostOriginal && post.repostOriginal.itineraryId && originalItineraryData) {
+            const destination = originalItineraryData?.destination || 'Việt Nam';
+            const coords  = originalItineraryData?._coords  || null;
+            const places  = originalItineraryData?._places  || [];
+            setTimeout(() => {
+                _initLeafletMap(`itinerary-map-quote-${postId}`, destination, coords, places);
+            }, 150);
         }
 
         // ── Bước 10: Tự mở comments nếu có option ────────────────────────────
@@ -1212,7 +1241,7 @@ function _showRepostModal(postId, repostBtn, post) {
     const quoteContainer = modal.querySelector('.repost-modal-quote-container');
     const originalToQuote = post;
     if (quoteContainer) {
-        quoteContainer.innerHTML = originalToQuote ? _buildQuoteBlock(originalToQuote) : '';
+        quoteContainer.innerHTML = originalToQuote ? _buildQuoteBlock(originalToQuote, null, postId) : '';
     }
 
     const textarea = modal.querySelector('.repost-modal-textarea');
@@ -1252,3 +1281,6 @@ function _closeRepostModal(modal) {
         modal.classList.remove('active');
     }
 }
+
+// Expose globally for non-module script event handlers (like postCard.js)
+window.renderPostCard = renderPostCard;

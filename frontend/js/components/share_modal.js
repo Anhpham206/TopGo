@@ -242,9 +242,17 @@ export function openShareModal(trip) {
   overlay.classList.add('open');
 
   let busy = false;
+  let hasChanged = false;
 
   /* ── Đóng modal ── */
-  const closeModal = () => { if (!busy) overlay.classList.remove('open'); };
+  const closeModal = () => {
+    if (!busy) {
+      overlay.classList.remove('open');
+      if (hasChanged) {
+        window.location.reload();
+      }
+    }
+  };
   get('sm-close-btn').onclick = closeModal;
   overlay.onclick = e => { if (e.target === overlay) closeModal(); };
 
@@ -281,11 +289,14 @@ export function openShareModal(trip) {
 
       /* ── Xử lý kết quả theo từng loại ── */
       if (visibility === 'private') {
+        hasChanged = true;
         showToast('Lịch trình đã chuyển về Private.', 'success');
         closeModal();
       }
       else if (visibility === 'unlisted') {
-        const link = `${window.location.origin}/planner.html?shareId=${data.id}`;
+        hasChanged = true;
+        const ownerUid = window.TopGoAuth ? window.TopGoAuth.getUser()?.uid : (trip.ownerId || trip.uid);
+        const link = `${window.location.origin}/itinerary.html?uid=${ownerUid}&planId=${data.id}`;
         get('sm-link-input').value = link;
         get('sm-link-box').classList.add('visible');
         showToast('Link ẩn đã được tạo!', 'success');

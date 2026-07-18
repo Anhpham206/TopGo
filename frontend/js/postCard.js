@@ -505,11 +505,19 @@ function _showEditPostModal(post) {
             // Cập nhật DOM trực tiếp
             const postCard = document.querySelector(`.post-card[data-post-id="${post.id}"]`);
             if (postCard) {
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = PostCardRenderer.render(updatedPost);
-                const newCard = tempDiv.firstElementChild;
-                if (newCard) {
-                    postCard.replaceWith(newCard);
+                if (window.renderPostCard) {
+                    const parent = postCard.parentElement;
+                    const tempWrapper = document.createElement('div');
+                    parent.insertBefore(tempWrapper, postCard);
+                    postCard.remove();
+                    await window.renderPostCard(post.id, tempWrapper, { mockData: updatedPost });
+                } else {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = PostCardRenderer.render(updatedPost);
+                    const newCard = tempDiv.firstElementChild;
+                    if (newCard) {
+                        postCard.replaceWith(newCard);
+                    }
                 }
             }
 

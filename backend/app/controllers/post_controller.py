@@ -219,6 +219,26 @@ def _sync_post_itinerary(uid: str, itinerary_id: Optional[str]):
         logger.warning(f"Lỗi khi đồng bộ itinerary {itinerary_id}: {e}")
 
 
+async def get_post(post_id: str) -> dict:
+    """Lấy chi tiết một bài đăng từ Firestore."""
+    try:
+        doc = db.collection("posts").document(post_id).get()
+        if not doc.exists:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Không tìm thấy bài viết với mã {post_id}."
+            )
+        return doc.to_dict()
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Lỗi lấy bài viết {post_id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Lỗi khi lấy thông tin bài viết: {str(e)}"
+        )
+
+
 # ─── Like ───────────────────────────────────────────────────────────────────
 
 async def toggle_like(uid: str, post_id: str) -> dict:
@@ -353,7 +373,7 @@ async def create_repost(uid: str, author_info: dict, post_id: str, data: RepostC
     Bài mới có `repostOf` = post_id của bài gốc.
     """
     try:
-        # Lấy dữ liệu bài gốc để lưu snapshot
+        # Kiểm tra bài gốc tồn tại và lấy dữ liệu để lưu snapshot
         original = await get_post(post_id)
 
         repost_id = _post_id()

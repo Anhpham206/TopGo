@@ -43,6 +43,11 @@ async def share_itinerary(uid: str, req: ShareItineraryRequest) -> dict:
             doc_data["createdAt"] = firestore.SERVER_TIMESTAMP
             doc_ref.set(doc_data)
 
+        # Cập nhật trường visibility trong collection cá nhân users/{uid}/saved_plans/{plan_id}
+        user_plan_ref = db.collection("users").document(uid).collection("saved_plans").document(req.id)
+        if user_plan_ref.get().exists:
+            user_plan_ref.update({"visibility": req.visibility})
+
         logger.info(f"Đã cập nhật phân quyền lịch trình {req.id} sang {req.visibility} cho user {uid}")
         return {"status": "success", "id": req.id, "visibility": req.visibility}
 

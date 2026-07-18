@@ -73,7 +73,8 @@
     if (nameEl) nameEl.textContent = userName;
     if (handleEl) handleEl.textContent = `@${userId.substring(0, 8) || '—'}`;
     
-    const profileUrl = `./profile.html${userId ? '?userId=' + userId : ''}`;
+    const shortUid = userId.startsWith('TG-') ? userId : 'TG-' + userId.substring(0, 8).toUpperCase();
+    const profileUrl = `./profile.html${userId ? '?uid=' + shortUid : ''}`;
     if (linkEl) linkEl.href = profileUrl;
     if (nameEl) nameEl.href = profileUrl;
     if (avatarEl) avatarEl.href = profileUrl;
