@@ -3,6 +3,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getFirestore, collection, addDoc, onSnapshot, query, where, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { fetchCities, fetchPlaces } from './api.js';
 
+console.log("[TopGo Reviews] Script parsed and imports succeeded");
+
 const API_BASE = ['localhost', '127.0.0.1', ''].includes(window.location.hostname)
     ? 'http://localhost:8000'
     : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
@@ -34,6 +36,7 @@ const STAR_LABELS = {
 };
 
 async function initReviews() {
+    console.log("[TopGo Reviews] initReviews running...");
     const citySelector = document.getElementById('city-selector');
     const placeSelector = document.getElementById('place-selector');
     const reviewsSection = document.getElementById('reviews-section');
@@ -59,13 +62,15 @@ async function initReviews() {
     try {
         const cities = await fetchCities();
         
-        // Populate City Selector immediately to ensure cities list is always shown
-        cities.forEach(city => {
-            const option = document.createElement('option');
-            option.value = city.id;
-            option.textContent = city.name;
-            citySelector.appendChild(option);
-        });
+        // Populate City Selector if not already pre-populated in HTML
+        if (citySelector && citySelector.options.length <= 1) {
+            cities.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city.id;
+                option.textContent = city.name;
+                citySelector.appendChild(option);
+            });
+        }
 
         allPlaces = await fetchPlaces();
     } catch (error) {
