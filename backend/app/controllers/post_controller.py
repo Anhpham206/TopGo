@@ -29,6 +29,94 @@ from app.services.ai_logic.ai_moderation import check_content_safety
 
 logger = logging.getLogger("app.post_controller")
 
+import unicodedata
+
+VIETNAM_PROVINCES = [
+    "An Giang", "Bà Rịa - Vũng Tàu", "Bạc Liêu", "Bắc Giang", "Bắc Kạn",
+    "Bắc Ninh", "Bến Tre", "Bình Dương", "Bình Định", "Bình Phước",
+    "Bình Thuận", "Cà Mau", "Cao Bằng", "Cần Thơ", "Đà Nẵng",
+    "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp",
+    "Gia Lai", "Hà Giang", "Hà Nam", "Hà Nội", "Hà Tĩnh",
+    "Hải Dương", "Hải Phòng", "Hậu Giang", "Hòa Bình", "Hưng Yên",
+    "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lạng Sơn",
+    "Lào Cai", "Lâm Đồng", "Long An", "Nam Định", "Nghệ An",
+    "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên", "Quảng Bình",
+    "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng",
+    "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên", "Thanh Hóa",
+    "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long",
+    "Vĩnh Phúc", "Yên Bái", "TP. Hồ Chí Minh"
+]
+
+def strip_accents(s: str) -> str:
+    return ''.join(c for c in unicodedata.normalize('NFD', s)
+                  if unicodedata.category(c) != 'Mn')
+
+def normalize_location(name: str) -> Optional[str]:
+    if not name:
+        return None
+    name_clean = strip_accents(name).lower().strip()
+    
+    # Custom tourist mappings
+    mappings = {
+        "phu quoc": "Kiên Giang",
+        "sapa": "Lào Cai",
+        "sa pa": "Lào Cai",
+        "da lat": "Lâm Đồng",
+        "hoi an": "Quảng Nam",
+        "nha trang": "Khánh Hòa",
+        "mui ne": "Bình Thuận",
+        "vung tau": "Bà Rịa - Vũng Tàu",
+        "con dao": "Bà Rịa - Vũng Tàu",
+        "phong nha": "Quảng Bình",
+        "ha long": "Quảng Ninh",
+        "cat ba": "Hải Phòng",
+        "sai gon": "TP. Hồ Chí Minh",
+        "tphcm": "TP. Hồ Chí Minh",
+        "hcm": "TP. Hồ Chí Minh",
+    }
+    for key, province in mappings.items():
+        if key in name_clean:
+            return province
+            
+    for p in VIETNAM_PROVINCES:
+        p_clean = strip_accents(p).lower().strip()
+        if p_clean in name_clean or name_clean in p_clean:
+            return p
+            
+    return None
+
+def _clean_and_enrich_post_locations(tagged_locations: list, itinerary_id: Optional[str], uid: str) -> list:
+    valid_tags = []
+    # 1. Chuẩn hóa tag thủ công từ người dùng
+    if tagged_locations:
+        for tag in tagged_locations:
+            norm = normalize_location(tag)
+            if norm and norm not in valid_tags:
+                valid_tags.append(norm)
+
+    # 2. Tự động trích xuất địa danh của lịch trình đính kèm
+    if itinerary_id:
+        try:
+            itin_ref = db.collection("itineraries").document(itinerary_id)
+            itin_doc = itin_ref.get()
+            itin_dest = None
+            if itin_doc.exists:
+                itin_dest = itin_doc.to_dict().get("destination")
+            else:
+                user_plan_ref = db.collection("users").document(uid).collection("saved_plans").document(itinerary_id)
+                user_plan_doc = user_plan_ref.get()
+                if user_plan_doc.exists:
+                    itin_dest = user_plan_doc.to_dict().get("destination")
+
+            if itin_dest:
+                norm_itin_dest = normalize_location(itin_dest)
+                if norm_itin_dest and norm_itin_dest not in valid_tags:
+                    valid_tags.append(norm_itin_dest)
+        except Exception as e:
+            logger.warning(f"Lỗi tự động trích xuất tỉnh thành từ lịch trình {itinerary_id}: {e}")
+
+    return valid_tags
+
 
 # ─── Pydantic Models ────────────────────────────────────────────────────────
 
@@ -327,6 +415,7 @@ async def create_post(uid: str, req: CreatePostRequest) -> dict:
         doc_data["commentCount"] = 0
         doc_data["hotScore"] = 0
         doc_data["createdAt"] = firestore.SERVER_TIMESTAMP
+        doc_data["taggedLocations"] = _clean_and_enrich_post_locations(req.taggedLocations, req.itineraryId, uid)
 
         # Determine type based on provided data
         if doc_data.get("itineraryId"):
@@ -485,7 +574,7 @@ async def update_post(uid: str, postId: str, postData: CreatePostRequest) -> dic
         updateDict = {
             "content": postData.content.strip(),
             "mediaUrls": postData.mediaUrls[:4],
-            "taggedLocations": postData.taggedLocations[:5],
+            "taggedLocations": _clean_and_enrich_post_locations(postData.taggedLocations, postData.itineraryId, uid),
             "itineraryId": postData.itineraryId,
             "visibility": postData.visibility,
             "updatedAt": now.isoformat()
