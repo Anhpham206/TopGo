@@ -33,7 +33,7 @@ const STAR_LABELS = {
     5: "Tuyệt vời!",
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
+async function initReviews() {
     const citySelector = document.getElementById('city-selector');
     const placeSelector = document.getElementById('place-selector');
     const reviewsSection = document.getElementById('reviews-section');
@@ -333,4 +333,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
     }
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReviews);
+} else {
+    initReviews();
+}
