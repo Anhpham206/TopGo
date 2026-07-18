@@ -2,48 +2,63 @@ import { firebaseConfig } from './firebaseConfig.js';
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, where, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { fetchCities, fetchPlaces } from './api.js';
-const API_BASE = 'http://localhost:8000'
 
-// Initialize Firebase
+const API_BASE = ['localhost', '127.0.0.1', ''].includes(window.location.hostname)
+    ? 'http://localhost:8000'
+    : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let allPlaces = {};
 let currentPlaceId = null;
-let currentRating = 5;
+let currentRating = 0;
 let unsubscribeReviews = null;
+const googleReviewsCache = {};
+
+// ── Suggestion chips by star rating ──────────────────────────
+const SUGGESTIONS = {
+    1: ["Thất vọng hoàn toàn", "Không đáng đến", "Dịch vụ tệ", "Giá quá đắt so với chất lượng"],
+    2: ["Dưới kỳ vọng", "Cần cải thiện nhiều", "Không gian ổn nhưng dịch vụ kém", "Sẽ không quay lại"],
+    3: ["Tạm được", "Bình thường, không nổi bật", "Giá cả phải chăng", "Phù hợp để ghé qua"],
+    4: ["Khá tốt, đáng thử", "Không khí dễ chịu", "Nhân viên thân thiện", "Sẽ giới thiệu bạn bè"],
+    5: ["Tuyệt vời!", "Không thể chê được gì", "Nhất định phải đến", "Cảnh đẹp ấn tượng", "Dịch vụ xuất sắc"],
+};
+
+const STAR_LABELS = {
+    1: "Rất tệ",
+    2: "Không hài lòng",
+    3: "Bình thường",
+    4: "Khá tốt",
+    5: "Tuyệt vời!",
+};
 
 document.addEventListener('DOMContentLoaded', async () => {
     const citySelector = document.getElementById('city-selector');
     const placeSelector = document.getElementById('place-selector');
     const reviewsSection = document.getElementById('reviews-section');
+    const reviewsPlaceholder = document.getElementById('reviews-placeholder');
     const authWarning = document.getElementById('auth-warning');
-    const reviewFormContainer = document.getElementById('review-form-container');
     const starRatingSpans = document.querySelectorAll('#star-rating span');
+    const starLabel = document.getElementById('star-label');
+    const reviewSuggestions = document.getElementById('review-suggestions');
+    const suggestionChips = document.getElementById('suggestion-chips');
+    const reviewText = document.getElementById('review-text');
 
-    // Check Auth Status
+    // ── Auth ─────────────────────────────────────────────────
     const checkAuthStatus = () => {
-        if (window.TopGoAuth && window.TopGoAuth.isLoggedIn()) {
-            authWarning.style.display = 'none';
-            document.getElementById('review-text').disabled = false;
-            document.getElementById('btn-submit-review').disabled = false;
-        } else {
-            authWarning.style.display = 'block';
-            document.getElementById('review-text').disabled = true;
-            document.getElementById('btn-submit-review').disabled = true;
-        }
+        const loggedIn = window.TopGoAuth && window.TopGoAuth.isLoggedIn();
+        authWarning.style.display = loggedIn ? 'none' : 'flex';
+        reviewText.disabled = !loggedIn;
+        document.getElementById('btn-submit-review').disabled = !loggedIn;
     };
-
     window.addEventListener('topgo-auth-change', checkAuthStatus);
-    // Initial check
-    setTimeout(checkAuthStatus, 1000); // Wait for auth.js to initialize
+    setTimeout(checkAuthStatus, 1000);
 
-    // Load Cities and Places
+    // ── Load cities & places ──────────────────────────────────
     try {
         const cities = await fetchCities();
         allPlaces = await fetchPlaces();
-
-        // Populate City Selector
         cities.forEach(city => {
             if (allPlaces[city.id] && allPlaces[city.id].length > 0) {
                 const option = document.createElement('option');
@@ -53,25 +68,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     } catch (error) {
-        console.error("Lỗi khi tải dữ liệu địa điểm:", error);
+        console.error("Lỗi tải dữ liệu địa điểm:", error);
     }
 
-    // Handle City Change
+    // ── City change ───────────────────────────────────────────
     citySelector.addEventListener('change', (e) => {
         const cityId = e.target.value;
         placeSelector.innerHTML = '<option value="">-- Chọn Địa điểm --</option>';
-
-        // Luôn reset trạng thái reviews khi đổi thành phố
-        // 1. Ẩn phần reviews
         reviewsSection.style.display = 'none';
-        // 2. Xóa nội dung reviews cũ
-        document.getElementById('reviews-list').innerHTML = '';
-        // 3. Hủy listener Firestore (nếu có) để tránh nhận data cũ
-        if (unsubscribeReviews) {
-            unsubscribeReviews();
-            unsubscribeReviews = null;
-        }
-        // 4. Reset ID địa điểm hiện tại
+        reviewsPlaceholder.style.display = 'flex';
+        document.getElementById('google-reviews-list').innerHTML = '';
+        document.getElementById('user-reviews-list').innerHTML = '';
+        document.getElementById('user-reviews-empty').style.display = 'none';
+        if (unsubscribeReviews) { unsubscribeReviews(); unsubscribeReviews = null; }
         currentPlaceId = null;
 
         if (cityId && allPlaces[cityId]) {
@@ -87,55 +96,79 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // Handle Place Change
+    // ── Place change ──────────────────────────────────────────
     placeSelector.addEventListener('change', (e) => {
         currentPlaceId = e.target.value;
         if (currentPlaceId) {
             reviewsSection.style.display = 'block';
+            reviewsPlaceholder.style.display = 'none';
             loadReviews(currentPlaceId);
         } else {
             reviewsSection.style.display = 'none';
+            reviewsPlaceholder.style.display = 'flex';
         }
     });
 
-    // Star Rating Logic
+    // ── Star rating + hover ───────────────────────────────────
     starRatingSpans.forEach(span => {
+        span.addEventListener('mouseenter', () => {
+            const hoverVal = parseInt(span.getAttribute('data-val'));
+            starRatingSpans.forEach(s => {
+                s.classList.toggle('hover', parseInt(s.getAttribute('data-val')) <= hoverVal);
+            });
+        });
+        span.addEventListener('mouseleave', () => {
+            starRatingSpans.forEach(s => s.classList.remove('hover'));
+        });
         span.addEventListener('click', () => {
             currentRating = parseInt(span.getAttribute('data-val'));
             updateStarsUI();
+            showSuggestions(currentRating);
         });
     });
 
     function updateStarsUI() {
-        starRatingSpans.forEach(span => {
-            if (parseInt(span.getAttribute('data-val')) <= currentRating) {
-                span.classList.add('active');
-            } else {
-                span.classList.remove('active');
-            }
+        starRatingSpans.forEach(s => {
+            s.classList.toggle('active', parseInt(s.getAttribute('data-val')) <= currentRating);
+        });
+        starLabel.textContent = currentRating > 0 ? STAR_LABELS[currentRating] : 'Chọn số sao';
+    }
+
+    function showSuggestions(rating) {
+        const chips = SUGGESTIONS[rating] || [];
+        if (!chips.length) { reviewSuggestions.style.display = 'none'; return; }
+        reviewSuggestions.style.display = 'block';
+        suggestionChips.innerHTML = chips.map(text =>
+            `<span class="suggestion-chip" data-text="${escapeHtml(text)}">${escapeHtml(text)}</span>`
+        ).join('');
+        // Bind chip clicks — append to textarea (không replace)
+        suggestionChips.querySelectorAll('.suggestion-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const addText = chip.getAttribute('data-text');
+                const cur = reviewText.value;
+                reviewText.value = cur
+                    ? cur.trimEnd() + ' ' + addText
+                    : addText;
+                reviewText.focus();
+            });
         });
     }
-    updateStarsUI();
 
-    // Submit Review
+    // ── Submit ────────────────────────────────────────────────
     document.getElementById('btn-submit-review').addEventListener('click', async () => {
         if (!window.TopGoAuth || !window.TopGoAuth.isLoggedIn()) return;
-
-        const textInput = document.getElementById('review-text');
-        const text = textInput.value.trim();
-        if (!text) {
-            alert('Vui lòng nhập nội dung đánh giá!');
-            return;
-        }
+        if (currentRating === 0) { alert('Vui lòng chọn số sao đánh giá!'); return; }
+        const text = reviewText.value.trim();
+        if (!text) { alert('Vui lòng nhập nội dung đánh giá!'); return; }
 
         const user = window.TopGoAuth.getUser();
         const userName = `${user.lastname || ''} ${user.firstname || ''}`.trim() || 'Người dùng Ẩn danh';
 
-        try {
-            const btn = document.getElementById('btn-submit-review');
-            btn.disabled = true;
-            btn.textContent = 'Đang gửi...';
+        const btn = document.getElementById('btn-submit-review');
+        btn.disabled = true;
+        btn.innerHTML = '<div class="loading-spinner" style="width:16px;height:16px;border-width:2px"></div> Đang gửi...';
 
+        try {
             await addDoc(collection(db, "Reviews"), {
                 location_id: currentPlaceId,
                 user_id: user.uid,
@@ -144,188 +177,134 @@ document.addEventListener('DOMContentLoaded', async () => {
                 comment: text,
                 timestamp: serverTimestamp()
             });
-
-            textInput.value = '';
-            currentRating = 5;
+            reviewText.value = '';
+            currentRating = 0;
             updateStarsUI();
-
+            reviewSuggestions.style.display = 'none';
         } catch (error) {
-            console.error("Lỗi khi gửi đánh giá:", error);
+            console.error("Lỗi gửi đánh giá:", error);
             alert("Có lỗi xảy ra: " + error.message);
         } finally {
-            const btn = document.getElementById('btn-submit-review');
             btn.disabled = false;
-            btn.textContent = 'Gửi Đánh giá';
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Gửi đánh giá';
+            checkAuthStatus();
         }
     });
 
-    // Cache Google reviews phía frontend để không gọi lại API
-    const googleReviewsCache = {};
-
-    // Lấy tên địa điểm và thành phố hiện tại
-    function getCurrentPlaceName() {
-        const placeSelector = document.getElementById('place-selector');
-        return placeSelector.options[placeSelector.selectedIndex]?.textContent || '';
-    }
-    function getCurrentCityName() {
-        const citySelector = document.getElementById('city-selector');
-        return citySelector.options[citySelector.selectedIndex]?.textContent || '';
-    }
-
-    // Load and Render Reviews
+    // ── Load reviews ──────────────────────────────────────────
     function loadReviews(placeId) {
-        if (unsubscribeReviews) {
-            unsubscribeReviews();
-        }
+        if (unsubscribeReviews) unsubscribeReviews();
 
-        const reviewsList = document.getElementById('reviews-list');
-        reviewsList.innerHTML = '<div style="text-align:center; padding: 20px;">Đang tải đánh giá...</div>';
+        const googleList = document.getElementById('google-reviews-list');
+        const userList = document.getElementById('user-reviews-list');
+        const userEmpty = document.getElementById('user-reviews-empty');
 
-        // Load Google reviews song song
+        // Reset
+        googleList.innerHTML = `<div class="reviews-loading" id="google-reviews-loading">
+            <div class="loading-spinner"></div><span>Đang tải từ Google Maps...</span>
+        </div>`;
+        userList.innerHTML = '';
+        userEmpty.style.display = 'none';
+
+        // Google reviews
         loadGoogleReviews(placeId);
 
-        // Load user reviews từ Firestore
+        // Firestore realtime
         const q = query(collection(db, "Reviews"), where("location_id", "==", placeId));
-
         unsubscribeReviews = onSnapshot(q, (snapshot) => {
-            // Giữ lại phần Google reviews nếu đã render
-            const googleSection = reviewsList.querySelector('.google-reviews-section');
-            reviewsList.innerHTML = '';
-            if (googleSection) {
-                reviewsList.appendChild(googleSection);
-            }
-
             const currentUser = window.TopGoAuth ? window.TopGoAuth.getUser() : null;
-
-            const reviewDocs = [];
-            snapshot.forEach((docSnap) => {
-                reviewDocs.push({ id: docSnap.id, data: docSnap.data() });
-            });
-            reviewDocs.sort((a, b) => {
-                const timeA = a.data.timestamp ? a.data.timestamp.toMillis() : 0;
-                const timeB = b.data.timestamp ? b.data.timestamp.toMillis() : 0;
-                return timeB - timeA;
+            const docs = [];
+            snapshot.forEach(docSnap => docs.push({ id: docSnap.id, data: docSnap.data() }));
+            docs.sort((a, b) => {
+                const tA = a.data.timestamp ? a.data.timestamp.toMillis() : 0;
+                const tB = b.data.timestamp ? b.data.timestamp.toMillis() : 0;
+                return tB - tA;
             });
 
-            if (reviewDocs.length > 0) {
-                // Thêm header cho phần user reviews
-                const userHeader = document.createElement('div');
-                userHeader.className = 'reviews-section-header';
-                userHeader.innerHTML = `<h4 style="margin: 20px 0 10px; color: var(--text); font-size: 1.1rem;">💬 Đánh giá từ người dùng TopGo</h4>`;
-                reviewsList.appendChild(userHeader);
-            }
-
-            reviewDocs.forEach(({ id: reviewId, data: review }) => {
-                const isOwner = currentUser && currentUser.uid === review.user_id;
-
-                const dateStr = review.timestamp ? new Date(review.timestamp.toDate()).toLocaleDateString('vi-VN') : 'Vừa xong';
-                const starsHtml = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
-
-                const avatarLetter = review.user_name ? review.user_name.charAt(0).toUpperCase() : 'U';
-                const reviewEl = document.createElement('div');
-                reviewEl.className = 'review-item';
-                reviewEl.innerHTML = `
-                    <div class="review-header">
-                        <div class="review-author-info">
-                            <div class="review-author-avatar">${avatarLetter}</div>
-                            <div class="review-author-details">
-                                <span class="review-author">${review.user_name}</span>
-                                <span class="review-date">${dateStr}</span>
+            userList.innerHTML = '';
+            if (docs.length === 0) {
+                userEmpty.style.display = 'flex';
+            } else {
+                userEmpty.style.display = 'none';
+                docs.forEach(({ id: reviewId, data: review }) => {
+                    const isOwner = currentUser && currentUser.uid === review.user_id;
+                    const dateStr = review.timestamp
+                        ? new Date(review.timestamp.toDate()).toLocaleDateString('vi-VN')
+                        : 'Vừa xong';
+                    const starsHtml = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                    const avatarLetter = review.user_name ? review.user_name.charAt(0).toUpperCase() : 'U';
+                    const el = document.createElement('div');
+                    el.className = 'review-item';
+                    el.innerHTML = `
+                        <div class="review-header">
+                            <div class="review-author-info">
+                                <div class="review-author-avatar">${avatarLetter}</div>
+                                <div class="review-author-details">
+                                    <span class="review-author">${escapeHtml(review.user_name)}</span>
+                                    <span class="review-date">${dateStr}</span>
+                                </div>
                             </div>
+                            <div class="review-stars">${starsHtml}</div>
                         </div>
-                        <div class="review-stars">${starsHtml}</div>
-                    </div>
-                    <div class="review-text">${escapeHtml(review.comment)}</div>
-                    ${isOwner ? `<div class="review-actions"><button class="btn-delete-review" data-id="${reviewId}">Xoá</button></div>` : ''}
-                `;
-                reviewsList.appendChild(reviewEl);
-            });
-
-            // Nếu không có cả Google reviews lẫn user reviews
-            if (reviewDocs.length === 0 && !reviewsList.querySelector('.google-reviews-section')) {
-                const emptyMsg = document.createElement('div');
-                emptyMsg.className = 'empty-reviews';
-                emptyMsg.id = 'empty-reviews-msg';
-                emptyMsg.textContent = 'Đang tải đánh giá từ Google Maps...';
-                reviewsList.appendChild(emptyMsg);
-            }
-
-            // Bind Delete Events
-            document.querySelectorAll('.btn-delete-review').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    if (confirm('Bạn có chắc muốn xóa đánh giá này?')) {
-                        const id = e.target.getAttribute('data-id');
-                        try {
-                            await deleteDoc(doc(db, "Reviews", id));
-                        } catch (err) {
-                            console.error("Lỗi xóa:", err);
-                            alert("Xóa thất bại!");
-                        }
-                    }
+                        <div class="review-text">${escapeHtml(review.comment)}</div>
+                        ${isOwner ? `<div class="review-actions"><button class="btn-delete-review" data-id="${reviewId}">Xoá</button></div>` : ''}
+                    `;
+                    userList.appendChild(el);
                 });
-            });
+
+                // Bind delete
+                userList.querySelectorAll('.btn-delete-review').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        if (confirm('Bạn có chắc muốn xóa đánh giá này?')) {
+                            const id = e.target.getAttribute('data-id');
+                            try { await deleteDoc(doc(db, "Reviews", id)); }
+                            catch (err) { console.error("Lỗi xóa:", err); alert("Xóa thất bại!"); }
+                        }
+                    });
+                });
+            }
         }, (error) => {
-            console.error("Lỗi lắng nghe dữ liệu:", error);
-            reviewsList.innerHTML = '<div class="empty-reviews" style="color:red">Lỗi tải dữ liệu. Vui lòng thử lại.</div>';
+            console.error("Firestore error:", error);
+            userList.innerHTML = '<div class="reviews-empty"><p style="color:#ef4444">Lỗi tải dữ liệu. Vui lòng thử lại.</p></div>';
         });
     }
 
-    // Lazy-load Google reviews qua backend API
+    // ── Google Reviews ────────────────────────────────────────
     async function loadGoogleReviews(placeId) {
-        const reviewsList = document.getElementById('reviews-list');
-        const placeName = getCurrentPlaceName();
-        const cityName = getCurrentCityName();
-
+        const googleList = document.getElementById('google-reviews-list');
+        const placeName = placeSelector.options[placeSelector.selectedIndex]?.textContent || '';
+        const cityName = citySelector.options[citySelector.selectedIndex]?.textContent || '';
         if (!placeName) return;
 
-        // Check cache frontend
         if (googleReviewsCache[placeId]) {
             renderGoogleReviews(googleReviewsCache[placeId]);
             return;
         }
 
         try {
-            const apiBase = window.location.origin;
             const resp = await fetch(`${API_BASE}/api/google-reviews?place_name=${encodeURIComponent(placeName)}&city_name=${encodeURIComponent(cityName)}`);
             const data = await resp.json();
-
             if (data.reviews && data.reviews.length > 0) {
                 googleReviewsCache[placeId] = data.reviews;
                 renderGoogleReviews(data.reviews);
             } else {
-                // Xoá msg "đang tải" nếu có
-                const emptyMsg = document.getElementById('empty-reviews-msg');
-                if (emptyMsg && !reviewsList.querySelector('.review-item')) {
-                    emptyMsg.textContent = 'Chưa có đánh giá nào cho địa điểm này. Hãy là người đầu tiên!';
-                }
+                googleList.innerHTML = `<div class="reviews-empty">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 15h8M9 9h.01M15 9h.01"/></svg>
+                    <p>Không tìm thấy đánh giá Google Maps<br>cho địa điểm này.</p>
+                </div>`;
             }
         } catch (err) {
-            console.error("Lỗi tải Google reviews:", err);
+            console.error("Lỗi Google reviews:", err);
+            googleList.innerHTML = `<div class="reviews-empty"><p style="color:#ef4444">Không thể kết nối Google Maps API.</p></div>`;
         }
     }
 
     function renderGoogleReviews(reviews) {
-        const reviewsList = document.getElementById('reviews-list');
-
-        // Xoá phần Google cũ nếu có
-        const oldSection = reviewsList.querySelector('.google-reviews-section');
-        if (oldSection) oldSection.remove();
-
-        // Xoá msg "đang tải" hoặc "chưa có đánh giá"
-        const emptyMsg = document.getElementById('empty-reviews-msg');
-        if (emptyMsg) emptyMsg.remove();
-
-        const section = document.createElement('div');
-        section.className = 'google-reviews-section';
-        section.innerHTML = `<h4 style="margin: 0 0 12px; color: var(--text); font-size: 1.1rem;">
-            <img src="https://www.google.com/favicon.ico" alt="G" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;">
-            Đánh giá từ Google Maps
-        </h4>`;
-
+        const googleList = document.getElementById('google-reviews-list');
+        googleList.innerHTML = '';
         reviews.forEach(review => {
             const starsHtml = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
             const avatarLetter = review.user_name ? review.user_name.charAt(0).toUpperCase() : 'G';
-
             const el = document.createElement('div');
             el.className = 'review-item google-review';
             el.innerHTML = `
@@ -341,15 +320,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
                 <div class="review-text">${escapeHtml(review.comment)}</div>
             `;
-            section.appendChild(el);
+            googleList.appendChild(el);
         });
-
-        // Chèn Google reviews lên ĐẦU danh sách
-        reviewsList.insertBefore(section, reviewsList.firstChild);
     }
 
     function escapeHtml(unsafe) {
-        return unsafe
+        if (!unsafe) return '';
+        return unsafe.toString()
             .replace(/&/g, "&amp;")
             .replace(/</g, "&lt;")
             .replace(/>/g, "&gt;")

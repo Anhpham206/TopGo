@@ -535,7 +535,7 @@
                     const postCount = (topic.postCount || 0).toLocaleString('vi-VN');
 
                     return `
-                        <li class="trending-item ${topClass}" onclick="window.location.href='./trending.html'">
+                        <li class="trending-item ${topClass}" onclick="window.location.href='./location.html?name=${encodeURIComponent(topic.name || '')}'" style="cursor:pointer">
                             <div class="trending-rank ${rankClass}">${rank}</div>
                             <div class="trending-info">
                                 <div class="trending-name">${safeName}</div>
