@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const cityId = e.target.value;
         placeSelector.innerHTML = '<option value="">-- Chọn Địa điểm --</option>';
         reviewsSection.style.display = 'none';
-        reviewsPlaceholder.style.display = 'flex';
+        reviewsPlaceholder?.style.display = 'flex';
         document.getElementById('google-reviews-list').innerHTML = '';
         document.getElementById('user-reviews-list').innerHTML = '';
         document.getElementById('user-reviews-empty').style.display = 'none';
@@ -101,11 +101,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         currentPlaceId = e.target.value;
         if (currentPlaceId) {
             reviewsSection.style.display = 'block';
-            reviewsPlaceholder.style.display = 'none';
+            reviewsPlaceholder?.style.display = 'none';
             loadReviews(currentPlaceId);
         } else {
             reviewsSection.style.display = 'none';
-            reviewsPlaceholder.style.display = 'flex';
+            reviewsPlaceholder?.style.display = 'flex';
         }
     });
 
