@@ -218,6 +218,7 @@
   display: block;
   max-height: 340px;
   transition: transform 0.4s ease;
+  cursor: zoom-in;
 }
 
 .topgo-thu-post-wrapper .post-card--image .post-image-wrap {
@@ -226,6 +227,10 @@
 
 .topgo-thu-post-wrapper .post-card--image:hover .post-image-wrap img {
   transform: scale(1.02);
+}
+
+.topgo-thu-post-wrapper .post-card--image .post-body {
+  padding-top: 16px;
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -1072,7 +1077,7 @@ body.dark .repost-modal-footer {
 
 /* Scoped Tagged Locations inside post card */
 .topgo-thu-post-wrapper .post-locations {
-  padding: 0 18px 12px;
+  padding: 12px 18px 12px;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -1098,3 +1103,88 @@ body.dark .topgo-thu-post-wrapper .post-location-tag {
   background: rgba(0, 169, 255, 0.1);
   border-color: rgba(0, 169, 255, 0.2);
 }
+
+/* ── Lightbox Phóng to ảnh bài đăng ── */
+#post-image-lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+  opacity: 0;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+#post-image-lightbox.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Dark mode override */
+body.dark #post-image-lightbox {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+#post-image-lightbox img {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.1);
+  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#post-image-lightbox.show img {
+  transform: scale(1);
+}
+
+body.dark #post-image-lightbox img {
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+#post-lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 100002;
+  backdrop-filter: blur(4px);
+  box-sizing: border-box;
+  padding: 0;
+}
+
+#post-lightbox-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+body.dark #post-lightbox-close {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+body.dark #post-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+

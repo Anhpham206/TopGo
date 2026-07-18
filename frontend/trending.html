@@ -665,7 +665,7 @@
                 const safeName = (topic.name || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
                 return `
-                <li class="trending-item ${topClass}" onclick="window.location.href='./feed.html'">
+                <li class="trending-item ${topClass}" style="cursor:pointer" onclick="window.location.href='./location.html?name=${encodeURIComponent(topic.name || '')}'">
                     <div class="trending-rank ${rankClass}">${rank}</div>
 
                     <div class="trending-info">

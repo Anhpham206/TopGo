@@ -153,10 +153,29 @@ def run_hot_score_update():
                 if itinDest and itinDest not in taggedLocations:
                     taggedLocations.append(itinDest)
 
+            # Chuẩn hóa địa điểm về 63 tỉnh thành Việt Nam
+            from app.controllers.post_controller import normalize_location
+            
+            normalized_tags = []
             for location in taggedLocations:
                 if location:
-                    topicScores[location] = topicScores.get(location, 0) + newScore
-                    topicPostCounts[location] = topicPostCounts.get(location, 0) + 1
+                    norm = normalize_location(location)
+                    if norm and norm not in normalized_tags:
+                        normalized_tags.append(norm)
+
+            for location in normalized_tags:
+                topicScores[location] = topicScores.get(location, 0) + newScore
+                topicPostCounts[location] = topicPostCounts.get(location, 0) + 1
+
+        # Xóa các hot_topics cũ để tránh rác từ các tên chưa chuẩn hóa trước đó
+        try:
+            old_topics = db.collection("hot_topics").stream()
+            batch = db.batch()
+            for doc in old_topics:
+                batch.delete(doc.reference)
+            batch.commit()
+        except Exception as e:
+            logger.warning(f"Lỗi khi xóa hot_topics cũ: {e}")
 
         # Ghi hot_topics vào Firestore (dùng postCount đã đếm inline)
         for topic, score in topicScores.items():

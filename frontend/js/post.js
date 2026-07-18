@@ -218,6 +218,58 @@ function _buildImageBlock(imageUrl) {
 }
 
 /**
+ * Hiển thị lightbox phóng to hình ảnh
+ */
+function _openImageLightbox(imageUrl) {
+    let lightbox = document.getElementById('post-image-lightbox');
+    if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.id = 'post-image-lightbox';
+        
+        lightbox.innerHTML = `
+            <button id="post-lightbox-close">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <img id="post-lightbox-img" src="" alt="Zoomed view">
+        `;
+        document.body.appendChild(lightbox);
+
+        // Close on click background (or image itself to zoom out)
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.id === 'post-lightbox-img') {
+                _closeLightbox();
+            }
+        });
+
+        // Close on button click
+        lightbox.querySelector('#post-lightbox-close').addEventListener('click', _closeLightbox);
+    }
+
+    const img = lightbox.querySelector('#post-lightbox-img');
+    img.src = imageUrl;
+
+    // Open transition using CSS class
+    lightbox.style.display = 'flex';
+    // Force reflow
+    lightbox.offsetHeight;
+    lightbox.classList.add('show');
+    document.body.style.overflow = 'hidden'; // prevent background scrolling
+
+    function _closeLightbox() {
+        lightbox.classList.remove('show');
+        setTimeout(() => {
+            if (!lightbox.classList.contains('show')) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        }, 250);
+    }
+}
+
+/**
  * Tạo HTML cho thẻ lộ trình du lịch (variant: itinerary).
  * Leaflet map sẽ được khởi tạo sau khi DOM mount.
  * @param {string} itineraryId
@@ -767,6 +819,12 @@ function _attachPostEvents(wrapperEl, postId, isLiked, post) {
             return;
         }
         _showRepostModal(postId, repostBtn, post);
+    });
+
+    // ── Image zoom (Lightbox) ────────────────────────────────────────────────
+    const postImg = wrapperEl.querySelector('.post-image-wrap img');
+    postImg?.addEventListener('click', () => {
+        _openImageLightbox(postImg.src);
     });
 }
 
