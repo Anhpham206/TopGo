@@ -32,19 +32,9 @@ logger = logging.getLogger("app.post_controller")
 import unicodedata
 
 VIETNAM_PROVINCES = [
-    "An Giang", "Bà Rịa - Vũng Tàu", "Bạc Liêu", "Bắc Giang", "Bắc Kạn",
-    "Bắc Ninh", "Bến Tre", "Bình Dương", "Bình Định", "Bình Phước",
-    "Bình Thuận", "Cà Mau", "Cao Bằng", "Cần Thơ", "Đà Nẵng",
-    "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp",
-    "Gia Lai", "Hà Giang", "Hà Nam", "Hà Nội", "Hà Tĩnh",
-    "Hải Dương", "Hải Phòng", "Hậu Giang", "Hòa Bình", "Hưng Yên",
-    "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lạng Sơn",
-    "Lào Cai", "Lâm Đồng", "Long An", "Nam Định", "Nghệ An",
-    "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên", "Quảng Bình",
-    "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng",
-    "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên", "Thanh Hóa",
-    "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long",
-    "Vĩnh Phúc", "Yên Bái", "TP. Hồ Chí Minh"
+    "Bình Thuận", "Cà Mau", "Cần Thơ", "Đà Nẵng", "Hà Nội",
+    "Hội An", "Lâm Đồng", "Nha Trang", "Ninh Bình", "Ninh Thuận",
+    "Phú Quốc", "Thành phố Hồ Chí Minh"
 ]
 
 def strip_accents(s: str) -> str:
@@ -56,23 +46,30 @@ def normalize_location(name: str) -> Optional[str]:
         return None
     name_clean = strip_accents(name).lower().strip()
     
-    # Custom tourist mappings
+    # Custom tourist mappings to standard dataset names
     mappings = {
-        "phu quoc": "Kiên Giang",
-        "sapa": "Lào Cai",
-        "sa pa": "Lào Cai",
+        "phu quoc": "Phú Quốc",
+        "kien giang": "Phú Quốc",
         "da lat": "Lâm Đồng",
-        "hoi an": "Quảng Nam",
-        "nha trang": "Khánh Hòa",
+        "lam dong": "Lâm Đồng",
+        "hoi an": "Hội An",
+        "quang nam": "Hội An",
+        "nha trang": "Nha Trang",
+        "khanh hoa": "Nha Trang",
         "mui ne": "Bình Thuận",
-        "vung tau": "Bà Rịa - Vũng Tàu",
-        "con dao": "Bà Rịa - Vũng Tàu",
-        "phong nha": "Quảng Bình",
-        "ha long": "Quảng Ninh",
-        "cat ba": "Hải Phòng",
-        "sai gon": "TP. Hồ Chí Minh",
-        "tphcm": "TP. Hồ Chí Minh",
-        "hcm": "TP. Hồ Chí Minh",
+        "binh thuan": "Bình Thuận",
+        "sai gon": "Thành phố Hồ Chí Minh",
+        "tphcm": "Thành phố Hồ Chí Minh",
+        "hcm": "Thành phố Hồ Chí Minh",
+        "tp. ho chi minh": "Thành phố Hồ Chí Minh",
+        "ho chi minh": "Thành phố Hồ Chí Minh",
+        "thanh pho ho chi minh": "Thành phố Hồ Chí Minh",
+        "ca mau": "Cà Mau",
+        "can tho": "Cần Thơ",
+        "da nang": "Đà Nẵng",
+        "ha noi": "Hà Nội",
+        "ninh binh": "Ninh Bình",
+        "ninh thuan": "Ninh Thuận",
     }
     for key, province in mappings.items():
         if key in name_clean:
@@ -219,6 +216,26 @@ def _sync_post_itinerary(uid: str, itinerary_id: Optional[str]):
         logger.warning(f"Lỗi khi đồng bộ itinerary {itinerary_id}: {e}")
 
 
+async def get_post(post_id: str) -> dict:
+    """Lấy chi tiết một bài đăng từ Firestore."""
+    try:
+        doc = db.collection("posts").document(post_id).get()
+        if not doc.exists:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Không tìm thấy bài viết với mã {post_id}."
+            )
+        return doc.to_dict()
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Lỗi lấy bài viết {post_id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Lỗi khi lấy thông tin bài viết: {str(e)}"
+        )
+
+
 # ─── Like ───────────────────────────────────────────────────────────────────
 
 async def toggle_like(uid: str, post_id: str) -> dict:
@@ -353,7 +370,7 @@ async def create_repost(uid: str, author_info: dict, post_id: str, data: RepostC
     Bài mới có `repostOf` = post_id của bài gốc.
     """
     try:
-        # Lấy dữ liệu bài gốc để lưu snapshot
+        # Kiểm tra bài gốc tồn tại và lấy dữ liệu để lưu snapshot
         original = await get_post(post_id)
 
         repost_id = _post_id()
@@ -623,7 +640,12 @@ async def get_posts_by_location(location_name: str) -> dict:
     try:
         from app.controllers.feed_controller import _enrich_post_with_author, _enrich_post_with_itinerary
         
-        loc_lower = location_name.lower().strip()
+        # Chuẩn hóa địa điểm tìm kiếm trước
+        norm_location = normalize_location(location_name)
+        if norm_location:
+            loc_lower = norm_location.lower().strip()
+        else:
+            loc_lower = location_name.lower().strip()
         posts_ref = db.collection("posts")
         allPostsDocs = posts_ref.stream()
 

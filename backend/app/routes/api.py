@@ -64,7 +64,14 @@ async def delete_user_plan(plan_id: str, decoded_token: dict = Depends(verify_fi
     uid = decoded_token["uid"]
     return await delete_plan(uid, plan_id)
 
-from app.controllers.user_controller import UserProfileModel, get_user_profile, get_public_user_profile, update_user_profile, check_username
+# ════════════════════════════════════════════════════════════════════
+# USERS — Hồ sơ người dùng
+# ════════════════════════════════════════════════════════════════════
+from app.controllers.user_controller import (
+    UserProfileModel, get_user_profile, update_user_profile,
+    follow_user, unfollow_user, check_follow_status, get_follow_counts,
+    get_public_profile, get_user_posts_stub, check_username
+)
 
 @router.get("/users/check-username")
 async def api_check_username(username: str):
@@ -72,14 +79,17 @@ async def api_check_username(username: str):
     return await check_username(username)
 
 @router.get("/users/{userId}/profile")
-async def get_public_profile(userId: str):
+async def get_public_profile_legacy(userId: str, request: Request):
     """Lấy thông tin hồ sơ công khai của người dùng khác từ Firestore."""
-    return await get_public_user_profile(userId)
-
-
-# ════════════════════════════════════════════════════════════════════
-# USERS — Hồ sơ người dùng
-# ════════════════════════════════════════════════════════════════════
+    auth_header = request.headers.get("Authorization")
+    current_user_uid = None
+    if auth_header:
+        try:
+            decoded_token = await verify_firebase_token(auth_header)
+            current_user_uid = decoded_token["uid"]
+        except Exception:
+            pass
+    return await get_public_profile(userId, current_user_uid)
 
 @router.get("/users/profile")
 async def get_profile(decodedToken: dict = Depends(verify_firebase_token)):
@@ -92,6 +102,77 @@ async def update_profile(profileData: UserProfileModel, decodedToken: dict = Dep
     """Cập nhật thông tin hồ sơ người dùng lên Firestore."""
     uid = decodedToken["uid"]
     return await update_user_profile(uid, profileData)
+
+@router.post("/users/{uid}/follow")
+async def follow(uid: str, decoded_token: dict = Depends(verify_firebase_token)):
+    """Theo dõi người dùng."""
+    current_uid = decoded_token["uid"]
+    return await follow_user(current_uid, uid)
+
+@router.post("/users/{uid}/unfollow")
+async def unfollow(uid: str, decoded_token: dict = Depends(verify_firebase_token)):
+    """Hủy theo dõi người dùng."""
+    current_uid = decoded_token["uid"]
+    return await unfollow_user(current_uid, uid)
+
+@router.get("/users/{uid}/follow-status")
+async def follow_status(uid: str, decoded_token: dict = Depends(verify_firebase_token)):
+    """Kiểm tra xem người dùng hiện tại đã follow uid hay chưa."""
+    current_uid = decoded_token["uid"]
+    is_following = await check_follow_status(current_uid, uid)
+    return {"is_following": is_following}
+
+@router.get("/users/{uid}/network-count")
+async def network_count(uid: str):
+    """Lấy số lượng người theo dõi và đang theo dõi của người dùng."""
+    return await get_follow_counts(uid)
+
+@router.get("/users/{uid}/public-profile")
+async def public_profile(uid: str, request: Request):
+    """Lấy thông tin trang cá nhân công khai."""
+    auth_header = request.headers.get("Authorization")
+    current_user_uid = None
+    if auth_header:
+        try:
+            # Giải mã token thủ công để lấy uid người dùng hiện tại (nếu có)
+            decoded_token = await verify_firebase_token(auth_header)
+            current_user_uid = decoded_token["uid"]
+        except Exception:
+            pass
+    return await get_public_profile(uid, current_user_uid)
+
+@router.get("/users/{uid}/posts")
+async def get_user_posts(uid: str):
+    """Lấy danh sách bài viết công khai của người dùng (stub)."""
+    return await get_user_posts_stub(uid)
+
+from app.controllers.saved_plans_controller import get_plan, clone_plan, list_user_public_plans
+
+@router.get("/users/{uid}/plans")
+async def get_user_plans(uid: str, request: Request):
+    """Lấy danh sách lịch trình công khai (hoặc tất cả nếu là chủ sở hữu)."""
+    auth_header = request.headers.get("Authorization")
+    current_user_uid = None
+    if auth_header:
+        try:
+            decoded_token = await verify_firebase_token(auth_header)
+            current_user_uid = decoded_token["uid"]
+        except Exception:
+            pass
+    return await list_user_public_plans(uid, current_user_uid)
+
+@router.get("/users/{uid}/plans/{plan_id}")
+async def get_user_plan_details(uid: str, plan_id: str, decoded_token: dict = Depends(verify_firebase_token)):
+    """Lấy chi tiết một lịch trình cụ thể của người dùng."""
+    # Sẽ có middleware bảo mật chặn IDOR do Thư viết sau này ở đây.
+    return await get_plan(uid, plan_id)
+
+
+@router.post("/plans/{plan_id}/clone")
+async def clone_user_plan(plan_id: str, target_uid: str, decoded_token: dict = Depends(verify_firebase_token)):
+    """Nhân bản lịch trình của người dùng khác về tài khoản của người dùng hiện tại."""
+    current_uid = decoded_token["uid"]
+    return await clone_plan(current_uid, target_uid, plan_id)
 
 from app.controllers.reviews_controller import get_google_reviews
 
@@ -227,7 +308,7 @@ def _build_author_info(decoded_token: dict) -> dict:
     }
 
 @router.get("/posts/{post_id}")
-async def get_single_post(post_id: str):
+async def get_post_detail(post_id: str):
     """Lấy chi tiết một bài viết."""
     return await get_post(post_id)
 

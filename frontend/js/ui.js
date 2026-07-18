@@ -795,8 +795,15 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
         if (window.TopGoAuth && window.TopGoAuth.isLoggedIn()) {
             showToast('Đang lưu lịch trình...', 'warning');
             try {
-                await window.TopGoAuth.saveTrip(trip);
+                const saveResult = await window.TopGoAuth.saveTrip(trip);
                 showToast('Đã lưu lịch trình thành công!', 'success');
+                
+                // Lưu ID lịch trình mới lưu
+                window._lastSavedPlanId = saveResult.id;
+                
+                // Hiển thị nút chia sẻ
+                const shareBtn = document.getElementById('btn-share-plan');
+                if (shareBtn) shareBtn.style.display = 'inline-flex';
             } catch (err) {
                 showToast('Lưu lịch trình thất bại: ' + err.message, 'error');
             }
@@ -806,7 +813,44 @@ export function initFormUIEvents({ onGenerate, onFeedback, onContinueFromError }
             showPopup('popup-login');
         }
     });
-    document.getElementById('btn-back-to-form')?.addEventListener('click', () => showScreen('form'));
+
+    // Sự kiện nút Share trên màn hình kết quả Planner
+    document.getElementById('btn-share-plan')?.addEventListener('click', () => {
+        const planId = window._lastSavedPlanId;
+        const loggedInUser = window.TopGoAuth ? window.TopGoAuth.getUser() : null;
+        if (!planId || !loggedInUser) {
+            showToast('Vui lòng lưu lịch trình trước khi chia sẻ.', 'warning');
+            return;
+        }
+
+        const shareData = {
+            id: planId,
+            destination: state.selectedCity?.name || window._lastPayload?.city_name || 'Chuyến đi',
+            days: getTripDays(),
+            pax: parseInt(document.getElementById('pax-val')?.value || window._lastPayload?.pax || '1'),
+            budget: parseFloat(getRawBudget() || window._lastPayload?.budget || 0),
+            dateStart: document.getElementById('date-start')?.value || window._lastPayload?.date_start || '',
+            dateEnd: document.getElementById('date-end')?.value || window._lastPayload?.date_end || '',
+            itinerary: window._lastItineraryData || ''
+        };
+
+        window._pendingShareData = shareData;
+        console.log("Đã đóng gói dữ liệu share từ Planner:", shareData);
+
+        if (typeof window.openShareModal === 'function') {
+            window.openShareModal(shareData);
+        } else {
+            showToast(`[Mock Share] Đã sao chép liên kết ẩn (unlisted) của lịch trình: ${window.location.origin}/itinerary.html?uid=${loggedInUser.uid}&planId=${planId}`, 'success');
+        }
+    });
+
+    document.getElementById('btn-back-to-form')?.addEventListener('click', () => {
+        // Ẩn nút Share khi quay về form nhập để gen lại
+        const shareBtn = document.getElementById('btn-share-plan');
+        if (shareBtn) shareBtn.style.display = 'none';
+        window._lastSavedPlanId = null;
+        showScreen('form');
+    });
     document.getElementById('btn-continue-error')?.addEventListener('click', onContinueFromError);
     document.getElementById('btn-close-map')?.addEventListener('click', () => closePopup('popup-map'));
 

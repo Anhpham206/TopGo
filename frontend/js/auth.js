@@ -38,6 +38,7 @@ onAuthStateChanged(auth, (user) => {
       firstname: firstname || user.email.split('@')[0],
       lastname: lastname,
       photoUrl: user.photoURL || null,
+      photoURL: user.photoURL || null,
       nationality: 'Việt Nam',
       sex: '',
       dob: '',
@@ -45,7 +46,7 @@ onAuthStateChanged(auth, (user) => {
       createdAt: new Date().toISOString().split('T')[0],
       id: user.uid.slice(0, 8),
     };
-    
+
     // Giữ nguyên các trường profile bổ sung nếu có trong cache trước đó
     const existing = localStorage.getItem('topgo_user');
     if (existing) {
@@ -54,7 +55,7 @@ onAuthStateChanged(auth, (user) => {
         if (parsed.uid === user.uid) {
           Object.assign(cachedUser, parsed);
         }
-      } catch (e) {}
+      } catch (e) { }
     }
     localStorage.setItem('topgo_user', JSON.stringify(cachedUser));
 
@@ -64,64 +65,66 @@ onAuthStateChanged(auth, (user) => {
       fetch(`${API_BASE}/api/users/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then(dbProfile => {
-        if (dbProfile && Object.keys(dbProfile).length > 0) {
-          // Ghi nhận các trường thay đổi từ database
-          const updatedUser = { ...cachedUser, ...dbProfile };
-          localStorage.setItem('topgo_user', JSON.stringify(updatedUser));
-          window.dispatchEvent(new Event('topgo-auth-change'));
-        }
-
-        // ── SYNC photoURL và thông tin cơ bản lên BE nếu chưa có ──
-        // Điều này đảm bảo feed_controller có thể lấy avatar khi enrich post
-        const needsSync = !dbProfile?.photoURL && user.photoURL
-          || !dbProfile?.firstname && cachedUser.firstname
-          || !dbProfile?.email && user.email;
-
-        if (needsSync) {
-          const profileToSync = {
-            firstname: cachedUser.firstname || '',
-            lastname: cachedUser.lastname || '',
-            email: user.email || '',
-            photoURL: user.photoURL || null,
-            nationality: dbProfile?.nationality || 'Việt Nam',
-          };
-          fetch(`${API_BASE}/api/users/profile`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(profileToSync)
-          }).catch(err => {
-            console.warn('[TopGo] Không thể đồng bộ profile lên BE:', err);
-          });
-        }
-      })
-      .catch(err => {
-        // Nếu GET profile lỗi, vẫn thử sync thông tin cơ bản lên BE
-        console.warn("Chưa có cấu hình profile hoặc lỗi kết nối:", err);
-        if (user.photoURL || cachedUser.firstname) {
-          fetch(`${API_BASE}/api/users/profile`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-              firstname: cachedUser.firstname || '',
-              lastname: cachedUser.lastname || '',
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json();
+        })
+        .then(dbProfile => {
+          if (dbProfile && (dbProfile.firstname || dbProfile.lastname || dbProfile.nationality || dbProfile.sex || dbProfile.dob || dbProfile.pob)) {
+            // Ghi nhận các trường thay đổi từ database, giữ lại photoURL từ Google Auth làm dự phòng nếu DB trống
+            const updatedUser = { ...cachedUser, ...dbProfile };
+            if (!updatedUser.photoURL && user.photoURL) {
+              updatedUser.photoURL = user.photoURL;
+              updatedUser.photoUrl = user.photoURL;
+              
+              // Tự động đồng bộ ảnh đại diện Google lên Firestore để lưu trữ lâu dài
+              fetch(`${API_BASE}/api/users/profile`, {
+                method: 'POST',
+                headers: { 
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ photoURL: user.photoURL, photoUrl: user.photoURL })
+              }).catch(e => console.error("Lỗi tự động đồng bộ ảnh Google:", e));
+            }
+            localStorage.setItem('topgo_user', JSON.stringify(updatedUser));
+            window.dispatchEvent(new Event('topgo-auth-change'));
+          } else {
+            // Bản ghi profile chưa có trên Firestore, tiến hành tự động khởi tạo mặc định
+            const nameParts = (user.displayName || '').trim().split(/\s+/);
+            const firstname = nameParts.pop() || '';
+            const lastname = nameParts.join(' ') || '';
+            const initialProfile = {
+              firstname: cachedUser.firstname || firstname || 'Thành viên',
+              lastname: cachedUser.lastname || lastname || 'TopGo',
               email: user.email || '',
-              photoURL: user.photoURL || null,
+              photoURL: user.photoURL || '',
               nationality: 'Việt Nam',
+              sex: '',
+              dob: '',
+              pob: ''
+            };
+            fetch(`${API_BASE}/api/users/profile`, {
+              method: 'POST',
+              headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify(initialProfile)
             })
-          }).catch(() => {});
-        }
-      });
+            .then(res => {
+              if (res.ok) {
+                const updatedUser = { ...cachedUser, ...initialProfile };
+                localStorage.setItem('topgo_user', JSON.stringify(updatedUser));
+                window.dispatchEvent(new Event('topgo-auth-change'));
+              }
+            })
+            .catch(err => console.error("Lỗi tự động khởi tạo profile:", err));
+          }
+        })
+        .catch(err => {
+          console.warn("Chưa có cấu hình profile hoặc lỗi kết nối:", err);
+        });
     });
   } else {
     localStorage.removeItem('topgo_user');
@@ -222,6 +225,11 @@ const AuthService = {
     
     // Cập nhật local sau khi backend thành công
     Object.assign(user, updates);
+    const url = updates.photoURL || updates.photoUrl;
+    if (url) {
+      user.photoURL = url;
+      user.photoUrl = url;
+    }
     this.setUser(user);
     window.dispatchEvent(new Event('topgo-auth-change'));
     return user;
@@ -252,7 +260,7 @@ const AuthService = {
     if (!user) throw new Error("Bạn cần đăng nhập để thực hiện chức năng này.");
     try {
       const token = await user.getIdToken(true);
-      
+
       let itineraryStr = null;
       if (trip.itinerary) {
         itineraryStr = typeof trip.itinerary === 'string' ? trip.itinerary : JSON.stringify(trip.itinerary);
@@ -420,7 +428,7 @@ if (currentPage === 'auth.html') {
       const password = document.getElementById('reg-password').value;
       const confirm = document.getElementById('reg-confirm').value;
 
-      ['err-reg-lastname','err-reg-firstname','err-reg-email','err-reg-password','err-reg-confirm','err-register-global']
+      ['err-reg-lastname', 'err-reg-firstname', 'err-reg-email', 'err-reg-password', 'err-reg-confirm', 'err-register-global']
         .forEach(hideErr);
 
       if (!lastname) { showErr('err-reg-lastname'); valid = false; }
@@ -476,521 +484,7 @@ if (currentPage === 'auth.html') {
     });
   });
 }
-
-// ── Logic trang Hồ sơ cá nhân (profile.html) ──
-if (currentPage === 'profile.html') {
-  onDOMReady(async () => {
-    // Chuyển hướng nếu chưa đăng nhập
-    if (!AuthService.isLoggedIn()) {
-      window.location.href = './auth.html';
-      return;
-    }
-
-    const setText = (id, val) => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = val || '—';
-    };
-
-    // Tabs Logic
-    const tabs = document.querySelectorAll('.pv2-tab');
-    const tabContents = document.querySelectorAll('.pv2-tab-content');
-    const tabIndicator = document.querySelector('.pv2-tab-indicator');
-    
-    function updateTabIndicator(activeTab) {
-      if (!tabIndicator || !activeTab) return;
-      tabIndicator.style.display = 'block';
-      tabIndicator.style.width = `${activeTab.offsetWidth}px`;
-      tabIndicator.style.left = `${activeTab.offsetLeft}px`;
-    }
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tabContents.forEach(c => c.classList.remove('active'));
-        
-        tab.classList.add('active');
-        const targetId = tab.dataset.tab;
-        const targetContent = document.getElementById(targetId);
-        if (targetContent) targetContent.classList.add('active');
-        
-        updateTabIndicator(tab);
-      });
-    });
-
-    // Initialize tab indicator on load (give DOM time to render)
-    setTimeout(() => {
-      const activeTab = document.querySelector('.pv2-tab.active');
-      if (activeTab) updateTabIndicator(activeTab);
-    }, 100);
-
-
-    const updateProfileUI = async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const viewUserId = urlParams.get('userId');
-      let user = AuthService.getUser();
-      
-      const isViewingOther = viewUserId && (!user || (user.id !== viewUserId && user.uid !== viewUserId));
-      
-      if (isViewingOther) {
-          // Ẩn nút chỉnh sửa, đăng xuất, edit avatar
-          const actionsEl = document.getElementById('pv2-actions');
-          if (actionsEl) actionsEl.style.display = 'none';
-          const photoEditBtn = document.getElementById('pp-photo-edit');
-          if (photoEditBtn) photoEditBtn.style.display = 'none';
-          
-          setText('pv2-name', 'Đang tải...');
-          
-          try {
-              const res = await fetch(`${API_BASE}/api/users/${viewUserId}/profile`);
-              if (res.ok) {
-                  user = await res.json();
-              } else {
-                  throw new Error('User not found');
-              }
-          } catch (e) {
-              console.warn("Không thể tải public profile:", e);
-              user = {
-                  id: viewUserId.substring(0, 8),
-                  firstname: '',
-                  lastname: 'Thành viên ' + viewUserId.substring(0, 4),
-                  nationality: 'Việt Nam',
-                  sex: 'Khác',
-                  dob: '—',
-                  pob: '—',
-                  email: 'Bảo mật',
-                  createdAt: '—',
-                  photoURL: null
-              };
-          }
-      }
-
-      if (!user) return;
-      const fullname = `${user.lastname || ''} ${user.firstname || ''}`.trim() || '—';
-      
-      // ── Populate V2 Header ──
-      setText('pv2-name', fullname);
-      const handleEl = document.getElementById('pv2-handle');
-      if (handleEl) {
-          const username = user.username ? user.username : (user.id || 'TG-000000');
-          handleEl.textContent = `@${username} · ${user.nationality || 'Việt Nam'}`;
-      }
-      const emailEl = document.getElementById('pv2-email');
-      if (emailEl && !isViewingOther) emailEl.textContent = user.email || '';
-      
-      const passportNo = user.is_vip ? `${user.id} (VIP)` : user.id;
-      setText('pp-passport-no', passportNo);
-
-      // Render ảnh đại diện nếu có
-      const photoEl = document.getElementById('pp-photo');
-      if (photoEl) {
-        const borderStyle = user.is_vip ? 'border: 3px solid #ffb347; box-shadow: 0 0 10px rgba(255,179,71,0.5);' : '';
-        if (user.photoUrl) {
-          photoEl.innerHTML = `<img src="${user.photoUrl}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; ${borderStyle}">`;
-        } else {
-          const initial = (user.firstname || user.lastname || user.email || 'T').charAt(0).toUpperCase();
-          photoEl.innerHTML = `<span style="font-size: 40px; font-weight: 600; color: var(--p1); display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">${initial}</span>`;
-        }
-      }
-
-      // V2 Stats
-      const statNationEl = document.getElementById('pv2-stat-nation-label');
-      if (statNationEl) statNationEl.textContent = user.nationality || 'Việt Nam';
-
-      // ── Populate Identity Panel (Sidebar) ──
-      setText('pip-fullname', fullname);
-      setText('pip-nationality', user.nationality || 'Việt Nam');
-      setText('pip-sex', user.sex || '—');
-      setText('pip-dob', user.dob || '—');
-      setText('pip-pob', user.pob || '—');
-      const pipEmailEl = document.getElementById('pip-email');
-      if (pipEmailEl) pipEmailEl.textContent = isViewingOther ? 'Bảo mật' : (user.email || '—');
-      const pipJoinedEl = document.getElementById('pip-joined');
-      if (pipJoinedEl) {
-        pipJoinedEl.textContent = user.createdAt || '—';
-      }
-    };
-
-    // Render giao diện ban đầu từ cache
-    updateProfileUI();
-
-    // Lắng nghe sự kiện để tự động làm mới giao diện khi tải xong profile từ server
-    window.addEventListener('topgo-auth-change', updateProfileUI);
-
-    // Xử lý chọn/chụp ảnh đại diện từ camera hoặc thư viện
-    const photoEditBtn = document.getElementById('pp-photo-edit');
-    const avatarInput = document.getElementById('pp-avatar-input');
-    
-    photoEditBtn?.addEventListener('click', () => {
-      avatarInput?.click();
-    });
-    
-    avatarInput?.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const img = new Image();
-        img.onload = async () => {
-          const canvas = document.createElement('canvas');
-          const max_size = 150; // Kích thước nén avatar hợp lý để lưu Firestore
-          let width = img.width;
-          let height = img.height;
-          
-          if (width > height) {
-            if (width > max_size) {
-              height *= max_size / width;
-              width = max_size;
-            }
-          } else {
-            if (height > max_size) {
-              width *= max_size / height;
-              height = max_size;
-            }
-          }
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-          
-          const base64Str = canvas.toDataURL('image/jpeg', 0.85);
-          
-          try {
-            await AuthService.updateProfile({ photoUrl: base64Str });
-            window.location.reload();
-          } catch (err) {
-            console.error("Lỗi cập nhật ảnh đại diện:", err);
-            alert("Không thể cập nhật ảnh đại diện: " + err.message);
-          }
-        };
-        img.src = event.target.result;
-      };
-      reader.readAsDataURL(file);
-    });
-
-    // Tải danh sách lịch trình từ database
-    let trips = [];
-    const urlParamsTrips = new URLSearchParams(window.location.search);
-    const viewUserIdTrips = urlParamsTrips.get('userId');
-    const isViewingOtherTrips = viewUserIdTrips && AuthService.getUser() && AuthService.getUser().id !== viewUserIdTrips && AuthService.getUser().uid !== viewUserIdTrips;
-
-    if (!isViewingOtherTrips) {
-        try {
-          trips = await AuthService.getTrips();
-        } catch (e) {
-          console.warn("Không thể tải chuyến đi từ API, thử dùng demo.");
-        }
-    } else {
-        // Ẩn phần lịch trình nếu đang xem profile người khác (vì chưa có API lấy lịch trình public)
-        const stampsEl = document.querySelector('.passport-stamps');
-        if (stampsEl) stampsEl.style.display = 'none';
-    }
-
-    // Hiển thị số lượng
-    setText('pp-trips', String(trips.length));
-    setText('stamps-count', `${trips.length} chuyến`);
-    setText('pv2-stat-trips', String(trips.length));
-
-    // Render danh sách chuyến đi ra giao diện
-    renderTrips(trips);
-
-    // Chuyển đổi hiển thị dạng lưới hoặc danh sách
-    const toggleBtns = document.querySelectorAll('.view-btn');
-    const stampsGrid = document.getElementById('stamps-grid');
-
-    // Restore saved view mode
-    const savedView = localStorage.getItem('topgo_trips_view_mode') || 'grid';
-    if (savedView === 'list' && stampsGrid) {
-        stampsGrid.classList.add('list-view');
-        toggleBtns.forEach(b => {
-            b.classList.toggle('active', b.dataset.view === 'list');
-        });
-    }
-
-    toggleBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        toggleBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        if (btn.dataset.view === 'list') {
-          stampsGrid.classList.add('list-view');
-          localStorage.setItem('topgo_trips_view_mode', 'list');
-        } else {
-          stampsGrid.classList.remove('list-view');
-          localStorage.setItem('topgo_trips_view_mode', 'grid');
-        }
-      });
-    });
-
-    // Chỉnh sửa hồ sơ
-    const overlay = document.getElementById('pp-edit-overlay');
-    document.getElementById('btn-edit-profile')?.addEventListener('click', () => {
-      const user = AuthService.getUser() || {};
-      document.getElementById('edit-lastname').value = user.lastname || '';
-      document.getElementById('edit-firstname').value = user.firstname || '';
-      const usernameInput = document.getElementById('edit-username');
-      if (usernameInput) usernameInput.value = user.username || '';
-      document.getElementById('edit-dob').value = user.dob || '';
-      document.getElementById('edit-sex').value = user.sex || '';
-      document.getElementById('edit-pob').value = user.pob || '';
-      document.getElementById('edit-nationality').value = user.nationality || '';
-      overlay.classList.remove('hidden');
-    });
-    document.getElementById('pp-edit-close')?.addEventListener('click', () => overlay.classList.add('hidden'));
-    document.getElementById('btn-edit-cancel')?.addEventListener('click', () => overlay.classList.add('hidden'));
-    overlay?.addEventListener('click', e => { if (e.target === overlay) overlay.classList.add('hidden'); });
-
-    // Username validation logic
-    const usernameInput = document.getElementById('edit-username');
-    const usernameStatus = document.getElementById('username-status');
-    let usernameTimeout;
-    if (usernameInput) {
-        usernameInput.addEventListener('input', (e) => {
-            const val = e.target.value.trim();
-            if (usernameStatus) {
-                usernameStatus.textContent = '';
-                usernameStatus.style.color = '';
-            }
-            if (!val) return;
-            
-            clearTimeout(usernameTimeout);
-            usernameTimeout = setTimeout(async () => {
-                const user = AuthService.getUser();
-                if (user && user.username === val) {
-                    if (usernameStatus) {
-                        usernameStatus.textContent = 'Username hiện tại';
-                        usernameStatus.style.color = 'var(--sub)';
-                    }
-                    return;
-                }
-                if (usernameStatus) {
-                    usernameStatus.textContent = 'Đang kiểm tra...';
-                    usernameStatus.style.color = 'var(--sub)';
-                }
-                try {
-                    const _isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-                    const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
-                    
-                    const fetchRes = await fetch(`${API_BASE}/api/users/check-username?username=${val}`);
-                    const res = await fetchRes.json();
-                    if (res && res.available !== undefined) {
-                        usernameStatus.textContent = res.message;
-                        usernameStatus.style.color = res.available ? 'var(--success)' : 'var(--error)';
-                    }
-                } catch (err) {
-                    if (usernameStatus) {
-                        usernameStatus.textContent = 'Username không hợp lệ hoặc trùng';
-                        usernameStatus.style.color = 'var(--error)';
-                    }
-                }
-            }, 500);
-        });
-    }
-
-    document.getElementById('btn-edit-save')?.addEventListener('click', async () => {
-      try {
-          const updated = await AuthService.updateProfile({
-            lastname: document.getElementById('edit-lastname').value.trim(),
-            firstname: document.getElementById('edit-firstname').value.trim(),
-            username: document.getElementById('edit-username')?.value.trim(),
-            dob: document.getElementById('edit-dob').value,
-            sex: document.getElementById('edit-sex').value,
-            pob: document.getElementById('edit-pob').value.trim(),
-            nationality: document.getElementById('edit-nationality').value.trim(),
-          });
-          if (updated) window.location.reload();
-      } catch (err) {
-          import('./shared.js').then(module => {
-              module.showToast(err.message, 'error');
-          });
-      }
-    });
-
-    // Đăng xuất
-    document.getElementById('btn-logout')?.addEventListener('click', async () => {
-      await AuthService.logout();
-      window.location.href = './auth.html';
-    });
-
-    // Lọc tìm kiếm chuyến đi
-    const filterDest = document.getElementById('filter-dest');
-    const filterDateFrom = document.getElementById('filter-date-from');
-    const filterDateTo = document.getElementById('filter-date-to');
-    const filterBudget = document.getElementById('filter-budget');
-
-    function applyFilters() {
-      const destQuery = filterDest ? filterDest.value.toLowerCase().trim() : '';
-      const dateFromQuery = filterDateFrom ? filterDateFrom.value : '';
-      const dateToQuery = filterDateTo ? filterDateTo.value : '';
-      const maxBudget = filterBudget && filterBudget.value ? parseFloat(filterBudget.value) : Infinity;
-
-      const filteredTrips = trips.filter(trip => {
-        const matchDest = !destQuery || (trip.destination && trip.destination.toLowerCase().includes(destQuery));
-        let matchDate = true;
-        if (dateFromQuery && trip.dateStart) {
-          matchDate = matchDate && (trip.dateStart >= dateFromQuery);
-        }
-        if (dateToQuery && trip.dateEnd) {
-          matchDate = matchDate && (trip.dateEnd <= dateToQuery);
-        }
-        const matchBudget = !trip.budget || (parseFloat(trip.budget) <= maxBudget);
-        return matchDest && matchDate && matchBudget;
-      });
-
-      renderTrips(filteredTrips);
-    }
-
-    filterDest?.addEventListener('input', applyFilters);
-    filterDateFrom?.addEventListener('change', applyFilters);
-    filterDateTo?.addEventListener('change', applyFilters);
-    filterBudget?.addEventListener('input', applyFilters);
-
-    // ── V2 Tab Switching with Indicator ──
-    const pv2Tabs = document.querySelectorAll('.pv2-tab');
-    const pv2Indicator = document.querySelector('.pv2-tab-indicator');
-    
-    function updateTabIndicator(activeTab) {
-        if (!pv2Indicator || !activeTab) return;
-        pv2Indicator.style.left = activeTab.offsetLeft + 'px';
-        pv2Indicator.style.width = activeTab.offsetWidth + 'px';
-    }
-    
-    // Tự động seed một vài chuyến đi mẫu nếu danh sách trống hoàn toàn để hỗ trợ test nhanh (chỉ thử 1 lần)
-    if (trips.length === 0 && !localStorage.getItem('demo_seeded')) {
-      localStorage.setItem('demo_seeded', 'true');
-      await seedDemoTrips();
-      window.location.reload();
-    }
-    
-    // Set initial indicator position
-    const initialActive = document.querySelector('.pv2-tab.active');
-    if (initialActive) {
-        requestAnimationFrame(() => updateTabIndicator(initialActive));
-    }
-    
-    pv2Tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            pv2Tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            updateTabIndicator(tab);
-            
-            const targetId = tab.dataset.tab;
-            document.querySelectorAll('.pv2-tab-content').forEach(content => {
-                content.classList.toggle('active', content.id === targetId);
-            });
-        });
-    });
-    
-    // Recalculate on resize
-    window.addEventListener('resize', () => {
-        const activeTab = document.querySelector('.pv2-tab.active');
-        if (activeTab) updateTabIndicator(activeTab);
-    });
-
-  });
-}
-
-function renderTrips(trips) {
-  const grid = document.getElementById('stamps-grid');
-  const empty = document.getElementById('stamps-empty');
-  if (!grid) return;
-
-  // Xóa các card cũ ngoại trừ card rỗng
-  grid.querySelectorAll('.stamp-card').forEach(card => card.remove());
-
-  if (trips.length === 0) {
-    if (empty) empty.style.display = '';
-    return;
-  }
-  if (empty) empty.style.display = 'none';
-
-  // Lọc trùng lặp dựa vào id để tránh bị hiển thị lặp
-  const uniqueTrips = [];
-  const seenIds = new Set();
-  trips.forEach(t => {
-      if (!seenIds.has(t.id)) {
-          seenIds.add(t.id);
-          uniqueTrips.push(t);
-      }
-  });
-
-  // Kiểm tra xem có đang xem profile người khác không
-  const urlParamsTrips = new URLSearchParams(window.location.search);
-  const viewUserIdTrips = urlParamsTrips.get('userId');
-  let user = null;
-  try { user = AuthService.getUser(); } catch(e){}
-  const isViewingOtherTrips = viewUserIdTrips && user && user.id !== viewUserIdTrips && user.uid !== viewUserIdTrips;
-
-  // Show global privacy toggle only if viewing own profile
-  const globalPrivacyToggle = document.getElementById('trips-privacy-toggle');
-  if (globalPrivacyToggle) {
-    globalPrivacyToggle.style.display = !isViewingOtherTrips ? 'flex' : 'none';
-  }
-
-  uniqueTrips.forEach(trip => {
-    const card = document.createElement('div');
-    card.className = 'stamp-card';
-    card.innerHTML = `
-      <div class="stamp-main-info">
-        <div class="stamp-dest-wrap">
-          <span class="stamp-dest">${trip.destination || 'Chuyến đi'}</span>
-        </div>
-        <div class="stamp-meta">
-          <span class="stamp-tag">${trip.days || '?'} ngày</span>
-          <span class="stamp-tag">${trip.pax || '?'} người</span>
-          ${trip.budget ? `<span class="stamp-tag">${Number(trip.budget).toLocaleString('vi-VN')}₫</span>` : ''}
-        </div>
-      </div>
-      <div class="stamp-date">${trip.dateStart || ''} → ${trip.dateEnd || ''}</div>
-      <div class="stamp-actions">
-        <button class="stamp-btn" data-share="${trip.id}" style="color: var(--gold); border-color: var(--gold);">Chia sẻ</button>
-        <button class="stamp-btn" data-review="${trip.id}">Xem lại</button>
-        <button class="stamp-btn danger" data-delete="${trip.id}">Xóa</button>
-      </div>
-    `;
-    grid.appendChild(card);
-  });
-
-  // Gán sự kiện xem lại
-  grid.querySelectorAll('[data-review]').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      const id = btn.dataset.review;
-      const trip = trips.find(t => t.id === id);
-      if (trip) {
-        localStorage.setItem('topgo_review_plan', JSON.stringify(trip));
-        window.location.href = './planner.html';
-      }
-    });
-  });
-
-  // Gán sự kiện chia sẻ
-  grid.querySelectorAll('[data-share]').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      const id = btn.dataset.share;
-      const trip = trips.find(t => t.id === id);
-      if (trip && window.openShareModal) {
-        window.openShareModal(trip);
-      }
-    });
-  });
-
-  // Gán sự kiện xóa
-  grid.querySelectorAll('[data-delete]').forEach(btn => {
-    btn.addEventListener('click', async e => {
-      e.stopPropagation();
-      const id = btn.dataset.delete;
-      if (confirm('Bạn chắc chắn muốn xóa lịch trình này?')) {
-        try {
-          await AuthService.deleteTrip(id);
-          window.location.reload();
-        } catch (error) {
-          alert('Không thể xóa lịch trình: ' + error.message);
-        }
-      }
-    });
-  });
-}
+// ── Logic trang Hồ sơ cá nhân (profile.html) đã được chuyển toàn bộ sang profile.js ──
 
 
 

@@ -16,7 +16,8 @@ const BASE_API_URL = _isLocal
     : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
 
 const VIETNAM_PROVINCES = [
-  "An Giang", "Bà Rịa - Vũng Tàu", "Bạc Liêu", "Bắc Giang", "Bắc Kạn", "Bắc Ninh", "Bến Tre", "Bình Dương", "Bình Định", "Bình Phước", "Bình Thuận", "Cà Mau", "Cao Bằng", "Cần Thơ", "Đà Nẵng", "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam", "Hà Nội", "Hà Tĩnh", "Hải Dương", "Hải Phòng", "Hậu Giang", "Hòa Bình", "Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lạng Sơn", "Lào Cai", "Lâm Đồng", "Long An", "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên", "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long", "Vĩnh Phúc", "Yên Bái", "TP. Hồ Chí Minh"
+  "Bình Thuận", "Cà Mau", "Cần Thơ", "Đà Nẵng", "Hà Nội", "Hội An",
+  "Lâm Đồng", "Nha Trang", "Ninh Bình", "Ninh Thuận", "Phú Quốc", "Thành phố Hồ Chí Minh"
 ];
 
 function removeVietnameseTones(str) {
@@ -684,7 +685,12 @@ export function openPostModal(trip = null) {
   overlay.classList.add('open');
 
   /* ── Close ── */
-  const closeModal = () => overlay.classList.remove('open');
+  const closeModal = () => {
+    overlay.classList.remove('open');
+    if (currentTrip) {
+      window.location.reload();
+    }
+  };
   get('pm-close-btn').onclick = closeModal;
   overlay.onclick = e => { if (e.target === overlay) closeModal(); };
 
@@ -838,7 +844,7 @@ export function openPostModal(trip = null) {
   };
 
   const showDefaultProvinces = () => {
-    const topProvinces = ["Hà Nội", "TP. Hồ Chí Minh", "Đà Nẵng", "Lâm Đồng", "Khánh Hòa", "Kiên Giang", "Quảng Nam", "Ninh Bình"];
+    const topProvinces = ["Hà Nội", "Thành phố Hồ Chí Minh", "Đà Nẵng", "Lâm Đồng", "Nha Trang", "Phú Quốc", "Hội An", "Bình Thuận"];
     renderDropdownList(topProvinces);
   };
 
@@ -950,14 +956,18 @@ export function openPostModal(trip = null) {
       // Thành công
       setStatus('Đã đăng bài thành công!', 'success');
       showToast('Bài viết của bạn đã được đăng tải', 'success');
-      
-      // Gửi bài viết mới về Newsfeed để hiển thị ngay lập tức
+      btn.innerHTML = 'Đã đăng!';
       if (typeof window.NewsFeedBridge?.onPostCreated === 'function') {
         window.NewsFeedBridge.onPostCreated(data);
+        setTimeout(() => {
+          closeModal();
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          closeModal();
+          window.location.reload();
+        }, 1000);
       }
-      
-      btn.innerHTML = 'Đã đăng!';
-      closeModal();
 
     } catch (err) {
       setStatus(err.message, 'error');

@@ -112,17 +112,13 @@ function _updateHeaderUser() {
                 }
             }
             if (linkEl) linkEl.href = './profile.html';
-
-            if (iconEl && user.photoURL && user.photoURL !== 'undefined' && user.photoURL !== 'null') {
+            const url = user.photoUrl || user.photoURL;
+            if (iconEl && url && url !== 'undefined' && url !== 'null') {
                 const borderStyle = user.is_vip ? 'border: 2px solid #ffb347;' : '';
-                iconEl.innerHTML = `<img src="${user.photoURL}" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
+                iconEl.innerHTML = `<img src="${url}" alt="Avatar" referrerpolicy="no-referrer" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
             } else if (iconEl) {
                 const initial = (user.firstname || user.email || 'T').charAt(0).toUpperCase();
                 iconEl.innerHTML = `<span style="font-weight: 700; color: var(--p1); font-size: 14px;">${initial}</span>`;
-                }
-            if (iconEl && user.photoUrl) {
-                const borderStyle = user.is_vip ? 'border: 2px solid #ffb347;' : '';
-                iconEl.innerHTML = `<img src="${user.photoUrl}" alt="Avatar" referrerpolicy="no-referrer" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
             }
         } else {
             if (nameEl) nameEl.textContent = 'Đăng nhập';
@@ -221,12 +217,23 @@ function _initGlobalSearch(headerEl) {
                 
                 if (data.users && data.users.length > 0) {
                     html += '<div class="search-section-title">Người dùng</div>';
+                    let currentUserUid = null;
+                    try {
+                        const stored = localStorage.getItem('topgo_user');
+                        if (stored) {
+                            const parsed = JSON.parse(stored);
+                            currentUserUid = parsed.uid;
+                        }
+                    } catch (err) {}
+
                     data.users.forEach(u => {
                         const avatar = u.photoURL || 'https://i.pravatar.cc/150?u=' + u.id;
                         const name = u.fullname ? u.fullname.trim() : 'Người dùng';
                         const handle = u.username ? '@' + u.username.trim() : '@' + u.id;
+                        const shortUid = u.id.startsWith('TG-') ? u.id : 'TG-' + u.id.substring(0, 8).toUpperCase();
+                        const targetUrl = u.id === currentUserUid ? './profile.html' : `./profile.html?uid=${shortUid}`;
                         html += `
-                        <a href="./profile.html?userId=${u.id}" class="search-item">
+                        <a href="${targetUrl}" class="search-item">
                             <div class="search-item-icon"><img src="${avatar}" alt="${name}"></div>
                             <div class="search-item-info">
                                 <span class="search-item-title" style="text-transform: capitalize;">${name || 'Người dùng'}</span>

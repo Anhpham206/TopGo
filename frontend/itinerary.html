@@ -1,0 +1,219 @@
+<!-- 
+  ========================================================================
+  FILE: itinerary.html
+  CHỨC NĂNG: 
+  - Trang hiển thị lịch trình chi tiết chỉ đọc (ReadOnly Itinerary).
+  - Sử dụng cho khách truy cập hoặc xem lại lịch trình đã lưu của người khác.
+  - Hỗ trợ xem lộ trình trên bản đồ, timeline, danh sách nơi lưu trú.
+  - Tích hợp nút Clone (Nhân bản lịch trình) và nút Share (Chia sẻ).
+  ========================================================================
+-->
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopGo — Chi tiết lịch trình ✦</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <meta name="description" content="Chi tiết lịch trình du lịch thông minh thiết kế bởi TopGo AI.">
+
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/shared.css?v=2">
+    <link rel="stylesheet" href="./css/result.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+</head>
+
+<body>
+    <!-- Header — loaded from components/header.html by shared.js -->
+    <header class="header" id="site-header">
+        <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
+    </header>
+
+    <main id="app-main" style="padding-top: 80px; min-height: 100vh; position: relative; overflow-x: hidden;">
+        <!-- Liquid Glass Floating Orbs -->
+        <div class="res-bg-orb orb-1"></div>
+        <div class="res-bg-orb orb-2"></div>
+        <div class="res-bg-orb orb-3"></div>
+
+        <div class="result-wrap bionic-wrap" style="max-width: 1200px; margin: 0 auto; padding: 24px 16px;">
+            <!-- 1. BENTO HERO HEADER -->
+            <div class="bento-hero-unified glass-panel glow-container" id="res-hero-panel" style="margin-bottom: 24px;">
+                <div class="hero-bg-overlay"></div>
+
+                <div class="hero-content-wrapper">
+                    <!-- Left side: Main Title & Actions -->
+                    <div class="hero-main-content">
+                        <div class="res-eyebrow">
+                            <span class="res-dot"></span>
+                            CHI TIẾT HÀNH TRÌNH
+                        </div>
+                        <h1 class="res-title-massive" id="res-title">Đang tải lịch trình...</h1>
+                        <div class="res-actions">
+                            <button class="glass-btn glass-btn-primary glow hidden" id="btn-clone-plan"
+                                style="letter-spacing: 0.5px; text-transform: none; font-size: 13px;">
+                                Tạo bản sao
+                            </button>
+                            <button class="glass-btn btn-outline" id="btn-share-plan"
+                                style="letter-spacing: 0.5px; text-transform: none; font-size: 13px;">
+                                Chia sẻ
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Ticket Divider -->
+                    <div class="ticket-divider"></div>
+
+                    <!-- Right side: Key Stats -->
+                    <div class="hero-stats-container">
+                        <div class="hero-stats-grid">
+                            <div class="hero-stat-item">
+                                <div class="bento-lbl">Thời gian</div>
+                                <div class="bento-val" id="res-dates">...</div>
+                            </div>
+                            <div class="hero-stat-item">
+                                <div class="bento-lbl">Người đăng</div>
+                                <div class="bento-val" id="res-owner-name">--</div>
+                            </div>
+                            <div class="hero-stat-item">
+                                <div class="bento-lbl">Số người</div>
+                                <div class="bento-val" id="res-pax">...</div>
+                            </div>
+                            <div class="hero-stat-item">
+                                <div class="bento-lbl">Ngân sách</div>
+                                <div class="bento-val highlight" id="res-budget">...</div>
+                            </div>
+                        </div>
+
+                        <div class="hero-divider-v"></div>
+
+                        <div class="hero-prep-row">
+                            <div class="hero-stat-item">
+                                <div class="bento-lbl">Bắt đầu đi</div>
+                                <div class="bento-val" id="res-departure">--</div>
+                            </div>
+                            <div class="hero-stat-item">
+                                <div class="bento-lbl">Phương tiện</div>
+                                <div class="bento-val" id="res-transport">--</div>
+                            </div>
+                            <div class="hero-stat-item">
+                                <div class="bento-lbl">Chỗ ở</div>
+                                <div class="bento-val highlight" id="res-accommodation">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 + 3. TWO-COLUMN: MAP (left) + TIMELINE (right) -->
+            <section class="wow-section split-section" style="margin-bottom: 24px;">
+                <div class="split-left glass-panel">
+                    <div class="section-label">
+                        <span class="section-label-text">Lộ Trình Bản Đồ</span>
+                    </div>
+
+                    <div class="immersive-map-container glow-container"
+                        style="border-radius: var(--r-xl); overflow: hidden; position: relative;">
+                        <div id="leaflet-map" class="bionic-map"></div>
+                        <div id="map-click-overlay" style="position: absolute; inset: 0; z-index: 9; cursor: pointer;">
+                        </div>
+
+                        <!-- Floating Stats Overlay -->
+                        <div class="floating-stats-overlay">
+                            <div class="stat-glass">
+                                <div class="stat-val" id="res-dist">~-- km</div>
+                                <div class="stat-lbl">Quãng đường</div>
+                            </div>
+                            <div class="stat-glass">
+                                <div class="stat-val" id="res-places-count">-- điểm</div>
+                                <div class="stat-lbl">Địa điểm</div>
+                            </div>
+                            <div class="stat-glass highlight-stat">
+                                <div class="stat-val" id="res-total-budget">-- ₫</div>
+                                <div class="stat-lbl">Tổng chi phí</div>
+                            </div>
+                            <div class="stat-glass">
+                                <div class="stat-val" id="res-budget-pp">-- ₫</div>
+                                <div class="stat-lbl">Chi phí/người</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split-right glass-panel">
+                    <div class="section-label">
+                        <span class="section-label-text">Lịch Trình Chi Tiết</span>
+                    </div>
+                    <div id="itinerary-container" class="wow-timeline" style="flex: 1; overflow-y: auto;">
+                        <div style="text-align: center; padding: 40px; color: var(--sub);">Đang tải dữ liệu...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3.5. RECOMMENDED HOTELS -->
+            <section class="wow-section hotels-section glass-panel" style="padding: 24px 20px;">
+                <div class="section-label">
+                    <span class="section-label-text">Nơi Lưu Trú Đề Xuất</span>
+                </div>
+                <div class="bionic-accom-grid" id="hotels-grid-container"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 16px;">
+                    <!-- Rendered dynamically by JS -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer + Toast + Popups -->
+    <div id="site-shared"></div>
+
+    <!-- MODAL MAP -->
+    <div class="popup-ov" id="popup-map">
+        <div class="popup-card"
+            style="max-width:95vw;width:95vw;height:80vh;max-height:90vh;padding:16px;display:flex;flex-direction:column;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <div class="popup-title" style="font-size:20px;font-weight:700;">Bản đồ hành trình chi tiết</div>
+                <button id="btn-close-map" data-popup-close="popup-map"
+                    style="background:none;border:none;font-size:28px;cursor:pointer;line-height:1;">&times;</button>
+            </div>
+            <div class="map-modal-split" style="display:flex;gap:16px;flex:1;height:100%;min-height:0;">
+                <div class="map-modal-left"
+                    style="flex:1;height:100%;min-height:0;position:relative;border-radius:var(--r-l);overflow:hidden;">
+                    <div id="leaflet-modal-map" style="height:100%;width:100%;border-radius:var(--r-l);"></div>
+                </div>
+                <div class="map-modal-right"
+                    style="width:260px;height:100%;min-height:0;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,0.5);padding:16px;border-radius:var(--r-l);border:1px solid rgba(0,169,255,0.15);backdrop-filter:blur(10px);overflow-y:auto;box-sizing:border-box;">
+                    <div
+                        style="font-size:14px;font-weight:700;color:var(--text);border-bottom:1px dashed rgba(0,169,255,0.2);padding-bottom:8px;margin-bottom:4px;">
+                        Chọn Ngày Hiển Thị</div>
+                    <div id="map-day-selector" style="display:flex;flex-direction:column;gap:8px;">
+                        <!-- Rendered dynamically by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <!-- DOMPurify -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    <script src="./js/mockFallback.js"></script>
+
+    <!-- App Scripts -->
+    <script type="module" src="./js/auth.js"></script>
+    <script type="module" src="./js/itinerary.js"></script>
+
+    <!-- Modal Containers -->
+    <div id="share-modal-container"></div>
+    <div id="post-modal-container"></div>
+
+    <script type="module" src="./js/components/share_modal.js"></script>
+    <script type="module" src="./js/components/post_create_modal.js"></script>
+    <script type="module">
+        import('./js/components/share_modal.js').then(m => m.initShareModal());
+        import('./js/components/post_create_modal.js').then(m => m.initPostModal());
+    </script>
+</body>
+
+</html>
