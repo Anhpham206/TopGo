@@ -32,6 +32,41 @@ Xử lý tương tác với Cloud Firestore liên quan đến việc lưu trữ 
 * **`delete_plan`**: Xác thực tài liệu có tồn tại trước khi tiến hành xóa vĩnh viễn lịch trình khỏi bộ sưu tập của người dùng nhằm đảm bảo tính toàn vẹn dữ liệu.
 
 ### 4. `user_controller.py` - Quản Lý Hồ Sơ Người Dùng
-Quản lý thông tin tài khoản và hộ chiếu thành viên trên Firestore:
+Quản lý thông tin tài khoản, hộ chiếu thành viên và mối quan hệ theo dõi (Follow/Unfollow) trên Firestore:
 * **`get_user_profile`**: Lấy thông tin cá nhân của người dùng từ tài liệu `/users/{uid}`.
-* **`update_user_profile`**: Cập nhật thông tin hồ sơ (Họ tên, ngày sinh, giới tính, quốc tịch, ảnh đại diện...). Áp dụng giải pháp **Merge dữ liệu**: Đọc dữ liệu cũ hiện có, hợp nhất với các trường dữ liệu mới thay đổi được gửi lên từ client và cập nhật thông qua phương thức `set(..., merge=True)` tránh ghi đè làm mất mát dữ liệu khác.
+* **`update_user_profile`**: Cập nhật thông tin hồ sơ (Họ tên, ngày sinh, giới tính, quốc tịch, ảnh đại diện...). Áp dụng giải pháp **Merge dữ liệu** tránh ghi đè làm mất mát dữ liệu khác.
+* **`follow_user` & `unfollow_user`**: Thực hiện thiết lập liên kết theo dõi giữa hai người dùng (thêm/xóa UID vào danh sách `following` và `followers`).
+* **`check_follow_status` & `get_follow_counts`**: Kiểm tra xem người dùng hiện tại đã follow đối tượng chưa và lấy số lượng người theo dõi/đang theo dõi.
+* **`get_public_profile`**: Lấy hồ sơ công khai của một thành viên khác (bao gồm cả danh sách bài đăng và lịch trình công khai của họ).
+
+### 5. `feed_controller.py` - Quản Lý Bảng Tin (Newsfeed)
+Điều phối việc xây dựng các bài viết hiển thị trên dòng thời gian:
+* **`get_personal_feed`**: Tự động truy cập danh sách người dùng đang theo dõi của tài khoản hiện tại, gom toàn bộ các bài đăng của họ, kết hợp lấy thông tin tác giả và thông tin lịch trình đi kèm để tạo luồng bài đăng cá nhân hóa (Personal Feed) sắp xếp giảm dần theo thời gian.
+* **`_enrich_post_with_author` & `_enrich_post_with_itinerary`**: Các hàm phụ trợ làm giàu thông tin của bài đăng (nhúng thông tin avatar/tên người dùng và bản đồ/timeline lịch trình đính kèm) trước khi trả về phía client.
+
+### 6. `post_controller.py` & `post_controller_extensions.py` - Quản Lý Bài Đăng & Tương Tác
+Bộ điều phối toàn diện cho các tính năng mạng xã hội du lịch:
+* **`create_post`, `update_post`, `delete_post`**: Thực hiện các thao tác CRUD bài viết trong Firestore. Bài đăng có thể gắn thẻ (tag) địa điểm du lịch và liên kết trực tiếp với một lịch trình chuyến đi đã lưu (`itinerary_id`).
+* **`toggle_like` & `get_user_like_status`**: Thao tác thả tim/bỏ thích bài đăng của người dùng và kiểm tra trạng thái thích phục vụ hiển thị nút bấm frontend.
+* **`add_comment` & `list_comments`**: Thêm bình luận mới dưới bài viết (nội dung tự động đi qua dịch vụ kiểm duyệt AI Moderation để ngăn chặn ngôn từ thù địch, đồi trụy) và truy xuất danh sách bình luận liên quan.
+* **`create_repost`**: Cho phép người dùng chia sẻ lại bài đăng của người khác lên trang cá nhân của mình kèm lời bình luận riêng.
+* **`get_posts_by_location`**: Lấy tất cả bài đăng được gắn thẻ một địa danh cụ thể để phục vụ trang chi tiết địa danh.
+
+### 7. `payment_controller.py` - Tích Hợp Thanh Toán (VNPay)
+Điều phối luồng đăng ký gói VIP thành viên thông qua cổng VNPay Sandbox:
+* **`create_payment_url`**: Tiếp nhận yêu cầu mua gói VIP, tạo mã đơn hàng duy nhất và gọi VNPay Service để sinh chuỗi ký HMAC-SHA512 cùng liên kết chuyển hướng thanh toán VNPay Sandbox.
+* **`handle_payment_return`**: Nhận redirect từ VNPay sau khi giao dịch hoàn tất, kiểm tra tính hợp lệ của chữ ký phản hồi. Nếu giao dịch thành công, tự động cập nhật trường `is_vip = True` và thời hạn hết hạn (`vip_expires_at`) trong tài liệu hồ sơ Firestore của người dùng.
+* **`handle_payment_ipn`**: Đầu cuối IPN (Instant Payment Notification) nhận thông báo ngầm từ máy chủ VNPay để bảo đảm cập nhật database an toàn, tránh mất mát dữ liệu kể cả khi kết nối mạng của người dùng bị gián đoạn lúc chuyển hướng.
+
+### 8. `search_controller.py` - Tìm Kiếm Đa Nhiệm
+* **`perform_search`**: Thực hiện truy vấn đồng thời trên Firestore để tìm kiếm các bài viết (theo nội dung, địa danh), tài khoản người dùng (theo username, họ tên), hoặc thông tin địa điểm trong dataset. Ghi nhận từ khóa tìm kiếm để xếp hạng từ khóa hot.
+
+### 9. `hot_search_controller.py` - Phân Tích Từ Khóa Hot
+* **`get_hot_search`**: Truy xuất danh sách các từ khóa tìm kiếm thịnh hành nhất của hệ thống phục vụ tính năng gợi ý nhanh tại thanh tìm kiếm.
+
+### 10. `itinerary_controller.py` - Chia Sẻ Lịch Trình
+* **`share_itinerary`**: Đánh dấu một lịch trình du lịch là công khai (`isPublic = True`), tạo khóa chia sẻ công khai.
+* **`get_itinerary`**: Truy xuất dữ liệu lịch trình công khai phục vụ người dùng chưa đăng nhập hoặc xem chung lộ trình.
+
+### 11. `reviews_controller.py` - Tích Hợp Google Reviews
+* **`get_google_reviews`**: Tiếp nhận tên địa danh du lịch từ client, gọi SerpAPI Reviews Endpoint để lấy danh sách đánh giá thực tế trên Google Maps giúp tăng tính khách quan của dữ liệu địa điểm.

@@ -49,38 +49,59 @@ Mặc dù không dùng React/Vue, hệ thống vẫn áp dụng tư duy Componen
 
 ```text
 frontend/
-├── index.html           # Trang nhập liệu chính (AI Planner Form) và hiển thị kết quả
-├── chatbot.html         # Giao diện Chatbot AI riêng biệt
-├── home.html            # Trang chủ (Landing Page) giới thiệu TopGo
-├── README.md            # Tài liệu dự án (File bạn đang đọc)
+├── index.html           # Trang chủ (Landing Page) giới thiệu nền tảng TopGo
+├── planner.html         # Công cụ lập lịch trình bằng AI (AI Planner Form) & hiển thị bản đồ hành trình
+├── auth.html            # Giao diện Đăng nhập / Đăng ký tài khoản (Email/Mật khẩu hoặc Google)
+├── profile.html         # Trang Hộ chiếu thành viên & Quản lý lịch trình du lịch cá nhân
+├── chatbot.html         # Giao diện Trợ lý ảo tư vấn du lịch (TopChat)
+├── feed.html            # Giao diện mạng xã hội chia sẻ trải nghiệm du lịch (Newsfeed)
+├── trending.html        # Trang khám phá xu hướng: Bài viết nổi bật & Địa danh tìm kiếm hot
+├── search.html          # Trang tìm kiếm đa nhiệm (Bài viết, địa điểm, người dùng)
+├── pricing.html         # Trang nâng cấp tài khoản VIP Premium & Thanh toán VNPay
+├── location.html        # Trang chi tiết địa danh du lịch và danh sách bài viết liên quan
+├── aboutus.html         # Trang thông tin giới thiệu về đội ngũ phát triển dự án
+├── terms.html           # Điều khoản sử dụng và chính sách của TopGo
+├── reviews.html         # Khung pop-up hiển thị đánh giá Google Reviews
+├── README.md            # Tài liệu dự án Frontend (File bạn đang đọc)
 │
-├── components/          # Thư mục chứa các mảnh HTML dùng chung (Fragments)
-│   ├── header.html      # Thanh điều hướng (Nav Bar)
-│   ├── footer.html      # Chân trang (Footer)
-│   ├── loading.html     # Màn hình chờ AI xử lý
+├── components/          # Thư mục chứa các mảnh HTML dùng chung (HTML Fragments)
+│   ├── header.html      # Thanh điều hướng (Navbar) dùng chung
+│   ├── footer.html      # Chân trang (Footer) dùng chung
+│   ├── loading.html     # Màn hình chờ AI xử lý (AI Loading State)
 │   └── result.html      # Cấu trúc hiển thị kết quả (Bản đồ + Lịch trình)
 │
 ├── css/                 # Thư mục chứa các tệp định dạng giao diện
-│   ├── base.css         # Các biến toàn cục (colors, fonts), reset CSS
-│   ├── shared.css       # Style cho các components dùng chung (Header, Footer, Popup, Toast)
-│   ├── home.css         # Style riêng cho trang chủ (home.html)
-│   ├── form.css         # Style cho Form nhập liệu (index.html)
-│   ├── result.css       # Style cho Màn hình kết quả và Bản đồ
-│   └── chatbot.css      # Style riêng cho giao diện TopChat (chatbot.html)
+│   ├── base.css         # Các biến toàn cục (Design Tokens), reset CSS
+│   ├── shared.css       # Style cho các components dùng chung (Header, Footer, Toast)
+│   ├── home.css         # Style cho trang Landing Page (index.html)
+│   ├── form.css         # Style cho form nhập liệu và giao diện AI Planner (planner.html)
+│   ├── result.css       # Style cho màn hình kết quả lịch trình & bản đồ Leaflet
+│   ├── chatbot.css      # Style cho giao diện chat trợ lý ảo (chatbot.html)
+│   ├── auth.css         # Style cho form xác thực đăng nhập/đăng ký (auth.html)
+│   ├── newsfeed.css     # Style cho trang mạng xã hội và các bài đăng (feed.html)
+│   ├── post.css         # Style cho trang chi tiết bài đăng và bình luận
+│   ├── pricing.css      # Style cho trang nâng cấp tài khoản VIP (pricing.html)
+│   ├── reviews.css      # Style cho phần hiển thị đánh giá (reviews.html)
+│   └── aboutus.css      # Style cho trang giới thiệu đội ngũ (aboutus.html)
 │
-├── js/                  # Thư mục chứa logic xử lý (ES6 Modules)
-│   ├── main.js          # Entry point chính của AI Planner, khởi tạo App và điều phối luồng
-│   ├── ui.js            # View Controller: Tương tác DOM, Validation Form, render UI
-│   ├── data.js          # Quản lý State cục bộ và xử lý dữ liệu địa lý
-│   ├── api.js           # Xử lý giao tiếp với Backend (Fetch API, bắt lỗi)
-│   ├── utils.js         # Các hàm tiện ích thuần (Pure Functions) xử lý logic nghiệp vụ
-│   ├── map.js           # Xử lý thư viện bản đồ Leaflet (vẽ tuyến đường, markers)
-│   ├── fragmentLoader.js# Hàm tiện ích Fetch HTML fragments
-│   ├── shared.js        # Logic chung: Khởi tạo Header/Footer, Event Delegation toàn cục, Toast
-│   ├── chatbot.js       # Logic xử lý giao tiếp riêng của TopChat
-│   └── mockFallback.js  # Tệp dữ liệu giả lập (sẽ bị xóa khi có Backend thực tế)
+├── js/                  # Thư mục chứa logic xử lý Javascript (ES6 Modules)
+│   ├── main.js          # Entry point chính của AI Planner, khởi tạo và điều phối luồng
+│   ├── ui.js            # View Controller: Tương tác DOM, Validation Form, render UI lịch trình
+│   ├── data.js          # Quản lý State cục bộ và chứa các hằng số địa lý
+│   ├── api.js           # Xử lý giao tiếp API với Backend (Fetch API, bắt lỗi, fallback)
+│   ├── map.js           # Xử lý tương tác bản đồ Leaflet (vẽ Polyline, Markers)
+│   ├── chatbot.js       # Logic xử lý giao tiếp & hiệu ứng chat của TopChat
+│   ├── auth.js          # Quản lý đăng ký, đăng nhập và xác thực Firebase Web SDK client
+│   ├── newsfeed.js      # Logic quản lý bài đăng, tải feed, tương tác Like/Bình luận/Chia sẻ
+│   ├── post.js          # Logic trang chi tiết bài đăng
+│   ├── pricing.js       # Logic nâng cấp VIP và tích hợp cổng thanh toán VNPay
+│   ├── profile.js       # Logic quản lý thông tin Hộ chiếu du lịch & lịch trình cá nhân
+│   ├── reviews.js       # Logic gọi API Google Reviews & hiển thị đánh giá
+│   ├── shared.js        # Khởi tạo Header/Footer và xử lý sự kiện chung toàn trang
+│   ├── fragmentLoader.js# Tiện ích gọi AJAX tải động HTML fragments
+│   └── mockFallback.js  # Tệp dữ liệu giả lập dự phòng offline khi mất kết nối backend
 │
-└── assets/              # Thư mục chứa ảnh minh họa, icon (nếu có)
+└── assets/              # Thư mục tài nguyên hình ảnh, logo và vector icons
 ```
 
 ### Logic phân bổ File (Separation of Concerns)

@@ -64,3 +64,24 @@ Chịu trách nhiệm giải quyết bài toán phân cụm địa điểm theo 
   * **Far-First Seed (Gieo điểm xa nhất)**: Chọn địa điểm xa tọa độ trung vị (Hub) nhất làm điểm xuất phát đầu tiên của ngày mới để gom nhóm các khu vực ngoại thành/xa trung tâm vào một ngày riêng.
   * **Savings Heuristic (Tối ưu hóa hành trình)**: Các địa điểm tiếp theo trong ngày được lựa chọn dựa trên khoảng cách ngắn nhất đến điểm hiện tại, kết hợp kiểm tra độ khớp khung giờ mở/đóng cửa và cộng thêm trọng số phạt khi quay về Hub.
 * **Vẽ Hình Học Tuyến Đường**: Gọi OSRM Route API để lấy dữ liệu GeoJSON đường đi chi tiết từng ngày (chu trình khép kín Hub -> Điểm 1 -> Điểm 2 -> ... -> Hub) cùng với khoảng cách/thời gian cụ thể của từng chặng (legs) để hiển thị trực quan lên bản đồ Leaflet ở Frontend.
+
+---
+
+### 5. Kiểm Duyệt Nội Dung & An Toàn AI (`ai_logic/ai_moderation.py`)
+* **`check_content_safety`**: Tích hợp mô hình Gemini chuyên biệt kiểm duyệt để phân tích và chặn các nội dung độc hại (bạo lực, đồi trụy, thù địch, bắt nạt...) đối với các bài đăng và bình luận mạng xã hội, đảm bảo môi trường cộng đồng trong sạch.
+
+### 6. Cổng Thanh Toán VIP (`vnpay_service.py`)
+* **Ký Số Giao Dịch**: Triển khai thuật toán tạo chữ ký bảo mật `HMAC-SHA512` kết hợp khóa bí mật `vnp_HashSecret` để tạo liên kết thanh toán VNPay Sandbox hợp lệ.
+* **Xác Thực Kết Quả (Checksum Validation)**: Giải mã và đối chiếu chữ ký số trả về từ VNPay khi người dùng được chuyển hướng ngược lại website để phát hiện gian lận giao dịch.
+
+### 7. Phân Tích & Phân Hạng Xu Hướng (`hot_search_service.py`)
+* **Xếp Hạng Tìm Kiếm**: Lưu vết và tổng hợp số lượng truy vấn của từng từ khóa, tự động tính toán tần suất để xếp hạng Top 10 từ khóa tìm kiếm phổ biến nhất (Trending Topics) phục vụ gợi ý nhanh cho ô tìm kiếm ở frontend.
+
+### 8. Phòng Chống Lỗ Hổng Phân Quyền (`idor_middleware.py`)
+* **Middleware Bảo Mật**: Kiểm tra chéo ID người dùng (`uid`) được giải mã từ Firebase JWT Token với tham số ID tài nguyên cần chỉnh sửa/xóa trong request, ngăn ngừa các cuộc tấn công thay đổi thông tin trái phép (IDOR - Insecure Direct Object References).
+
+### 9. Xác Thực Định Dạng Dữ Liệu (`validation_service.py`)
+* **Pydantic Validation Core**: Định nghĩa cấu trúc nghiêm ngặt (Schemas) cho tất cả các loại dữ liệu đầu vào gửi lên backend (như tạo bài đăng, chia sẻ lịch trình, thêm bình luận), lọc sạch dữ liệu rác trước khi lưu trữ vào Cloud Firestore.
+
+### 10. Dữ Liệu Cộng Đồng Giả Lập (`comment/seed_reviews.py`)
+* **Seeder Tiện Ích**: Sinh tự động các lượt thích (likes), bình luận (comments) ngẫu nhiên cho các bài viết mạng xã hội trên hệ thống, phục vụ việc minh họa giao diện dòng tin (feed) sống động hơn khi kiểm thử.

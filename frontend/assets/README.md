@@ -8,16 +8,16 @@ Thư mục này chứa toàn bộ các tài nguyên tĩnh phục vụ cho thiế
 
 | Tài nguyên / Thư mục | Định dạng | Vai trò & Mục đích sử dụng |
 | :--- | :---: | :--- |
-| [`logo.png`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/assets/logo.png) | PNG | Logo chính thức của thương hiệu TopGo hiển thị trên thanh điều hướng (Navbar) và chân trang (Footer). |
-| [`globe-icon.json`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/assets/globe-icon.json) | JSON (Lottie) | Dữ liệu hoạt ảnh vector (Lottie Animation) mô tả quả địa cầu đang xoay, được dùng làm icon động tại nút bấm tạo lịch trình để tăng tính thẩm mỹ và hiện đại. |
-| [`img/`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/assets/img) | Folder | Thư mục chứa các tài nguyên ảnh chụp tĩnh. |
-| [`img/cities/`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/assets/img/cities) | Folder | Chứa hình ảnh thu nhỏ (thumbnails) đại diện cho 12 tỉnh thành du lịch được hiển thị trên danh sách lựa chọn của AI Planner. |
+| [`logo.png`](logo.png) | PNG | Logo chính thức của thương hiệu TopGo hiển thị trên thanh điều hướng (Navbar) và chân trang (Footer). |
+| [`globe-icon.json`](globe-icon.json) | JSON (Lottie) | Dữ liệu hoạt ảnh vector (Lottie Animation) mô tả quả địa cầu đang xoay, được dùng làm icon động tại nút bấm tạo lịch trình để tăng tính thẩm mỹ và hiện đại. |
+| [`img/`](img) | Folder | Thư mục chứa các tài nguyên ảnh chụp tĩnh. |
+| [`img/cities/`](img/cities) | Folder | Chứa hình ảnh thu nhỏ (thumbnails) đại diện cho 12 tỉnh thành du lịch được hiển thị trên danh sách lựa chọn của AI Planner. |
 
 ---
 
 ## ⚡ 2. Kỹ thuật Tối ưu hóa Hiệu năng Hình ảnh (WebP Optimization)
 
-Để phục vụ cho yêu cầu tối ưu hóa tốc độ tải trang cực nhanh và triệt tiêu hoàn toàn độ trễ (lag) khi mở danh sách thành phố, toàn bộ hình ảnh trong thư mục [`img/cities/`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/assets/img/cities) đã được tối ưu hóa sâu sắc:
+Để phục vụ cho yêu cầu tối ưu hóa tốc độ tải trang cực nhanh và triệt tiêu hoàn toàn độ trễ (lag) khi mở danh sách thành phố, toàn bộ hình ảnh trong thư mục [`img/cities/`](img/cities) đã được tối ưu hóa sâu sắc:
 
 - **Định dạng thế hệ mới WebP**: Thay vì dùng JPEG hay PNG truyền thống, các ảnh được chuyển hoàn toàn sang đuôi `.webp` giúp nén dung lượng mà không làm suy giảm chất lượng hiển thị.
 - **Kích thước Thumbnail siêu nhỏ**: Mỗi ảnh được crop chuẩn về kích thước hiển thị thực tế trên UI (40x30px). 
