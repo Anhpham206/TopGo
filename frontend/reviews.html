@@ -4,38 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TopGo — Đánh giá & Bình luận</title>
-    <meta name="description" content="Đọc và chia sẻ đánh giá về các địa điểm du lịch Việt Nam từ cộng đồng TopGo và Google Maps.">
+    <meta name="description" content="Xem và chia sẻ đánh giá địa điểm du lịch từ cộng đồng TopGo và Google Maps.">
     <link rel="icon" type="image/png" href="./assets/logo.png">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/shared.css?v=2">
-    <link rel="stylesheet" href="./css/reviews.css?v=5">
+    <link rel="stylesheet" href="./css/reviews.css?v=14">
 </head>
 <body>
     <header class="header header-solid" id="site-header">
         <div style="text-align:center;padding:16px;color:var(--sub);font-size:13px;">Đang tải header...</div>
     </header>
 
-    <!-- ── Hero Banner ── -->
-    <section class="reviews-hero">
-        <div class="reviews-hero-bg"></div>
-        <div class="reviews-hero-inner">
-            <div class="reviews-hero-tagline">
-                <span class="reviews-hero-dot"></span>
-                Cộng đồng · Thực tế · Tin cậy
-            </div>
-            <h1 class="reviews-hero-title">Đánh giá<br><em>Địa điểm</em></h1>
-            <p class="reviews-hero-desc">
-                Khám phá nhận xét thực tế từ cộng đồng du lịch TopGo và Google Maps.<br>
-                Chọn địa điểm để xem đánh giá hoặc chia sẻ trải nghiệm của bạn.
-            </p>
+    <main id="app-main">
 
-            <!-- Selector nằm trong hero -->
-            <div class="reviews-selector-card" id="reviews-selector-card">
+        <!-- ── Hero Banner ── -->
+        <section class="reviews-hero">
+            <div class="reviews-hero-bg"></div>
+            <div class="reviews-hero-inner">
+                <div class="reviews-hero-tagline">
+                    <span class="reviews-hero-dot"></span>
+                    Cộng đồng · Thực tế · Tin cậy
+                </div>
+                <h1 class="reviews-hero-title">Đánh giá<br><em>Địa điểm</em></h1>
+                <p class="reviews-hero-desc">
+                    Khám phá nhận xét thực tế từ cộng đồng du lịch TopGo và Google Maps.<br>
+                    Chọn địa điểm để xem đánh giá hoặc chia sẻ trải nghiệm của bạn.
+                </p>
+            </div>
+            <div class="reviews-hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </section>
+
+        <!-- ── Main Card ── -->
+        <div class="reviews-container">
+
+            <!-- Selectors Row -->
+            <div class="reviews-selectors">
                 <div class="selector-group">
-                    <label class="label-sm" for="city-selector">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        Tỉnh / Thành phố
-                    </label>
+                    <label class="label-sm">Tỉnh / Thành phố</label>
                     <select id="city-selector" class="selector-select">
                         <option value="">-- Chọn Tỉnh/Thành --</option>
                         <option value="ha_noi">Hà Nội</option>
@@ -53,104 +62,66 @@
                     </select>
                 </div>
                 <div class="selector-group">
-                    <label class="label-sm" for="place-selector">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h4"/></svg>
-                        Địa điểm cụ thể
-                    </label>
+                    <label class="label-sm">Địa điểm</label>
                     <select id="place-selector" class="selector-select" disabled>
                         <option value="">-- Chọn Địa điểm --</option>
                     </select>
                 </div>
-                <div class="selector-stats" id="selector-stats" style="display:none">
-                    <span id="stats-place-name" class="stats-place-name"></span>
-                </div>
             </div>
-        </div>
-        <div class="reviews-hero-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-        </div>
-    </section>
 
-    <main id="app-main" class="reviews-main">
-        <!-- Reviews Section: 2 column layout -->
-        <div id="reviews-section" class="reviews-section-wrap" style="display:none">
-            <div class="reviews-two-col">
+            <!-- Reviews section: 2 column layout, hidden until place selected -->
+            <div id="reviews-section" style="display: none;">
 
-                <!-- LEFT: Google Reviews -->
-                <div class="reviews-col reviews-col-google">
-                    <div class="reviews-col-header">
-                        <div class="reviews-col-title-wrap">
-                            <img src="https://www.google.com/favicon.ico" alt="Google" class="google-favicon">
-                            <span class="reviews-col-title">Google Maps</span>
+                <!-- 2-column grid -->
+                <div class="reviews-grid">
+                    <!-- Left: Google Maps reviews -->
+                    <div class="reviews-col reviews-col-google">
+                        <div class="col-header">
+                            <img src="https://www.google.com/favicon.ico" alt="Google" class="col-header-icon">
+                            <span>Đánh giá từ Google Maps</span>
                         </div>
-                        <span class="reviews-col-badge">Đánh giá tham khảo</span>
-                    </div>
-                    <div class="reviews-list" id="google-reviews-list">
-                        <div class="reviews-loading" id="google-reviews-loading">
-                            <div class="loading-spinner"></div>
-                            <span>Đang tải từ Google Maps...</span>
+                        <div id="col-google">
+                            <div class="reviews-loading">Đang tải đánh giá Google...</div>
                         </div>
                     </div>
-                </div>
 
-                <!-- RIGHT: User Reviews + Form -->
-                <div class="reviews-col reviews-col-user">
-                    <div class="reviews-col-header">
-                        <div class="reviews-col-title-wrap">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                            <span class="reviews-col-title">TopGo Community</span>
+                    <!-- Right: TopGo user reviews + write form -->
+                    <div class="reviews-col reviews-col-user">
+                        <div class="col-header">
+                            <span class="col-header-icon topgo-icon">T</span>
+                            <span>Đánh giá từ cộng đồng TopGo</span>
                         </div>
-                        <span class="reviews-col-badge badge-topgo">Đánh giá thực tế</span>
-                    </div>
+                        <div id="col-user">
+                            <div class="reviews-loading">Đang tải đánh giá...</div>
+                        </div>
 
-                    <!-- Write review form -->
-                    <div class="review-form" id="review-form-container">
-                        <div class="review-form-header">
+                        <!-- Write review form -->
+                        <div class="review-form" id="review-form-container">
                             <h3>Viết đánh giá của bạn</h3>
-                        </div>
-                        <div id="auth-warning" style="display:none">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                            Bạn cần <a href="./auth.html">đăng nhập</a> để viết đánh giá.
-                        </div>
-
-                        <div class="star-rating-wrap">
-                            <div class="star-rating" id="star-rating">
-                                <span data-val="1" title="1 sao">★</span>
-                                <span data-val="2" title="2 sao">★</span>
-                                <span data-val="3" title="3 sao">★</span>
-                                <span data-val="4" title="4 sao">★</span>
-                                <span data-val="5" title="5 sao">★</span>
+                            <div id="auth-warning" style="display: none; color: #ff4d4f; margin-bottom: 10px;">
+                                Bạn cần <a href="./auth.html" style="color: var(--p1); text-decoration: underline;">đăng nhập</a> để viết đánh giá.
                             </div>
-                            <span class="star-label" id="star-label">Chọn số sao</span>
-                        </div>
-
-                        <!-- Suggestion chips by star level -->
-                        <div class="review-suggestions" id="review-suggestions" style="display:none">
-                            <span class="suggestions-label">Gợi ý nhanh:</span>
-                            <div class="suggestion-chips" id="suggestion-chips"></div>
-                        </div>
-
-                        <textarea class="review-input" id="review-text" placeholder="Chia sẻ trải nghiệm của bạn về địa điểm này..." rows="4"></textarea>
-                        <button class="btn-submit-review" id="btn-submit-review">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                            Gửi đánh giá
-                        </button>
-                    </div>
-
-                    <!-- User reviews list -->
-                    <div class="reviews-list" id="user-reviews-list">
-                        <div class="reviews-empty" id="user-reviews-empty" style="display:none">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                            <p>Chưa có đánh giá nào.<br>Hãy là người đầu tiên!</p>
+                            <div class="star-rating-wrap">
+                                <div class="star-rating" id="star-rating">
+                                    <span data-val="1">★</span>
+                                    <span data-val="2">★</span>
+                                    <span data-val="3">★</span>
+                                    <span data-val="4">★</span>
+                                    <span data-val="5">★</span>
+                                </div>
+                                <span class="star-label" id="star-label">Chọn số sao</span>
+                            </div>
+                            <div class="review-suggestions" id="review-suggestions" style="display: none;">
+                                <span class="suggestions-label">Gợi ý nhanh:</span>
+                                <div class="suggestion-chips" id="suggestion-chips"></div>
+                            </div>
+                            <textarea class="review-input" id="review-text" placeholder="Chia sẻ trải nghiệm của bạn về địa điểm này..."></textarea>
+                            <button class="btn-submit-review" id="btn-submit-review">Gửi Đánh giá</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </main>
 
     <div id="site-shared"></div>
@@ -158,6 +129,6 @@
     <script src="./js/mockFallback.js"></script>
     <script type="module" src="./js/auth.js"></script>
     <script type="module" src="./js/shared.js"></script>
-    <script type="module" src="./js/reviews.js?v=9"></script>
+    <script type="module" src="./js/reviews.js?v=18"></script>
 </body>
 </html>

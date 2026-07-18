@@ -445,107 +445,88 @@
 }
 
 /* ── 3. BILLING TOGGLE ── */
-.billing-toggle-wrap {
-  display: inline-flex;
+/* ── 3. BILLING SEGMENTED CONTROL ── */
+.billing-segment-wrap {
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 8px 30px rgba(0, 169, 255, 0.04);
-  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 169, 255, 0.05), inset 0 2px 5px rgba(0,0,0,0.02);
+  padding: 6px;
   border-radius: 100px;
   margin: 0 auto 50px;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  width: max-content;
   z-index: 12;
   animation: fadeUp 0.9s cubic-bezier(0.4, 0, 0.2, 1) ease;
 }
 
-.billing-label {
+.segment-pill {
+  flex: 1;
+  min-width: 150px;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  padding: 12px 24px;
   font-family: var(--font-label);
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--muted);
-  transition: var(--t);
+  border-radius: 100px;
   cursor: pointer;
-  user-select: none;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   display: flex;
   align-items: center;
   gap: 8px;
+  user-select: none;
 }
 
-.billing-label.active {
+.segment-pill.active {
   color: var(--p1);
   font-weight: 700;
 }
 
-.discount-badge {
+.segment-glider {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  height: calc(100% - 12px);
+  width: calc(50% - 6px);
+  background: white;
+  border-radius: 100px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 1;
+}
+
+/* When checkbox is checked (Yearly is active), slide glider */
+#billing-checkbox:checked ~ .segment-glider {
+  transform: translateX(100%);
+}
+
+.discount-badge-new {
+  position: absolute;
+  top: -10px;
+  right: -5px;
   background: linear-gradient(135deg, #ff9f43, var(--gold));
   color: white;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
-  padding: 2px 8px;
-  border-radius: 100px;
+  padding: 3px 8px;
+  border-radius: 8px;
   box-shadow: 0 4px 10px rgba(255, 179, 71, 0.3);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   animation: pulseBadge 2s infinite alternate ease-in-out;
+  pointer-events: none;
 }
 
 @keyframes pulseBadge {
-  0% { transform: scale(0.97); }
-  100% { transform: scale(1.05); }
-}
-
-/* Custom Switch styles */
-.toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 52px;
-  height: 28px;
-}
-
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.toggle-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(38, 78, 107, 0.15);
-  transition: .4s;
-  border-radius: 34px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.toggle-slider:before {
-  position: absolute;
-  content: "";
-  height: 20px;
-  width: 20px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-.toggle-switch input:checked + .toggle-slider {
-  background-color: var(--p1);
-}
-
-.toggle-switch input:checked + .toggle-slider:before {
-  transform: translateX(24px);
+  0% { transform: scale(0.97) rotate(-1deg); }
+  100% { transform: scale(1.05) rotate(1deg); }
 }
 
 /* ── 4. MODERN PRICING GRID ── */
@@ -1109,19 +1090,22 @@ body.dark .t-hole {
   box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Billing Toggle */
-body.dark .billing-toggle-wrap {
+/* Billing Segmented Control in Dark Mode */
+body.dark .billing-segment-wrap {
   background: rgba(13, 20, 38, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), inset 0 2px 5px rgba(0,0,0,0.2);
 }
-body.dark .toggle-slider {
-  background-color: rgba(255, 255, 255, 0.08);
+body.dark .segment-pill {
+  color: #94a3b8;
+}
+body.dark .segment-pill.active {
+  color: #fff;
+}
+body.dark .segment-glider {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.05);
-}
-body.dark .toggle-slider:before {
-  background-color: #cbd5e1;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* Glass Pricing Cards */
@@ -1250,71 +1234,188 @@ body.dark .cs-highlight-desc {
     0 15px 35px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 /* ── 12. COMPARISON TABLE ── */
+/* ── 12. COMPARISON TABLE ── */
 .comparison-section {
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 100px;
+  margin-bottom: 100px;
   animation: fadeUp 1.1s cubic-bezier(0.4, 0, 0.2, 1) ease;
+  max-width: 1050px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 }
 .comparison-title {
   text-align: center;
   font-family: var(--font-heading);
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 800;
   color: var(--text);
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+  background: linear-gradient(135deg, var(--p1), var(--p2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .comparison-table-wrapper {
   overflow-x: auto;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: var(--r-l);
-  box-shadow: var(--sh);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 169, 255, 0.08), inset 0 2px 10px rgba(255,255,255,1);
+  padding: 10px;
 }
 .comparison-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 10px;
   text-align: left;
-  min-width: 700px;
+  min-width: 800px;
 }
 .comparison-table th, .comparison-table td {
-  padding: 18px 24px;
-  border-bottom: 1px solid rgba(38, 78, 107, 0.08);
+  padding: 24px;
 }
-.comparison-table th {
-  background: rgba(0, 169, 255, 0.05);
-  color: var(--text);
+.comparison-table thead th {
+  background: transparent;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  text-align: center;
+  border-bottom: 2px solid rgba(0, 169, 255, 0.1);
+}
+.comparison-table th.feature-col {
+  text-align: left;
+  vertical-align: bottom;
+  font-family: var(--font-label);
+  font-weight: 800;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+.comparison-table th .col-title {
   font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 16px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.comparison-table th .col-sub {
+  font-size: 14px;
+  color: var(--muted);
+}
+.comparison-table th.vip-col .col-title {
+  background: linear-gradient(135deg, var(--gold), #ff8c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 26px;
+  text-shadow: 0 4px 15px rgba(255, 179, 71, 0.2);
 }
 .comparison-table td {
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--text);
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  text-align: left;
+  vertical-align: middle;
+  background: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
 }
-.comparison-table tr:last-child td {
-  border-bottom: none;
-}
-.comparison-table td:first-child {
+.comparison-table td.feature-name {
   font-weight: 700;
   color: var(--text);
-  width: 25%;
+  width: 28%;
+  border-radius: 16px 0 0 16px;
+  border-left: 1px solid rgba(255, 255, 255, 0.8);
+  padding-left: 30px;
 }
-.comparison-table td:nth-child(2), .comparison-table td:nth-child(3) {
-  width: 37.5%;
+.comparison-table tr.comp-row td:last-child {
+  border-radius: 0 16px 16px 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.8);
 }
-.comparison-table tr:hover {
-  background: rgba(255, 255, 255, 0.2);
+.feature-title {
+  display: inline-block;
 }
+.free-cell {
+  width: 32%;
+  opacity: 0.8;
+  font-weight: 500;
+}
+.vip-cell {
+  width: 40%;
+  padding: 0 !important;
+}
+.vip-content {
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(255, 179, 71, 0.08), rgba(255, 223, 186, 0.15));
+  border-left: 2px solid var(--gold);
+  color: var(--text);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: inset 5px 0 15px rgba(255, 179, 71, 0.03);
+}
+.comparison-table tr.comp-row:hover td {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px rgba(0, 169, 255, 0.05);
+  transform: translateY(-2px);
+}
+.comparison-table tr.comp-row:hover .vip-content {
+  background: linear-gradient(135deg, rgba(255, 179, 71, 0.15), rgba(255, 223, 186, 0.3));
+  border-left-width: 4px;
+  padding-left: 22px; /* compensate for border */
+  box-shadow: 0 8px 30px rgba(255, 179, 71, 0.2);
+}
+
+body.dark .comparison-table-wrapper {
+  background: rgba(13, 20, 38, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), inset 0 2px 10px rgba(255,255,255,0.05);
+}
+body.dark .comparison-table td {
+  background: rgba(25, 30, 48, 0.5);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+body.dark .comparison-table td.feature-name {
+  border-left-color: rgba(255, 255, 255, 0.05);
+}
+body.dark .comparison-table tr.comp-row td:last-child {
+  border-right-color: rgba(255, 255, 255, 0.05);
+}
+body.dark .comparison-table thead th {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+body.dark .vip-content {
+  background: linear-gradient(135deg, rgba(255, 179, 71, 0.1), rgba(255, 223, 186, 0.02));
+  color: #f1f5f9;
+}
+body.dark .comparison-table tr.comp-row:hover td {
+  background: rgba(45, 50, 70, 0.6);
+}
+body.dark .comparison-table tr.comp-row:hover .vip-content {
+  background: linear-gradient(135deg, rgba(255, 179, 71, 0.2), rgba(255, 223, 186, 0.05));
+  box-shadow: 0 8px 25px rgba(255, 179, 71, 0.15);
+}
+body.dark .comparison-table th .col-title {
+  color: #f1f5f9;
+}
+body.dark .comparison-table td.feature-name {
+  color: #f1f5f9;
+}
+
 @media (max-width: 768px) {
   .comparison-title {
-    font-size: 22px;
-    margin-bottom: 24px;
+    font-size: 24px;
+    margin-bottom: 30px;
   }
   .comparison-table th, .comparison-table td {
-    padding: 14px 16px;
-    font-size: 13.5px;
+    padding: 16px 12px;
+    font-size: 14px;
+  }
+  .comparison-table th .col-title {
+    font-size: 16px;
   }
 }
