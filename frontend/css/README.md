@@ -8,20 +8,24 @@ Thư mục này chứa toàn bộ các tệp CSS định dạng giao diện cho 
 
 | Tệp CSS | Đối tượng áp dụng | Chức năng chính |
 | :--- | :--- | :--- |
-| [`base.css`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/css/base.css) | Toàn bộ ứng dụng | Khởi tạo hệ thống màu sắc (Color Tokens), phông chữ (Typography), Reset CSS và các lớp tiện ích (Utility Classes) toàn cục. |
-| [`shared.css`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/css/shared.css) | Các component dùng chung | Định dạng giao diện cho Header, Footer, Hộp thoại Popup, Toast thông báo, và các cấu trúc layout cơ sở. |
-| [`home.css`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/css/home.css) | Trang chủ (`home.html`) | Thiết kế giao diện giới thiệu dịch vụ (Landing Page), các hiệu ứng cuộn và phần giới thiệu tính năng. |
-| [`form.css`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/css/form.css) | Trang Planner (`index.html`) | Định dạng Form nhập liệu lập lịch trình, các dropdown gợi ý thông minh, nút bấm và hoạt ảnh chuyển động mượt mà. |
-| [`result.css`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/css/result.css) | Màn hình kết quả | Thiết kế giao diện hiển thị Timeline lịch trình AI tạo ra, bản đồ Leaflet, thẻ địa điểm chi tiết, và dự toán chi phí. |
-| [`chatbot.css`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/css/chatbot.css) | Trang TopChat (`chatbot.html`) | Khung giao diện bong bóng trò chuyện, thẻ thông tin phản hồi của Bot, các khối dự toán ngân sách và bảng thời tiết đẹp mắt. |
-| [`auth.css`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/css/auth.css) | Giao diện Đăng nhập / Ký | Thiết kế hộp thoại đăng nhập, form đăng ký thành viên với hiệu ứng chuyển động gradient chuyên nghiệp. |
-| [`pricing.css`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/css/pricing.css) | Trang nâng cấp tài khoản | Thiết kế các thẻ bảng giá (Pricing Cards), so sánh tính năng gói dịch vụ. |
+| [`base.css`](base.css) | Toàn bộ ứng dụng | Khởi tạo hệ thống màu sắc (Color Tokens), phông chữ (Typography), Reset CSS và các lớp tiện ích (Utility Classes) toàn cục. |
+| [`shared.css`](shared.css) | Các component dùng chung | Định dạng giao diện cho Header, Footer, Hộp thoại Popup, Toast thông báo, và các cấu trúc layout cơ sở. |
+| [`home.css`](home.css) | Trang chủ (`index.html`) | Thiết kế giao diện giới thiệu dịch vụ (Landing Page), các hiệu ứng cuộn và phần giới thiệu tính năng. |
+| [`form.css`](form.css) | Trang Planner (`planner.html`) | Định dạng Form nhập liệu lập lịch trình, các dropdown gợi ý thông minh, nút bấm và hoạt ảnh chuyển động mượt mà. |
+| [`result.css`](result.css) | Màn hình kết quả | Thiết kế giao diện hiển thị Timeline lịch trình AI tạo ra, bản đồ Leaflet, thẻ địa điểm chi tiết, và dự toán chi phí. |
+| [`chatbot.css`](chatbot.css) | Trang TopChat (`chatbot.html`) | Khung giao diện bong bóng trò chuyện, thẻ thông tin phản hồi của Bot, các khối dự toán ngân sách và bảng thời tiết đẹp mắt. |
+| [`auth.css`](auth.css) | Giao diện Đăng nhập / Ký | Thiết kế hộp thoại đăng nhập, form đăng ký thành viên với hiệu ứng chuyển động gradient chuyên nghiệp. |
+| [`pricing.css`](pricing.css) | Trang nâng cấp tài khoản | Thiết kế các thẻ bảng giá (Pricing Cards), so sánh tính năng gói dịch vụ. |
+| [`newsfeed.css`](newsfeed.css) | Trang Newsfeed (`feed.html`) | Thiết kế các bài đăng (posts), bố cục dòng thời gian và các khối tương tác mạng xã hội. |
+| [`post.css`](post.css) | Chi tiết bài viết | Định dạng chi tiết bài đăng và khu vực hiển thị bình luận. |
+| [`reviews.css`](reviews.css) | Đánh giá | Bố cục hiển thị danh sách đánh giá của các địa điểm du lịch. |
+| [`aboutus.css`](aboutus.css) | Trang Giới thiệu | Thiết kế trang thông tin về đội ngũ phát triển dự án. |
 
 ---
 
 ## 🎨 2. Hệ thống Biến Toàn cục (Design Tokens)
 
-Hệ thống màu sắc và cấu trúc khoảng cách được định nghĩa tập trung tại [`base.css`](file:///c:/Users/Trung%20Kien/Downloads/FOR%20STUDYING/TDTT/main%20project/TopGo/frontend/css/base.css) dưới dạng CSS Variables. Điều này cho phép dễ dàng chỉnh sửa chủ đề (Theme) của toàn hệ thống chỉ bằng việc thay đổi các biến tại một nơi duy nhất:
+Hệ thống màu sắc và cấu trúc khoảng cách được định nghĩa tập trung tại [`base.css`](base.css) dưới dạng CSS Variables. Điều này cho phép dễ dàng chỉnh sửa chủ đề (Theme) của toàn hệ thống chỉ bằng việc thay đổi các biến tại một nơi duy nhất:
 
 ### Bảng màu chủ đạo (Theme Colors)
 - `--p1` (Primary - Màu xanh dương đậm): Chủ đề chính của TopGo, thể hiện sự chuyên nghiệp, tin cậy của dịch vụ du lịch.
