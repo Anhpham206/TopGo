@@ -17,7 +17,7 @@ const _fbAuth = getAuth(_fbApp);
 
 function _escapeHtml(str) {
     if (!str) return '';
-    return str.replace(/[&<>"']/g, function(m) {
+    return str.replace(/[&<>"']/g, function (m) {
         switch (m) {
             case '&': return '&amp;';
             case '<': return '&lt;';
@@ -93,15 +93,15 @@ export const HotSearchWidget = {
         const html = topTopics.map((topic, idx) => {
             const rank = idx + 1;
             const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-default';
-            
-            const trendIcon = topic.trend === 'up' 
-                    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>'
-                    : topic.trend === 'down' 
+
+            const trendIcon = topic.trend === 'up'
+                ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>'
+                : topic.trend === 'down'
                     ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>'
                     : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>';
-            
+
             const trendClass = topic.trend === 'up' ? 'trend-up'
-                             : topic.trend === 'down' ? 'trend-down' : 'trend-stable';
+                : topic.trend === 'down' ? 'trend-down' : 'trend-stable';
             const heatPct = Math.round((topic.postCount || 0) / maxCount * 100);
 
             return `
@@ -129,7 +129,7 @@ export const HotSearchWidget = {
 
 export async function updateSidebarProfile() {
     await _waitForFirebaseAuth();
-    
+
     let userInfo = { fullName: "Khách", email: "", photoURL: "" };
     let userStats = { trips: 0, posts: 0 };
     try {
@@ -142,10 +142,10 @@ export async function updateSidebarProfile() {
             userInfo.username = parsed.username || "";
             userInfo.uid = parsed.uid || parsed.id || "";
         }
-        
+
         const storedStats = localStorage.getItem('userStats');
         if (storedStats) userStats = JSON.parse(storedStats);
-    } catch(e) {}
+    } catch (e) { }
 
     const nameEl = document.getElementById('sp-name');
     const handleEl = document.getElementById('sp-handle');
@@ -182,10 +182,10 @@ export async function updateSidebarProfile() {
     if (userInfo.uid) {
         _getAuthHeaders().then(headers => {
             if (!headers['Authorization']) return;
-            
+
             Promise.all([
-                fetch(`${API_BASE}/api/plans/list`, { headers }).then(res => res.ok ? res.json() : {plans:[]}),
-                fetch(`${API_BASE}/api/users/profile/posts`, { headers }).then(res => res.ok ? res.json() : {posts:[]})
+                fetch(`${API_BASE}/api/plans/list`, { headers }).then(res => res.ok ? res.json() : { plans: [] }),
+                fetch(`${API_BASE}/api/users/profile/posts`, { headers }).then(res => res.ok ? res.json() : { posts: [] })
             ]).then(([tripsData, postsData]) => {
                 const tripCount = tripsData.plans ? tripsData.plans.length : 0;
                 const postCount = postsData.posts ? postsData.posts.length : 0;
@@ -207,7 +207,7 @@ export const SuggestedFollowWidget = {
             const res = await fetch(`${API_BASE}/api/users/suggestions?limit=3`);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data = await res.json();
-            
+
             if (data.users && data.users.length > 0) {
                 this.render(data.users);
             } else {
@@ -234,7 +234,7 @@ export const SuggestedFollowWidget = {
         const html = users.map(u => {
             const avatarContent = u.avatar ? `<img src="${_escapeHtml(u.avatar)}" alt="TopGo" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">` : _escapeHtml(u.displayName.charAt(0));
             const targetLink = u.link ? _escapeHtml(u.link) : `./profile.html?userId=${_escapeHtml(u.id)}`;
-            
+
             return `
             <div class="sg-item">
                 <a href="${targetLink}" class="sg-avatar" style="background: ${u.color || 'var(--p1)'}; text-decoration:none;">${avatarContent}</a>
@@ -242,7 +242,7 @@ export const SuggestedFollowWidget = {
                     <a href="${targetLink}" class="sg-name" style="text-decoration:none; color:inherit;">${_escapeHtml(u.displayName)}</a>
                     <div class="sg-desc">${u.posts || 0} bài viết · ${u.trips || 0} chuyến đi</div>
                 </div>
-                ${u.id === 'topgo' 
+                ${u.id === 'topgo'
                     ? `<button class="sg-follow" onclick="window.location.href='./aboutus.html'">Khám phá</button>`
                     : `<button class="sg-follow" onclick="alert('Chức năng theo dõi đang được hoàn thiện!')">Theo dõi</button>`
                 }
@@ -263,7 +263,7 @@ export const DestinationsWidget = {
             const res = await fetch(`${API_BASE}/api/locations/outstanding?limit=4`);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data = await res.json();
-            
+
             if (data.locations && data.locations.length > 0) {
                 let locs = data.locations.filter(l => l.id !== currentLocationId && l.name !== currentLocationId);
                 this.render(locs.slice(0, 4));
@@ -278,13 +278,13 @@ export const DestinationsWidget = {
 
     renderFallback(currentLocationId) {
         let mocks = [
-            { id: 'dalat', name: 'Đà Lạt', img: 'https://images.unsplash.com/photo-1597505191845-a7ee5fdf687a?w=300&q=80' },
-            { id: 'danang', name: 'Đà Nẵng', img: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=300&q=80' },
-            { id: 'sapa', name: 'Sa Pa', img: 'https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?w=300&q=80' },
-            { id: 'hoian', name: 'Hội An', img: 'https://images.unsplash.com/photo-1588614959060-4d144f28b2ea?w=300&q=80' },
-            { id: 'hanoi', name: 'Hà Nội', img: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=300&q=80' }
+            { id: 'dalat', name: 'Đà Lạt', img: 'assets/img/cities/da-lat.webp' },
+            { id: 'danang', name: 'Đà Nẵng', img: 'assets/img/cities/da-nang.webp' },
+            { id: 'hoian', name: 'Hội An', img: 'assets/img/cities/hoi-an.webp' },
+            { id: 'hanoi', name: 'Hà Nội', img: 'assets/img/cities/ha-noi.webp' },
+            { id: 'hcm', name: 'TP. HCM', img: 'assets/img/cities/hcm.webp' }
         ];
-        
+
         mocks = mocks.filter(l => l.id !== currentLocationId && l.name !== currentLocationId).slice(0, 4);
         this.render(mocks);
     },
@@ -293,11 +293,32 @@ export const DestinationsWidget = {
         let container = document.getElementById('sd-grid');
         if (!container) return;
 
-        const html = locations.map(loc => `
-            <a href="./location.html?name=${encodeURIComponent(loc.name || '')}" class="sd-card" style="background: url('${_escapeHtml(loc.img || loc.image)}') center/cover;">
-                <span class="sd-name">${_escapeHtml(loc.name)}</span>
-            </a>
-        `).join('');
+        const getLocalAsset = (loc) => {
+            const name = (loc.name || '').toLowerCase();
+            if (name.includes('đà lạt') || name.includes('da lat')) return 'assets/img/cities/da-lat.webp';
+            if (name.includes('đà nẵng') || name.includes('da nang')) return 'assets/img/cities/da-nang.webp';
+            if (name.includes('hội an') || name.includes('hoi an')) return 'assets/img/cities/hoi-an.webp';
+            if (name.includes('hà nội') || name.includes('ha noi')) return 'assets/img/cities/ha-noi.webp';
+            if (name.includes('hồ chí minh') || name.includes('hcm') || name.includes('sài gòn') || name.includes('tp. hcm')) return 'assets/img/cities/hcm.webp';
+            if (name.includes('nha trang') || name.includes('nha trang')) return 'assets/img/cities/nha-trang.webp';
+            if (name.includes('phú quốc') || name.includes('phu quoc')) return 'assets/img/cities/phu-quoc.webp';
+            if (name.includes('ninh bình') || name.includes('ninh binh')) return 'assets/img/cities/ninh-binh.webp';
+            if (name.includes('cà mau') || name.includes('ca mau')) return 'assets/img/cities/ca-mau.webp';
+            if (name.includes('cần thơ') || name.includes('can tho')) return 'assets/img/cities/can-tho.webp';
+            if (name.includes('bình thuận') || name.includes('binh thuan')) return 'assets/img/cities/binh-thuan.webp';
+            if (name.includes('ninh thuận') || name.includes('ninh thuan')) return 'assets/img/cities/ninh-thuan.webp';
+            
+            return loc.img || loc.image || 'assets/img/hero-bg.jpg';
+        };
+
+        const html = locations.map(loc => {
+            const imgPath = getLocalAsset(loc);
+            return `
+                <a href="./location.html?name=${encodeURIComponent(loc.name || '')}" class="sd-card" style="background: url('${_escapeHtml(imgPath)}?v=2') center/cover;">
+                    <span class="sd-name">${_escapeHtml(loc.name)}</span>
+                </a>
+            `;
+        }).join('');
         container.innerHTML = html;
     }
 };
