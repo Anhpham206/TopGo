@@ -443,6 +443,7 @@
   flex: 1;
   min-width: 480px;
   min-height: 720px;
+  height: 720px;
   background: #ffffff;
   position: relative;
   overflow: hidden;
@@ -606,6 +607,8 @@
   box-shadow: none;
   padding: 40px 48px;
   animation: floatUp 0.7s cubic-bezier(0.2,0.8,0.2,1) 0.15s backwards;
+  display: flex;
+  flex-direction: column;
 }
 .stamps-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
 .stamps-title {
@@ -696,8 +699,51 @@
   box-shadow: 0 0 0 3px rgba(0, 169, 255, 0.1);
 }
 
-.stamps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; transition: all var(--t); }
-.stamps-grid.list-view { grid-template-columns: 1fr; gap: 12px; }
+.stamps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 250px));
+  gap: 16px;
+  justify-content: start;
+  align-content: start;
+  align-items: stretch;
+  transition: all var(--t);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.stamps-grid.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.posts-grid {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Custom Scrollbar for stamps-grid and posts-grid */
+.stamps-grid::-webkit-scrollbar,
+.posts-grid::-webkit-scrollbar {
+  width: 6px;
+}
+.stamps-grid::-webkit-scrollbar-track,
+.posts-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.stamps-grid::-webkit-scrollbar-thumb,
+.posts-grid::-webkit-scrollbar-thumb {
+  background: rgba(0, 169, 255, 0.25);
+  border-radius: 10px;
+}
+.stamps-grid::-webkit-scrollbar-thumb:hover,
+.posts-grid::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 169, 255, 0.45);
+}
 
 /* ── TRIP CARD HIỆN ĐẠI ── */
 .stamp-card {

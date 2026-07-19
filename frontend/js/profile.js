@@ -380,16 +380,20 @@ function renderTrips(trips, profileOwnerUid, isOwn) {
         const visibilityTag = isOwn ? `<span class="stamp-tag visibility">${trip.visibility === 'private' ? 'Riêng tư' : trip.visibility === 'unlisted' ? 'Ẩn' : 'Công khai'}</span>` : '';
         
         card.innerHTML = `
-            <div class="stamp-dest">${trip.destination || 'Chuyến đi'}</div>
-            <div class="stamp-meta">
-                <span class="stamp-tag">${trip.days || '?'} ngày</span>
-                <span class="stamp-tag">${trip.pax || '?'} người</span>
-                ${trip.budget ? `<span class="stamp-tag">${Number(trip.budget).toLocaleString('vi-VN')}₫</span>` : ''}
-                ${visibilityTag}
+            <div class="stamp-main-info">
+                <div class="stamp-dest-wrap">
+                    <div class="stamp-dest">${trip.destination || 'Chuyến đi'}</div>
+                </div>
+                <div class="stamp-meta">
+                    <span class="stamp-tag">${trip.days || '?'} ngày</span>
+                    <span class="stamp-tag">${trip.pax || '?'} người</span>
+                    ${trip.budget ? `<span class="stamp-tag">${Number(trip.budget).toLocaleString('vi-VN')}₫</span>` : ''}
+                    ${visibilityTag}
+                </div>
             </div>
             <div class="stamp-date">${trip.dateStart || ''} → ${trip.dateEnd || ''}</div>
             <div class="stamp-actions">
-                ${isOwn ? `<button class="stamp-btn" data-share="${trip.id}" style="color: var(--gold); border-color: var(--gold);">Chia sẻ</button>` : ''}
+                ${isOwn ? `<button class="stamp-btn" data-share="${trip.id}" style="color: var(--p1); border-color: var(--p1);">Chia sẻ</button>` : ''}
                 <button class="stamp-btn" data-review="${trip.id}">${isOwn ? 'Xem lại' : 'Chi tiết'}</button>
                 ${isOwn ? `<button class="stamp-btn danger" data-delete="${trip.id}">Xóa</button>` : ''}
             </div>
@@ -545,6 +549,23 @@ function setupTabs(uid, isOwnProfile) {
             }
         });
     });
+
+    // Thiết lập bộ chọn chế độ xem (Lưới / Danh sách) cho lịch trình
+    if (viewToggle) {
+        const viewButtons = viewToggle.querySelectorAll('.view-btn');
+        viewButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                viewButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const viewMode = btn.dataset.view;
+                if (viewMode === 'list') {
+                    tripsGrid.classList.add('list-view');
+                } else {
+                    tripsGrid.classList.remove('list-view');
+                }
+            });
+        });
+    }
 }
 
 // Tải bài viết cá nhân (stub/mock)

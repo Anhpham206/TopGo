@@ -1515,3 +1515,69 @@ body.dark .post-edit-btn-cancel:hover {
   background: rgba(255, 255, 255, 0.4);
 }
 
+/* ========================================================================
+   DARK MODE OVERRIDES
+   ======================================================================== */
+body.dark .topgo-thu-post-wrapper {
+  --pc-text: #e2e8f0;
+  --pc-muted: #94a3b8;
+  --pc-border: rgba(255, 255, 255, 0.1);
+  --pc-border-light: rgba(255, 255, 255, 0.06);
+  --pc-bg: #1e293b;
+  --pc-bg2: #0f172a;
+  --pc-white: #1e293b;
+  --pc-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+body.dark .topgo-thu-post-wrapper .post-card {
+  background: rgba(22, 32, 51, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .topgo-thu-post-wrapper .post-author-name {
+  color: #f8fafc;
+}
+
+body.dark .topgo-thu-post-wrapper .post-content-text {
+  color: #e2e8f0;
+}
+
+body.dark .topgo-thu-post-wrapper .post-quote-block {
+  background: rgba(0, 169, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .topgo-thu-post-wrapper .itinerary-card {
+  background: rgba(15, 23, 42, 0.65);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .topgo-thu-post-wrapper .itinerary-map-preview::after {
+  background: linear-gradient(to bottom, transparent 60%, rgba(15, 23, 42, 0.85) 100%);
+}
+
+body.dark .topgo-thu-post-wrapper .itinerary-map-placeholder {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: var(--pc-muted);
+}
+
+body.dark .topgo-thu-post-wrapper .post-comments-section {
+  background: rgba(0, 0, 0, 0.15);
+  border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark .topgo-thu-post-wrapper .comment-bubble {
+  background: rgba(15, 23, 42, 0.5);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark .topgo-thu-post-wrapper .post-comment-input {
+  background: rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+body.dark .topgo-thu-post-wrapper .post-comment-input:focus {
+  border-color: var(--pc-primary);
+}
+

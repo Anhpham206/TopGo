@@ -179,6 +179,37 @@ export function renderPostComposer(containerId = 'post-composer-container', trip
       box-shadow: 0 4px 16px rgba(0,169,255,0.35);
       transform: translateY(-1px);
     }
+
+    /* ── Dark Mode Overrides ── */
+    body.dark .pc-wrapper {
+      background: rgba(22, 32, 51, 0.75);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+    body.dark .pc-avatar {
+      border-color: rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.2);
+    }
+    body.dark .pc-input-trigger {
+      background: rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: var(--muted, #94a3b8);
+    }
+    body.dark .pc-input-trigger:hover {
+      border-color: var(--p1, #00a9ff);
+      background: rgba(0, 169, 255, 0.08);
+      color: #fff;
+    }
+    body.dark .pc-divider {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    body.dark .pc-icon-btn {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--p1, #00a9ff);
+    }
+    body.dark .pc-icon-btn:hover {
+      background: rgba(0, 169, 255, 0.15);
+    }
   </style>
 
   <div class="pc-wrapper">

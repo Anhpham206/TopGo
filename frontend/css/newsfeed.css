@@ -3134,3 +3134,36 @@ body.dark .feed-sidebar .sp-avatar {
 /* Hide the "view all" footer link inside compact variant to save space */
 .sidebar-hot-search-compact .hot-search-view-all { display: none; }
 
+/* ========================================================================
+   DARK MODE OVERRIDES FOR POSTS ON THE FEED PAGE
+   ======================================================================== */
+body.dark .post-card {
+  background: rgba(22, 32, 51, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.dark .post-author-name {
+  color: #f8fafc !important;
+}
+
+body.dark .post-timestamp {
+  color: #94a3b8 !important;
+}
+
+body.dark .post-content-text {
+  color: #e2e8f0 !important;
+}
+
+body.dark .post-content {
+  color: #e2e8f0 !important;
+}
+
+body.dark .post-action-btn {
+  color: #94a3b8 !important;
+}
+
+body.dark .post-action-count {
+  color: #94a3b8 !important;
+}
+

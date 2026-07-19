@@ -510,6 +510,35 @@
   overflow: hidden;
 }
 
+.free-card {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--r-l);
+  box-shadow: var(--sh);
+}
+
+.premium-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 2px solid var(--gold);
+  border-radius: var(--r-l);
+  box-shadow: var(--sh-m);
+}
+
+.premium-card .plan-btn-solid {
+  background: linear-gradient(90deg, #ffb347, #ffa500);
+  border: none;
+  box-shadow: 0 8px 24px rgba(255, 179, 71, 0.3);
+  color: white;
+}
+.premium-card .plan-btn-solid:hover {
+  background: linear-gradient(90deg, #ffa500, #ffb347);
+  box-shadow: 0 10px 28px rgba(255, 179, 71, 0.45);
+}
+
 /* Mirror sheen sweep effect on hover */
 .pricing-card::after {
   content: '';
@@ -1079,11 +1108,18 @@ body.dark .segment-glider {
 
 /* Glass Pricing Cards */
 body.dark .pricing-card {
-  background: rgba(13, 20, 38, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+}
+
+body.dark .free-card {
+  background: rgba(15, 23, 42, 0.65) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(56, 189, 248, 0.15) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45) !important;
 }
 
 body.dark .pricing-card::after {
@@ -1094,10 +1130,8 @@ body.dark .pricing-card::after {
 }
 
 body.dark .pricing-card:hover {
-  box-shadow:
-    0 25px 60px rgba(0, 169, 255, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  border-color: rgba(0, 169, 255, 0.25);
+  box-shadow: 0 20px 50px rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.45);
 }
 
 /* Card Header badging */
@@ -1165,25 +1199,27 @@ body.dark .pricing-card.popular::before {
 
 /* Premium card design */
 body.dark .premium-card {
-  border: 1px solid rgba(255, 179, 71, 0.2) !important;
+  background: rgba(15, 23, 42, 0.75) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  border: 2px solid rgba(0, 169, 255, 0.35) !important;
+  box-shadow: 0 0 35px rgba(0, 169, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
 }
 
 body.dark .premium-card:hover {
-  border-color: rgba(255, 179, 71, 0.45) !important;
-  box-shadow:
-    0 25px 60px rgba(255, 179, 71, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 169, 255, 0.6) !important;
+  box-shadow: 0 0 45px rgba(0, 169, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
 }
 
-body.dark .premium-card .plan-btn-outline {
-  border-color: rgba(255, 179, 71, 0.35);
-  color: #f59e0b;
+body.dark .premium-card .plan-btn-solid {
+  background: linear-gradient(90deg, var(--p1), var(--p2)) !important;
+  box-shadow: 0 8px 24px rgba(0, 169, 255, 0.3) !important;
+  border: none !important;
+  color: white !important;
 }
-
-body.dark .premium-card .plan-btn-outline:hover {
-  background: linear-gradient(135deg, var(--gold), #ffa500);
-  border-color: #ffa500;
-  color: white;
+body.dark .premium-card .plan-btn-solid:hover {
+  background: linear-gradient(90deg, var(--p2), var(--p1)) !important;
+  box-shadow: 0 10px 28px rgba(0, 169, 255, 0.5) !important;
 }
 
 /* FAQ segment in dark mode */
@@ -1227,12 +1263,69 @@ body.dark .cs-highlight-desc {
 }
 
 .comparison-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
   text-align: center;
   font-family: var(--font-heading);
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--text);
+  font-size: 35px;
+  font-weight: 950;
+  background: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0) 75%
+    ),
+    linear-gradient(
+      135deg,
+      #003c8f 0%,
+      #0073e6 30%,
+      #0099ff 65%,
+      #70c5ff 100%
+    );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   margin-bottom: 40px;
+  filter: drop-shadow(0 2px 8px rgba(0, 145, 255, 0.2));
+  width: 100%;
+}
+
+/* Left separator line */
+.comparison-title::before {
+  content: "";
+  flex: 1;
+  max-width: 280px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 60, 143, 0) 0%,
+    rgba(0, 115, 230, 0.4) 50%,
+    rgba(0, 153, 255, 0.8) 100%
+  );
+  border-radius: 10px;
+  opacity: 0.85;
+  filter: drop-shadow(0 1px 2px rgba(0, 153, 255, 0.2));
+}
+
+/* Right separator line */
+.comparison-title::after {
+  content: "";
+  flex: 1;
+  max-width: 280px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 153, 255, 0.8) 0%,
+    rgba(0, 115, 230, 0.4) 50%,
+    rgba(0, 60, 143, 0) 100%
+  );
+  border-radius: 10px;
+  opacity: 0.85;
+  filter: drop-shadow(0 1px 2px rgba(0, 153, 255, 0.2));
 }
 
 .comparison-table-wrapper {
@@ -1287,8 +1380,178 @@ body.dark .cs-highlight-desc {
   width: 37.5%;
 }
 
+/* Highlight VIP Column (3rd Column) - Blue Dominant with Gold Accents */
+.comparison-table th:nth-child(3) {
+  background: rgba(0, 169, 255, 0.06) !important;
+  position: relative;
+  border-left: 2px solid #00a9ff !important;
+  border-right: 2px solid #00a9ff !important;
+  border-bottom: 2px solid rgba(0, 169, 255, 0.4) !important;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+body.dark .comparison-table th:nth-child(3) {
+  background: rgba(0, 169, 255, 0.09) !important;
+  border-left: 2px solid #38bdf8 !important;
+  border-right: 2px solid #38bdf8 !important;
+  border-bottom: 2px solid rgba(56, 189, 248, 0.55) !important;
+}
+
+/* Blue Accent Top Border */
+.comparison-table th:nth-child(3)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0091ff, #89cff3, #0091ff);
+  background-size: 200% 100%;
+  animation: gradientFlow 4s ease infinite;
+  z-index: 2;
+  box-shadow: 0 1px 5px rgba(0, 169, 255, 0.4);
+}
+
+/* Shiny Sweep / Gloss Effect */
+.comparison-table th:nth-child(3)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-30deg);
+  animation: shine-sweep 2.5s infinite ease-in-out;
+  z-index: 1;
+}
+
+@keyframes shine-sweep {
+  0% { left: -150%; }
+  20% { left: 150%; }
+  100% { left: 150%; }
+}
+
+/* Column Title Gradient Text */
+.vip-header-title {
+  background: linear-gradient(135deg, #0091ff 5%, #00a9ff 40%, #89cff3 95%);
+  background-size: 200% 200%;
+  animation: gradientFlow 4s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 950;
+  font-size: 19px;
+  text-transform: uppercase;
+  font-family: var(--font-heading);
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+/* Gold Mini Badge */
+.vip-badge-mini {
+  background: linear-gradient(135deg, #0091ff 5%, #00a9ff 40%, #89cff3 95%);
+  background-size: 200% 200%;
+  animation: gradientFlow 4s ease infinite, vip-badge-glow 2s infinite alternate;
+  color: white !important;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 100px;
+  box-shadow: 0 3px 10px rgba(0, 169, 255, 0.35);
+  letter-spacing: 0.5px;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+@keyframes vip-badge-glow {
+  0% { transform: scale(1); box-shadow: 0 2px 6px rgba(0, 169, 255, 0.3); }
+  100% { transform: scale(1.08); box-shadow: 0 5px 14px rgba(0, 169, 255, 0.6); }
+}
+
+/* Body column styling - Blue Tint and Distinct Border */
+.comparison-table td:nth-child(3) {
+  background: rgba(0, 169, 255, 0.035);
+  border-left: 2px solid rgba(0, 169, 255, 0.2);
+  border-right: 2px solid rgba(0, 169, 255, 0.2);
+  font-weight: 500;
+  transition: all var(--t);
+  animation: borderPulse 2s infinite alternate;
+}
+
+body.dark .comparison-table td:nth-child(3) {
+  background: rgba(0, 169, 255, 0.06);
+  border-left: 2px solid rgba(56, 189, 248, 0.25);
+  border-right: 2px solid rgba(56, 189, 248, 0.25);
+  animation: borderPulseDark 2.5s infinite alternate;
+}
+
+@keyframes borderPulse {
+  0% { border-color: rgba(0, 169, 255, 0.2); }
+  100% { border-color: rgba(0, 169, 255, 0.55); }
+}
+
+@keyframes borderPulseDark {
+  0% { border-color: rgba(56, 189, 248, 0.25); }
+  100% { border-color: rgba(56, 189, 248, 0.6); }
+}
+
+/* Make key text inside VIP column glow with a gradient! */
+.comparison-table td:nth-child(3) strong {
+  background: linear-gradient(135deg, #0091ff 5%, #00a9ff 40%, #89cff3 95%);
+  background-size: 200% 200%;
+  animation: gradientFlow 4s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 700;
+  display: inline;
+}
+
+/* Sparkle Decoration prefix for key features */
+.comparison-table td:nth-child(3) strong::before {
+  content: "✦ ";
+  background: linear-gradient(135deg, #0091ff, #89cff3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-size: 13px;
+  margin-right: 6px;
+  display: inline-block;
+  animation: float-sparkle 1.5s infinite alternate;
+}
+
+@keyframes float-sparkle {
+  0% { transform: translateY(0) scale(0.9); opacity: 0.7; }
+  100% { transform: translateY(-2px) scale(1.1); opacity: 1; }
+}
+
 .comparison-table tr:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+/* Maintain hover effect on VIP cells but keep the blue tint */
+.comparison-table tr:hover td:nth-child(3) {
+  background: rgba(0, 169, 255, 0.065) !important;
+}
+
+body.dark .comparison-table tr:hover td:nth-child(3) {
+  background: rgba(0, 169, 255, 0.09) !important;
+}
+
+/* Keyframes for Moving text gradient flow */
+@keyframes gradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 @media (max-width: 768px) {
@@ -1302,4 +1565,31 @@ body.dark .cs-highlight-desc {
     padding: 14px 16px;
     font-size: 13.5px;
   }
+}
+
+/* Dark Mode Comparison Table Enhancements */
+body.dark .comparison-table-wrapper {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .comparison-table th {
+  background: rgba(255, 255, 255, 0.02);
+  color: #f1f5f9;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.dark .comparison-table td {
+  color: #cbd5e1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body.dark .comparison-table td:first-child {
+  color: #f1f5f9;
+}
+
+body.dark .comparison-table tr:hover {
+  background: rgba(255, 255, 255, 0.03);
 }
