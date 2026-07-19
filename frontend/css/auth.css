@@ -623,7 +623,7 @@
   flex: 1;
   min-width: 480px;
   min-height: 720px;
-  height: 720px;
+  max-height: 930px;
   background: #ffffff;
   position: relative;
   overflow: hidden;
