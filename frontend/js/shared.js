@@ -26,12 +26,12 @@ export function closePopup(id) { document.getElementById(id)?.classList.remove('
 
 let _toastTimer;
 export function showToast(msg, type) {
-    const t=document.getElementById('toast'), tm=document.getElementById('toast-msg');
-    if (!t||!tm) return;
-    tm.textContent=msg;
-    t.className='toast show'+(type?' '+type:'');
+    const t = document.getElementById('toast'), tm = document.getElementById('toast-msg');
+    if (!t || !tm) return;
+    tm.textContent = msg;
+    t.className = 'toast show' + (type ? ' ' + type : '');
     clearTimeout(_toastTimer);
-    _toastTimer=setTimeout(()=>{t.className='toast';}, type==='error'?4500:type==='warning'?5000:3200);
+    _toastTimer = setTimeout(() => { t.className = 'toast'; }, type === 'error' ? 4500 : type === 'warning' ? 5000 : 3200);
 }
 
 const CACHE_VERSION = Date.now(); // force update
@@ -42,12 +42,12 @@ const FOOTER_COMPONENT_URL = new URL(`../components/footer.html?v=${CACHE_VERSIO
 
 function initSharedEvents(container) {
     // Popup overlay: click outside to close
-    container.querySelectorAll('.popup-ov').forEach(o=>{
-        o.addEventListener('click', e=>{ if(e.target===o) o.classList.remove('open'); });
+    container.querySelectorAll('.popup-ov').forEach(o => {
+        o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
     });
 
     // Declarative: data-popup-close="id"
-    container.addEventListener('click', e=>{
+    container.addEventListener('click', e => {
         const btn = e.target.closest('[data-popup-close]');
         if (btn) {
             closePopup(btn.dataset.popupClose);
@@ -58,7 +58,7 @@ function initSharedEvents(container) {
         const ad = e.target.closest('[data-nav]');
         if (ad) {
             const nav = ad.dataset.nav;
-            window.location.href = nav==='chatbot' ? './chatbot.html' : './planner.html';
+            window.location.href = nav === 'chatbot' ? './chatbot.html' : './planner.html';
         }
     });
 
@@ -72,7 +72,7 @@ function initSharedEvents(container) {
                 if (window.TopGoAuth) {
                     await window.TopGoAuth.loginWithGoogle();
                     showToast('Đăng nhập thành công!', 'success');
-                    
+
                     // Tự động lưu lịch trình đang chờ sau khi đăng nhập thành công
                     if (window._pendingSaveTrip) {
                         showToast('Đang tự động lưu lịch trình...', 'warning');
@@ -106,7 +106,7 @@ function _updateHeaderUser() {
             let displayName = user.firstname || user.email || 'Tài khoản';
             if (nameEl) {
                 if (user.is_vip) {
-                    nameEl.innerHTML = `${displayName} <span style="color:#ffb347;margin-left:2px;font-size:14px;" title="Thành viên VIP">👑</span>`;
+                    nameEl.innerHTML = `${displayName} <span style="color:#61caffff;margin-left:2px;font-size:14px;" title="Thành viên VIP">♛</span>`;
                 } else {
                     nameEl.textContent = displayName;
                 }
@@ -114,7 +114,7 @@ function _updateHeaderUser() {
             if (linkEl) linkEl.href = './profile.html';
             const url = user.photoUrl || user.photoURL;
             if (iconEl && url && url !== 'undefined' && url !== 'null') {
-                const borderStyle = user.is_vip ? 'border: 2px solid #ffb347;' : '';
+                const borderStyle = user.is_vip ? 'border: 2px solid #00a9ff;' : '';
                 iconEl.innerHTML = `<img src="${url}" alt="Avatar" referrerpolicy="no-referrer" style="width:100%;height:100%;border-radius:50%;object-fit:cover;${borderStyle}">`;
             } else if (iconEl) {
                 const initial = (user.firstname || user.email || 'T').charAt(0).toUpperCase();
@@ -212,9 +212,9 @@ function _initGlobalSearch(headerEl) {
                 const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
                 const res = await fetch(`${API_BASE}/api/search?q=${encodeURIComponent(query)}`);
                 const data = await res.json();
-                
+
                 let html = '';
-                
+
                 if (data.users && data.users.length > 0) {
                     html += '<div class="search-section-title">Người dùng</div>';
                     let currentUserUid = null;
@@ -224,7 +224,7 @@ function _initGlobalSearch(headerEl) {
                             const parsed = JSON.parse(stored);
                             currentUserUid = parsed.uid;
                         }
-                    } catch (err) {}
+                    } catch (err) { }
 
                     data.users.forEach(u => {
                         const avatar = u.photoURL || 'https://i.pravatar.cc/150?u=' + u.id;
@@ -243,7 +243,7 @@ function _initGlobalSearch(headerEl) {
                         `;
                     });
                 }
-                
+
                 if (data.locations && data.locations.length > 0) {
                     html += '<div class="search-section-title">Địa điểm</div>';
                     data.locations.forEach(loc => {
@@ -278,11 +278,11 @@ function _initGlobalSearch(headerEl) {
                         `;
                     });
                 }
-                
+
                 if (!html) {
                     html = '<div class="search-empty">Không tìm thấy kết quả nào.</div>';
                 }
-                
+
                 searchDropdownContent.innerHTML = html;
             } catch (err) {
                 console.error('[Search] Error:', err);
@@ -373,7 +373,7 @@ export async function loadSharedComponents() {
             sharedEl.innerHTML = footerFrag.text;
             initSharedEvents(sharedEl);
         }
-    } catch(err) {
+    } catch (err) {
         console.warn('[TopGo] loadSharedComponents failed:', err.message);
     } finally {
         document.body.classList.add('app-ready');
@@ -478,10 +478,10 @@ export async function loadSharedComponents() {
                 try {
                     const _isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
                     const API_BASE = _isLocal ? 'http://localhost:8000' : (window.__TOPGO_API_BASE__ || 'https://api.topgo.vn');
-                    
+
                     // Thêm chỉ thị yêu cầu trả lời ngắn gọn vào câu hỏi gửi lên backend
                     const modifiedQuery = query + "\n\n(Lưu ý từ hệ thống: Vì đây là ô chat nhỏ góc màn hình, hãy trả lời thật ngắn gọn, súc tích trong vòng 2-3 câu ngắn, tối giản nhưng đầy đủ ý)";
-                    
+
                     const res = await fetch(`${API_BASE}/api/chat`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -489,14 +489,14 @@ export async function loadSharedComponents() {
                     });
                     if (!res.ok) throw new Error(`HTTP ${res.status}`);
                     const data = await res.json();
-                    
+
                     // Phát hiện lỗi từ backend trả về thành công dạng chuỗi lỗi
                     if (data.reply && (data.reply.includes('Lỗi khi giao tiếp với AI') || data.reply.includes('429') || data.reply.includes('RESOURCE_EXHAUSTED') || data.reply.includes('Quota exceeded'))) {
                         throw new Error('AI_QUOTA_EXCEEDED');
                     }
-                    
+
                     return data.reply;
-                } catch(err) {
+                } catch (err) {
                     console.warn('[TopGo] Mini chatbot API error, falling back to mock:', err);
                     return new Promise(resolve => {
                         setTimeout(() => {
@@ -518,24 +518,24 @@ export async function loadSharedComponents() {
                 const maxLen = 200;
                 let textToShow = content;
                 let showContinueBtn = false;
-                
+
                 if (content.length > maxLen) {
                     textToShow = content.substring(0, maxLen) + '...';
                     showContinueBtn = true;
                 }
-                
+
                 // Format basic Markdown to HTML
                 const formattedText = textToShow
                     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                     .replace(/\*(.*?)\*/g, '<em>$1</em>')
                     .replace(/\n/g, '<br>');
-                
+
                 let bubbleHTML = `<div class="mc-bubble">${formattedText}`;
                 if (showContinueBtn) {
                     bubbleHTML += `<br><a href="./chatbot.html?q=${encodeURIComponent(query)}" class="mc-continue-btn">Tiếp tục trò chuyện &rarr;</a>`;
                 }
                 bubbleHTML += `</div>`;
-                
+
                 mcBody.insertAdjacentHTML('beforeend', `<div class="mc-msg bot">${bubbleHTML}</div>`);
                 mcBody.scrollTop = mcBody.scrollHeight;
             };
@@ -544,12 +544,12 @@ export async function loadSharedComponents() {
             const sendMsg = async (text) => {
                 if (!text.trim()) return;
                 const query = text.trim();
-                
+
                 // Add user message
                 mcBody.insertAdjacentHTML('beforeend', `<div class="mc-msg user"><div class="mc-bubble">${query}</div></div>`);
                 mcInput.value = '';
                 mcBody.scrollTop = mcBody.scrollHeight;
-                
+
                 // Typing indicator
                 const typingId = 'typing-' + Date.now();
                 mcBody.insertAdjacentHTML('beforeend', `<div id="${typingId}" class="mc-msg bot"><div class="mc-bubble"><div class="mc-typing"><span class="mc-dot"></span><span class="mc-dot"></span><span class="mc-dot"></span></div></div></div>`);
@@ -560,7 +560,7 @@ export async function loadSharedComponents() {
                     const typingEl = document.getElementById(typingId);
                     if (typingEl) typingEl.remove();
                     appendBotMessage(responseText, query);
-                } catch(err) {
+                } catch (err) {
                     const typingEl = document.getElementById(typingId);
                     if (typingEl) typingEl.remove();
                     appendBotMessage("Xin lỗi, có lỗi xảy ra. Hãy thử lại.", query);
@@ -571,7 +571,7 @@ export async function loadSharedComponents() {
             mcInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') sendMsg(mcInput.value);
             });
-            
+
             mcWidget.querySelectorAll('.mc-chip').forEach(chip => {
                 chip.addEventListener('click', () => sendMsg(chip.dataset.q));
             });

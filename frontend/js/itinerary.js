@@ -287,7 +287,7 @@ async function renderItineraryDetails(plan, isOwnPlan, ownerUid) {
         // Fallback: estimate from coordinates
         let estimatedDistance = 0;
         for (let i = 0; i < coords.length - 1; i++) {
-            estimatedDistance += getDistanceBetween(coords[i], coords[i+1]);
+            estimatedDistance += getDistanceBetween(coords[i], coords[i + 1]);
         }
         if (rd) rd.textContent = `~${estimatedDistance.toFixed(1)} km`;
     }
@@ -312,7 +312,7 @@ async function loadOwnerName(ownerUid) {
         const data = await res.json();
         const name = `${data.lastname || ''} ${data.firstname || ''}`.trim() || 'Thành viên TopGo';
         const display = data.is_vip ? `${name} 👑` : name;
-        
+
         const ownerEl = document.getElementById('res-owner-name');
         if (ownerEl) {
             ownerEl.innerHTML = `<a href="./profile.html?uid=${ownerUid}" style="color: var(--primary); font-weight: bold; text-decoration: none;">${display}</a>`;
@@ -388,10 +388,10 @@ function getDistanceBetween(c1, c2) {
     const R = 6371; // Bán kính Trái Đất (km)
     const dLat = (c2[0] - c1[0]) * Math.PI / 180;
     const dLng = (c2[1] - c1[1]) * Math.PI / 180;
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-              Math.cos(c1[0] * Math.PI / 180) * Math.cos(c2[0] * Math.PI / 180) *
-              Math.sin(dLng/2) * Math.sin(dLng/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(c1[0] * Math.PI / 180) * Math.cos(c2[0] * Math.PI / 180) *
+        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }
 

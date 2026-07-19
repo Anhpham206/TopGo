@@ -337,6 +337,114 @@ export function initPostModal() {
       50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
       100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
     }
+
+    /* ── Dark Mode Overrides ── */
+    body.dark #post-modal-overlay {
+      background: rgba(15, 23, 42, 0.4);
+    }
+    body.dark #post-modal-card {
+      background: rgba(22, 32, 51, 0.95);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+    body.dark .pm-header {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+    body.dark .pm-header h2 {
+      color: #f8fafc;
+    }
+    body.dark .pm-close {
+      background: rgba(255, 255, 255, 0.06);
+      color: #94a3b8;
+    }
+    body.dark .pm-close:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+    body.dark .pm-textarea {
+      background: rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+    }
+    body.dark .pm-textarea:focus {
+      border-color: var(--p1);
+    }
+    body.dark .pm-textarea::placeholder {
+      color: #64748b;
+    }
+    body.dark .pm-tool-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+    }
+    body.dark .pm-tool-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--p2);
+    }
+    body.dark .pm-tag-input {
+      background: rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+    }
+    body.dark .pm-tag-input:focus {
+      border-color: var(--p1);
+    }
+    body.dark .pm-chip {
+      background: rgba(0, 169, 255, 0.12);
+      border-color: rgba(0, 169, 255, 0.25);
+      color: #e2e8f0;
+    }
+    body.dark .pm-itinerary-tag {
+      background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    body.dark .pm-itin-bottom {
+      color: #cbd5e1;
+    }
+    body.dark .pm-itin-meta-item {
+      color: #94a3b8;
+    }
+    body.dark .pm-itin-undo-bar {
+      background: rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: #e2e8f0;
+    }
+    body.dark .pm-itin-undo-label {
+      color: #94a3b8;
+    }
+    body.dark .pm-itin-barcode span {
+      background: #e2e8f0;
+    }
+    body.dark .pm-actions-bar {
+      border-top-color: rgba(255, 255, 255, 0.08);
+    }
+    body.dark .pm-action-btn {
+      color: #94a3b8;
+    }
+    body.dark .pm-action-btn:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--p1);
+    }
+    body.dark #pm-itin-picker-wrap {
+      background: rgba(22, 32, 51, 0.98) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    body.dark #pm-itin-picker-list > div {
+      background: rgba(0, 0, 0, 0.2) !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+      color: #cbd5e1 !important;
+    }
+    body.dark #pm-itin-picker-list > div:hover {
+      background: rgba(0, 169, 255, 0.1) !important;
+      border-color: var(--p1) !important;
+    }
+    body.dark #pm-itin-picker-list > div strong {
+      color: #f8fafc !important;
+    }
+    body.dark #pm-itin-picker-list > div span {
+      color: #94a3b8 !important;
+    }
   </style>
 
   <div id="post-modal-overlay">

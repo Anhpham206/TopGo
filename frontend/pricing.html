@@ -139,8 +139,7 @@
         <div class="modern-pricing-grid"
             style="grid-template-columns: repeat(2, 1fr); max-width: 900px; margin: 0 auto 80px;">
             <!-- FREE CARD -->
-            <div class="pricing-card free-card glass-card"
-                style="background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.6); border-radius: var(--r-l); box-shadow: var(--sh); transition: transform 0.3s ease;">
+            <div class="pricing-card free-card glass-card">
                 <div class="card-header">
                     <div class="plan-badge">Basic</div>
                     <h3 class="plan-name">Tài khoản thường</h3>
@@ -191,8 +190,7 @@
             </div>
 
             <!-- VIP PREMIUM CARD -->
-            <div class="pricing-card premium-card glass-card"
-                style="background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(25px); border: 2px solid var(--gold); border-radius: var(--r-l); box-shadow: var(--sh-m); transition: transform 0.3s ease;">
+            <div class="pricing-card premium-card glass-card">
                 <div class="popular-badge">Khuyên dùng</div>
                 <div class="card-header">
                     <div class="plan-badge">VIP Premium</div>
@@ -242,9 +240,7 @@
                     </ul>
                 </div>
                 <div class="card-cta">
-                    <button class="plan-btn plan-btn-solid" id="vip-cta-btn"
-                        style="background: linear-gradient(90deg, #ffb347, #ffa500); border: none; box-shadow: 0 8px 24px rgba(255,179,71,0.3); color: white;">Mua
-                        gói VIP</button>
+                    <button class="plan-btn plan-btn-solid" id="vip-cta-btn">Mua gói VIP</button>
                 </div>
             </div>
         </div>
@@ -258,7 +254,12 @@
                         <tr>
                             <th>Tính năng</th>
                             <th>Tài khoản thường (Free)</th>
-                            <th>Tài khoản VIP (Premium)</th>
+                            <th>
+                                 <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                     <span class="vip-header-title">Tài khoản VIP (Premium)</span>
+                                     <span class="vip-badge-mini">✦ VIP</span>
+                                 </div>
+                             </th>
                         </tr>
                     </thead>
                     <tbody>

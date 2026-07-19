@@ -23,7 +23,7 @@ function setText(id, val) {
 document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
     const targetUid = params.get('uid');
-    
+
     const loggedInUser = window.TopGoAuth ? window.TopGoAuth.getUser() : null;
 
     // Kiểm tra xem targetUid có phải là mã hộ chiếu rút gọn (TG-XXXXXXXX) của chính mình không
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             isOwnProfile = loggedInUser.uid.toUpperCase().startsWith(shortId);
         }
     }
-    
+
     // Nếu không xem profile người khác và chưa đăng nhập -> chuyển hướng
     if (!isOwnProfile && !loggedInUser && !targetUid) {
         window.location.href = './auth.html';
@@ -204,11 +204,11 @@ async function initProfile(uid, isOwnProfile, loggedInUser) {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                
+
                 // Toggle trạng thái UI
                 const nextState = !isFollowing;
                 updateFollowButton(nextState);
-                
+
                 // Cập nhật live số lượng followers
                 const followersEl = document.getElementById('pp-followers');
                 if (followersEl) {
@@ -231,8 +231,8 @@ async function initProfile(uid, isOwnProfile, loggedInUser) {
 function updateUI(user) {
     if (!user) return;
     const fullname = `${user.lastname || ''} ${user.firstname || ''}`.trim() || user.displayName || user.username || 'Thành viên TopGo';
-    const fullnameDisplay = user.is_vip ? `${fullname} 👑 (VIP)` : fullname;
-    
+    const fullnameDisplay = user.is_vip ? `${fullname} <span  style="color:#61caffff;margin-left:2px;font-size:25px;" title="Thành viên VIP">VIP</span>` : fullname;
+
     const fullnameEl = document.getElementById('pp-fullname');
     if (fullnameEl) fullnameEl.innerHTML = fullnameDisplay;
 
@@ -249,7 +249,7 @@ function updateUI(user) {
     // Render ảnh đại diện
     const photoEl = document.getElementById('pp-photo');
     if (photoEl) {
-        const borderStyle = user.is_vip ? 'border: 3px solid #ffb347; box-shadow: 0 0 10px rgba(255,179,71,0.5);' : '';
+        const borderStyle = user.is_vip ? 'border: 3px solid #00a9ff; box-shadow: 0 0 10px rgba(0,169,255,0.5);' : '';
         const url = user.photoURL || user.photoUrl;
         if (url) {
             photoEl.innerHTML = `<img src="${url}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; ${borderStyle}">`;
@@ -268,12 +268,12 @@ function updateUI(user) {
         const lastname = (user.lastname || 'TOPGO').toUpperCase().replace(/\s/g, '<');
         const firstname = (user.firstname || 'TRAVELER').toUpperCase().replace(/\s/g, '<');
         const line1 = `P<VNM<${lastname}<<${firstname}`.padEnd(44, '<').replace(/</g, '&lt;');
-        
-        const dobStr = (user.dob || '000000').replace(/-/g, '').slice(-6); 
+
+        const dobStr = (user.dob || '000000').replace(/-/g, '').slice(-6);
         const sexStr = (user.sex === 'Nam' ? 'M' : (user.sex === 'Nữ' ? 'F' : '<'));
         const idStr = user.uid ? `TG${user.uid.slice(0, 6)}`.toUpperCase() : 'TG000000';
         const line2 = `${idStr.padEnd(9, '<')}0VNM${dobStr.padEnd(6, '<')}0${sexStr}${'<'.repeat(7)}`.padEnd(44, '<').replace(/</g, '&lt;');
-        
+
         mrzEl.innerHTML = `${line1}<br>${line2}`;
     }
 
@@ -338,7 +338,7 @@ async function loadUserPlans(uid, isOwn) {
             const token = await window.TopGoAuth.getIdToken();
             if (token) headers['Authorization'] = `Bearer ${token}`;
         }
-        
+
         // Gọi API lấy danh sách plans (nếu là chủ sở hữu, trả về toàn bộ; nếu là khách, chỉ trả về public)
         const res = await fetch(`${API_BASE}/api/users/${uid}/plans`, { headers });
         if (!res.ok) throw new Error("HTTP " + res.status);
@@ -365,31 +365,41 @@ function renderTrips(trips, profileOwnerUid, isOwn) {
 
     if (trips.length === 0) {
         if (empty) {
-            empty.style.display = '';
+            empty.classList.remove('hidden');
             const cta = empty.querySelector('.stamps-empty-cta');
-            if (cta) cta.style.display = isOwn ? '' : 'none'; // Ẩn cta tạo lịch trình nếu không phải chủ
+            if (cta) {
+                if (isOwn) {
+                    cta.classList.remove('hidden');
+                } else {
+                    cta.classList.add('hidden');
+                }
+            }
         }
         return;
     }
-    if (empty) empty.style.display = 'none';
+    if (empty) empty.classList.add('hidden');
 
     trips.forEach(trip => {
         const card = document.createElement('div');
         card.className = 'stamp-card';
         // Hiển thị trạng thái visibility nếu là chủ sở hữu
         const visibilityTag = isOwn ? `<span class="stamp-tag visibility">${trip.visibility === 'private' ? 'Riêng tư' : trip.visibility === 'unlisted' ? 'Ẩn' : 'Công khai'}</span>` : '';
-        
+
         card.innerHTML = `
-            <div class="stamp-dest">${trip.destination || 'Chuyến đi'}</div>
-            <div class="stamp-meta">
-                <span class="stamp-tag">${trip.days || '?'} ngày</span>
-                <span class="stamp-tag">${trip.pax || '?'} người</span>
-                ${trip.budget ? `<span class="stamp-tag">${Number(trip.budget).toLocaleString('vi-VN')}₫</span>` : ''}
-                ${visibilityTag}
+            <div class="stamp-main-info">
+                <div class="stamp-dest-wrap">
+                    <div class="stamp-dest">${trip.destination || 'Chuyến đi'}</div>
+                </div>
+                <div class="stamp-meta">
+                    <span class="stamp-tag">${trip.days || '?'} ngày</span>
+                    <span class="stamp-tag">${trip.pax || '?'} người</span>
+                    ${trip.budget ? `<span class="stamp-tag">${Number(trip.budget).toLocaleString('vi-VN')}₫</span>` : ''}
+                    ${visibilityTag}
+                </div>
             </div>
             <div class="stamp-date">${trip.dateStart || ''} → ${trip.dateEnd || ''}</div>
             <div class="stamp-actions">
-                ${isOwn ? `<button class="stamp-btn" data-share="${trip.id}" style="color: var(--gold); border-color: var(--gold);">Chia sẻ</button>` : ''}
+                ${isOwn ? `<button class="stamp-btn" data-share="${trip.id}" style="color: var(--p1); border-color: var(--p1);">Chia sẻ</button>` : ''}
                 <button class="stamp-btn" data-review="${trip.id}">${isOwn ? 'Xem lại' : 'Chi tiết'}</button>
                 ${isOwn ? `<button class="stamp-btn danger" data-delete="${trip.id}">Xóa</button>` : ''}
             </div>
@@ -490,7 +500,7 @@ function setupTabs(uid, isOwnProfile) {
     if (!isOwnProfile) {
         // Ẩn nút tab Lộ trình du lịch
         const tripsTabBtn = document.querySelector('.profile-tab[data-tab="trips"]');
-        if (tripsTabBtn) tripsTabBtn.style.display = 'none';
+        if (tripsTabBtn) tripsTabBtn.classList.add('hidden');
 
         // Thiết lập tab Bài đăng cá nhân là active duy nhất
         const postsTabBtn = document.querySelector('.profile-tab[data-tab="posts"]');
@@ -502,13 +512,11 @@ function setupTabs(uid, isOwnProfile) {
 
         // Hiện vùng danh sách bài viết, ẩn vùng lộ trình
         tripsGrid.classList.add('hidden');
-        tripsGrid.style.display = 'none';
-        if (stampsEmpty) stampsEmpty.style.display = 'none';
-        if (filters) filters.style.display = 'none';
-        if (viewToggle) viewToggle.style.display = 'none';
+        if (stampsEmpty) stampsEmpty.classList.add('hidden');
+        if (filters) filters.classList.add('hidden');
+        if (viewToggle) viewToggle.classList.add('hidden');
 
         postsGrid.classList.remove('hidden');
-        postsGrid.style.display = 'flex';
         loadUserPosts(uid);
         return; // Không cần lắng nghe sự kiện chuyển tab ở chế độ khách
     }
@@ -527,24 +535,44 @@ function setupTabs(uid, isOwnProfile) {
             const activeTab = tab.dataset.tab;
             if (activeTab === 'trips') {
                 tripsGrid.classList.remove('hidden');
-                tripsGrid.style.display = 'grid';
-                if (stampsEmpty) stampsEmpty.style.display = tripsGrid.children.length === 1 ? '' : 'none'; // logic empty
-                if (filters) filters.style.display = '';
-                if (viewToggle) viewToggle.style.display = '';
+                if (stampsEmpty) {
+                    const hasCards = tripsGrid.querySelectorAll('.stamp-card').length > 0;
+                    if (hasCards) {
+                        stampsEmpty.classList.add('hidden');
+                    } else {
+                        stampsEmpty.classList.remove('hidden');
+                    }
+                }
+                if (filters) filters.classList.remove('hidden');
+                if (viewToggle) viewToggle.classList.remove('hidden');
                 postsGrid.classList.add('hidden');
-                postsGrid.style.display = 'none';
             } else {
                 tripsGrid.classList.add('hidden');
-                tripsGrid.style.display = 'none';
-                if (stampsEmpty) stampsEmpty.style.display = 'none';
-                if (filters) filters.style.display = 'none';
-                if (viewToggle) viewToggle.style.display = 'none';
+                if (stampsEmpty) stampsEmpty.classList.add('hidden');
+                if (filters) filters.classList.add('hidden');
+                if (viewToggle) viewToggle.classList.add('hidden');
                 postsGrid.classList.remove('hidden');
-                postsGrid.style.display = 'flex';
                 loadUserPosts(uid);
             }
         });
     });
+
+    // Thiết lập bộ chọn chế độ xem (Lưới / Danh sách) cho lịch trình
+    if (viewToggle) {
+        const viewButtons = viewToggle.querySelectorAll('.view-btn');
+        viewButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                viewButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const viewMode = btn.dataset.view;
+                if (viewMode === 'list') {
+                    tripsGrid.classList.add('list-view');
+                } else {
+                    tripsGrid.classList.remove('list-view');
+                }
+            });
+        });
+    }
 }
 
 // Tải bài viết cá nhân (stub/mock)
@@ -556,7 +584,7 @@ async function loadUserPosts(uid) {
         const res = await fetch(`${API_BASE}/api/users/${uid}/posts`);
         if (!res.ok) throw new Error("HTTP " + res.status);
         const posts = await res.json();
-        
+
         renderUserPosts(posts);
     } catch (e) {
         console.warn("Lỗi tải bài viết:", e);

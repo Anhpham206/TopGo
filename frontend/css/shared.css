@@ -200,7 +200,7 @@ body.dark .search-item:hover {
   padding: 7px 15px;
   border-radius: 50px;
   font-family: var(--font-label);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--muted);
   background: none;
@@ -1639,7 +1639,7 @@ body.dark .mc-invite-bubble::after {
   padding: 10px 20px;
   border-radius: 30px;
   font-family: var(--font-label);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--muted);
   text-decoration: none;
